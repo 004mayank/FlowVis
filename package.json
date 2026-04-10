@@ -1,0 +1,16 @@
+{
+  "name": "flowvis",
+  "version": "1.0.0",
+  "description": "FlowVis - See how products actually work. Interactive system flow visualizer for 100+ products.",
+  "scripts": {
+    "dev": "npx serve . -l 3000",
+    "build": "echo 'Static site - no build needed'",
+    "start": "npx serve . -l 3000"
+  },
+  "keywords": ["flowvis", "system-design", "visualization", "interactive"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.0.0"
+  }
+}
