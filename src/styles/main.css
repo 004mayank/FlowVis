@@ -1,0 +1,38 @@
+/* FlowVis - Main Stylesheet */
+
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#0d0d12;--bg2:#13131a;--bg3:#1a1a24;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);
+  --text:#f0f0f8;--text2:#8888a8;--text3:#44445a;
+  --blue:#5b5df5;--blue2:#7b7df8;
+  --green:#22c55e;--amber:#f59e0b;--purple:#9333ea;--pink:#ec4899;--teal:#14b8a6;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;z-index:0;
+  background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);
+  background-size:60px 60px;pointer-events:none;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;padding:0 32px;height:60px;
+  background:rgba(13,13,18,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.logo{display:flex;align-items:center;gap:10px;margin-right:48px;cursor:pointer;}
+.logo-icon{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,#5b5df5,#9333ea,#22c55e);
+  display:flex;align-items:center;justify-content:center;font-size:13px;}
+.logo-text{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;}
+.logo-text b{color:var(--blue2);}
+.nav-links{display:flex;gap:2px;}
+.nl{display:flex;align-items:center;gap:7px;padding:7px 16px;border-radius:8px;font-size:14px;color:var(--text2);
+  cursor:pointer;transition:all .2s;border:none;background:none;font-family:'Inter',sans-serif;}
+.nl:hover{color:var(--text);background:rgba(255,255,255,0.05);}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:12px;}
+.nav-search{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.05);
+  border:1px solid var(--border);border-radius:10px;padding:7px 14px;width:230px;}
+.nav-search input{background:none;border:none;outline:none;color:var(--text);font-size:13px;font-family:'Inter',sans-serif;flex:1;}
+.nav-search input::placeholder{color:var(--text3);}
+.kbd{font-size:10px;color:var(--text3);background:rgba(255,255,255,0.06);border:1px solid var(--border);
+  border-radius:4px;padding:2px 5px;font-family:monospace;}
+.nav-cta{padding:8px 22px;background:var(--blue);color:#fff;border:none;border-radius:10px;
+  font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;}
+.nav-cta:hover{background:var(--blue2);transform:translateY(-1px);}
