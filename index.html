@@ -14,6 +14,33 @@
 </head>
 <body>
 
+  <!-- Simple preview-mode routing (/?page=preview etc.) -->
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const page = params.get('page');
+      if (!page) return;
+
+      // Defer until app JS loads (if present). If showPage doesn't exist,
+      // we still expose the intended page for later.
+      window.__FLOWVIS_INITIAL_PAGE__ = page;
+      function tryShow() {
+        if (typeof window.showPage === 'function') {
+          window.showPage(page);
+          return true;
+        }
+        return false;
+      }
+
+      if (tryShow()) return;
+      let tries = 0;
+      const t = setInterval(() => {
+        tries++;
+        if (tryShow() || tries > 30) clearInterval(t);
+      }, 100);
+    })();
+  </script>
+
   <!-- ═══════════════════════════════════════════
        NAV
   ═══════════════════════════════════════════ -->
@@ -52,7 +79,9 @@
         <input type="text" placeholder="Search systems..." oninput="searchSystems(this.value)" id="nav-search-input">
         <span class="kbd">⌘K</span>
       </div>
-      <button class="nav-cta" onclick="showPage('explore')">Explore Free</button>
+      <button class="nav-cta" onclick="showPage('preview')">Preview</button>
     </div>
   </nav>
+
+  <script type="module" src="src/js/app.js"></script>
 </body></html>

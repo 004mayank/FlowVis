@@ -1,308 +1,1071 @@
 /**
- * FlowVis - Application Logic
- * Navigation, rendering, canvas, playback, UI flow
+ * FlowVis - Rewritten App (clean)
+ * - simple SPA-style page router
+ * - homepage + explore grid
+ * - preview hub
+ * - hero rotating product (1.5s)
  */
 
-const GWS=['UPI Payments','WhatsApp','ChatGPT','Instagram','Netflix','OAuth Login','Uber','DNS'];
-let gwi=0;
+import { SYSTEMS, addSystem, CATEGORIES, slugify } from '../data/systems.js';
+import { logoForSystemId } from '../data/logos.js';
 
-function fitHeroH1(){
-  const h1=document.querySelector('.hero h1');
-  const line1=document.querySelector('.h1-line1');
-  if(!h1||!line1)return;
-  const maxW=window.innerWidth*0.86;
-  let size=Math.min(window.innerWidth*0.082,82);
-  h1.style.fontSize=size+'px';
-  while(line1.scrollWidth>maxW&&size>24){size-=0.5;h1.style.fontSize=size+'px';}
+// ---------- Product seed (from user paste) ----------
+const PRODUCT_LINES = `Stripe
+PayPal
+Revolut
+Wise
+Robinhood
+Cash App
+Venmo
+Coinbase
+Binance
+Nubank
+Monzo
+Chime
+Klarna
+Razorpay
+PhonePe
+Amazon
+Shopify
+Etsy
+eBay
+Flipkart
+Myntra
+Meesho
+Ajio
+Zalando
+ASOS
+Wayfair
+Daraz
+Shopee
+Lazada
+Nykaa
+Uber
+Ola
+Airbnb
+Booking.com
+MakeMyTrip
+Lyft
+Grab
+BlaBlaCar
+Skyscanner
+Expedia
+Netflix
+Spotify
+YouTube
+Disney+
+Prime Video
+Apple Music
+SoundCloud
+Twitch
+JioCinema
+Hotstar
+Instagram
+WhatsApp
+Telegram
+Snapchat
+Facebook
+Messenger
+Twitter (X)
+Reddit
+Discord
+Threads
+LinkedIn
+Signal
+Notion
+Slack
+Dropbox
+Google Drive
+Gmail
+Microsoft Teams
+Trello
+Asana
+ClickUp
+Evernote
+Airtable
+Monday.com
+Zoom
+Calendly
+Jira
+Headspace
+Calm
+Nike Training Club
+MyFitnessPal
+Cult.fit
+Fitbit
+Strava
+HealthifyMe
+Swiggy
+Zomato
+Uber Eats
+DoorDash
+Deliveroo
+Grubhub
+Dominoâ€™s
+McDonaldâ€™s App
+Google Pay
+Paytm
+BHIM
+HDFC Bank App
+ICICI iMobile
+Axis Mobile
+Kotak 811
+GitHub
+GitLab
+Stack Overflow
+Postman
+Vercel
+Netlify
+Firebase Console
+AWS Console
+Affirm
+Afterpay
+Brex
+Ramp
+Mercury
+Square
+Stripe Dashboard
+Wise Business
+Payoneer
+Remitly
+WorldRemit
+Western Union App
+MoneyGram
+Zelle
+Apple Pay
+Samsung Pay
+Google Wallet
+MobiKwik
+Freecharge
+Groww
+Zerodha Kite
+Upstox
+INDmoney
+ET Money
+CRED
+Slice
+Jupiter
+Fi Money
+Niyo
+YNAB
+Mint
+PocketGuard
+Acorns
+Stash
+SoFi
+Ally Bank
+Varo
+Current
+Aspiration
+Starling Bank
+Tinkoff
+Paysera
+Curve
+Wise Card
+Cashplus
+Bunq
+Paytm Money
+KuCoin
+Kraken
+Bitstamp
+Temu
+Shein
+AliExpress
+Taobao
+Tmall
+JD.com
+Rakuten
+Mercado Libre
+Noon
+Jumia
+Vinted
+Depop
+Poshmark
+Carousell
+OLX
+Quikr
+Facebook Marketplace
+Wish
+Banggood
+Gearbest
+Overstock
+Houzz
+1mg
+PharmEasy
+Netmeds
+FirstCry
+Lenskart
+Pepperfry
+Urban Ladder
+Tata Cliq
+Snapdeal
+BigBasket
+Blinkit
+Zepto
+Instacart
+Shipt
+Costco App
+Walmart App
+Target App
+Best Buy App
+Newegg
+Wayfair App
+Chewy
+Zappos
+StockX
+GOAT
+Farfetch
+Ssense
+Mr Porter
+Net-a-Porter
+Rebag
+The RealReal
+Grailed
+Etsy Seller
+Shopify Admin
+Ecwid
+Squarespace Commerce
+Wix Stores
+Magento
+WooCommerce
+BeReal
+Mastodon
+Clubhouse
+Geneva
+Geneva Groups
+Nextdoor
+Meetup
+Amino
+VSCO
+Flickr
+Imgur
+Tumblr
+Hive Social
+Lemon8
+Koo
+ShareChat
+Moj
+Josh
+Chingari
+Roposo
+Likee
+WeChat
+QQ
+LINE
+KakaoTalk
+Viber
+Hike
+IMO
+Marco Polo
+Houseparty
+Yubo
+Wink
+Slowly
+Peanut
+Fishbowl
+Blind
+Polywork
+Lunchclub
+Shapr
+Circle
+Vimeo
+Dailymotion
+Rumble
+Nebula
+CuriosityStream
+Discovery+
+HBO Go
+Peacock
+SonyLIV
+Zee5
+MX Player
+Voot
+Crunchyroll
+Funimation
+Tubi
+Pluto TV
+Plex
+Kodi
+Apple TV
+YouTube Studio
+Anchor
+Pocket Casts
+Overcast
+Castbox
+Audible
+Storytel
+Scribd
+Kindle
+Wattpad
+Medium
+Substack
+Ghost
+Beehiiv
+Revue
+Flipboard
+Feedly
+Inshorts
+Dailyhunt
+SmartNews
+Pocket
+Instapaper
+Google News
+Apple News
+NewsBreak
+Reddit Reader apps
+Letterboxd
+IMDb
+TV Time
+Trakt
+JustWatch
+Coda
+Obsidian
+Roam Research
+Bear
+Craft
+Superhuman
+Spark Mail
+Newton Mail
+Front
+Missive
+Proton Mail
+Zoho Mail
+Zoho CRM
+HubSpot
+Salesforce
+Pipedrive
+Freshsales
+Intercom
+Drift
+Crisp
+Help Scout
+Zendesk
+Gorgias
+Linear
+Height
+Basecamp
+Wrike
+Teamwork
+ProofHub
+Smartsheet
+Quip
+Notability
+GoodNotes
+XMind
+MindNode
+Miro
+FigJam
+Whimsical
+Lucidchart
+Draw.io
+Toggl
+Clockify
+Harvest
+RescueTime
+Freedom
+Cold Turkey
+Sunsama
+Motion
+Reclaim AI
+Fantastical
+Outlook
+Zoho Books
+QuickBooks
+Xero
+FreshBooks
+Wave
+Stripe Atlas
+Paddle
+Chargebee
+Recurly
+Mailchimp
+ConvertKit
+ActiveCampaign
+Klaviyo
+SendGrid
+Brevo (Sendinblue)
+Canva Docs
+Gamma
+Tome
+Pitch
+Beautiful.ai
+Loom
+Screen Studio
+Descript
+Riverside
+VEED
+Kapwing
+Runway
+Synthesia
+Pictory
+Freeletics
+Fitbod
+Centr
+Sweat
+8fit
+Seven
+JEFIT
+Strong
+Nike Run Club
+Adidas Running
+MapMyRun
+Runkeeper
+Peloton
+Zwift
+Trainerize
+MySugr
+Glucose Buddy
+Flo
+Clue
+Ovia
+BetterHelp
+Talkspace
+Wysa
+Youper
+MindDoc
+Sanvello
+Fabulous
+Stoic
+Reflectly
+Daylio
+Sleep Cycle
+SleepScore
+Calm Sleep
+Insight Timer
+Balance
+Aura
+Noom
+Lifesum
+Yazio
+Fooducate
+EatSure
+Dunzo
+Postmates
+ChowNow
+Ritual
+Deliveroo Rider
+Talabat
+Careem Food
+Glovo
+Bolt Food
+Foodpanda
+SkipTheDishes
+Menulog
+Zomato Business
+Swiggy Instamart
+Uber Eats Driver
+Dominoâ€™s Tracker
+Starbucks App
+KFC App
+Burger King App
+Taco Bell App
+Pizza Hut App
+Baskin Robbins App
+Dunkin App
+Blue Apron
+HelloFresh
+Freshly
+Gousto
+EveryPlate
+Home Chef
+Hopper
+Rome2Rio
+Omio
+Agoda
+Hostelworld
+Trip.com
+Cleartrip
+Yatra
+ixigo
+RedBus
+FlixBus
+BlaBlaCar Daily
+Turo
+Getaround
+Zipcar
+Lime
+Bird
+Tier
+Bolt
+Careem
+Free Now
+GrabTaxi
+GoJek
+Moovit
+Citymapper
+Transit App
+Google Trips (legacy)
+Roadtrippers
+ParkMobile
+SpotHero
+OpenAI Playground
+Anthropic Claude
+Perplexity AI
+Poe
+Character AI
+Replit
+CodeSandbox
+StackBlitz
+Glitch
+Codespaces
+Sourcegraph
+Sentry
+Datadog
+New Relic
+LogRocket
+Supabase
+PlanetScale
+Railway
+Render
+Fly.io
+V0.dev
+Bolt.new
+Cursor
+Tabnine
+Codeium
+Hugging Face
+Replicate
+Stability AI
+Midjourney
+Leonardo AI
+RunPod
+Paperspace
+Kaggle
+Colab
+Jupyter
+Airbyte
+n8n
+Zapier
+Make (Integromat)
+Retool
+Roblox Studio
+Epic Games Store
+Steam
+Xbox App
+PlayStation App
+Discord Nitro
+Battle.net
+Riot Client
+GOG
+itch.io
+Game Jolt
+Miniclip
+Poki
+CrazyGames
+Armor Games
+Kongregate
+Coolmath Games
+Lichess
+Chess.com
+Duolingo
+Memrise
+Babbel
+Busuu
+Quizlet
+Khan Academy
+Coursera
+Udemy
+Skillshare
+MasterClass
+edX
+Brainly
+Photomath
+Socratic
+Remind
+ClassDojo
+Seesaw
+Blackboard
+Moodle
+Canvas LMS
+Google Classroom
+Noteflight
+Yousician
+Simply Piano
+Fender Play
+Ultimate Guitar
+GarageBand
+FL Studio Mobile
+BandLab
+Soundtrap
+Splice
+Canva
+Adobe Express
+PicsArt
+Snapseed
+Lightroom Mobile
+VSCO Editor
+Facetune
+Remini
+Lensa
+CapCut Editor
+InShot
+VN Editor
+Kinemaster
+FilmoraGo
+Alight Motion
+Mojo
+Unfold
+Linktree
+Beacons
+Stan Store
+Gumroad
+Lemon Squeezy
+Ko-fi
+Patreon
+Buy Me a Coffee
+Subbly
+Teachable
+Kajabi
+Podia
+Circle.so`;
+
+PRODUCT_LINES.split(/\r?\n/).forEach(addSystem);
+
+// ---------- Basic router ----------
+const state = {
+  page: 'home',
+  q: '',
+  activeHomeCat: 'all',
+  activeExploreCat: 'all',
+  homeRenderCount: 48,
+  homeChunk: 48
+};
+
+window.showPage = function showPage(page) {
+  state.page = page;
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const el = document.getElementById(`${page}-page`);
+  if (el) el.classList.add('active');
+
+  if (page === 'explore') renderExplore();
+  if (page === 'home') renderHomeGrid();
+  if (page === 'preview') renderPreview();
+  if (page === 'ai') renderAI();
+
+  window.scrollTo(0, 0);
+};
+
+function mountShell() {
+  const body = document.body;
+
+  // Main container after fixed nav
+  const app = document.createElement('main');
+  app.id = 'app';
+  app.style.position = 'relative';
+  app.style.zIndex = '1';
+  app.style.paddingTop = '86px';
+  body.appendChild(app);
+
+  app.innerHTML = `
+    <section id="home-page" class="page active"></section>
+    <section id="explore-page" class="page"></section>
+    <section id="ai-page" class="page"></section>
+    <section id="preview-page" class="page"></section>
+    <section id="product-page" class="page"></section>
+  `;
 }
 
-setInterval(()=>{
-  const el=document.getElementById('cycle-word');
-  el.classList.add('fade-out');
-  setTimeout(()=>{gwi=(gwi+1)%GWS.length;el.textContent=GWS[gwi];el.classList.remove('fade-out');fitHeroH1();},300);
-},2000);
+// ---------- UI helpers ----------
+function el(tag, attrs = {}, html = '') {
+  const n = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === 'class') n.className = v;
+    else if (k.startsWith('on') && typeof v === 'function') n.addEventListener(k.slice(2), v);
+    else n.setAttribute(k, v);
+  }
+  if (html) n.innerHTML = html;
+  return n;
+}
 
-window.addEventListener('load',fitHeroH1);
-window.addEventListener('resize',fitHeroH1);
-function showPage(n){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById(n+'-page').classList.add('active');
-  if(n==='explore')renderGrid('exp-grid',SYSTEMS);
-  window.scrollTo(0,0);
+function uniqBy(arr, keyFn) {
+  const seen = new Set();
+  const out = [];
+  for (const x of arr) {
+    const k = keyFn(x);
+    if (seen.has(k)) continue;
+    seen.add(k);
+    out.push(x);
+  }
+  return out;
 }
-const RAFS={};
-function initMini(canvas,sys){
-  if(RAFS[canvas.id])cancelAnimationFrame(RAFS[canvas.id]);
-  let hov=false;
-  const card=canvas.closest('.card');
-  card.addEventListener('mouseenter',()=>hov=true,{passive:true});
-  card.addEventListener('mouseleave',()=>hov=false,{passive:true});
-  const dpr=window.devicePixelRatio||1;
-  canvas.width=(canvas.offsetWidth||300)*dpr;canvas.height=(canvas.offsetHeight||180)*dpr;
-  const ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);
-  const loop=()=>{
-    const W=canvas.width/dpr,H=canvas.height/dpr,t=Date.now()/1000;
-    ctx.clearRect(0,0,W,H);
-    const np={};sys.nodes.forEach(n=>{np[n.id]={x:n.x*W,y:n.y*};});
-    sys.edges.forEach(e=>{
-      const f=np[e.f],t2=np[e.t];if(!f||!t2)return;
-      const rgb=hxrgb(sys.color);
-      ctx.beginPath();ctx.moveTo(f.x,f.y);ctx.lineTo(t2.x,t2.y);
-      ctx.strokeStyle=`rgba(${rgb},${hov?.3:.13})`;ctx.lineWidth=hov?1.5:1;
-      ctx.setLineDash(hov?[]:[3,4]);ctx.stroke();ctx.setLineDash([]);
-      if(hov){const p=((t*.65+e.s*.19)%1);
-        ctx.beginPath();ctx.arc(f.x+(t2.x-f.x)*p,f.y+(t2.y-f.y)*p,2.5,0,Math.PI*2);
-        ctx.fillStyle=sys.color;ctx.fill();}
-    });
-    sys.nodes.forEach((n,i)=>{
-      const p=np[n.id];if(!p)return;
-      const s=hov?7:4.5,pulse=hov?(Math.sin(t*3+i*.9)*.3+.w):.6,rgb=hxrgb(n.c);
-      ctx.beginPath();ctx.arc(p.x,p.y,s,0,Math.PI*2);
-      ctx.fillStyle=`rgba(${rgb},${pulse})`;ctx.fill();
-    });
-    RAFS[canvas.id]=requestAnimationFrame(loop);
-  };loop();
+
+function pickRotatingTitles() {
+  // prefer a spread of well-known products + whatever exists
+  const titles = SYSTEMS.map(s => s.title);
+  return uniqBy(titles, t => t.toLowerCase());
 }
-function hxrgb(hex){const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);return`${r},${g},${b}`;}
-const TCLASS={msg:'t-msg',ai:'t-ai',pay:'t-pay',auth:'t-auth',social:'t-social',dev:'t-dev',stream:'t-stream',food:'t-food',travel:'t-travel',shop:'t-shop',health:'t-health',work:'t-work'};
-const TLABEL={msg:'Messaging',ai:'AI',pay:'Payments',auth:'Auth',social:'Social',dev:'Dev',stream:'Streaming',food:'Food',travel:'Travel',shop:'Shopping',health:'Health',work:'Productivity'};
-function renderGrid(id,list){
-  const g=document.getElementById(id);g.innerHTML='';
-  list.forEach(sys=>{
-    const card=document.createElement('div');card.className='card';
-    const logoSvg=LOGOS[sys.id]||`<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="24" fill="${sys.color}"/></svg>`;
-    card.innerHTML=`
-  <div class="card-canvas" style="background:${sys.color}18">
-    <div class="card-logo-bg">${logoSvg}</div>
-    <div class="card-graph"><canvas id="m-${id}-${sys.id}"></canvas></div>
-  </div>
-  <div class="card-body">
-    <div class="card-tags"><span class="tag ${TCLASS[sys.cat]}">${TRACKER_LABEL_BACKGROUND}TLABEL[sys.cat]}</span><span class="tag t-n">${sys.steps.length} steps</span></div>
-    <div class="card-title">${sys.title}</div>
-    <div class="card-desc">${sys.desc}</div>
-    <div class="card-foot">
-      <div class="dots">${[1,2,3].map(i=>`<span class="${i<=sys.cx?'on':''}"></span>`).join('')}</div>
-      <span class="card-arr">View system â†’</span>
-    </div>
-  </div>`;
-    card.onclick=()=>openDetail(sys);
-    g.appendChild(card);
-    requestAnimationFrame(()=>{const c=document.getElementById(`m-${id}-${sys.id}`);if(c)initMini(c,sys);});
-  });
+
+// ---------- Hero rotation ----------
+let rotIdx = 0;
+let rotTimer = null;
+
+function startRotation() {
+  const word = document.getElementById('cycle-word');
+  if (!word) return;
+
+  const titles = pickRotatingTitles();
+  if (!titles.length) return;
+
+  if (rotTimer) clearInterval(rotTimer);
+  rotTimer = setInterval(() => {
+    rotIdx = (rotIdx + 1) % titles.length;
+    word.classList.add('fade-out');
+    setTimeout(() => {
+      word.textContent = titles[rotIdx];
+      word.classList.remove('fade-out');
+    }, 220);
+  }, 1500);
 }
-function searchSystems(q){
-  const list=SYSTEMS.filter(s=>s.title.toLowerCase().includes(q.toLowerCase())||s.desc.toLowerCase().includes(q.toLowerCase()));
-  renderGrid('home-grid',list);
-}
-function filterSystems(cat,btn){
-  document.querySelectorAll('#home-filters .fb').forEach(b=>b.classList.remove('active'));
-  if(btn)btn.classList.add('active');
-  const list=cat===''?SYSTEMS:SYSTEMS.filter(s=>s.cat===cat);
-  renderGrid('home-grid',list);
-}
-function filterExplore(cat,btn){
-  document.querySelectorAll('#explore-page .fb').forEach(b=>b.classList.remove('active'));
-  if(btn)btn.classList.add('active');
-  const list=cat===''?SYSTEMS:SYSTEMS.filter(s=>s.cat===cat);
-  renderGrid('exp-grid',list);
-}
-let CUR=null,STEP=-1,PLAYING=false,PI=null,RAF=null,CTX=null,VIEW='system',SPEED=1,CVZOOM=1;
-function openDetail(sys){
-  CUR=sys;STEP=-1;VIEW='system';PLAYING=false;CVZOOM=1;clearInterval(PI);
-  const uiScroller=document.getElementById('ui-flow-scroller');
-  const uiLoading=document.getElementById('ui-flow-loading');
-  if(uiScroller){uiScroller.querySelectorAll('.ui-screen-wrap').forEach(e=>e.remove());if(uiLoading)uiLoading.style.display='flex';}
-  const logoSvg=LOGOS[sys.id]||`<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="24" fill="${sys.color}"/></svg>`;
-  document.getElementById('detail-logo').innerHTML=logoSvg;
-  document.getElementById('detail-name').textContent=sys.title+' Flow';
-  document.getElementById('detail-badge').textContent=TLABEL[sys.cat]||'';
-  document.getElementById('detail-diff').textContent='';
-  document.getElementById('detail-desc').textContent=sys.desc;
-  document.getElementById('step-num').textContent='-';
-  document.getElementById('step-tot').textContent=sys.steps.length;
-  updatePlayBtn(false);
-  document.getElementById('detail').classList.add('open');
-  document.querySelectorAll('.vt')[1]?.classList.add('active');
-  document.getElementById('sys-canvas').style.display='block';
-  document.getElementById('ui-flow').classList.remove('show');
-  document.getElementById('steps-list').innerHTML=sys.steps.map((s,i)=>`
-    <div class="si" id="si${i}" onclick="jt(${i})">
-      <div class="si-num-badge">${i+1}</div>
-      <div class="si-content">
-        <div class="si-name">${s.n}</div>
-        <div class="si-desc">${s.d.substring(0,60)}${s.d.length>60?'...':''}</div>
+
+// ---------- Home ----------
+function renderHome() {
+  const root = document.getElementById('home-page');
+  root.innerHTML = `
+    <div class="container">
+      <div class="hero">
+        <div class="hero-bg">
+          <div class="particle p1"></div><div class="particle p2"></div><div class="particle p3"></div>
+          <div class="particle p4"></div><div class="particle p5"></div>
+        </div>
+
+        <div class="hero-inner">
+          <h1>
+            <span class="h1-line1">See how <span id="cycle-word">${SYSTEMS[0]?.title || 'Stripe'}</span></span>
+            <span class="h1-line2">actually works</span>
+          </h1>
+          <p class="hero-sub">FlowVis transforms complex system design into beautiful, interactive animations. Explore 100+ real products, step-by-step.</p>
+
+          <div class="hero-search">
+            <input id="hero-search" type="text" placeholder="Search any system" />
+            <button id="hero-search-btn" class="btn-primary">Search</button>
+          </div>
+
+          <div class="chip-row" id="home-chips"></div>
+        </div>
       </div>
-      <div class="si-chevron">â€º</div>
-    </div>`).join('');
-  initCv();
-  setTimeout(()=>{startPlay();},800);
-}
-function updatePlayBtn(playing){
-  const btn=document.getElementById('play-btn');
-  btn.innerHTML=playing?`<svg width="14" height="14" fill="currentColor" viewBox="0 0 14 14"><rect x="2" y="2" width="4" height="10" rx="1"/><rect x="8" y="2" width="4" height="10" rx="1"/></svg> Pause`:`<svg width="14" height="14" fill="currentColor" viewBox="0 0 14 14"><polygon points="3,2 14,7 3,12"/></svg> Play All Steps`;
-}
-function closeDetail(){PLAYING=false;clearInterval(PI);if(RAF)cancelAnimationFrame(RAF);RAF=null;CTX=null;document.getElementById('detail').classList.remove('open');CUR=null;}
-function buildUIScreens(sys){
-  const scroller=document.getElementById('ui-flow-scroller');
-  const loading=document.getElementById('ui-flow-loading');
-  document.getElementById('ui-flow-source').textContent=`UI screens for ${sys.steps.length} steps`;
-  loading.style.display='none';
-  let html='';
-  sys.steps.forEach((step,i)=>{
-    const isLast=i===sys.steps.length-1;
-    html+=`<div class="ui-screen-wrap">
-      <div class="ui-step-chip" style="background:${sys.color}22;border:1px solid ${sys.color}55;color:${sys.color};font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:6px">Step ${i+1}</div>
-      <div class="ui-screen" onclick="jt(${i})" title="${step.n}">${buildPhoneScreen(sys,step,i)}</div>
-      <div style="font-size:10px;color:rgba(255,255,255,0.7);text-align:center;max-width:132px;margin-top:6px">${step.n}</div>
-    </div>${isLast?'':'<div style="color:rgba(255,255,255,0.25);font-size:22px;align-self:center;margin-top:-20px;flex-shrink:0">â€º</div>'}`;
+
+      <div class="section-title">
+        <h2>Browse & Explore</h2>
+        <p>Jump into systems by category. Each product includes an animated, step-by-step breakdown.</p>
+      </div>
+
+      <div id="home-filters" class="filters"></div>
+      <div id="home-grid" class="grid"></div>
+      <div id="home-sentinel" class="sentinel"></div>
+    </div>
+  `;
+
+  // chips
+  const chips = document.getElementById('home-chips');
+  const top = SYSTEMS.slice(0, 10);
+  chips.innerHTML = top.map(s => `<button class="chip" data-id="${s.id}">${s.title}</button>`).join('');
+  chips.querySelectorAll('.chip').forEach(b => b.addEventListener('click', () => openProductById(b.dataset.id)));
+
+  // search
+  const heroInput = document.getElementById('hero-search');
+  const go = () => {
+    const q = heroInput.value.trim();
+    if (!q) return;
+    const found = findSystem(q);
+    if (found) openProduct(found);
+    else {
+      // fallback to explore filtered view
+      state.q = q;
+      showPage('explore');
+      const expInput = document.getElementById('explore-search');
+      if (expInput) expInput.value = q;
+    }
+  };
+  document.getElementById('hero-search-btn').addEventListener('click', go);
+  heroInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') go();
   });
-  scroller.insertAdjacentHTML('beforeend',html);
+
+  renderHomeFilters();
+  renderHomeGrid();
+  startRotation();
+
+  initHomeInfiniteScroll();
 }
-function buildPhoneScreen(sys,step,idx){
-  const c=sys.color,accent=['#5b5df5','#22c55e','#f59e0b','#ec4899','#14b8a6','#9333ea','#3b82f6','#ef4444'][idx%8];
-  const bgDark='#0d0d12';const stepName=step.n.toLowerCase();
-  let body='';
-  if(stepName.includes('auth')||stepName.includes('pin')||stepName.includes('verif')){body=uiLogin(c,accent,sys,step);}
-  else if(stepName.includes('pay')||stepName.includes('wallet')||stepName.includes('amount')){body=uiPayment(c,accent,sys,step);}
-  else if(stepName.includes('map')||stepName.includes('route')||stepName.includes('locat')){body=uiMap(c,accent,sys,step);}
-  else if(stepName.includes('success')||stepName.includes('notif')||stepName.includes('confirm')){body=uiNotif(c,accent,sys,step);}
-  else if(stepName.includes('search')||stepName.includes('feed')||stepName.includes('browse')){body=uiFeed(c,accent,sys,step);}
-  else if(stepName.includes('play')||stepName.includes('stream')||stepName.includes('music')){body=uiPlayer(c,accent,sys,step);}
-  else if(stepName.includes('chat')||stepName.includes('message')||stepName.includes('encrypt')){body=uiChat(c,accent,sys,step);}
-  else if(stepName.includes('order')||stepName.includes('checkout')){body=uiOrder(c,accent,sys,step);}
-  else if(stepName.includes('dashboard')||stepName.includes('stats')){body=uiDashboard(c,accent,sys,step);}
-  else{body=uiGeneric(c,accent,sys,step,idx);}
-  return `<svg viewBox="0 0 132 262" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block">
-    <rect width="132" height="262" rx="18" fill="${bgDark}"/>
-    <rect y="0" width="132" height="26" rx="2" fill="${c}25"/>
-    <rect x="45" y="5" width="42" height="14" rx="7" fill="#1a1a25"/>
-    <text x="15" y="17" fill="rgba(255,255,255,0.7)" font-size="8" font-family="Arial">9:41</text>
-    <rect x="108" y="8" width="14" height="8" rx="2" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.2"/>
-    <rect x="109" y="9" width="10" height="6" rx="1" fill="rgba(255,255,255,0.7)"/>
-    <rect x="7" y="26" width="118" height="32" fill="${c}18"/>
-    <rect x="10" y="31" width="22" height="22" rx="6" fill="${c}"/>
-    <text x="21" y="47" text-anchor="middle" fill="white" font-size="9" font-weight="900" font-family="Arial">${sys.title.substring(0,2).toUpperCase()}</text>
-    <text x="44" y="46" fill="rgba(255,255,255,0.95)" font-size="9" font-weight="700" font-family="Arial">${sys.title}</text>
-    <rect x="7" y="62" width="118" height="16" rx="4" fill="${c}20"/>
-    <text x="66" y="74" text-anchor="middle" fill="${c}" font-size="7.5" font-weight="700" font-family="Arial">${step.n.substring(0,26)}</text>
-    ${body}
-    <rect y="248" width="132" height="14" fill="${bgDark}"/>
-    <rect x="46" y="252" width="40" height="4" rx="2" fill="rgba(255,255,255,0.3)"/>
-  </svg>`;
+
+function renderHomeFilters() {
+  const host = document.getElementById('home-filters');
+  const items = [{ id: 'all', label: 'All' }, ...CATEGORIES.map(c => ({ id: c.id, label: c.label }))];
+  host.innerHTML = items.map(x => `<button class="fb ${x.id === state.activeHomeCat ? 'active' : ''}" data-cat="${x.id}">${x.label}</button>`).join('');
+  host.querySelectorAll('.fb').forEach(b => b.addEventListener('click', () => {
+    state.activeHomeCat = b.dataset.cat;
+    state.homeRenderCount = state.homeChunk;
+    renderHomeFilters();
+    renderHomeGrid();
+  }));
 }
-function uiChat(c,accent,sys,step){return `<rect x="7" y="82" width="118" height="130" fill="#0d0d12"/><rect x="10" y="86" width="65" height="22" rx="6" fill="#1e1e2a"/><text x="18" y="98" fill="rgba(255,255,255,0.85)" font-size="7" font-family="Arial">${step.n.substring(0,14)}...</text><rect x="55" y="114" width="70" height="22" rx="6" fill="${c}55"/><text x="62" y="127" fill="white" font-size="7" font-family="Arial">Processing...</text><rect x="60" y="141" width="65" height="22" rx="6" fill="${c}55"/><text x="66" y="154" fill="white" font-size="7" font-family="Arial">Confirmed!</text><rect x="30" y="168" width="72" height="14" rx="7" fill="#1e1e2a"/><text x="66" y="178" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="6" font-family="Arial">ðŸ”’ E/E encrypted</text><rect x="7" y="185" width="118" height="22" fill="#1a1a24"/><rect x="10" y="188" width="95" height="16" rx="8" fill="#252535"/><text x="57" y="199" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-size="7" font-family="Arial">Message...</text><circle cx="118" cy="197" r="7" fill="${c}"/>`;}
-function uiPayment(c,accent,sys,step){return `<rect x="7" y="82" width="118" height="130" fill="#0d0d12"/><rect x="12" y="86" width="108" height="45" rx="10" fill="${c}18" stroke="${c}30" stroke-width="1"/><text x="66" y="103" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="7" font-family="Arial">Amount</text><text x="66" y="120" text-anchor="middle" fill="white" font-size="18" font-weight="900" font-family="Arial">â‚¹1,200</text><rect x="12" y="146" width="108" height="18" rx="5" fill="#1e1e2a"/><text x="18" y="158" fill="rgba(255,255,255,0.7)" font-size="7.5" font-family="Arial">user@upi</text><rect x="12" y="170" width="108" height="14" rx="7" fill="${c}20"/><text x="66" y="180" text-anchor="middle" fill="${c}" font-size="7" font-weight="700" font-family="Arial">${step.n.substring(0,22)}</text><rect x="20" y="189" width="92" height="20" rx="10" fill="${c}"/><text x="66" y="203" text-anchor="middle" fill="white" font-size="9" font-weight="700" font-family="Arial">Pay Now</text>`;}
-function uiLogin(c,accent,sys,step){return `<rect x="7" y="82" width="118" height="130" fill="#0d0d12"/><rect x="51" y="90" width="30" height="30" rx="10" fill="${c}"/><text x="66" y="111" text-anchor="middle" fill="white" font-size="12" font-weight="900" font-family="Arial">${sys.title.substring(0,2).toUpperCase()}</text><text x="66" y="135" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="8" font-family="Arial">${step.n.substring(0,20)}</text><rect x="15" y="143" width="102" height="17" rx="5" fill="#1e1e2a" stroke="${c}44" stroke-width="1"/><text x="20" y="155" fill="rgba(255,255,255,0.35)" font-size="7" font-family="Arial">Enter PIN / OTP</text>${[0,1,2].map(r=>[0,1,2].map(col=>`<rect x="${22+col*30}" y="${166+r*14}" width="22" height="10" rx="3" fill="#1e1e2a"/><text x="${33+col*30}" y="${174+r*MHˆ^X[˜ÚÜH›ZYHˆš[Hœ™Ø˜JMKMKMKŠHˆ›Û\Ú^™OHÈˆ›ÛY˜[Z[OH\šX[‰ÜŠŒÊØÛÛ
-Ì_OÝ^˜
-Kš›Ú[Š	ÉÊJKš›Ú[Š	ÉÊ_O™XÝHŒŒˆOHŒŒHˆÚYHŽLˆˆZYÚHŒNHˆžHŽHˆš[H‰ØßH‹Ï^HˆˆOHŒŒŒˆˆ^X[˜ÚÜH›ZYHˆš[HÚ]Hˆ›Û\Ú^™OHŽHˆ›Û]ÙZYÚHÌˆ›ÛY˜[Z[OH\šX[•™\šYžOÝ^˜ßB™[˜Ý[ÛˆZSX\
-ËXØÙ[Þ\ËÝ\
-^Ü™]\›ˆ™XÝHÈˆOHŽˆˆÚYHŒLNˆZYÚHŒLÌˆš[HˆÌXLÎ‹Ï‰Ð\œ˜^K™œ›ÛJÛ[™ÝŸK
-ËJOO˜[™HOHÈˆLOH‰ÎŠÚJŒŒŸHˆHŒLHˆLH‰ÎŠÚJŒŒŸHˆÝ›ÚÙOHˆÌÌˆÝ›ÚÙK]ÚYHŒŽ‹Ï˜
-Kš›Ú[Š	ÉÊ_IÐ\œ˜^K™œ›ÛJÛ[™ÝßK
-ËJOO˜[™HOH‰ÍÊÚJŒMßHˆLOHŽˆˆH‰ÍÊÚJŒMßHˆLHŒŒLˆˆÝ›ÚÙOHˆÌÌˆÝ›ÚÙK]ÚYHŒŽ‹Ï˜
-Kš›Ú[Š	ÉÊ_O[™HOHÈˆLOHŒMHˆHŒLHˆLHŒMHˆÝ›ÚÙOHˆÌ˜LØMMHˆÝ›ÚÙK]ÚYH‹Ï[™HOHŒˆLOHŽˆˆHŒˆLHŒŒLˆˆÝ›ÚÙOHˆÌ˜LØMMHˆÝ›ÚÙK]ÚYH‹ÏÛ[[™HÚ[ÏHŒÌNHÌMHLMHLLLˆÝ›ÚÙOH‰ØßHˆÝ›ÚÙK]ÚYHŒÈˆš[H››Û™HˆÝ›ÚÙK[[™XØ\Hœ›Ý[™‹ÏÚ\˜ÛHÞHŒÌˆÞOHŒNHˆHˆˆš[HÚ]HˆÝ›ÚÙOH‰ØßHˆÝ›ÚÙK]ÚYHŒˆ‹ÏÚ\˜ÛHÞHŒÌˆÞOHŒNHˆHŒÈˆš[H‰ØßH‹ÏÚ\˜ÛHÞHŽLˆÞOHŒLLˆHŽˆš[H‰ØßH‹Ï^HŽLˆOHŒLMˆ^X[˜ÚÜH›ZYHˆš[HÚ]Hˆ›Û\Ú^™OHÈˆ›ÛY˜[Z[OH\šX[¸¦!OÝ^™XÝHŒLˆOHŒNMˆˆÚYHŒLLˆˆZYÚHŒMˆžHÈˆš[HˆÌLˆ‹Ï^HˆˆOHŒŒˆˆ^X[˜ÚÜH›ZYHˆš[H‰ØßHˆ›Û\Ú^™OHÈˆ›Û]ÙZYÚHÌˆ›ÛY˜[Z[OH\šX[‘UNˆZ[œÏÝ^˜ßB™[˜Ý[ÛˆZS›ÝYŠËXØÙ[Þ\ËÝ\
-^Ü™]\›ˆ™XÝHÈˆOHŽˆˆÚYHŒLNˆZYÚHŒLÌˆš[HˆÌLˆ‹ÏÚ\˜ÛHÞHˆˆÞOHŒLÌˆHŒÌˆš[H‰ØßLŒˆÝ›ÚÙOH‰ØßHˆÝ›ÚÙK]ÚYHŒ‹H‹Ï^HˆˆOHŒLÍˆˆ^X[˜ÚÜH›ZYHˆš[H‰ØßHˆ›Û\Ú^™OHŒŒˆˆ›ÛY˜[Z[OH\šX[¸§$ÏÝ^^HˆˆOHŒMÌˆˆ^X[˜ÚÜH›ZYHˆš[HÚ]Hˆ›Û\Ú^™OHŒLˆ›Û]ÙZYÚHÌˆ›ÛY˜[Z[OH\šX[‰ÜÝ\›‹œÝXœÝš[™ÊM
-_OÝ^™XÝHŒŒˆˆOHŒNNˆÚYHŽˆZYÚHŒNˆžHŽHˆš[H‰ØßH‹Ï^HˆˆOHŒŒLHˆ^X[˜ÚÜH›ZYHˆš[HÚ]Hˆ›Û\Ú^™OHŽHˆ›Û]ÙZYÚHÌˆ›ÛY˜[Z[OH\šX[‘Û™OÝ^˜ßB™[˜Ý[ÛˆZQ™YY
-ËXØÙ[Þ\ËÝ\
-^Ü™]\›ˆ™XÝHÈˆOHŽˆˆÚYHŒLNˆZYÚHŒLÌˆš[HˆÌLˆ‹Ï™XÝHŒLˆOHŽHˆÚYHŒLLˆˆZYÚHŒMÈˆžHŽˆš[HˆÌYLYL˜H‹Ï^HŒNˆOHŽMÈˆš[Hœ™Ø˜JMKMKMKŒÊHˆ›Û\Ú^™OHÈˆ›ÛY˜[Z[OH\šX[¼'ãdHÙX\˜Ú	ÜÞ\Ë]_K‹‹Ý^‰ÖÌK‹×K›X\
-OO˜™XÝHŒLˆOH‰ÌLÊÚJŒ_HˆÚYHŒLLˆˆZYÚHŒŒˆˆžHˆˆš[HˆÌMŒMŒŒ‹Ï™XÝHŒLÈˆOH‰ÌLL
-ÚJŒ_HˆÚYHŒMˆˆZYÚHŒMˆˆžHHˆš[H‰ØßMŒ‹Ï™XÝHŒÌÈˆOH‰ÌLLŠÚJŒ_HˆÚYHLˆZYÚHHˆžHŒˆˆš[Hœ™Ø˜JMKMKMK
-H‹Ï˜
-Kš›Ú[Š	ÉÊ_XßB™[˜Ý[ÛˆZT^Y\ŠËXØÙ[Þ\ËÝ\
-^Ü™]\›ˆ™XÝHÈˆOHŽˆˆÚYHŒLNˆZYÚHŒLÌˆš[HˆÌLˆ‹Ï™XÝHŒHˆOHŽHˆÚYHŽˆˆZYÚHÌˆˆžHŒLˆš[H‰ØßLÌ‹Ï™XÝHHˆOHŽMHˆÚYHˆˆZYÚHˆˆžHŽˆš[H‰ØßMŒ‹Ï^HˆˆOHŒLŒˆˆ^X[˜ÚÜH›ZYHˆš[HÚ]Hˆ›Û\Ú^™OHŒMˆˆ›Û]ÙZYÚHÌˆ›ÛY˜[Z[OH\šX[‰ÜÞ\Ë]KœÝXœÝš[™ÊŠKÕ\\Ø\ÙJ
-_OÝ^^HˆˆOHŒMÌˆ^X[˜ÚÜH›ZYHˆš[HÚ]Hˆ›Û\Ú^™OHŽHˆ›Û]ÙZYÚHÌˆ›ÛY˜[Z[OH\šX[‰ÜÝ\›‹œÝXœÝš[™ÊN
-_OÝ^™XÝHŒMHˆOHŒNˆÚYHŒLˆˆZYÚHŒÈˆžHŒHˆš[HˆÌÌÌÈ‹Ï™XÝHŒMHˆOHŒNˆÚYHMHˆZYÚHŒÈˆžHŒHˆš[H‰ØßH‹ÏÚ\˜ÛHÞHˆˆÞOHŒŒˆHŒLHˆš[H‰ØßH‹Ï^HˆˆOHŒŒHˆ^X[˜ÚÜH›ZYHˆš[HÚ]Hˆ›Û\Ú^™OHŒLˆˆ›ÛY˜[Z[OH\šX[¸¥­Ý^˜ßB™[˜Ý[ÛˆZSÜ™\ŠËXØÙ[Þ\ËÝ\
-^Ü™]\›ˆ™XÝHÈˆOHŽˆˆÚYHŒLNˆZYÚHŒLÌˆš[HˆÌLˆ‹Ï™XÝHŒLˆOHŽHˆÚYHŒLLˆˆZYÚHŒŽˆžHŽˆš[H‰ØßLŒ‹Ï^HˆˆOHŽNHˆ^X[˜ÚÜH›ZYHˆš[H‰ØßHˆ›Û\Ú^™OHŽˆ›Û]ÙZYÚHÌˆ›ÛY˜[Z[OH\šX[‰ÜÝ\›‹œÝXœÝš[™ÊŒŠ_OÝ^‰ÖÌK—K›X\
-OO˜™XÝHŒLˆOH‰ÌLN
-ÚJŒŒßHˆÚYHŒLLˆˆZYÚHŒŒˆžHHˆš[HˆÌMŒMŒŒ‹ÏÚ\˜ÛHÞHŒŒˆˆÞOH‰ÌLŽ
-ÚJŒŒßHˆHÈˆš[H‰ØßX
-ÖÚOOOLÉÎ	Î‰Í	×JØ‹Ï˜
-Kš›Ú[Š	ÉÊ_O™XÝHŒLˆOHŒNˆÚYHŒLLˆˆZYÚHŒNˆžHHˆš[H‰ØßLÌ‹Ï^HŒMHˆOHŒŒˆš[Hœ™Ø˜JMKMKMKÊHˆ›Û\Ú^™OHËHˆ›ÛY˜[Z[OH\šX[•Ý[Ý^^HŒLMÈˆOHŒŒˆ^X[˜ÚÜH™[™ˆš[HÚ]Hˆ›Û\Ú^™OHŽˆ›Û]ÙZYÚHÌˆ›ÛY˜[Z[OH\šX[¸ -OÝ^˜ßB™[˜Ý[ÛˆZQ\Ú›Ø\™
-ËXØÙ[Þ\ËÝ\
-^Ü™]\›ˆ™XÝHÈˆOHŽˆˆÚYHŒLNˆZYÚHŒLÌˆš[HˆÌLˆ‹Ï™XÝHŒLˆOHŽHˆÚYHMˆZYÚHŒÎˆžHŽˆš[H‰ØßLŒ‹Ï^HŒÍÈˆOHŒLˆˆ^X[˜ÚÜH›ZYHˆš[H‰ØßHˆ›Û\Ú^™OHŒMˆ›Û]ÙZYÚHŽLˆ›ÛY˜[Z[OH\šX[ŽN	OÝ^™XÝHŽˆOHŽHˆÚYHMˆZYÚHŒÎˆžHŽˆš[Hœ™Ø˜JMKMKMKŒJH‹Ï^HŽMHˆOHŒLˆˆ^X[˜ÚÜH›ZYHˆš[HÚ]Hˆ›Û\Ú^™OHŒMˆ›Û]ÙZYÚHŽLˆ›ÛY˜[Z[OH\šX[Œ‹Œ\ÏÝ^™XÝHŒLˆOHŒLŽˆÚYHŒLLˆˆZYÚHLˆžHŽˆš[HˆÌMŒMŒŒ‹ÏÛ[[™HÚ[ÏHŒNMŽÍKMMHL‹MŒŽKMˆ‹MLËLÍHLŒMˆÝ›ÚÙOH‰ØßHˆÝ›ÚÙK]ÚYHŒˆˆš[H››Û™HˆÝ›ÚÙK[[™XØ\Hœ›Ý[™‹Ï™XÝHŒLˆOHŒNÈˆÚYHŒLLˆˆZYÚHŒHˆžHˆˆš[HˆÌMŒMŒŒ‹Ï^HˆˆOHŒNMˆˆ^X[˜ÚÜH›ZYHˆš[H‰ØßHˆ›Û\Ú^™OHÈˆ›Û]ÙZYÚHÌˆ›ÛY˜[Z[OH\šX[‰ÜÝ\›‹œÝXœÝš[™ÊŒŠ_OÝ^˜ßB™[˜Ý[ÛˆZQÙ[™\šXÊËXØÙ[Þ\ËÝ\Y
-^Ü™]\›ˆ™XÝHÈˆOHŽˆˆÚYHŒLNˆZYÚHŒLÌˆš[HˆÌLˆ‹ÏÚ\˜ÛHÞHŒÌˆÞOHŒLLˆˆHŒLˆˆš[H‰ØßNL‹Ï^HŒÌˆOHŒLMÈˆ^X[˜ÚÜH›ZYHˆš[HÚ]Hˆ›Û\Ú^™OHŒLˆ›Û]ÙZYÚHŽLˆ›ÛY˜[Z[OH\šX[‰ÚY
-Ì_OÝ^[™HOHˆˆLOHŒLLˆˆHŽLˆLHŒLLˆˆÝ›ÚÙOH‰ØßMLˆÝ›ÚÙK]ÚYHŒˆˆÝ›ÚÙKY\Ú\œ˜^OHÈ‹ÏÚ\˜ÛHÞHŒLˆˆÞOHŒLLˆˆHŒLˆˆš[H‰ØßLÌˆÝ›ÚÙOH‰ØßMŒˆÝ›ÚÙK]ÚYHŒKH‹Ï^HŒLˆˆOHŒLMÈˆ^X[˜ÚÜH›ZYHˆš[H‰ØßHˆ›Û\Ú^™OHŒLˆ›Û]ÙZYÚHÌˆ›ÛY˜[Z[OH\šX[¸ .Ý^™XÝHŒLˆOHŒLÌˆˆÚYHŒLLˆˆZYÚHLˆžHŽˆš[HˆÌMŒMŒŒ‹Ï^HˆˆOHŒMLˆˆ^X[˜ÚÜH›ZYHˆš[HÚ]Hˆ›Û\Ú^™OHŽHˆ›Û]ÙZYÚHÌˆ›ÛY˜[Z[OH\šX[‰ÜÝ\›‹œÝXœÝš[™ÊŒ
-_OÝ^™XÝHŒŒˆˆOHŒNˆÚYHŽˆZYÚHŒNˆžHŽHˆš[H‰ØßH‹Ï^HˆˆOHŒŒˆ^X[˜ÚÜH›ZYHˆš[HÚ]Hˆ›Û\Ú^™OHŽˆ›Û]ÙZYÚHÌˆ›ÛY˜[Z[OH\šX[”Ý\	ÚY
-Ì_OÝ^˜ßB™[˜Ý[ÛˆÙ]šY]ÊŠNÂ™[˜Ý[ÛˆÙ]ÜYY
-ËŠ^ÔÔQQ\ÎÙØÝ[Y[œ]Y\žTÙ[XÝÜ[
-	ËœÜYYX‰ÊK™›Ü‘XXÚ
-O˜‹˜Û\ÜÓ\Ýœ™[[Ý™J	ØXÝ]™IÊJNØ‹˜Û\ÜÓ\Ý˜Y
-	ØXÝ]™IÊNÚYŠVRS‘Ê^ÜÝÜ^J
-NÜÝ\^J
-Nß_B›]Õ”S^ÞŒNŒKÜ[›š[™ÏY˜[ÙKÜ[”Ý\^ÞŒNŒKÝÚY[[™\[[ÛY[™\[[Â™[˜Ý[Ûˆ›ÛÛJŠ^ÚYŠOOL
-^ÐÕ–“ÓÓOLNÐÕ”S^ÞŒNŒNßY[Ù^ÐÕ–“ÓÓOSX]›X^
-X]›Z[ŠÕ–SÓÓJ™ŠJNß_B™[˜Ý[Ûˆ[š]ÝŠ
-^ÂˆÛÛœÝÝYØÝ[Y[™Ù][[Y[žRY
-	ÜÞ\ËXØ[˜\ÉÊK\™XOXÝ‹œ\™[[[Y[ÂˆÛÛœÝ]Ú[™ÝË™]šXÙT^[˜][ßNÂˆÝ‹ÚYX\™XK˜ÛY[ÚY
-™ŽØÝ‹šZYÚX\™XK˜ÛY[ZYÚ
-™ŽÂˆÝ‹œÝ[KÚYX\™XK˜ÛY[ÚY
-ÉÜ	ÎØÝ‹œÝ[KšZYÚX\™XK˜ÛY[ZYÚ
-ÉÜ	ÎÂˆÕXÝ‹™Ù]ÛÛ^
-	Ì™	ÊNÐÕœØØ[J‹ŠNÂˆÕ–“ÓÓOLNÐÕ”S^ÞŒNŒNÂˆYŠÝÚY[[™\ŠX\™XKœ™[[Ý™Q]™[\Ý[™\Š	ÝÚY[	ËÝÚY[[™\ŠNÂˆYŠÛY[™\ŠX\™XKœ™[[Ý™Q]™[\Ý[™\Š	Û[Ý\ÙYÝÛ‰ËÛY[™\ŠNÂˆÝÚY[[™\JJOOžÙKœ™]™[Y˜][
 
-NØÛÛœÝÜYYSX]˜XœÊK™[VJOLÌŒÎŒŒŽØÛÛœÝ[OYK™[VOÌJÜÜYY
-“X]˜XœÊK™[VJNŒK\ÜYY
-“X]˜XœÊK™[VJNØÛÛœÝ™]Ö›ÛÛOSX]›X^
-X]›Z[ŠÕ–“ÓÓJ™[JJNØÛÛœÝÕÏXÝ‹˜ÛY[ÚYXÝ‹˜ÛY[ZYÚØÛÛœÝÞUÕËÌ‹ÞORÌŽÐÕ”S‹žXÞJÞPÕ”S‹ž
-JŠ™]Ö›ÛÛKÐÕ–“ÓÓJNÐÕ”S‹žOXÞKJÞHPÕ”S‹žJJŠ™]Ö›ÛÛKÐÕ–“ÓÓJNÐÕ–“ÓÓO[™]Ö›ÛÛNßNÂˆ\™XK˜Y]™[\Ý[™\Š	ÝÚY[	ËÝÚY[[™\‹Ü\ÜÚ]™N™˜[Ù_JNÂˆÛY[™\JJOOžÚYŠK˜]ÛOOL
-^×Ü[›š[™Ï]YN×Ü[”Ý\^Þ™K˜ÛY[PÕ”S‹žOYK˜ÛY[KPÕ”S‹ž_Nß_NÂˆ\™XK˜Y]™[\Ý[™\Š	Û[Ý\ÙYÝÛ‰ËÛY[™\ŠNÂˆÚ[™ÝË˜Y]™[\Ý[™\Š	Û[Ý\Ù[[Ý™IË
-JOOžÚYŠÜ[›š[™Ê^ÐÕ”S‹žYK˜ÛY[WÜ[”Ý\žÐÕ”S‹žOYK˜ÛY[KWÜ[”Ý\žNß_JNÂˆÚ[™ÝË˜Y]™[\Ý[™\Š	Û[Ý\Ù]\	Ë
+function renderHomeGrid() {
+  const grid = document.getElementById('home-grid');
+  if (!grid) return;
 
-OOž×Ü[›š[™ÏY˜[ÙNßJNÂˆYŠQŠXØ[˜Ù[[š[X][Û‘œ˜[YJQŠNÙ˜]ÐÝŠ
-NÂŸB™[˜Ý[Ûˆ˜]ÐÝŠ
-^ÂˆYŠPÕPÔ•ÔŠ\™]\›ŽÂˆÛÛœÝÝYØÝ[Y[™Ù][[Y[žRY
-	ÜÞ\ËXØ[˜\ÉÊKÏXÝ‹˜ÛY[ÚYXÝ‹˜ÛY[ZYÚQ]K››ÝÊ
-KÌLÂˆÕ˜ÛX\”™XÝ
-Ë
-NÐÕœØ]™J
-NÐÕ˜[œÛ]JÕ”S‹žÔÝ˜[‹žX[
-NÐÕœØØ[JÕ–“ÓÓKÕ–“ÓÓJNÂˆÛÛœÝÞ\ÏPÕT‹œ^ßNÜÞ\Ë››Ù\Ë™›Ü‘XXÚ
-OžÛœÛ‹šYO^Þ›‹ž
-•ËÐÕ–“ÓÓKN›‹žJ‚ÐÕ–“ÓÓ_NßJNÂˆÞ\Ë™YÙ\Ë™›Ü‘XXÚ
-OOžØÛÛœÝ[œÙK™—K[œÙKNÚYŠYŸ]Š\™]\›ŽØÛÛœÝ\ÐOTÕTOOYKœË\ÔTÕT™KœÎØÛÛœÝ˜Ï\Þ\Ë››Ù\Ë™š[™
-O›‹šYOOYK™ŠOË˜ßÞ\Ë˜ÛÛÜŽØÛÛœÝ™ØZ™ØŠ˜ÊK[Z\ÐOËŽNš\ÔË‹ŒNÐÕ˜™YÚ[”]
+  const list = (state.activeHomeCat === 'all')
+    ? SYSTEMS
+    : SYSTEMS.filter(s => s.cat === state.activeHomeCat);
 
-NÚYŠK˜ÝŠ^ØÛÛœÝÞJ‹ž
-Ý‹ž
-KÌ‹ÞOSX]›Z[Š‹žK‹žJKMÍNÐÕ›[Ý™UÊ‹ž‹žJNÐÕœ]XY˜]XÐÝ\™UÊÞÞK‹ž‹žJNßY[Ù^ÐÕ›[Ý™UÊ‹ž‹žJNÐÕ›[™UÊ‹ž‹žJNßPÕœÝ›ÚÙTÝ[OX™Ø˜J	Ü™ØŸK	Ø[JXÐÕ›[™UÚYZ\ÐOÌŽŒNÐÕœÙ][™Q\Ú
-\ÐOÖ×N–ÍKWJNÐÕœÝ›ÚÙJ
-NÐÕœÙ][™Q\Ú
-×JNÚYŠ\ÐJ^Ù›ÜŠ]OLÚOÎÚJÊÊ^ØÛÛœÝJ
-
-‹N
-ÚJ‹ŒÍ
-ILJNÛ]NÚYŠK˜ÝŠ^ØÛÛœÝÞJ‹ž
-Ý‹ž
-KÌ‹ÞOSX]›Z[Š‹žK‹žJKMÍNÜJK\ŠJŠŒŸJ™‹ž
-ÌŠŠK\ŠJœŠ˜Þ
-ÜŠŠŒŠ‹žÜOJK\ŠJŠŒŠ™‹žJÌŠŠK\ŠJœŠ˜ÞJÜŠŠŒŠ‹žNßY[Ù^ÜY‹ž
-Ê‹žY‹ž
-JœŽÜOY‹žJÊ‹žKY‹žJI‰ŽßPÕ˜™YÚ[”]
+  // Infinite scroll: render only the first N; the rest loads as you scroll
+  const slice = list.slice(0, state.homeRenderCount);
 
-NÐÕ˜\˜ÊK‹KX]”JŒŠNÐÕ™š[Ý[O[˜ÎÐÕ™ÛØ˜[[OLKSX]˜XœÊ‹KJJŒKŽNÐÕ™š[
+  grid.innerHTML = slice.map(s => {
+    const logo = logoForSystemId(s.id);
+    const iconHtml = logo
+      ? `<div class="card-logo">${logo}</div>`
+      : `<div class="card-icon">${abbr(s.title)}</div>`;
 
-NÐÕ™ÛØ˜[[OLNß__JNÂˆÞ\Ë››Ù\Ë™›Ü‘XXÚ
+    return `
+    <div class="card" data-id="${s.id}">
+      <div class="card-top">
+        ${iconHtml}
+        <div class="card-meta">
+          <div class="card-title">${s.title}</div>
+          <div class="card-tags">
+            <span class="tag">${s.tag || catLabel(s.cat)}</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-desc">${s.desc}</div>
+      <div class="card-foot"><span>View system</span><span class="arr">â†’</span></div>
+    </div>
+  `;
+  }).join('');
 
-‹JOOžØïnst p=np[n.id];if(!p)return;const aE=sys.edges.find(e=>e.s===STEP);const isA=aE&&(aE.f===n.id||aE.t===n.id);const rgb=hxrgb(n.c),b=isA?30:24;CTX.beginPath();CTX.arc(p.x,p.y,r,0,Math.PI*2);CTX.fillStyle=isA?`rgba(${rgb},.2)`:'rgba(255,255,255,.03)';CTX.fill();CTX.strokeStyle=isA?n.c:'rgba(255,255,255,.12)';CTX.lineWidth=isA?2:1;CTX.stroke();const lines=(n.label||'').split('\n');CTX.textAlign='center';CTX.fillStyle=isA?n.c:'rgba(255,255,255,.4)';CTX.font='11px Inter,sans-serif';lines.forEach((l,li)=>CTX.fillText(l,p.x,p.y+(li-(lines.length-1)/2)*14));});CTX.restore();RAF=requestAnimationFrame(drawCv);
+  grid.querySelectorAll('.card').forEach(c => c.addEventListener('click', () => openProductById(c.dataset.id)));
 }
-function jt(i){STEP=i;document.querySelectorAll('.si').forEach((e,ix)=>e.classList.toggle('active')ix===i));document.getElementById(`si${i}`)?.scrollIntoView({behavior:'smooth',block:'nearest'});if(CUR){document.getElementById('step-num').textContent=i+1;const pct=((i+1)/CUR.steps.length)*100;document.getElementById('progress-fill').style.width=pct+'%';}if(CUR&&i<=CUR.steps.length-1){const s=CUR.steps[i];const ast=document.getElementById('active-step-title');const asd=document.getElementById('active-step-desc');if(ast)ast.textContent=`Step ${i+1} - ${s.n}`;if(asd)asd.textContent=s.d.substring(0,80);const sdt=document.getElementById('step-detail-title');const sdb=document.getElementById('step-detail-body');if(sdt)sdt.textContent=`Step ${i+1} Detail`;if(sdb)sdb.textContent=s.d;}}
-function prevStep(){if(!CUR)return;jt(Math.max(0,STEP-1));}
-function nextStep(){if(!CUR)return;jt(Math.min(STEP+1,CUR.steps.length-1));}
-function togglePlay(){if(PLAYING)stopPlay();else startPlay();}
-function startPlay(){PLAYING=true;updatePlayBtn(true);if(STEP>=(CUR?.steps.length-1))jt(0);PI=setInterval(()=>{if(!CUR){stopPlay();return;const n=STEP+1;if(n>=CUR.steps.length){stopPlay();return;}jt(n);},Math.round(2200/SPEED));}
-function stopPlay(){PLAYING=false;updatePlayBtn(false);clearInterval(PI);}
-function shareSystem(){if(navigator.clipboard)navigator.clipboard.writeText(window.location.href);}
-function setView(v,btn){VIEW=v;document.querySelectorAll('.vt').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const cl=document.getElementById('sys-canvas'),ul=document.getElementById('ui-flow');if(v==='system'){cl.style.display='block';ul.classList.remove('show');initCv();}else{cl.style.display='none';ul.classList.add('show');const scroller=document.getElementById('ui-flow-scroller');if(scroller.querySelectorAll('.ui-screen-wrap').length===0&&CUR)buildUIScreens(CUR);}}
-async function genFlow(){
-  const prompt=document.getElementById('ai-prompt').value.trim();if(!prompt)return;
-  const res=document.getElementById('ai-result');
-  res.innerHTML=`ACcounting...`;res.style.display='block';
-  try{
-    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:`For "${prompt}" respond ONLY with JSON:{"title":"title","steps":[{"n":"name","d":"desc"}],"nodes":[{"id":"id","label":"label","x":0.1,"y":0.5,"c":"#hex"}],"edges":[{"f":"id","t":"id","lbl":"label","s":0}]}`}]})});
-    const data=await r.json();
-    const text=data.content?.map(i=>i.text||'').join('')||'';
-    let parsed;try{parsed=JSON.parse(text.replace(/```json|```/g,'').trim());}catch{parsed={title:prompt,steps:[{n:'Flow',d:'AI diagram'}],nodes:[{id:'a',label:'Input',x:.2,y:.5,c:'#9333ea'},{id:'b',label:'Output',x:.8,y:.5,c:'#22c55e'}],edges:[{f:'a',t:'b',lbl:'data',s:2}]};}
-    res.innerHTML=`<h3 style="margin-bottom:16px">${parsed.title}</h3>${parsed.steps.map((s,i)=>`<div class="asc"><div class="asc-n">${i+1}</div><div><div class="asc-name">${s.n}</div><div class="asc-desc">${s.d}</div></div></div>`).join('')}`;
-  }catch(e){res.innerHTML='Generation failed.';}
+
+function initHomeInfiniteScroll() {
+  const sentinel = document.getElementById('home-sentinel');
+  if (!sentinel) return;
+
+  const obs = new IntersectionObserver((entries) => {
+    const ent = entries[0];
+    if (!ent.isIntersecting) return;
+
+    // Increase render count and re-render
+    const list = (state.activeHomeCat === 'all')
+      ? SYSTEMS
+      : SYSTEMS.filter(s => s.cat === state.activeHomeCat);
+
+    if (state.homeRenderCount >= list.length) return;
+    state.homeRenderCount = Math.min(state.homeRenderCount + state.homeChunk, list.length);
+    renderHomeGrid();
+  }, { root: null, rootMargin: '800px 0px', threshold: 0.01 });
+
+  obs.observe(sentinel);
 }
-document.addEventListener('DOMContentLoaded',()=>{fitHeroH1();renderGrid('home-grid',SYSTEMS);window.addEventListener('resize',()=>{if(CUR&&VIEW==='system')initCv();});});
+
+// ---------- Explore ----------
+function renderExplore() {
+  const root = document.getElementById('explore-page');
+  root.innerHTML = `
+    <div class="container">
+      <div class="section-title" style="margin-top:10px">
+        <h2>Explore</h2>
+        <p>Search across the full catalog and filter by category.</p>
+      </div>
+
+      <div class="explore-bar">
+        <input id="explore-search" type="text" placeholder="Search systems..." />
+      </div>
+
+      <div id="explore-filters" class="filters"></div>
+      <div id="explore-grid" class="grid"></div>
+    </div>
+  `;
+
+  renderExploreFilters();
+  renderExploreGrid('');
+
+  const input = document.getElementById('explore-search');
+  input.addEventListener('input', () => renderExploreGrid(input.value));
+}
+
+function renderExploreFilters() {
+  const host = document.getElementById('explore-filters');
+  const items = [{ id: 'all', label: 'All' }, ...CATEGORIES.map(c => ({ id: c.id, label: c.label }))];
+  host.innerHTML = items.map(x => `<button class="fb ${x.id === state.activeExploreCat ? 'active' : ''}" data-cat="${x.id}">${x.label}</button>`).join('');
+  host.querySelectorAll('.fb').forEach(b => b.addEventListener('click', () => {
+    state.activeExploreCat = b.dataset.cat;
+    renderExploreFilters();
+    const input = document.getElementById('explore-search');
+    renderExploreGrid(input?.value || '');
+  }));
+}
+
+function renderExploreGrid(q) {
+  const grid = document.getElementById('explore-grid');
+  if (!grid) return;
+
+  const qq = (q || '').trim().toLowerCase();
+  let list = SYSTEMS;
+  if (state.activeExploreCat !== 'all') list = list.filter(s => s.cat === state.activeExploreCat);
+  if (qq) list = list.filter(s => s.title.toLowerCase().includes(qq));
+
+  grid.innerHTML = list.slice(0, 120).map(s => {
+    const logo = logoForSystemId(s.id);
+    const iconHtml = logo
+      ? `<div class="card-logo">${logo}</div>`
+      : `<div class="card-icon">${abbr(s.title)}</div>`;
+
+    return `
+    <div class="card" data-id="${s.id}">
+      <div class="card-top">
+        ${iconHtml}
+        <div class="card-meta">
+          <div class="card-title">${s.title}</div>
+          <div class="card-tags">
+            <span class="tag">${s.tag || catLabel(s.cat)}</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-desc">${s.desc}</div>
+      <div class="card-foot"><span>View system</span><span class="arr">â†’</span></div>
+    </div>
+  `;
+  }).join('');
+
+  grid.querySelectorAll('.card').forEach(c => c.addEventListener('click', () => openProductById(c.dataset.id)));
+}
+
+// ---------- Product (stub for now) ----------
+function openProduct(sys) {
+  const root = document.getElementById('product-page');
+  root.innerHTML = `
+    <div class="container">
+      <div class="section-title" style="margin-top:10px">
+        <h2>${sys.title}</h2>
+        <p>${sys.desc}</p>
+      </div>
+      <div class="product-box">
+        <div class="muted">(Next) This is where the animated system flow will render step-by-step.</div>
+        <div class="muted">For now, the rewrite focuses on page structure + routing + catalog.</div>
+      </div>
+    </div>
+  `;
+  showPage('product');
+}
+
+function openProductById(id) {
+  const sys = SYSTEMS.find(s => s.id === id);
+  if (sys) openProduct(sys);
+}
+
+function findSystem(q) {
+  const qq = q.trim().toLowerCase();
+  // exact match
+  let s = SYSTEMS.find(x => x.title.toLowerCase() === qq);
+  if (s) return s;
+  // slug match
+  const slug = slugify(q);
+  s = SYSTEMS.find(x => x.id === slug);
+  if (s) return s;
+  // contains
+  return SYSTEMS.find(x => x.title.toLowerCase().includes(qq));
+}
+
+// ---------- AI Generate (placeholder) ----------
+function renderAI() {
+  const root = document.getElementById('ai-page');
+  root.innerHTML = `
+    <div class="container">
+      <div class="section-title" style="margin-top:10px">
+        <h2>AI Generate</h2>
+        <p>Generate a new system flow from a prompt. (Placeholder for now.)</p>
+      </div>
+      <div class="product-box">
+        <div class="muted">Weâ€™ll wire this once the main browsing flow is locked.</div>
+      </div>
+    </div>
+  `;
+}
+
+// ---------- Preview hub ----------
+function renderPreview() {
+  const root = document.getElementById('preview-page');
+  root.innerHTML = `
+    <div class="container">
+      <div class="section-title" style="margin-top:10px">
+        <h2>Preview</h2>
+        <p>Quick links to review pages and flows.</p>
+      </div>
+
+      <div class="preview-grid">
+        <a class="preview-link" href="#" data-page="home">Home</a>
+        <a class="preview-link" href="#" data-page="explore">Explore</a>
+        <a class="preview-link" href="#" data-page="ai">AI Generate</a>
+      </div>
+
+      <div style="height:18px"></div>
+
+      <div class="product-box">
+        <div class="muted" style="margin-bottom:10px">Sample products</div>
+        <div class="mini-list" id="preview-products"></div>
+      </div>
+    </div>
+  `;
+
+  root.querySelectorAll('[data-page]').forEach(a => a.addEventListener('click', (e) => {
+    e.preventDefault();
+    showPage(a.dataset.page);
+  }));
+
+  const list = document.getElementById('preview-products');
+  const sample = SYSTEMS.slice(0, 30);
+  list.innerHTML = sample.map(s => `<button class="mini" data-id="${s.id}">${s.title}</button>`).join('');
+  list.querySelectorAll('.mini').forEach(b => b.addEventListener('click', () => openProductById(b.dataset.id)));
+}
+
+// ---------- Utils ----------
+function abbr(title) {
+  const parts = title.replace(/\(.*?\)/g, '').trim().split(/\s+/).filter(Boolean);
+  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+  return (parts[0][0] + parts[1][0]).toUpperCase();
+}
+
+function catLabel(catId) {
+  return CATEGORIES.find(c => c.id === catId)?.label || 'General';
+}
+
+// ---------- Init ----------
+function initNavBindings() {
+  // Hook up existing fixed nav buttons if present
+  const navSearch = document.getElementById('nav-search-input');
+  if (navSearch) {
+    navSearch.addEventListener('input', () => {
+      // quick jump in place: if matches a product exactly, open it
+      const q = navSearch.value.trim();
+      if (!q) return;
+      const found = findSystem(q);
+      if (found && found.title.toLowerCase() === q.toLowerCase()) openProduct(found);
+    });
+    navSearch.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const found = findSystem(navSearch.value);
+        if (found) openProduct(found);
+      }
+    });
+  }
+
+  // Keyboard: Cmd+K focuses nav search
+  window.addEventListener('keydown', (e) => {
+    const isMac = navigator.platform.toLowerCase().includes('mac');
+    if ((isMac ? e.metaKey : e.ctrlKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      navSearch?.focus();
+    }
+  });
+}
+
+window.addEventListener('load', () => {
+  mountShell();
+  renderHome();
+  initNavBindings();
+
+  // Respect initial routing set by index.html (/?page=preview)
+  const initial = window.__FLOWVIS_INITIAL_PAGE__;
+  if (initial) showPage(initial);
+});
