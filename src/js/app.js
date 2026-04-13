@@ -1262,8 +1262,9 @@ function renderWhatsAppArchitecture(step) {
   const objstore = { x: 980, y: 420 };
 
   // External
-  const fcm = { x: 1140, y: 150 };
-  const cdn = { x: 1140, y: 240 };
+  // Keep external systems clearly outside backend and not overlapping
+  const fcm = { x: 1220, y: 150 };
+  const cdn = { x: 1220, y: 240 };
 
   // Only show a clean subset of edges per current step to avoid clutter
   const idx = (PLAYGROUND.step ?? 0) + 1;
@@ -1286,8 +1287,9 @@ function renderWhatsAppArchitecture(step) {
     edges += arrowOrtho(relay.x+220, relay.y+30, meta.x, meta.y+30, 'store');
   }
 
+  svg.setAttribute('viewBox', '0 0 1420 760');
   svg.innerHTML = `
-    <rect x="0" y="0" width="1200" height="760" fill="rgba(0,0,0,0)"/>
+    <rect x="0" y="0" width="1420" height="760" fill="rgba(0,0,0,0)"/>
     ${box(backend.x, backend.y, backend.w, backend.h, 'WhatsApp Backend')}
 
     ${n('sender', sender.x, sender.y, 'Sender App')}
