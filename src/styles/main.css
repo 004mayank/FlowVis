@@ -159,6 +159,11 @@ body{scrollbar-width:none;}
 .pg-btn.primary{background:rgba(123,125,248,0.22);border-color:rgba(123,125,248,0.38);}
 
 .pg-main{border:1px solid var(--border);background:rgba(255,255,255,0.02);border-radius:18px;overflow:hidden;}
+.pg-system{position:relative;}
+.pg-zoom{position:absolute;right:14px;top:14px;display:flex;flex-direction:column;gap:10px;z-index:5;}
+.pg-zoom .z{width:46px;height:46px;border-radius:14px;border:1px solid rgba(255,255,255,0.12);
+  background:rgba(13,13,18,0.6);color:rgba(240,240,248,0.9);font-weight:900;font-size:14px;cursor:pointer;}
+.pg-zoom .z:hover{border-color:rgba(255,255,255,0.20);background:rgba(13,13,18,0.72);}
 .pg-panel{height:100%;}
 .pg-panel.hidden{display:none;}
 .pg-canvas-wrap{height:100%;display:flex;align-items:center;justify-content:center;padding:10px;}

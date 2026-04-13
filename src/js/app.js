@@ -684,6 +684,7 @@ function mountShell() {
       <div class="pg-tabs">
         <button class="pg-tab active" data-tab="system">System Flow</button>
         <button class="pg-tab" data-tab="ui">UI Flow</button>
+        <button class="pg-tab" data-tab="arch">Architecture Flow</button>
       </div>
     </div>
 
@@ -699,14 +700,29 @@ function mountShell() {
       </aside>
 
       <main class="pg-main">
-        <div class="pg-panel" id="pg-system">
+        <div class="pg-panel pg-system" id="pg-system">
           <div class="pg-canvas-wrap">
             <svg id="wa-diagram" viewBox="0 0 1000 640" xmlns="http://www.w3.org/2000/svg"></svg>
+          </div>
+          <div class="pg-zoom">
+            <button class="z" id="z-in">+</button>
+            <button class="z" id="z-out">−</button>
+            <button class="z" id="z-reset">Reset</button>
           </div>
         </div>
         <div class="pg-panel hidden" id="pg-ui">
           <div class="pg-placeholder">
             UI Flow coming soon.
+          </div>
+        </div>
+        <div class="pg-panel pg-system hidden" id="pg-arch">
+          <div class="pg-canvas-wrap">
+            <svg id="wa-arch" viewBox="0 0 1200 760" xmlns="http://www.w3.org/2000/svg"></svg>
+          </div>
+          <div class="pg-zoom">
+            <button class="z" id="za-in">+</button>
+            <button class="z" id="za-out">−</button>
+            <button class="z" id="za-reset">Reset</button>
           </div>
         </div>
       </main>
@@ -1027,10 +1043,47 @@ function openPlayground(sys) {
     overlay.querySelectorAll('.pg-tab').forEach(x => x.classList.toggle('active', x.dataset.tab === PLAYGROUND.tab));
     document.getElementById('pg-system').classList.toggle('hidden', PLAYGROUND.tab !== 'system');
     document.getElementById('pg-ui').classList.toggle('hidden', PLAYGROUND.tab !== 'ui');
+    document.getElementById('pg-arch').classList.toggle('hidden', PLAYGROUND.tab !== 'arch');
+    renderPlayground();
   });
+
+  // Zoom controls
+  wireZoom('wa-diagram', 'z-in', 'z-out', 'z-reset');
+  wireZoom('wa-arch', 'za-in', 'za-out', 'za-reset');
 
   // Initial render
   renderPlayground();
+}
+
+const ZOOM = {};
+function wireZoom(svgId, inId, outId, resetId) {
+  const svg = document.getElementById(svgId);
+  if (!svg) return;
+  if (!ZOOM[svgId]) ZOOM[svgId] = { k: 1, x: 0, y: 0 };
+
+  const apply = () => {
+    const { k, x, y } = ZOOM[svgId];
+    // Wrap contents in a group for transform
+    let g = svg.querySelector('g[data-zoom]');
+    if (!g) {
+      g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      g.setAttribute('data-zoom', '1');
+      // move all children into group
+      while (svg.firstChild) g.appendChild(svg.firstChild);
+      svg.appendChild(g);
+    }
+    g.setAttribute('transform', `translate(${x} ${y}) scale(${k})`);
+  };
+
+  const zin = document.getElementById(inId);
+  const zout = document.getElementById(outId);
+  const zreset = document.getElementById(resetId);
+  if (zin) zin.onclick = () => { ZOOM[svgId].k = Math.min(2.2, ZOOM[svgId].k + 0.15); apply(); };
+  if (zout) zout.onclick = () => { ZOOM[svgId].k = Math.max(0.6, ZOOM[svgId].k - 0.15); apply(); };
+  if (zreset) zreset.onclick = () => { ZOOM[svgId] = { k: 1, x: 0, y: 0 }; apply(); };
+
+  // Apply once after first render
+  setTimeout(apply, 0);
 }
 
 function closePlayground() {
@@ -1111,11 +1164,111 @@ function renderPlayground() {
 
   // Render WhatsApp diagram if applicable
   if (PLAYGROUND.sys?.title.toLowerCase() === 'whatsapp') {
-    renderWhatsAppDiagram(steps[PLAYGROUND.step]);
+    if (PLAYGROUND.tab === 'system') renderWhatsAppDiagram(steps[PLAYGROUND.step]);
+    if (PLAYGROUND.tab === 'arch') renderWhatsAppArchitecture(steps[PLAYGROUND.step]);
   } else {
     const svg = document.getElementById('wa-diagram');
     if (svg) svg.innerHTML = `<text x="50" y="80" fill="rgba(255,255,255,0.6)" font-size="18" font-family="Inter, Arial">Flow coming soon for ${escapeXml(PLAYGROUND.sys?.title || '')}</text>`;
   }
+}
+
+function renderWhatsAppArchitecture(step) {
+  const svg = document.getElementById('wa-arch');
+  if (!svg) return;
+
+  const active = new Set(step.active || []);
+
+  const box = (x,y,w,h,label) => `
+    <rect x="${x}" y="${y}" width="${w}" height="${h}" rx="20" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.10)" />
+    <text x="${x+18}" y="${y+28}" fill="rgba(240,240,248,0.75)" font-size="14" font-family="Inter, Arial" font-weight="900">${escapeXml(label)}</text>
+  `;
+
+  const n = (id,x,y,label) => {
+    const on = active.has(id);
+    const stroke = on ? 'rgba(236,72,153,0.95)' : 'rgba(255,255,255,0.12)';
+    const fill = on ? 'rgba(236,72,153,0.12)' : 'rgba(255,255,255,0.03)';
+    return `
+      <rect x="${x}" y="${y}" width="220" height="60" rx="16" fill="${fill}" stroke="${stroke}" stroke-width="2" opacity="${on?1:0.65}"/>
+      <text x="${x+14}" y="${y+38}" fill="rgba(240,240,248,0.90)" font-size="14" font-family="Inter, Arial" font-weight="900" opacity="${on?1:0.65}">${escapeXml(label)}</text>
+    `;
+  };
+
+  const arrow = (x1,y1,x2,y2,label='') => {
+    const mid = Math.abs(x1*13+x2*7+y1*11+y2*5).toFixed(0);
+    const markerId = `arch-arrow-${mid}`;
+    const d = `M${x1} ${y1} C ${x1+120} ${y1}, ${x2-120} ${y2}, ${x2} ${y2}`;
+    return `
+      <defs>
+        <marker id="${markerId}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(123,125,248,0.85)"/>
+        </marker>
+      </defs>
+      <path d="${d}" fill="none" stroke="rgba(123,125,248,0.65)" stroke-width="3" stroke-linecap="round" marker-end="url(#${markerId})"/>
+      ${label ? `<text><textPath href="#arch-p-${mid}" startOffset="50%" text-anchor="middle" fill="rgba(123,125,248,0.55)" font-size="12" font-family="Inter, Arial" font-weight="800">${escapeXml(label)}</textPath></text><path id="arch-p-${mid}" d="${d}" fill="none" stroke="none"/>` : ''}
+    `;
+  };
+
+  // Layout
+  // Clients
+  const sender = { x: 40, y: 120 };
+  const recipient = { x: 40, y: 200 };
+
+  // Backend box
+  const backend = { x: 320, y: 80, w: 840, h: 600 };
+
+  // Services
+  const edge = { x: 360, y: 140 };
+  const auth = { x: 360, y: 220 };
+  const keyb = { x: 360, y: 300 };
+  const relay = { x: 620, y: 140 };
+  const queue = { x: 620, y: 220 };
+  const spam = { x: 620, y: 300 };
+  const push = { x: 880, y: 140 };
+  const media = { x: 880, y: 220 };
+  const meta = { x: 880, y: 300 };
+  const objstore = { x: 880, y: 380 };
+
+  // External
+  const fcm = { x: 1140, y: 140 };
+  const cdn = { x: 1140, y: 220 };
+
+  svg.innerHTML = `
+    <rect x="0" y="0" width="1200" height="760" fill="rgba(0,0,0,0)"/>
+    ${box(backend.x, backend.y, backend.w, backend.h, 'WhatsApp Backend')}
+
+    ${n('sender', sender.x, sender.y, 'Sender App')}
+    ${n('recipient', recipient.x, recipient.y, 'Recipient App')}
+
+    ${n('relay', edge.x, edge.y, 'Edge / API Gateway')}
+    ${n('auth', auth.x, auth.y, 'Auth Service')}
+    ${n('keybundle', keyb.x, keyb.y, 'Key Bundle Service')}
+    ${n('relay', relay.x, relay.y, 'Messaging Relay')}
+    ${n('queue', queue.x, queue.y, 'Fanout Queue')}
+    ${n('spam', spam.x, spam.y, 'Spam / Abuse Checks')}
+    ${n('push', push.x, push.y, 'Push Orchestrator')}
+    ${n('media', media.x, media.y, 'Media Service')}
+    ${n('meta', meta.x, meta.y, 'Message Metadata Store')}
+    ${n('obj', objstore.x, objstore.y, 'Media Object Store')}
+
+    ${n('push', fcm.x, fcm.y, 'FCM / APNs')}
+    ${n('cdn', cdn.x, cdn.y, 'CDN')}
+
+    ${arrow(sender.x+220, sender.y+30, edge.x, edge.y+30, 'send')}
+    ${arrow(edge.x+220, edge.y+30, relay.x, relay.y+30, 'relay')}
+    ${arrow(relay.x+220, relay.y+30, queue.x, queue.y+30, 'fanout')}
+    ${arrow(queue.x+220, queue.y+30, push.x, push.y+30, 'notify')}
+    ${arrow(push.x+220, push.y+30, fcm.x, fcm.y+30, '')}
+    ${arrow(fcm.x, fcm.y+30, recipient.x+220, recipient.y+30, '')}
+
+    ${arrow(edge.x+220, edge.y+30, spam.x, spam.y+30, 'check')}
+    ${arrow(edge.x+220, edge.y+30, meta.x, meta.y+30, 'store')}
+    ${arrow(sender.x+220, sender.y+30, keyb.x, keyb.y+30, 'keys')}
+
+    ${arrow(sender.x+220, sender.y+30, media.x, media.y+30, 'upload')}
+    ${arrow(media.x+220, media.y+30, objstore.x, objstore.y+30, 'store')}
+    ${arrow(objstore.x+220, objstore.y+30, cdn.x, cdn.y+30, 'serve')}
+    ${arrow(cdn.x, cdn.y+30, recipient.x+220, recipient.y+30, 'download')}
+  `;
 }
 
 function renderWhatsAppDiagram(step) {
