@@ -1068,10 +1068,11 @@ function wireZoom(svgId, inId, outId, resetId) {
     if (!g) {
       g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
       g.setAttribute('data-zoom', '1');
-      // move all children into group
-      while (svg.firstChild) g.appendChild(svg.firstChild);
       svg.appendChild(g);
     }
+    // Ensure all non-zoom children are moved under zoom group (diagram rerenders replace innerHTML)
+    const kids = Array.from(svg.childNodes).filter(n => n !== g);
+    for (const k of kids) g.appendChild(k);
     g.setAttribute('transform', `translate(${x} ${y}) scale(${k})`);
   };
 
@@ -1082,8 +1083,8 @@ function wireZoom(svgId, inId, outId, resetId) {
   if (zout) zout.onclick = () => { ZOOM[svgId].k = Math.max(0.6, ZOOM[svgId].k - 0.15); apply(); };
   if (zreset) zreset.onclick = () => { ZOOM[svgId] = { k: 1, x: 0, y: 0 }; apply(); };
 
-  // Apply once after first render
-  setTimeout(apply, 0);
+  // Apply now and after each render call
+  apply();
 }
 
 function closePlayground() {
@@ -1166,6 +1167,10 @@ function renderPlayground() {
   if (PLAYGROUND.sys?.title.toLowerCase() === 'whatsapp') {
     if (PLAYGROUND.tab === 'system') renderWhatsAppDiagram(steps[PLAYGROUND.step]);
     if (PLAYGROUND.tab === 'arch') renderWhatsAppArchitecture(steps[PLAYGROUND.step]);
+
+    // Re-apply zoom after rerender so user zoom doesn't reset
+    if (PLAYGROUND.tab === 'system') wireZoom('wa-diagram', 'z-in', 'z-out', 'z-reset');
+    if (PLAYGROUND.tab === 'arch') wireZoom('wa-arch', 'za-in', 'za-out', 'za-reset');
   } else {
     const svg = document.getElementById('wa-diagram');
     if (svg) svg.innerHTML = `<text x="50" y="80" fill="rgba(255,255,255,0.6)" font-size="18" font-family="Inter, Arial">Flow coming soon for ${escapeXml(PLAYGROUND.sys?.title || '')}</text>`;
@@ -1193,17 +1198,17 @@ function renderWhatsAppArchitecture(step) {
     `;
   };
 
-  const arrow = (x1,y1,x2,y2,label='') => {
+  const arrow = (x1,y1,x2,y2,label='', bend=120) => {
     const mid = Math.abs(x1*13+x2*7+y1*11+y2*5).toFixed(0);
     const markerId = `arch-arrow-${mid}`;
-    const d = `M${x1} ${y1} C ${x1+120} ${y1}, ${x2-120} ${y2}, ${x2} ${y2}`;
+    const d = `M${x1} ${y1} C ${x1+bend} ${y1}, ${x2-bend} ${y2}, ${x2} ${y2}`;
     return `
       <defs>
         <marker id="${markerId}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(123,125,248,0.85)"/>
         </marker>
       </defs>
-      <path d="${d}" fill="none" stroke="rgba(123,125,248,0.65)" stroke-width="3" stroke-linecap="round" marker-end="url(#${markerId})"/>
+      <path d="${d}" fill="none" stroke="rgba(123,125,248,0.55)" stroke-width="3" stroke-linecap="round" marker-end="url(#${markerId})"/>
       ${label ? `<text><textPath href="#arch-p-${mid}" startOffset="50%" text-anchor="middle" fill="rgba(123,125,248,0.55)" font-size="12" font-family="Inter, Arial" font-weight="800">${escapeXml(label)}</textPath></text><path id="arch-p-${mid}" d="${d}" fill="none" stroke="none"/>` : ''}
     `;
   };
@@ -1232,6 +1237,26 @@ function renderWhatsAppArchitecture(step) {
   const fcm = { x: 1140, y: 140 };
   const cdn = { x: 1140, y: 220 };
 
+  // Edges grouped by row to reduce overlap
+  const edges = `
+    ${arrow(sender.x+220, sender.y+30, edge.x, edge.y+30, 'send', 140)}
+    ${arrow(edge.x+220, edge.y+30, relay.x, relay.y+30, 'relay', 120)}
+    ${arrow(relay.x+220, relay.y+30, push.x, push.y+30, 'notify', 140)}
+    ${arrow(push.x+220, push.y+30, fcm.x, fcm.y+30, '', 120)}
+
+    ${arrow(relay.x+220, relay.y+30, queue.x+0, queue.y+30, 'fanout', 160)}
+    ${arrow(queue.x+220, queue.y+30, push.x, push.y+30, '', 120)}
+
+    ${arrow(sender.x+220, sender.y+30, keyb.x, keyb.y+30, 'keys', 120)}
+    ${arrow(edge.x+220, edge.y+30, spam.x, spam.y+30, 'check', 150)}
+    ${arrow(edge.x+220, edge.y+30, meta.x, meta.y+30, 'store', 160)}
+
+    ${arrow(sender.x+220, sender.y+30, media.x, media.y+30, 'upload', 180)}
+    ${arrow(media.x+220, media.y+30, objstore.x, objstore.y+30, 'store', 140)}
+    ${arrow(objstore.x+220, objstore.y+30, cdn.x, cdn.y+30, 'serve', 120)}
+    ${arrow(cdn.x, cdn.y+30, recipient.x+220, recipient.y+30, 'download', 160)}
+  `;
+
   svg.innerHTML = `
     <rect x="0" y="0" width="1200" height="760" fill="rgba(0,0,0,0)"/>
     ${box(backend.x, backend.y, backend.w, backend.h, 'WhatsApp Backend')}
@@ -1253,21 +1278,7 @@ function renderWhatsAppArchitecture(step) {
     ${n('push', fcm.x, fcm.y, 'FCM / APNs')}
     ${n('cdn', cdn.x, cdn.y, 'CDN')}
 
-    ${arrow(sender.x+220, sender.y+30, edge.x, edge.y+30, 'send')}
-    ${arrow(edge.x+220, edge.y+30, relay.x, relay.y+30, 'relay')}
-    ${arrow(relay.x+220, relay.y+30, queue.x, queue.y+30, 'fanout')}
-    ${arrow(queue.x+220, queue.y+30, push.x, push.y+30, 'notify')}
-    ${arrow(push.x+220, push.y+30, fcm.x, fcm.y+30, '')}
-    ${arrow(fcm.x, fcm.y+30, recipient.x+220, recipient.y+30, '')}
-
-    ${arrow(edge.x+220, edge.y+30, spam.x, spam.y+30, 'check')}
-    ${arrow(edge.x+220, edge.y+30, meta.x, meta.y+30, 'store')}
-    ${arrow(sender.x+220, sender.y+30, keyb.x, keyb.y+30, 'keys')}
-
-    ${arrow(sender.x+220, sender.y+30, media.x, media.y+30, 'upload')}
-    ${arrow(media.x+220, media.y+30, objstore.x, objstore.y+30, 'store')}
-    ${arrow(objstore.x+220, objstore.y+30, cdn.x, cdn.y+30, 'serve')}
-    ${arrow(cdn.x, cdn.y+30, recipient.x+220, recipient.y+30, 'download')}
+    ${edges}
   `;
 }
 
