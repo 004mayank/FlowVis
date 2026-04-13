@@ -1375,7 +1375,7 @@ function renderWhatsAppDiagram(step) {
     relay: { cx: 520, cy: 360, label: 'WA Server', color: 'rgba(123,125,248,0.95)' },
     decrypt: { cx: 740, cy: 360, label: 'Signal Decrypt', color: 'rgba(34,197,94,0.95)' },
     recipient: { cx: 910, cy: 360, label: 'Friend', color: 'rgba(34,197,94,0.95)' },
-    push: { cx: 520, cy: 170, label: 'FCM APNs', color: 'rgba(123,125,248,0.75)' },
+    push: { cx: 1160, cy: 170, label: 'FCM APNs', color: 'rgba(123,125,248,0.75)' },
     keybundle: { cx: 290, cy: 520, label: 'Key Bundle', color: 'rgba(34,197,94,0.65)' },
   };
 
@@ -1403,8 +1403,9 @@ function renderWhatsAppDiagram(step) {
     ${node('keybundle', nodes.keybundle.cx, nodes.keybundle.cy, nodes.keybundle.label, nodes.keybundle.color)}
   `;
 
+  svg.setAttribute('viewBox', '0 0 1320 640');
   svg.innerHTML = `
-    <rect x="0" y="0" width="1000" height="640" fill="rgba(0,0,0,0)"/>
+    <rect x="0" y="0" width="1320" height="640" fill="rgba(0,0,0,0)"/>
     ${edgesSvg}
     ${nodesSvg}
   `;
