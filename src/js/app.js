@@ -1058,11 +1058,11 @@ function stopPlayground() {
 function getProductSteps(sys) {
   if (sys.title.toLowerCase() === 'whatsapp') {
     return [
-      { title: 'User types message', active: ['sender'] },
-      { title: 'Client encryption', active: ['sender','crypto','keybundle'] },
-      { title: 'Server relay', active: ['relay','queue'] },
-      { title: 'Push notification', active: ['push','recipient'] },
-      { title: 'Client decryption', active: ['recipient','crypto'] },
+      { title: 'User types message', active: ['sender'], edges: [] },
+      { title: 'Client encryption', active: ['sender','crypto','keybundle'], edges: [['sender','crypto'], ['keybundle','crypto']] },
+      { title: 'Server relay', active: ['crypto','relay','queue'], edges: [['crypto','relay'], ['relay','queue']] },
+      { title: 'Push notification', active: ['queue','push','recipient'], edges: [['queue','push'], ['push','recipient']] },
+      { title: 'Client decryption', active: ['recipient','crypto'], edges: [['recipient','crypto']] },
     ];
   }
   // Placeholder for other products
@@ -1093,22 +1093,26 @@ function renderWhatsAppDiagram(step) {
   if (!svg) return;
 
   const active = new Set(step.active || []);
+  const stepEdges = step.edges || [];
+  const eActive = (a,b) => stepEdges.some(e => e[0]===a && e[1]===b);
   const node = (id, x, y, label) => {
     const on = active.has(id);
-    const stroke = on ? 'rgba(123,125,248,0.95)' : 'rgba(255,255,255,0.14)';
-    const fill = on ? 'rgba(123,125,248,0.14)' : 'rgba(255,255,255,0.03)';
+    const stroke = on ? 'rgba(123,125,248,0.95)' : 'rgba(255,255,255,0.10)';
+    const fill = on ? 'rgba(123,125,248,0.14)' : 'rgba(255,255,255,0.02)';
+    const opacity = on ? 1 : 0.45;
     return `
       <g>
-        <rect x="${x}" y="${y}" rx="22" ry="22" width="270" height="86" fill="${fill}" stroke="${stroke}" stroke-width="2"/>
-        <text x="${x+22}" y="${y+52}" fill="rgba(240,240,248,0.92)" font-size="18" font-family="Inter, Arial" font-weight="900">${escapeXml(label)}</text>
+        <rect x="${x}" y="${y}" rx="22" ry="22" width="270" height="86" fill="${fill}" stroke="${stroke}" stroke-width="2" opacity="${opacity}"/>
+        <text x="${x+22}" y="${y+52}" fill="rgba(240,240,248,0.92)" font-size="18" font-family="Inter, Arial" font-weight="900" opacity="${opacity}">${escapeXml(label)}</text>
       </g>
     `;
   };
 
   const edge = (fromX, fromY, toX, toY, on) => {
-    // Simple connector like the reference (single smooth curve)
-    const stroke = on ? 'rgba(236,72,153,0.95)' : 'rgba(255,255,255,0.12)';
-    const w = on ? 4 : 3;
+    // Show only step-relevant edges; keep others hidden
+    if (!on) return '';
+    const stroke = 'rgba(236,72,153,0.95)';
+    const w = 4;
     const dx = Math.max(60, Math.min(180, Math.abs(toX - fromX) * 0.35));
     return `<path d="M${fromX} ${fromY} C ${fromX+dx} ${fromY}, ${toX-dx} ${toY}, ${toX} ${toY}" fill="none" stroke="${stroke}" stroke-width="${w}" stroke-linecap="round"/>`;
   };
@@ -1124,16 +1128,14 @@ function renderWhatsAppDiagram(step) {
     recipient: { x: 690, y: 350, label: 'Recipient App' },
   };
 
-  const eOn = (a,b) => active.has(a) && active.has(b);
-
   svg.innerHTML = `
     <rect x="0" y="0" width="1000" height="640" fill="rgba(0,0,0,0)"/>
-    ${edge(nodes.sender.x+270, nodes.sender.y+43, nodes.relay.x, nodes.relay.y+43, active.has('sender') && (active.has('relay') || active.has('queue') || active.has('push') || active.has('recipient')))}
-    ${edge(nodes.crypto.x+270, nodes.crypto.y+43, nodes.relay.x, nodes.relay.y+43, eOn('crypto','relay'))}
-    ${edge(nodes.keybundle.x+270, nodes.keybundle.y+43, nodes.crypto.x+270, nodes.crypto.y+43, eOn('keybundle','crypto'))}
-    ${edge(nodes.relay.x+270, nodes.relay.y+43, nodes.queue.x+270, nodes.queue.y+43, eOn('relay','queue'))}
-    ${edge(nodes.queue.x+270, nodes.queue.y+43, nodes.push.x, nodes.push.y+43, active.has('queue') && active.has('push'))}
-    ${edge(nodes.push.x+270, nodes.push.y+43, nodes.recipient.x, nodes.recipient.y+43, eOn('push','recipient'))}
+    ${edge(nodes.sender.x+270, nodes.sender.y+43, nodes.crypto.x, nodes.crypto.y+43, eActive('sender','crypto'))}
+    ${edge(nodes.keybundle.x+270, nodes.keybundle.y+43, nodes.crypto.x, nodes.crypto.y+43, eActive('keybundle','crypto'))}
+    ${edge(nodes.crypto.x+270, nodes.crypto.y+43, nodes.relay.x, nodes.relay.y+43, eActive('crypto','relay'))}
+    ${edge(nodes.relay.x+270, nodes.relay.y+43, nodes.queue.x, nodes.queue.y+43, eActive('relay','queue'))}
+    ${edge(nodes.queue.x+270, nodes.queue.y+43, nodes.push.x, nodes.push.y+43, eActive('queue','push'))}
+    ${edge(nodes.push.x+270, nodes.push.y+43, nodes.recipient.x, nodes.recipient.y+43, eActive('push','recipient'))}
 
     ${node('sender', nodes.sender.x, nodes.sender.y, nodes.sender.label)}
     ${node('crypto', nodes.crypto.x, nodes.crypto.y, nodes.crypto.label)}
