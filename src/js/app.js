@@ -1058,11 +1058,36 @@ function stopPlayground() {
 function getProductSteps(sys) {
   if (sys.title.toLowerCase() === 'whatsapp') {
     return [
-      { title: 'User types message', active: ['sender'], edges: [] },
-      { title: 'Client encryption', active: ['sender','crypto','keybundle'], edges: [['sender','crypto'], ['keybundle','crypto']] },
-      { title: 'Server relay', active: ['relay'], edges: [['crypto','relay'], ['relay','decrypt']] },
-      { title: 'Push notification', active: ['push','recipient','relay'], edges: [['relay','push'], ['push','recipient']] },
-      { title: 'Client decryption', active: ['decrypt','recipient'], edges: [['decrypt','recipient']] },
+      {
+        title: 'User types message',
+        desc: 'You compose a message on your device. Nothing leaves your phone yet.',
+        active: ['sender'],
+        edges: []
+      },
+      {
+        title: 'Client encryption',
+        desc: 'Your app encrypts the message using Signal Protocol and the recipient\'s key bundle.',
+        active: ['sender','crypto','keybundle'],
+        edges: [['sender','crypto'], ['keybundle','crypto']]
+      },
+      {
+        title: 'Server relay',
+        desc: 'WhatsApp servers relay the encrypted packet without reading the content.',
+        active: ['relay'],
+        edges: [['crypto','relay'], ['relay','decrypt']]
+      },
+      {
+        title: 'Push notification',
+        desc: 'If the recipient is offline, push services wake the app to fetch the message.',
+        active: ['push','recipient','relay'],
+        edges: [['relay','push'], ['push','recipient']]
+      },
+      {
+        title: 'Client decryption',
+        desc: 'The recipient app verifies and decrypts locally, then shows the plaintext.',
+        active: ['decrypt','recipient'],
+        edges: [['decrypt','recipient']]
+      },
     ];
   }
   // Placeholder for other products
@@ -1078,6 +1103,10 @@ function renderPlayground() {
   document.querySelectorAll('.pg-step').forEach((b) => {
     b.classList.toggle('active', Number(b.dataset.step) === PLAYGROUND.step);
   });
+
+  const s = steps[PLAYGROUND.step];
+  const d = document.getElementById('pg-desc');
+  if (d) d.textContent = s?.desc || PLAYGROUND.sys?.desc || '';
 
   // Render WhatsApp diagram if applicable
   if (PLAYGROUND.sys?.title.toLowerCase() === 'whatsapp') {
@@ -1129,7 +1158,14 @@ function renderWhatsAppDiagram(step) {
         <textPath href="#p-${Math.abs(fromX*13+toX*7+fromY*11+toY*5).toFixed(0)}" startOffset="50%" text-anchor="middle" fill="rgba(123,125,248,0.65)" font-size="12" font-family="Inter, Arial" font-weight="800">${escapeXml(label)}</textPath>
       </text>` : '';
     const pid = `p-${Math.abs(fromX*13+toX*7+fromY*11+toY*5).toFixed(0)}`;
-    return `<path id="${pid}" d="${d}" fill="none" stroke="${stroke}" stroke-width="${w}" stroke-linecap="round" ${dash}/>${midLabel}`;
+    // Arrow marker
+    const marker = `
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="${stroke}" opacity="0.9" />
+        </marker>
+      </defs>`;
+    return `${marker}<path id="${pid}" d="${d}" fill="none" stroke="${stroke}" stroke-width="${w}" stroke-linecap="round" ${dash} marker-end="url(#arrow)"/>${midLabel}`;
   };
 
   // Layout
