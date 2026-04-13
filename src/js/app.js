@@ -8,6 +8,7 @@
 
 import { SYSTEMS, addSystem, CATEGORIES, slugify } from '../data/systems.js';
 import { logoForSystemId } from '../data/logos.js';
+import { flowForSystem } from '../data/flows.js';
 
 // ---------- Product seed (from user paste) ----------
 const PRODUCT_LINES = `Stripe
@@ -1137,40 +1138,8 @@ function stopPlayground() {
 }
 
 function getProductSteps(sys) {
-  if (sys.title.toLowerCase() === 'whatsapp') {
-    return [
-      {
-        title: 'User types message',
-        desc: 'You compose a message on your device. Nothing leaves your phone yet.',
-        active: ['sender'],
-        edges: []
-      },
-      {
-        title: 'Client encryption',
-        desc: 'Your app encrypts the message using Signal Protocol and the recipient\'s key bundle.',
-        active: ['sender','crypto','keybundle'],
-        edges: [['sender','crypto'], ['keybundle','crypto']]
-      },
-      {
-        title: 'Server relay',
-        desc: 'WhatsApp servers relay the encrypted packet without reading the content.',
-        active: ['relay'],
-        edges: [['crypto','relay'], ['relay','decrypt']]
-      },
-      {
-        title: 'Push notification',
-        desc: 'If the recipient is offline, push services wake the app to fetch the message.',
-        active: ['push','recipient','relay'],
-        edges: [['relay','push'], ['push','recipient']]
-      },
-      {
-        title: 'Client decryption',
-        desc: 'The recipient app verifies and decrypts locally, then shows the plaintext.',
-        active: ['decrypt','recipient'],
-        edges: [['decrypt','recipient']]
-      },
-    ];
-  }
+  const flow = flowForSystem(sys);
+  if (flow?.steps?.length) return flow.steps;
   // Placeholder for other products
   return [
     { title: 'Start', active: [] },
