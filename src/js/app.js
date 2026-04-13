@@ -993,7 +993,8 @@ function openPlayground(sys) {
   const titleEl = document.getElementById('pg-title');
   const logo = logoForSystemId(sys.id);
   titleEl.innerHTML = `${logo ? `<span class="pg-logo">${logo}</span>` : ''}<span>${sys.title}</span>`;
-  document.getElementById('pg-desc').textContent = sys.desc;
+  // Step description is shown above step list (like reference)
+  document.getElementById('pg-desc').textContent = '';
 
   // Tabs
   overlay.querySelectorAll('.pg-tab').forEach(b => {
@@ -1106,7 +1107,7 @@ function renderPlayground() {
 
   const s = steps[PLAYGROUND.step];
   const d = document.getElementById('pg-desc');
-  if (d) d.textContent = s?.desc || PLAYGROUND.sys?.desc || '';
+  if (d) d.textContent = s?.desc || '';
 
   // Render WhatsApp diagram if applicable
   if (PLAYGROUND.sys?.title.toLowerCase() === 'whatsapp') {
