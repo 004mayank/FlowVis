@@ -652,6 +652,7 @@ const PLAYGROUND = {
   sys: null,
   step: 0,
   timer: null,
+  speed: 1,
 };
 
 function mountShell() {
@@ -696,6 +697,11 @@ function mountShell() {
           <button class="pg-btn" id="pg-prev">Prev</button>
           <button class="pg-btn primary" id="pg-play">Play</button>
           <button class="pg-btn" id="pg-next">Next</button>
+        </div>
+        <div class="pg-speed" id="pg-speed">
+          <button class="sp" data-speed="0.5">0.5x</button>
+          <button class="sp active" data-speed="1">1x</button>
+          <button class="sp" data-speed="2">2x</button>
         </div>
       </aside>
 
@@ -1037,6 +1043,22 @@ function openPlayground(sys) {
   };
   document.getElementById('pg-close').onclick = closePlayground;
 
+  // Speed controls
+  const spHost = document.getElementById('pg-speed');
+  if (spHost) {
+    spHost.querySelectorAll('[data-speed]').forEach(b => {
+      b.onclick = () => {
+        PLAYGROUND.speed = Number(b.dataset.speed);
+        spHost.querySelectorAll('[data-speed]').forEach(x => x.classList.toggle('active', x.dataset.speed === b.dataset.speed));
+        if (PLAYGROUND.timer) {
+          // restart timer with new speed
+          stopPlayground();
+          startPlayground();
+        }
+      };
+    });
+  }
+
   // Tab switching
   overlay.querySelectorAll('.pg-tab').forEach(b => b.onclick = () => {
     PLAYGROUND.tab = b.dataset.tab;
@@ -1053,6 +1075,9 @@ function openPlayground(sys) {
 
   // Initial render
   renderPlayground();
+
+  // Autoplay by default
+  startPlayground();
 }
 
 const ZOOM = {};
@@ -1097,10 +1122,11 @@ function closePlayground() {
 function startPlayground() {
   const steps = getProductSteps(PLAYGROUND.sys);
   document.getElementById('pg-play').textContent = 'Pause';
+  const ms = Math.round(1800 / (PLAYGROUND.speed || 1));
   PLAYGROUND.timer = setInterval(() => {
     PLAYGROUND.step = (PLAYGROUND.step + 1) % steps.length;
     renderPlayground();
-  }, 1800);
+  }, ms);
 }
 
 function stopPlayground() {
@@ -1213,29 +1239,29 @@ function renderWhatsAppArchitecture(step) {
     `;
   };
 
-  // Layout
+  // Layout (more spaced to keep connectors readable)
   // Clients
   const sender = { x: 40, y: 120 };
   const recipient = { x: 40, y: 200 };
 
   // Backend box
-  const backend = { x: 320, y: 80, w: 840, h: 600 };
+  const backend = { x: 320, y: 70, w: 860, h: 630 };
 
   // Services
-  const edge = { x: 360, y: 140 };
-  const auth = { x: 360, y: 220 };
-  const keyb = { x: 360, y: 300 };
-  const relay = { x: 620, y: 140 };
-  const queue = { x: 620, y: 220 };
-  const spam = { x: 620, y: 300 };
-  const push = { x: 880, y: 140 };
-  const media = { x: 880, y: 220 };
-  const meta = { x: 880, y: 300 };
-  const objstore = { x: 880, y: 380 };
+  const edge = { x: 370, y: 150 };
+  const auth = { x: 370, y: 240 };
+  const keyb = { x: 370, y: 330 };
+  const relay = { x: 680, y: 150 };
+  const queue = { x: 680, y: 240 };
+  const spam = { x: 680, y: 330 };
+  const push = { x: 980, y: 150 };
+  const media = { x: 980, y: 240 };
+  const meta = { x: 980, y: 330 };
+  const objstore = { x: 980, y: 420 };
 
   // External
-  const fcm = { x: 1140, y: 140 };
-  const cdn = { x: 1140, y: 220 };
+  const fcm = { x: 1140, y: 150 };
+  const cdn = { x: 1140, y: 240 };
 
   // Edges grouped by row to reduce overlap
   const edges = `

@@ -158,6 +158,11 @@ body{scrollbar-width:none;}
   padding:12px 12px;border-radius:14px;cursor:pointer;font-weight:900;}
 .pg-btn.primary{background:rgba(123,125,248,0.22);border-color:rgba(123,125,248,0.38);}
 
+.pg-speed{display:flex;gap:10px;margin-top:10px;}
+.sp{flex:1;border:1px solid rgba(255,255,255,0.10);background:rgba(255,255,255,0.02);
+  color:rgba(240,240,248,0.8);padding:10px 10px;border-radius:14px;cursor:pointer;font-weight:900;}
+.sp.active{background:rgba(236,72,153,0.14);border-color:rgba(236,72,153,0.30);color:#fff;}
+
 .pg-main{border:1px solid var(--border);background:rgba(255,255,255,0.02);border-radius:18px;overflow:hidden;}
 .pg-system{position:relative;}
 .pg-zoom{position:absolute;right:14px;top:14px;display:flex;flex-direction:column;gap:10px;z-index:5;}
