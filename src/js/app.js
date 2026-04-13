@@ -645,6 +645,15 @@ window.showPage = function showPage(page) {
   window.scrollTo(0, 0);
 };
 
+// ---------- Playground overlay (System/UI toggle) ----------
+const PLAYGROUND = {
+  open: false,
+  tab: 'system',
+  sys: null,
+  step: 0,
+  timer: null,
+};
+
 function mountShell() {
   const body = document.body;
 
@@ -663,6 +672,47 @@ function mountShell() {
     <section id="preview-page" class="page"></section>
     <section id="product-page" class="page"></section>
   `;
+
+  // Full-screen overlay playground (opens on product click)
+  const overlay = document.createElement('div');
+  overlay.id = 'playground';
+  overlay.className = 'playground';
+  overlay.innerHTML = `
+    <div class="pg-top">
+      <button class="pg-back" id="pg-close">← Back</button>
+      <div class="pg-title" id="pg-title"></div>
+      <div class="pg-tabs">
+        <button class="pg-tab active" data-tab="system">System Flow</button>
+        <button class="pg-tab" data-tab="ui">UI Flow</button>
+      </div>
+    </div>
+
+    <div class="pg-body">
+      <aside class="pg-left">
+        <div class="pg-desc" id="pg-desc"></div>
+        <div class="pg-steps" id="pg-steps"></div>
+        <div class="pg-controls">
+          <button class="pg-btn" id="pg-prev">Prev</button>
+          <button class="pg-btn primary" id="pg-play">Play</button>
+          <button class="pg-btn" id="pg-next">Next</button>
+        </div>
+      </aside>
+
+      <main class="pg-main">
+        <div class="pg-panel" id="pg-system">
+          <div class="pg-canvas-wrap">
+            <svg id="wa-diagram" viewBox="0 0 1000 640" xmlns="http://www.w3.org/2000/svg"></svg>
+          </div>
+        </div>
+        <div class="pg-panel hidden" id="pg-ui">
+          <div class="pg-placeholder">
+            UI Flow coming soon.
+          </div>
+        </div>
+      </main>
+    </div>
+  `;
+  body.appendChild(overlay);
 }
 
 // ---------- UI helpers ----------
@@ -925,20 +975,180 @@ function renderExploreGrid(q) {
 
 // ---------- Product (stub for now) ----------
 function openProduct(sys) {
-  const root = document.getElementById('product-page');
-  root.innerHTML = `
-    <div class="container">
-      <div class="section-title" style="margin-top:10px">
-        <h2>${sys.title}</h2>
-        <p>${sys.desc}</p>
-      </div>
-      <div class="product-box">
-        <div class="muted">(Next) This is where the animated system flow will render step-by-step.</div>
-        <div class="muted">For now, the rewrite focuses on page structure + routing + catalog.</div>
-      </div>
-    </div>
+  // Open full-screen playground overlay
+  openPlayground(sys);
+}
+
+function openPlayground(sys) {
+  PLAYGROUND.open = true;
+  PLAYGROUND.sys = sys;
+  PLAYGROUND.step = 0;
+  PLAYGROUND.tab = 'system';
+  stopPlayground();
+
+  const overlay = document.getElementById('playground');
+  overlay.classList.add('open');
+
+  document.getElementById('pg-title').textContent = `${sys.title} Playground`;
+  document.getElementById('pg-desc').textContent = sys.desc;
+
+  // Tabs
+  overlay.querySelectorAll('.pg-tab').forEach(b => {
+    b.classList.toggle('active', b.dataset.tab === 'system');
+  });
+  document.getElementById('pg-system').classList.remove('hidden');
+  document.getElementById('pg-ui').classList.add('hidden');
+
+  // Steps
+  const steps = getProductSteps(sys);
+  const host = document.getElementById('pg-steps');
+  host.innerHTML = steps.map((s,i)=>`<button class="pg-step ${i===0?'active':''}" data-step="${i}"><span class="n">${i+1}</span><span class="t">${s.title}</span></button>`).join('');
+  host.querySelectorAll('[data-step]').forEach(btn => btn.addEventListener('click', () => {
+    PLAYGROUND.step = Number(btn.dataset.step);
+    renderPlayground();
+  }));
+
+  // Controls
+  document.getElementById('pg-prev').onclick = () => { PLAYGROUND.step = Math.max(0, PLAYGROUND.step-1); renderPlayground(); };
+  document.getElementById('pg-next').onclick = () => { PLAYGROUND.step = Math.min(steps.length-1, PLAYGROUND.step+1); renderPlayground(); };
+  document.getElementById('pg-play').onclick = () => {
+    if (PLAYGROUND.timer) stopPlayground();
+    else startPlayground();
+  };
+  document.getElementById('pg-close').onclick = closePlayground;
+
+  // Tab switching
+  overlay.querySelectorAll('.pg-tab').forEach(b => b.onclick = () => {
+    PLAYGROUND.tab = b.dataset.tab;
+    overlay.querySelectorAll('.pg-tab').forEach(x => x.classList.toggle('active', x.dataset.tab === PLAYGROUND.tab));
+    document.getElementById('pg-system').classList.toggle('hidden', PLAYGROUND.tab !== 'system');
+    document.getElementById('pg-ui').classList.toggle('hidden', PLAYGROUND.tab !== 'ui');
+  });
+
+  // Initial render
+  renderPlayground();
+}
+
+function closePlayground() {
+  stopPlayground();
+  PLAYGROUND.open = false;
+  PLAYGROUND.sys = null;
+  document.getElementById('playground').classList.remove('open');
+}
+
+function startPlayground() {
+  const steps = getProductSteps(PLAYGROUND.sys);
+  document.getElementById('pg-play').textContent = 'Pause';
+  PLAYGROUND.timer = setInterval(() => {
+    PLAYGROUND.step = (PLAYGROUND.step + 1) % steps.length;
+    renderPlayground();
+  }, 1800);
+}
+
+function stopPlayground() {
+  if (PLAYGROUND.timer) clearInterval(PLAYGROUND.timer);
+  PLAYGROUND.timer = null;
+  const btn = document.getElementById('pg-play');
+  if (btn) btn.textContent = 'Play';
+}
+
+function getProductSteps(sys) {
+  if (sys.title.toLowerCase() === 'whatsapp') {
+    return [
+      { title: 'User types message', active: ['sender'] },
+      { title: 'Client encryption', active: ['sender','crypto','keybundle'] },
+      { title: 'Server relay', active: ['relay','queue'] },
+      { title: 'Push notification', active: ['push','recipient'] },
+      { title: 'Client decryption', active: ['recipient','crypto'] },
+    ];
+  }
+  // Placeholder for other products
+  return [
+    { title: 'Start', active: [] },
+    { title: 'Process', active: [] },
+    { title: 'Complete', active: [] },
+  ];
+}
+
+function renderPlayground() {
+  const steps = getProductSteps(PLAYGROUND.sys);
+  document.querySelectorAll('.pg-step').forEach((b) => {
+    b.classList.toggle('active', Number(b.dataset.step) === PLAYGROUND.step);
+  });
+
+  // Render WhatsApp diagram if applicable
+  if (PLAYGROUND.sys?.title.toLowerCase() === 'whatsapp') {
+    renderWhatsAppDiagram(steps[PLAYGROUND.step]);
+  } else {
+    const svg = document.getElementById('wa-diagram');
+    if (svg) svg.innerHTML = `<text x="50" y="80" fill="rgba(255,255,255,0.6)" font-size="18" font-family="Inter, Arial">Flow coming soon for ${escapeXml(PLAYGROUND.sys?.title || '')}</text>`;
+  }
+}
+
+function renderWhatsAppDiagram(step) {
+  const svg = document.getElementById('wa-diagram');
+  if (!svg) return;
+
+  const active = new Set(step.active || []);
+  const node = (id, x, y, label) => {
+    const on = active.has(id);
+    const stroke = on ? 'rgba(123,125,248,0.95)' : 'rgba(255,255,255,0.14)';
+    const fill = on ? 'rgba(123,125,248,0.16)' : 'rgba(255,255,255,0.04)';
+    const glow = on ? `<filter id="g"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>` : '';
+    return `
+      ${glow}
+      <g>
+        <rect x="${x}" y="${y}" rx="16" ry="16" width="220" height="74" fill="${fill}" stroke="${stroke}" stroke-width="2" ${on?'filter="url(#g)"':''}/>
+        <text x="${x+18}" y="${y+44}" fill="rgba(240,240,248,0.92)" font-size="16" font-family="Inter, Arial" font-weight="800">${escapeXml(label)}</text>
+      </g>
+    `;
+  };
+
+  const edge = (fromX, fromY, toX, toY, on) => {
+    const stroke = on ? 'rgba(236,72,153,0.9)' : 'rgba(255,255,255,0.10)';
+    const w = on ? 3 : 2;
+    return `<path d="M${fromX} ${fromY} C ${fromX+80} ${fromY}, ${toX-80} ${toY}, ${toX} ${toY}" fill="none" stroke="${stroke}" stroke-width="${w}"/>`;
+  };
+
+  // Layout
+  const nodes = {
+    sender: { x: 60, y: 90, label: 'Sender App' },
+    crypto: { x: 60, y: 200, label: 'Crypto Layer' },
+    keybundle: { x: 60, y: 310, label: 'Key Bundle Service' },
+    relay: { x: 390, y: 200, label: 'WhatsApp Servers' },
+    queue: { x: 390, y: 310, label: 'Message Queue' },
+    push: { x: 720, y: 200, label: 'Push Service' },
+    recipient: { x: 720, y: 310, label: 'Recipient App' },
+  };
+
+  const eOn = (a,b) => active.has(a) && active.has(b);
+
+  svg.innerHTML = `
+    <rect x="0" y="0" width="1000" height="640" fill="rgba(0,0,0,0)"/>
+    ${edge(nodes.sender.x+220, nodes.sender.y+36, nodes.crypto.x+220, nodes.crypto.y+36, eOn('sender','crypto'))}
+    ${edge(nodes.crypto.x+220, nodes.crypto.y+36, nodes.relay.x, nodes.relay.y+36, eOn('crypto','relay') || eOn('sender','relay'))}
+    ${edge(nodes.keybundle.x+220, nodes.keybundle.y+36, nodes.crypto.x+220, nodes.crypto.y+36, eOn('keybundle','crypto'))}
+    ${edge(nodes.relay.x+220, nodes.relay.y+36, nodes.queue.x+220, nodes.queue.y+36, eOn('relay','queue'))}
+    ${edge(nodes.queue.x+220, nodes.queue.y+36, nodes.push.x, nodes.push.y+36, eOn('queue','push'))}
+    ${edge(nodes.push.x+220, nodes.push.y+36, nodes.recipient.x+220, nodes.recipient.y+36, eOn('push','recipient'))}
+
+    ${node('sender', nodes.sender.x, nodes.sender.y, nodes.sender.label)}
+    ${node('crypto', nodes.crypto.x, nodes.crypto.y, nodes.crypto.label)}
+    ${node('keybundle', nodes.keybundle.x, nodes.keybundle.y, nodes.keybundle.label)}
+    ${node('relay', nodes.relay.x, nodes.relay.y, nodes.relay.label)}
+    ${node('queue', nodes.queue.x, nodes.queue.y, nodes.queue.label)}
+    ${node('push', nodes.push.x, nodes.push.y, nodes.push.label)}
+    ${node('recipient', nodes.recipient.x, nodes.recipient.y, nodes.recipient.label)}
   `;
-  showPage('product');
+}
+
+function escapeXml(s) {
+  return String(s)
+    .replaceAll('&','&amp;')
+    .replaceAll('<','&lt;')
+    .replaceAll('>','&gt;')
+    .replaceAll('"','&quot;')
+    .replaceAll("'",'&#39;');
 }
 
 function openProductById(id) {
