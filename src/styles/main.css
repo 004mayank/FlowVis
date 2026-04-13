@@ -127,6 +127,11 @@ body{scrollbar-width:none;}
 .pg-back{border:1px solid var(--border);background:rgba(255,255,255,0.04);color:rgba(240,240,248,0.9);
   padding:10px 12px;border-radius:12px;cursor:pointer;font-weight:800;}
 .pg-title{font-weight:900;font-size:16px;color:rgba(240,240,248,0.92);}
+.pg-title{display:flex;align-items:center;gap:10px;}
+.pg-title .pg-logo{width:28px;height:28px;border-radius:10px;overflow:hidden;
+  border:1px solid rgba(255,255,255,0.10);background:rgba(255,255,255,0.04);
+  display:flex;align-items:center;justify-content:center;}
+.pg-title .pg-logo img{width:100%;height:100%;object-fit:contain;display:block;}
 .pg-tabs{margin-left:auto;display:flex;gap:8px;}
 .pg-tab{border:1px solid var(--border);background:rgba(255,255,255,0.03);color:rgba(240,240,248,0.75);
   padding:10px 12px;border-radius:12px;cursor:pointer;font-weight:900;}

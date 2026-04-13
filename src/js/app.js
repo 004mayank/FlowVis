@@ -989,7 +989,10 @@ function openPlayground(sys) {
   const overlay = document.getElementById('playground');
   overlay.classList.add('open');
 
-  document.getElementById('pg-title').textContent = `${sys.title} Playground`;
+  // Title: logo + product name (no "Playground")
+  const titleEl = document.getElementById('pg-title');
+  const logo = logoForSystemId(sys.id);
+  titleEl.innerHTML = `${logo ? `<span class="pg-logo">${logo}</span>` : ''}<span>${sys.title}</span>`;
   document.getElementById('pg-desc').textContent = sys.desc;
 
   // Tabs
@@ -1093,44 +1096,44 @@ function renderWhatsAppDiagram(step) {
   const node = (id, x, y, label) => {
     const on = active.has(id);
     const stroke = on ? 'rgba(123,125,248,0.95)' : 'rgba(255,255,255,0.14)';
-    const fill = on ? 'rgba(123,125,248,0.16)' : 'rgba(255,255,255,0.04)';
-    const glow = on ? `<filter id="g"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>` : '';
+    const fill = on ? 'rgba(123,125,248,0.14)' : 'rgba(255,255,255,0.03)';
     return `
-      ${glow}
       <g>
-        <rect x="${x}" y="${y}" rx="16" ry="16" width="220" height="74" fill="${fill}" stroke="${stroke}" stroke-width="2" ${on?'filter="url(#g)"':''}/>
-        <text x="${x+18}" y="${y+44}" fill="rgba(240,240,248,0.92)" font-size="16" font-family="Inter, Arial" font-weight="800">${escapeXml(label)}</text>
+        <rect x="${x}" y="${y}" rx="22" ry="22" width="270" height="86" fill="${fill}" stroke="${stroke}" stroke-width="2"/>
+        <text x="${x+22}" y="${y+52}" fill="rgba(240,240,248,0.92)" font-size="18" font-family="Inter, Arial" font-weight="900">${escapeXml(label)}</text>
       </g>
     `;
   };
 
   const edge = (fromX, fromY, toX, toY, on) => {
-    const stroke = on ? 'rgba(236,72,153,0.9)' : 'rgba(255,255,255,0.10)';
-    const w = on ? 3 : 2;
-    return `<path d="M${fromX} ${fromY} C ${fromX+80} ${fromY}, ${toX-80} ${toY}, ${toX} ${toY}" fill="none" stroke="${stroke}" stroke-width="${w}"/>`;
+    // Simple connector like the reference (single smooth curve)
+    const stroke = on ? 'rgba(236,72,153,0.95)' : 'rgba(255,255,255,0.12)';
+    const w = on ? 4 : 3;
+    const dx = Math.max(60, Math.min(180, Math.abs(toX - fromX) * 0.35));
+    return `<path d="M${fromX} ${fromY} C ${fromX+dx} ${fromY}, ${toX-dx} ${toY}, ${toX} ${toY}" fill="none" stroke="${stroke}" stroke-width="${w}" stroke-linecap="round"/>`;
   };
 
   // Layout
   const nodes = {
-    sender: { x: 60, y: 90, label: 'Sender App' },
-    crypto: { x: 60, y: 200, label: 'Crypto Layer' },
-    keybundle: { x: 60, y: 310, label: 'Key Bundle Service' },
-    relay: { x: 390, y: 200, label: 'WhatsApp Servers' },
-    queue: { x: 390, y: 310, label: 'Message Queue' },
-    push: { x: 720, y: 200, label: 'Push Service' },
-    recipient: { x: 720, y: 310, label: 'Recipient App' },
+    sender: { x: 60, y: 120, label: 'Sender App' },
+    crypto: { x: 60, y: 250, label: 'Crypto Layer' },
+    keybundle: { x: 60, y: 380, label: 'Key Bundle Service' },
+    relay: { x: 365, y: 210, label: 'WhatsApp Servers' },
+    queue: { x: 365, y: 350, label: 'Message Queue' },
+    push: { x: 690, y: 210, label: 'Push Service' },
+    recipient: { x: 690, y: 350, label: 'Recipient App' },
   };
 
   const eOn = (a,b) => active.has(a) && active.has(b);
 
   svg.innerHTML = `
     <rect x="0" y="0" width="1000" height="640" fill="rgba(0,0,0,0)"/>
-    ${edge(nodes.sender.x+220, nodes.sender.y+36, nodes.crypto.x+220, nodes.crypto.y+36, eOn('sender','crypto'))}
-    ${edge(nodes.crypto.x+220, nodes.crypto.y+36, nodes.relay.x, nodes.relay.y+36, eOn('crypto','relay') || eOn('sender','relay'))}
-    ${edge(nodes.keybundle.x+220, nodes.keybundle.y+36, nodes.crypto.x+220, nodes.crypto.y+36, eOn('keybundle','crypto'))}
-    ${edge(nodes.relay.x+220, nodes.relay.y+36, nodes.queue.x+220, nodes.queue.y+36, eOn('relay','queue'))}
-    ${edge(nodes.queue.x+220, nodes.queue.y+36, nodes.push.x, nodes.push.y+36, eOn('queue','push'))}
-    ${edge(nodes.push.x+220, nodes.push.y+36, nodes.recipient.x+220, nodes.recipient.y+36, eOn('push','recipient'))}
+    ${edge(nodes.sender.x+270, nodes.sender.y+43, nodes.relay.x, nodes.relay.y+43, active.has('sender') && (active.has('relay') || active.has('queue') || active.has('push') || active.has('recipient')))}
+    ${edge(nodes.crypto.x+270, nodes.crypto.y+43, nodes.relay.x, nodes.relay.y+43, eOn('crypto','relay'))}
+    ${edge(nodes.keybundle.x+270, nodes.keybundle.y+43, nodes.crypto.x+270, nodes.crypto.y+43, eOn('keybundle','crypto'))}
+    ${edge(nodes.relay.x+270, nodes.relay.y+43, nodes.queue.x+270, nodes.queue.y+43, eOn('relay','queue'))}
+    ${edge(nodes.queue.x+270, nodes.queue.y+43, nodes.push.x, nodes.push.y+43, active.has('queue') && active.has('push'))}
+    ${edge(nodes.push.x+270, nodes.push.y+43, nodes.recipient.x, nodes.recipient.y+43, eOn('push','recipient'))}
 
     ${node('sender', nodes.sender.x, nodes.sender.y, nodes.sender.label)}
     ${node('crypto', nodes.crypto.x, nodes.crypto.y, nodes.crypto.label)}
