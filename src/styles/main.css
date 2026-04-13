@@ -40,20 +40,19 @@ body{scrollbar-width:none;}
 .hero h1{font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-0.03em;line-height:0.98;
   font-size:72px;}
 .h1-line1,.h1-line2{display:block;}
-#cycle-word{display:inline-block;min-width:10ch;transition:opacity .22s ease, transform .22s ease;}
+#cycle-word{display:inline-block;min-width:10ch;transition:opacity .22s ease, transform .22s ease;
+  background:linear-gradient(90deg,#7b7df8,#b58cff,#ec4899);
+  -webkit-background-clip:text;background-clip:text;color:transparent;}
 #cycle-word.fade-out{opacity:0;transform:translateY(4px);}
 .hero-sub{margin-top:14px;color:rgba(240,240,248,0.78);font-size:16px;max-width:720px;line-height:1.6;}
-.hero-search{margin-top:22px;display:flex;gap:10px;align-items:center;max-width:520px;}
-.hero-search input{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--border);
-  border-radius:12px;padding:12px 14px;color:var(--text);font-size:14px;outline:none;}
+.hero-search{margin-top:22px;display:flex;gap:10px;align-items:center;max-width:760px;}
+.hero-search input{flex:1;background:rgba(255,255,255,0.06);border:1px solid var(--border);
+  border-radius:16px;padding:16px 18px;color:var(--text);font-size:16px;outline:none;min-height:54px;}
 .hero-search input::placeholder{color:var(--text3);}
-.btn-primary{background:var(--blue);border:none;color:#fff;font-weight:700;border-radius:12px;padding:12px 16px;cursor:pointer;}
+.btn-primary{background:var(--blue);border:none;color:#fff;font-weight:800;border-radius:16px;padding:14px 22px;cursor:pointer;min-height:54px;font-size:16px;}
 .btn-primary:hover{background:var(--blue2);}
 
-.chip-row{margin-top:16px;display:flex;flex-wrap:wrap;gap:10px;}
-.chip{background:rgba(255,255,255,0.05);border:1px solid var(--border);color:rgba(240,240,248,0.85);
-  padding:7px 10px;border-radius:999px;font-size:12px;cursor:pointer;}
-.chip:hover{border-color:rgba(255,255,255,0.18);background:rgba(255,255,255,0.07);}
+/* (removed) chip row */
 
 /* Particles (simple) */
 .particle{position:absolute;border-radius:999px;filter:blur(0.2px);opacity:0.5;mix-blend-mode:screen;}

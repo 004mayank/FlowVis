@@ -739,8 +739,6 @@ function renderHome() {
             <input id="hero-search" type="text" placeholder="Search any system" />
             <button id="hero-search-btn" class="btn-primary">Search</button>
           </div>
-
-          <div class="chip-row" id="home-chips"></div>
         </div>
       </div>
 
@@ -754,12 +752,6 @@ function renderHome() {
       <div id="home-sentinel" class="sentinel"></div>
     </div>
   `;
-
-  // chips
-  const chips = document.getElementById('home-chips');
-  const top = SYSTEMS.slice(0, 10);
-  chips.innerHTML = top.map(s => `<button class="chip" data-id="${s.id}">${s.title}</button>`).join('');
-  chips.querySelectorAll('.chip').forEach(b => b.addEventListener('click', () => openProductById(b.dataset.id)));
 
   // search
   const heroInput = document.getElementById('hero-search');
