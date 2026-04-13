@@ -139,8 +139,11 @@ body{scrollbar-width:none;}
 
 .pg-body{display:grid;grid-template-columns:380px 1fr;gap:18px;padding:18px;height:calc(100vh - 64px);}
 .pg-left{border:1px solid var(--border);background:rgba(255,255,255,0.03);border-radius:18px;padding:16px;overflow:auto;}
+.pg-left{display:flex;flex-direction:column;gap:12px;}
 .pg-desc{color:rgba(240,240,248,0.7);line-height:1.5;font-size:14px;margin-bottom:12px;}
 .pg-desc{padding:10px 10px 2px 10px;font-weight:700;}
+.pg-desc{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);
+  border-radius:16px;padding:14px 14px;}
 .pg-steps{display:flex;flex-direction:column;gap:10px;}
 .pg-step{display:flex;align-items:center;gap:12px;text-align:left;border:1px solid var(--border);
   background:rgba(255,255,255,0.02);border-radius:14px;padding:12px 12px;cursor:pointer;color:rgba(240,240,248,0.9);

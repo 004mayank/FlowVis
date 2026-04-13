@@ -1147,10 +1147,10 @@ function renderWhatsAppDiagram(step) {
     `;
   };
 
-  const edge = (fromX, fromY, toX, toY, on, dashed=false, label='') => {
+  const edge = (fromX, fromY, toX, toY, on, dashed=false, label='', color='rgba(123,125,248,0.9)') => {
     // Show only step-relevant edges; keep others hidden
     if (!on) return '';
-    const stroke = dashed ? 'rgba(123,125,248,0.55)' : 'rgba(123,125,248,0.9)';
+    const stroke = dashed ? color.replace('0.9','0.55') : color;
     const w = dashed ? 2.2 : 3.2;
     const dx = Math.max(60, Math.min(220, Math.abs(toX - fromX) * 0.35));
     const d = `M${fromX} ${fromY} C ${fromX+dx} ${fromY}, ${toX-dx} ${toY}, ${toX} ${toY}`;
@@ -1159,14 +1159,17 @@ function renderWhatsAppDiagram(step) {
         <textPath href="#p-${Math.abs(fromX*13+toX*7+fromY*11+toY*5).toFixed(0)}" startOffset="50%" text-anchor="middle" fill="rgba(123,125,248,0.65)" font-size="12" font-family="Inter, Arial" font-weight="800">${escapeXml(label)}</textPath>
       </text>` : '';
     const pid = `p-${Math.abs(fromX*13+toX*7+fromY*11+toY*5).toFixed(0)}`;
-    // Arrow marker
+    // Arrow marker (unique per edge)
+    const mid = Math.abs(fromX*13+toX*7+fromY*11+toY*5).toFixed(0);
+    const mid2 = Math.abs(fromX*5+toX*11+fromY*7+toY*13).toFixed(0);
+    const markerId = `arrow-${mid}-${mid2}`;
     const marker = `
       <defs>
-        <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-          <path d="M 0 0 L 10 5 L 0 10 z" fill="${stroke}" opacity="0.9" />
+        <marker id="${markerId}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="${stroke}" opacity="0.95" />
         </marker>
       </defs>`;
-    return `${marker}<path id="${pid}" d="${d}" fill="none" stroke="${stroke}" stroke-width="${w}" stroke-linecap="round" ${dash} marker-end="url(#arrow)"/>${midLabel}`;
+    return `${marker}<path id="${pid}" d="${d}" fill="none" stroke="${stroke}" stroke-width="${w}" stroke-linecap="round" ${dash} marker-end="url(#${markerId})"/>${midLabel}`;
   };
 
   // Layout
@@ -1181,18 +1184,21 @@ function renderWhatsAppDiagram(step) {
     keybundle: { cx: 290, cy: 520, label: 'Key Bundle', color: 'rgba(34,197,94,0.65)' },
   };
 
-  svg.innerHTML = `
-    <rect x="0" y="0" width="1000" height="640" fill="rgba(0,0,0,0)"/>
-    ${edge(nodes.sender.cx, nodes.sender.cy, nodes.crypto.cx, nodes.crypto.cy, eActive('sender','crypto'), true, 'plaintext')}
-    ${edge(nodes.crypto.cx, nodes.crypto.cy, nodes.relay.cx, nodes.relay.cy, eActive('crypto','relay'), true, 'encrypted')}
-    ${edge(nodes.relay.cx, nodes.relay.cy, nodes.decrypt.cx, nodes.decrypt.cy, eActive('relay','decrypt'), false, 'ciphertext')}
-    ${edge(nodes.decrypt.cx, nodes.decrypt.cy, nodes.recipient.cx, nodes.recipient.cy, eActive('decrypt','recipient'), true, '')}
+  const dataColor = 'rgba(123,125,248,0.95)';
+  const asyncColor = 'rgba(123,125,248,0.55)';
+  const edgesSvg = `
+    ${edge(nodes.sender.cx, nodes.sender.cy, nodes.crypto.cx, nodes.crypto.cy, eActive('sender','crypto'), true, 'plaintext', asyncColor)}
+    ${edge(nodes.crypto.cx, nodes.crypto.cy, nodes.relay.cx, nodes.relay.cy, eActive('crypto','relay'), true, 'encrypted', asyncColor)}
+    ${edge(nodes.relay.cx, nodes.relay.cy, nodes.decrypt.cx, nodes.decrypt.cy, eActive('relay','decrypt'), false, 'ciphertext', dataColor)}
+    ${edge(nodes.decrypt.cx, nodes.decrypt.cy, nodes.recipient.cx, nodes.recipient.cy, eActive('decrypt','recipient'), true, '', asyncColor)}
 
-    ${edge(nodes.relay.cx, nodes.relay.cy, nodes.push.cx, nodes.push.cy, eActive('relay','push'), true, 'notify')}
-    ${edge(nodes.push.cx, nodes.push.cy, nodes.recipient.cx, nodes.recipient.cy, eActive('push','recipient'), true, 'wake')}
+    ${edge(nodes.relay.cx, nodes.relay.cy, nodes.push.cx, nodes.push.cy, eActive('relay','push'), true, 'notify', asyncColor)}
+    ${edge(nodes.push.cx, nodes.push.cy, nodes.recipient.cx, nodes.recipient.cy, eActive('push','recipient'), true, 'wake', asyncColor)}
 
-    ${edge(nodes.keybundle.cx, nodes.keybundle.cy, nodes.crypto.cx, nodes.crypto.cy, eActive('keybundle','crypto'), true, 'keys')}
+    ${edge(nodes.keybundle.cx, nodes.keybundle.cy, nodes.crypto.cx, nodes.crypto.cy, eActive('keybundle','crypto'), true, 'keys', asyncColor)}
+  `;
 
+  const nodesSvg = `
     ${node('sender', nodes.sender.cx, nodes.sender.cy, nodes.sender.label, nodes.sender.color)}
     ${node('crypto', nodes.crypto.cx, nodes.crypto.cy, nodes.crypto.label, nodes.crypto.color)}
     ${node('relay', nodes.relay.cx, nodes.relay.cy, nodes.relay.label, nodes.relay.color)}
@@ -1200,6 +1206,12 @@ function renderWhatsAppDiagram(step) {
     ${node('recipient', nodes.recipient.cx, nodes.recipient.cy, nodes.recipient.label, nodes.recipient.color)}
     ${node('push', nodes.push.cx, nodes.push.cy, nodes.push.label, nodes.push.color)}
     ${node('keybundle', nodes.keybundle.cx, nodes.keybundle.cy, nodes.keybundle.label, nodes.keybundle.color)}
+  `;
+
+  svg.innerHTML = `
+    <rect x="0" y="0" width="1000" height="640" fill="rgba(0,0,0,0)"/>
+    ${edgesSvg}
+    ${nodesSvg}
   `;
 }
 
