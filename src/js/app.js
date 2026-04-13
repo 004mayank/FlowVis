@@ -1224,18 +1224,20 @@ function renderWhatsAppArchitecture(step) {
     `;
   };
 
-  const arrow = (x1,y1,x2,y2,label='', bend=120) => {
+  const arrowOrtho = (x1,y1,x2,y2,label='') => {
     const mid = Math.abs(x1*13+x2*7+y1*11+y2*5).toFixed(0);
     const markerId = `arch-arrow-${mid}`;
-    const d = `M${x1} ${y1} C ${x1+bend} ${y1}, ${x2-bend} ${y2}, ${x2} ${y2}`;
+    // Route: horizontal then vertical then horizontal
+    const mx = Math.round((x1 + x2) / 2);
+    const d = `M${x1} ${y1} L ${mx} ${y1} L ${mx} ${y2} L ${x2} ${y2}`;
     return `
       <defs>
         <marker id="${markerId}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-          <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(123,125,248,0.85)"/>
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(123,125,248,0.9)"/>
         </marker>
       </defs>
-      <path d="${d}" fill="none" stroke="rgba(123,125,248,0.55)" stroke-width="3" stroke-linecap="round" marker-end="url(#${markerId})"/>
-      ${label ? `<text><textPath href="#arch-p-${mid}" startOffset="50%" text-anchor="middle" fill="rgba(123,125,248,0.55)" font-size="12" font-family="Inter, Arial" font-weight="800">${escapeXml(label)}</textPath></text><path id="arch-p-${mid}" d="${d}" fill="none" stroke="none"/>` : ''}
+      <path d="${d}" fill="none" stroke="rgba(123,125,248,0.55)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#${markerId})"/>
+      ${label ? `<text x="${mx}" y="${Math.min(y1,y2)-10}" text-anchor="middle" fill="rgba(123,125,248,0.65)" font-size="12" font-family="Inter, Arial" font-weight="800">${escapeXml(label)}</text>` : ''}
     `;
   };
 
@@ -1263,25 +1265,26 @@ function renderWhatsAppArchitecture(step) {
   const fcm = { x: 1140, y: 150 };
   const cdn = { x: 1140, y: 240 };
 
-  // Edges grouped by row to reduce overlap
-  const edges = `
-    ${arrow(sender.x+220, sender.y+30, edge.x, edge.y+30, 'send', 140)}
-    ${arrow(edge.x+220, edge.y+30, relay.x, relay.y+30, 'relay', 120)}
-    ${arrow(relay.x+220, relay.y+30, push.x, push.y+30, 'notify', 140)}
-    ${arrow(push.x+220, push.y+30, fcm.x, fcm.y+30, '', 120)}
-
-    ${arrow(relay.x+220, relay.y+30, queue.x+0, queue.y+30, 'fanout', 160)}
-    ${arrow(queue.x+220, queue.y+30, push.x, push.y+30, '', 120)}
-
-    ${arrow(sender.x+220, sender.y+30, keyb.x, keyb.y+30, 'keys', 120)}
-    ${arrow(edge.x+220, edge.y+30, spam.x, spam.y+30, 'check', 150)}
-    ${arrow(edge.x+220, edge.y+30, meta.x, meta.y+30, 'store', 160)}
-
-    ${arrow(sender.x+220, sender.y+30, media.x, media.y+30, 'upload', 180)}
-    ${arrow(media.x+220, media.y+30, objstore.x, objstore.y+30, 'store', 140)}
-    ${arrow(objstore.x+220, objstore.y+30, cdn.x, cdn.y+30, 'serve', 120)}
-    ${arrow(cdn.x, cdn.y+30, recipient.x+220, recipient.y+30, 'download', 160)}
-  `;
+  // Only show a clean subset of edges per current step to avoid clutter
+  const idx = (PLAYGROUND.step ?? 0) + 1;
+  let edges = '';
+  if (idx === 2) {
+    edges += arrowOrtho(sender.x+220, sender.y+30, keyb.x, keyb.y+30, 'keys');
+    edges += arrowOrtho(sender.x+220, sender.y+30, edge.x, edge.y+30, 'send');
+  }
+  if (idx === 3) {
+    edges += arrowOrtho(sender.x+220, sender.y+30, edge.x, edge.y+30, 'send');
+    edges += arrowOrtho(edge.x+220, edge.y+30, relay.x, relay.y+30, 'relay');
+    edges += arrowOrtho(relay.x+220, relay.y+30, queue.x, queue.y+30, 'fanout');
+  }
+  if (idx === 4) {
+    edges += arrowOrtho(queue.x+220, queue.y+30, push.x, push.y+30, 'notify');
+    edges += arrowOrtho(push.x+220, push.y+30, fcm.x, fcm.y+30, 'push');
+    edges += arrowOrtho(fcm.x, fcm.y+30, recipient.x+220, recipient.y+30, 'wake');
+  }
+  if (idx === 5) {
+    edges += arrowOrtho(relay.x+220, relay.y+30, meta.x, meta.y+30, 'store');
+  }
 
   svg.innerHTML = `
     <rect x="0" y="0" width="1200" height="760" fill="rgba(0,0,0,0)"/>
