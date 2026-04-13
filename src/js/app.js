@@ -742,6 +742,8 @@ function renderHome() {
         </div>
       </div>
 
+      <div class="featured" id="featured"></div>
+
       <div class="section-title">
         <h2>Browse & Explore</h2>
         <p>Jump into systems by category. Each product includes an animated, step-by-step breakdown.</p>
@@ -778,6 +780,35 @@ function renderHome() {
   startRotation();
 
   initHomeInfiniteScroll();
+
+  renderFeatured();
+}
+
+function renderFeatured() {
+  const host = document.getElementById('featured');
+  if (!host) return;
+
+  const featuredTitles = [
+    'Stripe','PayPal','Revolut','Wise','Robinhood','Cash App','Venmo','Coinbase','Binance','Nubank','Monzo','Chime'
+  ];
+
+  const items = featuredTitles
+    .map(t => SYSTEMS.find(s => s.title === t))
+    .filter(Boolean);
+
+  host.innerHTML = `
+    <div class="featured-row">
+      ${items.map(s => {
+        const logo = logoForSystemId(s.id);
+        const iconHtml = logo
+          ? `<div class="f-logo">${logo}</div>`
+          : `<div class="f-logo f-fallback">${abbr(s.title)}</div>`;
+        return `<button class="f-item" data-id="${s.id}" title="${s.title}">${iconHtml}<span>${s.title}</span></button>`;
+      }).join('')}
+    </div>
+  `;
+
+  host.querySelectorAll('[data-id]').forEach(b => b.addEventListener('click', () => openProductById(b.dataset.id)));
 }
 
 function renderHomeFilters() {
