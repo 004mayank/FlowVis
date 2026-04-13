@@ -4,8 +4,6 @@ FlowVis lets users see how a product works under the hood.
 
 FlowVis uses animations and flow diagrams like the example below to explain the working step by step.
 
-![Example system flow diagram](./assets/readme/flow-example.png)
-
 ## Run locally
 
 ```bash
