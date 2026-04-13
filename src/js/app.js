@@ -1060,9 +1060,9 @@ function getProductSteps(sys) {
     return [
       { title: 'User types message', active: ['sender'], edges: [] },
       { title: 'Client encryption', active: ['sender','crypto','keybundle'], edges: [['sender','crypto'], ['keybundle','crypto']] },
-      { title: 'Server relay', active: ['crypto','relay','queue'], edges: [['crypto','relay'], ['relay','queue']] },
-      { title: 'Push notification', active: ['queue','push','recipient'], edges: [['queue','push'], ['push','recipient']] },
-      { title: 'Client decryption', active: ['recipient','crypto'], edges: [['recipient','crypto']] },
+      { title: 'Server relay', active: ['relay'], edges: [['crypto','relay'], ['relay','decrypt']] },
+      { title: 'Push notification', active: ['push','recipient','relay'], edges: [['relay','push'], ['push','recipient']] },
+      { title: 'Client decryption', active: ['decrypt','recipient'], edges: [['decrypt','recipient']] },
     ];
   }
   // Placeholder for other products
@@ -1095,55 +1095,74 @@ function renderWhatsAppDiagram(step) {
   const active = new Set(step.active || []);
   const stepEdges = step.edges || [];
   const eActive = (a,b) => stepEdges.some(e => e[0]===a && e[1]===b);
-  const node = (id, x, y, label) => {
+  const node = (id, cx, cy, label, color) => {
     const on = active.has(id);
-    const stroke = on ? 'rgba(123,125,248,0.95)' : 'rgba(255,255,255,0.10)';
-    const fill = on ? 'rgba(123,125,248,0.14)' : 'rgba(255,255,255,0.02)';
-    const opacity = on ? 1 : 0.45;
+    const base = on ? 1 : 0.45;
+    const stroke = on ? color : 'rgba(255,255,255,0.16)';
+    const fill = on ? 'rgba(0,0,0,0.20)' : 'rgba(0,0,0,0.10)';
+    const r = 30;
+    const ring1 = on ? `<circle cx="${cx}" cy="${cy}" r="${r+18}" fill="none" stroke="${color}" stroke-width="2" opacity="0.35"/>` : '';
+    const ring2 = on ? `<circle cx="${cx}" cy="${cy}" r="${r+8}" fill="none" stroke="${color}" stroke-width="2" opacity="0.65"/>` : '';
+    const glow = on
+      ? `<filter id="glow-${id}"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>`
+      : '';
     return `
-      <g>
-        <rect x="${x}" y="${y}" rx="22" ry="22" width="270" height="86" fill="${fill}" stroke="${stroke}" stroke-width="2" opacity="${opacity}"/>
-        <text x="${x+22}" y="${y+52}" fill="rgba(240,240,248,0.92)" font-size="18" font-family="Inter, Arial" font-weight="900" opacity="${opacity}">${escapeXml(label)}</text>
+      ${glow}
+      <g ${on ? `filter="url(#glow-${id})"` : ''}>
+        ${ring1}
+        ${ring2}
+        <circle cx="${cx}" cy="${cy}" r="${r}" fill="${fill}" stroke="${stroke}" stroke-width="2" opacity="${base}"/>
+        <text x="${cx}" y="${cy+5}" text-anchor="middle" fill="${stroke}" font-size="14" font-family="Inter, Arial" font-weight="900" opacity="${base}">${escapeXml(label)}</text>
       </g>
     `;
   };
 
-  const edge = (fromX, fromY, toX, toY, on) => {
+  const edge = (fromX, fromY, toX, toY, on, dashed=false, label='') => {
     // Show only step-relevant edges; keep others hidden
     if (!on) return '';
-    const stroke = 'rgba(236,72,153,0.95)';
-    const w = 4;
-    const dx = Math.max(60, Math.min(180, Math.abs(toX - fromX) * 0.35));
-    return `<path d="M${fromX} ${fromY} C ${fromX+dx} ${fromY}, ${toX-dx} ${toY}, ${toX} ${toY}" fill="none" stroke="${stroke}" stroke-width="${w}" stroke-linecap="round"/>`;
+    const stroke = dashed ? 'rgba(123,125,248,0.55)' : 'rgba(123,125,248,0.9)';
+    const w = dashed ? 2.2 : 3.2;
+    const dx = Math.max(60, Math.min(220, Math.abs(toX - fromX) * 0.35));
+    const d = `M${fromX} ${fromY} C ${fromX+dx} ${fromY}, ${toX-dx} ${toY}, ${toX} ${toY}`;
+    const dash = dashed ? 'stroke-dasharray="8 8"' : '';
+    const midLabel = label ? `<text>
+        <textPath href="#p-${Math.abs(fromX*13+toX*7+fromY*11+toY*5).toFixed(0)}" startOffset="50%" text-anchor="middle" fill="rgba(123,125,248,0.65)" font-size="12" font-family="Inter, Arial" font-weight="800">${escapeXml(label)}</textPath>
+      </text>` : '';
+    const pid = `p-${Math.abs(fromX*13+toX*7+fromY*11+toY*5).toFixed(0)}`;
+    return `<path id="${pid}" d="${d}" fill="none" stroke="${stroke}" stroke-width="${w}" stroke-linecap="round" ${dash}/>${midLabel}`;
   };
 
   // Layout
+  // Circle-node layout similar to reference
   const nodes = {
-    sender: { x: 60, y: 120, label: 'Sender App' },
-    crypto: { x: 60, y: 250, label: 'Crypto Layer' },
-    keybundle: { x: 60, y: 380, label: 'Key Bundle Service' },
-    relay: { x: 365, y: 210, label: 'WhatsApp Servers' },
-    queue: { x: 365, y: 350, label: 'Message Queue' },
-    push: { x: 690, y: 210, label: 'Push Service' },
-    recipient: { x: 690, y: 350, label: 'Recipient App' },
+    sender: { cx: 110, cy: 360, label: 'You', color: 'rgba(34,197,94,0.95)' },
+    crypto: { cx: 290, cy: 360, label: 'Signal Encrypt', color: 'rgba(34,197,94,0.95)' },
+    relay: { cx: 520, cy: 360, label: 'WA Server', color: 'rgba(123,125,248,0.95)' },
+    decrypt: { cx: 740, cy: 360, label: 'Signal Decrypt', color: 'rgba(34,197,94,0.95)' },
+    recipient: { cx: 910, cy: 360, label: 'Friend', color: 'rgba(34,197,94,0.95)' },
+    push: { cx: 520, cy: 170, label: 'FCM APNs', color: 'rgba(123,125,248,0.75)' },
+    keybundle: { cx: 290, cy: 520, label: 'Key Bundle', color: 'rgba(34,197,94,0.65)' },
   };
 
   svg.innerHTML = `
     <rect x="0" y="0" width="1000" height="640" fill="rgba(0,0,0,0)"/>
-    ${edge(nodes.sender.x+270, nodes.sender.y+43, nodes.crypto.x, nodes.crypto.y+43, eActive('sender','crypto'))}
-    ${edge(nodes.keybundle.x+270, nodes.keybundle.y+43, nodes.crypto.x, nodes.crypto.y+43, eActive('keybundle','crypto'))}
-    ${edge(nodes.crypto.x+270, nodes.crypto.y+43, nodes.relay.x, nodes.relay.y+43, eActive('crypto','relay'))}
-    ${edge(nodes.relay.x+270, nodes.relay.y+43, nodes.queue.x, nodes.queue.y+43, eActive('relay','queue'))}
-    ${edge(nodes.queue.x+270, nodes.queue.y+43, nodes.push.x, nodes.push.y+43, eActive('queue','push'))}
-    ${edge(nodes.push.x+270, nodes.push.y+43, nodes.recipient.x, nodes.recipient.y+43, eActive('push','recipient'))}
+    ${edge(nodes.sender.cx, nodes.sender.cy, nodes.crypto.cx, nodes.crypto.cy, eActive('sender','crypto'), true, 'plaintext')}
+    ${edge(nodes.crypto.cx, nodes.crypto.cy, nodes.relay.cx, nodes.relay.cy, eActive('crypto','relay'), true, 'encrypted')}
+    ${edge(nodes.relay.cx, nodes.relay.cy, nodes.decrypt.cx, nodes.decrypt.cy, eActive('relay','decrypt'), false, 'ciphertext')}
+    ${edge(nodes.decrypt.cx, nodes.decrypt.cy, nodes.recipient.cx, nodes.recipient.cy, eActive('decrypt','recipient'), true, '')}
 
-    ${node('sender', nodes.sender.x, nodes.sender.y, nodes.sender.label)}
-    ${node('crypto', nodes.crypto.x, nodes.crypto.y, nodes.crypto.label)}
-    ${node('keybundle', nodes.keybundle.x, nodes.keybundle.y, nodes.keybundle.label)}
-    ${node('relay', nodes.relay.x, nodes.relay.y, nodes.relay.label)}
-    ${node('queue', nodes.queue.x, nodes.queue.y, nodes.queue.label)}
-    ${node('push', nodes.push.x, nodes.push.y, nodes.push.label)}
-    ${node('recipient', nodes.recipient.x, nodes.recipient.y, nodes.recipient.label)}
+    ${edge(nodes.relay.cx, nodes.relay.cy, nodes.push.cx, nodes.push.cy, eActive('relay','push'), true, 'notify')}
+    ${edge(nodes.push.cx, nodes.push.cy, nodes.recipient.cx, nodes.recipient.cy, eActive('push','recipient'), true, 'wake')}
+
+    ${edge(nodes.keybundle.cx, nodes.keybundle.cy, nodes.crypto.cx, nodes.crypto.cy, eActive('keybundle','crypto'), true, 'keys')}
+
+    ${node('sender', nodes.sender.cx, nodes.sender.cy, nodes.sender.label, nodes.sender.color)}
+    ${node('crypto', nodes.crypto.cx, nodes.crypto.cy, nodes.crypto.label, nodes.crypto.color)}
+    ${node('relay', nodes.relay.cx, nodes.relay.cy, nodes.relay.label, nodes.relay.color)}
+    ${node('decrypt', nodes.decrypt.cx, nodes.decrypt.cy, nodes.decrypt.label, nodes.decrypt.color)}
+    ${node('recipient', nodes.recipient.cx, nodes.recipient.cy, nodes.recipient.label, nodes.recipient.color)}
+    ${node('push', nodes.push.cx, nodes.push.cy, nodes.push.label, nodes.push.color)}
+    ${node('keybundle', nodes.keybundle.cx, nodes.keybundle.cy, nodes.keybundle.label, nodes.keybundle.color)}
   `;
 }
 
