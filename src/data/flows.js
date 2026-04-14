@@ -4463,6 +4463,428 @@ export const FLOWS = {
       }
     ]
   }
+
+  ,
+
+  tinder: {
+    title: 'Tinder',
+    steps: [
+      {
+        title: 'Open app and fetch recommendations',
+        desc: 'Client authenticates and fetches a ranked stack of profiles.',
+        active: ['client','auth','recos','rank'],
+        edges: [['client','auth'], ['auth','recos'], ['recos','rank']]
+      },
+      {
+        title: 'Swipe action',
+        desc: 'Like/Pass is recorded; signals update ranking and candidate generation.',
+        active: ['swipes','write','signals'],
+        edges: [['client','swipes'], ['swipes','write'], ['write','signals']]
+      },
+      {
+        title: 'Matchmaking',
+        desc: 'Mutual likes create a match and open messaging.',
+        active: ['match','store','chat'],
+        edges: [['signals','match'], ['match','store'], ['match','chat']]
+      },
+      {
+        title: 'Send message',
+        desc: 'Messages persist and deliver via realtime gateways.',
+        active: ['chat','realtime','notify'],
+        edges: [['client','chat'], ['chat','realtime'], ['chat','notify']]
+      },
+      {
+        title: 'Safety and moderation',
+        desc: 'Safety systems monitor abuse reports and spam signals.',
+        active: ['moderation','risk','policy'],
+        edges: [['chat','moderation'], ['moderation','risk'], ['moderation','policy']]
+      },
+      {
+        title: 'Subscriptions',
+        desc: 'Premium features gated by entitlements and billing.',
+        active: ['paywall','entitlements','payments'],
+        edges: [['client','paywall'], ['paywall','entitlements'], ['entitlements','payments']]
+      }
+    ]
+  },
+
+  bumble: {
+    title: 'Bumble',
+    steps: [
+      {
+        title: 'Fetch recommendations',
+        desc: 'Client loads ranked candidates using preferences and location.',
+        active: ['client','auth','recos','rank'],
+        edges: [['client','auth'], ['auth','recos'], ['recos','rank']]
+      },
+      {
+        title: 'Swipe and signals',
+        desc: 'Swipes persist and update ranking signals and filters.',
+        active: ['swipes','write','signals'],
+        edges: [['client','swipes'], ['swipes','write'], ['write','signals']]
+      },
+      {
+        title: 'Match creation',
+        desc: 'Mutual likes create a match and open chat.',
+        active: ['match','store','chat'],
+        edges: [['signals','match'], ['match','store'], ['match','chat']]
+      },
+      {
+        title: 'First message flow',
+        desc: 'Messaging rules (e.g., first message) enforced and notified.',
+        active: ['rules','notify','chat'],
+        edges: [['match','rules'], ['rules','notify'], ['notify','chat']]
+      },
+      {
+        title: 'Realtime messaging',
+        desc: 'Messages persist and deliver via realtime gateways.',
+        active: ['chat','realtime','push'],
+        edges: [['chat','realtime'], ['realtime','push'], ['push','client']]
+      },
+      {
+        title: 'Safety and verification',
+        desc: 'Photo verification and abuse monitoring improve trust.',
+        active: ['verify','moderation','risk'],
+        edges: [['client','verify'], ['verify','moderation'], ['moderation','risk']]
+      }
+    ]
+  },
+
+  hinge: {
+    title: 'Hinge',
+    steps: [
+      {
+        title: 'Load curated feed',
+        desc: 'Client loads curated candidates and prompts with ranking.',
+        active: ['client','recos','rank'],
+        edges: [['client','recos'], ['recos','rank']]
+      },
+      {
+        title: 'Like with comment',
+        desc: 'Likes with comments persist and trigger notification to recipient.',
+        active: ['likes','comments','notify'],
+        edges: [['client','likes'], ['likes','comments'], ['comments','notify']]
+      },
+      {
+        title: 'Matchmaking',
+        desc: 'Mutual engagement creates match and enables chat.',
+        active: ['match','store','chat'],
+        edges: [['likes','match'], ['match','store'], ['match','chat']]
+      },
+      {
+        title: 'Conversation and delivery',
+        desc: 'Messages persist and deliver via realtime gateways.',
+        active: ['chat','realtime','push'],
+        edges: [['chat','realtime'], ['realtime','push'], ['push','client']]
+      },
+      {
+        title: 'Profile integrity',
+        desc: 'Moderation checks spam, fake accounts, and reported content.',
+        active: ['moderation','risk','policy'],
+        edges: [['chat','moderation'], ['moderation','risk'], ['moderation','policy']]
+      },
+      {
+        title: 'Premium preferences',
+        desc: 'Premium filters and boosts gated by entitlements.',
+        active: ['entitlements','paywall','payments'],
+        edges: [['client','paywall'], ['paywall','entitlements'], ['entitlements','payments']]
+      }
+    ]
+  },
+
+  zerodha: {
+    title: 'Zerodha',
+    steps: [
+      {
+        title: 'Login and KYC status',
+        desc: 'User authenticates and account/KYC status is validated.',
+        active: ['client','auth','kyc'],
+        edges: [['client','auth'], ['auth','kyc']]
+      },
+      {
+        title: 'Add funds',
+        desc: 'Payments add funds; ledger updates balances.',
+        active: ['payments','ledger','wallet'],
+        edges: [['client','payments'], ['payments','ledger'], ['ledger','wallet']]
+      },
+      {
+        title: 'Place order',
+        desc: 'Order validated; risk checks; routed to broker/exchange.',
+        active: ['orders','risk','broker'],
+        edges: [['client','orders'], ['orders','risk'], ['orders','broker']]
+      },
+      {
+        title: 'Execution',
+        desc: 'Execution updates positions and order status.',
+        active: ['execution','positions','status'],
+        edges: [['broker','execution'], ['execution','positions'], ['execution','status']]
+      },
+      {
+        title: 'Settlement and reports',
+        desc: 'Settlement reconciles cash/holdings; reports generated.',
+        active: ['settlement','reports','warehouse'],
+        edges: [['positions','settlement'], ['settlement','reports'], ['reports','warehouse']]
+      },
+      {
+        title: 'Withdraw funds',
+        desc: 'Withdrawals to bank with compliance checks.',
+        active: ['withdraw','bank','compliance'],
+        edges: [['client','withdraw'], ['withdraw','compliance'], ['withdraw','bank']]
+      }
+    ]
+  },
+
+  upstox: {
+    title: 'Upstox',
+    steps: [
+      {
+        title: 'Login',
+        desc: 'Authentication and device checks complete.',
+        active: ['client','auth','risk'],
+        edges: [['client','auth'], ['auth','risk']]
+      },
+      {
+        title: 'Market data',
+        desc: 'Streaming market data delivered to client watchlists.',
+        active: ['marketdata','stream','client'],
+        edges: [['marketdata','stream'], ['stream','client']]
+      },
+      {
+        title: 'Place order',
+        desc: 'Order validated and routed to broker/exchange.',
+        active: ['orders','risk','broker'],
+        edges: [['client','orders'], ['orders','risk'], ['orders','broker']]
+      },
+      {
+        title: 'Execution and positions',
+        desc: 'Execution updates positions and portfolio state.',
+        active: ['execution','positions','ledger'],
+        edges: [['broker','execution'], ['execution','positions'], ['positions','ledger']]
+      },
+      {
+        title: 'Reports',
+        desc: 'Reports and statements generated from warehouse.',
+        active: ['reports','warehouse','analytics'],
+        edges: [['positions','warehouse'], ['warehouse','reports'], ['reports','analytics']]
+      },
+      {
+        title: 'Withdraw',
+        desc: 'Withdrawals to bank with compliance checks.',
+        active: ['withdraw','bank','compliance'],
+        edges: [['client','withdraw'], ['withdraw','compliance'], ['withdraw','bank']]
+      }
+    ]
+  },
+
+  'angel-one': {
+    title: 'Angel One',
+    steps: [
+      {
+        title: 'Login and KYC',
+        desc: 'User logs in; KYC/account status validated.',
+        active: ['client','auth','kyc'],
+        edges: [['client','auth'], ['auth','kyc']]
+      },
+      {
+        title: 'Market data stream',
+        desc: 'Quotes and charts stream to client.',
+        active: ['marketdata','stream','client'],
+        edges: [['marketdata','stream'], ['stream','client']]
+      },
+      {
+        title: 'Place order',
+        desc: 'Order validated and routed; risk controls apply.',
+        active: ['orders','risk','broker'],
+        edges: [['client','orders'], ['orders','risk'], ['orders','broker']]
+      },
+      {
+        title: 'Execution',
+        desc: 'Execution updates positions and order status.',
+        active: ['execution','positions','status'],
+        edges: [['broker','execution'], ['execution','positions'], ['execution','status']]
+      },
+      {
+        title: 'Settlement and ledger',
+        desc: 'Settlement reconciles cash/holdings; ledger updated.',
+        active: ['settlement','ledger','reports'],
+        edges: [['positions','settlement'], ['settlement','ledger'], ['ledger','reports']]
+      },
+      {
+        title: 'Support and compliance',
+        desc: 'Compliance checks and support workflows handle issues.',
+        active: ['compliance','support','audit'],
+        edges: [['ledger','compliance'], ['compliance','audit'], ['support','client']]
+      }
+    ]
+  },
+
+  paytm: {
+    title: 'Paytm',
+    steps: [
+      {
+        title: 'Authenticate',
+        desc: 'User signs in; device binding and risk checks run.',
+        active: ['client','auth','risk'],
+        edges: [['client','auth'], ['auth','risk']]
+      },
+      {
+        title: 'Create payment intent',
+        desc: 'Payment intent created; routed to wallet/UPI/card/bank rails.',
+        active: ['payments','routing','upi'],
+        edges: [['client','payments'], ['payments','routing'], ['routing','upi']]
+      },
+      {
+        title: 'Authorize and update ledger',
+        desc: 'Authorization completes; ledger updates balances and status.',
+        active: ['bank','status','ledger'],
+        edges: [['upi','bank'], ['bank','status'], ['status','ledger']]
+      },
+      {
+        title: 'Merchant callbacks',
+        desc: 'Webhooks/callbacks notify merchants and generate receipts.',
+        active: ['webhooks','merchant','notify'],
+        edges: [['status','webhooks'], ['webhooks','merchant'], ['status','notify']]
+      },
+      {
+        title: 'Recharge/bills',
+        desc: 'Bill pay flows integrate with billers and update ledger.',
+        active: ['billpay','billers','ledger'],
+        edges: [['client','billpay'], ['billpay','billers'], ['billpay','ledger']]
+      },
+      {
+        title: 'Insights',
+        desc: 'Analytics aggregates transactions and user insights.',
+        active: ['analytics','warehouse','reports'],
+        edges: [['ledger','analytics'], ['analytics','warehouse'], ['warehouse','reports']]
+      }
+    ]
+  },
+
+  gpay: {
+    title: 'GPay',
+    steps: [
+      {
+        title: 'Authenticate',
+        desc: 'User authenticates and device binding/risk checks run.',
+        active: ['client','auth','risk'],
+        edges: [['client','auth'], ['auth','risk']]
+      },
+      {
+        title: 'Create UPI payment',
+        desc: 'UPI payment intent created and routed to UPI rails.',
+        active: ['payments','routing','upi'],
+        edges: [['client','payments'], ['payments','routing'], ['routing','upi']]
+      },
+      {
+        title: 'Bank authorization',
+        desc: 'Bank authorizes and returns status; ledger updated.',
+        active: ['bank','status','ledger'],
+        edges: [['upi','bank'], ['bank','status'], ['status','ledger']]
+      },
+      {
+        title: 'Rewards and offers',
+        desc: 'Rewards computed and offers personalized.',
+        active: ['rewards','offers','rank'],
+        edges: [['status','rewards'], ['rewards','offers'], ['offers','rank']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Payment confirmations and reminders delivered via push.',
+        active: ['notify','push','client'],
+        edges: [['status','notify'], ['notify','push'], ['push','client']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics aggregates payments, retention, and funnel metrics.',
+        active: ['analytics','warehouse','reports'],
+        edges: [['ledger','analytics'], ['analytics','warehouse'], ['warehouse','reports']]
+      }
+    ]
+  },
+
+  aadhaar: {
+    title: 'Aadhaar',
+    steps: [
+      {
+        title: 'Enrollment capture',
+        desc: 'Biometrics and demographics captured and packaged securely.',
+        active: ['enrollment','biometrics','client'],
+        edges: [['enrollment','biometrics'], ['biometrics','client']]
+      },
+      {
+        title: 'Validation and dedupe',
+        desc: 'Validation checks data quality; dedupe matches against registry.',
+        active: ['validation','dedupe','registry'],
+        edges: [['client','validation'], ['validation','dedupe'], ['dedupe','registry']]
+      },
+      {
+        title: 'Issue Aadhaar',
+        desc: 'UID issued; credentials generated and stored.',
+        active: ['issuer','registry','credentials'],
+        edges: [['dedupe','issuer'], ['issuer','registry'], ['issuer','credentials']]
+      },
+      {
+        title: 'Authentication request',
+        desc: 'Auth request validated; matching run against biometrics/OTP.',
+        active: ['auth','matching','otp'],
+        edges: [['client','auth'], ['auth','otp'], ['auth','matching']]
+      },
+      {
+        title: 'Response and logging',
+        desc: 'Auth response returned; audit logs persisted.',
+        active: ['response','audit','store'],
+        edges: [['matching','response'], ['response','audit'], ['audit','store']]
+      },
+      {
+        title: 'eKYC',
+        desc: 'eKYC returns verified attributes to relying party.',
+        active: ['ekyc','authz','client'],
+        edges: [['auth','ekyc'], ['ekyc','authz'], ['authz','client']]
+      }
+    ]
+  },
+
+  digilocker: {
+    title: 'DigiLocker',
+    steps: [
+      {
+        title: 'Sign in',
+        desc: 'User signs in and links identity (Aadhaar/phone).',
+        active: ['client','auth','linking'],
+        edges: [['client','auth'], ['auth','linking']]
+      },
+      {
+        title: 'Fetch issuer documents',
+        desc: 'Requests documents from issuer APIs and caches metadata.',
+        active: ['issuers','api','cache'],
+        edges: [['client','api'], ['api','issuers'], ['api','cache']]
+      },
+      {
+        title: 'Store vault',
+        desc: 'Documents stored in vault with encryption and metadata.',
+        active: ['vault','storage','metadata'],
+        edges: [['issuers','vault'], ['vault','storage'], ['vault','metadata']]
+      },
+      {
+        title: 'Share document',
+        desc: 'Share link/consent created; authz enforced and audited.',
+        active: ['sharing','authz','audit'],
+        edges: [['client','sharing'], ['sharing','authz'], ['authz','audit']]
+      },
+      {
+        title: 'Verify document',
+        desc: 'Verification checks issuer signatures and validity.',
+        active: ['verify','signatures','issuers'],
+        edges: [['vault','verify'], ['verify','signatures'], ['signatures','issuers']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Notifications for shares and fetch status delivered via push.',
+        active: ['notify','push','client'],
+        edges: [['sharing','notify'], ['notify','push'], ['push','client']]
+      }
+    ]
+  }
 };
 
 export function flowForSystem(sys) {

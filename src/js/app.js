@@ -4154,6 +4154,248 @@ const SYSTEM_LAYOUTS = {
 
   ,
 
+  tinder: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','recos','rank','swipes','write','signals','match','store','chat','realtime','notify','push','moderation','risk','policy','paywall','entitlements','payments'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      recos: { x: 620, y: 180, label: 'Recos', colorKey: 'api' },
+      rank: { x: 860, y: 180, label: 'Ranking', colorKey: 'api' },
+      swipes: { x: 380, y: 320, label: 'Swipes', colorKey: 'api' },
+      write: { x: 620, y: 320, label: 'Writes', colorKey: 'store' },
+      signals: { x: 860, y: 320, label: 'Signals', colorKey: 'stream' },
+      match: { x: 1100, y: 320, label: 'Match', colorKey: 'api' },
+      store: { x: 1100, y: 180, label: 'Store', colorKey: 'store' },
+      chat: { x: 380, y: 460, label: 'Chat', colorKey: 'api' },
+      realtime: { x: 620, y: 460, label: 'Realtime', colorKey: 'stream' },
+      notify: { x: 860, y: 460, label: 'Notify', colorKey: 'external' },
+      push: { x: 1100, y: 460, label: 'Push', colorKey: 'external' },
+      moderation: { x: 620, y: 600, label: 'Moderation', colorKey: 'api' },
+      risk: { x: 860, y: 600, label: 'Risk', colorKey: 'api' },
+      policy: { x: 1100, y: 600, label: 'Policy', colorKey: 'api' },
+      paywall: { x: 380, y: 600, label: 'Paywall', colorKey: 'api' },
+      entitlements: { x: 380, y: 740, label: 'Entitlements', colorKey: 'store' },
+      payments: { x: 620, y: 740, label: 'Payments', colorKey: 'external' }
+    }
+  },
+
+  bumble: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','recos','rank','swipes','write','signals','match','store','rules','notify','chat','realtime','push','verify','moderation','risk'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      recos: { x: 620, y: 180, label: 'Recos', colorKey: 'api' },
+      rank: { x: 860, y: 180, label: 'Ranking', colorKey: 'api' },
+      swipes: { x: 380, y: 320, label: 'Swipes', colorKey: 'api' },
+      write: { x: 620, y: 320, label: 'Writes', colorKey: 'store' },
+      signals: { x: 860, y: 320, label: 'Signals', colorKey: 'stream' },
+      match: { x: 1100, y: 320, label: 'Match', colorKey: 'api' },
+      store: { x: 1100, y: 180, label: 'Store', colorKey: 'store' },
+      rules: { x: 380, y: 460, label: 'Rules', colorKey: 'api' },
+      notify: { x: 620, y: 460, label: 'Notify', colorKey: 'external' },
+      chat: { x: 860, y: 460, label: 'Chat', colorKey: 'api' },
+      realtime: { x: 860, y: 600, label: 'Realtime', colorKey: 'stream' },
+      push: { x: 1100, y: 600, label: 'Push', colorKey: 'external' },
+      verify: { x: 380, y: 600, label: 'Verify', colorKey: 'api' },
+      moderation: { x: 620, y: 600, label: 'Moderation', colorKey: 'api' },
+      risk: { x: 620, y: 740, label: 'Risk', colorKey: 'api' }
+    }
+  },
+
+  hinge: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','recos','rank','likes','comments','notify','match','store','chat','realtime','push','moderation','risk','policy','paywall','entitlements','payments'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      recos: { x: 380, y: 180, label: 'Recos', colorKey: 'api' },
+      rank: { x: 620, y: 180, label: 'Ranking', colorKey: 'api' },
+      likes: { x: 380, y: 320, label: 'Likes', colorKey: 'api' },
+      comments: { x: 620, y: 320, label: 'Comments', colorKey: 'store' },
+      notify: { x: 860, y: 320, label: 'Notify', colorKey: 'external' },
+      match: { x: 860, y: 180, label: 'Match', colorKey: 'api' },
+      store: { x: 1100, y: 180, label: 'Store', colorKey: 'store' },
+      chat: { x: 380, y: 460, label: 'Chat', colorKey: 'api' },
+      realtime: { x: 620, y: 460, label: 'Realtime', colorKey: 'stream' },
+      push: { x: 860, y: 460, label: 'Push', colorKey: 'external' },
+      moderation: { x: 620, y: 600, label: 'Moderation', colorKey: 'api' },
+      risk: { x: 860, y: 600, label: 'Risk', colorKey: 'api' },
+      policy: { x: 1100, y: 600, label: 'Policy', colorKey: 'api' },
+      paywall: { x: 380, y: 600, label: 'Paywall', colorKey: 'api' },
+      entitlements: { x: 380, y: 740, label: 'Entitlements', colorKey: 'store' },
+      payments: { x: 620, y: 740, label: 'Payments', colorKey: 'external' }
+    }
+  },
+
+  zerodha: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','kyc','payments','ledger','wallet','orders','risk','broker','execution','positions','status','settlement','reports','warehouse','withdraw','compliance','bank'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      kyc: { x: 620, y: 180, label: 'KYC', colorKey: 'api' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      ledger: { x: 620, y: 320, label: 'Ledger', colorKey: 'store' },
+      wallet: { x: 860, y: 320, label: 'Wallet', colorKey: 'api' },
+      orders: { x: 380, y: 460, label: 'Orders', colorKey: 'api' },
+      risk: { x: 620, y: 460, label: 'Risk', colorKey: 'api' },
+      broker: { x: 860, y: 460, label: 'Broker', colorKey: 'external' },
+      execution: { x: 1100, y: 460, label: 'Execution', colorKey: 'api' },
+      positions: { x: 860, y: 600, label: 'Positions', colorKey: 'store' },
+      status: { x: 1100, y: 600, label: 'Status', colorKey: 'api' },
+      settlement: { x: 620, y: 600, label: 'Settlement', colorKey: 'api' },
+      reports: { x: 380, y: 600, label: 'Reports', colorKey: 'store' },
+      warehouse: { x: 140, y: 600, label: 'Warehouse', colorKey: 'store' },
+      withdraw: { x: 380, y: 740, label: 'Withdraw', colorKey: 'api' },
+      compliance: { x: 620, y: 740, label: 'Compliance', colorKey: 'api' },
+      bank: { x: 860, y: 740, label: 'Bank', colorKey: 'external' }
+    }
+  },
+
+  upstox: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','risk','marketdata','stream','orders','broker','execution','positions','ledger','warehouse','reports','analytics','withdraw','compliance','bank'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      risk: { x: 620, y: 180, label: 'Risk', colorKey: 'api' },
+      marketdata: { x: 380, y: 320, label: 'Market Data', colorKey: 'api' },
+      stream: { x: 620, y: 320, label: 'Stream', colorKey: 'stream' },
+      orders: { x: 380, y: 460, label: 'Orders', colorKey: 'api' },
+      broker: { x: 620, y: 460, label: 'Broker', colorKey: 'external' },
+      execution: { x: 860, y: 460, label: 'Execution', colorKey: 'api' },
+      positions: { x: 860, y: 600, label: 'Positions', colorKey: 'store' },
+      ledger: { x: 620, y: 600, label: 'Ledger', colorKey: 'store' },
+      warehouse: { x: 380, y: 600, label: 'Warehouse', colorKey: 'store' },
+      reports: { x: 140, y: 600, label: 'Reports', colorKey: 'store' },
+      analytics: { x: 140, y: 460, label: 'Analytics', colorKey: 'stream' },
+      withdraw: { x: 380, y: 740, label: 'Withdraw', colorKey: 'api' },
+      compliance: { x: 620, y: 740, label: 'Compliance', colorKey: 'api' },
+      bank: { x: 860, y: 740, label: 'Bank', colorKey: 'external' }
+    }
+  },
+
+  'angel-one': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','kyc','marketdata','stream','orders','risk','broker','execution','positions','status','settlement','ledger','reports','compliance','audit','support'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      kyc: { x: 620, y: 180, label: 'KYC', colorKey: 'api' },
+      marketdata: { x: 380, y: 320, label: 'Market Data', colorKey: 'api' },
+      stream: { x: 620, y: 320, label: 'Stream', colorKey: 'stream' },
+      orders: { x: 380, y: 460, label: 'Orders', colorKey: 'api' },
+      risk: { x: 620, y: 460, label: 'Risk', colorKey: 'api' },
+      broker: { x: 860, y: 460, label: 'Broker', colorKey: 'external' },
+      execution: { x: 1100, y: 460, label: 'Execution', colorKey: 'api' },
+      positions: { x: 860, y: 600, label: 'Positions', colorKey: 'store' },
+      status: { x: 1100, y: 600, label: 'Status', colorKey: 'api' },
+      settlement: { x: 620, y: 600, label: 'Settlement', colorKey: 'api' },
+      ledger: { x: 380, y: 600, label: 'Ledger', colorKey: 'store' },
+      reports: { x: 140, y: 600, label: 'Reports', colorKey: 'store' },
+      compliance: { x: 620, y: 740, label: 'Compliance', colorKey: 'api' },
+      audit: { x: 860, y: 740, label: 'Audit', colorKey: 'store' },
+      support: { x: 1100, y: 740, label: 'Support', colorKey: 'external' }
+    }
+  },
+
+  paytm: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','risk','payments','routing','upi','bank','status','ledger','webhooks','merchant','notify','billpay','billers','analytics','warehouse','reports'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      risk: { x: 620, y: 180, label: 'Risk', colorKey: 'api' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'api' },
+      routing: { x: 620, y: 320, label: 'Routing', colorKey: 'api' },
+      upi: { x: 860, y: 320, label: 'UPI', colorKey: 'external' },
+      bank: { x: 1100, y: 320, label: 'Bank', colorKey: 'external' },
+      status: { x: 860, y: 460, label: 'Status', colorKey: 'api' },
+      ledger: { x: 620, y: 460, label: 'Ledger', colorKey: 'store' },
+      webhooks: { x: 380, y: 460, label: 'Webhooks', colorKey: 'external' },
+      merchant: { x: 140, y: 460, label: 'Merchant', colorKey: 'client' },
+      notify: { x: 380, y: 600, label: 'Notify', colorKey: 'external' },
+      billpay: { x: 620, y: 600, label: 'Bill Pay', colorKey: 'api' },
+      billers: { x: 860, y: 600, label: 'Billers', colorKey: 'external' },
+      analytics: { x: 620, y: 740, label: 'Analytics', colorKey: 'stream' },
+      warehouse: { x: 860, y: 740, label: 'Warehouse', colorKey: 'store' },
+      reports: { x: 1100, y: 740, label: 'Reports', colorKey: 'store' }
+    }
+  },
+
+  gpay: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','risk','payments','routing','upi','bank','status','ledger','rewards','offers','rank','notify','push','analytics','warehouse','reports'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      risk: { x: 620, y: 180, label: 'Risk', colorKey: 'api' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'api' },
+      routing: { x: 620, y: 320, label: 'Routing', colorKey: 'api' },
+      upi: { x: 860, y: 320, label: 'UPI', colorKey: 'external' },
+      bank: { x: 1100, y: 320, label: 'Bank', colorKey: 'external' },
+      status: { x: 860, y: 460, label: 'Status', colorKey: 'api' },
+      ledger: { x: 620, y: 460, label: 'Ledger', colorKey: 'store' },
+      rewards: { x: 380, y: 460, label: 'Rewards', colorKey: 'api' },
+      offers: { x: 380, y: 600, label: 'Offers', colorKey: 'api' },
+      rank: { x: 620, y: 600, label: 'Ranking', colorKey: 'api' },
+      notify: { x: 860, y: 600, label: 'Notify', colorKey: 'external' },
+      push: { x: 1100, y: 600, label: 'Push', colorKey: 'external' },
+      analytics: { x: 620, y: 740, label: 'Analytics', colorKey: 'stream' },
+      warehouse: { x: 860, y: 740, label: 'Warehouse', colorKey: 'store' },
+      reports: { x: 1100, y: 740, label: 'Reports', colorKey: 'store' }
+    }
+  },
+
+  aadhaar: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['enrollment','biometrics','client','validation','dedupe','registry','issuer','credentials','auth','otp','matching','response','audit','store','ekyc','authz'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      enrollment: { x: 380, y: 180, label: 'Enrollment', colorKey: 'api' },
+      biometrics: { x: 620, y: 180, label: 'Biometrics', colorKey: 'api' },
+      validation: { x: 860, y: 180, label: 'Validation', colorKey: 'api' },
+      dedupe: { x: 1100, y: 180, label: 'Dedupe', colorKey: 'api' },
+      registry: { x: 1100, y: 320, label: 'Registry', colorKey: 'store' },
+      issuer: { x: 860, y: 320, label: 'Issuer', colorKey: 'api' },
+      credentials: { x: 620, y: 320, label: 'Credentials', colorKey: 'store' },
+      auth: { x: 380, y: 320, label: 'Auth', colorKey: 'api' },
+      otp: { x: 380, y: 460, label: 'OTP', colorKey: 'external' },
+      matching: { x: 620, y: 460, label: 'Matching', colorKey: 'api' },
+      response: { x: 860, y: 460, label: 'Response', colorKey: 'api' },
+      audit: { x: 1100, y: 460, label: 'Audit', colorKey: 'store' },
+      store: { x: 1100, y: 600, label: 'Log Store', colorKey: 'store' },
+      ekyc: { x: 860, y: 600, label: 'eKYC', colorKey: 'api' },
+      authz: { x: 620, y: 600, label: 'AuthZ', colorKey: 'api' }
+    }
+  },
+
+  digilocker: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','linking','api','issuers','cache','vault','storage','metadata','sharing','authz','audit','verify','signatures','notify','push'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      linking: { x: 620, y: 180, label: 'Linking', colorKey: 'api' },
+      api: { x: 380, y: 320, label: 'API', colorKey: 'api' },
+      issuers: { x: 620, y: 320, label: 'Issuers', colorKey: 'external' },
+      cache: { x: 860, y: 320, label: 'Cache', colorKey: 'cache' },
+      vault: { x: 860, y: 180, label: 'Vault', colorKey: 'store' },
+      storage: { x: 1100, y: 180, label: 'Storage', colorKey: 'store' },
+      metadata: { x: 1100, y: 320, label: 'Metadata', colorKey: 'store' },
+      sharing: { x: 380, y: 460, label: 'Sharing', colorKey: 'api' },
+      authz: { x: 620, y: 460, label: 'AuthZ', colorKey: 'api' },
+      audit: { x: 860, y: 460, label: 'Audit', colorKey: 'store' },
+      verify: { x: 380, y: 600, label: 'Verify', colorKey: 'api' },
+      signatures: { x: 620, y: 600, label: 'Signatures', colorKey: 'api' },
+      notify: { x: 860, y: 600, label: 'Notify', colorKey: 'external' },
+      push: { x: 1100, y: 600, label: 'Push', colorKey: 'external' }
+    }
+  }
+
+  ,
+
   figma: {
     viewBox: '0 0 1200 960',
     primaryPath: ['client','auth','files','cache','editor','ops','realtime','merge','store','comments','notify','push','export','render','cdn','sharing','authz','audit'],
@@ -6401,6 +6643,368 @@ const ARCH_LAYOUTS = {
       if (stepIdx === 4) e.push(['ledger','status','status'], ['status','notify','notify'], ['notify','push','push']);
       if (stepIdx === 5) e.push(['status','rewards','rewards'], ['rewards','wallet','wallet'], ['rewards','analytics','analytics']);
       if (stepIdx === 6) e.push(['payments','risk','risk'], ['risk','fraud','fraud'], ['fraud','ledger','ledger']);
+      return e;
+    }
+  },
+
+  // ----- Batch 11 (Architecture) -----
+
+  tinder: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Tinder Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','recos','rank','swipes','write','signals','match','store','chat','realtime','notify','push','moderation','risk','policy','paywall','entitlements','payments'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      recos: { x: 600, y: 160, label: 'Recos' },
+      rank: { x: 880, y: 160, label: 'Ranking' },
+      swipes: { x: 320, y: 300, label: 'Swipes' },
+      write: { x: 600, y: 300, label: 'Writes' },
+      signals: { x: 880, y: 300, label: 'Signals' },
+      match: { x: 1160, y: 300, label: 'Match' },
+      store: { x: 1160, y: 160, label: 'Store' },
+      chat: { x: 320, y: 440, label: 'Chat' },
+      realtime: { x: 600, y: 440, label: 'Realtime' },
+      notify: { x: 880, y: 440, label: 'Notify' },
+      push: { x: 1160, y: 440, label: 'Push' },
+      moderation: { x: 600, y: 580, label: 'Moderation' },
+      risk: { x: 880, y: 580, label: 'Risk' },
+      policy: { x: 1160, y: 580, label: 'Policy' },
+      paywall: { x: 320, y: 580, label: 'Paywall' },
+      entitlements: { x: 320, y: 720, label: 'Entitlements' },
+      payments: { x: 600, y: 720, label: 'Payments' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','recos','recos'], ['recos','rank','rank']);
+      if (stepIdx === 2) e.push(['client','swipes','swipe'], ['swipes','write','write'], ['write','signals','signals']);
+      if (stepIdx === 3) e.push(['signals','match','match'], ['match','store','store'], ['match','chat','chat']);
+      if (stepIdx === 4) e.push(['client','chat','chat'], ['chat','realtime','rt'], ['chat','notify','notify']);
+      if (stepIdx === 5) e.push(['chat','moderation','mod'], ['moderation','risk','risk'], ['moderation','policy','policy']);
+      if (stepIdx === 6) e.push(['client','paywall','paywall'], ['paywall','entitlements','ent'], ['entitlements','payments','pay']);
+      return e;
+    }
+  },
+
+  bumble: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Bumble Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','recos','rank','swipes','write','signals','match','store','rules','notify','chat','realtime','push','verify','moderation','risk'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      recos: { x: 600, y: 160, label: 'Recos' },
+      rank: { x: 880, y: 160, label: 'Ranking' },
+      swipes: { x: 320, y: 300, label: 'Swipes' },
+      write: { x: 600, y: 300, label: 'Writes' },
+      signals: { x: 880, y: 300, label: 'Signals' },
+      match: { x: 1160, y: 300, label: 'Match' },
+      store: { x: 1160, y: 160, label: 'Store' },
+      rules: { x: 320, y: 440, label: 'Rules' },
+      notify: { x: 600, y: 440, label: 'Notify' },
+      chat: { x: 880, y: 440, label: 'Chat' },
+      realtime: { x: 880, y: 580, label: 'Realtime' },
+      push: { x: 1160, y: 580, label: 'Push' },
+      verify: { x: 320, y: 580, label: 'Verify' },
+      moderation: { x: 600, y: 580, label: 'Moderation' },
+      risk: { x: 600, y: 720, label: 'Risk' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','recos','recos'], ['recos','rank','rank']);
+      if (stepIdx === 2) e.push(['client','swipes','swipe'], ['swipes','write','write'], ['write','signals','signals']);
+      if (stepIdx === 3) e.push(['signals','match','match'], ['match','store','store'], ['match','chat','chat']);
+      if (stepIdx === 4) e.push(['match','rules','rules'], ['rules','notify','notify'], ['notify','chat','chat']);
+      if (stepIdx === 5) e.push(['chat','realtime','rt'], ['realtime','push','push'], ['push','client','client']);
+      if (stepIdx === 6) e.push(['client','verify','verify'], ['verify','moderation','mod'], ['moderation','risk','risk']);
+      return e;
+    }
+  },
+
+  hinge: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Hinge Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','recos','rank','likes','comments','notify','match','store','chat','realtime','push','moderation','risk','policy','paywall','entitlements','payments'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      recos: { x: 320, y: 160, label: 'Recos' },
+      rank: { x: 600, y: 160, label: 'Ranking' },
+      likes: { x: 320, y: 300, label: 'Likes' },
+      comments: { x: 600, y: 300, label: 'Comments' },
+      notify: { x: 880, y: 300, label: 'Notify' },
+      match: { x: 880, y: 160, label: 'Match' },
+      store: { x: 1160, y: 160, label: 'Store' },
+      chat: { x: 320, y: 440, label: 'Chat' },
+      realtime: { x: 600, y: 440, label: 'Realtime' },
+      push: { x: 880, y: 440, label: 'Push' },
+      moderation: { x: 600, y: 580, label: 'Moderation' },
+      risk: { x: 880, y: 580, label: 'Risk' },
+      policy: { x: 1160, y: 580, label: 'Policy' },
+      paywall: { x: 320, y: 580, label: 'Paywall' },
+      entitlements: { x: 320, y: 720, label: 'Entitlements' },
+      payments: { x: 600, y: 720, label: 'Payments' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','recos','recos'], ['recos','rank','rank']);
+      if (stepIdx === 2) e.push(['client','likes','like'], ['likes','comments','comment'], ['comments','notify','notify']);
+      if (stepIdx === 3) e.push(['likes','match','match'], ['match','store','store'], ['match','chat','chat']);
+      if (stepIdx === 4) e.push(['chat','realtime','rt'], ['realtime','push','push'], ['push','client','client']);
+      if (stepIdx === 5) e.push(['chat','moderation','mod'], ['moderation','risk','risk'], ['moderation','policy','policy']);
+      if (stepIdx === 6) e.push(['client','paywall','paywall'], ['paywall','entitlements','ent'], ['entitlements','payments','pay']);
+      return e;
+    }
+  },
+
+  zerodha: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Zerodha Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','kyc','payments','ledger','wallet','orders','risk','broker','execution','positions','status','settlement','reports','warehouse','withdraw','compliance','bank'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      kyc: { x: 600, y: 160, label: 'KYC' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      ledger: { x: 600, y: 300, label: 'Ledger' },
+      wallet: { x: 880, y: 300, label: 'Wallet' },
+      orders: { x: 320, y: 440, label: 'Orders' },
+      risk: { x: 600, y: 440, label: 'Risk' },
+      broker: { x: 880, y: 440, label: 'Broker' },
+      execution: { x: 1160, y: 440, label: 'Execution' },
+      positions: { x: 880, y: 580, label: 'Positions' },
+      status: { x: 1160, y: 580, label: 'Status' },
+      settlement: { x: 600, y: 580, label: 'Settlement' },
+      reports: { x: 320, y: 580, label: 'Reports' },
+      warehouse: { x: 40, y: 580, label: 'Warehouse' },
+      withdraw: { x: 320, y: 720, label: 'Withdraw' },
+      compliance: { x: 600, y: 720, label: 'Compliance' },
+      bank: { x: 880, y: 720, label: 'Bank' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','kyc','kyc']);
+      if (stepIdx === 2) e.push(['client','payments','fund'], ['payments','ledger','ledger'], ['ledger','wallet','wallet']);
+      if (stepIdx === 3) e.push(['client','orders','order'], ['orders','risk','risk'], ['orders','broker','broker']);
+      if (stepIdx === 4) e.push(['broker','execution','exec'], ['execution','positions','pos'], ['execution','status','status']);
+      if (stepIdx === 5) e.push(['positions','settlement','settle'], ['settlement','reports','reports'], ['reports','warehouse','wh']);
+      if (stepIdx === 6) e.push(['client','withdraw','withdraw'], ['withdraw','compliance','comp'], ['withdraw','bank','bank']);
+      return e;
+    }
+  },
+
+  upstox: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Upstox Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','risk','marketdata','stream','orders','broker','execution','positions','ledger','warehouse','reports','analytics','withdraw','compliance','bank'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      risk: { x: 600, y: 160, label: 'Risk' },
+      marketdata: { x: 320, y: 300, label: 'Market Data' },
+      stream: { x: 600, y: 300, label: 'Stream' },
+      orders: { x: 320, y: 440, label: 'Orders' },
+      broker: { x: 600, y: 440, label: 'Broker' },
+      execution: { x: 880, y: 440, label: 'Execution' },
+      positions: { x: 880, y: 580, label: 'Positions' },
+      ledger: { x: 600, y: 580, label: 'Ledger' },
+      warehouse: { x: 320, y: 580, label: 'Warehouse' },
+      reports: { x: 40, y: 580, label: 'Reports' },
+      analytics: { x: 40, y: 440, label: 'Analytics' },
+      withdraw: { x: 320, y: 720, label: 'Withdraw' },
+      compliance: { x: 600, y: 720, label: 'Compliance' },
+      bank: { x: 880, y: 720, label: 'Bank' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','risk','risk']);
+      if (stepIdx === 2) e.push(['marketdata','stream','stream'], ['stream','client','client']);
+      if (stepIdx === 3) e.push(['client','orders','order'], ['orders','risk','risk'], ['orders','broker','broker']);
+      if (stepIdx === 4) e.push(['broker','execution','exec'], ['execution','positions','pos'], ['positions','ledger','ledger']);
+      if (stepIdx === 5) e.push(['positions','warehouse','wh'], ['warehouse','reports','reports'], ['reports','analytics','analytics']);
+      if (stepIdx === 6) e.push(['client','withdraw','withdraw'], ['withdraw','compliance','comp'], ['withdraw','bank','bank']);
+      return e;
+    }
+  },
+
+  'angel-one': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Angel One Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','kyc','marketdata','stream','orders','risk','broker','execution','positions','status','settlement','ledger','reports','compliance','audit','support'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      kyc: { x: 600, y: 160, label: 'KYC' },
+      marketdata: { x: 320, y: 300, label: 'Market Data' },
+      stream: { x: 600, y: 300, label: 'Stream' },
+      orders: { x: 320, y: 440, label: 'Orders' },
+      risk: { x: 600, y: 440, label: 'Risk' },
+      broker: { x: 880, y: 440, label: 'Broker' },
+      execution: { x: 1160, y: 440, label: 'Execution' },
+      positions: { x: 880, y: 580, label: 'Positions' },
+      status: { x: 1160, y: 580, label: 'Status' },
+      settlement: { x: 600, y: 580, label: 'Settlement' },
+      ledger: { x: 320, y: 580, label: 'Ledger' },
+      reports: { x: 40, y: 580, label: 'Reports' },
+      compliance: { x: 600, y: 720, label: 'Compliance' },
+      audit: { x: 880, y: 720, label: 'Audit' },
+      support: { x: 1160, y: 720, label: 'Support' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','kyc','kyc']);
+      if (stepIdx === 2) e.push(['marketdata','stream','stream'], ['stream','client','client']);
+      if (stepIdx === 3) e.push(['client','orders','order'], ['orders','risk','risk'], ['orders','broker','broker']);
+      if (stepIdx === 4) e.push(['broker','execution','exec'], ['execution','positions','pos'], ['execution','status','status']);
+      if (stepIdx === 5) e.push(['positions','settlement','settle'], ['settlement','ledger','ledger'], ['ledger','reports','reports']);
+      if (stepIdx === 6) e.push(['ledger','compliance','comp'], ['compliance','audit','audit'], ['support','client','support']);
+      return e;
+    }
+  },
+
+  paytm: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Paytm Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','risk','payments','routing','upi','bank','status','ledger','webhooks','merchant','notify','billpay','billers','analytics','warehouse','reports'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      risk: { x: 600, y: 160, label: 'Risk' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      routing: { x: 600, y: 300, label: 'Routing' },
+      upi: { x: 880, y: 300, label: 'UPI' },
+      bank: { x: 1160, y: 300, label: 'Bank' },
+      status: { x: 880, y: 440, label: 'Status' },
+      ledger: { x: 600, y: 440, label: 'Ledger' },
+      webhooks: { x: 320, y: 440, label: 'Webhooks' },
+      merchant: { x: 40, y: 440, label: 'Merchant' },
+      notify: { x: 320, y: 580, label: 'Notify' },
+      billpay: { x: 600, y: 580, label: 'Bill Pay' },
+      billers: { x: 880, y: 580, label: 'Billers' },
+      analytics: { x: 600, y: 720, label: 'Analytics' },
+      warehouse: { x: 880, y: 720, label: 'Warehouse' },
+      reports: { x: 1160, y: 720, label: 'Reports' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','risk','risk']);
+      if (stepIdx === 2) e.push(['client','payments','pay'], ['payments','routing','route'], ['routing','upi','upi']);
+      if (stepIdx === 3) e.push(['upi','bank','bank'], ['bank','status','status'], ['status','ledger','ledger']);
+      if (stepIdx === 4) e.push(['status','webhooks','webhooks'], ['webhooks','merchant','merchant'], ['status','notify','notify']);
+      if (stepIdx === 5) e.push(['client','billpay','billpay'], ['billpay','billers','billers'], ['billpay','ledger','ledger']);
+      if (stepIdx === 6) e.push(['ledger','analytics','analytics'], ['analytics','warehouse','wh'], ['warehouse','reports','reports']);
+      return e;
+    }
+  },
+
+  gpay: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'GPay Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','risk','payments','routing','upi','bank','status','ledger','rewards','offers','rank','notify','push','analytics','warehouse','reports'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      risk: { x: 600, y: 160, label: 'Risk' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      routing: { x: 600, y: 300, label: 'Routing' },
+      upi: { x: 880, y: 300, label: 'UPI' },
+      bank: { x: 1160, y: 300, label: 'Bank' },
+      status: { x: 880, y: 440, label: 'Status' },
+      ledger: { x: 600, y: 440, label: 'Ledger' },
+      rewards: { x: 320, y: 440, label: 'Rewards' },
+      offers: { x: 320, y: 580, label: 'Offers' },
+      rank: { x: 600, y: 580, label: 'Ranking' },
+      notify: { x: 880, y: 580, label: 'Notify' },
+      push: { x: 1160, y: 580, label: 'Push' },
+      analytics: { x: 600, y: 720, label: 'Analytics' },
+      warehouse: { x: 880, y: 720, label: 'Warehouse' },
+      reports: { x: 1160, y: 720, label: 'Reports' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','risk','risk']);
+      if (stepIdx === 2) e.push(['client','payments','pay'], ['payments','routing','route'], ['routing','upi','upi']);
+      if (stepIdx === 3) e.push(['upi','bank','bank'], ['bank','status','status'], ['status','ledger','ledger']);
+      if (stepIdx === 4) e.push(['status','rewards','rewards'], ['rewards','offers','offers'], ['offers','rank','rank']);
+      if (stepIdx === 5) e.push(['status','notify','notify'], ['notify','push','push'], ['push','client','client']);
+      if (stepIdx === 6) e.push(['ledger','analytics','analytics'], ['analytics','warehouse','wh'], ['warehouse','reports','reports']);
+      return e;
+    }
+  },
+
+  aadhaar: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Aadhaar Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['enrollment','biometrics','validation','dedupe','registry','issuer','credentials','auth','otp','matching','response','audit','store','ekyc','authz','client'],
+    nodes: {
+      enrollment: { x: 320, y: 160, label: 'Enrollment' },
+      biometrics: { x: 600, y: 160, label: 'Biometrics' },
+      validation: { x: 880, y: 160, label: 'Validation' },
+      dedupe: { x: 1160, y: 160, label: 'Dedupe' },
+      registry: { x: 1160, y: 300, label: 'Registry' },
+      issuer: { x: 880, y: 300, label: 'Issuer' },
+      credentials: { x: 600, y: 300, label: 'Credentials' },
+      auth: { x: 320, y: 300, label: 'Auth' },
+      otp: { x: 320, y: 440, label: 'OTP' },
+      matching: { x: 600, y: 440, label: 'Matching' },
+      response: { x: 880, y: 440, label: 'Response' },
+      audit: { x: 1160, y: 440, label: 'Audit' },
+      store: { x: 1160, y: 580, label: 'Log Store' },
+      ekyc: { x: 880, y: 580, label: 'eKYC' },
+      authz: { x: 600, y: 580, label: 'AuthZ' },
+      client: { x: 320, y: 580, label: 'Relying Party' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['enrollment','biometrics','capture']);
+      if (stepIdx === 2) e.push(['client','validation','validate'], ['validation','dedupe','dedupe'], ['dedupe','registry','registry']);
+      if (stepIdx === 3) e.push(['dedupe','issuer','issue'], ['issuer','registry','store'], ['issuer','credentials','cred']);
+      if (stepIdx === 4) e.push(['client','auth','auth'], ['auth','otp','otp'], ['auth','matching','match']);
+      if (stepIdx === 5) e.push(['matching','response','resp'], ['response','audit','audit'], ['audit','store','store']);
+      if (stepIdx === 6) e.push(['auth','ekyc','ekyc'], ['ekyc','authz','authz'], ['authz','client','deliver']);
+      return e;
+    }
+  },
+
+  digilocker: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'DigiLocker Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','linking','api','issuers','cache','vault','storage','metadata','sharing','authz','audit','verify','signatures','notify','push'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      linking: { x: 600, y: 160, label: 'Linking' },
+      api: { x: 320, y: 300, label: 'API' },
+      issuers: { x: 600, y: 300, label: 'Issuers' },
+      cache: { x: 880, y: 300, label: 'Cache' },
+      vault: { x: 880, y: 160, label: 'Vault' },
+      storage: { x: 1160, y: 160, label: 'Storage' },
+      metadata: { x: 1160, y: 300, label: 'Metadata' },
+      sharing: { x: 320, y: 440, label: 'Sharing' },
+      authz: { x: 600, y: 440, label: 'AuthZ' },
+      audit: { x: 880, y: 440, label: 'Audit' },
+      verify: { x: 320, y: 580, label: 'Verify' },
+      signatures: { x: 600, y: 580, label: 'Signatures' },
+      notify: { x: 880, y: 580, label: 'Notify' },
+      push: { x: 1160, y: 580, label: 'Push' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','linking','link']);
+      if (stepIdx === 2) e.push(['client','api','api'], ['api','issuers','issuer'], ['api','cache','cache']);
+      if (stepIdx === 3) e.push(['issuers','vault','vault'], ['vault','storage','store'], ['vault','metadata','meta']);
+      if (stepIdx === 4) e.push(['client','sharing','share'], ['sharing','authz','authz'], ['authz','audit','audit']);
+      if (stepIdx === 5) e.push(['vault','verify','verify'], ['verify','signatures','sig'], ['signatures','issuers','issuer']);
+      if (stepIdx === 6) e.push(['sharing','notify','notify'], ['notify','push','push'], ['push','client','client']);
       return e;
     }
   },
