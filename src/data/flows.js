@@ -2775,6 +2775,428 @@ export const FLOWS = {
       }
     ]
   }
+
+  ,
+
+  discord: {
+    title: 'Discord',
+    steps: [
+      {
+        title: 'Open app and sync servers',
+        desc: 'Client authenticates and syncs guilds, channels, and recent messages.',
+        active: ['client','auth','sync'],
+        edges: [['client','auth'], ['auth','sync']]
+      },
+      {
+        title: 'Send message',
+        desc: 'Message is persisted and fanned out via realtime gateways.',
+        active: ['api','store','realtime'],
+        edges: [['client','api'], ['api','store'], ['store','realtime']]
+      },
+      {
+        title: 'Voice join and signaling',
+        desc: 'Voice join negotiates media via signaling services.',
+        active: ['voice','signaling','media'],
+        edges: [['client','voice'], ['voice','signaling'], ['signaling','media']]
+      },
+      {
+        title: 'Media relay',
+        desc: 'SFU/relay routes audio/video streams for voice channels.',
+        active: ['media','sfu','client'],
+        edges: [['client','media'], ['media','sfu'], ['sfu','client']]
+      },
+      {
+        title: 'Moderation and safety',
+        desc: 'Spam detection, reporting, and moderation actions are applied.',
+        active: ['moderation','risk','store'],
+        edges: [['store','moderation'], ['moderation','risk']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Mentions and DMs trigger notifications and push delivery.',
+        active: ['notify','push','client'],
+        edges: [['store','notify'], ['notify','push'], ['push','client']]
+      }
+    ]
+  },
+
+  reddit: {
+    title: 'Reddit',
+    steps: [
+      {
+        title: 'Load home feed',
+        desc: 'Client requests home feed; caching and prefetch speed up rendering.',
+        active: ['client','feed','cache'],
+        edges: [['client','feed'], ['feed','cache']]
+      },
+      {
+        title: 'Ranking and personalization',
+        desc: 'Ranking selects posts using subscriptions, votes, and personalization.',
+        active: ['rank','feed','recos'],
+        edges: [['feed','rank'], ['rank','recos']]
+      },
+      {
+        title: 'Open post and comments',
+        desc: 'Thread service fetches comments tree with pagination and caching.',
+        active: ['thread','comments','cache'],
+        edges: [['feed','thread'], ['thread','comments'], ['comments','cache']]
+      },
+      {
+        title: 'Vote and comment',
+        desc: 'Writes persist votes/comments and update counters safely.',
+        active: ['api','write','counters'],
+        edges: [['client','api'], ['api','write'], ['write','counters']]
+      },
+      {
+        title: 'Moderation',
+        desc: 'Automod and human mod tools enforce community rules.',
+        active: ['moderation','policy','risk'],
+        edges: [['write','moderation'], ['moderation','policy'], ['policy','risk']]
+      },
+      {
+        title: 'Notifications and messaging',
+        desc: 'Replies/mentions trigger notifications and inbox updates.',
+        active: ['notify','push','client'],
+        edges: [['write','notify'], ['notify','push'], ['push','client']]
+      }
+    ]
+  },
+
+  linkedin: {
+    title: 'LinkedIn',
+    steps: [
+      {
+        title: 'Load feed',
+        desc: 'Client requests personalized feed with caching and fast rendering.',
+        active: ['client','feed','cache'],
+        edges: [['client','feed'], ['feed','cache']]
+      },
+      {
+        title: 'Ranking and relevance',
+        desc: 'Ranking selects posts using graph edges, recency, and engagement predictions.',
+        active: ['rank','graph','feed'],
+        edges: [['feed','rank'], ['rank','graph']]
+      },
+      {
+        title: 'Profile and network graph',
+        desc: 'Profile service fetches details and connection graph.',
+        active: ['profile','graph','authz'],
+        edges: [['client','profile'], ['profile','graph'], ['profile','authz']]
+      },
+      {
+        title: 'Create post',
+        desc: 'Writes persist posts; fanout updates feeds and notifications.',
+        active: ['api','write','fanout'],
+        edges: [['client','api'], ['api','write'], ['write','fanout']]
+      },
+      {
+        title: 'Messaging',
+        desc: 'Messages persist and deliver via realtime gateways.',
+        active: ['messages','realtime','notify'],
+        edges: [['client','messages'], ['messages','realtime'], ['messages','notify']]
+      },
+      {
+        title: 'Jobs and recommendations',
+        desc: 'Job search and recommendation models match candidates to roles.',
+        active: ['jobs','recos','rank'],
+        edges: [['client','jobs'], ['jobs','recos'], ['recos','rank']]
+      }
+    ]
+  },
+
+  signal: {
+    title: 'Signal',
+    steps: [
+      {
+        title: 'Compose message',
+        desc: 'User composes message locally; client prepares payload.',
+        active: ['client','sender'],
+        edges: [['sender','client']]
+      },
+      {
+        title: 'End-to-end encryption',
+        desc: 'Client encrypts using Signal Protocol and recipient keys.',
+        active: ['crypto','keybundle','sender'],
+        edges: [['sender','crypto'], ['keybundle','crypto']]
+      },
+      {
+        title: 'Server relay',
+        desc: 'Server relays encrypted message without reading content.',
+        active: ['relay','server','recipient'],
+        edges: [['crypto','relay'], ['relay','recipient']]
+      },
+      {
+        title: 'Push notification',
+        desc: 'Push wakes recipient app to fetch and decrypt message.',
+        active: ['push','recipient','relay'],
+        edges: [['relay','push'], ['push','recipient']]
+      },
+      {
+        title: 'Client decryption',
+        desc: 'Recipient verifies and decrypts locally; message is displayed.',
+        active: ['decrypt','recipient'],
+        edges: [['recipient','decrypt']]
+      },
+      {
+        title: 'Safety and spam controls',
+        desc: 'Abuse reporting and rate limits help control spam and harassment.',
+        active: ['moderation','risk','server'],
+        edges: [['server','moderation'], ['moderation','risk']]
+      }
+    ]
+  },
+
+  threads: {
+    title: 'Threads',
+    steps: [
+      {
+        title: 'Load feed',
+        desc: 'Client requests feed; caching and prefetch speed up load.',
+        active: ['client','feed','cache'],
+        edges: [['client','feed'], ['feed','cache']]
+      },
+      {
+        title: 'Ranking and recommendations',
+        desc: 'Ranking selects posts using graph signals and safety filters.',
+        active: ['rank','recos','safety'],
+        edges: [['feed','rank'], ['rank','recos'], ['rank','safety']]
+      },
+      {
+        title: 'Create post',
+        desc: 'Post is persisted; fanout updates followers feeds.',
+        active: ['api','write','fanout'],
+        edges: [['client','api'], ['api','write'], ['write','fanout']]
+      },
+      {
+        title: 'Replies and conversations',
+        desc: 'Thread service stores reply tree and serves conversation views.',
+        active: ['thread','store','cache'],
+        edges: [['write','thread'], ['thread','store'], ['store','cache']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Replies/mentions trigger notifications and push delivery.',
+        active: ['notify','push','client'],
+        edges: [['write','notify'], ['notify','push'], ['push','client']]
+      },
+      {
+        title: 'Moderation',
+        desc: 'Integrity systems enforce rules and handle reports.',
+        active: ['moderation','policy','risk'],
+        edges: [['store','moderation'], ['moderation','policy'], ['policy','risk']]
+      }
+    ]
+  },
+
+  messenger: {
+    title: 'Messenger',
+    steps: [
+      {
+        title: 'Send message',
+        desc: 'Client sends message to API with auth session.',
+        active: ['client','api','auth'],
+        edges: [['client','api'], ['api','auth']]
+      },
+      {
+        title: 'Routing and storage',
+        desc: 'Backend routes messages and stores metadata and delivery state.',
+        active: ['router','storage','api'],
+        edges: [['api','router'], ['router','storage']]
+      },
+      {
+        title: 'Delivery and fanout',
+        desc: 'Fanout delivers to recipients and updates inbox state.',
+        active: ['fanout','realtime','client'],
+        edges: [['router','fanout'], ['fanout','realtime'], ['realtime','client']]
+      },
+      {
+        title: 'Push notifications',
+        desc: 'Push notifies offline recipients and wakes apps.',
+        active: ['push','notify','client'],
+        edges: [['fanout','notify'], ['notify','push'], ['push','client']]
+      },
+      {
+        title: 'Media messages',
+        desc: 'Media uploads to storage and serves via CDN.',
+        active: ['upload','obj','cdn'],
+        edges: [['client','upload'], ['upload','obj'], ['obj','cdn']]
+      },
+      {
+        title: 'Spam and integrity',
+        desc: 'Abuse detection and reporting systems enforce policies.',
+        active: ['moderation','risk','storage'],
+        edges: [['storage','moderation'], ['moderation','risk']]
+      }
+    ]
+  },
+
+  'twitter-x': {
+    title: 'Twitter (X)',
+    steps: [
+      {
+        title: 'Load timeline',
+        desc: 'Client requests timeline; caching and prefetch improve performance.',
+        active: ['client','timeline','cache'],
+        edges: [['client','timeline'], ['timeline','cache']]
+      },
+      {
+        title: 'Ranking and relevance',
+        desc: 'Ranking selects tweets using graph, follows, and engagement signals.',
+        active: ['rank','graph','timeline'],
+        edges: [['timeline','rank'], ['rank','graph']]
+      },
+      {
+        title: 'Post tweet',
+        desc: 'Write persists tweet; fanout updates followers timelines and search.',
+        active: ['api','write','fanout'],
+        edges: [['client','api'], ['api','write'], ['write','fanout']]
+      },
+      {
+        title: 'Media upload',
+        desc: 'Media uploads to storage and serves via CDN.',
+        active: ['upload','obj','cdn'],
+        edges: [['client','upload'], ['upload','obj'], ['obj','cdn']]
+      },
+      {
+        title: 'Search and trends',
+        desc: 'Indexing powers search and trends detection.',
+        active: ['index','search','trends'],
+        edges: [['write','index'], ['index','search'], ['search','trends']]
+      },
+      {
+        title: 'Moderation and notifications',
+        desc: 'Integrity systems enforce rules; notifications deliver mentions/replies.',
+        active: ['moderation','notify','push'],
+        edges: [['write','moderation'], ['write','notify'], ['notify','push']]
+      }
+    ]
+  },
+
+  notion: {
+    title: 'Notion',
+    steps: [
+      {
+        title: 'Open workspace and sync',
+        desc: 'Client syncs workspace pages and permissions for fast load.',
+        active: ['client','sync','authz'],
+        edges: [['client','sync'], ['sync','authz']]
+      },
+      {
+        title: 'Load page and blocks',
+        desc: 'Page blocks are fetched and rendered; caching speeds navigation.',
+        active: ['pages','blocks','cache'],
+        edges: [['client','pages'], ['pages','blocks'], ['blocks','cache']]
+      },
+      {
+        title: 'Edit and persist',
+        desc: 'Edits persist as operations; conflict resolution merges changes.',
+        active: ['editor','store','merge'],
+        edges: [['client','editor'], ['editor','store'], ['store','merge']]
+      },
+      {
+        title: 'Realtime collaboration',
+        desc: 'Realtime gateway broadcasts changes to collaborators.',
+        active: ['realtime','client','store'],
+        edges: [['store','realtime'], ['realtime','client']]
+      },
+      {
+        title: 'Search indexing',
+        desc: 'Indexing powers search across pages and databases.',
+        active: ['index','search','store'],
+        edges: [['store','index'], ['index','search']]
+      },
+      {
+        title: 'Sharing and permissions',
+        desc: 'Sharing links and permissions enforce access and auditing.',
+        active: ['sharing','authz','audit'],
+        edges: [['client','sharing'], ['sharing','authz'], ['authz','audit']]
+      }
+    ]
+  },
+
+  jira: {
+    title: 'Jira',
+    steps: [
+      {
+        title: 'Load projects and boards',
+        desc: 'Client fetches projects, boards, and issues with caching and permissions.',
+        active: ['client','projects','cache'],
+        edges: [['client','projects'], ['projects','cache']]
+      },
+      {
+        title: 'Create/update issue',
+        desc: 'Writes validate fields and permissions; issues persist to storage.',
+        active: ['api','authz','store'],
+        edges: [['client','api'], ['api','authz'], ['api','store']]
+      },
+      {
+        title: 'Workflows and automation',
+        desc: 'Workflow engine runs transitions and automations.',
+        active: ['workflow','automation','queue'],
+        edges: [['store','workflow'], ['workflow','automation'], ['automation','queue']]
+      },
+      {
+        title: 'Search and JQL',
+        desc: 'Indexing powers JQL search across issues and comments.',
+        active: ['index','search','store'],
+        edges: [['store','index'], ['index','search']]
+      },
+      {
+        title: 'Notifications and mentions',
+        desc: 'Notifications deliver updates and mentions to users.',
+        active: ['notify','email','client'],
+        edges: [['workflow','notify'], ['notify','email'], ['email','client']]
+      },
+      {
+        title: 'Reporting',
+        desc: 'Dashboards aggregate metrics for sprints and project reporting.',
+        active: ['reports','analytics','store'],
+        edges: [['store','reports'], ['reports','analytics']]
+      }
+    ]
+  },
+
+  calendly: {
+    title: 'Calendly',
+    steps: [
+      {
+        title: 'Load availability',
+        desc: 'Calendly pulls availability from connected calendars and rules.',
+        active: ['client','availability','calendars'],
+        edges: [['client','availability'], ['availability','calendars']]
+      },
+      {
+        title: 'Pick time slot',
+        desc: 'User selects a slot; server checks conflicts and holds the slot.',
+        active: ['booking','conflicts','hold'],
+        edges: [['client','booking'], ['booking','conflicts'], ['conflicts','hold']]
+      },
+      {
+        title: 'Create event',
+        desc: 'Event is created in calendars and stored in scheduling system.',
+        active: ['events','calendars','store'],
+        edges: [['hold','events'], ['events','calendars'], ['events','store']]
+      },
+      {
+        title: 'Notifications and reminders',
+        desc: 'Email/SMS reminders and confirmations are sent.',
+        active: ['notify','email','sms'],
+        edges: [['events','notify'], ['notify','email'], ['notify','sms']]
+      },
+      {
+        title: 'Reschedule/cancel',
+        desc: 'Changes update calendars and notify attendees.',
+        active: ['changes','calendars','notify'],
+        edges: [['client','changes'], ['changes','calendars'], ['changes','notify']]
+      },
+      {
+        title: 'Integrations',
+        desc: 'Webhooks and integrations update CRMs and meeting tools.',
+        active: ['apps','webhooks','api'],
+        edges: [['events','apps'], ['apps','webhooks'], ['webhooks','api']]
+      }
+    ]
+  }
 };
 
 export function flowForSystem(sys) {

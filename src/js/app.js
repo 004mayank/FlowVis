@@ -2698,6 +2698,339 @@ const SYSTEM_LAYOUTS = {
     }
   },
 
+  discord: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Discord Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','sync','api','store','realtime','voice','signaling','media','sfu','moderation','risk','notify','push'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      sync: { x: 600, y: 160, label: 'Sync' },
+      api: { x: 320, y: 300, label: 'API' },
+      store: { x: 600, y: 300, label: 'Store' },
+      realtime: { x: 880, y: 300, label: 'Realtime' },
+      voice: { x: 320, y: 440, label: 'Voice' },
+      signaling: { x: 600, y: 440, label: 'Signaling' },
+      media: { x: 880, y: 440, label: 'Media' },
+      sfu: { x: 1160, y: 440, label: 'SFU/Relay' },
+      moderation: { x: 880, y: 580, label: 'Moderation' },
+      risk: { x: 1160, y: 580, label: 'Risk' },
+      notify: { x: 600, y: 580, label: 'Notify' },
+      push: { x: 320, y: 580, label: 'Push' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','sync','sync']);
+      if (stepIdx === 2) e.push(['client','api','send'], ['api','store','store'], ['store','realtime','rt']);
+      if (stepIdx === 3) e.push(['client','voice','join'], ['voice','signaling','signal'], ['signaling','media','media']);
+      if (stepIdx === 4) e.push(['client','media','media'], ['media','sfu','sfu'], ['sfu','client','client']);
+      if (stepIdx === 5) e.push(['store','moderation','mod'], ['moderation','risk','risk']);
+      if (stepIdx === 6) e.push(['store','notify','notify'], ['notify','push','push'], ['push','client','client']);
+      return e;
+    }
+  },
+
+  reddit: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Reddit Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','feed','cache','rank','recos','thread','comments','api','write','counters','moderation','policy','risk','notify','push'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      feed: { x: 320, y: 160, label: 'Feed' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      rank: { x: 880, y: 160, label: 'Ranking' },
+      recos: { x: 1160, y: 160, label: 'Recos' },
+      thread: { x: 320, y: 300, label: 'Thread' },
+      comments: { x: 600, y: 300, label: 'Comments' },
+      api: { x: 320, y: 440, label: 'API' },
+      write: { x: 600, y: 440, label: 'Writes' },
+      counters: { x: 880, y: 440, label: 'Counters' },
+      moderation: { x: 600, y: 580, label: 'Moderation' },
+      policy: { x: 880, y: 580, label: 'Policy' },
+      risk: { x: 1160, y: 580, label: 'Risk' },
+      notify: { x: 320, y: 580, label: 'Notify' },
+      push: { x: 40, y: 580, label: 'Push' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','feed','feed'], ['feed','cache','cache']);
+      if (stepIdx === 2) e.push(['feed','rank','rank'], ['rank','recos','recos']);
+      if (stepIdx === 3) e.push(['feed','thread','open'], ['thread','comments','comments'], ['comments','cache','cache']);
+      if (stepIdx === 4) e.push(['client','api','vote'], ['api','write','write'], ['write','counters','counters']);
+      if (stepIdx === 5) e.push(['write','moderation','mod'], ['moderation','policy','policy'], ['policy','risk','risk']);
+      if (stepIdx === 6) e.push(['write','notify','notify'], ['notify','push','push'], ['push','client','client']);
+      return e;
+    }
+  },
+
+  linkedin: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'LinkedIn Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','feed','cache','rank','graph','profile','authz','api','write','fanout','messages','realtime','notify','jobs','recos'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      feed: { x: 320, y: 160, label: 'Feed' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      rank: { x: 880, y: 160, label: 'Ranking' },
+      graph: { x: 1160, y: 160, label: 'Graph' },
+      profile: { x: 320, y: 300, label: 'Profile' },
+      authz: { x: 600, y: 300, label: 'AuthZ' },
+      api: { x: 320, y: 440, label: 'API' },
+      write: { x: 600, y: 440, label: 'Writes' },
+      fanout: { x: 880, y: 440, label: 'Fanout' },
+      messages: { x: 320, y: 580, label: 'Messages' },
+      realtime: { x: 600, y: 580, label: 'Realtime' },
+      notify: { x: 880, y: 580, label: 'Notify' },
+      jobs: { x: 1160, y: 300, label: 'Jobs' },
+      recos: { x: 1160, y: 440, label: 'Recos' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','feed','feed'], ['feed','cache','cache']);
+      if (stepIdx === 2) e.push(['feed','rank','rank'], ['rank','graph','graph']);
+      if (stepIdx === 3) e.push(['client','profile','profile'], ['profile','graph','graph'], ['profile','authz','authz']);
+      if (stepIdx === 4) e.push(['client','api','post'], ['api','write','write'], ['write','fanout','fanout']);
+      if (stepIdx === 5) e.push(['client','messages','msg'], ['messages','realtime','rt'], ['messages','notify','notify']);
+      if (stepIdx === 6) e.push(['client','jobs','jobs'], ['jobs','recos','recos'], ['recos','rank','rank']);
+      return e;
+    }
+  },
+
+  signal: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Signal Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['sender','crypto','keybundle','relay','push','recipient','decrypt','moderation','risk'],
+    nodes: {
+      sender: { x: 40, y: 220, label: 'Sender' },
+      crypto: { x: 320, y: 220, label: 'Encrypt' },
+      keybundle: { x: 600, y: 220, label: 'Keys' },
+      relay: { x: 880, y: 220, label: 'Relay' },
+      push: { x: 1160, y: 220, label: 'Push' },
+      recipient: { x: 40, y: 360, label: 'Recipient' },
+      decrypt: { x: 320, y: 360, label: 'Decrypt' },
+      server: { x: 600, y: 360, label: 'Server' },
+      moderation: { x: 880, y: 500, label: 'Abuse' },
+      risk: { x: 1160, y: 500, label: 'Risk' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['sender','crypto','compose']);
+      if (stepIdx === 2) e.push(['sender','crypto','encrypt'], ['keybundle','crypto','keys']);
+      if (stepIdx === 3) e.push(['crypto','relay','relay'], ['relay','recipient','deliver']);
+      if (stepIdx === 4) e.push(['relay','push','push'], ['push','recipient','wake']);
+      if (stepIdx === 5) e.push(['recipient','decrypt','decrypt']);
+      if (stepIdx === 6) e.push(['server','moderation','report'], ['moderation','risk','risk']);
+      return e;
+    }
+  },
+
+  threads: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Threads Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','feed','cache','rank','recos','api','write','fanout','thread','store','notify','push','moderation','policy','risk'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      feed: { x: 320, y: 160, label: 'Feed' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      rank: { x: 880, y: 160, label: 'Ranking' },
+      recos: { x: 1160, y: 160, label: 'Recos' },
+      api: { x: 320, y: 300, label: 'API' },
+      write: { x: 600, y: 300, label: 'Writes' },
+      fanout: { x: 880, y: 300, label: 'Fanout' },
+      thread: { x: 600, y: 440, label: 'Thread' },
+      store: { x: 880, y: 440, label: 'Store' },
+      notify: { x: 320, y: 440, label: 'Notify' },
+      push: { x: 40, y: 440, label: 'Push' },
+      moderation: { x: 600, y: 580, label: 'Moderation' },
+      policy: { x: 880, y: 580, label: 'Policy' },
+      risk: { x: 1160, y: 580, label: 'Risk' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','feed','feed'], ['feed','cache','cache']);
+      if (stepIdx === 2) e.push(['feed','rank','rank'], ['rank','recos','recos'], ['rank','moderation','safety']);
+      if (stepIdx === 3) e.push(['client','api','post'], ['api','write','write'], ['write','fanout','fanout']);
+      if (stepIdx === 4) e.push(['write','thread','thread'], ['thread','store','store']);
+      if (stepIdx === 5) e.push(['write','notify','notify'], ['notify','push','push'], ['push','client','client']);
+      if (stepIdx === 6) e.push(['store','moderation','mod'], ['moderation','policy','policy'], ['policy','risk','risk']);
+      return e;
+    }
+  },
+
+  messenger: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Messenger Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','api','auth','router','storage','fanout','realtime','notify','push','upload','obj','cdn','moderation','risk'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      api: { x: 320, y: 240, label: 'API' },
+      auth: { x: 600, y: 240, label: 'Auth' },
+      router: { x: 880, y: 240, label: 'Router' },
+      storage: { x: 1160, y: 240, label: 'Storage' },
+      fanout: { x: 880, y: 380, label: 'Fanout' },
+      realtime: { x: 600, y: 380, label: 'Realtime' },
+      notify: { x: 320, y: 380, label: 'Notify' },
+      push: { x: 40, y: 380, label: 'Push' },
+      upload: { x: 600, y: 520, label: 'Upload' },
+      obj: { x: 880, y: 520, label: 'Object Store' },
+      cdn: { x: 1160, y: 520, label: 'CDN' },
+      moderation: { x: 880, y: 660, label: 'Moderation' },
+      risk: { x: 1160, y: 660, label: 'Risk' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','api','send'], ['api','auth','auth']);
+      if (stepIdx === 2) e.push(['api','router','route'], ['router','storage','store']);
+      if (stepIdx === 3) e.push(['router','fanout','fanout'], ['fanout','realtime','rt'], ['realtime','client','client']);
+      if (stepIdx === 4) e.push(['fanout','notify','notify'], ['notify','push','push'], ['push','client','client']);
+      if (stepIdx === 5) e.push(['client','upload','upload'], ['upload','obj','obj'], ['obj','cdn','cdn']);
+      if (stepIdx === 6) e.push(['storage','moderation','mod'], ['moderation','risk','risk']);
+      return e;
+    }
+  },
+
+  'twitter-x': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Twitter (X) Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','timeline','cache','rank','graph','api','write','fanout','upload','obj','cdn','index','search','trends','moderation','notify','push'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      timeline: { x: 320, y: 160, label: 'Timeline' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      rank: { x: 880, y: 160, label: 'Ranking' },
+      graph: { x: 1160, y: 160, label: 'Graph' },
+      api: { x: 320, y: 300, label: 'API' },
+      write: { x: 600, y: 300, label: 'Writes' },
+      fanout: { x: 880, y: 300, label: 'Fanout' },
+      upload: { x: 320, y: 440, label: 'Upload' },
+      obj: { x: 600, y: 440, label: 'Object Store' },
+      cdn: { x: 880, y: 440, label: 'CDN' },
+      index: { x: 1160, y: 300, label: 'Index' },
+      search: { x: 1160, y: 440, label: 'Search' },
+      trends: { x: 1160, y: 580, label: 'Trends' },
+      moderation: { x: 880, y: 580, label: 'Moderation' },
+      notify: { x: 600, y: 580, label: 'Notify' },
+      push: { x: 320, y: 580, label: 'Push' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','timeline','timeline'], ['timeline','cache','cache']);
+      if (stepIdx === 2) e.push(['timeline','rank','rank'], ['rank','graph','graph']);
+      if (stepIdx === 3) e.push(['client','api','tweet'], ['api','write','write'], ['write','fanout','fanout']);
+      if (stepIdx === 4) e.push(['client','upload','upload'], ['upload','obj','obj'], ['obj','cdn','cdn']);
+      if (stepIdx === 5) e.push(['write','index','index'], ['index','search','search'], ['search','trends','trends']);
+      if (stepIdx === 6) e.push(['write','moderation','mod'], ['write','notify','notify'], ['notify','push','push']);
+      return e;
+    }
+  },
+
+  notion: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Notion Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','sync','authz','pages','blocks','cache','editor','store','merge','realtime','index','search','sharing','audit'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      sync: { x: 320, y: 160, label: 'Sync' },
+      authz: { x: 600, y: 160, label: 'AuthZ' },
+      pages: { x: 320, y: 300, label: 'Pages' },
+      blocks: { x: 600, y: 300, label: 'Blocks' },
+      cache: { x: 880, y: 300, label: 'Cache' },
+      editor: { x: 320, y: 440, label: 'Editor' },
+      store: { x: 600, y: 440, label: 'Store' },
+      merge: { x: 880, y: 440, label: 'Merge' },
+      realtime: { x: 1160, y: 440, label: 'Realtime' },
+      index: { x: 600, y: 580, label: 'Index' },
+      search: { x: 880, y: 580, label: 'Search' },
+      sharing: { x: 320, y: 580, label: 'Sharing' },
+      audit: { x: 1160, y: 580, label: 'Audit' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','sync','sync'], ['sync','authz','authz']);
+      if (stepIdx === 2) e.push(['client','pages','page'], ['pages','blocks','blocks'], ['blocks','cache','cache']);
+      if (stepIdx === 3) e.push(['client','editor','edit'], ['editor','store','store'], ['store','merge','merge']);
+      if (stepIdx === 4) e.push(['store','realtime','rt'], ['realtime','client','client']);
+      if (stepIdx === 5) e.push(['store','index','index'], ['index','search','search']);
+      if (stepIdx === 6) e.push(['client','sharing','share'], ['sharing','authz','authz'], ['authz','audit','audit']);
+      return e;
+    }
+  },
+
+  jira: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Jira Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','projects','cache','api','authz','store','workflow','automation','queue','index','search','notify','email','reports','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      projects: { x: 320, y: 160, label: 'Projects' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      api: { x: 320, y: 300, label: 'API' },
+      authz: { x: 600, y: 300, label: 'AuthZ' },
+      store: { x: 880, y: 300, label: 'Issue Store' },
+      workflow: { x: 1160, y: 300, label: 'Workflow' },
+      automation: { x: 1160, y: 440, label: 'Automation' },
+      queue: { x: 880, y: 440, label: 'Queue' },
+      index: { x: 600, y: 440, label: 'Index' },
+      search: { x: 320, y: 440, label: 'Search' },
+      notify: { x: 600, y: 580, label: 'Notify' },
+      email: { x: 320, y: 580, label: 'Email' },
+      reports: { x: 880, y: 580, label: 'Reports' },
+      analytics: { x: 1160, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','projects','load'], ['projects','cache','cache']);
+      if (stepIdx === 2) e.push(['client','api','issue'], ['api','authz','authz'], ['api','store','store']);
+      if (stepIdx === 3) e.push(['store','workflow','wf'], ['workflow','automation','auto'], ['automation','queue','queue']);
+      if (stepIdx === 4) e.push(['store','index','index'], ['index','search','search']);
+      if (stepIdx === 5) e.push(['workflow','notify','notify'], ['notify','email','email'], ['email','client','client']);
+      if (stepIdx === 6) e.push(['store','reports','reports'], ['reports','analytics','analytics']);
+      return e;
+    }
+  },
+
+  calendly: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Calendly Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','availability','calendars','booking','conflicts','hold','events','store','notify','email','sms','changes','apps','webhooks'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      availability: { x: 320, y: 160, label: 'Availability' },
+      calendars: { x: 600, y: 160, label: 'Calendars' },
+      booking: { x: 320, y: 300, label: 'Booking' },
+      conflicts: { x: 600, y: 300, label: 'Conflicts' },
+      hold: { x: 880, y: 300, label: 'Hold Slot' },
+      events: { x: 1160, y: 300, label: 'Events' },
+      store: { x: 1160, y: 440, label: 'Store' },
+      notify: { x: 880, y: 440, label: 'Notify' },
+      email: { x: 600, y: 440, label: 'Email' },
+      sms: { x: 320, y: 440, label: 'SMS' },
+      changes: { x: 600, y: 580, label: 'Changes' },
+      apps: { x: 880, y: 580, label: 'Apps' },
+      webhooks: { x: 1160, y: 580, label: 'Webhooks' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','availability','avail'], ['availability','calendars','cal']);
+      if (stepIdx === 2) e.push(['client','booking','pick'], ['booking','conflicts','check'], ['conflicts','hold','hold']);
+      if (stepIdx === 3) e.push(['hold','events','create'], ['events','calendars','write'], ['events','store','store']);
+      if (stepIdx === 4) e.push(['events','notify','notify'], ['notify','email','email'], ['notify','sms','sms']);
+      if (stepIdx === 5) e.push(['client','changes','change'], ['changes','calendars','update'], ['changes','notify','notify']);
+      if (stepIdx === 6) e.push(['events','apps','apps'], ['apps','webhooks','webhooks'], ['webhooks','api','api']);
+      return e;
+    }
+  },
+
   uber: {
     viewBox: '0 0 1000 640',
     nodes: {
@@ -4057,6 +4390,222 @@ const SYSTEM_LAYOUTS = {
       metrics: { x: 620, y: 600, label: 'Metrics', colorKey: 'stream' },
       analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' },
       support: { x: 1100, y: 600, label: 'Support', colorKey: 'external' }
+    }
+  }
+
+  ,
+
+  discord: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','sync','api','store','realtime','voice','signaling','media','sfu','moderation','risk','notify','push'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      sync: { x: 620, y: 180, label: 'Sync', colorKey: 'stream' },
+      api: { x: 380, y: 320, label: 'API', colorKey: 'api' },
+      store: { x: 620, y: 320, label: 'Store', colorKey: 'store' },
+      realtime: { x: 860, y: 320, label: 'Realtime', colorKey: 'stream' },
+      voice: { x: 380, y: 460, label: 'Voice', colorKey: 'api' },
+      signaling: { x: 620, y: 460, label: 'Signaling', colorKey: 'api' },
+      media: { x: 860, y: 460, label: 'Media', colorKey: 'api' },
+      sfu: { x: 1100, y: 460, label: 'SFU/Relay', colorKey: 'api' },
+      moderation: { x: 860, y: 600, label: 'Moderation', colorKey: 'api' },
+      risk: { x: 1100, y: 600, label: 'Risk', colorKey: 'api' },
+      notify: { x: 620, y: 600, label: 'Notify', colorKey: 'external' },
+      push: { x: 380, y: 600, label: 'Push', colorKey: 'external' }
+    }
+  },
+
+  reddit: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','feed','cache','rank','recos','thread','comments','api','write','counters','moderation','policy','risk','notify','push'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      feed: { x: 380, y: 180, label: 'Feed', colorKey: 'api' },
+      cache: { x: 620, y: 180, label: 'Cache', colorKey: 'cache' },
+      rank: { x: 860, y: 180, label: 'Ranking', colorKey: 'api' },
+      recos: { x: 1100, y: 180, label: 'Recos', colorKey: 'api' },
+      thread: { x: 380, y: 320, label: 'Thread', colorKey: 'api' },
+      comments: { x: 620, y: 320, label: 'Comments', colorKey: 'store' },
+      api: { x: 380, y: 460, label: 'API', colorKey: 'api' },
+      write: { x: 620, y: 460, label: 'Writes', colorKey: 'store' },
+      counters: { x: 860, y: 460, label: 'Counters', colorKey: 'store' },
+      moderation: { x: 620, y: 600, label: 'Moderation', colorKey: 'api' },
+      policy: { x: 860, y: 600, label: 'Policy', colorKey: 'api' },
+      risk: { x: 1100, y: 600, label: 'Risk', colorKey: 'api' },
+      notify: { x: 380, y: 600, label: 'Notify', colorKey: 'external' },
+      push: { x: 140, y: 600, label: 'Push', colorKey: 'external' }
+    }
+  },
+
+  linkedin: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','feed','cache','rank','graph','profile','authz','api','write','fanout','messages','realtime','notify','jobs','recos'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      feed: { x: 380, y: 180, label: 'Feed', colorKey: 'api' },
+      cache: { x: 620, y: 180, label: 'Cache', colorKey: 'cache' },
+      rank: { x: 860, y: 180, label: 'Ranking', colorKey: 'api' },
+      graph: { x: 1100, y: 180, label: 'Graph', colorKey: 'store' },
+      profile: { x: 380, y: 320, label: 'Profile', colorKey: 'api' },
+      authz: { x: 620, y: 320, label: 'AuthZ', colorKey: 'api' },
+      api: { x: 380, y: 460, label: 'API', colorKey: 'api' },
+      write: { x: 620, y: 460, label: 'Writes', colorKey: 'store' },
+      fanout: { x: 860, y: 460, label: 'Fanout', colorKey: 'queue' },
+      messages: { x: 380, y: 600, label: 'Messages', colorKey: 'api' },
+      realtime: { x: 620, y: 600, label: 'Realtime', colorKey: 'stream' },
+      notify: { x: 860, y: 600, label: 'Notify', colorKey: 'external' },
+      jobs: { x: 1100, y: 320, label: 'Jobs', colorKey: 'api' },
+      recos: { x: 1100, y: 460, label: 'Recos', colorKey: 'api' }
+    }
+  },
+
+  signal: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['sender','client','crypto','keybundle','relay','push','recipient','decrypt','moderation','risk'],
+    nodes: {
+      sender: { x: 140, y: 180, label: 'Sender', colorKey: 'client' },
+      client: { x: 380, y: 180, label: 'Client', colorKey: 'client' },
+      crypto: { x: 620, y: 180, label: 'Encrypt', colorKey: 'api' },
+      keybundle: { x: 620, y: 320, label: 'Keys', colorKey: 'store' },
+      relay: { x: 860, y: 180, label: 'Relay', colorKey: 'api' },
+      push: { x: 1100, y: 180, label: 'Push', colorKey: 'external' },
+      recipient: { x: 140, y: 460, label: 'Recipient', colorKey: 'client' },
+      decrypt: { x: 380, y: 460, label: 'Decrypt', colorKey: 'api' },
+      server: { x: 860, y: 320, label: 'Server', colorKey: 'api' },
+      moderation: { x: 620, y: 600, label: 'Abuse', colorKey: 'api' },
+      risk: { x: 860, y: 600, label: 'Risk', colorKey: 'api' }
+    }
+  },
+
+  threads: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','feed','cache','rank','recos','api','write','fanout','thread','store','notify','push','moderation','policy','risk'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      feed: { x: 380, y: 180, label: 'Feed', colorKey: 'api' },
+      cache: { x: 620, y: 180, label: 'Cache', colorKey: 'cache' },
+      rank: { x: 860, y: 180, label: 'Ranking', colorKey: 'api' },
+      recos: { x: 1100, y: 180, label: 'Recos', colorKey: 'api' },
+      api: { x: 380, y: 320, label: 'API', colorKey: 'api' },
+      write: { x: 620, y: 320, label: 'Writes', colorKey: 'store' },
+      fanout: { x: 860, y: 320, label: 'Fanout', colorKey: 'queue' },
+      thread: { x: 620, y: 460, label: 'Thread', colorKey: 'api' },
+      store: { x: 860, y: 460, label: 'Store', colorKey: 'store' },
+      notify: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      push: { x: 140, y: 460, label: 'Push', colorKey: 'external' },
+      moderation: { x: 620, y: 600, label: 'Moderation', colorKey: 'api' },
+      policy: { x: 860, y: 600, label: 'Policy', colorKey: 'api' },
+      risk: { x: 1100, y: 600, label: 'Risk', colorKey: 'api' }
+    }
+  },
+
+  messenger: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','api','auth','router','storage','fanout','realtime','notify','push','upload','obj','cdn','moderation','risk'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      api: { x: 380, y: 240, label: 'API', colorKey: 'api' },
+      auth: { x: 620, y: 240, label: 'Auth', colorKey: 'api' },
+      router: { x: 860, y: 240, label: 'Router', colorKey: 'api' },
+      storage: { x: 1100, y: 240, label: 'Storage', colorKey: 'store' },
+      fanout: { x: 860, y: 380, label: 'Fanout', colorKey: 'queue' },
+      realtime: { x: 620, y: 380, label: 'Realtime', colorKey: 'stream' },
+      notify: { x: 380, y: 380, label: 'Notify', colorKey: 'external' },
+      push: { x: 140, y: 380, label: 'Push', colorKey: 'external' },
+      upload: { x: 620, y: 520, label: 'Upload', colorKey: 'api' },
+      obj: { x: 860, y: 520, label: 'Object Store', colorKey: 'store' },
+      cdn: { x: 1100, y: 520, label: 'CDN', colorKey: 'cdn' },
+      moderation: { x: 860, y: 660, label: 'Moderation', colorKey: 'api' },
+      risk: { x: 1100, y: 660, label: 'Risk', colorKey: 'api' }
+    }
+  },
+
+  'twitter-x': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','timeline','cache','rank','graph','api','write','fanout','upload','obj','cdn','index','search','trends','moderation','notify','push'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      timeline: { x: 380, y: 180, label: 'Timeline', colorKey: 'api' },
+      cache: { x: 620, y: 180, label: 'Cache', colorKey: 'cache' },
+      rank: { x: 860, y: 180, label: 'Ranking', colorKey: 'api' },
+      graph: { x: 1100, y: 180, label: 'Graph', colorKey: 'store' },
+      api: { x: 380, y: 320, label: 'API', colorKey: 'api' },
+      write: { x: 620, y: 320, label: 'Writes', colorKey: 'store' },
+      fanout: { x: 860, y: 320, label: 'Fanout', colorKey: 'queue' },
+      upload: { x: 380, y: 460, label: 'Upload', colorKey: 'api' },
+      obj: { x: 620, y: 460, label: 'Object Store', colorKey: 'store' },
+      cdn: { x: 860, y: 460, label: 'CDN', colorKey: 'cdn' },
+      index: { x: 1100, y: 320, label: 'Index', colorKey: 'store' },
+      search: { x: 1100, y: 460, label: 'Search', colorKey: 'api' },
+      trends: { x: 1100, y: 600, label: 'Trends', colorKey: 'api' },
+      moderation: { x: 860, y: 600, label: 'Moderation', colorKey: 'api' },
+      notify: { x: 620, y: 600, label: 'Notify', colorKey: 'external' },
+      push: { x: 380, y: 600, label: 'Push', colorKey: 'external' }
+    }
+  },
+
+  notion: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','sync','authz','pages','blocks','cache','editor','store','merge','realtime','index','search','sharing','audit'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      sync: { x: 380, y: 180, label: 'Sync', colorKey: 'stream' },
+      authz: { x: 620, y: 180, label: 'AuthZ', colorKey: 'api' },
+      pages: { x: 380, y: 320, label: 'Pages', colorKey: 'api' },
+      blocks: { x: 620, y: 320, label: 'Blocks', colorKey: 'store' },
+      cache: { x: 860, y: 320, label: 'Cache', colorKey: 'cache' },
+      editor: { x: 380, y: 460, label: 'Editor', colorKey: 'api' },
+      store: { x: 620, y: 460, label: 'Store', colorKey: 'store' },
+      merge: { x: 860, y: 460, label: 'Merge', colorKey: 'api' },
+      realtime: { x: 1100, y: 460, label: 'Realtime', colorKey: 'stream' },
+      index: { x: 620, y: 600, label: 'Index', colorKey: 'store' },
+      search: { x: 860, y: 600, label: 'Search', colorKey: 'api' },
+      sharing: { x: 380, y: 600, label: 'Sharing', colorKey: 'api' },
+      audit: { x: 1100, y: 600, label: 'Audit', colorKey: 'store' }
+    }
+  },
+
+  jira: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','projects','cache','api','authz','store','workflow','automation','queue','index','search','notify','email','reports','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      projects: { x: 380, y: 180, label: 'Projects', colorKey: 'api' },
+      cache: { x: 620, y: 180, label: 'Cache', colorKey: 'cache' },
+      api: { x: 380, y: 320, label: 'API', colorKey: 'api' },
+      authz: { x: 620, y: 320, label: 'AuthZ', colorKey: 'api' },
+      store: { x: 860, y: 320, label: 'Issue Store', colorKey: 'store' },
+      workflow: { x: 1100, y: 320, label: 'Workflow', colorKey: 'api' },
+      automation: { x: 1100, y: 460, label: 'Automation', colorKey: 'api' },
+      queue: { x: 860, y: 460, label: 'Queue', colorKey: 'queue' },
+      index: { x: 620, y: 460, label: 'Index', colorKey: 'store' },
+      search: { x: 380, y: 460, label: 'Search', colorKey: 'api' },
+      notify: { x: 620, y: 600, label: 'Notify', colorKey: 'external' },
+      email: { x: 380, y: 600, label: 'Email', colorKey: 'external' },
+      reports: { x: 860, y: 600, label: 'Reports', colorKey: 'store' },
+      analytics: { x: 1100, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  calendly: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','availability','calendars','booking','conflicts','hold','events','store','notify','email','sms','changes','apps','webhooks'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      availability: { x: 380, y: 180, label: 'Availability', colorKey: 'api' },
+      calendars: { x: 620, y: 180, label: 'Calendars', colorKey: 'external' },
+      booking: { x: 380, y: 320, label: 'Booking', colorKey: 'api' },
+      conflicts: { x: 620, y: 320, label: 'Conflicts', colorKey: 'api' },
+      hold: { x: 860, y: 320, label: 'Hold Slot', colorKey: 'store' },
+      events: { x: 1100, y: 320, label: 'Events', colorKey: 'api' },
+      store: { x: 1100, y: 460, label: 'Store', colorKey: 'store' },
+      notify: { x: 860, y: 460, label: 'Notify', colorKey: 'external' },
+      email: { x: 620, y: 460, label: 'Email', colorKey: 'external' },
+      sms: { x: 380, y: 460, label: 'SMS', colorKey: 'external' },
+      changes: { x: 620, y: 600, label: 'Changes', colorKey: 'api' },
+      apps: { x: 860, y: 600, label: 'Apps', colorKey: 'external' },
+      webhooks: { x: 1100, y: 600, label: 'Webhooks', colorKey: 'external' }
     }
   }
 };
