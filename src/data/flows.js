@@ -7416,6 +7416,428 @@ export const FLOWS = {
       }
     ]
   }
+
+  ,
+
+  niyo: {
+    title: 'Niyo',
+    steps: [
+      {
+        title: 'Onboard and KYC',
+        desc: 'Onboarding runs KYC and creates account in core banking.',
+        active: ['client','kyc','core'],
+        edges: [['client','kyc'], ['kyc','core']]
+      },
+      {
+        title: 'Login and dashboard',
+        desc: 'Client authenticates and loads balances and transactions.',
+        active: ['client','auth','accounts'],
+        edges: [['client','auth'], ['auth','accounts']]
+      },
+      {
+        title: 'Cards',
+        desc: 'Card issuance and controls managed; approvals applied.',
+        active: ['cards','controls','approvals'],
+        edges: [['accounts','cards'], ['cards','controls'], ['controls','approvals']]
+      },
+      {
+        title: 'Payments and transfers',
+        desc: 'Payments routed to UPI/IMPS and executed in core.',
+        active: ['payments','routing','upi'],
+        edges: [['client','payments'], ['payments','routing'], ['routing','upi']]
+      },
+      {
+        title: 'Ledger and status',
+        desc: 'Core posts ledger entries and returns status.',
+        active: ['core','ledger','status'],
+        edges: [['upi','core'], ['core','ledger'], ['core','status']]
+      },
+      {
+        title: 'Insights and alerts',
+        desc: 'Analytics computes insights; notifications sent.',
+        active: ['analytics','warehouse','notify'],
+        edges: [['ledger','analytics'], ['analytics','warehouse'], ['analytics','notify']]
+      }
+    ]
+  },
+
+  ynab: {
+    title: 'YNAB',
+    steps: [
+      {
+        title: 'Sign in',
+        desc: 'Client authenticates and loads budgets.',
+        active: ['client','auth','budgets'],
+        edges: [['client','auth'], ['auth','budgets']]
+      },
+      {
+        title: 'Sync accounts',
+        desc: 'Bank integrations sync transactions and balances.',
+        active: ['integrations','sync','ingest'],
+        edges: [['budgets','integrations'], ['integrations','sync'], ['sync','ingest']]
+      },
+      {
+        title: 'Categorize transactions',
+        desc: 'Rules and suggestions categorize; writes persist.',
+        active: ['rules','categorize','write'],
+        edges: [['ingest','rules'], ['rules','categorize'], ['categorize','write']]
+      },
+      {
+        title: 'Update budget',
+        desc: 'Budget allocations update; reports recomputed.',
+        active: ['budgets','ledger','reports'],
+        edges: [['write','ledger'], ['ledger','budgets'], ['budgets','reports']]
+      },
+      {
+        title: 'Goals and alerts',
+        desc: 'Goals tracked; alerts generated for overspend.',
+        active: ['goals','notify','client'],
+        edges: [['budgets','goals'], ['goals','notify'], ['notify','client']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics aggregates trends and produces insights.',
+        active: ['analytics','warehouse','insights'],
+        edges: [['ledger','analytics'], ['analytics','warehouse'], ['warehouse','insights']]
+      }
+    ]
+  },
+
+  mint: {
+    title: 'Mint',
+    steps: [
+      {
+        title: 'Sign in and link accounts',
+        desc: 'Client authenticates and links bank/credit accounts.',
+        active: ['client','auth','integrations'],
+        edges: [['client','auth'], ['auth','integrations']]
+      },
+      {
+        title: 'Sync transactions',
+        desc: 'Sync pulls transactions; ingest pipeline stores and indexes.',
+        active: ['sync','ingest','store'],
+        edges: [['integrations','sync'], ['sync','ingest'], ['ingest','store']]
+      },
+      {
+        title: 'Categorize',
+        desc: 'Rules and ML categorize spending; budgets updated.',
+        active: ['rules','categorize','budgets'],
+        edges: [['store','rules'], ['rules','categorize'], ['categorize','budgets']]
+      },
+      {
+        title: 'Alerts',
+        desc: 'Alerts generated for bills and unusual spend.',
+        active: ['alerts','notify','email'],
+        edges: [['budgets','alerts'], ['alerts','notify'], ['notify','email']]
+      },
+      {
+        title: 'Credit monitoring',
+        desc: 'Credit score and monitoring updates ingested.',
+        active: ['credit','ingest','reports'],
+        edges: [['credit','ingest'], ['ingest','reports']]
+      },
+      {
+        title: 'Insights',
+        desc: 'Analytics aggregates trends and generates insights.',
+        active: ['analytics','warehouse','insights'],
+        edges: [['store','analytics'], ['analytics','warehouse'], ['warehouse','insights']]
+      }
+    ]
+  },
+
+  pocketguard: {
+    title: 'PocketGuard',
+    steps: [
+      {
+        title: 'Link accounts',
+        desc: 'Client links bank accounts and verifies access.',
+        active: ['client','auth','integrations'],
+        edges: [['client','auth'], ['auth','integrations']]
+      },
+      {
+        title: 'Sync transactions',
+        desc: 'Sync pulls transactions; ingest stores and indexes.',
+        active: ['sync','ingest','index'],
+        edges: [['integrations','sync'], ['sync','ingest'], ['ingest','index']]
+      },
+      {
+        title: 'Compute In-My-Pocket',
+        desc: 'Rules compute spendable amount and budgets.',
+        active: ['rules','budgets','dashboard'],
+        edges: [['index','rules'], ['rules','budgets'], ['budgets','dashboard']]
+      },
+      {
+        title: 'Bill tracking',
+        desc: 'Bills detected; reminders scheduled.',
+        active: ['bills','scheduler','notify'],
+        edges: [['index','bills'], ['bills','scheduler'], ['scheduler','notify']]
+      },
+      {
+        title: 'Savings suggestions',
+        desc: 'Recommendations generated for subscriptions and spend.',
+        active: ['recos','rank','dashboard'],
+        edges: [['rules','recos'], ['recos','rank'], ['rank','dashboard']]
+      },
+      {
+        title: 'Insights',
+        desc: 'Analytics aggregates trends and produces insights.',
+        active: ['analytics','warehouse','reports'],
+        edges: [['index','analytics'], ['analytics','warehouse'], ['warehouse','reports']]
+      }
+    ]
+  },
+
+  acorns: {
+    title: 'Acorns',
+    steps: [
+      {
+        title: 'Onboard and KYC',
+        desc: 'KYC verifies identity and creates investment account.',
+        active: ['client','kyc','accounts'],
+        edges: [['client','kyc'], ['kyc','accounts']]
+      },
+      {
+        title: 'Link bank and cards',
+        desc: 'Integrations link cards/bank to track spend.',
+        active: ['integrations','auth','sync'],
+        edges: [['client','integrations'], ['integrations','auth'], ['integrations','sync']]
+      },
+      {
+        title: 'Round-ups',
+        desc: 'Round-up engine computes spare change and creates transfer.',
+        active: ['roundups','transfers','payments'],
+        edges: [['sync','roundups'], ['roundups','transfers'], ['transfers','payments']]
+      },
+      {
+        title: 'Invest',
+        desc: 'Invest service allocates portfolio and places trades.',
+        active: ['invest','portfolio','broker'],
+        edges: [['payments','invest'], ['invest','portfolio'], ['portfolio','broker']]
+      },
+      {
+        title: 'Ledger and statements',
+        desc: 'Ledger updated; statements and reports generated.',
+        active: ['ledger','reports','warehouse'],
+        edges: [['broker','ledger'], ['ledger','reports'], ['reports','warehouse']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Notifications sent for investments and performance.',
+        active: ['notify','push','client'],
+        edges: [['invest','notify'], ['notify','push'], ['push','client']]
+      }
+    ]
+  },
+
+  stash: {
+    title: 'Stash',
+    steps: [
+      {
+        title: 'Onboard and KYC',
+        desc: 'KYC verifies identity and creates investment account.',
+        active: ['client','kyc','accounts'],
+        edges: [['client','kyc'], ['kyc','accounts']]
+      },
+      {
+        title: 'Fund account',
+        desc: 'Funding via ACH/card; ledger updated.',
+        active: ['funding','payments','ledger'],
+        edges: [['client','funding'], ['funding','payments'], ['payments','ledger']]
+      },
+      {
+        title: 'Browse investments',
+        desc: 'Catalog and recommendations surface portfolios.',
+        active: ['catalog','recos','rank'],
+        edges: [['client','catalog'], ['catalog','recos'], ['recos','rank']]
+      },
+      {
+        title: 'Invest',
+        desc: 'Order created; routed to broker; portfolio updated.',
+        active: ['orders','broker','portfolio'],
+        edges: [['client','orders'], ['orders','broker'], ['broker','portfolio']]
+      },
+      {
+        title: 'Ledger and reporting',
+        desc: 'Ledger updated; reports and statements generated.',
+        active: ['ledger','reports','warehouse'],
+        edges: [['portfolio','ledger'], ['ledger','reports'], ['reports','warehouse']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Notifications sent for orders and price alerts.',
+        active: ['notify','push','client'],
+        edges: [['orders','notify'], ['notify','push'], ['push','client']]
+      }
+    ]
+  },
+
+  sofi: {
+    title: 'SoFi',
+    steps: [
+      {
+        title: 'Onboard and identity',
+        desc: 'Onboarding and identity verification create accounts.',
+        active: ['client','kyc','accounts'],
+        edges: [['client','kyc'], ['kyc','accounts']]
+      },
+      {
+        title: 'Login and dashboard',
+        desc: 'Client authenticates and loads products (banking, invest, loans).',
+        active: ['client','auth','dashboard'],
+        edges: [['client','auth'], ['auth','dashboard']]
+      },
+      {
+        title: 'Bank transfers',
+        desc: 'Transfers routed via ACH; core posts ledger.',
+        active: ['payments','routing','ach'],
+        edges: [['client','payments'], ['payments','routing'], ['routing','ach']]
+      },
+      {
+        title: 'Invest',
+        desc: 'Orders routed to broker; positions and ledger updated.',
+        active: ['orders','broker','positions'],
+        edges: [['dashboard','orders'], ['orders','broker'], ['broker','positions']]
+      },
+      {
+        title: 'Loans',
+        desc: 'Loan origination and servicing with risk and billing.',
+        active: ['loans','risk','billing'],
+        edges: [['dashboard','loans'], ['loans','risk'], ['loans','billing']]
+      },
+      {
+        title: 'Insights',
+        desc: 'Analytics aggregates and generates insights and offers.',
+        active: ['analytics','warehouse','recos'],
+        edges: [['dashboard','analytics'], ['analytics','warehouse'], ['warehouse','recos']]
+      }
+    ]
+  },
+
+  'ally-bank': {
+    title: 'Ally Bank',
+    steps: [
+      {
+        title: 'Login',
+        desc: 'Authenticate user; risk checks and session established.',
+        active: ['client','auth','risk'],
+        edges: [['client','auth'], ['auth','risk']]
+      },
+      {
+        title: 'Fetch accounts',
+        desc: 'Core banking fetches balances and transactions; cache used.',
+        active: ['accounts','core','cache'],
+        edges: [['client','accounts'], ['accounts','core'], ['core','cache']]
+      },
+      {
+        title: 'Transfers',
+        desc: 'Transfers routed to ACH and executed in core banking.',
+        active: ['payments','routing','ach'],
+        edges: [['client','payments'], ['payments','routing'], ['routing','ach']]
+      },
+      {
+        title: 'Ledger and status',
+        desc: 'Core posts ledger entries and returns status.',
+        active: ['core','ledger','status'],
+        edges: [['ach','core'], ['core','ledger'], ['core','status']]
+      },
+      {
+        title: 'Cards',
+        desc: 'Card management updates controls and approvals.',
+        active: ['cards','controls','approvals'],
+        edges: [['accounts','cards'], ['cards','controls'], ['controls','approvals']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Alerts delivered via push and email.',
+        active: ['notify','push','email'],
+        edges: [['status','notify'], ['notify','push'], ['notify','email']]
+      }
+    ]
+  },
+
+  varo: {
+    title: 'Varo',
+    steps: [
+      {
+        title: 'Onboard and KYC',
+        desc: 'Onboarding runs KYC and creates account in core banking.',
+        active: ['client','kyc','core'],
+        edges: [['client','kyc'], ['kyc','core']]
+      },
+      {
+        title: 'Login and dashboard',
+        desc: 'Client authenticates and loads balances and transactions.',
+        active: ['client','auth','accounts'],
+        edges: [['client','auth'], ['auth','accounts']]
+      },
+      {
+        title: 'Transfers',
+        desc: 'Transfers routed to ACH and executed in core.',
+        active: ['payments','routing','ach'],
+        edges: [['client','payments'], ['payments','routing'], ['routing','ach']]
+      },
+      {
+        title: 'Ledger and status',
+        desc: 'Core posts ledger entries and returns status.',
+        active: ['core','ledger','status'],
+        edges: [['ach','core'], ['core','ledger'], ['core','status']]
+      },
+      {
+        title: 'Cards',
+        desc: 'Card management updates controls and approvals.',
+        active: ['cards','controls','approvals'],
+        edges: [['accounts','cards'], ['cards','controls'], ['controls','approvals']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Alerts delivered via push and email.',
+        active: ['notify','push','email'],
+        edges: [['status','notify'], ['notify','push'], ['notify','email']]
+      }
+    ]
+  },
+
+  current: {
+    title: 'Current',
+    steps: [
+      {
+        title: 'Onboard and KYC',
+        desc: 'Onboarding runs KYC and creates account in core banking.',
+        active: ['client','kyc','core'],
+        edges: [['client','kyc'], ['kyc','core']]
+      },
+      {
+        title: 'Login and dashboard',
+        desc: 'Client authenticates and loads balances and transactions.',
+        active: ['client','auth','accounts'],
+        edges: [['client','auth'], ['auth','accounts']]
+      },
+      {
+        title: 'Transfers',
+        desc: 'Transfers routed to ACH and executed in core.',
+        active: ['payments','routing','ach'],
+        edges: [['client','payments'], ['payments','routing'], ['routing','ach']]
+      },
+      {
+        title: 'Ledger and status',
+        desc: 'Core posts ledger entries and returns status.',
+        active: ['core','ledger','status'],
+        edges: [['ach','core'], ['core','ledger'], ['core','status']]
+      },
+      {
+        title: 'Cards and controls',
+        desc: 'Card issuance and controls managed; approvals applied.',
+        active: ['cards','controls','approvals'],
+        edges: [['accounts','cards'], ['cards','controls'], ['controls','approvals']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Alerts delivered via push and email.',
+        active: ['notify','push','email'],
+        edges: [['status','notify'], ['notify','push'], ['notify','email']]
+      }
+    ]
+  }
 };
 
 export function flowForSystem(sys) {
