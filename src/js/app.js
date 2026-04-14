@@ -2361,14 +2361,16 @@ function renderSystemDiagram(sys, step) {
 
   // If nodes got bigger, ensure we keep enough canvas space so they don't overlap.
   // Prefer per-product viewBox when set; otherwise default to a roomier canvas.
-  svg.setAttribute('viewBox', layout.viewBox || '0 0 1200 760');
+  svg.setAttribute('viewBox', layout.viewBox || '0 0 1200 960');
 
   const active = new Set(step?.active || []);
   const stepEdges = step?.edges || [];
   const eActive = (a, b) => stepEdges.some(e => e[0] === a && e[1] === b);
 
   const NODE_R = 44;
+  // Expand product layouts on the y-axis to avoid vertical overlap with bigger nodes.
   const scaleLayout = (layout.viewBox ? 1 : 1.35);
+  const scaleY = 1.35;
   const node = (id, cx, cy, label, color) => {
     const on = active.has(id);
     const stroke = on ? color : 'rgba(255,255,255,0.16)';
@@ -2446,8 +2448,8 @@ function renderSystemDiagram(sys, step) {
   for (const [a, b] of stepEdges) {
     const na0 = layout.nodes[a];
     const nb0 = layout.nodes[b];
-    const na = na0 ? { ...na0, x: na0.x * scaleLayout, y: na0.y * scaleLayout } : null;
-    const nb = nb0 ? { ...nb0, x: nb0.x * scaleLayout, y: nb0.y * scaleLayout } : null;
+    const na = na0 ? { ...na0, x: na0.x * scaleLayout, y: na0.y * scaleLayout * scaleY } : null;
+    const nb = nb0 ? { ...nb0, x: nb0.x * scaleLayout, y: nb0.y * scaleLayout * scaleY } : null;
     if (!na || !nb) continue;
     const on = eActive(a, b);
     edgesSvg += arrow(na.x, na.y, nb.x, nb.y, on);
@@ -2462,7 +2464,7 @@ function renderSystemDiagram(sys, step) {
 
   let nodesSvg = '';
   for (const [id, n0] of Object.entries(layout.nodes)) {
-    const n = { ...n0, x: n0.x * scaleLayout, y: n0.y * scaleLayout };
+    const n = { ...n0, x: n0.x * scaleLayout, y: n0.y * scaleLayout * scaleY };
     const cKey = n.colorKey || 'api';
     const color = SYSTEM_NODE_COLORS[cKey] || 'rgba(236,72,153,0.95)';
     nodesSvg += node(id, n.x, n.y, n.label, color);
