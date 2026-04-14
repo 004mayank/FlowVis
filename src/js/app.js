@@ -6557,6 +6557,246 @@ const SYSTEM_LAYOUTS = {
 
   ,
 
+  noon: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','search','catalog','cart','pricing','promos','checkout','payments','risk','orders','fulfillment','tracking','support','disputes','notify','returns','refunds','ledger'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      search: { x: 380, y: 180, label: 'Search', colorKey: 'api' },
+      catalog: { x: 620, y: 180, label: 'Catalog', colorKey: 'store' },
+      cart: { x: 380, y: 320, label: 'Cart', colorKey: 'api' },
+      pricing: { x: 620, y: 320, label: 'Pricing', colorKey: 'api' },
+      promos: { x: 860, y: 320, label: 'Promos', colorKey: 'api' },
+      checkout: { x: 380, y: 460, label: 'Checkout', colorKey: 'api' },
+      payments: { x: 620, y: 460, label: 'Payments', colorKey: 'external' },
+      risk: { x: 860, y: 460, label: 'Risk', colorKey: 'api' },
+      orders: { x: 1100, y: 460, label: 'Orders', colorKey: 'store' },
+      fulfillment: { x: 860, y: 600, label: 'Fulfillment', colorKey: 'api' },
+      tracking: { x: 1100, y: 600, label: 'Tracking', colorKey: 'api' },
+      support: { x: 380, y: 600, label: 'Support', colorKey: 'api' },
+      disputes: { x: 620, y: 600, label: 'Disputes', colorKey: 'api' },
+      notify: { x: 380, y: 740, label: 'Notify', colorKey: 'external' },
+      returns: { x: 860, y: 740, label: 'Returns', colorKey: 'api' },
+      refunds: { x: 1100, y: 740, label: 'Refunds', colorKey: 'api' },
+      ledger: { x: 620, y: 740, label: 'Ledger', colorKey: 'store' }
+    }
+  },
+
+  jumia: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','search','catalog','cart','pricing','promos','checkout','payments','risk','orders','fulfillment','tracking','cod','recon','ledger','returns','refunds'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      search: { x: 380, y: 180, label: 'Search', colorKey: 'api' },
+      catalog: { x: 620, y: 180, label: 'Catalog', colorKey: 'store' },
+      cart: { x: 380, y: 320, label: 'Cart', colorKey: 'api' },
+      pricing: { x: 620, y: 320, label: 'Pricing', colorKey: 'api' },
+      promos: { x: 860, y: 320, label: 'Promos', colorKey: 'api' },
+      checkout: { x: 380, y: 460, label: 'Checkout', colorKey: 'api' },
+      payments: { x: 620, y: 460, label: 'Payments', colorKey: 'external' },
+      risk: { x: 860, y: 460, label: 'Risk', colorKey: 'api' },
+      orders: { x: 1100, y: 460, label: 'Orders', colorKey: 'store' },
+      fulfillment: { x: 860, y: 600, label: 'Fulfillment', colorKey: 'api' },
+      tracking: { x: 1100, y: 600, label: 'Tracking', colorKey: 'api' },
+      cod: { x: 380, y: 600, label: 'COD', colorKey: 'external' },
+      recon: { x: 620, y: 600, label: 'Recon', colorKey: 'api' },
+      ledger: { x: 860, y: 740, label: 'Ledger', colorKey: 'store' },
+      returns: { x: 380, y: 740, label: 'Returns', colorKey: 'api' },
+      refunds: { x: 620, y: 740, label: 'Refunds', colorKey: 'api' }
+    }
+  },
+
+  vinted: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','feed','rank','catalog','cdn','cache','checkout','payments','escrow','shipping','carrier','tracking','delivery','payouts','ledger','disputes','refunds'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      feed: { x: 380, y: 180, label: 'Feed', colorKey: 'api' },
+      rank: { x: 620, y: 180, label: 'Ranking', colorKey: 'api' },
+      catalog: { x: 860, y: 180, label: 'Catalog', colorKey: 'store' },
+      cdn: { x: 1100, y: 180, label: 'CDN', colorKey: 'cdn' },
+      cache: { x: 860, y: 320, label: 'Cache', colorKey: 'cache' },
+      checkout: { x: 380, y: 320, label: 'Checkout', colorKey: 'api' },
+      payments: { x: 620, y: 320, label: 'Payments', colorKey: 'external' },
+      escrow: { x: 860, y: 460, label: 'Escrow', colorKey: 'store' },
+      shipping: { x: 380, y: 460, label: 'Shipping', colorKey: 'api' },
+      carrier: { x: 620, y: 460, label: 'Carrier', colorKey: 'external' },
+      tracking: { x: 860, y: 600, label: 'Tracking', colorKey: 'api' },
+      delivery: { x: 1100, y: 600, label: 'Delivery', colorKey: 'api' },
+      payouts: { x: 1100, y: 460, label: 'Payouts', colorKey: 'api' },
+      ledger: { x: 1100, y: 320, label: 'Ledger', colorKey: 'store' },
+      disputes: { x: 380, y: 740, label: 'Disputes', colorKey: 'api' },
+      refunds: { x: 620, y: 740, label: 'Refunds', colorKey: 'api' }
+    }
+  },
+
+  depop: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','feed','rank','catalog','cdn','cache','checkout','payments','orders','shipping','carrier','tracking','payouts','ledger','notify','support','refunds'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      feed: { x: 380, y: 180, label: 'Feed', colorKey: 'api' },
+      rank: { x: 620, y: 180, label: 'Ranking', colorKey: 'api' },
+      catalog: { x: 860, y: 180, label: 'Catalog', colorKey: 'store' },
+      cdn: { x: 1100, y: 180, label: 'CDN', colorKey: 'cdn' },
+      cache: { x: 860, y: 320, label: 'Cache', colorKey: 'cache' },
+      checkout: { x: 380, y: 320, label: 'Checkout', colorKey: 'api' },
+      payments: { x: 620, y: 320, label: 'Payments', colorKey: 'external' },
+      orders: { x: 860, y: 460, label: 'Orders', colorKey: 'store' },
+      shipping: { x: 380, y: 460, label: 'Shipping', colorKey: 'api' },
+      carrier: { x: 620, y: 460, label: 'Carrier', colorKey: 'external' },
+      tracking: { x: 860, y: 600, label: 'Tracking', colorKey: 'api' },
+      payouts: { x: 1100, y: 600, label: 'Payouts', colorKey: 'api' },
+      ledger: { x: 1100, y: 460, label: 'Ledger', colorKey: 'store' },
+      notify: { x: 620, y: 600, label: 'Notify', colorKey: 'external' },
+      support: { x: 380, y: 740, label: 'Support', colorKey: 'api' },
+      refunds: { x: 620, y: 740, label: 'Refunds', colorKey: 'api' }
+    }
+  },
+
+  poshmark: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','feed','rank','offers','realtime','notify','checkout','payments','escrow','shipping','carrier','tracking','delivery','payouts','ledger','disputes','refunds'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      feed: { x: 380, y: 180, label: 'Feed', colorKey: 'api' },
+      rank: { x: 620, y: 180, label: 'Ranking', colorKey: 'api' },
+      offers: { x: 380, y: 320, label: 'Offers', colorKey: 'api' },
+      realtime: { x: 620, y: 320, label: 'Realtime', colorKey: 'stream' },
+      notify: { x: 860, y: 320, label: 'Notify', colorKey: 'external' },
+      checkout: { x: 380, y: 460, label: 'Checkout', colorKey: 'api' },
+      payments: { x: 620, y: 460, label: 'Payments', colorKey: 'external' },
+      escrow: { x: 860, y: 460, label: 'Escrow', colorKey: 'store' },
+      shipping: { x: 380, y: 600, label: 'Shipping', colorKey: 'api' },
+      carrier: { x: 620, y: 600, label: 'Carrier', colorKey: 'external' },
+      tracking: { x: 860, y: 600, label: 'Tracking', colorKey: 'api' },
+      delivery: { x: 1100, y: 600, label: 'Delivery', colorKey: 'api' },
+      payouts: { x: 1100, y: 460, label: 'Payouts', colorKey: 'api' },
+      ledger: { x: 1100, y: 320, label: 'Ledger', colorKey: 'store' },
+      disputes: { x: 380, y: 740, label: 'Disputes', colorKey: 'api' },
+      refunds: { x: 620, y: 740, label: 'Refunds', colorKey: 'api' }
+    }
+  },
+
+  carousell: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','feed','rank','chat','realtime','notify','checkout','payments','orders','shipping','carrier','tracking','payouts','ledger','support','refunds'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      feed: { x: 380, y: 180, label: 'Feed', colorKey: 'api' },
+      rank: { x: 620, y: 180, label: 'Ranking', colorKey: 'api' },
+      chat: { x: 380, y: 320, label: 'Chat', colorKey: 'api' },
+      realtime: { x: 620, y: 320, label: 'Realtime', colorKey: 'stream' },
+      notify: { x: 860, y: 320, label: 'Notify', colorKey: 'external' },
+      checkout: { x: 380, y: 460, label: 'Checkout', colorKey: 'api' },
+      payments: { x: 620, y: 460, label: 'Payments', colorKey: 'external' },
+      orders: { x: 860, y: 460, label: 'Orders', colorKey: 'store' },
+      shipping: { x: 380, y: 600, label: 'Shipping', colorKey: 'api' },
+      carrier: { x: 620, y: 600, label: 'Carrier', colorKey: 'external' },
+      tracking: { x: 860, y: 600, label: 'Tracking', colorKey: 'api' },
+      payouts: { x: 1100, y: 600, label: 'Payouts', colorKey: 'api' },
+      ledger: { x: 1100, y: 460, label: 'Ledger', colorKey: 'store' },
+      support: { x: 380, y: 740, label: 'Support', colorKey: 'api' },
+      refunds: { x: 620, y: 740, label: 'Refunds', colorKey: 'api' }
+    }
+  },
+
+  olx: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','search','index','catalog','cdn','cache','chat','realtime','notify','leads','events','analytics','risk','moderation','reports','push'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      search: { x: 380, y: 180, label: 'Search', colorKey: 'api' },
+      index: { x: 620, y: 180, label: 'Index', colorKey: 'store' },
+      catalog: { x: 860, y: 180, label: 'Catalog', colorKey: 'store' },
+      cdn: { x: 1100, y: 180, label: 'CDN', colorKey: 'cdn' },
+      cache: { x: 860, y: 320, label: 'Cache', colorKey: 'cache' },
+      chat: { x: 380, y: 320, label: 'Chat', colorKey: 'api' },
+      realtime: { x: 620, y: 320, label: 'Realtime', colorKey: 'stream' },
+      notify: { x: 1100, y: 320, label: 'Notify', colorKey: 'external' },
+      leads: { x: 380, y: 460, label: 'Leads', colorKey: 'store' },
+      events: { x: 620, y: 460, label: 'Events', colorKey: 'stream' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'stream' },
+      risk: { x: 380, y: 600, label: 'Risk', colorKey: 'api' },
+      moderation: { x: 620, y: 600, label: 'Moderation', colorKey: 'api' },
+      reports: { x: 860, y: 600, label: 'Reports', colorKey: 'api' },
+      push: { x: 1100, y: 600, label: 'Push', colorKey: 'external' }
+    }
+  },
+
+  quikr: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','search','index','catalog','cdn','cache','chat','realtime','notify','leads','events','analytics','risk','moderation','reports','push'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      search: { x: 380, y: 180, label: 'Search', colorKey: 'api' },
+      index: { x: 620, y: 180, label: 'Index', colorKey: 'store' },
+      catalog: { x: 860, y: 180, label: 'Catalog', colorKey: 'store' },
+      cdn: { x: 1100, y: 180, label: 'CDN', colorKey: 'cdn' },
+      cache: { x: 860, y: 320, label: 'Cache', colorKey: 'cache' },
+      chat: { x: 380, y: 320, label: 'Chat', colorKey: 'api' },
+      realtime: { x: 620, y: 320, label: 'Realtime', colorKey: 'stream' },
+      notify: { x: 1100, y: 320, label: 'Notify', colorKey: 'external' },
+      leads: { x: 380, y: 460, label: 'Leads', colorKey: 'store' },
+      events: { x: 620, y: 460, label: 'Events', colorKey: 'stream' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'stream' },
+      risk: { x: 380, y: 600, label: 'Risk', colorKey: 'api' },
+      moderation: { x: 620, y: 600, label: 'Moderation', colorKey: 'api' },
+      reports: { x: 860, y: 600, label: 'Reports', colorKey: 'api' },
+      push: { x: 1100, y: 600, label: 'Push', colorKey: 'external' }
+    }
+  },
+
+  'facebook-marketplace': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','feed','rank','catalog','cdn','cache','chat','realtime','notify','payments','escrow','ledger','risk','moderation','reports','push'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      feed: { x: 380, y: 180, label: 'Feed', colorKey: 'api' },
+      rank: { x: 620, y: 180, label: 'Ranking', colorKey: 'api' },
+      catalog: { x: 860, y: 180, label: 'Catalog', colorKey: 'store' },
+      cdn: { x: 1100, y: 180, label: 'CDN', colorKey: 'cdn' },
+      cache: { x: 860, y: 320, label: 'Cache', colorKey: 'cache' },
+      chat: { x: 380, y: 320, label: 'Chat', colorKey: 'api' },
+      realtime: { x: 620, y: 320, label: 'Realtime', colorKey: 'stream' },
+      notify: { x: 1100, y: 320, label: 'Notify', colorKey: 'external' },
+      payments: { x: 380, y: 460, label: 'Payments', colorKey: 'external' },
+      escrow: { x: 620, y: 460, label: 'Escrow', colorKey: 'store' },
+      ledger: { x: 860, y: 460, label: 'Ledger', colorKey: 'store' },
+      risk: { x: 380, y: 600, label: 'Risk', colorKey: 'api' },
+      moderation: { x: 620, y: 600, label: 'Moderation', colorKey: 'api' },
+      reports: { x: 860, y: 600, label: 'Reports', colorKey: 'api' },
+      push: { x: 1100, y: 600, label: 'Push', colorKey: 'external' }
+    }
+  },
+
+  wish: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','feed','rank','search','index','catalog','cart','pricing','promos','checkout','payments','risk','orders','fulfillment','tracking','returns','refunds','ledger'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      feed: { x: 380, y: 180, label: 'Feed', colorKey: 'api' },
+      rank: { x: 620, y: 180, label: 'Ranking', colorKey: 'api' },
+      search: { x: 380, y: 320, label: 'Search', colorKey: 'api' },
+      index: { x: 620, y: 320, label: 'Index', colorKey: 'store' },
+      catalog: { x: 860, y: 320, label: 'Catalog', colorKey: 'store' },
+      cart: { x: 380, y: 460, label: 'Cart', colorKey: 'api' },
+      pricing: { x: 620, y: 460, label: 'Pricing', colorKey: 'api' },
+      promos: { x: 860, y: 460, label: 'Promos', colorKey: 'api' },
+      checkout: { x: 380, y: 600, label: 'Checkout', colorKey: 'api' },
+      payments: { x: 620, y: 600, label: 'Payments', colorKey: 'external' },
+      risk: { x: 860, y: 600, label: 'Risk', colorKey: 'api' },
+      orders: { x: 1100, y: 600, label: 'Orders', colorKey: 'store' },
+      fulfillment: { x: 860, y: 740, label: 'Fulfillment', colorKey: 'api' },
+      tracking: { x: 1100, y: 740, label: 'Tracking', colorKey: 'api' },
+      returns: { x: 380, y: 740, label: 'Returns', colorKey: 'api' },
+      refunds: { x: 620, y: 740, label: 'Refunds', colorKey: 'api' },
+      ledger: { x: 620, y: 860, label: 'Ledger', colorKey: 'store' }
+    }
+  }
+
+  ,
+
   figma: {
     viewBox: '0 0 1200 960',
     primaryPath: ['client','auth','files','cache','editor','ops','realtime','merge','store','comments','notify','push','export','render','cdn','sharing','authz','audit'],
@@ -12406,6 +12646,366 @@ const ARCH_LAYOUTS = {
       if (stepIdx === 3) e.push(['cart','checkout','checkout'], ['checkout','payments','pay'], ['payments','risk','risk']);
       if (stepIdx === 4) e.push(['payments','orders','order'], ['orders','fulfillment','fulfill'], ['fulfillment','tracking','track']);
       if (stepIdx === 5) e.push(['orders','risk','risk'], ['client','disputes','dispute'], ['disputes','support','support']);
+      if (stepIdx === 6) e.push(['client','returns','return'], ['returns','refunds','refund'], ['refunds','ledger','ledger']);
+      return e;
+    }
+  },
+
+  // ----- Batch 21 (Architecture - from sheet) -----
+
+  noon: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Noon Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','search','catalog','cart','pricing','promos','checkout','payments','risk','orders','fulfillment','tracking','support','disputes','notify','returns','refunds','ledger'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      search: { x: 320, y: 160, label: 'Search' },
+      catalog: { x: 600, y: 160, label: 'Catalog' },
+      cart: { x: 320, y: 300, label: 'Cart' },
+      pricing: { x: 600, y: 300, label: 'Pricing' },
+      promos: { x: 880, y: 300, label: 'Promos' },
+      checkout: { x: 320, y: 440, label: 'Checkout' },
+      payments: { x: 600, y: 440, label: 'Payments' },
+      risk: { x: 880, y: 440, label: 'Risk' },
+      orders: { x: 1160, y: 440, label: 'Orders' },
+      fulfillment: { x: 880, y: 580, label: 'Fulfillment' },
+      tracking: { x: 1160, y: 580, label: 'Tracking' },
+      support: { x: 320, y: 580, label: 'Support' },
+      disputes: { x: 600, y: 580, label: 'Disputes' },
+      notify: { x: 320, y: 720, label: 'Notify' },
+      returns: { x: 880, y: 720, label: 'Returns' },
+      refunds: { x: 1160, y: 720, label: 'Refunds' },
+      ledger: { x: 600, y: 720, label: 'Ledger' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','search','search'], ['search','catalog','catalog']);
+      if (stepIdx === 2) e.push(['client','cart','cart'], ['cart','pricing','price'], ['pricing','promos','promo']);
+      if (stepIdx === 3) e.push(['cart','checkout','checkout'], ['checkout','payments','pay'], ['payments','risk','risk']);
+      if (stepIdx === 4) e.push(['payments','orders','order'], ['orders','fulfillment','fulfill'], ['fulfillment','tracking','track']);
+      if (stepIdx === 5) e.push(['orders','support','support'], ['client','disputes','dispute'], ['disputes','notify','notify']);
+      if (stepIdx === 6) e.push(['client','returns','return'], ['returns','refunds','refund'], ['refunds','ledger','ledger']);
+      return e;
+    }
+  },
+
+  jumia: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Jumia Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','search','catalog','cart','pricing','promos','checkout','payments','risk','orders','fulfillment','tracking','cod','recon','ledger','returns','refunds'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      search: { x: 320, y: 160, label: 'Search' },
+      catalog: { x: 600, y: 160, label: 'Catalog' },
+      cart: { x: 320, y: 300, label: 'Cart' },
+      pricing: { x: 600, y: 300, label: 'Pricing' },
+      promos: { x: 880, y: 300, label: 'Promos' },
+      checkout: { x: 320, y: 440, label: 'Checkout' },
+      payments: { x: 600, y: 440, label: 'Payments' },
+      risk: { x: 880, y: 440, label: 'Risk' },
+      orders: { x: 1160, y: 440, label: 'Orders' },
+      fulfillment: { x: 880, y: 580, label: 'Fulfillment' },
+      tracking: { x: 1160, y: 580, label: 'Tracking' },
+      cod: { x: 320, y: 580, label: 'COD' },
+      recon: { x: 600, y: 580, label: 'Recon' },
+      ledger: { x: 880, y: 720, label: 'Ledger' },
+      returns: { x: 320, y: 720, label: 'Returns' },
+      refunds: { x: 600, y: 720, label: 'Refunds' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','search','search'], ['search','catalog','catalog']);
+      if (stepIdx === 2) e.push(['client','cart','cart'], ['cart','pricing','price'], ['pricing','promos','promo']);
+      if (stepIdx === 3) e.push(['cart','checkout','checkout'], ['checkout','payments','pay'], ['payments','risk','risk']);
+      if (stepIdx === 4) e.push(['payments','orders','order'], ['orders','fulfillment','fulfill'], ['fulfillment','tracking','track']);
+      if (stepIdx === 5) e.push(['orders','cod','cod'], ['cod','recon','recon'], ['recon','ledger','ledger']);
+      if (stepIdx === 6) e.push(['client','returns','return'], ['returns','refunds','refund'], ['refunds','ledger','ledger']);
+      return e;
+    }
+  },
+
+  vinted: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Vinted Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','feed','rank','catalog','cdn','cache','checkout','payments','escrow','shipping','carrier','tracking','delivery','payouts','ledger','disputes','refunds'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      feed: { x: 320, y: 160, label: 'Feed' },
+      rank: { x: 600, y: 160, label: 'Ranking' },
+      catalog: { x: 880, y: 160, label: 'Catalog' },
+      cdn: { x: 1160, y: 160, label: 'CDN' },
+      cache: { x: 880, y: 300, label: 'Cache' },
+      checkout: { x: 320, y: 300, label: 'Checkout' },
+      payments: { x: 600, y: 300, label: 'Payments' },
+      escrow: { x: 880, y: 440, label: 'Escrow' },
+      shipping: { x: 320, y: 440, label: 'Shipping' },
+      carrier: { x: 600, y: 440, label: 'Carrier' },
+      tracking: { x: 880, y: 580, label: 'Tracking' },
+      delivery: { x: 1160, y: 580, label: 'Delivery' },
+      payouts: { x: 1160, y: 440, label: 'Payouts' },
+      ledger: { x: 1160, y: 300, label: 'Ledger' },
+      disputes: { x: 320, y: 720, label: 'Disputes' },
+      refunds: { x: 600, y: 720, label: 'Refunds' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','feed','feed'], ['feed','rank','rank']);
+      if (stepIdx === 2) e.push(['feed','catalog','catalog'], ['catalog','cdn','cdn'], ['catalog','cache','cache']);
+      if (stepIdx === 3) e.push(['client','checkout','checkout'], ['checkout','payments','pay'], ['payments','escrow','escrow']);
+      if (stepIdx === 4) e.push(['escrow','shipping','ship'], ['shipping','carrier','carrier'], ['carrier','tracking','track']);
+      if (stepIdx === 5) e.push(['tracking','delivery','deliver'], ['delivery','payouts','payout'], ['payouts','ledger','ledger']);
+      if (stepIdx === 6) e.push(['client','disputes','dispute'], ['disputes','refunds','refund'], ['refunds','ledger','ledger']);
+      return e;
+    }
+  },
+
+  depop: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Depop Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','feed','rank','catalog','cdn','cache','checkout','payments','orders','shipping','carrier','tracking','payouts','ledger','notify','support','refunds'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      feed: { x: 320, y: 160, label: 'Feed' },
+      rank: { x: 600, y: 160, label: 'Ranking' },
+      catalog: { x: 880, y: 160, label: 'Catalog' },
+      cdn: { x: 1160, y: 160, label: 'CDN' },
+      cache: { x: 880, y: 300, label: 'Cache' },
+      checkout: { x: 320, y: 300, label: 'Checkout' },
+      payments: { x: 600, y: 300, label: 'Payments' },
+      orders: { x: 880, y: 440, label: 'Orders' },
+      shipping: { x: 320, y: 440, label: 'Shipping' },
+      carrier: { x: 600, y: 440, label: 'Carrier' },
+      tracking: { x: 880, y: 580, label: 'Tracking' },
+      payouts: { x: 1160, y: 580, label: 'Payouts' },
+      ledger: { x: 1160, y: 440, label: 'Ledger' },
+      notify: { x: 600, y: 580, label: 'Notify' },
+      support: { x: 320, y: 720, label: 'Support' },
+      refunds: { x: 600, y: 720, label: 'Refunds' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','feed','feed'], ['feed','rank','rank']);
+      if (stepIdx === 2) e.push(['feed','catalog','catalog'], ['catalog','cdn','cdn'], ['catalog','cache','cache']);
+      if (stepIdx === 3) e.push(['client','checkout','checkout'], ['checkout','payments','pay'], ['payments','orders','order']);
+      if (stepIdx === 4) e.push(['orders','shipping','ship'], ['shipping','carrier','carrier'], ['carrier','tracking','track']);
+      if (stepIdx === 5) e.push(['tracking','payouts','payout'], ['payouts','ledger','ledger'], ['payouts','notify','notify']);
+      if (stepIdx === 6) e.push(['client','support','support'], ['support','refunds','refund'], ['refunds','ledger','ledger']);
+      return e;
+    }
+  },
+
+  poshmark: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Poshmark Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','feed','rank','offers','realtime','notify','checkout','payments','escrow','shipping','carrier','tracking','delivery','payouts','ledger','disputes','refunds'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      feed: { x: 320, y: 160, label: 'Feed' },
+      rank: { x: 600, y: 160, label: 'Ranking' },
+      offers: { x: 320, y: 300, label: 'Offers' },
+      realtime: { x: 600, y: 300, label: 'Realtime' },
+      notify: { x: 880, y: 300, label: 'Notify' },
+      checkout: { x: 320, y: 440, label: 'Checkout' },
+      payments: { x: 600, y: 440, label: 'Payments' },
+      escrow: { x: 880, y: 440, label: 'Escrow' },
+      shipping: { x: 320, y: 580, label: 'Shipping' },
+      carrier: { x: 600, y: 580, label: 'Carrier' },
+      tracking: { x: 880, y: 580, label: 'Tracking' },
+      delivery: { x: 1160, y: 580, label: 'Delivery' },
+      payouts: { x: 1160, y: 440, label: 'Payouts' },
+      ledger: { x: 1160, y: 300, label: 'Ledger' },
+      disputes: { x: 320, y: 720, label: 'Disputes' },
+      refunds: { x: 600, y: 720, label: 'Refunds' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','feed','feed'], ['feed','rank','rank']);
+      if (stepIdx === 2) e.push(['client','offers','offer'], ['offers','realtime','rt'], ['realtime','notify','notify']);
+      if (stepIdx === 3) e.push(['client','checkout','checkout'], ['checkout','payments','pay'], ['payments','escrow','escrow']);
+      if (stepIdx === 4) e.push(['escrow','shipping','ship'], ['shipping','carrier','carrier'], ['carrier','tracking','track']);
+      if (stepIdx === 5) e.push(['tracking','delivery','deliver'], ['delivery','payouts','payout'], ['payouts','ledger','ledger']);
+      if (stepIdx === 6) e.push(['client','disputes','dispute'], ['disputes','refunds','refund'], ['refunds','ledger','ledger']);
+      return e;
+    }
+  },
+
+  carousell: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Carousell Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','feed','rank','chat','realtime','notify','checkout','payments','orders','shipping','carrier','tracking','payouts','ledger','support','refunds'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      feed: { x: 320, y: 160, label: 'Feed' },
+      rank: { x: 600, y: 160, label: 'Ranking' },
+      chat: { x: 320, y: 300, label: 'Chat' },
+      realtime: { x: 600, y: 300, label: 'Realtime' },
+      notify: { x: 880, y: 300, label: 'Notify' },
+      checkout: { x: 320, y: 440, label: 'Checkout' },
+      payments: { x: 600, y: 440, label: 'Payments' },
+      orders: { x: 880, y: 440, label: 'Orders' },
+      shipping: { x: 320, y: 580, label: 'Shipping' },
+      carrier: { x: 600, y: 580, label: 'Carrier' },
+      tracking: { x: 880, y: 580, label: 'Tracking' },
+      payouts: { x: 1160, y: 580, label: 'Payouts' },
+      ledger: { x: 1160, y: 440, label: 'Ledger' },
+      support: { x: 320, y: 720, label: 'Support' },
+      refunds: { x: 600, y: 720, label: 'Refunds' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','feed','feed'], ['feed','rank','rank']);
+      if (stepIdx === 2) e.push(['client','chat','chat'], ['chat','realtime','rt'], ['chat','notify','notify']);
+      if (stepIdx === 3) e.push(['client','checkout','checkout'], ['checkout','payments','pay'], ['payments','orders','order']);
+      if (stepIdx === 4) e.push(['orders','shipping','ship'], ['shipping','carrier','carrier'], ['carrier','tracking','track']);
+      if (stepIdx === 5) e.push(['tracking','payouts','payout'], ['payouts','ledger','ledger'], ['payouts','notify','notify']);
+      if (stepIdx === 6) e.push(['client','support','support'], ['support','refunds','refund'], ['refunds','ledger','ledger']);
+      return e;
+    }
+  },
+
+  olx: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'OLX Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','search','index','catalog','cdn','cache','chat','realtime','notify','leads','events','analytics','risk','moderation','reports','push'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      search: { x: 320, y: 160, label: 'Search' },
+      index: { x: 600, y: 160, label: 'Index' },
+      catalog: { x: 880, y: 160, label: 'Catalog' },
+      cdn: { x: 1160, y: 160, label: 'CDN' },
+      cache: { x: 880, y: 300, label: 'Cache' },
+      chat: { x: 320, y: 300, label: 'Chat' },
+      realtime: { x: 600, y: 300, label: 'Realtime' },
+      notify: { x: 1160, y: 300, label: 'Notify' },
+      leads: { x: 320, y: 440, label: 'Leads' },
+      events: { x: 600, y: 440, label: 'Events' },
+      analytics: { x: 880, y: 440, label: 'Analytics' },
+      risk: { x: 320, y: 580, label: 'Risk' },
+      moderation: { x: 600, y: 580, label: 'Moderation' },
+      reports: { x: 880, y: 580, label: 'Reports' },
+      push: { x: 1160, y: 580, label: 'Push' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','search','search'], ['search','index','index']);
+      if (stepIdx === 2) e.push(['index','catalog','catalog'], ['catalog','cdn','cdn'], ['catalog','cache','cache']);
+      if (stepIdx === 3) e.push(['client','chat','chat'], ['chat','realtime','rt'], ['chat','notify','notify']);
+      if (stepIdx === 4) e.push(['chat','leads','lead'], ['leads','events','events'], ['events','analytics','analytics']);
+      if (stepIdx === 5) e.push(['events','risk','risk'], ['risk','moderation','moderation'], ['moderation','reports','reports']);
+      if (stepIdx === 6) e.push(['leads','notify','notify'], ['notify','push','push'], ['push','client','client']);
+      return e;
+    }
+  },
+
+  quikr: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Quikr Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','search','index','catalog','cdn','cache','chat','realtime','notify','leads','events','analytics','risk','moderation','reports','push'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      search: { x: 320, y: 160, label: 'Search' },
+      index: { x: 600, y: 160, label: 'Index' },
+      catalog: { x: 880, y: 160, label: 'Catalog' },
+      cdn: { x: 1160, y: 160, label: 'CDN' },
+      cache: { x: 880, y: 300, label: 'Cache' },
+      chat: { x: 320, y: 300, label: 'Chat' },
+      realtime: { x: 600, y: 300, label: 'Realtime' },
+      notify: { x: 1160, y: 300, label: 'Notify' },
+      leads: { x: 320, y: 440, label: 'Leads' },
+      events: { x: 600, y: 440, label: 'Events' },
+      analytics: { x: 880, y: 440, label: 'Analytics' },
+      risk: { x: 320, y: 580, label: 'Risk' },
+      moderation: { x: 600, y: 580, label: 'Moderation' },
+      reports: { x: 880, y: 580, label: 'Reports' },
+      push: { x: 1160, y: 580, label: 'Push' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','search','search'], ['search','index','index']);
+      if (stepIdx === 2) e.push(['index','catalog','catalog'], ['catalog','cdn','cdn'], ['catalog','cache','cache']);
+      if (stepIdx === 3) e.push(['client','chat','chat'], ['chat','realtime','rt'], ['chat','notify','notify']);
+      if (stepIdx === 4) e.push(['chat','leads','lead'], ['leads','events','events'], ['events','analytics','analytics']);
+      if (stepIdx === 5) e.push(['events','risk','risk'], ['risk','moderation','moderation'], ['moderation','reports','reports']);
+      if (stepIdx === 6) e.push(['leads','notify','notify'], ['notify','push','push'], ['push','client','client']);
+      return e;
+    }
+  },
+
+  'facebook-marketplace': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Facebook Marketplace Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','feed','rank','catalog','cdn','cache','chat','realtime','notify','payments','escrow','ledger','risk','moderation','reports','push'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      feed: { x: 320, y: 160, label: 'Feed' },
+      rank: { x: 600, y: 160, label: 'Ranking' },
+      catalog: { x: 880, y: 160, label: 'Catalog' },
+      cdn: { x: 1160, y: 160, label: 'CDN' },
+      cache: { x: 880, y: 300, label: 'Cache' },
+      chat: { x: 320, y: 300, label: 'Chat' },
+      realtime: { x: 600, y: 300, label: 'Realtime' },
+      notify: { x: 1160, y: 300, label: 'Notify' },
+      payments: { x: 320, y: 440, label: 'Payments' },
+      escrow: { x: 600, y: 440, label: 'Escrow' },
+      ledger: { x: 880, y: 440, label: 'Ledger' },
+      risk: { x: 320, y: 580, label: 'Risk' },
+      moderation: { x: 600, y: 580, label: 'Moderation' },
+      reports: { x: 880, y: 580, label: 'Reports' },
+      push: { x: 1160, y: 580, label: 'Push' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','feed','feed'], ['feed','rank','rank']);
+      if (stepIdx === 2) e.push(['feed','catalog','catalog'], ['catalog','cdn','cdn'], ['catalog','cache','cache']);
+      if (stepIdx === 3) e.push(['client','chat','chat'], ['chat','realtime','rt'], ['chat','notify','notify']);
+      if (stepIdx === 4) e.push(['chat','payments','pay'], ['payments','escrow','escrow'], ['escrow','ledger','ledger']);
+      if (stepIdx === 5) e.push(['chat','risk','risk'], ['risk','moderation','moderation'], ['moderation','reports','reports']);
+      if (stepIdx === 6) e.push(['chat','notify','notify'], ['notify','push','push'], ['push','client','client']);
+      return e;
+    }
+  },
+
+  wish: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Wish Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','feed','rank','search','index','catalog','cart','pricing','promos','checkout','payments','risk','orders','fulfillment','tracking','returns','refunds','ledger'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      feed: { x: 320, y: 160, label: 'Feed' },
+      rank: { x: 600, y: 160, label: 'Ranking' },
+      search: { x: 320, y: 300, label: 'Search' },
+      index: { x: 600, y: 300, label: 'Index' },
+      catalog: { x: 880, y: 300, label: 'Catalog' },
+      cart: { x: 320, y: 440, label: 'Cart' },
+      pricing: { x: 600, y: 440, label: 'Pricing' },
+      promos: { x: 880, y: 440, label: 'Promos' },
+      checkout: { x: 320, y: 580, label: 'Checkout' },
+      payments: { x: 600, y: 580, label: 'Payments' },
+      risk: { x: 880, y: 580, label: 'Risk' },
+      orders: { x: 1160, y: 580, label: 'Orders' },
+      fulfillment: { x: 880, y: 720, label: 'Fulfillment' },
+      tracking: { x: 1160, y: 720, label: 'Tracking' },
+      returns: { x: 320, y: 720, label: 'Returns' },
+      refunds: { x: 600, y: 720, label: 'Refunds' },
+      ledger: { x: 600, y: 860, label: 'Ledger' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','feed','feed'], ['feed','rank','rank']);
+      if (stepIdx === 2) e.push(['client','search','search'], ['search','index','index'], ['index','catalog','catalog']);
+      if (stepIdx === 3) e.push(['client','cart','cart'], ['cart','pricing','price'], ['pricing','promos','promo']);
+      if (stepIdx === 4) e.push(['cart','checkout','checkout'], ['checkout','payments','pay'], ['payments','risk','risk']);
+      if (stepIdx === 5) e.push(['payments','orders','order'], ['orders','fulfillment','fulfill'], ['fulfillment','tracking','track']);
       if (stepIdx === 6) e.push(['client','returns','return'], ['returns','refunds','refund'], ['refunds','ledger','ledger']);
       return e;
     }

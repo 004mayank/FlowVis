@@ -8682,6 +8682,428 @@ export const FLOWS = {
       }
     ]
   }
+
+  ,
+
+  noon: {
+    title: 'Noon',
+    steps: [
+      {
+        title: 'Browse and search',
+        desc: 'Client loads search and catalog with caching.',
+        active: ['client','search','catalog'],
+        edges: [['client','search'], ['search','catalog']]
+      },
+      {
+        title: 'Cart and pricing',
+        desc: 'Cart persists; pricing and promos compute totals.',
+        active: ['cart','pricing','promos'],
+        edges: [['client','cart'], ['cart','pricing'], ['pricing','promos']]
+      },
+      {
+        title: 'Checkout and payment',
+        desc: 'Payments processed with risk checks; order created.',
+        active: ['checkout','payments','risk'],
+        edges: [['cart','checkout'], ['checkout','payments'], ['payments','risk']]
+      },
+      {
+        title: 'Fulfillment and shipping',
+        desc: 'Orders sent to fulfillment; carrier ships; tracking updates.',
+        active: ['orders','fulfillment','tracking'],
+        edges: [['payments','orders'], ['orders','fulfillment'], ['fulfillment','tracking']]
+      },
+      {
+        title: 'Support and disputes',
+        desc: 'Support handles issues and disputes.',
+        active: ['support','disputes','notify'],
+        edges: [['orders','support'], ['client','disputes'], ['disputes','notify']]
+      },
+      {
+        title: 'Returns and refunds',
+        desc: 'Returns handled; refunds adjust ledger.',
+        active: ['returns','refunds','ledger'],
+        edges: [['client','returns'], ['returns','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  jumia: {
+    title: 'Jumia',
+    steps: [
+      {
+        title: 'Browse and search',
+        desc: 'Client loads search and catalog with caching.',
+        active: ['client','search','catalog'],
+        edges: [['client','search'], ['search','catalog']]
+      },
+      {
+        title: 'Cart and pricing',
+        desc: 'Cart persists; pricing and promos compute totals.',
+        active: ['cart','pricing','promos'],
+        edges: [['client','cart'], ['cart','pricing'], ['pricing','promos']]
+      },
+      {
+        title: 'Checkout and payment',
+        desc: 'Payments processed with risk checks; order created.',
+        active: ['checkout','payments','risk'],
+        edges: [['cart','checkout'], ['checkout','payments'], ['payments','risk']]
+      },
+      {
+        title: 'Fulfillment and shipping',
+        desc: 'Orders sent to fulfillment; carrier ships; tracking updates.',
+        active: ['orders','fulfillment','tracking'],
+        edges: [['payments','orders'], ['orders','fulfillment'], ['fulfillment','tracking']]
+      },
+      {
+        title: 'Cash on delivery',
+        desc: 'COD reconciliation posts to ledger and updates status.',
+        active: ['cod','recon','ledger'],
+        edges: [['orders','cod'], ['cod','recon'], ['recon','ledger']]
+      },
+      {
+        title: 'Returns and refunds',
+        desc: 'Returns handled; refunds adjust ledger.',
+        active: ['returns','refunds','ledger'],
+        edges: [['client','returns'], ['returns','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  vinted: {
+    title: 'Vinted',
+    steps: [
+      {
+        title: 'Browse listings',
+        desc: 'Client loads feed/search with ranking and caching.',
+        active: ['client','feed','rank'],
+        edges: [['client','feed'], ['feed','rank']]
+      },
+      {
+        title: 'Listing details',
+        desc: 'Catalog returns listing details; images served via CDN.',
+        active: ['catalog','cdn','cache'],
+        edges: [['feed','catalog'], ['catalog','cdn'], ['catalog','cache']]
+      },
+      {
+        title: 'Buy and pay (escrow)',
+        desc: 'Payment captured into escrow; order created.',
+        active: ['checkout','payments','escrow'],
+        edges: [['client','checkout'], ['checkout','payments'], ['payments','escrow']]
+      },
+      {
+        title: 'Shipping label',
+        desc: 'Shipping label generated; carrier tracking starts.',
+        active: ['shipping','carrier','tracking'],
+        edges: [['escrow','shipping'], ['shipping','carrier'], ['carrier','tracking']]
+      },
+      {
+        title: 'Delivery and release',
+        desc: 'Delivery confirmed; escrow released to seller; ledger updated.',
+        active: ['delivery','payouts','ledger'],
+        edges: [['tracking','delivery'], ['delivery','payouts'], ['payouts','ledger']]
+      },
+      {
+        title: 'Disputes and refunds',
+        desc: 'Disputes/refunds adjust escrow and ledger.',
+        active: ['disputes','refunds','ledger'],
+        edges: [['client','disputes'], ['disputes','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  depop: {
+    title: 'Depop',
+    steps: [
+      {
+        title: 'Browse listings',
+        desc: 'Client loads feed/search with ranking and caching.',
+        active: ['client','feed','rank'],
+        edges: [['client','feed'], ['feed','rank']]
+      },
+      {
+        title: 'Listing details',
+        desc: 'Catalog returns listing details; images served via CDN.',
+        active: ['catalog','cdn','cache'],
+        edges: [['feed','catalog'], ['catalog','cdn'], ['catalog','cache']]
+      },
+      {
+        title: 'Checkout and pay',
+        desc: 'Payment processed; order created; notifications sent.',
+        active: ['checkout','payments','orders'],
+        edges: [['client','checkout'], ['checkout','payments'], ['payments','orders']]
+      },
+      {
+        title: 'Shipping',
+        desc: 'Shipping label generated; carrier tracking starts.',
+        active: ['shipping','carrier','tracking'],
+        edges: [['orders','shipping'], ['shipping','carrier'], ['carrier','tracking']]
+      },
+      {
+        title: 'Payouts',
+        desc: 'Delivery confirmed; payouts released; ledger updated.',
+        active: ['payouts','ledger','notify'],
+        edges: [['tracking','payouts'], ['payouts','ledger'], ['payouts','notify']]
+      },
+      {
+        title: 'Support and refunds',
+        desc: 'Support handles issues; refunds adjust ledger.',
+        active: ['support','refunds','ledger'],
+        edges: [['client','support'], ['support','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  poshmark: {
+    title: 'Poshmark',
+    steps: [
+      {
+        title: 'Browse listings',
+        desc: 'Client loads feed/search with ranking and caching.',
+        active: ['client','feed','rank'],
+        edges: [['client','feed'], ['feed','rank']]
+      },
+      {
+        title: 'Offers and negotiation',
+        desc: 'Offers sent; realtime updates delivered.',
+        active: ['offers','realtime','notify'],
+        edges: [['client','offers'], ['offers','realtime'], ['realtime','notify']]
+      },
+      {
+        title: 'Checkout and escrow',
+        desc: 'Payment captured to escrow; order created.',
+        active: ['checkout','payments','escrow'],
+        edges: [['client','checkout'], ['checkout','payments'], ['payments','escrow']]
+      },
+      {
+        title: 'Shipping label',
+        desc: 'Label generated; carrier tracking starts.',
+        active: ['shipping','carrier','tracking'],
+        edges: [['escrow','shipping'], ['shipping','carrier'], ['carrier','tracking']]
+      },
+      {
+        title: 'Delivery and release',
+        desc: 'Delivery confirmed; escrow released to seller.',
+        active: ['delivery','payouts','ledger'],
+        edges: [['tracking','delivery'], ['delivery','payouts'], ['payouts','ledger']]
+      },
+      {
+        title: 'Disputes and refunds',
+        desc: 'Disputes/refunds adjust escrow and ledger.',
+        active: ['disputes','refunds','ledger'],
+        edges: [['client','disputes'], ['disputes','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  carousell: {
+    title: 'Carousell',
+    steps: [
+      {
+        title: 'Browse listings',
+        desc: 'Client loads feed/search with ranking and caching.',
+        active: ['client','feed','rank'],
+        edges: [['client','feed'], ['feed','rank']]
+      },
+      {
+        title: 'Chat seller',
+        desc: 'In-app chat uses realtime messaging and notifications.',
+        active: ['chat','realtime','notify'],
+        edges: [['client','chat'], ['chat','realtime'], ['chat','notify']]
+      },
+      {
+        title: 'Checkout and pay',
+        desc: 'Payment processed; order created.',
+        active: ['checkout','payments','orders'],
+        edges: [['client','checkout'], ['checkout','payments'], ['payments','orders']]
+      },
+      {
+        title: 'Shipping',
+        desc: 'Shipping label generated; tracking updates.',
+        active: ['shipping','carrier','tracking'],
+        edges: [['orders','shipping'], ['shipping','carrier'], ['carrier','tracking']]
+      },
+      {
+        title: 'Payouts',
+        desc: 'Delivery confirmed; payouts released; ledger updated.',
+        active: ['payouts','ledger','notify'],
+        edges: [['tracking','payouts'], ['payouts','ledger'], ['payouts','notify']]
+      },
+      {
+        title: 'Support and refunds',
+        desc: 'Support handles issues; refunds adjust ledger.',
+        active: ['support','refunds','ledger'],
+        edges: [['client','support'], ['support','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  olx: {
+    title: 'OLX',
+    steps: [
+      {
+        title: 'Browse listings',
+        desc: 'Client loads search and listings with caching.',
+        active: ['client','search','index'],
+        edges: [['client','search'], ['search','index']]
+      },
+      {
+        title: 'View listing',
+        desc: 'Listing details loaded; images served via CDN.',
+        active: ['catalog','cdn','cache'],
+        edges: [['index','catalog'], ['catalog','cdn'], ['catalog','cache']]
+      },
+      {
+        title: 'Chat',
+        desc: 'Chat uses realtime messaging and notifications.',
+        active: ['chat','realtime','notify'],
+        edges: [['client','chat'], ['chat','realtime'], ['chat','notify']]
+      },
+      {
+        title: 'Lead and conversion',
+        desc: 'Leads tracked; analytics measures conversion funnel.',
+        active: ['leads','events','analytics'],
+        edges: [['chat','leads'], ['leads','events'], ['events','analytics']]
+      },
+      {
+        title: 'Trust and safety',
+        desc: 'Risk and moderation detect fraud and abuse.',
+        active: ['risk','moderation','reports'],
+        edges: [['events','risk'], ['risk','moderation'], ['moderation','reports']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Notifications delivered for messages and leads.',
+        active: ['notify','push','client'],
+        edges: [['leads','notify'], ['notify','push'], ['push','client']]
+      }
+    ]
+  },
+
+  quikr: {
+    title: 'Quikr',
+    steps: [
+      {
+        title: 'Browse listings',
+        desc: 'Client loads search and listings with caching.',
+        active: ['client','search','index'],
+        edges: [['client','search'], ['search','index']]
+      },
+      {
+        title: 'View listing',
+        desc: 'Listing details loaded; images served via CDN.',
+        active: ['catalog','cdn','cache'],
+        edges: [['index','catalog'], ['catalog','cdn'], ['catalog','cache']]
+      },
+      {
+        title: 'Chat',
+        desc: 'Chat uses realtime messaging and notifications.',
+        active: ['chat','realtime','notify'],
+        edges: [['client','chat'], ['chat','realtime'], ['chat','notify']]
+      },
+      {
+        title: 'Lead and conversion',
+        desc: 'Leads tracked; analytics measures conversion funnel.',
+        active: ['leads','events','analytics'],
+        edges: [['chat','leads'], ['leads','events'], ['events','analytics']]
+      },
+      {
+        title: 'Trust and safety',
+        desc: 'Risk and moderation detect fraud and abuse.',
+        active: ['risk','moderation','reports'],
+        edges: [['events','risk'], ['risk','moderation'], ['moderation','reports']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Notifications delivered for messages and leads.',
+        active: ['notify','push','client'],
+        edges: [['leads','notify'], ['notify','push'], ['push','client']]
+      }
+    ]
+  },
+
+  'facebook-marketplace': {
+    title: 'Facebook Marketplace',
+    steps: [
+      {
+        title: 'Browse listings',
+        desc: 'Client loads feed/search with ranking and caching.',
+        active: ['client','feed','rank'],
+        edges: [['client','feed'], ['feed','rank']]
+      },
+      {
+        title: 'View listing',
+        desc: 'Listing details loaded; images served via CDN.',
+        active: ['catalog','cdn','cache'],
+        edges: [['feed','catalog'], ['catalog','cdn'], ['catalog','cache']]
+      },
+      {
+        title: 'Message seller',
+        desc: 'Messenger chat uses realtime messaging and notifications.',
+        active: ['chat','realtime','notify'],
+        edges: [['client','chat'], ['chat','realtime'], ['chat','notify']]
+      },
+      {
+        title: 'Payments (if enabled)',
+        desc: 'Payments processed; escrow/ledger updated.',
+        active: ['payments','escrow','ledger'],
+        edges: [['chat','payments'], ['payments','escrow'], ['escrow','ledger']]
+      },
+      {
+        title: 'Trust and safety',
+        desc: 'Risk and moderation detect fraud and abuse.',
+        active: ['risk','moderation','reports'],
+        edges: [['chat','risk'], ['risk','moderation'], ['moderation','reports']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Notifications delivered for messages and offers.',
+        active: ['notify','push','client'],
+        edges: [['chat','notify'], ['notify','push'], ['push','client']]
+      }
+    ]
+  },
+
+  wish: {
+    title: 'Wish',
+    steps: [
+      {
+        title: 'Browse products',
+        desc: 'Client loads feed/search with ranking and caching.',
+        active: ['client','feed','rank'],
+        edges: [['client','feed'], ['feed','rank']]
+      },
+      {
+        title: 'Search and details',
+        desc: 'Search queries index; catalog returns details; cache used.',
+        active: ['search','index','catalog'],
+        edges: [['client','search'], ['search','index'], ['index','catalog']]
+      },
+      {
+        title: 'Cart and pricing',
+        desc: 'Cart persists; pricing and promos compute totals.',
+        active: ['cart','pricing','promos'],
+        edges: [['client','cart'], ['cart','pricing'], ['pricing','promos']]
+      },
+      {
+        title: 'Checkout and payment',
+        desc: 'Payments processed with risk checks; order created.',
+        active: ['checkout','payments','risk'],
+        edges: [['cart','checkout'], ['checkout','payments'], ['payments','risk']]
+      },
+      {
+        title: 'Fulfillment and tracking',
+        desc: 'Fulfillment dispatches; tracking updates; notifications sent.',
+        active: ['orders','fulfillment','tracking'],
+        edges: [['payments','orders'], ['orders','fulfillment'], ['fulfillment','tracking']]
+      },
+      {
+        title: 'Returns and refunds',
+        desc: 'Returns handled; refunds adjust ledger.',
+        active: ['returns','refunds','ledger'],
+        edges: [['client','returns'], ['returns','refunds'], ['refunds','ledger']]
+      }
+    ]
+  }
 };
 
 export function flowForSystem(sys) {
