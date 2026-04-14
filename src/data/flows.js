@@ -5729,6 +5729,427 @@ export const FLOWS = {
       }
     ]
   }
+  ,
+
+  dominos: {
+    title: 'Domino’s',
+    steps: [
+      {
+        title: 'Browse menu',
+        desc: 'Client loads menu, offers, and store availability with caching.',
+        active: ['client','catalog','cache'],
+        edges: [['client','catalog'], ['catalog','cache']]
+      },
+      {
+        title: 'Build order',
+        desc: 'Cart and pricing compute totals, coupons, and delivery fees.',
+        active: ['cart','pricing','promos'],
+        edges: [['client','cart'], ['cart','pricing'], ['pricing','promos']]
+      },
+      {
+        title: 'Checkout and pay',
+        desc: 'Payment intent created; authorization completes; ledger updated.',
+        active: ['payments','risk','ledger'],
+        edges: [['cart','payments'], ['payments','risk'], ['payments','ledger']]
+      },
+      {
+        title: 'Send to store',
+        desc: 'Order routed to store POS/kitchen system; confirmation returned.',
+        active: ['orders','pos','notify'],
+        edges: [['ledger','orders'], ['orders','pos'], ['orders','notify']]
+      },
+      {
+        title: 'Pizza tracker',
+        desc: 'Status updates stream from store and delivery to client tracker.',
+        active: ['tracking','realtime','client'],
+        edges: [['pos','tracking'], ['tracking','realtime'], ['realtime','client']]
+      },
+      {
+        title: 'Support and refunds',
+        desc: 'Issues handled; refunds processed and ledger adjusted.',
+        active: ['support','refunds','ledger'],
+        edges: [['orders','support'], ['support','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  'mcdonalds-app': {
+    title: 'McDonald’s App',
+    steps: [
+      {
+        title: 'Browse menu and deals',
+        desc: 'Client loads menu, deals, and store availability with caching.',
+        active: ['client','catalog','cache'],
+        edges: [['client','catalog'], ['catalog','cache']]
+      },
+      {
+        title: 'Build cart',
+        desc: 'Cart persists items; pricing and promos applied.',
+        active: ['cart','pricing','promos'],
+        edges: [['client','cart'], ['cart','pricing'], ['pricing','promos']]
+      },
+      {
+        title: 'Order and payment',
+        desc: 'Payment intent created; risk checks; order created.',
+        active: ['payments','risk','orders'],
+        edges: [['cart','payments'], ['payments','risk'], ['payments','orders']]
+      },
+      {
+        title: 'Send to store',
+        desc: 'Order sent to store POS/kitchen; prep status updated.',
+        active: ['pos','kitchen','tracking'],
+        edges: [['orders','pos'], ['pos','kitchen'], ['kitchen','tracking']]
+      },
+      {
+        title: 'Pickup or delivery tracking',
+        desc: 'Status updates stream to client; notifications sent.',
+        active: ['tracking','notify','push'],
+        edges: [['tracking','notify'], ['notify','push'], ['push','client']]
+      },
+      {
+        title: 'Loyalty and offers',
+        desc: 'Loyalty points update and offers personalized.',
+        active: ['loyalty','ledger','rank'],
+        edges: [['orders','loyalty'], ['loyalty','ledger'], ['loyalty','rank']]
+      }
+    ]
+  },
+
+  'google-pay': {
+    title: 'Google Pay',
+    steps: [
+      {
+        title: 'Authenticate',
+        desc: 'User authenticates; device binding and risk checks run.',
+        active: ['client','auth','risk'],
+        edges: [['client','auth'], ['auth','risk']]
+      },
+      {
+        title: 'Create payment',
+        desc: 'Payment intent created; routed to UPI rails.',
+        active: ['payments','routing','upi'],
+        edges: [['client','payments'], ['payments','routing'], ['routing','upi']]
+      },
+      {
+        title: 'Authorization',
+        desc: 'Bank authorizes; status returned; ledger updated.',
+        active: ['bank','status','ledger'],
+        edges: [['upi','bank'], ['bank','status'], ['status','ledger']]
+      },
+      {
+        title: 'Merchant callback',
+        desc: 'Callbacks/webhooks notify merchant and create receipts.',
+        active: ['webhooks','merchant','notify'],
+        edges: [['status','webhooks'], ['webhooks','merchant'], ['status','notify']]
+      },
+      {
+        title: 'Rewards',
+        desc: 'Rewards computed and offers personalized.',
+        active: ['rewards','offers','rank'],
+        edges: [['status','rewards'], ['rewards','offers'], ['offers','rank']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics aggregates payments and funnel metrics.',
+        active: ['analytics','warehouse','reports'],
+        edges: [['ledger','analytics'], ['analytics','warehouse'], ['warehouse','reports']]
+      }
+    ]
+  },
+
+  bhim: {
+    title: 'BHIM',
+    steps: [
+      {
+        title: 'Authenticate and link bank',
+        desc: 'User authenticates and links bank account; risk checks run.',
+        active: ['client','auth','bank','risk'],
+        edges: [['client','auth'], ['auth','bank'], ['auth','risk']]
+      },
+      {
+        title: 'Create UPI payment',
+        desc: 'Payment intent created and routed to UPI switch.',
+        active: ['payments','routing','upi'],
+        edges: [['client','payments'], ['payments','routing'], ['routing','upi']]
+      },
+      {
+        title: 'Authorization',
+        desc: 'Bank authorizes and returns status; ledger updated.',
+        active: ['bank','status','ledger'],
+        edges: [['upi','bank'], ['bank','status'], ['status','ledger']]
+      },
+      {
+        title: 'Receipts and notifications',
+        desc: 'Receipt generated; push notifications delivered.',
+        active: ['receipts','notify','push'],
+        edges: [['status','receipts'], ['receipts','notify'], ['notify','push']]
+      },
+      {
+        title: 'Disputes and reversals',
+        desc: 'Dispute filed; reversal/chargeback flows update ledger.',
+        active: ['disputes','refunds','ledger'],
+        edges: [['client','disputes'], ['disputes','refunds'], ['refunds','ledger']]
+      },
+      {
+        title: 'Reports',
+        desc: 'Analytics aggregates transactions and generates reports.',
+        active: ['analytics','warehouse','reports'],
+        edges: [['ledger','analytics'], ['analytics','warehouse'], ['warehouse','reports']]
+      }
+    ]
+  },
+
+  'hdfc-bank-app': {
+    title: 'HDFC Bank App',
+    steps: [
+      {
+        title: 'Login',
+        desc: 'Authenticate user; device binding and risk checks run.',
+        active: ['client','auth','risk'],
+        edges: [['client','auth'], ['auth','risk']]
+      },
+      {
+        title: 'Fetch accounts',
+        desc: 'Core banking fetches balances and transactions; cache used.',
+        active: ['accounts','core','cache'],
+        edges: [['client','accounts'], ['accounts','core'], ['core','cache']]
+      },
+      {
+        title: 'Transfer funds',
+        desc: 'Payment created and routed to IMPS or NEFT rails.',
+        active: ['payments','routing','imps'],
+        edges: [['client','payments'], ['payments','routing'], ['routing','imps']]
+      },
+      {
+        title: 'Execute in core banking',
+        desc: 'Core banking executes debit/credit and updates ledger.',
+        active: ['core','ledger','status'],
+        edges: [['imps','core'], ['core','ledger'], ['core','status']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Alerts delivered via SMS, email, and push.',
+        active: ['notify','sms','push'],
+        edges: [['status','notify'], ['notify','sms'], ['notify','push']]
+      },
+      {
+        title: 'Statements and reports',
+        desc: 'Reporting compiles statements and exports.',
+        active: ['reports','warehouse','exports'],
+        edges: [['ledger','reports'], ['reports','warehouse'], ['reports','exports']]
+      }
+    ]
+  },
+
+  'icici-imobile': {
+    title: 'ICICI iMobile',
+    steps: [
+      {
+        title: 'Login',
+        desc: 'Authenticate user; device binding and risk checks run.',
+        active: ['client','auth','risk'],
+        edges: [['client','auth'], ['auth','risk']]
+      },
+      {
+        title: 'Fetch accounts',
+        desc: 'Core banking fetches balances and transactions; cache used.',
+        active: ['accounts','core','cache'],
+        edges: [['client','accounts'], ['accounts','core'], ['core','cache']]
+      },
+      {
+        title: 'Transfer funds',
+        desc: 'Payment created and routed to IMPS, NEFT, or RTGS rails.',
+        active: ['payments','routing','imps'],
+        edges: [['client','payments'], ['payments','routing'], ['routing','imps']]
+      },
+      {
+        title: 'Execute in core banking',
+        desc: 'Core banking executes debit/credit and updates ledger.',
+        active: ['core','ledger','status'],
+        edges: [['imps','core'], ['core','ledger'], ['core','status']]
+      },
+      {
+        title: 'Beneficiary management',
+        desc: 'Beneficiary add/edit uses approvals and risk controls.',
+        active: ['beneficiaries','approvals','risk'],
+        edges: [['client','beneficiaries'], ['beneficiaries','approvals'], ['approvals','risk']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Alerts delivered via push and SMS.',
+        active: ['notify','push','sms'],
+        edges: [['status','notify'], ['notify','push'], ['notify','sms']]
+      }
+    ]
+  },
+
+  'axis-mobile': {
+    title: 'Axis Mobile',
+    steps: [
+      {
+        title: 'Login',
+        desc: 'Authenticate user; device binding and risk checks run.',
+        active: ['client','auth','risk'],
+        edges: [['client','auth'], ['auth','risk']]
+      },
+      {
+        title: 'Fetch accounts',
+        desc: 'Core banking fetches balances and transactions; cache used.',
+        active: ['accounts','core','cache'],
+        edges: [['client','accounts'], ['accounts','core'], ['core','cache']]
+      },
+      {
+        title: 'Pay bills',
+        desc: 'Bill payment routed to biller network and confirmed.',
+        active: ['billpay','routing','biller'],
+        edges: [['client','billpay'], ['billpay','routing'], ['routing','biller']]
+      },
+      {
+        title: 'Transfers',
+        desc: 'Transfers routed to IMPS/NEFT and executed in core banking.',
+        active: ['payments','routing','imps'],
+        edges: [['client','payments'], ['payments','routing'], ['routing','imps']]
+      },
+      {
+        title: 'Ledger and status',
+        desc: 'Core banking updates ledger and returns status.',
+        active: ['core','ledger','status'],
+        edges: [['imps','core'], ['core','ledger'], ['core','status']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Alerts delivered via push, SMS, and email.',
+        active: ['notify','push','sms'],
+        edges: [['status','notify'], ['notify','push'], ['notify','sms']]
+      }
+    ]
+  },
+
+  'kotak-811': {
+    title: 'Kotak 811',
+    steps: [
+      {
+        title: 'Onboarding',
+        desc: 'KYC onboarding verifies identity and creates account in core banking.',
+        active: ['client','kyc','core'],
+        edges: [['client','kyc'], ['kyc','core']]
+      },
+      {
+        title: 'Login',
+        desc: 'Authenticate user; device binding and risk checks run.',
+        active: ['client','auth','risk'],
+        edges: [['client','auth'], ['auth','risk']]
+      },
+      {
+        title: 'Fetch accounts',
+        desc: 'Core banking fetches balances and transactions; cache used.',
+        active: ['accounts','core','cache'],
+        edges: [['client','accounts'], ['accounts','core'], ['core','cache']]
+      },
+      {
+        title: 'Transfers',
+        desc: 'Transfers routed to IMPS/NEFT and executed in core banking.',
+        active: ['payments','routing','imps'],
+        edges: [['client','payments'], ['payments','routing'], ['routing','imps']]
+      },
+      {
+        title: 'Cards and controls',
+        desc: 'Card management updates limits and controls with approvals.',
+        active: ['cards','controls','approvals'],
+        edges: [['client','cards'], ['cards','controls'], ['controls','approvals']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Alerts delivered via push and SMS.',
+        active: ['notify','push','sms'],
+        edges: [['payments','notify'], ['notify','push'], ['notify','sms']]
+      }
+    ]
+  },
+
+  gitlab: {
+    title: 'GitLab',
+    steps: [
+      {
+        title: 'Authenticate and load project',
+        desc: 'Client authenticates; loads project metadata and permissions.',
+        active: ['client','auth','projects'],
+        edges: [['client','auth'], ['auth','projects']]
+      },
+      {
+        title: 'Clone and push',
+        desc: 'Git operations hit git-http/ssh; object storage and cache used.',
+        active: ['git','storage','cache'],
+        edges: [['client','git'], ['git','storage'], ['git','cache']]
+      },
+      {
+        title: 'Create merge request',
+        desc: 'Merge request created; hooks fire; CI pipeline created.',
+        active: ['mrs','hooks','ci'],
+        edges: [['client','mrs'], ['mrs','hooks'], ['hooks','ci']]
+      },
+      {
+        title: 'CI pipeline',
+        desc: 'Runner executes jobs; artifacts stored; statuses updated.',
+        active: ['runner','artifacts','status'],
+        edges: [['ci','runner'], ['runner','artifacts'], ['ci','status']]
+      },
+      {
+        title: 'Review and approvals',
+        desc: 'Code review comments and approvals persisted; notifications sent.',
+        active: ['reviews','approvals','notify'],
+        edges: [['mrs','reviews'], ['reviews','approvals'], ['approvals','notify']]
+      },
+      {
+        title: 'Merge and deploy',
+        desc: 'Merge updates repo; CD deploy triggers; metrics updated.',
+        active: ['merge','deploy','metrics'],
+        edges: [['approvals','merge'], ['merge','deploy'], ['deploy','metrics']]
+      }
+    ]
+  },
+
+  'stack-overflow': {
+    title: 'Stack Overflow',
+    steps: [
+      {
+        title: 'Search and browse',
+        desc: 'Client searches; index and cache serve results.',
+        active: ['client','search','index'],
+        edges: [['client','search'], ['search','index']]
+      },
+      {
+        title: 'Open question',
+        desc: 'Question fetched; related content and recommendations loaded.',
+        active: ['questions','cache','recos'],
+        edges: [['search','questions'], ['questions','cache'], ['questions','recos']]
+      },
+      {
+        title: 'Post answer',
+        desc: 'Answer write persists; moderation and spam checks run.',
+        active: ['answers','write','moderation'],
+        edges: [['client','answers'], ['answers','write'], ['write','moderation']]
+      },
+      {
+        title: 'Voting and reputation',
+        desc: 'Votes update reputation; leaderboards computed.',
+        active: ['votes','rep','leaderboards'],
+        edges: [['client','votes'], ['votes','rep'], ['rep','leaderboards']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Events trigger notifications and emails.',
+        active: ['events','notify','email'],
+        edges: [['write','events'], ['events','notify'], ['notify','email']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics aggregates engagement and content metrics.',
+        active: ['analytics','warehouse','reports'],
+        edges: [['events','analytics'], ['analytics','warehouse'], ['warehouse','reports']]
+      }
+    ]
+  }
 };
 
 export function flowForSystem(sys) {
