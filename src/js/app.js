@@ -2564,13 +2564,20 @@ function renderArchitectureDiagram(sys, step) {
     const mid = Math.abs(x1 * 13 + x2 * 7 + y1 * 11 + y2 * 5).toFixed(0);
     const markerId = `arch-arrow-${mid}`;
     const mx = Math.round((x1 + x2) / 2);
-    const d = `M${x1} ${y1} L ${mx} ${y1} L ${mx} ${y2} L ${x2} ${y2}`;
+    // Add clearance so edges don't go through boxes
+    const clearance = 22;
+    const dir = (y2 >= y1) ? 1 : -1;
+    const y1c = y1 + dir * clearance;
+    const y2c = y2 - dir * clearance;
+    // Route: out from source, over at mid, down/up, into target
+    const d = `M${x1} ${y1} L ${x1} ${y1c} L ${mx} ${y1c} L ${mx} ${y2c} L ${x2} ${y2c} L ${x2} ${y2}`;
     return `
       <defs>
         <marker id="${markerId}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(123,125,248,0.9)"/>
         </marker>
       </defs>
+      <path d="${d}" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 8" opacity="0.95"/>
       <path d="${d}" fill="none" stroke="rgba(123,125,248,0.55)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#${markerId})"/>
       ${label ? `<text x="${mx}" y="${Math.min(y1, y2) - 10}" text-anchor="middle" fill="rgba(123,125,248,0.65)" font-size="12" font-family="Inter, Arial" font-weight="800">${escapeXml(label)}</text>` : ''}
     `;
@@ -2582,7 +2589,8 @@ function renderArchitectureDiagram(sys, step) {
       const na = layout.nodes[a];
       const nb = layout.nodes[b];
       if (!na || !nb) return '';
-      return arrowOrtho(na.x + 240, na.y + 30, nb.x, nb.y + 30, label || '');
+      // Connect from right edge of source to left edge of target with more padding
+      return arrowOrtho(na.x + 252, na.y + 30, nb.x - 12, nb.y + 30, label || '');
     })
     .join('');
 
