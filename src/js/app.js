@@ -4396,6 +4396,247 @@ const SYSTEM_LAYOUTS = {
 
   ,
 
+  klarna: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','merchant','checkout','risk','auth','decision','orders','authz','capture','ledger','settlement','billing','payments','collections','disputes','refunds'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      merchant: { x: 140, y: 400, label: 'Merchant', colorKey: 'client' },
+      checkout: { x: 380, y: 240, label: 'Checkout', colorKey: 'api' },
+      risk: { x: 620, y: 180, label: 'Risk', colorKey: 'api' },
+      auth: { x: 620, y: 320, label: 'Auth', colorKey: 'api' },
+      decision: { x: 860, y: 240, label: 'Decision', colorKey: 'api' },
+      orders: { x: 1100, y: 240, label: 'Orders', colorKey: 'store' },
+      authz: { x: 1100, y: 400, label: 'AuthZ', colorKey: 'api' },
+      capture: { x: 860, y: 400, label: 'Capture', colorKey: 'api' },
+      ledger: { x: 620, y: 460, label: 'Ledger', colorKey: 'store' },
+      settlement: { x: 860, y: 460, label: 'Settlement', colorKey: 'api' },
+      billing: { x: 1100, y: 560, label: 'Billing', colorKey: 'api' },
+      payments: { x: 860, y: 560, label: 'Payments', colorKey: 'external' },
+      collections: { x: 1100, y: 720, label: 'Collections', colorKey: 'api' },
+      disputes: { x: 380, y: 560, label: 'Disputes', colorKey: 'api' },
+      refunds: { x: 380, y: 720, label: 'Refunds', colorKey: 'api' }
+    }
+  },
+
+  daraz: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','search','catalog','cart','pricing','promos','checkout','payments','risk','orders','inventory','notify','fulfillment','carrier','tracking','returns','refunds','ledger'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      search: { x: 380, y: 180, label: 'Search', colorKey: 'api' },
+      catalog: { x: 620, y: 180, label: 'Catalog', colorKey: 'store' },
+      cart: { x: 380, y: 320, label: 'Cart', colorKey: 'store' },
+      pricing: { x: 620, y: 320, label: 'Pricing', colorKey: 'api' },
+      promos: { x: 860, y: 320, label: 'Promos', colorKey: 'api' },
+      checkout: { x: 380, y: 460, label: 'Checkout', colorKey: 'api' },
+      payments: { x: 620, y: 460, label: 'Payments', colorKey: 'external' },
+      risk: { x: 860, y: 460, label: 'Risk', colorKey: 'api' },
+      orders: { x: 1100, y: 460, label: 'Orders', colorKey: 'store' },
+      inventory: { x: 1100, y: 320, label: 'Inventory', colorKey: 'store' },
+      notify: { x: 860, y: 180, label: 'Notify', colorKey: 'external' },
+      fulfillment: { x: 620, y: 600, label: 'Fulfillment', colorKey: 'external' },
+      carrier: { x: 860, y: 600, label: 'Carrier', colorKey: 'external' },
+      tracking: { x: 1100, y: 600, label: 'Tracking', colorKey: 'stream' },
+      returns: { x: 380, y: 740, label: 'Returns', colorKey: 'api' },
+      refunds: { x: 620, y: 740, label: 'Refunds', colorKey: 'api' },
+      ledger: { x: 860, y: 740, label: 'Ledger', colorKey: 'store' }
+    }
+  },
+
+  shopee: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','feed','rank','search','index','cart','pricing','payments','orders','escrow','ledger','logistics','carrier','tracking','returns','refunds','notify'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      feed: { x: 380, y: 180, label: 'Feed', colorKey: 'api' },
+      rank: { x: 620, y: 180, label: 'Ranking', colorKey: 'api' },
+      search: { x: 380, y: 320, label: 'Search', colorKey: 'api' },
+      index: { x: 620, y: 320, label: 'Index', colorKey: 'store' },
+      cart: { x: 380, y: 460, label: 'Cart', colorKey: 'store' },
+      pricing: { x: 620, y: 460, label: 'Pricing', colorKey: 'api' },
+      payments: { x: 860, y: 460, label: 'Payments', colorKey: 'external' },
+      orders: { x: 1100, y: 460, label: 'Orders', colorKey: 'store' },
+      escrow: { x: 860, y: 320, label: 'Escrow', colorKey: 'api' },
+      ledger: { x: 1100, y: 320, label: 'Ledger', colorKey: 'store' },
+      logistics: { x: 620, y: 600, label: 'Logistics', colorKey: 'external' },
+      carrier: { x: 860, y: 600, label: 'Carrier', colorKey: 'external' },
+      tracking: { x: 1100, y: 600, label: 'Tracking', colorKey: 'stream' },
+      returns: { x: 380, y: 740, label: 'Returns', colorKey: 'api' },
+      refunds: { x: 620, y: 740, label: 'Refunds', colorKey: 'api' },
+      notify: { x: 860, y: 740, label: 'Notify', colorKey: 'external' }
+    }
+  },
+
+  lazada: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','catalog','cache','cart','pricing','promos','payments','risk','ledger','orders','inventory','notify','fulfillment','carrier','tracking','support','returns','refunds'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      catalog: { x: 380, y: 180, label: 'Catalog', colorKey: 'store' },
+      cache: { x: 620, y: 180, label: 'Cache', colorKey: 'cache' },
+      cart: { x: 380, y: 320, label: 'Cart', colorKey: 'store' },
+      pricing: { x: 620, y: 320, label: 'Pricing', colorKey: 'api' },
+      promos: { x: 860, y: 320, label: 'Promos', colorKey: 'api' },
+      payments: { x: 620, y: 460, label: 'Payments', colorKey: 'external' },
+      risk: { x: 860, y: 460, label: 'Risk', colorKey: 'api' },
+      ledger: { x: 1100, y: 460, label: 'Ledger', colorKey: 'store' },
+      orders: { x: 1100, y: 320, label: 'Orders', colorKey: 'store' },
+      inventory: { x: 860, y: 180, label: 'Inventory', colorKey: 'store' },
+      notify: { x: 1100, y: 180, label: 'Notify', colorKey: 'external' },
+      fulfillment: { x: 620, y: 600, label: 'Fulfillment', colorKey: 'external' },
+      carrier: { x: 860, y: 600, label: 'Carrier', colorKey: 'external' },
+      tracking: { x: 1100, y: 600, label: 'Tracking', colorKey: 'stream' },
+      support: { x: 380, y: 600, label: 'Support', colorKey: 'external' },
+      returns: { x: 380, y: 740, label: 'Returns', colorKey: 'api' },
+      refunds: { x: 620, y: 740, label: 'Refunds', colorKey: 'api' }
+    }
+  },
+
+  nykaa: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','search','index','cart','pricing','promos','checkout','payments','risk','orders','inventory','fulfillment','carrier','tracking','returns','refunds','notify'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      search: { x: 380, y: 180, label: 'Search', colorKey: 'api' },
+      index: { x: 620, y: 180, label: 'Index', colorKey: 'store' },
+      cart: { x: 380, y: 320, label: 'Cart', colorKey: 'store' },
+      pricing: { x: 620, y: 320, label: 'Pricing', colorKey: 'api' },
+      promos: { x: 860, y: 320, label: 'Promos', colorKey: 'api' },
+      checkout: { x: 380, y: 460, label: 'Checkout', colorKey: 'api' },
+      payments: { x: 620, y: 460, label: 'Payments', colorKey: 'external' },
+      risk: { x: 860, y: 460, label: 'Risk', colorKey: 'api' },
+      orders: { x: 1100, y: 460, label: 'Orders', colorKey: 'store' },
+      inventory: { x: 1100, y: 320, label: 'Inventory', colorKey: 'store' },
+      fulfillment: { x: 860, y: 600, label: 'Fulfillment', colorKey: 'external' },
+      carrier: { x: 1100, y: 600, label: 'Carrier', colorKey: 'external' },
+      tracking: { x: 1100, y: 740, label: 'Tracking', colorKey: 'stream' },
+      notify: { x: 860, y: 740, label: 'Notify', colorKey: 'external' },
+      returns: { x: 380, y: 740, label: 'Returns', colorKey: 'api' },
+      refunds: { x: 620, y: 740, label: 'Refunds', colorKey: 'api' }
+    }
+  },
+
+  'booking-com': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','search','inventory','details','availability','cache','booking','pricing','hold','payments','risk','ledger','confirm','partner','notify','changes','refunds'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      search: { x: 380, y: 180, label: 'Search', colorKey: 'api' },
+      inventory: { x: 620, y: 180, label: 'Inventory', colorKey: 'store' },
+      details: { x: 380, y: 320, label: 'Details', colorKey: 'api' },
+      availability: { x: 620, y: 320, label: 'Availability', colorKey: 'api' },
+      cache: { x: 860, y: 320, label: 'Cache', colorKey: 'cache' },
+      booking: { x: 380, y: 460, label: 'Booking', colorKey: 'api' },
+      pricing: { x: 620, y: 460, label: 'Pricing', colorKey: 'api' },
+      hold: { x: 860, y: 460, label: 'Hold', colorKey: 'store' },
+      payments: { x: 1100, y: 460, label: 'Payments', colorKey: 'external' },
+      risk: { x: 1100, y: 320, label: 'Risk', colorKey: 'api' },
+      ledger: { x: 860, y: 600, label: 'Ledger', colorKey: 'store' },
+      confirm: { x: 620, y: 600, label: 'Confirm', colorKey: 'api' },
+      partner: { x: 380, y: 600, label: 'Partner', colorKey: 'external' },
+      notify: { x: 1100, y: 600, label: 'Notify', colorKey: 'external' },
+      changes: { x: 620, y: 740, label: 'Changes', colorKey: 'api' },
+      refunds: { x: 860, y: 740, label: 'Refunds', colorKey: 'api' }
+    }
+  },
+
+  'disney-plus': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','entitlements','home','recos','cache','catalog','drm','player','playback','cdn','ads','auction','analytics','metrics','warehouse'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      entitlements: { x: 620, y: 180, label: 'Entitlements', colorKey: 'store' },
+      home: { x: 380, y: 320, label: 'Home', colorKey: 'api' },
+      recos: { x: 620, y: 320, label: 'Recos', colorKey: 'api' },
+      cache: { x: 860, y: 320, label: 'Cache', colorKey: 'cache' },
+      catalog: { x: 380, y: 460, label: 'Catalog', colorKey: 'store' },
+      drm: { x: 620, y: 460, label: 'DRM', colorKey: 'api' },
+      player: { x: 860, y: 460, label: 'Player', colorKey: 'client' },
+      playback: { x: 380, y: 600, label: 'Playback', colorKey: 'api' },
+      cdn: { x: 620, y: 600, label: 'CDN', colorKey: 'cdn' },
+      ads: { x: 860, y: 600, label: 'Ads', colorKey: 'api' },
+      auction: { x: 1100, y: 600, label: 'Auction', colorKey: 'api' },
+      analytics: { x: 860, y: 740, label: 'Analytics', colorKey: 'store' },
+      metrics: { x: 620, y: 740, label: 'Metrics', colorKey: 'stream' },
+      warehouse: { x: 1100, y: 740, label: 'Warehouse', colorKey: 'store' }
+    }
+  },
+
+  soundcloud: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','home','recos','search','index','rank','player','playback','cdn','upload','transcode','catalog','ads','entitlements','ledger','events','analytics','warehouse'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      home: { x: 380, y: 180, label: 'Home', colorKey: 'api' },
+      recos: { x: 620, y: 180, label: 'Recos', colorKey: 'api' },
+      search: { x: 380, y: 320, label: 'Search', colorKey: 'api' },
+      index: { x: 620, y: 320, label: 'Index', colorKey: 'store' },
+      rank: { x: 860, y: 320, label: 'Ranking', colorKey: 'api' },
+      player: { x: 380, y: 460, label: 'Player', colorKey: 'client' },
+      playback: { x: 620, y: 460, label: 'Playback', colorKey: 'api' },
+      cdn: { x: 860, y: 460, label: 'CDN', colorKey: 'cdn' },
+      upload: { x: 380, y: 600, label: 'Upload', colorKey: 'api' },
+      transcode: { x: 620, y: 600, label: 'Transcode', colorKey: 'api' },
+      catalog: { x: 860, y: 600, label: 'Catalog', colorKey: 'store' },
+      ads: { x: 1100, y: 460, label: 'Ads', colorKey: 'api' },
+      entitlements: { x: 1100, y: 600, label: 'Entitlements', colorKey: 'store' },
+      ledger: { x: 1100, y: 740, label: 'Ledger', colorKey: 'store' },
+      events: { x: 620, y: 740, label: 'Events', colorKey: 'stream' },
+      analytics: { x: 860, y: 740, label: 'Analytics', colorKey: 'store' },
+      warehouse: { x: 1100, y: 880, label: 'Warehouse', colorKey: 'store' }
+    }
+  },
+
+  jiocinema: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','entitlements','home','recos','cache','catalog','drm','player','playback','cdn','ingest','transcode','metrics','analytics','warehouse'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      entitlements: { x: 620, y: 180, label: 'Entitlements', colorKey: 'store' },
+      home: { x: 380, y: 320, label: 'Home', colorKey: 'api' },
+      recos: { x: 620, y: 320, label: 'Recos', colorKey: 'api' },
+      cache: { x: 860, y: 320, label: 'Cache', colorKey: 'cache' },
+      catalog: { x: 380, y: 460, label: 'Catalog', colorKey: 'store' },
+      drm: { x: 620, y: 460, label: 'DRM', colorKey: 'api' },
+      player: { x: 860, y: 460, label: 'Player', colorKey: 'client' },
+      playback: { x: 380, y: 600, label: 'Playback', colorKey: 'api' },
+      cdn: { x: 620, y: 600, label: 'CDN', colorKey: 'cdn' },
+      ingest: { x: 380, y: 740, label: 'Ingest', colorKey: 'stream' },
+      transcode: { x: 620, y: 740, label: 'Transcode', colorKey: 'api' },
+      metrics: { x: 860, y: 600, label: 'Metrics', colorKey: 'stream' },
+      analytics: { x: 860, y: 740, label: 'Analytics', colorKey: 'store' },
+      warehouse: { x: 1100, y: 740, label: 'Warehouse', colorKey: 'store' }
+    }
+  },
+
+  hotstar: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','entitlements','home','recos','cache','catalog','drm','player','playback','cdn','ads','auction','metrics','analytics','warehouse'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      entitlements: { x: 620, y: 180, label: 'Entitlements', colorKey: 'store' },
+      home: { x: 380, y: 320, label: 'Home', colorKey: 'api' },
+      recos: { x: 620, y: 320, label: 'Recos', colorKey: 'api' },
+      cache: { x: 860, y: 320, label: 'Cache', colorKey: 'cache' },
+      catalog: { x: 380, y: 460, label: 'Catalog', colorKey: 'store' },
+      drm: { x: 620, y: 460, label: 'DRM', colorKey: 'api' },
+      player: { x: 860, y: 460, label: 'Player', colorKey: 'client' },
+      playback: { x: 380, y: 600, label: 'Playback', colorKey: 'api' },
+      cdn: { x: 620, y: 600, label: 'CDN', colorKey: 'cdn' },
+      ads: { x: 860, y: 600, label: 'Ads', colorKey: 'api' },
+      auction: { x: 1100, y: 600, label: 'Auction', colorKey: 'api' },
+      metrics: { x: 620, y: 740, label: 'Metrics', colorKey: 'stream' },
+      analytics: { x: 860, y: 740, label: 'Analytics', colorKey: 'store' },
+      warehouse: { x: 1100, y: 740, label: 'Warehouse', colorKey: 'store' }
+    }
+  }
+
+  ,
+
   figma: {
     viewBox: '0 0 1200 960',
     primaryPath: ['client','auth','files','cache','editor','ops','realtime','merge','store','comments','notify','push','export','render','cdn','sharing','authz','audit'],
@@ -7005,6 +7246,367 @@ const ARCH_LAYOUTS = {
       if (stepIdx === 4) e.push(['client','sharing','share'], ['sharing','authz','authz'], ['authz','audit','audit']);
       if (stepIdx === 5) e.push(['vault','verify','verify'], ['verify','signatures','sig'], ['signatures','issuers','issuer']);
       if (stepIdx === 6) e.push(['sharing','notify','notify'], ['notify','push','push'], ['push','client','client']);
+      return e;
+    }
+  },
+
+  // ----- Batch 12 (Architecture - from sheet) -----
+
+  klarna: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Klarna Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','merchant','checkout','risk','auth','decision','orders','authz','capture','ledger','settlement','billing','payments','collections','disputes','refunds'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      merchant: { x: 40, y: 380, label: 'Merchant' },
+      checkout: { x: 320, y: 240, label: 'Checkout' },
+      risk: { x: 600, y: 180, label: 'Risk' },
+      auth: { x: 600, y: 300, label: 'Auth' },
+      decision: { x: 880, y: 240, label: 'Decision' },
+      orders: { x: 1160, y: 240, label: 'Orders' },
+      authz: { x: 1160, y: 380, label: 'AuthZ' },
+      capture: { x: 880, y: 380, label: 'Capture' },
+      ledger: { x: 600, y: 460, label: 'Ledger' },
+      settlement: { x: 880, y: 460, label: 'Settlement' },
+      billing: { x: 1160, y: 560, label: 'Billing' },
+      payments: { x: 880, y: 560, label: 'Payments' },
+      collections: { x: 1160, y: 720, label: 'Collections' },
+      disputes: { x: 320, y: 560, label: 'Disputes' },
+      refunds: { x: 320, y: 720, label: 'Refunds' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','checkout','choose'], ['merchant','checkout','session']);
+      if (stepIdx === 2) e.push(['checkout','risk','risk'], ['risk','auth','auth'], ['risk','decision','decision']);
+      if (stepIdx === 3) e.push(['decision','orders','order'], ['orders','authz','authz'], ['authz','merchant','merchant']);
+      if (stepIdx === 4) e.push(['merchant','capture','capture'], ['capture','ledger','ledger'], ['ledger','settlement','settle']);
+      if (stepIdx === 5) e.push(['settlement','billing','bill'], ['billing','payments','pay'], ['billing','collections','collect']);
+      if (stepIdx === 6) e.push(['client','disputes','dispute'], ['disputes','refunds','refund'], ['refunds','merchant','merchant']);
+      return e;
+    }
+  },
+
+  daraz: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Daraz Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','search','catalog','cart','pricing','promos','checkout','payments','risk','orders','inventory','notify','fulfillment','carrier','tracking','returns','refunds','ledger'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      search: { x: 320, y: 160, label: 'Search' },
+      catalog: { x: 600, y: 160, label: 'Catalog' },
+      cart: { x: 320, y: 300, label: 'Cart' },
+      pricing: { x: 600, y: 300, label: 'Pricing' },
+      promos: { x: 880, y: 300, label: 'Promos' },
+      checkout: { x: 320, y: 440, label: 'Checkout' },
+      payments: { x: 600, y: 440, label: 'Payments' },
+      risk: { x: 880, y: 440, label: 'Risk' },
+      orders: { x: 1160, y: 440, label: 'Orders' },
+      inventory: { x: 1160, y: 300, label: 'Inventory' },
+      notify: { x: 880, y: 160, label: 'Notify' },
+      fulfillment: { x: 600, y: 580, label: 'Fulfillment' },
+      carrier: { x: 880, y: 580, label: 'Carrier' },
+      tracking: { x: 1160, y: 580, label: 'Tracking' },
+      returns: { x: 320, y: 720, label: 'Returns' },
+      refunds: { x: 600, y: 720, label: 'Refunds' },
+      ledger: { x: 880, y: 720, label: 'Ledger' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','search','search'], ['search','catalog','catalog']);
+      if (stepIdx === 2) e.push(['client','cart','cart'], ['cart','pricing','price'], ['pricing','promos','promos']);
+      if (stepIdx === 3) e.push(['cart','checkout','checkout'], ['checkout','payments','pay'], ['payments','risk','risk']);
+      if (stepIdx === 4) e.push(['payments','orders','order'], ['orders','inventory','reserve'], ['orders','notify','notify']);
+      if (stepIdx === 5) e.push(['orders','fulfillment','fulfill'], ['fulfillment','carrier','ship'], ['carrier','tracking','track']);
+      if (stepIdx === 6) e.push(['client','returns','return'], ['returns','refunds','refund'], ['refunds','ledger','ledger']);
+      return e;
+    }
+  },
+
+  shopee: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Shopee Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','feed','rank','search','index','cart','pricing','payments','orders','escrow','ledger','logistics','carrier','tracking','returns','refunds','notify'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      feed: { x: 320, y: 160, label: 'Feed' },
+      rank: { x: 600, y: 160, label: 'Ranking' },
+      search: { x: 320, y: 300, label: 'Search' },
+      index: { x: 600, y: 300, label: 'Index' },
+      cart: { x: 320, y: 440, label: 'Cart' },
+      pricing: { x: 600, y: 440, label: 'Pricing' },
+      payments: { x: 880, y: 440, label: 'Payments' },
+      orders: { x: 1160, y: 440, label: 'Orders' },
+      escrow: { x: 880, y: 300, label: 'Escrow' },
+      ledger: { x: 1160, y: 300, label: 'Ledger' },
+      logistics: { x: 600, y: 580, label: 'Logistics' },
+      carrier: { x: 880, y: 580, label: 'Carrier' },
+      tracking: { x: 1160, y: 580, label: 'Tracking' },
+      returns: { x: 320, y: 720, label: 'Returns' },
+      refunds: { x: 600, y: 720, label: 'Refunds' },
+      notify: { x: 880, y: 720, label: 'Notify' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','feed','feed'], ['feed','rank','rank']);
+      if (stepIdx === 2) e.push(['client','search','search'], ['search','index','index'], ['search','rank','rank']);
+      if (stepIdx === 3) e.push(['client','cart','cart'], ['cart','pricing','price'], ['pricing','payments','pay']);
+      if (stepIdx === 4) e.push(['payments','orders','order'], ['orders','escrow','escrow'], ['escrow','ledger','ledger']);
+      if (stepIdx === 5) e.push(['orders','logistics','logistics'], ['logistics','carrier','carrier'], ['carrier','tracking','track']);
+      if (stepIdx === 6) e.push(['client','returns','return'], ['returns','refunds','refund'], ['refunds','notify','notify']);
+      return e;
+    }
+  },
+
+  lazada: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Lazada Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','catalog','cache','cart','pricing','promos','payments','risk','ledger','orders','inventory','notify','fulfillment','carrier','tracking','support','returns','refunds'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      catalog: { x: 320, y: 160, label: 'Catalog' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      inventory: { x: 880, y: 160, label: 'Inventory' },
+      notify: { x: 1160, y: 160, label: 'Notify' },
+      cart: { x: 320, y: 300, label: 'Cart' },
+      pricing: { x: 600, y: 300, label: 'Pricing' },
+      promos: { x: 880, y: 300, label: 'Promos' },
+      orders: { x: 1160, y: 300, label: 'Orders' },
+      payments: { x: 600, y: 440, label: 'Payments' },
+      risk: { x: 880, y: 440, label: 'Risk' },
+      ledger: { x: 1160, y: 440, label: 'Ledger' },
+      support: { x: 320, y: 580, label: 'Support' },
+      fulfillment: { x: 600, y: 580, label: 'Fulfillment' },
+      carrier: { x: 880, y: 580, label: 'Carrier' },
+      tracking: { x: 1160, y: 580, label: 'Tracking' },
+      returns: { x: 320, y: 720, label: 'Returns' },
+      refunds: { x: 600, y: 720, label: 'Refunds' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','catalog','catalog'], ['catalog','cache','cache']);
+      if (stepIdx === 2) e.push(['client','cart','cart'], ['cart','pricing','price'], ['pricing','promos','promos']);
+      if (stepIdx === 3) e.push(['client','payments','pay'], ['payments','risk','risk'], ['payments','ledger','ledger']);
+      if (stepIdx === 4) e.push(['payments','orders','order'], ['orders','inventory','reserve'], ['orders','notify','notify']);
+      if (stepIdx === 5) e.push(['orders','fulfillment','fulfill'], ['fulfillment','carrier','ship'], ['carrier','tracking','track']);
+      if (stepIdx === 6) e.push(['client','support','support'], ['support','returns','return'], ['returns','refunds','refund']);
+      return e;
+    }
+  },
+
+  nykaa: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Nykaa Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','search','index','cart','pricing','promos','checkout','payments','risk','orders','inventory','fulfillment','carrier','tracking','returns','refunds','notify'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      search: { x: 320, y: 160, label: 'Search' },
+      index: { x: 600, y: 160, label: 'Index' },
+      cart: { x: 320, y: 300, label: 'Cart' },
+      pricing: { x: 600, y: 300, label: 'Pricing' },
+      promos: { x: 880, y: 300, label: 'Promos' },
+      checkout: { x: 320, y: 440, label: 'Checkout' },
+      payments: { x: 600, y: 440, label: 'Payments' },
+      risk: { x: 880, y: 440, label: 'Risk' },
+      orders: { x: 1160, y: 440, label: 'Orders' },
+      inventory: { x: 1160, y: 300, label: 'Inventory' },
+      fulfillment: { x: 880, y: 580, label: 'Fulfillment' },
+      carrier: { x: 1160, y: 580, label: 'Carrier' },
+      tracking: { x: 1160, y: 720, label: 'Tracking' },
+      notify: { x: 880, y: 720, label: 'Notify' },
+      returns: { x: 320, y: 720, label: 'Returns' },
+      refunds: { x: 600, y: 720, label: 'Refunds' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','search','search'], ['search','index','index']);
+      if (stepIdx === 2) e.push(['client','cart','cart'], ['cart','pricing','price'], ['pricing','promos','promos']);
+      if (stepIdx === 3) e.push(['cart','checkout','checkout'], ['checkout','payments','pay'], ['payments','risk','risk']);
+      if (stepIdx === 4) e.push(['payments','orders','order'], ['orders','inventory','reserve'], ['orders','fulfillment','fulfill']);
+      if (stepIdx === 5) e.push(['fulfillment','carrier','ship'], ['carrier','tracking','track'], ['tracking','notify','notify']);
+      if (stepIdx === 6) e.push(['client','returns','return'], ['returns','refunds','refund'], ['refunds','notify','notify']);
+      return e;
+    }
+  },
+
+  'booking-com': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Booking.com Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','search','inventory','details','availability','cache','booking','pricing','hold','payments','risk','ledger','confirm','partner','notify','changes','refunds'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      search: { x: 320, y: 160, label: 'Search' },
+      inventory: { x: 600, y: 160, label: 'Inventory' },
+      details: { x: 320, y: 300, label: 'Details' },
+      availability: { x: 600, y: 300, label: 'Availability' },
+      cache: { x: 880, y: 300, label: 'Cache' },
+      booking: { x: 320, y: 440, label: 'Booking' },
+      pricing: { x: 600, y: 440, label: 'Pricing' },
+      hold: { x: 880, y: 440, label: 'Hold' },
+      payments: { x: 1160, y: 440, label: 'Payments' },
+      risk: { x: 1160, y: 300, label: 'Risk' },
+      ledger: { x: 880, y: 580, label: 'Ledger' },
+      confirm: { x: 600, y: 580, label: 'Confirm' },
+      partner: { x: 320, y: 580, label: 'Partner' },
+      notify: { x: 1160, y: 580, label: 'Notify' },
+      changes: { x: 600, y: 720, label: 'Changes' },
+      refunds: { x: 880, y: 720, label: 'Refunds' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','search','search'], ['search','inventory','inventory']);
+      if (stepIdx === 2) e.push(['search','details','details'], ['details','availability','avail'], ['details','cache','cache']);
+      if (stepIdx === 3) e.push(['client','booking','reserve'], ['booking','pricing','price'], ['pricing','hold','hold']);
+      if (stepIdx === 4) e.push(['booking','payments','pay'], ['payments','risk','risk'], ['payments','ledger','ledger']);
+      if (stepIdx === 5) e.push(['ledger','confirm','confirm'], ['confirm','partner','partner'], ['confirm','notify','notify']);
+      if (stepIdx === 6) e.push(['client','changes','changes'], ['changes','inventory','inventory'], ['changes','refunds','refund']);
+      return e;
+    }
+  },
+
+  'disney-plus': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Disney+ Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','entitlements','home','recos','cache','catalog','drm','player','playback','cdn','ads','auction','metrics','analytics','warehouse'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      entitlements: { x: 600, y: 160, label: 'Entitlements' },
+      home: { x: 320, y: 300, label: 'Home' },
+      recos: { x: 600, y: 300, label: 'Recos' },
+      cache: { x: 880, y: 300, label: 'Cache' },
+      catalog: { x: 320, y: 440, label: 'Catalog' },
+      drm: { x: 600, y: 440, label: 'DRM' },
+      player: { x: 880, y: 440, label: 'Player' },
+      playback: { x: 320, y: 580, label: 'Playback' },
+      cdn: { x: 600, y: 580, label: 'CDN' },
+      ads: { x: 880, y: 580, label: 'Ads' },
+      auction: { x: 1160, y: 580, label: 'Auction' },
+      metrics: { x: 600, y: 720, label: 'Metrics' },
+      analytics: { x: 880, y: 720, label: 'Analytics' },
+      warehouse: { x: 1160, y: 720, label: 'Warehouse' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','entitlements','ent']);
+      if (stepIdx === 2) e.push(['client','home','home'], ['home','recos','recos'], ['home','cache','cache']);
+      if (stepIdx === 3) e.push(['home','catalog','catalog'], ['catalog','drm','drm'], ['catalog','player','player']);
+      if (stepIdx === 4) e.push(['player','playback','playback'], ['playback','cdn','cdn']);
+      if (stepIdx === 5) e.push(['playback','ads','ads'], ['ads','auction','auc'], ['auction','analytics','analytics']);
+      if (stepIdx === 6) e.push(['player','metrics','metrics'], ['metrics','analytics','analytics'], ['analytics','warehouse','warehouse']);
+      return e;
+    }
+  },
+
+  soundcloud: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'SoundCloud Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','home','recos','search','index','rank','player','playback','cdn','upload','transcode','catalog','ads','entitlements','ledger','events','analytics','warehouse'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      home: { x: 320, y: 160, label: 'Home' },
+      recos: { x: 600, y: 160, label: 'Recos' },
+      search: { x: 320, y: 300, label: 'Search' },
+      index: { x: 600, y: 300, label: 'Index' },
+      rank: { x: 880, y: 300, label: 'Ranking' },
+      player: { x: 320, y: 440, label: 'Player' },
+      playback: { x: 600, y: 440, label: 'Playback' },
+      cdn: { x: 880, y: 440, label: 'CDN' },
+      upload: { x: 320, y: 580, label: 'Upload' },
+      transcode: { x: 600, y: 580, label: 'Transcode' },
+      catalog: { x: 880, y: 580, label: 'Catalog' },
+      ads: { x: 1160, y: 440, label: 'Ads' },
+      entitlements: { x: 1160, y: 580, label: 'Entitlements' },
+      ledger: { x: 1160, y: 720, label: 'Ledger' },
+      events: { x: 600, y: 720, label: 'Events' },
+      analytics: { x: 880, y: 720, label: 'Analytics' },
+      warehouse: { x: 1160, y: 860, label: 'Warehouse' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','home','home'], ['home','recos','recos']);
+      if (stepIdx === 2) e.push(['client','search','search'], ['search','index','index'], ['search','rank','rank']);
+      if (stepIdx === 3) e.push(['client','player','player'], ['player','playback','play'], ['playback','cdn','cdn']);
+      if (stepIdx === 4) e.push(['client','upload','upload'], ['upload','transcode','transcode'], ['transcode','catalog','catalog']);
+      if (stepIdx === 5) e.push(['playback','ads','ads'], ['ads','entitlements','ent'], ['entitlements','ledger','ledger']);
+      if (stepIdx === 6) e.push(['playback','events','events'], ['events','analytics','analytics'], ['analytics','warehouse','warehouse']);
+      return e;
+    }
+  },
+
+  jiocinema: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'JioCinema Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','entitlements','home','recos','cache','catalog','drm','player','playback','cdn','ingest','transcode','metrics','analytics','warehouse'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      entitlements: { x: 600, y: 160, label: 'Entitlements' },
+      home: { x: 320, y: 300, label: 'Home' },
+      recos: { x: 600, y: 300, label: 'Recos' },
+      cache: { x: 880, y: 300, label: 'Cache' },
+      catalog: { x: 320, y: 440, label: 'Catalog' },
+      drm: { x: 600, y: 440, label: 'DRM' },
+      player: { x: 880, y: 440, label: 'Player' },
+      playback: { x: 320, y: 580, label: 'Playback' },
+      cdn: { x: 600, y: 580, label: 'CDN' },
+      ingest: { x: 320, y: 720, label: 'Ingest' },
+      transcode: { x: 600, y: 720, label: 'Transcode' },
+      metrics: { x: 880, y: 580, label: 'Metrics' },
+      analytics: { x: 880, y: 720, label: 'Analytics' },
+      warehouse: { x: 1160, y: 720, label: 'Warehouse' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','entitlements','ent']);
+      if (stepIdx === 2) e.push(['client','home','home'], ['home','recos','recos'], ['home','cache','cache']);
+      if (stepIdx === 3) e.push(['home','catalog','catalog'], ['catalog','drm','drm'], ['catalog','player','player']);
+      if (stepIdx === 4) e.push(['player','playback','playback'], ['playback','cdn','cdn']);
+      if (stepIdx === 5) e.push(['ingest','transcode','transcode'], ['transcode','cdn','cdn']);
+      if (stepIdx === 6) e.push(['player','metrics','metrics'], ['metrics','analytics','analytics'], ['analytics','warehouse','warehouse']);
+      return e;
+    }
+  },
+
+  hotstar: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Hotstar Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','entitlements','home','recos','cache','catalog','drm','player','playback','cdn','ads','auction','metrics','analytics','warehouse'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      entitlements: { x: 600, y: 160, label: 'Entitlements' },
+      home: { x: 320, y: 300, label: 'Home' },
+      recos: { x: 600, y: 300, label: 'Recos' },
+      cache: { x: 880, y: 300, label: 'Cache' },
+      catalog: { x: 320, y: 440, label: 'Catalog' },
+      drm: { x: 600, y: 440, label: 'DRM' },
+      player: { x: 880, y: 440, label: 'Player' },
+      playback: { x: 320, y: 580, label: 'Playback' },
+      cdn: { x: 600, y: 580, label: 'CDN' },
+      ads: { x: 880, y: 580, label: 'Ads' },
+      auction: { x: 1160, y: 580, label: 'Auction' },
+      metrics: { x: 600, y: 720, label: 'Metrics' },
+      analytics: { x: 880, y: 720, label: 'Analytics' },
+      warehouse: { x: 1160, y: 720, label: 'Warehouse' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','entitlements','ent']);
+      if (stepIdx === 2) e.push(['client','home','home'], ['home','recos','recos'], ['home','cache','cache']);
+      if (stepIdx === 3) e.push(['home','catalog','catalog'], ['catalog','drm','drm'], ['catalog','player','player']);
+      if (stepIdx === 4) e.push(['player','playback','playback'], ['playback','cdn','cdn']);
+      if (stepIdx === 5) e.push(['playback','ads','ads'], ['ads','auction','auc'], ['auction','analytics','analytics']);
+      if (stepIdx === 6) e.push(['player','metrics','metrics'], ['metrics','analytics','analytics'], ['analytics','warehouse','warehouse']);
       return e;
     }
   },

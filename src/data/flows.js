@@ -4885,6 +4885,428 @@ export const FLOWS = {
       }
     ]
   }
+
+  ,
+
+  klarna: {
+    title: 'Klarna',
+    steps: [
+      {
+        title: 'Select Klarna at checkout',
+        desc: 'User chooses Klarna; merchant creates a payment session.',
+        active: ['client','merchant','checkout'],
+        edges: [['client','checkout'], ['merchant','checkout']]
+      },
+      {
+        title: 'Credit decision',
+        desc: 'Risk and eligibility checks run using identity and transaction signals.',
+        active: ['risk','auth','decision'],
+        edges: [['checkout','risk'], ['risk','auth'], ['risk','decision']]
+      },
+      {
+        title: 'Create order and authorize',
+        desc: 'Order is created; authorization token returned to merchant.',
+        active: ['orders','authz','merchant'],
+        edges: [['decision','orders'], ['orders','authz'], ['authz','merchant']]
+      },
+      {
+        title: 'Fulfillment and capture',
+        desc: 'Merchant ships; capture triggers settlement and ledger updates.',
+        active: ['capture','ledger','settlement'],
+        edges: [['merchant','capture'], ['capture','ledger'], ['ledger','settlement']]
+      },
+      {
+        title: 'Repayments',
+        desc: 'Installment billing schedules repayments and handles collections.',
+        active: ['billing','payments','collections'],
+        edges: [['settlement','billing'], ['billing','payments'], ['billing','collections']]
+      },
+      {
+        title: 'Disputes and returns',
+        desc: 'Returns/disputes adjust ledger and communicate with merchant.',
+        active: ['disputes','refunds','merchant'],
+        edges: [['client','disputes'], ['disputes','refunds'], ['refunds','merchant']]
+      }
+    ]
+  },
+
+  daraz: {
+    title: 'Daraz',
+    steps: [
+      {
+        title: 'Browse and search',
+        desc: 'Client loads catalog via search and caching.',
+        active: ['client','search','catalog'],
+        edges: [['client','search'], ['search','catalog']]
+      },
+      {
+        title: 'Add to cart and price',
+        desc: 'Cart updates; pricing service calculates totals and promos.',
+        active: ['cart','pricing','promos'],
+        edges: [['client','cart'], ['cart','pricing'], ['pricing','promos']]
+      },
+      {
+        title: 'Checkout and payment',
+        desc: 'Payment intent created; risk checks and payment rails invoked.',
+        active: ['checkout','payments','risk'],
+        edges: [['cart','checkout'], ['checkout','payments'], ['payments','risk']]
+      },
+      {
+        title: 'Create order',
+        desc: 'Order is created; inventory reserved; confirmation sent.',
+        active: ['orders','inventory','notify'],
+        edges: [['payments','orders'], ['orders','inventory'], ['orders','notify']]
+      },
+      {
+        title: 'Fulfillment and shipping',
+        desc: 'Warehouse/3PL processes shipment; tracking updates.',
+        active: ['fulfillment','carrier','tracking'],
+        edges: [['orders','fulfillment'], ['fulfillment','carrier'], ['carrier','tracking']]
+      },
+      {
+        title: 'Returns and refunds',
+        desc: 'Returns processed; refunds posted to ledger and payment reversal.',
+        active: ['returns','refunds','ledger'],
+        edges: [['client','returns'], ['returns','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  shopee: {
+    title: 'Shopee',
+    steps: [
+      {
+        title: 'Load home feed',
+        desc: 'Client loads home feed, categories and personalized deals.',
+        active: ['client','feed','rank'],
+        edges: [['client','feed'], ['feed','rank']]
+      },
+      {
+        title: 'Search products',
+        desc: 'Search queries index and returns ranked results.',
+        active: ['search','index','rank'],
+        edges: [['client','search'], ['search','index'], ['search','rank']]
+      },
+      {
+        title: 'Checkout',
+        desc: 'Cart pricing and promos applied; payment intent created.',
+        active: ['cart','pricing','payments'],
+        edges: [['client','cart'], ['cart','pricing'], ['pricing','payments']]
+      },
+      {
+        title: 'Order and escrow',
+        desc: 'Order created; escrow/ledger tracks payment state.',
+        active: ['orders','escrow','ledger'],
+        edges: [['payments','orders'], ['orders','escrow'], ['escrow','ledger']]
+      },
+      {
+        title: 'Shipping and tracking',
+        desc: 'Logistics assigns carrier and updates tracking.',
+        active: ['logistics','carrier','tracking'],
+        edges: [['orders','logistics'], ['logistics','carrier'], ['carrier','tracking']]
+      },
+      {
+        title: 'Returns/refunds',
+        desc: 'Disputes and refunds adjust ledger and notify parties.',
+        active: ['returns','refunds','notify'],
+        edges: [['client','returns'], ['returns','refunds'], ['refunds','notify']]
+      }
+    ]
+  },
+
+  lazada: {
+    title: 'Lazada',
+    steps: [
+      {
+        title: 'Browse catalog',
+        desc: 'Client loads catalog and recommendations with caching.',
+        active: ['client','catalog','cache'],
+        edges: [['client','catalog'], ['catalog','cache']]
+      },
+      {
+        title: 'Add to cart',
+        desc: 'Cart service persists items and calculates totals.',
+        active: ['cart','pricing','promos'],
+        edges: [['client','cart'], ['cart','pricing'], ['pricing','promos']]
+      },
+      {
+        title: 'Payment',
+        desc: 'Payment intent created; risk checks applied.',
+        active: ['payments','risk','ledger'],
+        edges: [['client','payments'], ['payments','risk'], ['payments','ledger']]
+      },
+      {
+        title: 'Order creation',
+        desc: 'Order created; inventory reserved; confirmation sent.',
+        active: ['orders','inventory','notify'],
+        edges: [['payments','orders'], ['orders','inventory'], ['orders','notify']]
+      },
+      {
+        title: 'Fulfillment',
+        desc: 'Warehouse/3PL ships; tracking updates delivered.',
+        active: ['fulfillment','carrier','tracking'],
+        edges: [['orders','fulfillment'], ['fulfillment','carrier'], ['carrier','tracking']]
+      },
+      {
+        title: 'Customer support',
+        desc: 'Support handles issues; refunds/returns processed.',
+        active: ['support','returns','refunds'],
+        edges: [['client','support'], ['support','returns'], ['returns','refunds']]
+      }
+    ]
+  },
+
+  nykaa: {
+    title: 'Nykaa',
+    steps: [
+      {
+        title: 'Discover and search',
+        desc: 'Client browses catalog; search uses index and ranking.',
+        active: ['client','search','index'],
+        edges: [['client','search'], ['search','index']]
+      },
+      {
+        title: 'Add to cart',
+        desc: 'Cart persists items; pricing and promos applied.',
+        active: ['cart','pricing','promos'],
+        edges: [['client','cart'], ['cart','pricing'], ['pricing','promos']]
+      },
+      {
+        title: 'Checkout and payment',
+        desc: 'Payment intent created; risk checks and payment rails invoked.',
+        active: ['checkout','payments','risk'],
+        edges: [['cart','checkout'], ['checkout','payments'], ['payments','risk']]
+      },
+      {
+        title: 'Order and inventory',
+        desc: 'Order created; inventory reserved; fulfillment queued.',
+        active: ['orders','inventory','fulfillment'],
+        edges: [['payments','orders'], ['orders','inventory'], ['orders','fulfillment']]
+      },
+      {
+        title: 'Shipping and tracking',
+        desc: 'Carrier ships; tracking updates delivered to client.',
+        active: ['carrier','tracking','notify'],
+        edges: [['fulfillment','carrier'], ['carrier','tracking'], ['tracking','notify']]
+      },
+      {
+        title: 'Returns and refunds',
+        desc: 'Returns processed; refunds posted and notified.',
+        active: ['returns','refunds','notify'],
+        edges: [['client','returns'], ['returns','refunds'], ['refunds','notify']]
+      }
+    ]
+  },
+
+  'booking-com': {
+    title: 'Booking.com',
+    steps: [
+      {
+        title: 'Search stays',
+        desc: 'Client searches inventory; ranking and pricing return results.',
+        active: ['client','search','inventory'],
+        edges: [['client','search'], ['search','inventory']]
+      },
+      {
+        title: 'View property',
+        desc: 'Property details, availability, and reviews are loaded with caching.',
+        active: ['details','availability','cache'],
+        edges: [['search','details'], ['details','availability'], ['details','cache']]
+      },
+      {
+        title: 'Reserve',
+        desc: 'Reservation hold created; pricing confirmed.',
+        active: ['booking','pricing','hold'],
+        edges: [['client','booking'], ['booking','pricing'], ['pricing','hold']]
+      },
+      {
+        title: 'Payment',
+        desc: 'Payment processed; fraud checks and confirmation.',
+        active: ['payments','risk','ledger'],
+        edges: [['booking','payments'], ['payments','risk'], ['payments','ledger']]
+      },
+      {
+        title: 'Confirm with property',
+        desc: 'Booking is confirmed with property system/channel manager.',
+        active: ['partner','confirm','notify'],
+        edges: [['ledger','confirm'], ['confirm','partner'], ['confirm','notify']]
+      },
+      {
+        title: 'Post-booking changes',
+        desc: 'Cancellations/changes update inventory and trigger refunds.',
+        active: ['changes','refunds','inventory'],
+        edges: [['client','changes'], ['changes','inventory'], ['changes','refunds']]
+      }
+    ]
+  },
+
+  'disney-plus': {
+    title: 'Disney+',
+    steps: [
+      {
+        title: 'Open app and authenticate',
+        desc: 'Client authenticates and fetches entitlements and profile.',
+        active: ['client','auth','entitlements'],
+        edges: [['client','auth'], ['auth','entitlements']]
+      },
+      {
+        title: 'Load home',
+        desc: 'Home API returns personalized rows using recos and caching.',
+        active: ['home','recos','cache'],
+        edges: [['client','home'], ['home','recos'], ['home','cache']]
+      },
+      {
+        title: 'Select title',
+        desc: 'Catalog returns metadata and playback eligibility.',
+        active: ['catalog','drm','player'],
+        edges: [['home','catalog'], ['catalog','drm'], ['catalog','player']]
+      },
+      {
+        title: 'Start playback',
+        desc: 'Playback session created; CDN serves video segments.',
+        active: ['playback','cdn','player'],
+        edges: [['player','playback'], ['playback','cdn']]
+      },
+      {
+        title: 'Ads (if applicable)',
+        desc: 'Ad decisioning inserts ads and measures impressions.',
+        active: ['ads','auction','analytics'],
+        edges: [['playback','ads'], ['ads','auction'], ['auction','analytics']]
+      },
+      {
+        title: 'Quality telemetry',
+        desc: 'QoE metrics and events stream to analytics.',
+        active: ['metrics','analytics','warehouse'],
+        edges: [['player','metrics'], ['metrics','analytics'], ['analytics','warehouse']]
+      }
+    ]
+  },
+
+  soundcloud: {
+    title: 'SoundCloud',
+    steps: [
+      {
+        title: 'Load home feed',
+        desc: 'Client loads home feed using recommendations and caching.',
+        active: ['client','home','recos'],
+        edges: [['client','home'], ['home','recos']]
+      },
+      {
+        title: 'Search tracks',
+        desc: 'Search queries index and returns ranked results.',
+        active: ['search','index','rank'],
+        edges: [['client','search'], ['search','index'], ['search','rank']]
+      },
+      {
+        title: 'Start playback',
+        desc: 'Playback session created; CDN serves audio segments.',
+        active: ['playback','cdn','player'],
+        edges: [['client','player'], ['player','playback'], ['playback','cdn']]
+      },
+      {
+        title: 'Upload track',
+        desc: 'Upload pipeline stores audio; transcode and catalog updates run.',
+        active: ['upload','transcode','catalog'],
+        edges: [['client','upload'], ['upload','transcode'], ['transcode','catalog']]
+      },
+      {
+        title: 'Monetization',
+        desc: 'Ads/subscriptions enforce entitlements and payouts.',
+        active: ['ads','entitlements','ledger'],
+        edges: [['playback','ads'], ['ads','entitlements'], ['entitlements','ledger']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Plays and engagement events stream to analytics.',
+        active: ['events','analytics','warehouse'],
+        edges: [['playback','events'], ['events','analytics'], ['analytics','warehouse']]
+      }
+    ]
+  },
+
+  jiocinema: {
+    title: 'JioCinema',
+    steps: [
+      {
+        title: 'Authenticate',
+        desc: 'Client authenticates and loads subscription entitlements.',
+        active: ['client','auth','entitlements'],
+        edges: [['client','auth'], ['auth','entitlements']]
+      },
+      {
+        title: 'Load home',
+        desc: 'Home API returns personalized recommendations with caching.',
+        active: ['home','recos','cache'],
+        edges: [['client','home'], ['home','recos'], ['home','cache']]
+      },
+      {
+        title: 'Select content',
+        desc: 'Catalog returns metadata and playback eligibility.',
+        active: ['catalog','drm','player'],
+        edges: [['home','catalog'], ['catalog','drm'], ['catalog','player']]
+      },
+      {
+        title: 'Playback',
+        desc: 'Playback session created; CDN serves video segments.',
+        active: ['playback','cdn','player'],
+        edges: [['player','playback'], ['playback','cdn']]
+      },
+      {
+        title: 'Live events',
+        desc: 'Live streaming uses ingest, transcode and edge distribution.',
+        active: ['ingest','transcode','cdn'],
+        edges: [['ingest','transcode'], ['transcode','cdn']]
+      },
+      {
+        title: 'QoE analytics',
+        desc: 'QoE metrics and events stream to analytics warehouse.',
+        active: ['metrics','analytics','warehouse'],
+        edges: [['player','metrics'], ['metrics','analytics'], ['analytics','warehouse']]
+      }
+    ]
+  },
+
+  hotstar: {
+    title: 'Hotstar',
+    steps: [
+      {
+        title: 'Authenticate',
+        desc: 'Client authenticates and loads entitlements and profile.',
+        active: ['client','auth','entitlements'],
+        edges: [['client','auth'], ['auth','entitlements']]
+      },
+      {
+        title: 'Load home',
+        desc: 'Home API returns personalized rows using recos and caching.',
+        active: ['home','recos','cache'],
+        edges: [['client','home'], ['home','recos'], ['home','cache']]
+      },
+      {
+        title: 'Select title',
+        desc: 'Catalog returns metadata and playback eligibility.',
+        active: ['catalog','drm','player'],
+        edges: [['home','catalog'], ['catalog','drm'], ['catalog','player']]
+      },
+      {
+        title: 'Playback',
+        desc: 'Playback session created; CDN serves segments.',
+        active: ['playback','cdn','player'],
+        edges: [['player','playback'], ['playback','cdn']]
+      },
+      {
+        title: 'Ads',
+        desc: 'Ad decisioning inserts ads and measures impressions.',
+        active: ['ads','auction','analytics'],
+        edges: [['playback','ads'], ['ads','auction'], ['auction','analytics']]
+      },
+      {
+        title: 'QoE analytics',
+        desc: 'QoE metrics stream to analytics warehouse.',
+        active: ['metrics','analytics','warehouse'],
+        edges: [['player','metrics'], ['metrics','analytics'], ['analytics','warehouse']]
+      }
+    ]
+  }
 };
 
 export function flowForSystem(sys) {

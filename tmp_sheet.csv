@@ -1,0 +1,609 @@
+Products,Status
+Stripe,Posted
+PayPal,Posted
+Revolut,Posted
+Wise,Posted
+Robinhood,Posted
+Cash App,Posted
+Venmo,Posted
+Coinbase,Posted
+Binance,Posted
+Nubank,Posted
+Monzo,Posted
+Chime,Posted
+Klarna,Posted
+Razorpay,Posted
+PhonePe,Posted
+Amazon,Posted
+Shopify,Posted
+Etsy,Posted
+eBay,Posted
+Flipkart,Posted
+Myntra,Posted
+Meesho,Posted
+Ajio,Posted
+Zalando,Posted
+ASOS,Posted
+Wayfair,Posted
+Daraz,Posted
+Shopee,Posted
+Lazada,Posted
+Nykaa,Posted
+Uber,Posted
+Ola,Posted
+Airbnb,Posted
+Booking.com,Posted
+MakeMyTrip,Posted
+Lyft,Posted
+Grab,Posted
+BlaBlaCar,Posted
+Skyscanner,Posted
+Expedia,Posted
+Netflix,Posted
+Spotify,Posted
+YouTube,Posted
+Disney+,Posted
+Prime Video,Posted
+Apple Music,Posted
+SoundCloud,Posted
+Twitch,Posted
+JioCinema,Posted
+Hotstar,Posted
+Instagram,Posted
+WhatsApp,Posted
+Telegram,Posted
+Snapchat,Posted
+Facebook,Posted
+Messenger,Posted
+Twitter (X),Posted
+Reddit,Posted
+Discord,Posted
+Threads,Posted
+LinkedIn,Posted
+Signal,Posted
+Notion,Posted
+Slack,Posted
+Dropbox,Posted
+Google Drive,Posted
+Gmail,Posted
+Microsoft Teams,Posted
+Trello,Posted
+Asana,Posted
+ClickUp,Posted
+Evernote,Posted
+Airtable,Posted
+Monday.com,Posted
+Zoom,Posted
+Calendly,Posted
+Jira,Posted
+Headspace,Posted
+Calm,Posted
+Nike Training Club,Posted
+MyFitnessPal,Posted
+Cult.fit,Posted
+Fitbit,Posted
+Strava,Posted
+HealthifyMe,Posted
+Swiggy,Posted
+Zomato,Posted
+Uber Eats,Posted
+DoorDash,Posted
+Deliveroo,Posted
+Grubhub,Posted
+Domino’s,Posted
+McDonald’s App,Posted
+Google Pay,Posted
+Paytm,Posted
+BHIM,Posted
+HDFC Bank App,Posted
+ICICI iMobile,Posted
+Axis Mobile,Posted
+Kotak 811,Posted
+GitHub,Posted
+GitLab,Posted
+Stack Overflow,Posted
+Postman,Posted
+Vercel,Posted
+Netlify,Posted
+Firebase Console,Posted
+AWS Console,Posted
+Affirm,Posted
+Afterpay,Posted
+Brex,Posted
+Ramp,Posted
+Mercury,Posted
+Square,Posted
+Stripe Dashboard,Posted
+Wise Business,Posted
+Payoneer,Posted
+Remitly,Posted
+WorldRemit,Posted
+Western Union App,Posted
+MoneyGram,Posted
+Zelle,Posted
+Apple Pay,Posted
+Samsung Pay,Posted
+Google Wallet,Posted
+MobiKwik,Posted
+Freecharge,Posted
+Groww,Posted
+Zerodha Kite,Posted
+Upstox,Posted
+INDmoney,Posted
+ET Money,Posted
+CRED,Posted
+Slice,Posted
+Jupiter,Posted
+Fi Money,Posted
+Niyo,Posted
+YNAB,Posted
+Mint,Posted
+PocketGuard,Posted
+Acorns,Posted
+Stash,Posted
+SoFi,Posted
+Ally Bank,Posted
+Varo,Posted
+Current,Posted
+Aspiration,Posted
+Starling Bank,Posted
+Tinkoff,Posted
+Paysera,Posted
+Curve,Posted
+Wise Card,Posted
+Cashplus,Posted
+Bunq,Posted
+Paytm Money,Posted
+KuCoin,Posted
+Kraken,Posted
+Bitstamp,Posted
+Temu,Posted
+Shein,Posted
+AliExpress,Posted
+Taobao,Posted
+Tmall,Posted
+JD.com,Posted
+Rakuten,Posted
+Mercado Libre,Posted
+Noon,Posted
+Jumia,Posted
+Vinted,Posted
+Depop,Posted
+Poshmark,Posted
+Carousell,Posted
+OLX,Posted
+Quikr,Posted
+Facebook Marketplace,Posted
+Wish,Posted
+Banggood,Posted
+Gearbest,Posted
+Overstock,Posted
+Houzz,Posted
+1mg,Posted
+PharmEasy,Posted
+Netmeds,Posted
+FirstCry,Posted
+Lenskart,Posted
+Pepperfry,Posted
+Urban Ladder,Posted
+Tata Cliq,Posted
+Snapdeal,Posted
+BigBasket,Posted
+Blinkit,Posted
+Zepto,Posted
+Instacart,Posted
+Shipt,Posted
+Costco App,Posted
+Walmart App,Posted
+Target App,Posted
+Best Buy App,Posted
+Newegg,Posted
+Wayfair App,Posted
+Chewy,Posted
+Zappos,Posted
+StockX,Posted
+GOAT,Posted
+Farfetch,Posted
+Ssense,Posted
+Mr Porter,Posted
+Net-a-Porter,Posted
+Rebag,Posted
+The RealReal,Posted
+Grailed,Posted
+Etsy Seller,Posted
+Shopify Admin,Posted
+Ecwid,Posted
+Squarespace Commerce,Posted
+Wix Stores,Posted
+Magento,Posted
+WooCommerce,Posted
+BeReal,Posted
+Mastodon,Posted
+Clubhouse,Posted
+Geneva,Posted
+Geneva Groups,Posted
+Nextdoor,Posted
+Meetup,Posted
+Amino,Posted
+VSCO,Posted
+Flickr,Posted
+Imgur,Posted
+Tumblr,Posted
+Hive Social,Posted
+Lemon8,Posted
+Koo,Posted
+ShareChat,Posted
+Moj,Posted
+Josh,Posted
+Chingari,Posted
+Roposo,Posted
+Likee,Posted
+WeChat,Posted
+QQ,Posted
+LINE,Posted
+KakaoTalk,Posted
+Viber,Posted
+Hike,Posted
+IMO,Posted
+Marco Polo,Posted
+Houseparty,Posted
+Yubo,Posted
+Wink,Posted
+Slowly,Posted
+Peanut,Posted
+Fishbowl,Posted
+Blind,Posted
+Polywork,Posted
+Lunchclub,Posted
+Shapr,Posted
+Circle,Posted
+Vimeo,Posted
+Dailymotion,Posted
+Rumble,Posted
+Nebula,Posted
+CuriosityStream,Posted
+Discovery+,Posted
+HBO Go,Posted
+Peacock,Posted
+SonyLIV,Posted
+Zee5,Posted
+MX Player,Posted
+Voot,Posted
+Crunchyroll,Posted
+Funimation,Posted
+Tubi,Posted
+Pluto TV,Posted
+Plex,Posted
+Kodi,Posted
+Apple TV,Posted
+YouTube Studio,Posted
+Anchor,Posted
+Pocket Casts,Posted
+Overcast,Posted
+Castbox,Posted
+Audible,Posted
+Storytel,Posted
+Scribd,Posted
+Kindle,Posted
+Wattpad,Posted
+Medium,Posted
+Substack,Posted
+Ghost,Posted
+Beehiiv,Posted
+Revue,Posted
+Flipboard,Posted
+Feedly,Posted
+Inshorts,Posted
+Dailyhunt,Posted
+SmartNews,Posted
+Pocket,Posted
+Instapaper,Posted
+Google News,Posted
+Apple News,Posted
+NewsBreak,Posted
+Reddit Reader apps,Posted
+Letterboxd,Posted
+IMDb,Posted
+TV Time,Posted
+Trakt,Posted
+JustWatch,Posted
+Coda,Posted
+Obsidian,Posted
+Roam Research,Posted
+Bear,Posted
+Craft,Posted
+Superhuman,Posted
+Spark Mail,Posted
+Newton Mail,Posted
+Front,Posted
+Missive,Posted
+Proton Mail,Posted
+Zoho Mail,Posted
+Zoho CRM,Posted
+HubSpot,Posted
+Salesforce,Posted
+Pipedrive,Posted
+Freshsales,Posted
+Intercom,Posted
+Drift,Posted
+Crisp,Posted
+Help Scout,Posted
+Zendesk,Posted
+Gorgias,Posted
+Linear,Posted
+Height,Posted
+Basecamp,Posted
+Wrike,Posted
+Teamwork,Posted
+ProofHub,Posted
+Smartsheet,Posted
+Quip,Posted
+Notability,Posted
+GoodNotes,Posted
+XMind,Posted
+MindNode,Posted
+Miro,Posted
+FigJam,Posted
+Whimsical,Posted
+Lucidchart,Posted
+Draw.io,Posted
+Toggl,Posted
+Clockify,Posted
+Harvest,Posted
+RescueTime,Posted
+Freedom,Posted
+Cold Turkey,Posted
+Sunsama,Posted
+Motion,Posted
+Reclaim AI,Posted
+Fantastical,Posted
+Outlook,Posted
+Zoho Books,Posted
+QuickBooks,Posted
+Xero,Posted
+FreshBooks,Posted
+Wave,Posted
+Stripe Atlas,Posted
+Paddle,Posted
+Chargebee,Posted
+Recurly,Posted
+Mailchimp,Posted
+ConvertKit,Posted
+ActiveCampaign,Posted
+Klaviyo,Posted
+SendGrid,Posted
+Brevo (Sendinblue),Posted
+Canva Docs,Posted
+Gamma,Posted
+Tome,Posted
+Pitch,Posted
+Beautiful.ai,Posted
+Loom,Posted
+Screen Studio,Posted
+Descript,Posted
+Riverside,Posted
+VEED,Posted
+Kapwing,Posted
+Runway,Posted
+Synthesia,Posted
+Pictory,Posted
+Freeletics,Posted
+Fitbod,Posted
+Centr,Posted
+Sweat,Posted
+8fit,Posted
+Seven,Posted
+JEFIT,Posted
+Strong,Posted
+Nike Run Club,Posted
+Adidas Running,Posted
+MapMyRun,Posted
+Runkeeper,Posted
+Peloton,Posted
+Zwift,Posted
+Trainerize,Posted
+MySugr,Posted
+Glucose Buddy,Posted
+Flo,Posted
+Clue,Posted
+Ovia,Posted
+BetterHelp,Posted
+Talkspace,Posted
+Wysa,Posted
+Youper,Posted
+MindDoc,Posted
+Sanvello,Posted
+Fabulous,Posted
+Stoic,Posted
+Reflectly,Posted
+Daylio,Posted
+Sleep Cycle,Posted
+SleepScore,Posted
+Calm Sleep,Posted
+Insight Timer,Posted
+Balance,Posted
+Aura,Posted
+Noom,Posted
+Lifesum,Posted
+Yazio,Posted
+Fooducate,Posted
+EatSure,Posted
+Dunzo,Posted
+Postmates,Posted
+ChowNow,Posted
+Ritual,Posted
+Deliveroo Rider,Posted
+Talabat,Posted
+Careem Food,Posted
+Glovo,Posted
+Bolt Food,Posted
+Foodpanda,Posted
+SkipTheDishes,Posted
+Menulog,Posted
+Zomato Business,Posted
+Swiggy Instamart,Posted
+Uber Eats Driver,Posted
+Domino’s Tracker,Posted
+Starbucks App,Posted
+KFC App,Posted
+Burger King App,Posted
+Taco Bell App,Posted
+Pizza Hut App,Posted
+Baskin Robbins App,Posted
+Dunkin App,Posted
+Blue Apron,Posted
+HelloFresh,Posted
+Freshly,Posted
+Gousto,Posted
+EveryPlate,Posted
+Home Chef,Posted
+Hopper,Posted
+Rome2Rio,Posted
+Omio,Posted
+Agoda,Posted
+Hostelworld,Posted
+Trip.com,Posted
+Cleartrip,Posted
+Yatra,Posted
+ixigo,Posted
+RedBus,Posted
+FlixBus,Posted
+BlaBlaCar Daily,Posted
+Turo,Posted
+Getaround,Posted
+Zipcar,Posted
+Lime,Posted
+Bird,Posted
+Tier,Posted
+Bolt,Posted
+Careem,Posted
+Free Now,Posted
+GrabTaxi,Posted
+GoJek,Posted
+Moovit,Posted
+Citymapper,Posted
+Transit App,Posted
+Google Trips (legacy),Posted
+Roadtrippers,Posted
+ParkMobile,Posted
+SpotHero,Posted
+OpenAI Playground,Posted
+Anthropic Claude,Posted
+Perplexity AI,Posted
+Poe,Posted
+Character AI,Posted
+Replit,Posted
+CodeSandbox,Posted
+StackBlitz,Posted
+Glitch,Posted
+Codespaces,Posted
+Sourcegraph,Posted
+Sentry,Posted
+Datadog,Posted
+New Relic,Posted
+LogRocket,Posted
+Supabase,Posted
+PlanetScale,Posted
+Railway,Posted
+Render,Posted
+Fly.io,Posted
+V0.dev,Posted
+Bolt.new,Posted
+Cursor,Posted
+Tabnine,Posted
+Codeium,Posted
+Hugging Face,Posted
+Replicate,Posted
+Stability AI,Posted
+Midjourney,Posted
+Leonardo AI,Posted
+RunPod,Posted
+Paperspace,Posted
+Kaggle,Posted
+Colab,Posted
+Jupyter,Posted
+Airbyte,Posted
+n8n,Posted
+Zapier,Posted
+Make (Integromat),Posted
+Retool,Posted
+Roblox Studio,Posted
+Epic Games Store,Posted
+Steam,Posted
+Xbox App,Posted
+PlayStation App,Posted
+Discord Nitro,Posted
+Battle.net,Posted
+Riot Client,Posted
+GOG,Posted
+itch.io,Posted
+Game Jolt,Posted
+Miniclip,Posted
+Poki,Posted
+CrazyGames,Posted
+Armor Games,Posted
+Kongregate,Posted
+Coolmath Games,Posted
+Lichess,Posted
+Chess.com,Posted
+Duolingo,Posted
+Memrise,Posted
+Babbel,Posted
+Busuu,Posted
+Quizlet,Posted
+Khan Academy,Posted
+Coursera,Posted
+Udemy,Posted
+Skillshare,Posted
+MasterClass,Posted
+edX,Posted
+Brainly,Posted
+Photomath,Posted
+Socratic,Posted
+Remind,Posted
+ClassDojo,Posted
+Seesaw,Posted
+Blackboard,Posted
+Moodle,Posted
+Canvas LMS,Posted
+Google Classroom,Posted
+Noteflight,Posted
+Yousician,Posted
+Simply Piano,Posted
+Fender Play,Posted
+Ultimate Guitar,Posted
+GarageBand,Posted
+FL Studio Mobile,Posted
+BandLab,Posted
+Soundtrap,Posted
+Splice,Posted
+Canva,Posted
+Adobe Express,Posted
+PicsArt,Posted
+Snapseed,Posted
+Lightroom Mobile,Posted
+VSCO Editor,Posted
+Facetune,Posted
+Remini,Posted
+Lensa,Posted
+CapCut Editor,Posted
+InShot,Posted
+VN Editor,Posted
+Kinemaster,Posted
+FilmoraGo,Posted
+Alight Motion,Posted
+Mojo,Posted
+Unfold,Posted
+Linktree,Posted
+Beacons,Posted
+Stan Store,Posted
+Gumroad,Posted
+Lemon Squeezy,Posted
+Ko-fi,Posted
+Patreon,Posted
+Buy Me a Coffee,Posted
+Subbly,Posted
+Teachable,Posted
+Kajabi,Posted
+Podia,Posted
+Circle.so,Posted
