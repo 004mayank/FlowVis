@@ -1012,6 +1012,10 @@ function openPlayground(sys) {
   const overlay = document.getElementById('playground');
   overlay.classList.add('open');
 
+  // Lock background page scrolling while overlay is open
+  document.body.dataset.prevOverflow = document.body.style.overflow || '';
+  document.body.style.overflow = 'hidden';
+
   // Title: logo + product name (no "Playground")
   const titleEl = document.getElementById('pg-title');
   const logo = logoForSystemId(sys.id);
@@ -1074,11 +1078,71 @@ function openPlayground(sys) {
   wireZoom('wa-diagram', 'z-in', 'z-out', 'z-reset');
   wireZoom('wa-arch', 'za-in', 'za-out', 'za-reset');
 
+  // Trackpad / mouse wheel support:
+  // - two-finger scroll pans the diagram
+  // - pinch/ctrl+wheel zooms
+  wireWheelPanZoom(overlay);
+
   // Initial render
   renderPlayground();
 
   // Autoplay by default
   startPlayground();
+}
+
+function wireWheelPanZoom(overlay) {
+  if (!overlay) return;
+  if (overlay.dataset.wheelBound === '1') return;
+  overlay.dataset.wheelBound = '1';
+
+  const isDiagramEl = (el) => {
+    if (!el) return false;
+    return Boolean(el.closest && el.closest('#pg-system, #pg-arch'));
+  };
+
+  overlay.addEventListener('wheel', (e) => {
+    if (!PLAYGROUND.open) return;
+    if (!isDiagramEl(e.target)) return;
+
+    // Prevent background from scrolling
+    e.preventDefault();
+
+    const svgId = (PLAYGROUND.tab === 'arch') ? 'wa-arch' : 'wa-diagram';
+    if (!ZOOM[svgId]) ZOOM[svgId] = { k: 1, x: 0, y: 0 };
+
+    // Zoom gesture (trackpad pinch often shows as ctrlKey wheel)
+    if (e.ctrlKey) {
+      const dir = (e.deltaY < 0) ? 1 : -1;
+      ZOOM[svgId].k = Math.min(2.4, Math.max(0.55, ZOOM[svgId].k + dir * 0.10));
+      applyZoom(svgId);
+      return;
+    }
+
+    // Pan (two-finger scroll)
+    // Make panning speed scale-aware so it feels consistent at different zoom.
+    const k = ZOOM[svgId].k || 1;
+    const speed = 1.0 / k;
+    ZOOM[svgId].x -= e.deltaX * speed;
+    ZOOM[svgId].y -= e.deltaY * speed;
+    applyZoom(svgId);
+  }, { passive: false });
+}
+
+function applyZoom(svgId) {
+  const svg = document.getElementById(svgId);
+  if (!svg) return;
+  if (!ZOOM[svgId]) ZOOM[svgId] = { k: 1, x: 0, y: 0 };
+
+  const { k, x, y } = ZOOM[svgId];
+  let g = svg.querySelector('g[data-zoom]');
+  if (!g) {
+    g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    g.setAttribute('data-zoom', '1');
+    svg.appendChild(g);
+  }
+  const kids = Array.from(svg.childNodes).filter(n => n !== g);
+  for (const kk of kids) g.appendChild(kk);
+  g.setAttribute('transform', `translate(${x} ${y}) scale(${k})`);
 }
 
 const ZOOM = {};
@@ -1087,30 +1151,15 @@ function wireZoom(svgId, inId, outId, resetId) {
   if (!svg) return;
   if (!ZOOM[svgId]) ZOOM[svgId] = { k: 1, x: 0, y: 0 };
 
-  const apply = () => {
-    const { k, x, y } = ZOOM[svgId];
-    // Wrap contents in a group for transform
-    let g = svg.querySelector('g[data-zoom]');
-    if (!g) {
-      g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-      g.setAttribute('data-zoom', '1');
-      svg.appendChild(g);
-    }
-    // Ensure all non-zoom children are moved under zoom group (diagram rerenders replace innerHTML)
-    const kids = Array.from(svg.childNodes).filter(n => n !== g);
-    for (const k of kids) g.appendChild(k);
-    g.setAttribute('transform', `translate(${x} ${y}) scale(${k})`);
-  };
-
   const zin = document.getElementById(inId);
   const zout = document.getElementById(outId);
   const zreset = document.getElementById(resetId);
-  if (zin) zin.onclick = () => { ZOOM[svgId].k = Math.min(2.2, ZOOM[svgId].k + 0.15); apply(); };
-  if (zout) zout.onclick = () => { ZOOM[svgId].k = Math.max(0.6, ZOOM[svgId].k - 0.15); apply(); };
-  if (zreset) zreset.onclick = () => { ZOOM[svgId] = { k: 1, x: 0, y: 0 }; apply(); };
+  if (zin) zin.onclick = () => { ZOOM[svgId].k = Math.min(2.4, ZOOM[svgId].k + 0.15); applyZoom(svgId); };
+  if (zout) zout.onclick = () => { ZOOM[svgId].k = Math.max(0.55, ZOOM[svgId].k - 0.15); applyZoom(svgId); };
+  if (zreset) zreset.onclick = () => { ZOOM[svgId] = { k: 1, x: 0, y: 0 }; applyZoom(svgId); };
 
   // Apply now and after each render call
-  apply();
+  applyZoom(svgId);
 }
 
 function closePlayground() {
@@ -1118,6 +1167,10 @@ function closePlayground() {
   PLAYGROUND.open = false;
   PLAYGROUND.sys = null;
   document.getElementById('playground').classList.remove('open');
+
+  // Restore background scrolling
+  const prev = document.body.dataset.prevOverflow;
+  document.body.style.overflow = prev || '';
 }
 
 function startPlayground() {
