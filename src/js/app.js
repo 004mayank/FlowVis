@@ -4637,6 +4637,244 @@ const SYSTEM_LAYOUTS = {
 
   ,
 
+  headspace: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','recos','catalog','search','cache','playback','cdn','progress','completion','write','events','rank','scheduler','notify','push','analytics','warehouse'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      recos: { x: 860, y: 180, label: 'Recos', colorKey: 'api' },
+      catalog: { x: 380, y: 320, label: 'Catalog', colorKey: 'store' },
+      search: { x: 620, y: 320, label: 'Search', colorKey: 'api' },
+      cache: { x: 860, y: 320, label: 'Cache', colorKey: 'cache' },
+      playback: { x: 380, y: 460, label: 'Playback', colorKey: 'api' },
+      cdn: { x: 620, y: 460, label: 'CDN', colorKey: 'cdn' },
+      progress: { x: 860, y: 460, label: 'Progress', colorKey: 'store' },
+      completion: { x: 380, y: 600, label: 'Completion', colorKey: 'api' },
+      write: { x: 620, y: 600, label: 'Writes', colorKey: 'store' },
+      events: { x: 860, y: 600, label: 'Events', colorKey: 'stream' },
+      rank: { x: 1100, y: 180, label: 'Ranking', colorKey: 'api' },
+      scheduler: { x: 1100, y: 320, label: 'Scheduler', colorKey: 'queue' },
+      notify: { x: 1100, y: 460, label: 'Notify', colorKey: 'external' },
+      push: { x: 1100, y: 600, label: 'Push', colorKey: 'external' },
+      analytics: { x: 620, y: 740, label: 'Analytics', colorKey: 'store' },
+      warehouse: { x: 860, y: 740, label: 'Warehouse', colorKey: 'store' }
+    }
+  },
+
+  calm: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','home','catalog','recos','rank','playback','cdn','progress','completion','write','profile','paywall','entitlements','payments','scheduler','notify','push'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      home: { x: 620, y: 180, label: 'Home', colorKey: 'api' },
+      catalog: { x: 380, y: 320, label: 'Catalog', colorKey: 'store' },
+      recos: { x: 620, y: 320, label: 'Recos', colorKey: 'api' },
+      rank: { x: 860, y: 320, label: 'Ranking', colorKey: 'api' },
+      playback: { x: 380, y: 460, label: 'Playback', colorKey: 'api' },
+      cdn: { x: 620, y: 460, label: 'CDN', colorKey: 'cdn' },
+      progress: { x: 860, y: 460, label: 'Progress', colorKey: 'store' },
+      completion: { x: 380, y: 600, label: 'Completion', colorKey: 'api' },
+      write: { x: 620, y: 600, label: 'Writes', colorKey: 'store' },
+      profile: { x: 860, y: 600, label: 'Profile', colorKey: 'store' },
+      paywall: { x: 380, y: 740, label: 'Paywall', colorKey: 'api' },
+      entitlements: { x: 620, y: 740, label: 'Entitlements', colorKey: 'store' },
+      payments: { x: 860, y: 740, label: 'Payments', colorKey: 'external' },
+      scheduler: { x: 1100, y: 740, label: 'Scheduler', colorKey: 'queue' },
+      notify: { x: 1100, y: 600, label: 'Notify', colorKey: 'external' },
+      push: { x: 1100, y: 460, label: 'Push', colorKey: 'external' }
+    }
+  },
+
+  'nike-training-club': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','plans','catalog','recos','rank','player','cdn','telemetry','completion','write','profile','events','notify','push'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      plans: { x: 620, y: 180, label: 'Plans', colorKey: 'store' },
+      catalog: { x: 380, y: 320, label: 'Catalog', colorKey: 'store' },
+      recos: { x: 620, y: 320, label: 'Recos', colorKey: 'api' },
+      rank: { x: 860, y: 320, label: 'Ranking', colorKey: 'api' },
+      player: { x: 380, y: 460, label: 'Player', colorKey: 'client' },
+      cdn: { x: 620, y: 460, label: 'CDN', colorKey: 'cdn' },
+      telemetry: { x: 860, y: 460, label: 'Telemetry', colorKey: 'stream' },
+      completion: { x: 380, y: 600, label: 'Completion', colorKey: 'api' },
+      write: { x: 620, y: 600, label: 'Writes', colorKey: 'store' },
+      profile: { x: 860, y: 600, label: 'Profile', colorKey: 'store' },
+      events: { x: 1100, y: 320, label: 'Events', colorKey: 'stream' },
+      notify: { x: 1100, y: 600, label: 'Notify', colorKey: 'external' },
+      push: { x: 1100, y: 460, label: 'Push', colorKey: 'external' }
+    }
+  },
+
+  myfitnesspal: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','dashboard','search','index','catalog','logging','write','totals','integrations','sync','analytics','warehouse','insights','notify','push'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      dashboard: { x: 620, y: 180, label: 'Dashboard', colorKey: 'api' },
+      search: { x: 380, y: 320, label: 'Search', colorKey: 'api' },
+      index: { x: 620, y: 320, label: 'Index', colorKey: 'store' },
+      catalog: { x: 860, y: 320, label: 'Catalog', colorKey: 'store' },
+      logging: { x: 380, y: 460, label: 'Logging', colorKey: 'api' },
+      write: { x: 620, y: 460, label: 'Writes', colorKey: 'store' },
+      totals: { x: 860, y: 460, label: 'Totals', colorKey: 'store' },
+      integrations: { x: 380, y: 600, label: 'Integrations', colorKey: 'external' },
+      sync: { x: 620, y: 600, label: 'Sync', colorKey: 'stream' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'stream' },
+      warehouse: { x: 1100, y: 600, label: 'Warehouse', colorKey: 'store' },
+      insights: { x: 1100, y: 460, label: 'Insights', colorKey: 'api' },
+      notify: { x: 860, y: 740, label: 'Notify', colorKey: 'external' },
+      push: { x: 1100, y: 740, label: 'Push', colorKey: 'external' }
+    }
+  },
+
+  cultfit: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','catalog','availability','hold','booking','payments','entitlements','ledger','notify','push','checkin','write','profile','analytics','warehouse','insights'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      catalog: { x: 620, y: 180, label: 'Catalog', colorKey: 'api' },
+      availability: { x: 380, y: 320, label: 'Availability', colorKey: 'api' },
+      hold: { x: 620, y: 320, label: 'Hold', colorKey: 'store' },
+      booking: { x: 860, y: 320, label: 'Booking', colorKey: 'store' },
+      payments: { x: 1100, y: 320, label: 'Payments', colorKey: 'external' },
+      entitlements: { x: 860, y: 460, label: 'Entitlements', colorKey: 'store' },
+      ledger: { x: 1100, y: 460, label: 'Ledger', colorKey: 'store' },
+      notify: { x: 620, y: 460, label: 'Notify', colorKey: 'external' },
+      push: { x: 380, y: 460, label: 'Push', colorKey: 'external' },
+      checkin: { x: 380, y: 600, label: 'Check-in', colorKey: 'api' },
+      write: { x: 620, y: 600, label: 'Writes', colorKey: 'store' },
+      profile: { x: 860, y: 600, label: 'Profile', colorKey: 'store' },
+      analytics: { x: 620, y: 740, label: 'Analytics', colorKey: 'stream' },
+      warehouse: { x: 860, y: 740, label: 'Warehouse', colorKey: 'store' },
+      insights: { x: 1100, y: 740, label: 'Insights', colorKey: 'api' }
+    }
+  },
+
+  fitbit: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['device','sync','ingest','timeseries','store','aggregate','metrics','profile','dashboard','cache','analytics','warehouse','recos','notify','push','client'],
+    nodes: {
+      device: { x: 140, y: 180, label: 'Device', colorKey: 'device' },
+      sync: { x: 380, y: 180, label: 'Sync', colorKey: 'stream' },
+      ingest: { x: 620, y: 180, label: 'Ingest', colorKey: 'api' },
+      timeseries: { x: 860, y: 180, label: 'Timeseries', colorKey: 'store' },
+      store: { x: 1100, y: 180, label: 'Store', colorKey: 'store' },
+      aggregate: { x: 860, y: 320, label: 'Aggregate', colorKey: 'api' },
+      metrics: { x: 620, y: 320, label: 'Metrics', colorKey: 'api' },
+      profile: { x: 380, y: 320, label: 'Profile', colorKey: 'store' },
+      client: { x: 140, y: 320, label: 'Client', colorKey: 'client' },
+      dashboard: { x: 380, y: 460, label: 'Dashboard', colorKey: 'api' },
+      cache: { x: 620, y: 460, label: 'Cache', colorKey: 'cache' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'stream' },
+      warehouse: { x: 1100, y: 460, label: 'Warehouse', colorKey: 'store' },
+      recos: { x: 1100, y: 600, label: 'Recos', colorKey: 'api' },
+      notify: { x: 860, y: 600, label: 'Notify', colorKey: 'external' },
+      push: { x: 620, y: 600, label: 'Push', colorKey: 'external' }
+    }
+  },
+
+  strava: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','upload','ingest','processing','segments','metrics','store','index','search','feed','rank','cache','interactions','notify','push','challenges','leaderboards','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      upload: { x: 380, y: 180, label: 'Upload', colorKey: 'api' },
+      ingest: { x: 620, y: 180, label: 'Ingest', colorKey: 'api' },
+      processing: { x: 860, y: 180, label: 'Processing', colorKey: 'api' },
+      segments: { x: 1100, y: 180, label: 'Segments', colorKey: 'api' },
+      metrics: { x: 860, y: 320, label: 'Metrics', colorKey: 'api' },
+      store: { x: 620, y: 320, label: 'Store', colorKey: 'store' },
+      index: { x: 380, y: 320, label: 'Index', colorKey: 'store' },
+      search: { x: 140, y: 320, label: 'Search', colorKey: 'api' },
+      feed: { x: 380, y: 460, label: 'Feed', colorKey: 'api' },
+      rank: { x: 620, y: 460, label: 'Ranking', colorKey: 'api' },
+      cache: { x: 860, y: 460, label: 'Cache', colorKey: 'cache' },
+      interactions: { x: 140, y: 460, label: 'Interactions', colorKey: 'api' },
+      notify: { x: 380, y: 600, label: 'Notify', colorKey: 'external' },
+      push: { x: 140, y: 600, label: 'Push', colorKey: 'external' },
+      challenges: { x: 620, y: 600, label: 'Challenges', colorKey: 'api' },
+      leaderboards: { x: 860, y: 600, label: 'Leaderboards', colorKey: 'store' },
+      analytics: { x: 1100, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  healthifyme: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','plans','logging','write','totals','workouts','sync','chat','realtime','notify','analytics','warehouse','recos','push'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      plans: { x: 620, y: 180, label: 'Plans', colorKey: 'store' },
+      logging: { x: 380, y: 320, label: 'Logging', colorKey: 'api' },
+      write: { x: 620, y: 320, label: 'Writes', colorKey: 'store' },
+      totals: { x: 860, y: 320, label: 'Totals', colorKey: 'store' },
+      workouts: { x: 380, y: 460, label: 'Workouts', colorKey: 'api' },
+      sync: { x: 620, y: 460, label: 'Sync', colorKey: 'stream' },
+      chat: { x: 380, y: 600, label: 'Chat', colorKey: 'api' },
+      realtime: { x: 620, y: 600, label: 'Realtime', colorKey: 'stream' },
+      notify: { x: 860, y: 600, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 620, y: 740, label: 'Analytics', colorKey: 'stream' },
+      warehouse: { x: 860, y: 740, label: 'Warehouse', colorKey: 'store' },
+      recos: { x: 1100, y: 740, label: 'Recos', colorKey: 'api' },
+      push: { x: 1100, y: 600, label: 'Push', colorKey: 'external' }
+    }
+  },
+
+  deliveroo: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','catalog','cache','cart','pricing','payments','orders','restaurant','dispatch','courier','realtime','location','eta','support','refunds','ledger'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      catalog: { x: 380, y: 180, label: 'Catalog', colorKey: 'api' },
+      cache: { x: 620, y: 180, label: 'Cache', colorKey: 'cache' },
+      cart: { x: 380, y: 320, label: 'Cart', colorKey: 'api' },
+      pricing: { x: 620, y: 320, label: 'Pricing', colorKey: 'api' },
+      payments: { x: 860, y: 320, label: 'Payments', colorKey: 'external' },
+      orders: { x: 1100, y: 320, label: 'Orders', colorKey: 'store' },
+      restaurant: { x: 1100, y: 460, label: 'Restaurant', colorKey: 'external' },
+      dispatch: { x: 860, y: 460, label: 'Dispatch', colorKey: 'api' },
+      courier: { x: 620, y: 460, label: 'Courier', colorKey: 'external' },
+      realtime: { x: 380, y: 460, label: 'Realtime', colorKey: 'stream' },
+      location: { x: 380, y: 600, label: 'Location', colorKey: 'stream' },
+      eta: { x: 620, y: 600, label: 'ETA', colorKey: 'api' },
+      support: { x: 860, y: 600, label: 'Support', colorKey: 'api' },
+      refunds: { x: 1100, y: 600, label: 'Refunds', colorKey: 'api' },
+      ledger: { x: 1100, y: 740, label: 'Ledger', colorKey: 'store' }
+    }
+  },
+
+  grubhub: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','catalog','cache','cart','pricing','payments','orders','restaurant','dispatch','courier','realtime','location','eta','support','refunds','ledger'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      catalog: { x: 380, y: 180, label: 'Catalog', colorKey: 'api' },
+      cache: { x: 620, y: 180, label: 'Cache', colorKey: 'cache' },
+      cart: { x: 380, y: 320, label: 'Cart', colorKey: 'api' },
+      pricing: { x: 620, y: 320, label: 'Pricing', colorKey: 'api' },
+      payments: { x: 860, y: 320, label: 'Payments', colorKey: 'external' },
+      orders: { x: 1100, y: 320, label: 'Orders', colorKey: 'store' },
+      restaurant: { x: 1100, y: 460, label: 'Restaurant', colorKey: 'external' },
+      dispatch: { x: 860, y: 460, label: 'Dispatch', colorKey: 'api' },
+      courier: { x: 620, y: 460, label: 'Courier', colorKey: 'external' },
+      realtime: { x: 380, y: 460, label: 'Realtime', colorKey: 'stream' },
+      location: { x: 380, y: 600, label: 'Location', colorKey: 'stream' },
+      eta: { x: 620, y: 600, label: 'ETA', colorKey: 'api' },
+      support: { x: 860, y: 600, label: 'Support', colorKey: 'api' },
+      refunds: { x: 1100, y: 600, label: 'Refunds', colorKey: 'api' },
+      ledger: { x: 1100, y: 740, label: 'Ledger', colorKey: 'store' }
+    }
+  }
+
+  ,
+
   figma: {
     viewBox: '0 0 1200 960',
     primaryPath: ['client','auth','files','cache','editor','ops','realtime','merge','store','comments','notify','push','export','render','cdn','sharing','authz','audit'],
@@ -7607,6 +7845,364 @@ const ARCH_LAYOUTS = {
       if (stepIdx === 4) e.push(['player','playback','playback'], ['playback','cdn','cdn']);
       if (stepIdx === 5) e.push(['playback','ads','ads'], ['ads','auction','auc'], ['auction','analytics','analytics']);
       if (stepIdx === 6) e.push(['player','metrics','metrics'], ['metrics','analytics','analytics'], ['analytics','warehouse','warehouse']);
+      return e;
+    }
+  },
+
+  // ----- Batch 13 (Architecture - from sheet) -----
+
+  headspace: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Headspace Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','recos','catalog','search','cache','playback','cdn','progress','completion','write','events','rank','scheduler','notify','push','analytics','warehouse'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      recos: { x: 880, y: 160, label: 'Recos' },
+      catalog: { x: 320, y: 300, label: 'Catalog' },
+      search: { x: 600, y: 300, label: 'Search' },
+      cache: { x: 880, y: 300, label: 'Cache' },
+      playback: { x: 320, y: 440, label: 'Playback' },
+      cdn: { x: 600, y: 440, label: 'CDN' },
+      progress: { x: 880, y: 440, label: 'Progress' },
+      completion: { x: 320, y: 580, label: 'Completion' },
+      write: { x: 600, y: 580, label: 'Writes' },
+      events: { x: 880, y: 580, label: 'Events' },
+      rank: { x: 1160, y: 160, label: 'Ranking' },
+      scheduler: { x: 1160, y: 300, label: 'Scheduler' },
+      notify: { x: 1160, y: 440, label: 'Notify' },
+      push: { x: 1160, y: 580, label: 'Push' },
+      analytics: { x: 600, y: 720, label: 'Analytics' },
+      warehouse: { x: 880, y: 720, label: 'Warehouse' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','profile','profile'], ['profile','recos','recos']);
+      if (stepIdx === 2) e.push(['client','catalog','catalog'], ['client','search','search'], ['catalog','cache','cache']);
+      if (stepIdx === 3) e.push(['client','playback','play'], ['playback','cdn','cdn'], ['playback','progress','progress']);
+      if (stepIdx === 4) e.push(['progress','completion','complete'], ['completion','write','write'], ['write','profile','profile']);
+      if (stepIdx === 5) e.push(['completion','events','events'], ['events','rank','rank'], ['rank','recos','recos']);
+      if (stepIdx === 6) e.push(['profile','scheduler','schedule'], ['scheduler','notify','notify'], ['notify','push','push']);
+      return e;
+    }
+  },
+
+  calm: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Calm Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','home','catalog','recos','rank','playback','cdn','progress','completion','write','profile','paywall','entitlements','payments','scheduler','notify','push'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      home: { x: 600, y: 160, label: 'Home' },
+      catalog: { x: 320, y: 300, label: 'Catalog' },
+      recos: { x: 600, y: 300, label: 'Recos' },
+      rank: { x: 880, y: 300, label: 'Ranking' },
+      playback: { x: 320, y: 440, label: 'Playback' },
+      cdn: { x: 600, y: 440, label: 'CDN' },
+      progress: { x: 880, y: 440, label: 'Progress' },
+      completion: { x: 320, y: 580, label: 'Completion' },
+      write: { x: 600, y: 580, label: 'Writes' },
+      profile: { x: 880, y: 580, label: 'Profile' },
+      paywall: { x: 320, y: 720, label: 'Paywall' },
+      entitlements: { x: 600, y: 720, label: 'Entitlements' },
+      payments: { x: 880, y: 720, label: 'Payments' },
+      scheduler: { x: 1160, y: 720, label: 'Scheduler' },
+      notify: { x: 1160, y: 580, label: 'Notify' },
+      push: { x: 1160, y: 440, label: 'Push' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','home','home']);
+      if (stepIdx === 2) e.push(['home','catalog','catalog'], ['home','recos','recos'], ['recos','rank','rank']);
+      if (stepIdx === 3) e.push(['client','playback','play'], ['playback','cdn','cdn'], ['playback','progress','progress']);
+      if (stepIdx === 4) e.push(['progress','completion','complete'], ['completion','write','write'], ['write','profile','profile']);
+      if (stepIdx === 5) e.push(['catalog','paywall','paywall'], ['paywall','entitlements','ent'], ['entitlements','payments','pay']);
+      if (stepIdx === 6) e.push(['profile','scheduler','schedule'], ['scheduler','notify','notify'], ['notify','push','push']);
+      return e;
+    }
+  },
+
+  'nike-training-club': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Nike Training Club Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','plans','catalog','recos','rank','player','cdn','telemetry','completion','write','profile','events','notify','push'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      plans: { x: 600, y: 160, label: 'Plans' },
+      catalog: { x: 320, y: 300, label: 'Catalog' },
+      recos: { x: 600, y: 300, label: 'Recos' },
+      rank: { x: 880, y: 300, label: 'Ranking' },
+      player: { x: 320, y: 440, label: 'Player' },
+      cdn: { x: 600, y: 440, label: 'CDN' },
+      telemetry: { x: 880, y: 440, label: 'Telemetry' },
+      completion: { x: 320, y: 580, label: 'Completion' },
+      write: { x: 600, y: 580, label: 'Writes' },
+      profile: { x: 880, y: 580, label: 'Profile' },
+      events: { x: 1160, y: 300, label: 'Events' },
+      notify: { x: 1160, y: 580, label: 'Notify' },
+      push: { x: 1160, y: 440, label: 'Push' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','plans','plans']);
+      if (stepIdx === 2) e.push(['plans','catalog','catalog'], ['catalog','recos','recos'], ['recos','rank','rank']);
+      if (stepIdx === 3) e.push(['client','player','play'], ['player','cdn','cdn'], ['player','telemetry','telemetry']);
+      if (stepIdx === 4) e.push(['telemetry','completion','complete'], ['completion','write','write'], ['write','profile','profile']);
+      if (stepIdx === 5) e.push(['completion','events','events'], ['events','rank','rank'], ['rank','recos','recos']);
+      if (stepIdx === 6) e.push(['profile','notify','notify'], ['notify','push','push'], ['push','client','client']);
+      return e;
+    }
+  },
+
+  myfitnesspal: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'MyFitnessPal Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','dashboard','search','index','catalog','logging','write','totals','integrations','sync','analytics','warehouse','insights','notify','push'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      dashboard: { x: 600, y: 160, label: 'Dashboard' },
+      search: { x: 320, y: 300, label: 'Search' },
+      index: { x: 600, y: 300, label: 'Index' },
+      catalog: { x: 880, y: 300, label: 'Catalog' },
+      logging: { x: 320, y: 440, label: 'Logging' },
+      write: { x: 600, y: 440, label: 'Writes' },
+      totals: { x: 880, y: 440, label: 'Totals' },
+      integrations: { x: 320, y: 580, label: 'Integrations' },
+      sync: { x: 600, y: 580, label: 'Sync' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      warehouse: { x: 1160, y: 580, label: 'Warehouse' },
+      insights: { x: 1160, y: 440, label: 'Insights' },
+      notify: { x: 880, y: 720, label: 'Notify' },
+      push: { x: 1160, y: 720, label: 'Push' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','dashboard','dashboard']);
+      if (stepIdx === 2) e.push(['client','search','search'], ['search','index','index'], ['index','catalog','catalog']);
+      if (stepIdx === 3) e.push(['client','logging','log'], ['logging','write','write'], ['write','totals','totals']);
+      if (stepIdx === 4) e.push(['integrations','sync','sync'], ['sync','totals','totals']);
+      if (stepIdx === 5) e.push(['write','analytics','analytics'], ['analytics','warehouse','warehouse'], ['warehouse','insights','insights']);
+      if (stepIdx === 6) e.push(['dashboard','notify','notify'], ['notify','push','push'], ['push','client','client']);
+      return e;
+    }
+  },
+
+  cultfit: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Cult.fit Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','catalog','availability','hold','booking','payments','entitlements','ledger','notify','push','checkin','write','profile','analytics','warehouse','insights'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      catalog: { x: 600, y: 160, label: 'Catalog' },
+      availability: { x: 320, y: 300, label: 'Availability' },
+      hold: { x: 600, y: 300, label: 'Hold' },
+      booking: { x: 880, y: 300, label: 'Booking' },
+      payments: { x: 1160, y: 300, label: 'Payments' },
+      entitlements: { x: 880, y: 440, label: 'Entitlements' },
+      ledger: { x: 1160, y: 440, label: 'Ledger' },
+      notify: { x: 600, y: 440, label: 'Notify' },
+      push: { x: 320, y: 440, label: 'Push' },
+      checkin: { x: 320, y: 580, label: 'Check-in' },
+      write: { x: 600, y: 580, label: 'Writes' },
+      profile: { x: 880, y: 580, label: 'Profile' },
+      analytics: { x: 600, y: 720, label: 'Analytics' },
+      warehouse: { x: 880, y: 720, label: 'Warehouse' },
+      insights: { x: 1160, y: 720, label: 'Insights' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','catalog','catalog']);
+      if (stepIdx === 2) e.push(['catalog','availability','avail'], ['availability','hold','hold'], ['hold','booking','booking']);
+      if (stepIdx === 3) e.push(['booking','payments','pay'], ['payments','entitlements','ent'], ['payments','ledger','ledger']);
+      if (stepIdx === 4) e.push(['ledger','booking','confirm'], ['booking','notify','notify'], ['notify','push','push']);
+      if (stepIdx === 5) e.push(['client','checkin','checkin'], ['checkin','write','write'], ['write','profile','profile']);
+      if (stepIdx === 6) e.push(['write','analytics','analytics'], ['analytics','warehouse','warehouse'], ['warehouse','insights','insights']);
+      return e;
+    }
+  },
+
+  fitbit: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Fitbit Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['device','sync','ingest','timeseries','store','aggregate','metrics','profile','dashboard','cache','analytics','warehouse','recos','notify','push','client'],
+    nodes: {
+      device: { x: 40, y: 160, label: 'Device' },
+      sync: { x: 320, y: 160, label: 'Sync' },
+      ingest: { x: 600, y: 160, label: 'Ingest' },
+      timeseries: { x: 880, y: 160, label: 'Timeseries' },
+      store: { x: 1160, y: 160, label: 'Store' },
+      aggregate: { x: 880, y: 300, label: 'Aggregate' },
+      metrics: { x: 600, y: 300, label: 'Metrics' },
+      profile: { x: 320, y: 300, label: 'Profile' },
+      client: { x: 40, y: 300, label: 'Client' },
+      dashboard: { x: 320, y: 440, label: 'Dashboard' },
+      cache: { x: 600, y: 440, label: 'Cache' },
+      analytics: { x: 880, y: 440, label: 'Analytics' },
+      warehouse: { x: 1160, y: 440, label: 'Warehouse' },
+      recos: { x: 1160, y: 580, label: 'Recos' },
+      notify: { x: 880, y: 580, label: 'Notify' },
+      push: { x: 600, y: 580, label: 'Push' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['device','sync','sync'], ['sync','ingest','ingest']);
+      if (stepIdx === 2) e.push(['ingest','timeseries','ts'], ['timeseries','store','store'], ['timeseries','aggregate','agg']);
+      if (stepIdx === 3) e.push(['aggregate','metrics','metrics'], ['metrics','profile','profile']);
+      if (stepIdx === 4) e.push(['client','dashboard','dashboard'], ['dashboard','cache','cache']);
+      if (stepIdx === 5) e.push(['metrics','analytics','analytics'], ['analytics','warehouse','warehouse'], ['analytics','recos','recos']);
+      if (stepIdx === 6) e.push(['profile','notify','notify'], ['notify','push','push'], ['push','client','client']);
+      return e;
+    }
+  },
+
+  strava: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Strava Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','upload','ingest','processing','segments','metrics','store','index','search','feed','rank','cache','interactions','notify','push','challenges','leaderboards','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      upload: { x: 320, y: 160, label: 'Upload' },
+      ingest: { x: 600, y: 160, label: 'Ingest' },
+      processing: { x: 880, y: 160, label: 'Processing' },
+      segments: { x: 1160, y: 160, label: 'Segments' },
+      metrics: { x: 880, y: 300, label: 'Metrics' },
+      store: { x: 600, y: 300, label: 'Store' },
+      index: { x: 320, y: 300, label: 'Index' },
+      search: { x: 40, y: 300, label: 'Search' },
+      feed: { x: 320, y: 440, label: 'Feed' },
+      rank: { x: 600, y: 440, label: 'Ranking' },
+      cache: { x: 880, y: 440, label: 'Cache' },
+      interactions: { x: 40, y: 440, label: 'Interactions' },
+      notify: { x: 320, y: 580, label: 'Notify' },
+      push: { x: 40, y: 580, label: 'Push' },
+      challenges: { x: 600, y: 580, label: 'Challenges' },
+      leaderboards: { x: 880, y: 580, label: 'Leaderboards' },
+      analytics: { x: 1160, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','upload','upload'], ['upload','ingest','ingest']);
+      if (stepIdx === 2) e.push(['ingest','processing','process'], ['processing','segments','segments'], ['processing','metrics','metrics']);
+      if (stepIdx === 3) e.push(['processing','store','store'], ['store','index','index'], ['index','search','search']);
+      if (stepIdx === 4) e.push(['store','feed','feed'], ['feed','rank','rank'], ['feed','cache','cache']);
+      if (stepIdx === 5) e.push(['client','interactions','kudos'], ['interactions','notify','notify'], ['notify','push','push']);
+      if (stepIdx === 6) e.push(['metrics','challenges','challenges'], ['challenges','leaderboards','lb'], ['leaderboards','analytics','analytics']);
+      return e;
+    }
+  },
+
+  healthifyme: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'HealthifyMe Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','plans','logging','write','totals','workouts','sync','chat','realtime','notify','analytics','warehouse','recos','push'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      plans: { x: 600, y: 160, label: 'Plans' },
+      logging: { x: 320, y: 300, label: 'Logging' },
+      write: { x: 600, y: 300, label: 'Writes' },
+      totals: { x: 880, y: 300, label: 'Totals' },
+      workouts: { x: 320, y: 440, label: 'Workouts' },
+      sync: { x: 600, y: 440, label: 'Sync' },
+      chat: { x: 320, y: 580, label: 'Chat' },
+      realtime: { x: 600, y: 580, label: 'Realtime' },
+      notify: { x: 880, y: 580, label: 'Notify' },
+      analytics: { x: 600, y: 720, label: 'Analytics' },
+      warehouse: { x: 880, y: 720, label: 'Warehouse' },
+      recos: { x: 1160, y: 720, label: 'Recos' },
+      push: { x: 1160, y: 580, label: 'Push' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','plans','plans']);
+      if (stepIdx === 2) e.push(['client','logging','log'], ['logging','write','write'], ['write','totals','totals']);
+      if (stepIdx === 3) e.push(['client','workouts','workouts'], ['workouts','sync','sync'], ['sync','totals','totals']);
+      if (stepIdx === 4) e.push(['client','chat','chat'], ['chat','realtime','rt'], ['chat','notify','notify']);
+      if (stepIdx === 5) e.push(['write','analytics','analytics'], ['analytics','warehouse','warehouse'], ['analytics','recos','recos']);
+      if (stepIdx === 6) e.push(['plans','notify','notify'], ['notify','push','push'], ['push','client','client']);
+      return e;
+    }
+  },
+
+  deliveroo: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Deliveroo Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','catalog','cache','cart','pricing','payments','orders','restaurant','dispatch','courier','realtime','location','eta','support','refunds','ledger'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      catalog: { x: 320, y: 160, label: 'Catalog' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      cart: { x: 320, y: 300, label: 'Cart' },
+      pricing: { x: 600, y: 300, label: 'Pricing' },
+      payments: { x: 880, y: 300, label: 'Payments' },
+      orders: { x: 1160, y: 300, label: 'Orders' },
+      restaurant: { x: 1160, y: 440, label: 'Restaurant' },
+      dispatch: { x: 880, y: 440, label: 'Dispatch' },
+      courier: { x: 600, y: 440, label: 'Courier' },
+      realtime: { x: 320, y: 440, label: 'Realtime' },
+      location: { x: 320, y: 580, label: 'Location' },
+      eta: { x: 600, y: 580, label: 'ETA' },
+      support: { x: 880, y: 580, label: 'Support' },
+      refunds: { x: 1160, y: 580, label: 'Refunds' },
+      ledger: { x: 1160, y: 720, label: 'Ledger' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','catalog','browse'], ['catalog','cache','cache']);
+      if (stepIdx === 2) e.push(['client','cart','cart'], ['cart','pricing','price'], ['pricing','payments','pay']);
+      if (stepIdx === 3) e.push(['payments','orders','order'], ['orders','restaurant','merchant'], ['orders','dispatch','dispatch']);
+      if (stepIdx === 4) e.push(['dispatch','courier','assign'], ['courier','realtime','rt']);
+      if (stepIdx === 5) e.push(['courier','location','loc'], ['location','eta','eta'], ['eta','client','client']);
+      if (stepIdx === 6) e.push(['orders','support','support'], ['support','refunds','refund'], ['refunds','ledger','ledger']);
+      return e;
+    }
+  },
+
+  grubhub: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Grubhub Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','catalog','cache','cart','pricing','payments','orders','restaurant','dispatch','courier','realtime','location','eta','support','refunds','ledger'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      catalog: { x: 320, y: 160, label: 'Catalog' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      cart: { x: 320, y: 300, label: 'Cart' },
+      pricing: { x: 600, y: 300, label: 'Pricing' },
+      payments: { x: 880, y: 300, label: 'Payments' },
+      orders: { x: 1160, y: 300, label: 'Orders' },
+      restaurant: { x: 1160, y: 440, label: 'Restaurant' },
+      dispatch: { x: 880, y: 440, label: 'Dispatch' },
+      courier: { x: 600, y: 440, label: 'Courier' },
+      realtime: { x: 320, y: 440, label: 'Realtime' },
+      location: { x: 320, y: 580, label: 'Location' },
+      eta: { x: 600, y: 580, label: 'ETA' },
+      support: { x: 880, y: 580, label: 'Support' },
+      refunds: { x: 1160, y: 580, label: 'Refunds' },
+      ledger: { x: 1160, y: 720, label: 'Ledger' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','catalog','browse'], ['catalog','cache','cache']);
+      if (stepIdx === 2) e.push(['client','cart','cart'], ['cart','pricing','price'], ['pricing','payments','pay']);
+      if (stepIdx === 3) e.push(['payments','orders','order'], ['orders','restaurant','merchant'], ['orders','dispatch','dispatch']);
+      if (stepIdx === 4) e.push(['dispatch','courier','assign'], ['courier','realtime','rt']);
+      if (stepIdx === 5) e.push(['courier','location','loc'], ['location','eta','eta'], ['eta','client','client']);
+      if (stepIdx === 6) e.push(['orders','support','support'], ['support','refunds','refund'], ['refunds','ledger','ledger']);
       return e;
     }
   },

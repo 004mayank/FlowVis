@@ -5307,6 +5307,428 @@ export const FLOWS = {
       }
     ]
   }
+
+  ,
+
+  headspace: {
+    title: 'Headspace',
+    steps: [
+      {
+        title: 'Open app and personalize',
+        desc: 'Client authenticates and loads preferences and today’s plan.',
+        active: ['client','auth','profile','recos'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','recos']]
+      },
+      {
+        title: 'Browse content',
+        desc: 'Catalog and search return sessions with caching.',
+        active: ['catalog','search','cache'],
+        edges: [['client','catalog'], ['client','search'], ['catalog','cache']]
+      },
+      {
+        title: 'Start session',
+        desc: 'Playback service streams audio; progress is tracked.',
+        active: ['playback','cdn','progress'],
+        edges: [['client','playback'], ['playback','cdn'], ['playback','progress']]
+      },
+      {
+        title: 'Complete and update streak',
+        desc: 'Completion writes update streaks and goals.',
+        active: ['completion','write','profile'],
+        edges: [['progress','completion'], ['completion','write'], ['write','profile']]
+      },
+      {
+        title: 'Recommendations loop',
+        desc: 'Engagement events feed personalization.',
+        active: ['events','rank','recos'],
+        edges: [['completion','events'], ['events','rank'], ['rank','recos']]
+      },
+      {
+        title: 'Reminders',
+        desc: 'Reminder scheduler triggers push notifications.',
+        active: ['scheduler','notify','push'],
+        edges: [['profile','scheduler'], ['scheduler','notify'], ['notify','push']]
+      }
+    ]
+  },
+
+  calm: {
+    title: 'Calm',
+    steps: [
+      {
+        title: 'Authenticate and load home',
+        desc: 'Client authenticates and loads home feed and preferences.',
+        active: ['client','auth','home'],
+        edges: [['client','auth'], ['auth','home']]
+      },
+      {
+        title: 'Discover content',
+        desc: 'Catalog and recommendations surface meditations and sleep stories.',
+        active: ['catalog','recos','rank'],
+        edges: [['home','catalog'], ['home','recos'], ['recos','rank']]
+      },
+      {
+        title: 'Start playback',
+        desc: 'Playback streams audio via CDN; progress tracked.',
+        active: ['playback','cdn','progress'],
+        edges: [['client','playback'], ['playback','cdn'], ['playback','progress']]
+      },
+      {
+        title: 'Completion tracking',
+        desc: 'Completion writes update streaks and goals.',
+        active: ['completion','write','profile'],
+        edges: [['progress','completion'], ['completion','write'], ['write','profile']]
+      },
+      {
+        title: 'Subscription entitlements',
+        desc: 'Premium content gated by entitlements and billing.',
+        active: ['paywall','entitlements','payments'],
+        edges: [['catalog','paywall'], ['paywall','entitlements'], ['entitlements','payments']]
+      },
+      {
+        title: 'Reminders',
+        desc: 'Reminder scheduler triggers push notifications.',
+        active: ['scheduler','notify','push'],
+        edges: [['profile','scheduler'], ['scheduler','notify'], ['notify','push']]
+      }
+    ]
+  },
+
+  'nike-training-club': {
+    title: 'Nike Training Club',
+    steps: [
+      {
+        title: 'Load training plan',
+        desc: 'Client loads plan, workouts, and user profile state.',
+        active: ['client','auth','plans'],
+        edges: [['client','auth'], ['auth','plans']]
+      },
+      {
+        title: 'Browse workouts',
+        desc: 'Catalog and recommendations surface workouts.',
+        active: ['catalog','recos','rank'],
+        edges: [['plans','catalog'], ['catalog','recos'], ['recos','rank']]
+      },
+      {
+        title: 'Start workout',
+        desc: 'Media streams instructions; telemetry tracks session progress.',
+        active: ['player','cdn','telemetry'],
+        edges: [['client','player'], ['player','cdn'], ['player','telemetry']]
+      },
+      {
+        title: 'Log completion',
+        desc: 'Completion updates user stats and streaks.',
+        active: ['completion','write','profile'],
+        edges: [['telemetry','completion'], ['completion','write'], ['write','profile']]
+      },
+      {
+        title: 'Personalization',
+        desc: 'Events feed recommendations and plan adjustments.',
+        active: ['events','rank','recos'],
+        edges: [['completion','events'], ['events','rank'], ['rank','recos']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Reminders and achievements trigger notifications.',
+        active: ['notify','push','client'],
+        edges: [['profile','notify'], ['notify','push'], ['push','client']]
+      }
+    ]
+  },
+
+  myfitnesspal: {
+    title: 'MyFitnessPal',
+    steps: [
+      {
+        title: 'Load dashboard',
+        desc: 'Client loads goals, diary, and recent logs.',
+        active: ['client','auth','dashboard'],
+        edges: [['client','auth'], ['auth','dashboard']]
+      },
+      {
+        title: 'Search food',
+        desc: 'Search queries index and returns food items.',
+        active: ['search','index','catalog'],
+        edges: [['client','search'], ['search','index'], ['index','catalog']]
+      },
+      {
+        title: 'Log meal',
+        desc: 'Meal log writes persist and update nutrition totals.',
+        active: ['logging','write','totals'],
+        edges: [['client','logging'], ['logging','write'], ['write','totals']]
+      },
+      {
+        title: 'Sync devices',
+        desc: 'Integrations sync steps/workouts and update totals.',
+        active: ['integrations','sync','totals'],
+        edges: [['integrations','sync'], ['sync','totals']]
+      },
+      {
+        title: 'Insights',
+        desc: 'Analytics computes trends and insights for the user.',
+        active: ['analytics','warehouse','insights'],
+        edges: [['write','analytics'], ['analytics','warehouse'], ['warehouse','insights']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Reminders and goal alerts delivered via push.',
+        active: ['notify','push','client'],
+        edges: [['dashboard','notify'], ['notify','push'], ['push','client']]
+      }
+    ]
+  },
+
+  cultfit: {
+    title: 'Cult.fit',
+    steps: [
+      {
+        title: 'Load classes',
+        desc: 'Client loads class schedule and nearby centers.',
+        active: ['client','auth','catalog'],
+        edges: [['client','auth'], ['auth','catalog']]
+      },
+      {
+        title: 'Select slot',
+        desc: 'Availability check and hold slot for booking.',
+        active: ['availability','hold','booking'],
+        edges: [['catalog','availability'], ['availability','hold'], ['hold','booking']]
+      },
+      {
+        title: 'Payment',
+        desc: 'Payment processed; membership entitlements validated.',
+        active: ['payments','entitlements','ledger'],
+        edges: [['booking','payments'], ['payments','entitlements'], ['payments','ledger']]
+      },
+      {
+        title: 'Confirm booking',
+        desc: 'Booking confirmed and notifications sent.',
+        active: ['booking','notify','push'],
+        edges: [['ledger','booking'], ['booking','notify'], ['notify','push']]
+      },
+      {
+        title: 'Attendance',
+        desc: 'Check-in updates attendance and user stats.',
+        active: ['checkin','write','profile'],
+        edges: [['client','checkin'], ['checkin','write'], ['write','profile']]
+      },
+      {
+        title: 'Insights',
+        desc: 'Analytics computes streaks and class insights.',
+        active: ['analytics','warehouse','insights'],
+        edges: [['write','analytics'], ['analytics','warehouse'], ['warehouse','insights']]
+      }
+    ]
+  },
+
+  fitbit: {
+    title: 'Fitbit',
+    steps: [
+      {
+        title: 'Device sync',
+        desc: 'Device uploads activity data; sync pipeline ingests and stores.',
+        active: ['device','sync','ingest'],
+        edges: [['device','sync'], ['sync','ingest']]
+      },
+      {
+        title: 'Store timeseries',
+        desc: 'Timeseries stored and aggregated for dashboards.',
+        active: ['timeseries','store','aggregate'],
+        edges: [['ingest','timeseries'], ['timeseries','store'], ['timeseries','aggregate']]
+      },
+      {
+        title: 'Compute metrics',
+        desc: 'Metrics compute steps, sleep, heart rate summaries.',
+        active: ['metrics','aggregate','profile'],
+        edges: [['aggregate','metrics'], ['metrics','profile']]
+      },
+      {
+        title: 'Dashboard',
+        desc: 'Client loads dashboard using cache and APIs.',
+        active: ['client','dashboard','cache'],
+        edges: [['client','dashboard'], ['dashboard','cache']]
+      },
+      {
+        title: 'Insights',
+        desc: 'Analytics generates insights and recommendations.',
+        active: ['analytics','recos','warehouse'],
+        edges: [['metrics','analytics'], ['analytics','warehouse'], ['analytics','recos']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Goals and reminders trigger notifications and push.',
+        active: ['notify','push','client'],
+        edges: [['profile','notify'], ['notify','push'], ['push','client']]
+      }
+    ]
+  },
+
+  strava: {
+    title: 'Strava',
+    steps: [
+      {
+        title: 'Upload activity',
+        desc: 'Client uploads activity; ingest pipeline parses and stores.',
+        active: ['client','upload','ingest'],
+        edges: [['client','upload'], ['upload','ingest']]
+      },
+      {
+        title: 'Process and compute',
+        desc: 'Processing computes pace, segments, and stats.',
+        active: ['processing','segments','metrics'],
+        edges: [['ingest','processing'], ['processing','segments'], ['processing','metrics']]
+      },
+      {
+        title: 'Store and index',
+        desc: 'Activity stored and indexed for search and feeds.',
+        active: ['store','index','search'],
+        edges: [['processing','store'], ['store','index'], ['index','search']]
+      },
+      {
+        title: 'Social feed',
+        desc: 'Feed service ranks and serves friends activities.',
+        active: ['feed','rank','cache'],
+        edges: [['store','feed'], ['feed','rank'], ['feed','cache']]
+      },
+      {
+        title: 'Kudos and comments',
+        desc: 'Interactions persist and trigger notifications.',
+        active: ['interactions','notify','push'],
+        edges: [['client','interactions'], ['interactions','notify'], ['notify','push']]
+      },
+      {
+        title: 'Challenges',
+        desc: 'Challenges compute progress and leaderboards.',
+        active: ['challenges','leaderboards','analytics'],
+        edges: [['metrics','challenges'], ['challenges','leaderboards'], ['leaderboards','analytics']]
+      }
+    ]
+  },
+
+  healthifyme: {
+    title: 'HealthifyMe',
+    steps: [
+      {
+        title: 'Load plan',
+        desc: 'Client loads goals, diet plan, and coach messages.',
+        active: ['client','auth','plans'],
+        edges: [['client','auth'], ['auth','plans']]
+      },
+      {
+        title: 'Log meal',
+        desc: 'Meal logging writes persist and update nutrition totals.',
+        active: ['logging','write','totals'],
+        edges: [['client','logging'], ['logging','write'], ['write','totals']]
+      },
+      {
+        title: 'Workout tracking',
+        desc: 'Workout events sync and update totals.',
+        active: ['workouts','sync','totals'],
+        edges: [['client','workouts'], ['workouts','sync'], ['sync','totals']]
+      },
+      {
+        title: 'Coach interactions',
+        desc: 'Chat/messages persist and notify coach and user.',
+        active: ['chat','realtime','notify'],
+        edges: [['client','chat'], ['chat','realtime'], ['chat','notify']]
+      },
+      {
+        title: 'Insights',
+        desc: 'Analytics computes trends and personalized recommendations.',
+        active: ['analytics','recos','warehouse'],
+        edges: [['write','analytics'], ['analytics','warehouse'], ['analytics','recos']]
+      },
+      {
+        title: 'Reminders',
+        desc: 'Reminders trigger notifications and push.',
+        active: ['notify','push','client'],
+        edges: [['plans','notify'], ['notify','push'], ['push','client']]
+      }
+    ]
+  },
+
+  deliveroo: {
+    title: 'Deliveroo',
+    steps: [
+      {
+        title: 'Browse restaurants',
+        desc: 'Client loads catalog and menus with caching.',
+        active: ['client','catalog','cache'],
+        edges: [['client','catalog'], ['catalog','cache']]
+      },
+      {
+        title: 'Checkout',
+        desc: 'Pricing, fees, promos applied; payment intent created.',
+        active: ['cart','pricing','payments'],
+        edges: [['client','cart'], ['cart','pricing'], ['pricing','payments']]
+      },
+      {
+        title: 'Create order',
+        desc: 'Order created and sent to restaurant; dispatch begins.',
+        active: ['orders','restaurant','dispatch'],
+        edges: [['payments','orders'], ['orders','restaurant'], ['orders','dispatch']]
+      },
+      {
+        title: 'Courier assignment',
+        desc: 'Dispatch assigns courier; realtime updates begin.',
+        active: ['dispatch','courier','realtime'],
+        edges: [['dispatch','courier'], ['courier','realtime']]
+      },
+      {
+        title: 'Tracking and ETA',
+        desc: 'Location stream updates ETA and client tracking.',
+        active: ['location','eta','client'],
+        edges: [['courier','location'], ['location','eta'], ['eta','client']]
+      },
+      {
+        title: 'Support and refunds',
+        desc: 'Issues handled; refunds posted to ledger.',
+        active: ['support','refunds','ledger'],
+        edges: [['orders','support'], ['support','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  grubhub: {
+    title: 'Grubhub',
+    steps: [
+      {
+        title: 'Browse restaurants',
+        desc: 'Client loads catalog and menus with caching.',
+        active: ['client','catalog','cache'],
+        edges: [['client','catalog'], ['catalog','cache']]
+      },
+      {
+        title: 'Checkout',
+        desc: 'Pricing and promos applied; payment intent created.',
+        active: ['cart','pricing','payments'],
+        edges: [['client','cart'], ['cart','pricing'], ['pricing','payments']]
+      },
+      {
+        title: 'Create order',
+        desc: 'Order created and sent to restaurant; dispatch begins.',
+        active: ['orders','restaurant','dispatch'],
+        edges: [['payments','orders'], ['orders','restaurant'], ['orders','dispatch']]
+      },
+      {
+        title: 'Driver assignment',
+        desc: 'Dispatch assigns courier; realtime updates begin.',
+        active: ['dispatch','courier','realtime'],
+        edges: [['dispatch','courier'], ['courier','realtime']]
+      },
+      {
+        title: 'Tracking and ETA',
+        desc: 'Location stream updates ETA and client tracking.',
+        active: ['location','eta','client'],
+        edges: [['courier','location'], ['location','eta'], ['eta','client']]
+      },
+      {
+        title: 'Support and refunds',
+        desc: 'Issues handled; refunds posted to ledger.',
+        active: ['support','refunds','ledger'],
+        edges: [['orders','support'], ['support','refunds'], ['refunds','ledger']]
+      }
+    ]
+  }
 };
 
 export function flowForSystem(sys) {
