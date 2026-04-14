@@ -6150,6 +6150,428 @@ export const FLOWS = {
       }
     ]
   }
+
+  ,
+
+  postman: {
+    title: 'Postman',
+    steps: [
+      {
+        title: 'Sign in and load workspaces',
+        desc: 'Client authenticates and loads workspace state.',
+        active: ['client','auth','workspaces'],
+        edges: [['client','auth'], ['auth','workspaces']]
+      },
+      {
+        title: 'Create request',
+        desc: 'Request builder persists drafts and environment variables.',
+        active: ['builder','env','store'],
+        edges: [['client','builder'], ['builder','env'], ['builder','store']]
+      },
+      {
+        title: 'Send request',
+        desc: 'Runtime sends request; proxy/cert handling; response returned.',
+        active: ['runtime','network','client'],
+        edges: [['builder','runtime'], ['runtime','network'], ['network','client']]
+      },
+      {
+        title: 'Save to collection',
+        desc: 'Collections persisted; sync updates collaborators.',
+        active: ['collections','sync','realtime'],
+        edges: [['builder','collections'], ['collections','sync'], ['sync','realtime']]
+      },
+      {
+        title: 'Run tests',
+        desc: 'Runner executes scripts; results stored; reports generated.',
+        active: ['runner','results','reports'],
+        edges: [['collections','runner'], ['runner','results'], ['results','reports']]
+      },
+      {
+        title: 'Publish docs',
+        desc: 'Docs generated and published; notifications sent.',
+        active: ['docs','publish','notify'],
+        edges: [['collections','docs'], ['docs','publish'], ['publish','notify']]
+      }
+    ]
+  },
+
+  vercel: {
+    title: 'Vercel',
+    steps: [
+      {
+        title: 'Connect repo',
+        desc: 'Authenticate and connect Git provider; import project.',
+        active: ['client','auth','git'],
+        edges: [['client','auth'], ['auth','git']]
+      },
+      {
+        title: 'Create deployment',
+        desc: 'Build created from commit; build pipeline starts.',
+        active: ['deployments','build','queue'],
+        edges: [['git','deployments'], ['deployments','build'], ['build','queue']]
+      },
+      {
+        title: 'Build and artifacts',
+        desc: 'Build runs and stores artifacts in storage.',
+        active: ['builder','artifacts','storage'],
+        edges: [['queue','builder'], ['builder','artifacts'], ['artifacts','storage']]
+      },
+      {
+        title: 'Edge rollout',
+        desc: 'Deploy edge config and routes to CDN/edge network.',
+        active: ['edge','cdn','routing'],
+        edges: [['storage','edge'], ['edge','cdn'], ['edge','routing']]
+      },
+      {
+        title: 'Observability',
+        desc: 'Logs and metrics collected for the deployment.',
+        active: ['logs','metrics','analytics'],
+        edges: [['routing','logs'], ['routing','metrics'], ['metrics','analytics']]
+      },
+      {
+        title: 'Rollback',
+        desc: 'Rollback switches traffic to previous deployment.',
+        active: ['routing','traffic','deployments'],
+        edges: [['client','routing'], ['routing','traffic'], ['traffic','deployments']]
+      }
+    ]
+  },
+
+  netlify: {
+    title: 'Netlify',
+    steps: [
+      {
+        title: 'Connect repo',
+        desc: 'Authenticate and connect Git provider; import site.',
+        active: ['client','auth','git'],
+        edges: [['client','auth'], ['auth','git']]
+      },
+      {
+        title: 'Trigger build',
+        desc: 'Build triggered by webhook; build pipeline starts.',
+        active: ['webhooks','build','queue'],
+        edges: [['git','webhooks'], ['webhooks','build'], ['build','queue']]
+      },
+      {
+        title: 'Build and publish',
+        desc: 'Build runs and publishes assets to CDN/storage.',
+        active: ['builder','artifacts','cdn'],
+        edges: [['queue','builder'], ['builder','artifacts'], ['artifacts','cdn']]
+      },
+      {
+        title: 'Functions',
+        desc: 'Serverless functions deployed and routed at edge.',
+        active: ['functions','routing','edge'],
+        edges: [['builder','functions'], ['functions','routing'], ['routing','edge']]
+      },
+      {
+        title: 'Forms and identity',
+        desc: 'Forms submissions and identity auth handled via services.',
+        active: ['forms','identity','store'],
+        edges: [['client','forms'], ['forms','store'], ['client','identity']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics aggregates site traffic and performance.',
+        active: ['analytics','warehouse','reports'],
+        edges: [['edge','analytics'], ['analytics','warehouse'], ['warehouse','reports']]
+      }
+    ]
+  },
+
+  'firebase-console': {
+    title: 'Firebase Console',
+    steps: [
+      {
+        title: 'Sign in',
+        desc: 'Admin authenticates and loads project list.',
+        active: ['client','auth','projects'],
+        edges: [['client','auth'], ['auth','projects']]
+      },
+      {
+        title: 'Configure services',
+        desc: 'Changes apply to service configs; stored and validated.',
+        active: ['config','store','validate'],
+        edges: [['client','config'], ['config','store'], ['store','validate']]
+      },
+      {
+        title: 'Deploy rules',
+        desc: 'Rules deployed and rolled out to runtime.',
+        active: ['rules','deploy','routing'],
+        edges: [['config','rules'], ['rules','deploy'], ['deploy','routing']]
+      },
+      {
+        title: 'Monitor usage',
+        desc: 'Metrics and logs displayed; analytics aggregated.',
+        active: ['metrics','logs','analytics'],
+        edges: [['routing','metrics'], ['routing','logs'], ['metrics','analytics']]
+      },
+      {
+        title: 'Crash & performance',
+        desc: 'Crash reports and performance traces ingested.',
+        active: ['crash','traces','warehouse'],
+        edges: [['client','crash'], ['crash','traces'], ['traces','warehouse']]
+      },
+      {
+        title: 'Alerts',
+        desc: 'Alerts configured and notifications delivered.',
+        active: ['alerts','notify','email'],
+        edges: [['analytics','alerts'], ['alerts','notify'], ['notify','email']]
+      }
+    ]
+  },
+
+  'aws-console': {
+    title: 'AWS Console',
+    steps: [
+      {
+        title: 'Sign in',
+        desc: 'Admin authenticates (IAM/SAML) and loads account context.',
+        active: ['client','auth','iam'],
+        edges: [['client','auth'], ['auth','iam']]
+      },
+      {
+        title: 'Browse services',
+        desc: 'Console loads service catalog and account resources.',
+        active: ['catalog','resources','cache'],
+        edges: [['client','catalog'], ['catalog','cache'], ['catalog','resources']]
+      },
+      {
+        title: 'Apply config change',
+        desc: 'API call sent; change validated and executed in control plane.',
+        active: ['api','validate','controlplane'],
+        edges: [['client','api'], ['api','validate'], ['validate','controlplane']]
+      },
+      {
+        title: 'Provision resources',
+        desc: 'Provisioning creates resources and updates state.',
+        active: ['provision','state','events'],
+        edges: [['controlplane','provision'], ['provision','state'], ['provision','events']]
+      },
+      {
+        title: 'Audit and logging',
+        desc: 'Audit logs stored; metrics aggregated.',
+        active: ['audit','logs','metrics'],
+        edges: [['events','audit'], ['audit','logs'], ['logs','metrics']]
+      },
+      {
+        title: 'Alerts',
+        desc: 'Alerts configured and notifications delivered.',
+        active: ['alerts','notify','email'],
+        edges: [['metrics','alerts'], ['alerts','notify'], ['notify','email']]
+      }
+    ]
+  },
+
+  affirm: {
+    title: 'Affirm',
+    steps: [
+      {
+        title: 'Choose pay-over-time',
+        desc: 'Client selects Affirm at checkout; session created.',
+        active: ['client','merchant','checkout'],
+        edges: [['merchant','checkout'], ['client','checkout']]
+      },
+      {
+        title: 'Underwriting',
+        desc: 'Risk and underwriting evaluate user and cart.',
+        active: ['risk','underwriting','decision'],
+        edges: [['checkout','risk'], ['risk','underwriting'], ['underwriting','decision']]
+      },
+      {
+        title: 'Create loan',
+        desc: 'Loan created; auth holds; order confirmed to merchant.',
+        active: ['loan','authz','orders'],
+        edges: [['decision','loan'], ['loan','authz'], ['authz','orders']]
+      },
+      {
+        title: 'Capture and settle',
+        desc: 'Capture funds and settle to merchant; ledger updated.',
+        active: ['capture','settlement','ledger'],
+        edges: [['orders','capture'], ['capture','settlement'], ['settlement','ledger']]
+      },
+      {
+        title: 'Billing and collections',
+        desc: 'Installments billed; collections handle delinquencies.',
+        active: ['billing','payments','collections'],
+        edges: [['loan','billing'], ['billing','payments'], ['billing','collections']]
+      },
+      {
+        title: 'Disputes and refunds',
+        desc: 'Dispute/refund flows adjust ledger and merchant settlement.',
+        active: ['disputes','refunds','ledger'],
+        edges: [['client','disputes'], ['disputes','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  afterpay: {
+    title: 'Afterpay',
+    steps: [
+      {
+        title: 'Select installment option',
+        desc: 'Client selects Afterpay; session created with merchant.',
+        active: ['client','merchant','checkout'],
+        edges: [['merchant','checkout'], ['client','checkout']]
+      },
+      {
+        title: 'Risk decision',
+        desc: 'Risk checks and decisioning approve or decline.',
+        active: ['risk','decision','auth'],
+        edges: [['checkout','risk'], ['risk','decision'], ['decision','auth']]
+      },
+      {
+        title: 'Order authorization',
+        desc: 'Authorization created; order confirmed.',
+        active: ['authz','orders','notify'],
+        edges: [['auth','authz'], ['authz','orders'], ['orders','notify']]
+      },
+      {
+        title: 'Capture and settlement',
+        desc: 'Capture funds and settle to merchant; ledger updated.',
+        active: ['capture','settlement','ledger'],
+        edges: [['orders','capture'], ['capture','settlement'], ['settlement','ledger']]
+      },
+      {
+        title: 'Installments',
+        desc: 'Installments billed and collected.',
+        active: ['billing','payments','collections'],
+        edges: [['orders','billing'], ['billing','payments'], ['billing','collections']]
+      },
+      {
+        title: 'Returns and disputes',
+        desc: 'Returns and disputes trigger refunds and ledger adjustments.',
+        active: ['returns','refunds','ledger'],
+        edges: [['client','returns'], ['returns','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  brex: {
+    title: 'Brex',
+    steps: [
+      {
+        title: 'Onboard and KYC',
+        desc: 'Business onboarding runs KYC/KYB and creates account.',
+        active: ['client','kyc','accounts'],
+        edges: [['client','kyc'], ['kyc','accounts']]
+      },
+      {
+        title: 'Issue cards',
+        desc: 'Card issuance and controls configured.',
+        active: ['cards','controls','approvals'],
+        edges: [['accounts','cards'], ['cards','controls'], ['controls','approvals']]
+      },
+      {
+        title: 'Authorize spend',
+        desc: 'Authorization checks limits and risk; approval returned.',
+        active: ['authz','risk','decision'],
+        edges: [['cards','authz'], ['authz','risk'], ['risk','decision']]
+      },
+      {
+        title: 'Capture and ledger',
+        desc: 'Capture transactions and post to ledger.',
+        active: ['capture','ledger','reports'],
+        edges: [['decision','capture'], ['capture','ledger'], ['ledger','reports']]
+      },
+      {
+        title: 'Expenses',
+        desc: 'Receipts and expense management workflows.',
+        active: ['expenses','ocr','store'],
+        edges: [['client','expenses'], ['expenses','ocr'], ['ocr','store']]
+      },
+      {
+        title: 'Payouts',
+        desc: 'Payouts routed via ACH/wires; status notified.',
+        active: ['payouts','routing','notify'],
+        edges: [['ledger','payouts'], ['payouts','routing'], ['routing','notify']]
+      }
+    ]
+  },
+
+  ramp: {
+    title: 'Ramp',
+    steps: [
+      {
+        title: 'Onboard and KYB',
+        desc: 'Business onboarding runs KYB and creates accounts.',
+        active: ['client','kyc','accounts'],
+        edges: [['client','kyc'], ['kyc','accounts']]
+      },
+      {
+        title: 'Card controls',
+        desc: 'Issue cards and configure controls and policies.',
+        active: ['cards','controls','policies'],
+        edges: [['accounts','cards'], ['cards','controls'], ['controls','policies']]
+      },
+      {
+        title: 'Authorize transaction',
+        desc: 'Authorization checks risk and policies; decision returned.',
+        active: ['authz','risk','decision'],
+        edges: [['cards','authz'], ['authz','risk'], ['risk','decision']]
+      },
+      {
+        title: 'Ledger and accounting sync',
+        desc: 'Transactions posted to ledger and synced to accounting.',
+        active: ['ledger','sync','integrations'],
+        edges: [['decision','ledger'], ['ledger','sync'], ['sync','integrations']]
+      },
+      {
+        title: 'Expenses and receipts',
+        desc: 'Receipts ingested; OCR extracts data; reimbursements tracked.',
+        active: ['expenses','ocr','store'],
+        edges: [['client','expenses'], ['expenses','ocr'], ['ocr','store']]
+      },
+      {
+        title: 'Insights',
+        desc: 'Analytics computes savings and spend insights.',
+        active: ['analytics','warehouse','reports'],
+        edges: [['ledger','analytics'], ['analytics','warehouse'], ['warehouse','reports']]
+      }
+    ]
+  },
+
+  mercury: {
+    title: 'Mercury',
+    steps: [
+      {
+        title: 'Onboard and KYB',
+        desc: 'Business onboarding runs KYB and creates banking account.',
+        active: ['client','kyc','accounts'],
+        edges: [['client','kyc'], ['kyc','accounts']]
+      },
+      {
+        title: 'Login and dashboards',
+        desc: 'Client authenticates and loads balances and transactions.',
+        active: ['client','auth','accounts'],
+        edges: [['client','auth'], ['auth','accounts']]
+      },
+      {
+        title: 'ACH transfer',
+        desc: 'Transfer created and routed to ACH network.',
+        active: ['payments','routing','ach'],
+        edges: [['client','payments'], ['payments','routing'], ['routing','ach']]
+      },
+      {
+        title: 'Core banking execution',
+        desc: 'Core posts ledger entries and returns status.',
+        active: ['core','ledger','status'],
+        edges: [['ach','core'], ['core','ledger'], ['core','status']]
+      },
+      {
+        title: 'Cards',
+        desc: 'Card issuance and controls managed for business cards.',
+        active: ['cards','controls','approvals'],
+        edges: [['accounts','cards'], ['cards','controls'], ['controls','approvals']]
+      },
+      {
+        title: 'Notifications and reports',
+        desc: 'Notifications sent; reports compiled for export.',
+        active: ['notify','reports','exports'],
+        edges: [['status','notify'], ['ledger','reports'], ['reports','exports']]
+      }
+    ]
+  }
 };
 
 export function flowForSystem(sys) {

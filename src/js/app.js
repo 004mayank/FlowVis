@@ -5116,6 +5116,251 @@ const SYSTEM_LAYOUTS = {
 
   ,
 
+  postman: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','workspaces','builder','env','store','runtime','network','collections','sync','realtime','runner','results','reports','docs','publish','notify'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      workspaces: { x: 620, y: 180, label: 'Workspaces', colorKey: 'store' },
+      builder: { x: 380, y: 320, label: 'Builder', colorKey: 'api' },
+      env: { x: 620, y: 320, label: 'Env', colorKey: 'store' },
+      store: { x: 860, y: 320, label: 'Store', colorKey: 'store' },
+      runtime: { x: 380, y: 460, label: 'Runtime', colorKey: 'api' },
+      network: { x: 620, y: 460, label: 'Network', colorKey: 'external' },
+      collections: { x: 860, y: 460, label: 'Collections', colorKey: 'store' },
+      sync: { x: 1100, y: 460, label: 'Sync', colorKey: 'stream' },
+      realtime: { x: 1100, y: 320, label: 'Realtime', colorKey: 'stream' },
+      runner: { x: 380, y: 600, label: 'Runner', colorKey: 'api' },
+      results: { x: 620, y: 600, label: 'Results', colorKey: 'store' },
+      reports: { x: 860, y: 600, label: 'Reports', colorKey: 'api' },
+      docs: { x: 380, y: 740, label: 'Docs', colorKey: 'api' },
+      publish: { x: 620, y: 740, label: 'Publish', colorKey: 'external' },
+      notify: { x: 860, y: 740, label: 'Notify', colorKey: 'external' }
+    }
+  },
+
+  vercel: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','git','deployments','build','queue','builder','artifacts','storage','edge','cdn','routing','logs','metrics','analytics','traffic'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      git: { x: 620, y: 180, label: 'Git', colorKey: 'external' },
+      deployments: { x: 860, y: 180, label: 'Deployments', colorKey: 'store' },
+      build: { x: 380, y: 320, label: 'Build', colorKey: 'api' },
+      queue: { x: 620, y: 320, label: 'Queue', colorKey: 'queue' },
+      builder: { x: 860, y: 320, label: 'Builder', colorKey: 'api' },
+      artifacts: { x: 1100, y: 320, label: 'Artifacts', colorKey: 'store' },
+      storage: { x: 1100, y: 180, label: 'Storage', colorKey: 'store' },
+      edge: { x: 860, y: 460, label: 'Edge', colorKey: 'cdn' },
+      cdn: { x: 620, y: 460, label: 'CDN', colorKey: 'cdn' },
+      routing: { x: 380, y: 460, label: 'Routing', colorKey: 'api' },
+      logs: { x: 380, y: 600, label: 'Logs', colorKey: 'stream' },
+      metrics: { x: 620, y: 600, label: 'Metrics', colorKey: 'stream' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' },
+      traffic: { x: 1100, y: 600, label: 'Traffic', colorKey: 'api' }
+    }
+  },
+
+  netlify: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','git','webhooks','build','queue','builder','artifacts','cdn','functions','routing','edge','forms','identity','store','analytics','warehouse','reports'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      git: { x: 620, y: 180, label: 'Git', colorKey: 'external' },
+      webhooks: { x: 860, y: 180, label: 'Webhooks', colorKey: 'queue' },
+      build: { x: 380, y: 320, label: 'Build', colorKey: 'api' },
+      queue: { x: 620, y: 320, label: 'Queue', colorKey: 'queue' },
+      builder: { x: 860, y: 320, label: 'Builder', colorKey: 'api' },
+      artifacts: { x: 1100, y: 320, label: 'Artifacts', colorKey: 'store' },
+      cdn: { x: 1100, y: 180, label: 'CDN', colorKey: 'cdn' },
+      functions: { x: 380, y: 460, label: 'Functions', colorKey: 'api' },
+      routing: { x: 620, y: 460, label: 'Routing', colorKey: 'api' },
+      edge: { x: 860, y: 460, label: 'Edge', colorKey: 'cdn' },
+      forms: { x: 380, y: 600, label: 'Forms', colorKey: 'api' },
+      identity: { x: 620, y: 600, label: 'Identity', colorKey: 'api' },
+      store: { x: 860, y: 600, label: 'Store', colorKey: 'store' },
+      analytics: { x: 620, y: 740, label: 'Analytics', colorKey: 'stream' },
+      warehouse: { x: 860, y: 740, label: 'Warehouse', colorKey: 'store' },
+      reports: { x: 1100, y: 740, label: 'Reports', colorKey: 'api' }
+    }
+  },
+
+  'firebase-console': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','projects','config','store','validate','rules','deploy','routing','metrics','logs','analytics','crash','traces','warehouse','alerts','notify','email'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      projects: { x: 620, y: 180, label: 'Projects', colorKey: 'store' },
+      config: { x: 380, y: 320, label: 'Config', colorKey: 'api' },
+      store: { x: 620, y: 320, label: 'Store', colorKey: 'store' },
+      validate: { x: 860, y: 320, label: 'Validate', colorKey: 'api' },
+      rules: { x: 380, y: 460, label: 'Rules', colorKey: 'store' },
+      deploy: { x: 620, y: 460, label: 'Deploy', colorKey: 'queue' },
+      routing: { x: 860, y: 460, label: 'Routing', colorKey: 'api' },
+      metrics: { x: 380, y: 600, label: 'Metrics', colorKey: 'stream' },
+      logs: { x: 620, y: 600, label: 'Logs', colorKey: 'stream' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' },
+      crash: { x: 380, y: 740, label: 'Crash', colorKey: 'api' },
+      traces: { x: 620, y: 740, label: 'Traces', colorKey: 'api' },
+      warehouse: { x: 860, y: 740, label: 'Warehouse', colorKey: 'store' },
+      alerts: { x: 1100, y: 600, label: 'Alerts', colorKey: 'api' },
+      notify: { x: 1100, y: 740, label: 'Notify', colorKey: 'external' },
+      email: { x: 1100, y: 460, label: 'Email', colorKey: 'external' }
+    }
+  },
+
+  'aws-console': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','iam','catalog','resources','cache','api','validate','controlplane','provision','state','events','audit','logs','metrics','alerts','notify','email'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      iam: { x: 620, y: 180, label: 'IAM', colorKey: 'store' },
+      catalog: { x: 380, y: 320, label: 'Catalog', colorKey: 'api' },
+      resources: { x: 620, y: 320, label: 'Resources', colorKey: 'store' },
+      cache: { x: 860, y: 320, label: 'Cache', colorKey: 'cache' },
+      api: { x: 380, y: 460, label: 'API', colorKey: 'api' },
+      validate: { x: 620, y: 460, label: 'Validate', colorKey: 'api' },
+      controlplane: { x: 860, y: 460, label: 'Control Plane', colorKey: 'api' },
+      provision: { x: 1100, y: 460, label: 'Provision', colorKey: 'api' },
+      state: { x: 1100, y: 320, label: 'State', colorKey: 'store' },
+      events: { x: 860, y: 600, label: 'Events', colorKey: 'stream' },
+      audit: { x: 620, y: 600, label: 'Audit', colorKey: 'store' },
+      logs: { x: 380, y: 600, label: 'Logs', colorKey: 'store' },
+      metrics: { x: 380, y: 740, label: 'Metrics', colorKey: 'stream' },
+      alerts: { x: 620, y: 740, label: 'Alerts', colorKey: 'api' },
+      notify: { x: 860, y: 740, label: 'Notify', colorKey: 'external' },
+      email: { x: 1100, y: 740, label: 'Email', colorKey: 'external' }
+    }
+  },
+
+  affirm: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','merchant','checkout','risk','underwriting','decision','loan','authz','orders','capture','settlement','ledger','billing','payments','collections','disputes','refunds'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      merchant: { x: 140, y: 380, label: 'Merchant', colorKey: 'external' },
+      checkout: { x: 380, y: 240, label: 'Checkout', colorKey: 'api' },
+      risk: { x: 620, y: 180, label: 'Risk', colorKey: 'api' },
+      underwriting: { x: 620, y: 300, label: 'Underwriting', colorKey: 'api' },
+      decision: { x: 860, y: 240, label: 'Decision', colorKey: 'api' },
+      loan: { x: 1100, y: 240, label: 'Loan', colorKey: 'store' },
+      authz: { x: 1100, y: 380, label: 'AuthZ', colorKey: 'api' },
+      orders: { x: 860, y: 380, label: 'Orders', colorKey: 'store' },
+      capture: { x: 620, y: 460, label: 'Capture', colorKey: 'api' },
+      settlement: { x: 860, y: 460, label: 'Settlement', colorKey: 'api' },
+      ledger: { x: 1100, y: 460, label: 'Ledger', colorKey: 'store' },
+      billing: { x: 620, y: 600, label: 'Billing', colorKey: 'store' },
+      payments: { x: 860, y: 600, label: 'Payments', colorKey: 'external' },
+      collections: { x: 1100, y: 600, label: 'Collections', colorKey: 'api' },
+      disputes: { x: 380, y: 600, label: 'Disputes', colorKey: 'api' },
+      refunds: { x: 380, y: 740, label: 'Refunds', colorKey: 'api' }
+    }
+  },
+
+  afterpay: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','merchant','checkout','risk','decision','auth','authz','orders','notify','capture','settlement','ledger','billing','payments','collections','returns','refunds'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      merchant: { x: 140, y: 380, label: 'Merchant', colorKey: 'external' },
+      checkout: { x: 380, y: 240, label: 'Checkout', colorKey: 'api' },
+      risk: { x: 620, y: 180, label: 'Risk', colorKey: 'api' },
+      decision: { x: 860, y: 180, label: 'Decision', colorKey: 'api' },
+      auth: { x: 1100, y: 180, label: 'Auth', colorKey: 'api' },
+      authz: { x: 860, y: 320, label: 'AuthZ', colorKey: 'api' },
+      orders: { x: 1100, y: 320, label: 'Orders', colorKey: 'store' },
+      notify: { x: 1100, y: 460, label: 'Notify', colorKey: 'external' },
+      capture: { x: 620, y: 460, label: 'Capture', colorKey: 'api' },
+      settlement: { x: 860, y: 460, label: 'Settlement', colorKey: 'api' },
+      ledger: { x: 1100, y: 600, label: 'Ledger', colorKey: 'store' },
+      billing: { x: 620, y: 600, label: 'Billing', colorKey: 'store' },
+      payments: { x: 860, y: 600, label: 'Payments', colorKey: 'external' },
+      collections: { x: 1100, y: 740, label: 'Collections', colorKey: 'api' },
+      returns: { x: 380, y: 600, label: 'Returns', colorKey: 'api' },
+      refunds: { x: 380, y: 740, label: 'Refunds', colorKey: 'api' }
+    }
+  },
+
+  brex: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','kyc','accounts','cards','controls','approvals','authz','risk','decision','capture','ledger','reports','expenses','ocr','store','payouts','routing','notify'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      kyc: { x: 380, y: 180, label: 'KYB', colorKey: 'api' },
+      accounts: { x: 620, y: 180, label: 'Accounts', colorKey: 'store' },
+      cards: { x: 860, y: 180, label: 'Cards', colorKey: 'api' },
+      controls: { x: 1100, y: 180, label: 'Controls', colorKey: 'store' },
+      approvals: { x: 1100, y: 320, label: 'Approvals', colorKey: 'api' },
+      authz: { x: 860, y: 320, label: 'AuthZ', colorKey: 'api' },
+      risk: { x: 620, y: 320, label: 'Risk', colorKey: 'api' },
+      decision: { x: 380, y: 320, label: 'Decision', colorKey: 'api' },
+      capture: { x: 380, y: 460, label: 'Capture', colorKey: 'api' },
+      ledger: { x: 620, y: 460, label: 'Ledger', colorKey: 'store' },
+      reports: { x: 860, y: 460, label: 'Reports', colorKey: 'api' },
+      expenses: { x: 380, y: 600, label: 'Expenses', colorKey: 'api' },
+      ocr: { x: 620, y: 600, label: 'OCR', colorKey: 'api' },
+      store: { x: 860, y: 600, label: 'Store', colorKey: 'store' },
+      payouts: { x: 1100, y: 600, label: 'Payouts', colorKey: 'api' },
+      routing: { x: 1100, y: 740, label: 'Routing', colorKey: 'external' },
+      notify: { x: 860, y: 740, label: 'Notify', colorKey: 'external' }
+    }
+  },
+
+  ramp: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','kyc','accounts','cards','controls','policies','authz','risk','decision','ledger','sync','integrations','expenses','ocr','store','analytics','warehouse','reports'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      kyc: { x: 380, y: 180, label: 'KYB', colorKey: 'api' },
+      accounts: { x: 620, y: 180, label: 'Accounts', colorKey: 'store' },
+      cards: { x: 860, y: 180, label: 'Cards', colorKey: 'api' },
+      controls: { x: 1100, y: 180, label: 'Controls', colorKey: 'store' },
+      policies: { x: 1100, y: 320, label: 'Policies', colorKey: 'api' },
+      authz: { x: 860, y: 320, label: 'AuthZ', colorKey: 'api' },
+      risk: { x: 620, y: 320, label: 'Risk', colorKey: 'api' },
+      decision: { x: 380, y: 320, label: 'Decision', colorKey: 'api' },
+      ledger: { x: 380, y: 460, label: 'Ledger', colorKey: 'store' },
+      sync: { x: 620, y: 460, label: 'Sync', colorKey: 'stream' },
+      integrations: { x: 860, y: 460, label: 'Integrations', colorKey: 'external' },
+      expenses: { x: 380, y: 600, label: 'Expenses', colorKey: 'api' },
+      ocr: { x: 620, y: 600, label: 'OCR', colorKey: 'api' },
+      store: { x: 860, y: 600, label: 'Store', colorKey: 'store' },
+      analytics: { x: 620, y: 740, label: 'Analytics', colorKey: 'stream' },
+      warehouse: { x: 860, y: 740, label: 'Warehouse', colorKey: 'store' },
+      reports: { x: 1100, y: 740, label: 'Reports', colorKey: 'api' }
+    }
+  },
+
+  mercury: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','kyc','accounts','auth','payments','routing','ach','core','ledger','status','cards','controls','approvals','notify','reports','exports'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      kyc: { x: 380, y: 180, label: 'KYB', colorKey: 'api' },
+      accounts: { x: 620, y: 180, label: 'Accounts', colorKey: 'store' },
+      auth: { x: 860, y: 180, label: 'Auth', colorKey: 'api' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'api' },
+      routing: { x: 620, y: 320, label: 'Routing', colorKey: 'api' },
+      ach: { x: 860, y: 320, label: 'ACH', colorKey: 'external' },
+      core: { x: 1100, y: 320, label: 'Core', colorKey: 'external' },
+      ledger: { x: 620, y: 460, label: 'Ledger', colorKey: 'store' },
+      status: { x: 860, y: 460, label: 'Status', colorKey: 'api' },
+      cards: { x: 380, y: 460, label: 'Cards', colorKey: 'api' },
+      controls: { x: 380, y: 600, label: 'Controls', colorKey: 'store' },
+      approvals: { x: 620, y: 600, label: 'Approvals', colorKey: 'api' },
+      notify: { x: 860, y: 600, label: 'Notify', colorKey: 'external' },
+      reports: { x: 860, y: 740, label: 'Reports', colorKey: 'api' },
+      exports: { x: 1100, y: 740, label: 'Exports', colorKey: 'api' }
+    }
+  }
+
+  ,
+
   figma: {
     viewBox: '0 0 1200 960',
     primaryPath: ['client','auth','files','cache','editor','ops','realtime','merge','store','comments','notify','push','export','render','cdn','sharing','authz','audit'],
@@ -8805,6 +9050,371 @@ const ARCH_LAYOUTS = {
       if (stepIdx === 4) e.push(['client','votes','vote'], ['votes','rep','rep'], ['rep','leaderboards','leaderboards']);
       if (stepIdx === 5) e.push(['write','events','events'], ['events','notify','notify'], ['notify','email','email']);
       if (stepIdx === 6) e.push(['events','analytics','analytics'], ['analytics','warehouse','warehouse'], ['warehouse','reports','reports']);
+      return e;
+    }
+  },
+
+  // ----- Batch 15 (Architecture - from sheet) -----
+
+  postman: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Postman Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','workspaces','builder','env','store','runtime','network','collections','sync','realtime','runner','results','reports','docs','publish','notify'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      workspaces: { x: 600, y: 160, label: 'Workspaces' },
+      builder: { x: 320, y: 300, label: 'Builder' },
+      env: { x: 600, y: 300, label: 'Env' },
+      store: { x: 880, y: 300, label: 'Store' },
+      runtime: { x: 320, y: 440, label: 'Runtime' },
+      network: { x: 600, y: 440, label: 'Network' },
+      collections: { x: 880, y: 440, label: 'Collections' },
+      sync: { x: 1160, y: 440, label: 'Sync' },
+      realtime: { x: 1160, y: 300, label: 'Realtime' },
+      runner: { x: 320, y: 580, label: 'Runner' },
+      results: { x: 600, y: 580, label: 'Results' },
+      reports: { x: 880, y: 580, label: 'Reports' },
+      docs: { x: 320, y: 720, label: 'Docs' },
+      publish: { x: 600, y: 720, label: 'Publish' },
+      notify: { x: 880, y: 720, label: 'Notify' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','workspaces','ws']);
+      if (stepIdx === 2) e.push(['client','builder','build'], ['builder','env','env'], ['builder','store','store']);
+      if (stepIdx === 3) e.push(['builder','runtime','run'], ['runtime','network','net'], ['network','client','client']);
+      if (stepIdx === 4) e.push(['builder','collections','save'], ['collections','sync','sync'], ['sync','realtime','rt']);
+      if (stepIdx === 5) e.push(['collections','runner','run'], ['runner','results','results'], ['results','reports','reports']);
+      if (stepIdx === 6) e.push(['collections','docs','docs'], ['docs','publish','publish'], ['publish','notify','notify']);
+      return e;
+    }
+  },
+
+  vercel: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Vercel Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','git','deployments','build','queue','builder','artifacts','storage','edge','cdn','routing','logs','metrics','analytics','traffic'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      git: { x: 600, y: 160, label: 'Git' },
+      deployments: { x: 880, y: 160, label: 'Deployments' },
+      build: { x: 320, y: 300, label: 'Build' },
+      queue: { x: 600, y: 300, label: 'Queue' },
+      builder: { x: 880, y: 300, label: 'Builder' },
+      artifacts: { x: 1160, y: 300, label: 'Artifacts' },
+      storage: { x: 1160, y: 160, label: 'Storage' },
+      edge: { x: 880, y: 440, label: 'Edge' },
+      cdn: { x: 600, y: 440, label: 'CDN' },
+      routing: { x: 320, y: 440, label: 'Routing' },
+      logs: { x: 320, y: 580, label: 'Logs' },
+      metrics: { x: 600, y: 580, label: 'Metrics' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      traffic: { x: 1160, y: 580, label: 'Traffic' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','git','git']);
+      if (stepIdx === 2) e.push(['git','deployments','deploy'], ['deployments','build','build'], ['build','queue','queue']);
+      if (stepIdx === 3) e.push(['queue','builder','build'], ['builder','artifacts','artifacts'], ['artifacts','storage','storage']);
+      if (stepIdx === 4) e.push(['storage','edge','edge'], ['edge','cdn','cdn'], ['edge','routing','routing']);
+      if (stepIdx === 5) e.push(['routing','logs','logs'], ['routing','metrics','metrics'], ['metrics','analytics','analytics']);
+      if (stepIdx === 6) e.push(['client','routing','rollback'], ['routing','traffic','traffic'], ['traffic','deployments','deploy']);
+      return e;
+    }
+  },
+
+  netlify: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Netlify Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','git','webhooks','build','queue','builder','artifacts','cdn','functions','routing','edge','forms','identity','store','analytics','warehouse','reports'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      git: { x: 600, y: 160, label: 'Git' },
+      webhooks: { x: 880, y: 160, label: 'Webhooks' },
+      build: { x: 320, y: 300, label: 'Build' },
+      queue: { x: 600, y: 300, label: 'Queue' },
+      builder: { x: 880, y: 300, label: 'Builder' },
+      artifacts: { x: 1160, y: 300, label: 'Artifacts' },
+      cdn: { x: 1160, y: 160, label: 'CDN' },
+      functions: { x: 320, y: 440, label: 'Functions' },
+      routing: { x: 600, y: 440, label: 'Routing' },
+      edge: { x: 880, y: 440, label: 'Edge' },
+      forms: { x: 320, y: 580, label: 'Forms' },
+      identity: { x: 600, y: 580, label: 'Identity' },
+      store: { x: 880, y: 580, label: 'Store' },
+      analytics: { x: 600, y: 720, label: 'Analytics' },
+      warehouse: { x: 880, y: 720, label: 'Warehouse' },
+      reports: { x: 1160, y: 720, label: 'Reports' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','git','git']);
+      if (stepIdx === 2) e.push(['git','webhooks','webhook'], ['webhooks','build','build'], ['build','queue','queue']);
+      if (stepIdx === 3) e.push(['queue','builder','build'], ['builder','artifacts','artifacts'], ['artifacts','cdn','cdn']);
+      if (stepIdx === 4) e.push(['builder','functions','functions'], ['functions','routing','routing'], ['routing','edge','edge']);
+      if (stepIdx === 5) e.push(['client','forms','forms'], ['forms','store','store'], ['client','identity','identity']);
+      if (stepIdx === 6) e.push(['edge','analytics','analytics'], ['analytics','warehouse','warehouse'], ['warehouse','reports','reports']);
+      return e;
+    }
+  },
+
+  'firebase-console': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Firebase Console Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','projects','config','store','validate','rules','deploy','routing','metrics','logs','analytics','crash','traces','warehouse','alerts','notify','email'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      projects: { x: 600, y: 160, label: 'Projects' },
+      config: { x: 320, y: 300, label: 'Config' },
+      store: { x: 600, y: 300, label: 'Store' },
+      validate: { x: 880, y: 300, label: 'Validate' },
+      rules: { x: 320, y: 440, label: 'Rules' },
+      deploy: { x: 600, y: 440, label: 'Deploy' },
+      routing: { x: 880, y: 440, label: 'Routing' },
+      metrics: { x: 320, y: 580, label: 'Metrics' },
+      logs: { x: 600, y: 580, label: 'Logs' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      crash: { x: 320, y: 720, label: 'Crash' },
+      traces: { x: 600, y: 720, label: 'Traces' },
+      warehouse: { x: 880, y: 720, label: 'Warehouse' },
+      alerts: { x: 1160, y: 580, label: 'Alerts' },
+      notify: { x: 1160, y: 720, label: 'Notify' },
+      email: { x: 1160, y: 440, label: 'Email' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','projects','projects']);
+      if (stepIdx === 2) e.push(['client','config','config'], ['config','store','store'], ['store','validate','validate']);
+      if (stepIdx === 3) e.push(['config','rules','rules'], ['rules','deploy','deploy'], ['deploy','routing','routing']);
+      if (stepIdx === 4) e.push(['routing','metrics','metrics'], ['routing','logs','logs'], ['metrics','analytics','analytics']);
+      if (stepIdx === 5) e.push(['client','crash','crash'], ['crash','traces','traces'], ['traces','warehouse','warehouse']);
+      if (stepIdx === 6) e.push(['analytics','alerts','alerts'], ['alerts','notify','notify'], ['notify','email','email']);
+      return e;
+    }
+  },
+
+  'aws-console': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'AWS Console Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','iam','catalog','resources','cache','api','validate','controlplane','provision','state','events','audit','logs','metrics','alerts','notify','email'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      iam: { x: 600, y: 160, label: 'IAM' },
+      catalog: { x: 320, y: 300, label: 'Catalog' },
+      resources: { x: 600, y: 300, label: 'Resources' },
+      cache: { x: 880, y: 300, label: 'Cache' },
+      api: { x: 320, y: 440, label: 'API' },
+      validate: { x: 600, y: 440, label: 'Validate' },
+      controlplane: { x: 880, y: 440, label: 'Control Plane' },
+      provision: { x: 1160, y: 440, label: 'Provision' },
+      state: { x: 1160, y: 300, label: 'State' },
+      events: { x: 880, y: 580, label: 'Events' },
+      audit: { x: 600, y: 580, label: 'Audit' },
+      logs: { x: 320, y: 580, label: 'Logs' },
+      metrics: { x: 320, y: 720, label: 'Metrics' },
+      alerts: { x: 600, y: 720, label: 'Alerts' },
+      notify: { x: 880, y: 720, label: 'Notify' },
+      email: { x: 1160, y: 720, label: 'Email' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','iam','iam']);
+      if (stepIdx === 2) e.push(['client','catalog','catalog'], ['catalog','cache','cache'], ['catalog','resources','resources']);
+      if (stepIdx === 3) e.push(['client','api','api'], ['api','validate','validate'], ['validate','controlplane','cp']);
+      if (stepIdx === 4) e.push(['controlplane','provision','provision'], ['provision','state','state'], ['provision','events','events']);
+      if (stepIdx === 5) e.push(['events','audit','audit'], ['audit','logs','logs'], ['logs','metrics','metrics']);
+      if (stepIdx === 6) e.push(['metrics','alerts','alerts'], ['alerts','notify','notify'], ['notify','email','email']);
+      return e;
+    }
+  },
+
+  affirm: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Affirm Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','merchant','checkout','risk','underwriting','decision','loan','authz','orders','capture','settlement','ledger','billing','payments','collections','disputes','refunds'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      merchant: { x: 40, y: 380, label: 'Merchant' },
+      checkout: { x: 320, y: 240, label: 'Checkout' },
+      risk: { x: 600, y: 180, label: 'Risk' },
+      underwriting: { x: 600, y: 300, label: 'Underwriting' },
+      decision: { x: 880, y: 240, label: 'Decision' },
+      loan: { x: 1160, y: 240, label: 'Loan' },
+      authz: { x: 1160, y: 380, label: 'AuthZ' },
+      orders: { x: 880, y: 380, label: 'Orders' },
+      capture: { x: 600, y: 460, label: 'Capture' },
+      settlement: { x: 880, y: 460, label: 'Settlement' },
+      ledger: { x: 1160, y: 460, label: 'Ledger' },
+      billing: { x: 600, y: 600, label: 'Billing' },
+      payments: { x: 880, y: 600, label: 'Payments' },
+      collections: { x: 1160, y: 600, label: 'Collections' },
+      disputes: { x: 320, y: 600, label: 'Disputes' },
+      refunds: { x: 320, y: 740, label: 'Refunds' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','checkout','choose'], ['merchant','checkout','session']);
+      if (stepIdx === 2) e.push(['checkout','risk','risk'], ['risk','underwriting','uw'], ['underwriting','decision','decision']);
+      if (stepIdx === 3) e.push(['decision','loan','loan'], ['loan','authz','authz'], ['authz','orders','order']);
+      if (stepIdx === 4) e.push(['orders','capture','capture'], ['capture','settlement','settle'], ['settlement','ledger','ledger']);
+      if (stepIdx === 5) e.push(['loan','billing','bill'], ['billing','payments','pay'], ['billing','collections','collect']);
+      if (stepIdx === 6) e.push(['client','disputes','dispute'], ['disputes','refunds','refund'], ['refunds','ledger','ledger']);
+      return e;
+    }
+  },
+
+  afterpay: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Afterpay Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','merchant','checkout','risk','decision','auth','authz','orders','notify','capture','settlement','ledger','billing','payments','collections','returns','refunds'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      merchant: { x: 40, y: 380, label: 'Merchant' },
+      checkout: { x: 320, y: 240, label: 'Checkout' },
+      risk: { x: 600, y: 180, label: 'Risk' },
+      decision: { x: 880, y: 180, label: 'Decision' },
+      auth: { x: 1160, y: 180, label: 'Auth' },
+      authz: { x: 880, y: 320, label: 'AuthZ' },
+      orders: { x: 1160, y: 320, label: 'Orders' },
+      notify: { x: 1160, y: 460, label: 'Notify' },
+      capture: { x: 600, y: 460, label: 'Capture' },
+      settlement: { x: 880, y: 460, label: 'Settlement' },
+      ledger: { x: 1160, y: 600, label: 'Ledger' },
+      billing: { x: 600, y: 600, label: 'Billing' },
+      payments: { x: 880, y: 600, label: 'Payments' },
+      collections: { x: 1160, y: 740, label: 'Collections' },
+      returns: { x: 320, y: 600, label: 'Returns' },
+      refunds: { x: 320, y: 740, label: 'Refunds' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','checkout','choose'], ['merchant','checkout','session']);
+      if (stepIdx === 2) e.push(['checkout','risk','risk'], ['risk','decision','decision'], ['decision','auth','auth']);
+      if (stepIdx === 3) e.push(['auth','authz','authz'], ['authz','orders','order'], ['orders','notify','notify']);
+      if (stepIdx === 4) e.push(['orders','capture','capture'], ['capture','settlement','settle'], ['settlement','ledger','ledger']);
+      if (stepIdx === 5) e.push(['orders','billing','bill'], ['billing','payments','pay'], ['billing','collections','collect']);
+      if (stepIdx === 6) e.push(['client','returns','return'], ['returns','refunds','refund'], ['refunds','ledger','ledger']);
+      return e;
+    }
+  },
+
+  brex: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Brex Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','kyc','accounts','cards','controls','approvals','authz','risk','decision','capture','ledger','reports','expenses','ocr','store','payouts','routing','notify'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      kyc: { x: 320, y: 160, label: 'KYB' },
+      accounts: { x: 600, y: 160, label: 'Accounts' },
+      cards: { x: 880, y: 160, label: 'Cards' },
+      controls: { x: 1160, y: 160, label: 'Controls' },
+      approvals: { x: 1160, y: 300, label: 'Approvals' },
+      authz: { x: 880, y: 300, label: 'AuthZ' },
+      risk: { x: 600, y: 300, label: 'Risk' },
+      decision: { x: 320, y: 300, label: 'Decision' },
+      capture: { x: 320, y: 440, label: 'Capture' },
+      ledger: { x: 600, y: 440, label: 'Ledger' },
+      reports: { x: 880, y: 440, label: 'Reports' },
+      expenses: { x: 320, y: 580, label: 'Expenses' },
+      ocr: { x: 600, y: 580, label: 'OCR' },
+      store: { x: 880, y: 580, label: 'Store' },
+      payouts: { x: 1160, y: 580, label: 'Payouts' },
+      routing: { x: 1160, y: 720, label: 'Routing' },
+      notify: { x: 880, y: 720, label: 'Notify' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','kyc','kyb'], ['kyc','accounts','accounts']);
+      if (stepIdx === 2) e.push(['accounts','cards','cards'], ['cards','controls','controls'], ['controls','approvals','approve']);
+      if (stepIdx === 3) e.push(['cards','authz','authz'], ['authz','risk','risk'], ['risk','decision','decision']);
+      if (stepIdx === 4) e.push(['decision','capture','capture'], ['capture','ledger','ledger'], ['ledger','reports','reports']);
+      if (stepIdx === 5) e.push(['client','expenses','expense'], ['expenses','ocr','ocr'], ['ocr','store','store']);
+      if (stepIdx === 6) e.push(['ledger','payouts','payout'], ['payouts','routing','route'], ['routing','notify','notify']);
+      return e;
+    }
+  },
+
+  ramp: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Ramp Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','kyc','accounts','cards','controls','policies','authz','risk','decision','ledger','sync','integrations','expenses','ocr','store','analytics','warehouse','reports'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      kyc: { x: 320, y: 160, label: 'KYB' },
+      accounts: { x: 600, y: 160, label: 'Accounts' },
+      cards: { x: 880, y: 160, label: 'Cards' },
+      controls: { x: 1160, y: 160, label: 'Controls' },
+      policies: { x: 1160, y: 300, label: 'Policies' },
+      authz: { x: 880, y: 300, label: 'AuthZ' },
+      risk: { x: 600, y: 300, label: 'Risk' },
+      decision: { x: 320, y: 300, label: 'Decision' },
+      ledger: { x: 320, y: 440, label: 'Ledger' },
+      sync: { x: 600, y: 440, label: 'Sync' },
+      integrations: { x: 880, y: 440, label: 'Integrations' },
+      expenses: { x: 320, y: 580, label: 'Expenses' },
+      ocr: { x: 600, y: 580, label: 'OCR' },
+      store: { x: 880, y: 580, label: 'Store' },
+      analytics: { x: 600, y: 720, label: 'Analytics' },
+      warehouse: { x: 880, y: 720, label: 'Warehouse' },
+      reports: { x: 1160, y: 720, label: 'Reports' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','kyc','kyb'], ['kyc','accounts','accounts']);
+      if (stepIdx === 2) e.push(['accounts','cards','cards'], ['cards','controls','controls'], ['controls','policies','policy']);
+      if (stepIdx === 3) e.push(['cards','authz','authz'], ['authz','risk','risk'], ['risk','decision','decision']);
+      if (stepIdx === 4) e.push(['decision','ledger','ledger'], ['ledger','sync','sync'], ['sync','integrations','integrations']);
+      if (stepIdx === 5) e.push(['client','expenses','expense'], ['expenses','ocr','ocr'], ['ocr','store','store']);
+      if (stepIdx === 6) e.push(['ledger','analytics','analytics'], ['analytics','warehouse','warehouse'], ['warehouse','reports','reports']);
+      return e;
+    }
+  },
+
+  mercury: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Mercury Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','kyc','accounts','auth','payments','routing','ach','core','ledger','status','cards','controls','approvals','notify','reports','exports'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      kyc: { x: 320, y: 160, label: 'KYB' },
+      accounts: { x: 600, y: 160, label: 'Accounts' },
+      auth: { x: 880, y: 160, label: 'Auth' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      routing: { x: 600, y: 300, label: 'Routing' },
+      ach: { x: 880, y: 300, label: 'ACH' },
+      core: { x: 1160, y: 300, label: 'Core' },
+      ledger: { x: 600, y: 440, label: 'Ledger' },
+      status: { x: 880, y: 440, label: 'Status' },
+      cards: { x: 320, y: 440, label: 'Cards' },
+      controls: { x: 320, y: 580, label: 'Controls' },
+      approvals: { x: 600, y: 580, label: 'Approvals' },
+      notify: { x: 880, y: 580, label: 'Notify' },
+      reports: { x: 880, y: 720, label: 'Reports' },
+      exports: { x: 1160, y: 720, label: 'Exports' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','kyc','kyb'], ['kyc','accounts','accounts']);
+      if (stepIdx === 2) e.push(['client','auth','auth'], ['auth','accounts','accounts']);
+      if (stepIdx === 3) e.push(['client','payments','transfer'], ['payments','routing','route'], ['routing','ach','ach']);
+      if (stepIdx === 4) e.push(['ach','core','core'], ['core','ledger','ledger'], ['core','status','status']);
+      if (stepIdx === 5) e.push(['accounts','cards','cards'], ['cards','controls','controls'], ['controls','approvals','approve']);
+      if (stepIdx === 6) e.push(['status','notify','notify'], ['ledger','reports','reports'], ['reports','exports','exports']);
       return e;
     }
   },
