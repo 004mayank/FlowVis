@@ -1280,6 +1280,372 @@ const SYSTEM_LAYOUTS = {
     }
   },
 
+  shopify: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Shopify Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','storefront','catalog','cart','checkout','payments','orders','fulfillment','carrier','tracking'],
+    nodes: {
+      client: { x: 40, y: 220, label: 'Customer App' },
+      storefront: { x: 320, y: 220, label: 'Storefront' },
+      catalog: { x: 600, y: 220, label: 'Catalog' },
+      cart: { x: 880, y: 220, label: 'Cart' },
+      checkout: { x: 1160, y: 220, label: 'Checkout' },
+      payments: { x: 1440, y: 220, label: 'Payments' },
+      orders: { x: 1440, y: 320, label: 'Orders' },
+      fulfillment: { x: 1160, y: 420, label: 'Fulfillment' },
+      wms: { x: 880, y: 420, label: 'WMS' },
+      carrier: { x: 600, y: 420, label: 'Carrier' },
+      tracking: { x: 320, y: 420, label: 'Tracking' },
+      notify: { x: 1440, y: 520, label: 'Notifications' },
+      returns: { x: 1160, y: 520, label: 'Returns' },
+      refunds: { x: 880, y: 520, label: 'Refunds' },
+      merchant: { x: 1660, y: 320, label: 'Merchant Admin' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','storefront','load'], ['storefront','catalog','browse']);
+      if (stepIdx === 2) e.push(['catalog','checkout','details']);
+      if (stepIdx === 3) e.push(['client','cart','add'], ['cart','checkout','estimate']);
+      if (stepIdx === 4) e.push(['checkout','payments','pay'], ['checkout','orders','create']);
+      if (stepIdx === 5) e.push(['orders','notify','confirm'], ['orders','merchant','admin']);
+      if (stepIdx === 6) e.push(['orders','fulfillment','fulfill'], ['fulfillment','wms','pick'], ['wms','carrier','ship']);
+      if (stepIdx === 7) e.push(['carrier','tracking','events'], ['tracking','returns','return'], ['returns','refunds','refund']);
+      return e;
+    }
+  },
+
+  etsy: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Etsy Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','search','rank','catalog','cart','checkout','payments','orders','seller','carrier','tracking'],
+    nodes: {
+      client: { x: 40, y: 220, label: 'Buyer App' },
+      search: { x: 320, y: 220, label: 'Search' },
+      rank: { x: 600, y: 220, label: 'Ranking' },
+      catalog: { x: 880, y: 220, label: 'Listings' },
+      cart: { x: 1160, y: 220, label: 'Cart' },
+      checkout: { x: 1440, y: 220, label: 'Checkout' },
+      payments: { x: 1660, y: 220, label: 'Payments' },
+      fraud: { x: 1660, y: 320, label: 'Fraud' },
+      orders: { x: 1440, y: 320, label: 'Orders' },
+      seller: { x: 1160, y: 320, label: 'Seller' },
+      carrier: { x: 880, y: 320, label: 'Carrier' },
+      tracking: { x: 600, y: 320, label: 'Tracking' },
+      notify: { x: 320, y: 320, label: 'Notify' },
+      messages: { x: 320, y: 520, label: 'Messaging' },
+      cases: { x: 600, y: 520, label: 'Cases' },
+      refunds: { x: 880, y: 520, label: 'Refunds' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','search','query'], ['search','rank','rank']);
+      if (stepIdx === 2) e.push(['rank','catalog','results'], ['catalog','seller','policy']);
+      if (stepIdx === 3) e.push(['client','cart','add'], ['cart','checkout','estimate']);
+      if (stepIdx === 4) e.push(['checkout','fraud','screen'], ['checkout','payments','pay'], ['checkout','orders','create']);
+      if (stepIdx === 5) e.push(['orders','seller','notify'], ['seller','carrier','ship'], ['carrier','tracking','track']);
+      if (stepIdx === 6) e.push(['orders','notify','notify'], ['orders','messages','message']);
+      if (stepIdx === 7) e.push(['orders','cases','case'], ['cases','refunds','refund']);
+      return e;
+    }
+  },
+
+  ebay: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'eBay Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','search','rank','catalog','auction','orders','checkout','payments','seller','carrier','tracking'],
+    nodes: {
+      client: { x: 40, y: 220, label: 'Buyer App' },
+      search: { x: 320, y: 220, label: 'Search' },
+      rank: { x: 600, y: 220, label: 'Ranking' },
+      catalog: { x: 880, y: 220, label: 'Listings' },
+      auction: { x: 1160, y: 220, label: 'Auction/Bids' },
+      orders: { x: 1440, y: 220, label: 'Orders' },
+      checkout: { x: 1660, y: 220, label: 'Checkout' },
+      payments: { x: 1660, y: 320, label: 'Payments' },
+      fraud: { x: 1440, y: 320, label: 'Fraud' },
+      seller: { x: 1160, y: 320, label: 'Seller' },
+      carrier: { x: 880, y: 320, label: 'Carrier' },
+      tracking: { x: 600, y: 320, label: 'Tracking' },
+      escrow: { x: 320, y: 320, label: 'Escrow' },
+      ledger: { x: 320, y: 520, label: 'Ledger' },
+      returns: { x: 600, y: 520, label: 'Returns' },
+      cases: { x: 880, y: 520, label: 'Cases' },
+      refunds: { x: 1160, y: 520, label: 'Refunds' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','search','query'], ['search','rank','rank']);
+      if (stepIdx === 2) e.push(['rank','catalog','details'], ['catalog','seller','seller']);
+      if (stepIdx === 3) e.push(['client','auction','bid'], ['auction','orders','lock']);
+      if (stepIdx === 4) e.push(['orders','checkout','checkout'], ['checkout','fraud','screen'], ['checkout','payments','pay']);
+      if (stepIdx === 5) e.push(['seller','carrier','ship'], ['carrier','tracking','track']);
+      if (stepIdx === 6) e.push(['tracking','escrow','deliver'], ['escrow','ledger','release']);
+      if (stepIdx === 7) e.push(['ledger','returns','return'], ['returns','cases','case'], ['cases','refunds','refund']);
+      return e;
+    }
+  },
+
+  flipkart: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Flipkart Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','search','catalog','cart','checkout','payments','orders','wms','carrier','tracking'],
+    nodes: {
+      client: { x: 40, y: 220, label: 'Customer App' },
+      search: { x: 320, y: 220, label: 'Search' },
+      catalog: { x: 600, y: 220, label: 'Catalog' },
+      pricing: { x: 600, y: 320, label: 'Pricing' },
+      offers: { x: 600, y: 420, label: 'Offers' },
+      cart: { x: 880, y: 220, label: 'Cart' },
+      checkout: { x: 1160, y: 220, label: 'Checkout' },
+      payments: { x: 1440, y: 220, label: 'Payments' },
+      orders: { x: 1440, y: 320, label: 'Orders' },
+      inventory: { x: 1440, y: 420, label: 'Inventory' },
+      wms: { x: 1160, y: 420, label: 'WMS' },
+      carrier: { x: 880, y: 420, label: 'Carrier' },
+      tracking: { x: 600, y: 520, label: 'Tracking' },
+      notify: { x: 320, y: 520, label: 'Notify' },
+      returns: { x: 880, y: 520, label: 'Returns' },
+      refunds: { x: 1160, y: 520, label: 'Refunds' },
+      support: { x: 1440, y: 520, label: 'Support' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','search','query'], ['search','catalog','results']);
+      if (stepIdx === 2) e.push(['catalog','pricing','price'], ['pricing','offers','offers']);
+      if (stepIdx === 3) e.push(['client','cart','add']);
+      if (stepIdx === 4) e.push(['cart','checkout','checkout'], ['checkout','payments','pay'], ['checkout','orders','order']);
+      if (stepIdx === 5) e.push(['orders','inventory','alloc'], ['orders','wms','pick']);
+      if (stepIdx === 6) e.push(['wms','carrier','ship'], ['carrier','tracking','track'], ['tracking','notify','notify']);
+      if (stepIdx === 7) e.push(['orders','returns','return'], ['returns','refunds','refund'], ['returns','support','support']);
+      return e;
+    }
+  },
+
+  myntra: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Myntra Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','catalog','rank','cart','checkout','payments','orders','wms','carrier','tracking'],
+    nodes: {
+      client: { x: 40, y: 220, label: 'Customer App' },
+      catalog: { x: 320, y: 220, label: 'Catalog' },
+      rank: { x: 600, y: 220, label: 'Personalization' },
+      inventory: { x: 600, y: 320, label: 'Inventory' },
+      offers: { x: 600, y: 420, label: 'Offers' },
+      cart: { x: 880, y: 220, label: 'Bag' },
+      checkout: { x: 1160, y: 220, label: 'Checkout' },
+      payments: { x: 1440, y: 220, label: 'Payments' },
+      orders: { x: 1440, y: 320, label: 'Orders' },
+      wms: { x: 1160, y: 420, label: 'WMS' },
+      carrier: { x: 880, y: 420, label: 'Carrier' },
+      tracking: { x: 600, y: 520, label: 'Tracking' },
+      notify: { x: 320, y: 520, label: 'Notify' },
+      returns: { x: 880, y: 520, label: 'Returns' },
+      refunds: { x: 1160, y: 520, label: 'Refunds' },
+      qc: { x: 1440, y: 520, label: 'QC' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','catalog','browse'], ['catalog','rank','rank']);
+      if (stepIdx === 2) e.push(['catalog','inventory','sizes'], ['catalog','offers','offers']);
+      if (stepIdx === 3) e.push(['client','cart','add']);
+      if (stepIdx === 4) e.push(['cart','checkout','checkout'], ['checkout','payments','pay'], ['checkout','orders','order']);
+      if (stepIdx === 5) e.push(['orders','wms','pick'], ['wms','carrier','ship']);
+      if (stepIdx === 6) e.push(['carrier','tracking','track'], ['tracking','notify','notify']);
+      if (stepIdx === 7) e.push(['tracking','returns','return'], ['returns','qc','qc'], ['qc','refunds','refund']);
+      return e;
+    }
+  },
+
+  meesho: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Meesho Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','feed','catalog','checkout','orders','supplier','carrier','tracking','cod','ledger'],
+    nodes: {
+      client: { x: 40, y: 220, label: 'Customer App' },
+      feed: { x: 320, y: 220, label: 'Feed' },
+      catalog: { x: 600, y: 220, label: 'Catalog' },
+      pricing: { x: 600, y: 320, label: 'Pricing' },
+      offers: { x: 600, y: 420, label: 'Offers' },
+      checkout: { x: 880, y: 220, label: 'Checkout' },
+      orders: { x: 1160, y: 220, label: 'Orders' },
+      supplier: { x: 1440, y: 220, label: 'Supplier' },
+      carrier: { x: 1440, y: 320, label: 'Carrier' },
+      tracking: { x: 1160, y: 320, label: 'Tracking' },
+      notify: { x: 880, y: 320, label: 'Notify' },
+      cod: { x: 1440, y: 420, label: 'Cash Collect' },
+      ledger: { x: 1160, y: 420, label: 'Ledger' },
+      payouts: { x: 880, y: 420, label: 'Payouts' },
+      returns: { x: 880, y: 520, label: 'Returns' },
+      refunds: { x: 1160, y: 520, label: 'Refunds' },
+      support: { x: 1440, y: 520, label: 'Support' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','feed','feed'], ['feed','catalog','catalog']);
+      if (stepIdx === 2) e.push(['catalog','pricing','price'], ['pricing','offers','offers']);
+      if (stepIdx === 3) e.push(['client','checkout','order'], ['checkout','orders','create']);
+      if (stepIdx === 4) e.push(['orders','supplier','assign'], ['supplier','carrier','ship']);
+      if (stepIdx === 5) e.push(['carrier','tracking','track'], ['tracking','notify','notify']);
+      if (stepIdx === 6) e.push(['carrier','cod','collect'], ['cod','ledger','settle'], ['ledger','payouts','payout']);
+      if (stepIdx === 7) e.push(['tracking','returns','return'], ['returns','refunds','refund'], ['returns','support','support']);
+      return e;
+    }
+  },
+
+  ajio: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Ajio Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','search','catalog','cart','checkout','payments','orders','wms','carrier','tracking'],
+    nodes: {
+      client: { x: 40, y: 220, label: 'Customer App' },
+      search: { x: 320, y: 220, label: 'Search' },
+      catalog: { x: 600, y: 220, label: 'Catalog' },
+      inventory: { x: 600, y: 320, label: 'Inventory' },
+      pricing: { x: 600, y: 420, label: 'Pricing' },
+      cart: { x: 880, y: 220, label: 'Cart' },
+      checkout: { x: 1160, y: 220, label: 'Checkout' },
+      payments: { x: 1440, y: 220, label: 'Payments' },
+      orders: { x: 1440, y: 320, label: 'Orders' },
+      wms: { x: 1160, y: 420, label: 'WMS' },
+      carrier: { x: 880, y: 420, label: 'Carrier' },
+      tracking: { x: 600, y: 520, label: 'Tracking' },
+      notify: { x: 320, y: 520, label: 'Notify' },
+      returns: { x: 880, y: 520, label: 'Returns' },
+      qc: { x: 1160, y: 520, label: 'QC' },
+      refunds: { x: 1440, y: 520, label: 'Refunds' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','search','query'], ['search','catalog','results']);
+      if (stepIdx === 2) e.push(['catalog','inventory','inv'], ['catalog','pricing','price']);
+      if (stepIdx === 3) e.push(['client','cart','add']);
+      if (stepIdx === 4) e.push(['cart','checkout','checkout'], ['checkout','payments','pay'], ['checkout','orders','order']);
+      if (stepIdx === 5) e.push(['orders','wms','pick'], ['wms','carrier','ship']);
+      if (stepIdx === 6) e.push(['carrier','tracking','track'], ['tracking','notify','notify']);
+      if (stepIdx === 7) e.push(['tracking','returns','return'], ['returns','qc','qc'], ['qc','refunds','refund']);
+      return e;
+    }
+  },
+
+  zalando: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Zalando Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','catalog','rank','cart','checkout','payments','orders','wms','carrier','tracking'],
+    nodes: {
+      client: { x: 40, y: 220, label: 'Customer App' },
+      catalog: { x: 320, y: 220, label: 'Catalog' },
+      rank: { x: 600, y: 220, label: 'Personalization' },
+      inventory: { x: 600, y: 320, label: 'Inventory' },
+      pricing: { x: 600, y: 420, label: 'Pricing' },
+      cart: { x: 880, y: 220, label: 'Cart' },
+      checkout: { x: 1160, y: 220, label: 'Checkout' },
+      payments: { x: 1440, y: 220, label: 'Payments' },
+      orders: { x: 1440, y: 320, label: 'Orders' },
+      wms: { x: 1160, y: 420, label: 'WMS' },
+      carrier: { x: 880, y: 420, label: 'Carrier' },
+      tracking: { x: 600, y: 520, label: 'Tracking' },
+      notify: { x: 320, y: 520, label: 'Notify' },
+      returns: { x: 880, y: 520, label: 'Returns' },
+      refunds: { x: 1160, y: 520, label: 'Refunds' },
+      support: { x: 1440, y: 520, label: 'Support' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','catalog','browse'], ['catalog','rank','rank']);
+      if (stepIdx === 2) e.push(['catalog','inventory','inv'], ['catalog','pricing','price']);
+      if (stepIdx === 3) e.push(['client','cart','add']);
+      if (stepIdx === 4) e.push(['cart','checkout','checkout'], ['checkout','payments','pay'], ['checkout','orders','order']);
+      if (stepIdx === 5) e.push(['orders','wms','pick'], ['wms','carrier','ship']);
+      if (stepIdx === 6) e.push(['carrier','tracking','track'], ['tracking','notify','notify']);
+      if (stepIdx === 7) e.push(['tracking','returns','return'], ['returns','refunds','refund'], ['returns','support','support']);
+      return e;
+    }
+  },
+
+  asos: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'ASOS Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','search','catalog','cart','checkout','payments','orders','wms','carrier','tracking'],
+    nodes: {
+      client: { x: 40, y: 220, label: 'Customer App' },
+      search: { x: 320, y: 220, label: 'Search' },
+      catalog: { x: 600, y: 220, label: 'Catalog' },
+      inventory: { x: 600, y: 320, label: 'Inventory' },
+      pricing: { x: 600, y: 420, label: 'Pricing' },
+      cart: { x: 880, y: 220, label: 'Cart' },
+      checkout: { x: 1160, y: 220, label: 'Checkout' },
+      fraud: { x: 1160, y: 320, label: 'Fraud' },
+      payments: { x: 1440, y: 220, label: 'Payments' },
+      orders: { x: 1440, y: 320, label: 'Orders' },
+      wms: { x: 1160, y: 420, label: 'WMS' },
+      carrier: { x: 880, y: 420, label: 'Carrier' },
+      tracking: { x: 600, y: 520, label: 'Tracking' },
+      notify: { x: 320, y: 520, label: 'Notify' },
+      returns: { x: 880, y: 520, label: 'Returns' },
+      refunds: { x: 1160, y: 520, label: 'Refunds' },
+      support: { x: 1440, y: 520, label: 'Support' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','search','query'], ['search','catalog','results']);
+      if (stepIdx === 2) e.push(['catalog','inventory','inv'], ['catalog','pricing','price']);
+      if (stepIdx === 3) e.push(['client','cart','add']);
+      if (stepIdx === 4) e.push(['cart','checkout','checkout'], ['checkout','fraud','screen'], ['checkout','payments','pay'], ['checkout','orders','order']);
+      if (stepIdx === 5) e.push(['orders','wms','pick'], ['wms','carrier','ship']);
+      if (stepIdx === 6) e.push(['carrier','tracking','track'], ['tracking','notify','notify']);
+      if (stepIdx === 7) e.push(['tracking','returns','return'], ['returns','refunds','refund'], ['returns','support','support']);
+      return e;
+    }
+  },
+
+  wayfair: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Wayfair Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','search','catalog','cart','checkout','payments','orders','supplier','wms','carrier','tracking'],
+    nodes: {
+      client: { x: 40, y: 220, label: 'Customer App' },
+      search: { x: 320, y: 220, label: 'Search' },
+      catalog: { x: 600, y: 220, label: 'Catalog' },
+      shipping: { x: 600, y: 320, label: 'Shipping Quote' },
+      pricing: { x: 600, y: 420, label: 'Pricing' },
+      cart: { x: 880, y: 220, label: 'Cart' },
+      delivery: { x: 880, y: 320, label: 'Delivery Slots' },
+      checkout: { x: 1160, y: 220, label: 'Checkout' },
+      fraud: { x: 1160, y: 320, label: 'Fraud' },
+      payments: { x: 1440, y: 220, label: 'Payments' },
+      orders: { x: 1440, y: 320, label: 'Orders' },
+      supplier: { x: 1440, y: 420, label: 'Supplier' },
+      wms: { x: 1160, y: 420, label: 'Warehouse' },
+      carrier: { x: 880, y: 420, label: 'Freight Carrier' },
+      tracking: { x: 600, y: 520, label: 'Tracking' },
+      notify: { x: 320, y: 520, label: 'Notify' },
+      returns: { x: 880, y: 520, label: 'Returns' },
+      refunds: { x: 1160, y: 520, label: 'Refunds' },
+      support: { x: 1440, y: 520, label: 'Support' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','search','query'], ['search','catalog','results']);
+      if (stepIdx === 2) e.push(['catalog','shipping','quote'], ['catalog','pricing','price']);
+      if (stepIdx === 3) e.push(['client','cart','add'], ['cart','delivery','slot']);
+      if (stepIdx === 4) e.push(['cart','checkout','checkout'], ['checkout','fraud','screen'], ['checkout','payments','pay'], ['checkout','orders','order']);
+      if (stepIdx === 5) e.push(['orders','supplier','route'], ['orders','wms','pick']);
+      if (stepIdx === 6) e.push(['wms','carrier','ship'], ['carrier','tracking','track'], ['tracking','notify','notify']);
+      if (stepIdx === 7) e.push(['tracking','returns','return'], ['returns','support','support'], ['returns','refunds','refund']);
+      return e;
+    }
+  },
+
   uber: {
     viewBox: '0 0 1000 640',
     nodes: {
@@ -1686,6 +2052,271 @@ const SYSTEM_LAYOUTS = {
       disputes: { x: 720, y: 560, label: 'Disputes', colorKey: 'api' },
       support: { x: 880, y: 560, label: 'Support', colorKey: 'external' },
       recon: { x: 880, y: 640, label: 'Reconciliation', colorKey: 'api' }
+    }
+  }
+
+  ,
+
+  shopify: {
+    viewBox: '0 0 1000 760',
+    primaryPath: ['client','storefront','catalog','cart','checkout','payments','orders','fulfillment','carrier','tracking'],
+    nodes: {
+      client: { x: 140, y: 200, label: 'Client', colorKey: 'client' },
+      storefront: { x: 380, y: 200, label: 'Storefront', colorKey: 'api' },
+      catalog: { x: 620, y: 200, label: 'Catalog', colorKey: 'store' },
+      pricing: { x: 620, y: 340, label: 'Pricing', colorKey: 'api' },
+      inventory: { x: 620, y: 480, label: 'Inventory', colorKey: 'store' },
+      cart: { x: 380, y: 340, label: 'Cart', colorKey: 'store' },
+      promo: { x: 380, y: 480, label: 'Discounts', colorKey: 'api' },
+      checkout: { x: 860, y: 200, label: 'Checkout', colorKey: 'api' },
+      risk: { x: 860, y: 340, label: 'Risk', colorKey: 'api' },
+      payments: { x: 860, y: 480, label: 'Payments', colorKey: 'api' },
+      orders: { x: 1100, y: 200, label: 'Orders', colorKey: 'store' },
+      notify: { x: 1100, y: 340, label: 'Notify', colorKey: 'external' },
+      merchant: { x: 1100, y: 480, label: 'Merchant Admin', colorKey: 'external' },
+      fulfillment: { x: 1340, y: 200, label: 'Fulfillment', colorKey: 'api' },
+      wms: { x: 1340, y: 340, label: 'WMS', colorKey: 'external' },
+      carrier: { x: 1580, y: 200, label: 'Carrier', colorKey: 'external' },
+      tracking: { x: 1580, y: 340, label: 'Tracking', colorKey: 'stream' },
+      returns: { x: 1340, y: 480, label: 'Returns', colorKey: 'api' },
+      refunds: { x: 1580, y: 480, label: 'Refunds', colorKey: 'api' }
+    }
+  },
+
+  etsy: {
+    viewBox: '0 0 1000 760',
+    primaryPath: ['client','search','catalog','cart','checkout','payments','orders','seller','carrier','tracking'],
+    nodes: {
+      client: { x: 140, y: 220, label: 'Client', colorKey: 'client' },
+      search: { x: 380, y: 220, label: 'Search', colorKey: 'api' },
+      rank: { x: 620, y: 220, label: 'Ranking', colorKey: 'api' },
+      catalog: { x: 860, y: 220, label: 'Listings', colorKey: 'store' },
+      seller: { x: 1100, y: 220, label: 'Seller', colorKey: 'external' },
+      reviews: { x: 860, y: 360, label: 'Reviews', colorKey: 'store' },
+      pricing: { x: 860, y: 500, label: 'Shipping/Fees', colorKey: 'api' },
+      cart: { x: 380, y: 360, label: 'Cart', colorKey: 'store' },
+      tax: { x: 620, y: 360, label: 'Tax', colorKey: 'api' },
+      checkout: { x: 620, y: 500, label: 'Checkout', colorKey: 'api' },
+      payments: { x: 860, y: 620, label: 'Payments', colorKey: 'api' },
+      fraud: { x: 620, y: 620, label: 'Fraud', colorKey: 'api' },
+      orders: { x: 1100, y: 500, label: 'Orders', colorKey: 'store' },
+      notify: { x: 1340, y: 500, label: 'Notify', colorKey: 'external' },
+      messages: { x: 1340, y: 360, label: 'Messages', colorKey: 'external' },
+      carrier: { x: 1340, y: 220, label: 'Carrier', colorKey: 'external' },
+      tracking: { x: 1580, y: 220, label: 'Tracking', colorKey: 'stream' },
+      cases: { x: 1340, y: 620, label: 'Cases', colorKey: 'api' },
+      refunds: { x: 1580, y: 620, label: 'Refunds', colorKey: 'api' },
+      risk: { x: 1100, y: 620, label: 'Risk', colorKey: 'api' }
+    }
+  },
+
+  ebay: {
+    viewBox: '0 0 1000 760',
+    primaryPath: ['client','search','catalog','auction','orders','checkout','payments','seller','carrier','tracking'],
+    nodes: {
+      client: { x: 140, y: 220, label: 'Client', colorKey: 'client' },
+      search: { x: 380, y: 220, label: 'Search', colorKey: 'api' },
+      rank: { x: 620, y: 220, label: 'Ranking', colorKey: 'api' },
+      catalog: { x: 860, y: 220, label: 'Listings', colorKey: 'store' },
+      seller: { x: 1100, y: 220, label: 'Seller', colorKey: 'external' },
+      trust: { x: 1100, y: 360, label: 'Trust', colorKey: 'api' },
+      auction: { x: 860, y: 360, label: 'Auction', colorKey: 'stream' },
+      orders: { x: 620, y: 360, label: 'Orders', colorKey: 'store' },
+      inventory: { x: 620, y: 500, label: 'Inventory', colorKey: 'store' },
+      checkout: { x: 860, y: 500, label: 'Checkout', colorKey: 'api' },
+      fraud: { x: 1100, y: 500, label: 'Fraud', colorKey: 'api' },
+      payments: { x: 1340, y: 500, label: 'Payments', colorKey: 'api' },
+      carrier: { x: 1340, y: 220, label: 'Carrier', colorKey: 'external' },
+      tracking: { x: 1580, y: 220, label: 'Tracking', colorKey: 'stream' },
+      escrow: { x: 1340, y: 360, label: 'Escrow', colorKey: 'store' },
+      ledger: { x: 1580, y: 360, label: 'Ledger', colorKey: 'store' },
+      returns: { x: 1340, y: 620, label: 'Returns', colorKey: 'api' },
+      cases: { x: 1580, y: 620, label: 'Cases', colorKey: 'api' },
+      refunds: { x: 1820, y: 620, label: 'Refunds', colorKey: 'api' }
+    }
+  },
+
+  flipkart: {
+    viewBox: '0 0 1000 760',
+    primaryPath: ['client','search','catalog','cart','checkout','payments','orders','wms','carrier','tracking'],
+    nodes: {
+      client: { x: 140, y: 220, label: 'Client', colorKey: 'client' },
+      search: { x: 380, y: 220, label: 'Search', colorKey: 'api' },
+      catalog: { x: 620, y: 220, label: 'Catalog', colorKey: 'store' },
+      pricing: { x: 620, y: 360, label: 'Pricing', colorKey: 'api' },
+      offers: { x: 620, y: 500, label: 'Offers', colorKey: 'api' },
+      cart: { x: 380, y: 360, label: 'Cart', colorKey: 'store' },
+      promo: { x: 380, y: 500, label: 'Coupons', colorKey: 'api' },
+      tax: { x: 380, y: 640, label: 'Tax', colorKey: 'api' },
+      checkout: { x: 860, y: 220, label: 'Checkout', colorKey: 'api' },
+      risk: { x: 860, y: 360, label: 'Risk', colorKey: 'api' },
+      payments: { x: 860, y: 500, label: 'Payments', colorKey: 'api' },
+      orders: { x: 1100, y: 220, label: 'Orders', colorKey: 'store' },
+      inventory: { x: 1100, y: 360, label: 'Inventory', colorKey: 'store' },
+      wms: { x: 1340, y: 220, label: 'WMS', colorKey: 'external' },
+      carrier: { x: 1580, y: 220, label: 'Carrier', colorKey: 'external' },
+      tracking: { x: 1820, y: 220, label: 'Tracking', colorKey: 'stream' },
+      notify: { x: 1580, y: 360, label: 'Notify', colorKey: 'external' },
+      returns: { x: 1340, y: 500, label: 'Returns', colorKey: 'api' },
+      refunds: { x: 1580, y: 500, label: 'Refunds', colorKey: 'api' },
+      support: { x: 1820, y: 500, label: 'Support', colorKey: 'external' }
+    }
+  },
+
+  myntra: {
+    viewBox: '0 0 1000 760',
+    primaryPath: ['client','catalog','rank','cart','checkout','payments','orders','wms','carrier','tracking'],
+    nodes: {
+      client: { x: 140, y: 220, label: 'Client', colorKey: 'client' },
+      catalog: { x: 380, y: 220, label: 'Catalog', colorKey: 'store' },
+      rank: { x: 620, y: 220, label: 'Personalization', colorKey: 'api' },
+      inventory: { x: 620, y: 360, label: 'Inventory', colorKey: 'store' },
+      offers: { x: 620, y: 500, label: 'Offers', colorKey: 'api' },
+      cart: { x: 380, y: 360, label: 'Bag', colorKey: 'store' },
+      promo: { x: 380, y: 500, label: 'Coupons', colorKey: 'api' },
+      tax: { x: 380, y: 640, label: 'Tax', colorKey: 'api' },
+      checkout: { x: 860, y: 220, label: 'Checkout', colorKey: 'api' },
+      risk: { x: 860, y: 360, label: 'Risk/COD', colorKey: 'api' },
+      payments: { x: 860, y: 500, label: 'Payments', colorKey: 'api' },
+      orders: { x: 1100, y: 220, label: 'Orders', colorKey: 'store' },
+      wms: { x: 1340, y: 220, label: 'WMS', colorKey: 'external' },
+      carrier: { x: 1580, y: 220, label: 'Carrier', colorKey: 'external' },
+      tracking: { x: 1820, y: 220, label: 'Tracking', colorKey: 'stream' },
+      notify: { x: 1820, y: 360, label: 'Notify', colorKey: 'external' },
+      returns: { x: 1340, y: 500, label: 'Returns', colorKey: 'api' },
+      refunds: { x: 1580, y: 500, label: 'Refunds', colorKey: 'api' },
+      qc: { x: 1820, y: 500, label: 'QC', colorKey: 'api' }
+    }
+  },
+
+  meesho: {
+    viewBox: '0 0 1000 760',
+    primaryPath: ['client','feed','catalog','checkout','orders','supplier','carrier','tracking','cod','ledger'],
+    nodes: {
+      client: { x: 140, y: 220, label: 'Client', colorKey: 'client' },
+      feed: { x: 380, y: 220, label: 'Feed', colorKey: 'api' },
+      catalog: { x: 620, y: 220, label: 'Catalog', colorKey: 'store' },
+      pricing: { x: 620, y: 360, label: 'Pricing', colorKey: 'api' },
+      offers: { x: 620, y: 500, label: 'Offers', colorKey: 'api' },
+      checkout: { x: 860, y: 220, label: 'Checkout', colorKey: 'api' },
+      risk: { x: 860, y: 360, label: 'Risk/COD', colorKey: 'api' },
+      orders: { x: 1100, y: 220, label: 'Orders', colorKey: 'store' },
+      supplier: { x: 1340, y: 220, label: 'Supplier', colorKey: 'external' },
+      inventory: { x: 1340, y: 360, label: 'Supplier Inv', colorKey: 'store' },
+      carrier: { x: 1580, y: 220, label: 'Carrier', colorKey: 'external' },
+      tracking: { x: 1820, y: 220, label: 'Tracking', colorKey: 'stream' },
+      notify: { x: 1820, y: 360, label: 'Notify', colorKey: 'external' },
+      cod: { x: 1580, y: 500, label: 'Cash Collect', colorKey: 'api' },
+      ledger: { x: 1820, y: 500, label: 'Ledger', colorKey: 'store' },
+      payouts: { x: 2060, y: 500, label: 'Payouts', colorKey: 'api' },
+      returns: { x: 1580, y: 620, label: 'Returns', colorKey: 'api' },
+      refunds: { x: 1820, y: 620, label: 'Refunds', colorKey: 'api' },
+      support: { x: 2060, y: 620, label: 'Support', colorKey: 'external' }
+    }
+  },
+
+  ajio: {
+    viewBox: '0 0 1000 760',
+    primaryPath: ['client','search','catalog','cart','checkout','payments','orders','wms','carrier','tracking'],
+    nodes: {
+      client: { x: 140, y: 220, label: 'Client', colorKey: 'client' },
+      search: { x: 380, y: 220, label: 'Search', colorKey: 'api' },
+      catalog: { x: 620, y: 220, label: 'Catalog', colorKey: 'store' },
+      inventory: { x: 620, y: 360, label: 'Inventory', colorKey: 'store' },
+      pricing: { x: 620, y: 500, label: 'Pricing', colorKey: 'api' },
+      cart: { x: 380, y: 360, label: 'Cart', colorKey: 'store' },
+      promo: { x: 380, y: 500, label: 'Promo', colorKey: 'api' },
+      tax: { x: 380, y: 640, label: 'Tax', colorKey: 'api' },
+      checkout: { x: 860, y: 220, label: 'Checkout', colorKey: 'api' },
+      risk: { x: 860, y: 360, label: 'Risk', colorKey: 'api' },
+      payments: { x: 860, y: 500, label: 'Payments', colorKey: 'api' },
+      orders: { x: 1100, y: 220, label: 'Orders', colorKey: 'store' },
+      wms: { x: 1340, y: 220, label: 'WMS', colorKey: 'external' },
+      carrier: { x: 1580, y: 220, label: 'Carrier', colorKey: 'external' },
+      tracking: { x: 1820, y: 220, label: 'Tracking', colorKey: 'stream' },
+      notify: { x: 1820, y: 360, label: 'Notify', colorKey: 'external' },
+      returns: { x: 1340, y: 500, label: 'Returns', colorKey: 'api' },
+      qc: { x: 1580, y: 500, label: 'QC', colorKey: 'api' },
+      refunds: { x: 1820, y: 500, label: 'Refunds', colorKey: 'api' }
+    }
+  },
+
+  zalando: {
+    viewBox: '0 0 1000 760',
+    primaryPath: ['client','catalog','rank','cart','checkout','payments','orders','wms','carrier','tracking'],
+    nodes: {
+      client: { x: 140, y: 220, label: 'Client', colorKey: 'client' },
+      catalog: { x: 380, y: 220, label: 'Catalog', colorKey: 'store' },
+      rank: { x: 620, y: 220, label: 'Personalization', colorKey: 'api' },
+      inventory: { x: 620, y: 360, label: 'Inventory', colorKey: 'store' },
+      pricing: { x: 620, y: 500, label: 'Pricing', colorKey: 'api' },
+      cart: { x: 380, y: 360, label: 'Cart', colorKey: 'store' },
+      promo: { x: 380, y: 500, label: 'Discounts', colorKey: 'api' },
+      tax: { x: 380, y: 640, label: 'Tax', colorKey: 'api' },
+      checkout: { x: 860, y: 220, label: 'Checkout', colorKey: 'api' },
+      fraud: { x: 860, y: 360, label: 'Fraud', colorKey: 'api' },
+      payments: { x: 860, y: 500, label: 'Payments', colorKey: 'api' },
+      orders: { x: 1100, y: 220, label: 'Orders', colorKey: 'store' },
+      wms: { x: 1340, y: 220, label: 'WMS', colorKey: 'external' },
+      carrier: { x: 1580, y: 220, label: 'Carrier', colorKey: 'external' },
+      tracking: { x: 1820, y: 220, label: 'Tracking', colorKey: 'stream' },
+      notify: { x: 1820, y: 360, label: 'Notify', colorKey: 'external' },
+      returns: { x: 1340, y: 500, label: 'Returns', colorKey: 'api' },
+      refunds: { x: 1580, y: 500, label: 'Refunds', colorKey: 'api' },
+      support: { x: 1820, y: 500, label: 'Support', colorKey: 'external' }
+    }
+  },
+
+  asos: {
+    viewBox: '0 0 1000 760',
+    primaryPath: ['client','search','catalog','cart','checkout','payments','orders','wms','carrier','tracking'],
+    nodes: {
+      client: { x: 140, y: 220, label: 'Client', colorKey: 'client' },
+      search: { x: 380, y: 220, label: 'Search', colorKey: 'api' },
+      catalog: { x: 620, y: 220, label: 'Catalog', colorKey: 'store' },
+      inventory: { x: 620, y: 360, label: 'Inventory', colorKey: 'store' },
+      pricing: { x: 620, y: 500, label: 'Pricing', colorKey: 'api' },
+      cart: { x: 380, y: 360, label: 'Cart', colorKey: 'store' },
+      promo: { x: 380, y: 500, label: 'Discounts', colorKey: 'api' },
+      tax: { x: 380, y: 640, label: 'Tax', colorKey: 'api' },
+      checkout: { x: 860, y: 220, label: 'Checkout', colorKey: 'api' },
+      fraud: { x: 860, y: 360, label: 'Fraud', colorKey: 'api' },
+      payments: { x: 860, y: 500, label: 'Payments', colorKey: 'api' },
+      orders: { x: 1100, y: 220, label: 'Orders', colorKey: 'store' },
+      wms: { x: 1340, y: 220, label: 'WMS', colorKey: 'external' },
+      carrier: { x: 1580, y: 220, label: 'Carrier', colorKey: 'external' },
+      tracking: { x: 1820, y: 220, label: 'Tracking', colorKey: 'stream' },
+      notify: { x: 1820, y: 360, label: 'Notify', colorKey: 'external' },
+      returns: { x: 1340, y: 500, label: 'Returns', colorKey: 'api' },
+      refunds: { x: 1580, y: 500, label: 'Refunds', colorKey: 'api' },
+      support: { x: 1820, y: 500, label: 'Support', colorKey: 'external' }
+    }
+  },
+
+  wayfair: {
+    viewBox: '0 0 1000 760',
+    primaryPath: ['client','search','catalog','cart','checkout','payments','orders','supplier','wms','carrier','tracking'],
+    nodes: {
+      client: { x: 140, y: 220, label: 'Client', colorKey: 'client' },
+      search: { x: 380, y: 220, label: 'Search', colorKey: 'api' },
+      catalog: { x: 620, y: 220, label: 'Catalog', colorKey: 'store' },
+      shipping: { x: 620, y: 360, label: 'Shipping Quote', colorKey: 'api' },
+      pricing: { x: 620, y: 500, label: 'Pricing', colorKey: 'api' },
+      cart: { x: 380, y: 360, label: 'Cart', colorKey: 'store' },
+      delivery: { x: 380, y: 500, label: 'Delivery Slots', colorKey: 'api' },
+      tax: { x: 380, y: 640, label: 'Tax', colorKey: 'api' },
+      checkout: { x: 860, y: 220, label: 'Checkout', colorKey: 'api' },
+      fraud: { x: 860, y: 360, label: 'Fraud', colorKey: 'api' },
+      payments: { x: 860, y: 500, label: 'Payments', colorKey: 'api' },
+      orders: { x: 1100, y: 220, label: 'Orders', colorKey: 'store' },
+      supplier: { x: 1340, y: 220, label: 'Supplier', colorKey: 'external' },
+      wms: { x: 1340, y: 360, label: 'Warehouse', colorKey: 'external' },
+      carrier: { x: 1580, y: 220, label: 'Freight Carrier', colorKey: 'external' },
+      tracking: { x: 1820, y: 220, label: 'Tracking', colorKey: 'stream' },
+      notify: { x: 1820, y: 360, label: 'Notify', colorKey: 'external' },
+      returns: { x: 1340, y: 500, label: 'Returns', colorKey: 'api' },
+      refunds: { x: 1580, y: 500, label: 'Refunds', colorKey: 'api' },
+      support: { x: 1820, y: 500, label: 'Support', colorKey: 'external' }
     }
   }
 };

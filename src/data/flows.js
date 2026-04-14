@@ -967,6 +967,488 @@ export const FLOWS = {
       }
     ]
   }
+
+  ,
+
+  shopify: {
+    title: 'Shopify',
+    steps: [
+      {
+        title: 'Browse storefront and search',
+        desc: 'Customer loads storefront pages, collections, and search results with cached content.',
+        active: ['client','storefront','catalog'],
+        edges: [['client','storefront'], ['storefront','catalog']]
+      },
+      {
+        title: 'View product page',
+        desc: 'Product details, variants, inventory status, and pricing rules are fetched.',
+        active: ['catalog','pricing','inventory'],
+        edges: [['catalog','pricing'], ['catalog','inventory']]
+      },
+      {
+        title: 'Add to cart',
+        desc: 'Cart is updated; discounts, taxes, and shipping options are estimated.',
+        active: ['client','cart','promo'],
+        edges: [['client','cart'], ['cart','promo']]
+      },
+      {
+        title: 'Checkout and payment',
+        desc: 'Checkout creates an order and routes payment via payment gateway with risk checks.',
+        active: ['checkout','payments','risk'],
+        edges: [['cart','checkout'], ['checkout','risk'], ['checkout','payments']]
+      },
+      {
+        title: 'Order creation and confirmation',
+        desc: 'Order service persists the order, issues confirmation, and updates merchant admin.',
+        active: ['orders','notify','merchant'],
+        edges: [['checkout','orders'], ['orders','notify'], ['orders','merchant']]
+      },
+      {
+        title: 'Fulfillment and shipping',
+        desc: 'Fulfillment workflows pick/pack/ship; carrier labels and tracking are generated.',
+        active: ['fulfillment','wms','carrier'],
+        edges: [['orders','fulfillment'], ['fulfillment','wms'], ['wms','carrier']]
+      },
+      {
+        title: 'Tracking, returns, and refunds',
+        desc: 'Tracking updates notify customer; returns trigger refunds and restocking.',
+        active: ['tracking','returns','refunds'],
+        edges: [['carrier','tracking'], ['tracking','returns'], ['returns','refunds']]
+      }
+    ]
+  },
+
+  etsy: {
+    title: 'Etsy',
+    steps: [
+      {
+        title: 'Search and discovery',
+        desc: 'Buyer searches listings; ranking and personalization assemble results.',
+        active: ['client','search','rank'],
+        edges: [['client','search'], ['search','rank']]
+      },
+      {
+        title: 'View listing and shop info',
+        desc: 'Listing details load with seller policies, shipping profiles, and reviews.',
+        active: ['catalog','seller','reviews'],
+        edges: [['search','catalog'], ['catalog','seller'], ['catalog','reviews']]
+      },
+      {
+        title: 'Add to cart',
+        desc: 'Cart aggregates items across shops and computes shipping + taxes per seller.',
+        active: ['cart','pricing','tax'],
+        edges: [['client','cart'], ['cart','pricing'], ['pricing','tax']]
+      },
+      {
+        title: 'Checkout and payment',
+        desc: 'Order is created and payment is authorized; fraud checks may hold the order.',
+        active: ['checkout','payments','fraud'],
+        edges: [['cart','checkout'], ['checkout','fraud'], ['checkout','payments']]
+      },
+      {
+        title: 'Seller fulfillment',
+        desc: 'Seller receives order; prints label, ships item, and posts tracking.',
+        active: ['orders','seller','carrier'],
+        edges: [['checkout','orders'], ['orders','seller'], ['seller','carrier']]
+      },
+      {
+        title: 'Notifications and messaging',
+        desc: 'Buyer and seller get updates; messaging supports questions and resolution.',
+        active: ['notify','messages','client'],
+        edges: [['orders','notify'], ['notify','client'], ['orders','messages']]
+      },
+      {
+        title: 'Disputes, returns, and refunds',
+        desc: 'Cases and disputes drive refunds and seller performance metrics.',
+        active: ['cases','refunds','risk'],
+        edges: [['orders','cases'], ['cases','refunds'], ['cases','risk']]
+      }
+    ]
+  },
+
+  ebay: {
+    title: 'eBay',
+    steps: [
+      {
+        title: 'Search and browse',
+        desc: 'Buyer searches listings; filters and ranking select relevant items.',
+        active: ['client','search','rank'],
+        edges: [['client','search'], ['search','rank']]
+      },
+      {
+        title: 'View listing and seller reputation',
+        desc: 'Listing details, seller ratings, shipping, and return policies load.',
+        active: ['catalog','seller','trust'],
+        edges: [['search','catalog'], ['catalog','seller'], ['seller','trust']]
+      },
+      {
+        title: 'Bid or buy now',
+        desc: 'Auction bids update in realtime; buy-now locks inventory and price.',
+        active: ['auction','orders','inventory'],
+        edges: [['client','auction'], ['auction','orders'], ['orders','inventory']]
+      },
+      {
+        title: 'Checkout and payment',
+        desc: 'Payment is authorized; fraud checks and address validation run.',
+        active: ['checkout','payments','fraud'],
+        edges: [['orders','checkout'], ['checkout','fraud'], ['checkout','payments']]
+      },
+      {
+        title: 'Shipping and tracking',
+        desc: 'Seller ships item; tracking updates are propagated to buyer.',
+        active: ['seller','carrier','tracking'],
+        edges: [['checkout','seller'], ['seller','carrier'], ['carrier','tracking']]
+      },
+      {
+        title: 'Delivery confirmation',
+        desc: 'Delivery events update order state and release seller funds as appropriate.',
+        active: ['tracking','escrow','ledger'],
+        edges: [['tracking','escrow'], ['escrow','ledger']]
+      },
+      {
+        title: 'Returns and disputes',
+        desc: 'Returns, chargebacks, and disputes are handled with case management.',
+        active: ['returns','cases','refunds'],
+        edges: [['ledger','returns'], ['returns','cases'], ['cases','refunds']]
+      }
+    ]
+  },
+
+  flipkart: {
+    title: 'Flipkart',
+    steps: [
+      {
+        title: 'Browse and search',
+        desc: 'Customer searches products; ranking blends inventory, price, and relevance.',
+        active: ['client','search','catalog'],
+        edges: [['client','search'], ['search','catalog']]
+      },
+      {
+        title: 'Product page and offers',
+        desc: 'Product details load with pricing, offers, and delivery estimates.',
+        active: ['catalog','pricing','offers'],
+        edges: [['catalog','pricing'], ['pricing','offers']]
+      },
+      {
+        title: 'Add to cart',
+        desc: 'Cart updates and computes totals, coupons, and taxes.',
+        active: ['cart','promo','tax'],
+        edges: [['client','cart'], ['cart','promo'], ['cart','tax']]
+      },
+      {
+        title: 'Checkout and payment',
+        desc: 'Order is placed; payment is authorized with risk checks and retries.',
+        active: ['checkout','payments','risk'],
+        edges: [['cart','checkout'], ['checkout','risk'], ['checkout','payments']]
+      },
+      {
+        title: 'Order and allocation',
+        desc: 'Inventory is allocated to a fulfillment center or seller for packing.',
+        active: ['orders','inventory','wms'],
+        edges: [['checkout','orders'], ['orders','inventory'], ['orders','wms']]
+      },
+      {
+        title: 'Shipping and last-mile delivery',
+        desc: 'Carrier pickup, routing, and delivery tracking updates are published.',
+        active: ['carrier','tracking','notify'],
+        edges: [['wms','carrier'], ['carrier','tracking'], ['tracking','notify']]
+      },
+      {
+        title: 'Returns and refunds',
+        desc: 'Returns process restocks items and issues refunds after inspection.',
+        active: ['returns','refunds','support'],
+        edges: [['orders','returns'], ['returns','refunds'], ['returns','support']]
+      }
+    ]
+  },
+
+  myntra: {
+    title: 'Myntra',
+    steps: [
+      {
+        title: 'Discover and browse',
+        desc: 'User browses fashion catalog; personalization and ranking select items.',
+        active: ['client','catalog','rank'],
+        edges: [['client','catalog'], ['catalog','rank']]
+      },
+      {
+        title: 'Product page and size availability',
+        desc: 'Variant availability and size charts load with pricing and offers.',
+        active: ['catalog','inventory','offers'],
+        edges: [['catalog','inventory'], ['catalog','offers']]
+      },
+      {
+        title: 'Add to bag',
+        desc: 'Bag/cart updates and computes coupons, taxes, and delivery fees.',
+        active: ['cart','promo','tax'],
+        edges: [['client','cart'], ['cart','promo'], ['cart','tax']]
+      },
+      {
+        title: 'Checkout and payments',
+        desc: 'Order is placed; payment is authorized; COD eligibility is evaluated.',
+        active: ['checkout','payments','risk'],
+        edges: [['cart','checkout'], ['checkout','risk'], ['checkout','payments']]
+      },
+      {
+        title: 'Fulfillment and packing',
+        desc: 'Warehouse picks/ packs apparel and generates shipping labels.',
+        active: ['orders','wms','carrier'],
+        edges: [['checkout','orders'], ['orders','wms'], ['wms','carrier']]
+      },
+      {
+        title: 'Delivery tracking',
+        desc: 'Shipment tracking updates notify the customer and update order timeline.',
+        active: ['tracking','notify','client'],
+        edges: [['carrier','tracking'], ['tracking','notify'], ['notify','client']]
+      },
+      {
+        title: 'Returns and refunds',
+        desc: 'Returns pickup and QC run; refunds issued to wallet/bank/card.',
+        active: ['returns','refunds','qc'],
+        edges: [['tracking','returns'], ['returns','qc'], ['qc','refunds']]
+      }
+    ]
+  },
+
+  meesho: {
+    title: 'Meesho',
+    steps: [
+      {
+        title: 'Browse catalog and recommendations',
+        desc: 'User discovers products through feeds, categories, and recommendations.',
+        active: ['client','feed','catalog'],
+        edges: [['client','feed'], ['feed','catalog']]
+      },
+      {
+        title: 'Product page and pricing',
+        desc: 'Product details load with supplier price, shipping fees, and margins.',
+        active: ['catalog','pricing','offers'],
+        edges: [['catalog','pricing'], ['pricing','offers']]
+      },
+      {
+        title: 'Place order (often COD)',
+        desc: 'Order is created; COD eligibility and fraud checks run.',
+        active: ['checkout','orders','risk'],
+        edges: [['client','checkout'], ['checkout','risk'], ['checkout','orders']]
+      },
+      {
+        title: 'Supplier assignment',
+        desc: 'Order is assigned to supplier; supplier confirms availability and ships.',
+        active: ['orders','supplier','inventory'],
+        edges: [['orders','supplier'], ['supplier','inventory']]
+      },
+      {
+        title: 'Logistics and tracking',
+        desc: 'Carrier pickup, routing, and tracking updates are published.',
+        active: ['carrier','tracking','notify'],
+        edges: [['supplier','carrier'], ['carrier','tracking'], ['tracking','notify']]
+      },
+      {
+        title: 'Cash collection and settlement',
+        desc: 'For COD, cash is collected and settled; ledger reconciles payouts.',
+        active: ['cod','ledger','payouts'],
+        edges: [['carrier','cod'], ['cod','ledger'], ['ledger','payouts']]
+      },
+      {
+        title: 'Returns and refunds',
+        desc: 'Returns are processed; refunds and supplier chargebacks are handled.',
+        active: ['returns','refunds','support'],
+        edges: [['tracking','returns'], ['returns','refunds'], ['returns','support']]
+      }
+    ]
+  },
+
+  ajio: {
+    title: 'Ajio',
+    steps: [
+      {
+        title: 'Browse and search',
+        desc: 'Customer browses catalog; search and ranking select products.',
+        active: ['client','search','catalog'],
+        edges: [['client','search'], ['search','catalog']]
+      },
+      {
+        title: 'Product page and inventory',
+        desc: 'Variant availability, pricing, and offers load with delivery promise.',
+        active: ['catalog','inventory','pricing'],
+        edges: [['catalog','inventory'], ['catalog','pricing']]
+      },
+      {
+        title: 'Add to cart',
+        desc: 'Cart computes totals, promos, taxes, and shipping.',
+        active: ['cart','promo','tax'],
+        edges: [['client','cart'], ['cart','promo'], ['cart','tax']]
+      },
+      {
+        title: 'Checkout and payment',
+        desc: 'Order is placed; payment authorization and risk checks run.',
+        active: ['checkout','payments','risk'],
+        edges: [['cart','checkout'], ['checkout','risk'], ['checkout','payments']]
+      },
+      {
+        title: 'Fulfillment',
+        desc: 'Warehouse picks/packs and hands off to carrier; tracking starts.',
+        active: ['orders','wms','carrier'],
+        edges: [['checkout','orders'], ['orders','wms'], ['wms','carrier']]
+      },
+      {
+        title: 'Tracking and notifications',
+        desc: 'Shipment events update order timeline and notify the customer.',
+        active: ['tracking','notify','client'],
+        edges: [['carrier','tracking'], ['tracking','notify'], ['notify','client']]
+      },
+      {
+        title: 'Returns and refunds',
+        desc: 'Returns pickup and QC; refunds are issued after verification.',
+        active: ['returns','qc','refunds'],
+        edges: [['tracking','returns'], ['returns','qc'], ['qc','refunds']]
+      }
+    ]
+  },
+
+  zalando: {
+    title: 'Zalando',
+    steps: [
+      {
+        title: 'Browse and personalization',
+        desc: 'User browses fashion catalog; personalization selects items and promos.',
+        active: ['client','catalog','rank'],
+        edges: [['client','catalog'], ['catalog','rank']]
+      },
+      {
+        title: 'Product page and availability',
+        desc: 'Variant availability and delivery promise are computed by inventory.',
+        active: ['catalog','inventory','pricing'],
+        edges: [['catalog','inventory'], ['catalog','pricing']]
+      },
+      {
+        title: 'Cart and checkout prep',
+        desc: 'Cart totals computed with discounts, taxes, and shipping options.',
+        active: ['cart','promo','tax'],
+        edges: [['client','cart'], ['cart','promo'], ['cart','tax']]
+      },
+      {
+        title: 'Checkout and payment',
+        desc: 'Payment is authorized; fraud and address checks run.',
+        active: ['checkout','payments','fraud'],
+        edges: [['cart','checkout'], ['checkout','fraud'], ['checkout','payments']]
+      },
+      {
+        title: 'Warehouse fulfillment',
+        desc: 'Fulfillment center picks/packs and ships; carrier integration posts tracking.',
+        active: ['orders','wms','carrier'],
+        edges: [['checkout','orders'], ['orders','wms'], ['wms','carrier']]
+      },
+      {
+        title: 'Delivery and notifications',
+        desc: 'Delivery events update timeline and notifications are sent.',
+        active: ['tracking','notify','client'],
+        edges: [['carrier','tracking'], ['tracking','notify'], ['notify','client']]
+      },
+      {
+        title: 'Returns and refunds',
+        desc: 'Returns are common; reverse logistics triggers refunds and restocking.',
+        active: ['returns','refunds','inventory'],
+        edges: [['tracking','returns'], ['returns','refunds'], ['returns','inventory']]
+      }
+    ]
+  },
+
+  asos: {
+    title: 'ASOS',
+    steps: [
+      {
+        title: 'Browse and search',
+        desc: 'User browses catalog; search and personalization select products.',
+        active: ['client','search','catalog'],
+        edges: [['client','search'], ['search','catalog']]
+      },
+      {
+        title: 'Product page',
+        desc: 'Product details load with size availability, pricing, and delivery promise.',
+        active: ['catalog','inventory','pricing'],
+        edges: [['catalog','inventory'], ['catalog','pricing']]
+      },
+      {
+        title: 'Cart',
+        desc: 'Cart totals computed with discounts, taxes, and shipping options.',
+        active: ['cart','promo','tax'],
+        edges: [['client','cart'], ['cart','promo'], ['cart','tax']]
+      },
+      {
+        title: 'Checkout and payment',
+        desc: 'Order is placed; payment is authorized; fraud checks may hold.',
+        active: ['checkout','payments','fraud'],
+        edges: [['cart','checkout'], ['checkout','fraud'], ['checkout','payments']]
+      },
+      {
+        title: 'Fulfillment',
+        desc: 'Warehouse picks/packs and ships; carrier integration provides tracking.',
+        active: ['orders','wms','carrier'],
+        edges: [['checkout','orders'], ['orders','wms'], ['wms','carrier']]
+      },
+      {
+        title: 'Tracking and notifications',
+        desc: 'Shipping events update order timeline and send notifications.',
+        active: ['tracking','notify','client'],
+        edges: [['carrier','tracking'], ['tracking','notify'], ['notify','client']]
+      },
+      {
+        title: 'Returns and refunds',
+        desc: 'Returns process handles reverse logistics and refunds.',
+        active: ['returns','refunds','support'],
+        edges: [['tracking','returns'], ['returns','refunds'], ['returns','support']]
+      }
+    ]
+  },
+
+  wayfair: {
+    title: 'Wayfair',
+    steps: [
+      {
+        title: 'Browse and search',
+        desc: 'User searches furniture catalog; ranking considers availability and shipping.',
+        active: ['client','search','catalog'],
+        edges: [['client','search'], ['search','catalog']]
+      },
+      {
+        title: 'Product details and delivery quote',
+        desc: 'Product details load with bulky-item shipping estimates and delivery scheduling.',
+        active: ['catalog','shipping','pricing'],
+        edges: [['catalog','shipping'], ['catalog','pricing']]
+      },
+      {
+        title: 'Cart and checkout prep',
+        desc: 'Cart totals computed; delivery slots and service add-ons may be selected.',
+        active: ['cart','delivery','tax'],
+        edges: [['client','cart'], ['cart','delivery'], ['cart','tax']]
+      },
+      {
+        title: 'Checkout and payment',
+        desc: 'Order is placed; payment is authorized and fraud checks run.',
+        active: ['checkout','payments','fraud'],
+        edges: [['cart','checkout'], ['checkout','fraud'], ['checkout','payments']]
+      },
+      {
+        title: 'Supplier / warehouse fulfillment',
+        desc: 'Order routed to supplier/warehouse; pick/pack and freight booking starts.',
+        active: ['orders','wms','supplier'],
+        edges: [['checkout','orders'], ['orders','supplier'], ['orders','wms']]
+      },
+      {
+        title: 'Freight and tracking',
+        desc: 'Freight carrier tracking updates; delivery appointment is coordinated.',
+        active: ['carrier','tracking','notify'],
+        edges: [['wms','carrier'], ['carrier','tracking'], ['tracking','notify']]
+      },
+      {
+        title: 'Returns and refunds',
+        desc: 'Returns for bulky items involve reverse logistics; refunds and support cases follow.',
+        active: ['returns','refunds','support'],
+        edges: [['tracking','returns'], ['returns','support'], ['returns','refunds']]
+      }
+    ]
+  }
 };
 
 export function flowForSystem(sys) {
