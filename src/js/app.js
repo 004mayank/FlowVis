@@ -2081,10 +2081,10 @@ const ARCH_LAYOUTS = {
       risk: { x: 600, y: 300, label: 'Risk Engine' },
       merchant: { x: 860, y: 160, label: 'Merchant Integration' },
       routing: { x: 860, y: 260, label: 'Routing' },
-      bank: { x: 1220, y: 260, label: 'Bank Rails' },
-      network: { x: 1220, y: 340, label: 'Card Networks' },
-      ledger: { x: 860, y: 380, label: 'Ledger' },
-      balances: { x: 1220, y: 380, label: 'Balances' },
+      bank: { x: 1220, y: 240, label: 'Bank Rails' },
+      network: { x: 1220, y: 330, label: 'Card Networks' },
+      ledger: { x: 860, y: 400, label: 'Ledger' },
+      balances: { x: 1220, y: 430, label: 'Balances' },
       notify: { x: 600, y: 520, label: 'Notifications' },
       webhook: { x: 860, y: 520, label: 'Webhooks' },
       disputes: { x: 860, y: 620, label: 'Disputes' },
@@ -2626,7 +2626,7 @@ function renderArchitectureDiagram(sys, step) {
     `;
   };
 
-  const arrowOrtho = (x1, y1, x2, y2, label = '') => {
+  const arrowOrtho = (x1, y1, x2, y2, label = '', on = false) => {
     const mid = Math.abs(x1 * 13 + x2 * 7 + y1 * 11 + y2 * 5).toFixed(0);
     const markerId = `arch-arrow-${mid}`;
     const mx = Math.round((x1 + x2) / 2);
@@ -2640,14 +2640,22 @@ function renderArchitectureDiagram(sys, step) {
     const x1c = x1 + clearance;
     const x2c = x2 - clearance;
     const d = `M${x1} ${y1} L ${x1c} ${y1} L ${x1c} ${y2} L ${x2c} ${y2} L ${x2} ${y2}`;
+
+    const glow = on
+      ? `<filter id="arch-glow-${mid}"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>`
+      : '';
+
+    const strokeOn = 'rgba(123,125,248,0.9)';
+    const strokeOff = 'rgba(123,125,248,0.40)';
     return `
+      ${glow}
       <defs>
         <marker id="${markerId}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-          <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(123,125,248,0.9)"/>
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="${on ? strokeOn : strokeOff}"/>
         </marker>
       </defs>
       <path d="${d}" fill="none" stroke="rgba(255,255,255,0.20)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 8" opacity="0.95"/>
-      <path d="${d}" fill="none" stroke="rgba(123,125,248,0.55)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.55" marker-end="url(#${markerId})"/>
+      <path d="${d}" fill="none" stroke="${on ? strokeOn : strokeOff}" stroke-width="${on ? 4 : 3}" stroke-linecap="round" stroke-linejoin="round" opacity="${on ? 0.92 : 0.55}" marker-end="url(#${markerId})" ${on ? `filter="url(#arch-glow-${mid})"` : ''}/>
       ${label ? `<text x="${mx}" y="${Math.min(y1, y2) - 10}" text-anchor="middle" fill="rgba(123,125,248,0.65)" font-size="12" font-family="Inter, Arial" font-weight="800">${escapeXml(label)}</text>` : ''}
     `;
   };
@@ -2696,7 +2704,7 @@ function renderArchitectureDiagram(sys, step) {
       const nb = layout.nodes[b];
       if (!na || !nb) return '';
       // Connect from right edge of source to left edge of target with padding
-      return arrowOrtho(na.x + 252, na.y + 30, nb.x - 12, nb.y + 30, '');
+      return arrowOrtho(na.x + 252, na.y + 30, nb.x - 12, nb.y + 30, '', false);
     })
     .join('');
 
@@ -2706,7 +2714,7 @@ function renderArchitectureDiagram(sys, step) {
       const na = layout.nodes[a];
       const nb = layout.nodes[b];
       if (!na || !nb) return '';
-      return arrowOrtho(na.x + 252, na.y + 30, nb.x - 12, nb.y + 30, label || '');
+      return arrowOrtho(na.x + 252, na.y + 30, nb.x - 12, nb.y + 30, label || '', true);
     })
     .join('');
 
