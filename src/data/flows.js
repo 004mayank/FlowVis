@@ -3197,6 +3197,428 @@ export const FLOWS = {
       }
     ]
   }
+
+  ,
+
+  duolingo: {
+    title: 'Duolingo',
+    steps: [
+      {
+        title: 'Open app and load today’s path',
+        desc: 'Client syncs user state, streak, and recommended lesson path.',
+        active: ['client','auth','state','recos'],
+        edges: [['client','auth'], ['auth','state'], ['state','recos']]
+      },
+      {
+        title: 'Start lesson',
+        desc: 'Lesson content and exercise set are fetched and cached.',
+        active: ['lessons','content','cache'],
+        edges: [['client','lessons'], ['lessons','content'], ['content','cache']]
+      },
+      {
+        title: 'Exercise evaluation',
+        desc: 'Answers are evaluated; hints and checks run in the grading engine.',
+        active: ['exercise','grade','nlp'],
+        edges: [['client','exercise'], ['exercise','grade'], ['grade','nlp']]
+      },
+      {
+        title: 'Progress and streak update',
+        desc: 'Progress writes update streaks, XP, crowns, and skill mastery.',
+        active: ['progress','write','state'],
+        edges: [['grade','progress'], ['progress','write'], ['write','state']]
+      },
+      {
+        title: 'Personalization feedback loop',
+        desc: 'Events feed ranking/personalization to adjust next lessons.',
+        active: ['events','rank','recos'],
+        edges: [['progress','events'], ['events','rank'], ['rank','recos']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Reminders and streak alerts are scheduled and pushed.',
+        active: ['notify','scheduler','push'],
+        edges: [['state','scheduler'], ['scheduler','notify'], ['notify','push']]
+      }
+    ]
+  },
+
+  coursera: {
+    title: 'Coursera',
+    steps: [
+      {
+        title: 'Browse catalog',
+        desc: 'Client loads catalog search and recommendation modules.',
+        active: ['client','catalog','search'],
+        edges: [['client','catalog'], ['catalog','search']]
+      },
+      {
+        title: 'Enroll in course',
+        desc: 'Enrollment is created; entitlements and payments are verified.',
+        active: ['enroll','payments','entitlements'],
+        edges: [['client','enroll'], ['enroll','payments'], ['payments','entitlements']]
+      },
+      {
+        title: 'Stream lecture video',
+        desc: 'Playback uses CDN and adaptive streaming with progress tracking.',
+        active: ['player','cdn','progress'],
+        edges: [['client','player'], ['player','cdn'], ['player','progress']]
+      },
+      {
+        title: 'Submit assignment',
+        desc: 'Submissions are stored; grading runs (auto or peer) and results persist.',
+        active: ['assignments','submissions','grading'],
+        edges: [['client','assignments'], ['assignments','submissions'], ['submissions','grading']]
+      },
+      {
+        title: 'Certificates',
+        desc: 'Completion triggers certificate issuance and verification links.',
+        active: ['completion','certs','verify'],
+        edges: [['grading','completion'], ['completion','certs'], ['certs','verify']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Deadlines and updates trigger email/push notifications.',
+        active: ['notify','email','push'],
+        edges: [['completion','notify'], ['notify','email'], ['notify','push']]
+      }
+    ]
+  },
+
+  'khan-academy': {
+    title: 'Khan Academy',
+    steps: [
+      {
+        title: 'Load dashboard',
+        desc: 'Client loads courses, skill map, and learner progress state.',
+        active: ['client','dashboard','state'],
+        edges: [['client','dashboard'], ['dashboard','state']]
+      },
+      {
+        title: 'Start practice',
+        desc: 'Practice engine selects items and fetches content assets.',
+        active: ['practice','content','cache'],
+        edges: [['client','practice'], ['practice','content'], ['content','cache']]
+      },
+      {
+        title: 'Evaluate answers',
+        desc: 'Grading checks answers and generates hints/steps.',
+        active: ['grade','hints','practice'],
+        edges: [['practice','grade'], ['grade','hints']]
+      },
+      {
+        title: 'Update mastery',
+        desc: 'Mastery model updates skill levels and persistence.',
+        active: ['mastery','write','state'],
+        edges: [['grade','mastery'], ['mastery','write'], ['write','state']]
+      },
+      {
+        title: 'Recommendations',
+        desc: 'Next practice and lessons are recommended based on mastery and goals.',
+        active: ['recos','rank','dashboard'],
+        edges: [['state','recos'], ['recos','rank'], ['rank','dashboard']]
+      },
+      {
+        title: 'Teacher/classroom insights',
+        desc: 'Classroom dashboards aggregate progress for teachers.',
+        active: ['classroom','analytics','warehouse'],
+        edges: [['state','analytics'], ['analytics','warehouse'], ['warehouse','classroom']]
+      }
+    ]
+  },
+
+  udemy: {
+    title: 'Udemy',
+    steps: [
+      {
+        title: 'Discover course',
+        desc: 'Search and recommendations surface courses with pricing and reviews.',
+        active: ['client','catalog','rank'],
+        edges: [['client','catalog'], ['catalog','rank']]
+      },
+      {
+        title: 'Purchase',
+        desc: 'Checkout processes payment and grants course access.',
+        active: ['checkout','payments','entitlements'],
+        edges: [['client','checkout'], ['checkout','payments'], ['payments','entitlements']]
+      },
+      {
+        title: 'Stream content',
+        desc: 'Video is served via CDN; progress is tracked.',
+        active: ['player','cdn','progress'],
+        edges: [['client','player'], ['player','cdn'], ['player','progress']]
+      },
+      {
+        title: 'Q&A / discussions',
+        desc: 'Learners post questions and instructors reply; notifications sent.',
+        active: ['discuss','store','notify'],
+        edges: [['client','discuss'], ['discuss','store'], ['store','notify']]
+      },
+      {
+        title: 'Reviews',
+        desc: 'Ratings and reviews persist and influence ranking.',
+        active: ['reviews','write','rank'],
+        edges: [['client','reviews'], ['reviews','write'], ['write','rank']]
+      },
+      {
+        title: 'Recommendations loop',
+        desc: 'Engagement events feed personalization and email campaigns.',
+        active: ['events','recos','email'],
+        edges: [['progress','events'], ['events','recos'], ['recos','email']]
+      }
+    ]
+  },
+
+  medium: {
+    title: 'Medium',
+    steps: [
+      {
+        title: 'Load home feed',
+        desc: 'Client loads personalized feed with caching and ranking.',
+        active: ['client','feed','rank'],
+        edges: [['client','feed'], ['feed','rank']]
+      },
+      {
+        title: 'Open article',
+        desc: 'Content is fetched and rendered; assets served via CDN.',
+        active: ['content','cdn','cache'],
+        edges: [['feed','content'], ['content','cdn'], ['content','cache']]
+      },
+      {
+        title: 'Claps and responses',
+        desc: 'Interactions persist and update counters and recommendations.',
+        active: ['interactions','write','counters'],
+        edges: [['client','interactions'], ['interactions','write'], ['write','counters']]
+      },
+      {
+        title: 'Publish story',
+        desc: 'Author writes; story is stored, indexed, and distributed.',
+        active: ['editor','store','index'],
+        edges: [['client','editor'], ['editor','store'], ['store','index']]
+      },
+      {
+        title: 'Subscriptions and paywall',
+        desc: 'Entitlements enforce access; payments manage subscriptions.',
+        active: ['paywall','entitlements','payments'],
+        edges: [['content','paywall'], ['paywall','entitlements'], ['entitlements','payments']]
+      },
+      {
+        title: 'Email digests',
+        desc: 'Digest scheduler sends curated recommendations by email.',
+        active: ['scheduler','email','recos'],
+        edges: [['rank','recos'], ['recos','scheduler'], ['scheduler','email']]
+      }
+    ]
+  },
+
+  substack: {
+    title: 'Substack',
+    steps: [
+      {
+        title: 'Browse newsletters',
+        desc: 'Discovery surfaces newsletters using search and ranking.',
+        active: ['client','discovery','search'],
+        edges: [['client','discovery'], ['discovery','search']]
+      },
+      {
+        title: 'Subscribe',
+        desc: 'Subscription purchase creates entitlements and recurring billing.',
+        active: ['checkout','payments','entitlements'],
+        edges: [['client','checkout'], ['checkout','payments'], ['payments','entitlements']]
+      },
+      {
+        title: 'Read post',
+        desc: 'Content is fetched and served; paywall enforces access.',
+        active: ['content','cdn','paywall'],
+        edges: [['client','content'], ['content','cdn'], ['content','paywall']]
+      },
+      {
+        title: 'Publish email',
+        desc: 'Writer publishes; email pipeline fans out to subscribers.',
+        active: ['editor','send','fanout'],
+        edges: [['client','editor'], ['editor','send'], ['send','fanout']]
+      },
+      {
+        title: 'Deliver and track',
+        desc: 'Delivery logs opens/clicks and updates analytics dashboards.',
+        active: ['delivery','events','analytics'],
+        edges: [['fanout','delivery'], ['delivery','events'], ['events','analytics']]
+      },
+      {
+        title: 'Comments and moderation',
+        desc: 'Comments persist; moderation tools enforce rules.',
+        active: ['comments','moderation','risk'],
+        edges: [['client','comments'], ['comments','moderation'], ['moderation','risk']]
+      }
+    ]
+  },
+
+  quora: {
+    title: 'Quora',
+    steps: [
+      {
+        title: 'Load feed',
+        desc: 'Client loads personalized feed with ranking and caching.',
+        active: ['client','feed','rank'],
+        edges: [['client','feed'], ['feed','rank']]
+      },
+      {
+        title: 'Ask question',
+        desc: 'Question write persists and routes to topics/experts.',
+        active: ['api','write','routing'],
+        edges: [['client','api'], ['api','write'], ['write','routing']]
+      },
+      {
+        title: 'Answer and edit',
+        desc: 'Answers persist, revisions stored, and indexed for search.',
+        active: ['answers','versions','index'],
+        edges: [['client','answers'], ['answers','versions'], ['versions','index']]
+      },
+      {
+        title: 'Upvotes and ranking',
+        desc: 'Votes update counters and impact feed ranking.',
+        active: ['votes','counters','rank'],
+        edges: [['client','votes'], ['votes','counters'], ['counters','rank']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Replies/mentions trigger notifications and push.',
+        active: ['notify','push','client'],
+        edges: [['answers','notify'], ['notify','push'], ['push','client']]
+      },
+      {
+        title: 'Moderation',
+        desc: 'Policy and integrity systems handle spam and abuse reports.',
+        active: ['moderation','policy','risk'],
+        edges: [['write','moderation'], ['moderation','policy'], ['policy','risk']]
+      }
+    ]
+  },
+
+  pinterest: {
+    title: 'Pinterest',
+    steps: [
+      {
+        title: 'Load home feed',
+        desc: 'Client loads home feed using ranking and caching.',
+        active: ['client','feed','rank'],
+        edges: [['client','feed'], ['feed','rank']]
+      },
+      {
+        title: 'Recommendation pipeline',
+        desc: 'Candidate generation and ranking produce personalized pins.',
+        active: ['recos','rank','graph'],
+        edges: [['feed','recos'], ['recos','rank'], ['rank','graph']]
+      },
+      {
+        title: 'Open pin',
+        desc: 'Pin content and images are served via media service and CDN.',
+        active: ['pin','media','cdn'],
+        edges: [['feed','pin'], ['pin','media'], ['media','cdn']]
+      },
+      {
+        title: 'Save pin',
+        desc: 'Save action persists to boards and updates graph signals.',
+        active: ['save','write','graph'],
+        edges: [['client','save'], ['save','write'], ['write','graph']]
+      },
+      {
+        title: 'Search',
+        desc: 'Search uses index and ranking to return relevant pins.',
+        active: ['search','index','rank'],
+        edges: [['client','search'], ['search','index'], ['search','rank']]
+      },
+      {
+        title: 'Ads and measurement',
+        desc: 'Ads selection and measurement track conversions and attribution.',
+        active: ['ads','auction','analytics'],
+        edges: [['feed','ads'], ['ads','auction'], ['auction','analytics']]
+      }
+    ]
+  },
+
+  'uber-eats': {
+    title: 'Uber Eats',
+    steps: [
+      {
+        title: 'Browse restaurants',
+        desc: 'Client loads catalog, menus, and availability with caching.',
+        active: ['client','catalog','cache'],
+        edges: [['client','catalog'], ['catalog','cache']]
+      },
+      {
+        title: 'Create cart and checkout',
+        desc: 'Cart is priced; promos applied; payment intent created.',
+        active: ['cart','pricing','payments'],
+        edges: [['client','cart'], ['cart','pricing'], ['pricing','payments']]
+      },
+      {
+        title: 'Place order',
+        desc: 'Order is created and routed to restaurant; acceptance tracked.',
+        active: ['orders','dispatch','restaurant'],
+        edges: [['payments','orders'], ['orders','dispatch'], ['dispatch','restaurant']]
+      },
+      {
+        title: 'Courier assignment',
+        desc: 'Dispatch assigns courier; courier app receives job.',
+        active: ['dispatch','courier','realtime'],
+        edges: [['dispatch','courier'], ['courier','realtime']]
+      },
+      {
+        title: 'Live tracking',
+        desc: 'Location updates stream; ETA and tracking updates shown to user.',
+        active: ['location','eta','client'],
+        edges: [['courier','location'], ['location','eta'], ['eta','client']]
+      },
+      {
+        title: 'Post-order support',
+        desc: 'Refunds/issues handled via support workflows and ledger adjustments.',
+        active: ['support','refunds','ledger'],
+        edges: [['orders','support'], ['support','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  doordash: {
+    title: 'DoorDash',
+    steps: [
+      {
+        title: 'Browse stores',
+        desc: 'Client loads catalog and menus with availability and caching.',
+        active: ['client','catalog','cache'],
+        edges: [['client','catalog'], ['catalog','cache']]
+      },
+      {
+        title: 'Checkout',
+        desc: 'Pricing, fees, and promos applied; payment intent created.',
+        active: ['cart','pricing','payments'],
+        edges: [['client','cart'], ['cart','pricing'], ['pricing','payments']]
+      },
+      {
+        title: 'Create order',
+        desc: 'Order is created and sent to merchant for acceptance.',
+        active: ['orders','merchant','dispatch'],
+        edges: [['payments','orders'], ['orders','merchant'], ['orders','dispatch']]
+      },
+      {
+        title: 'Dasher assignment',
+        desc: 'Dispatch assigns a dasher and sends job to courier app.',
+        active: ['dispatch','courier','realtime'],
+        edges: [['dispatch','courier'], ['courier','realtime']]
+      },
+      {
+        title: 'Tracking and ETA',
+        desc: 'Location updates stream; ETA model updates client tracking.',
+        active: ['location','eta','client'],
+        edges: [['courier','location'], ['location','eta'], ['eta','client']]
+      },
+      {
+        title: 'Support and refunds',
+        desc: 'Issues handled via support workflows and refunds in ledger.',
+        active: ['support','refunds','ledger'],
+        edges: [['orders','support'], ['support','refunds'], ['refunds','ledger']]
+      }
+    ]
+  }
 };
 
 export function flowForSystem(sys) {
