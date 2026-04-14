@@ -1925,6 +1925,434 @@ export const FLOWS = {
       }
     ]
   }
+
+  ,
+
+  spotify: {
+    title: 'Spotify',
+    steps: [
+      {
+        title: 'Open app and load home',
+        desc: 'Client loads home sections and cached recommendations quickly.',
+        active: ['client','home','recos'],
+        edges: [['client','home'], ['home','recos']]
+      },
+      {
+        title: 'Personalization and ranking',
+        desc: 'Ranking selects mixes and playlists using history, embeddings, and experiments.',
+        active: ['recos','rank','ab'],
+        edges: [['recos','rank'], ['rank','ab']]
+      },
+      {
+        title: 'Search',
+        desc: 'Search queries hit indexing services and return tracks, artists, and playlists.',
+        active: ['client','search','index'],
+        edges: [['client','search'], ['search','index']]
+      },
+      {
+        title: 'Start playback',
+        desc: 'Client requests stream URLs and starts playback from CDN.',
+        active: ['client','playback','cdn'],
+        edges: [['client','playback'], ['playback','cdn']]
+      },
+      {
+        title: 'DRM / licensing (where needed)',
+        desc: 'License checks and playback policy enforce subscription and device limits.',
+        active: ['drm','auth','playback'],
+        edges: [['playback','drm'], ['drm','auth']]
+      },
+      {
+        title: 'Telemetry and analytics',
+        desc: 'Playback events feed analytics to improve recommendations and quality.',
+        active: ['metrics','analytics','recos'],
+        edges: [['playback','metrics'], ['metrics','analytics'], ['analytics','recos']]
+      }
+    ]
+  },
+
+  youtube: {
+    title: 'YouTube',
+    steps: [
+      {
+        title: 'Open app and fetch home feed',
+        desc: 'Client requests personalized home feed with caching and fast first paint.',
+        active: ['client','home','recos'],
+        edges: [['client','home'], ['home','recos']]
+      },
+      {
+        title: 'Ranking and safety checks',
+        desc: 'Ranking selects videos using signals and applies policy/safety filters.',
+        active: ['recos','rank','safety'],
+        edges: [['recos','rank'], ['rank','safety']]
+      },
+      {
+        title: 'Search and retrieval',
+        desc: 'Search hits index and retrieval services to return relevant videos.',
+        active: ['client','search','index'],
+        edges: [['client','search'], ['search','index']]
+      },
+      {
+        title: 'Start playback via CDN',
+        desc: 'Player streams segments from CDN with adaptive bitrate.',
+        active: ['player','cdn','client'],
+        edges: [['cdn','client'], ['client','player']]
+      },
+      {
+        title: 'Ads and monetization',
+        desc: 'Ad decisioning selects ads; impressions and clicks are tracked.',
+        active: ['ads','auction','metrics'],
+        edges: [['player','ads'], ['ads','auction'], ['ads','metrics']]
+      },
+      {
+        title: 'Upload and processing',
+        desc: 'Creators upload; transcoding generates renditions and updates catalog.',
+        active: ['upload','transcode','catalog'],
+        edges: [['client','upload'], ['upload','transcode'], ['transcode','catalog']]
+      },
+      {
+        title: 'Comments and notifications',
+        desc: 'Comments/likes write to stores and trigger notification pipelines.',
+        active: ['comments','write','notify'],
+        edges: [['client','comments'], ['comments','write'], ['write','notify']]
+      }
+    ]
+  },
+
+  'disney-plus': {
+    title: 'Disney+',
+    steps: [
+      {
+        title: 'Browse catalog',
+        desc: 'Client loads rows and artwork with personalization and caching.',
+        active: ['client','catalog','recos'],
+        edges: [['client','catalog'], ['catalog','recos']]
+      },
+      {
+        title: 'Select title and policy',
+        desc: 'Client fetches title metadata, availability, and playback policy.',
+        active: ['catalog','policy','drm'],
+        edges: [['catalog','policy'], ['policy','drm']]
+      },
+      {
+        title: 'License and DRM',
+        desc: 'Client obtains DRM license and entitlements before playback.',
+        active: ['client','drm','auth'],
+        edges: [['client','drm'], ['drm','auth']]
+      },
+      {
+        title: 'Stream from CDN',
+        desc: 'Playback starts from CDN with adaptive bitrate streaming.',
+        active: ['client','cdn','player'],
+        edges: [['cdn','client'], ['client','player']]
+      },
+      {
+        title: 'Telemetry and QoE',
+        desc: 'Playback telemetry feeds analytics for quality improvements.',
+        active: ['metrics','analytics','recos'],
+        edges: [['player','metrics'], ['metrics','analytics'], ['analytics','recos']]
+      },
+      {
+        title: 'Profiles and parental controls',
+        desc: 'Profiles, watch history, and parental controls update personalization.',
+        active: ['profiles','history','recos'],
+        edges: [['client','profiles'], ['profiles','history'], ['history','recos']]
+      }
+    ]
+  },
+
+  'prime-video': {
+    title: 'Prime Video',
+    steps: [
+      {
+        title: 'Browse home',
+        desc: 'Client loads personalized home rows and recommendations.',
+        active: ['client','home','recos'],
+        edges: [['client','home'], ['home','recos']]
+      },
+      {
+        title: 'Select title',
+        desc: 'Client fetches metadata, availability, and playback policy.',
+        active: ['catalog','policy','drm'],
+        edges: [['home','catalog'], ['catalog','policy'], ['policy','drm']]
+      },
+      {
+        title: 'DRM license',
+        desc: 'Client requests DRM license and verifies entitlements.',
+        active: ['client','drm','auth'],
+        edges: [['client','drm'], ['drm','auth']]
+      },
+      {
+        title: 'Start playback',
+        desc: 'Segments stream from CDN with adaptive bitrate switching.',
+        active: ['cdn','client','player'],
+        edges: [['cdn','client'], ['client','player']]
+      },
+      {
+        title: 'Ads and telemetry',
+        desc: 'For ad-supported tiers, ad decisioning runs and telemetry is collected.',
+        active: ['ads','metrics','analytics'],
+        edges: [['player','ads'], ['player','metrics'], ['metrics','analytics']]
+      },
+      {
+        title: 'Watch history and recos',
+        desc: 'Watch events update history, continue-watching, and recommendations.',
+        active: ['history','recos','home'],
+        edges: [['analytics','history'], ['history','recos'], ['recos','home']]
+      }
+    ]
+  },
+
+  'apple-music': {
+    title: 'Apple Music',
+    steps: [
+      {
+        title: 'Open app and load library',
+        desc: 'Client syncs library metadata and loads home recommendations.',
+        active: ['client','library','recos'],
+        edges: [['client','library'], ['library','recos']]
+      },
+      {
+        title: 'Search catalog',
+        desc: 'Search hits indexing services to return tracks, artists, and playlists.',
+        active: ['client','search','index'],
+        edges: [['client','search'], ['search','index']]
+      },
+      {
+        title: 'Select track and entitlement',
+        desc: 'Playback policy verifies subscription and region rights.',
+        active: ['policy','auth','drm'],
+        edges: [['client','policy'], ['policy','auth'], ['policy','drm']]
+      },
+      {
+        title: 'Playback and CDN',
+        desc: 'Client requests stream URL and plays from CDN.',
+        active: ['client','playback','cdn'],
+        edges: [['client','playback'], ['playback','cdn']]
+      },
+      {
+        title: 'Lyrics and metadata',
+        desc: 'Lyrics and metadata are fetched alongside playback for UX features.',
+        active: ['metadata','lyrics','client'],
+        edges: [['playback','metadata'], ['metadata','lyrics'], ['lyrics','client']]
+      },
+      {
+        title: 'Telemetry and personalization',
+        desc: 'Listening events feed personalization and recommendations.',
+        active: ['metrics','analytics','recos'],
+        edges: [['playback','metrics'], ['metrics','analytics'], ['analytics','recos']]
+      }
+    ]
+  },
+
+  twitch: {
+    title: 'Twitch',
+    steps: [
+      {
+        title: 'Discover live channels',
+        desc: 'Client loads live directory; ranking selects streams based on interest.',
+        active: ['client','directory','rank'],
+        edges: [['client','directory'], ['directory','rank']]
+      },
+      {
+        title: 'Join stream',
+        desc: 'Client requests playback manifest and starts streaming from CDN.',
+        active: ['player','cdn','client'],
+        edges: [['client','player'], ['cdn','client']]
+      },
+      {
+        title: 'Ingest and transcoding',
+        desc: 'Streamer ingest goes to ingest servers; transcoding creates renditions.',
+        active: ['ingest','transcode','cdn'],
+        edges: [['streamer','ingest'], ['ingest','transcode'], ['transcode','cdn']]
+      },
+      {
+        title: 'Chat realtime',
+        desc: 'Chat messages go through realtime messaging and moderation.',
+        active: ['chat','realtime','moderation'],
+        edges: [['client','chat'], ['chat','realtime'], ['realtime','moderation']]
+      },
+      {
+        title: 'Ads and subscriptions',
+        desc: 'Monetization systems handle ads, subs, bits, and payouts.',
+        active: ['ads','subs','payouts'],
+        edges: [['player','ads'], ['client','subs'], ['subs','payouts']]
+      },
+      {
+        title: 'Telemetry and highlights',
+        desc: 'Events feed analytics; clips/highlights pipeline stores moments.',
+        active: ['metrics','analytics','clips'],
+        edges: [['player','metrics'], ['metrics','analytics'], ['analytics','clips']]
+      }
+    ]
+  },
+
+  telegram: {
+    title: 'Telegram',
+    steps: [
+      {
+        title: 'Send message',
+        desc: 'Client sends message request to Telegram servers with auth session.',
+        active: ['client','api','auth'],
+        edges: [['client','api'], ['api','auth']]
+      },
+      {
+        title: 'Server routing',
+        desc: 'Servers route message to recipient(s) and store metadata.',
+        active: ['router','storage','api'],
+        edges: [['api','router'], ['router','storage']]
+      },
+      {
+        title: 'Push notifications',
+        desc: 'If recipients are offline, push services wake the app.',
+        active: ['push','client','router'],
+        edges: [['router','push'], ['push','client']]
+      },
+      {
+        title: 'Media upload',
+        desc: 'Media uploads to object storage; CDN serves downloads.',
+        active: ['upload','obj','cdn'],
+        edges: [['client','upload'], ['upload','obj'], ['obj','cdn']]
+      },
+      {
+        title: 'Groups and channels fanout',
+        desc: 'Fanout and caching handle large groups and channel broadcasts.',
+        active: ['fanout','cache','router'],
+        edges: [['router','fanout'], ['fanout','cache']]
+      },
+      {
+        title: 'Moderation and abuse controls',
+        desc: 'Spam controls, reporting, and moderation workflows are applied.',
+        active: ['moderation','risk','storage'],
+        edges: [['storage','moderation'], ['moderation','risk']]
+      }
+    ]
+  },
+
+  snapchat: {
+    title: 'Snapchat',
+    steps: [
+      {
+        title: 'Open app and load camera/feed',
+        desc: 'Client loads camera UI and fetches friends and stories metadata.',
+        active: ['client','feed','friends'],
+        edges: [['client','feed'], ['feed','friends']]
+      },
+      {
+        title: 'Capture snap',
+        desc: 'Snap is captured and prepared for upload with filters/AR effects.',
+        active: ['client','camera','effects'],
+        edges: [['camera','effects'], ['effects','client']]
+      },
+      {
+        title: 'Upload media',
+        desc: 'Media uploads to storage; metadata is written for delivery.',
+        active: ['upload','storage','write'],
+        edges: [['client','upload'], ['upload','storage'], ['upload','write']]
+      },
+      {
+        title: 'Deliver to recipients',
+        desc: 'Routing and fanout deliver snaps to recipients with caching.',
+        active: ['router','fanout','cache'],
+        edges: [['write','router'], ['router','fanout'], ['fanout','cache']]
+      },
+      {
+        title: 'Stories and discovery',
+        desc: 'Stories are assembled and ranked; ads may be inserted.',
+        active: ['stories','rank','ads'],
+        edges: [['cache','stories'], ['stories','rank'], ['rank','ads']]
+      },
+      {
+        title: 'Telemetry and safety',
+        desc: 'Events feed analytics; safety and moderation systems enforce policies.',
+        active: ['metrics','analytics','moderation'],
+        edges: [['client','metrics'], ['metrics','analytics'], ['analytics','moderation']]
+      }
+    ]
+  },
+
+  facebook: {
+    title: 'Facebook',
+    steps: [
+      {
+        title: 'Load feed',
+        desc: 'Client requests feed; caching and prefetch enable fast rendering.',
+        active: ['client','feed','cache'],
+        edges: [['client','feed'], ['feed','cache']]
+      },
+      {
+        title: 'Ranking and integrity',
+        desc: 'Ranking selects posts; integrity/safety filters apply.',
+        active: ['rank','safety','feed'],
+        edges: [['feed','rank'], ['rank','safety']]
+      },
+      {
+        title: 'Fetch media',
+        desc: 'Media URLs are resolved and content streams from CDN.',
+        active: ['media','cdn','client'],
+        edges: [['feed','media'], ['media','cdn'], ['cdn','client']]
+      },
+      {
+        title: 'Create post',
+        desc: 'Writes go through API and persist to storage; fanout updates timelines.',
+        active: ['api','write','fanout'],
+        edges: [['client','api'], ['api','write'], ['write','fanout']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Notification pipeline sends updates for likes/comments and friend activity.',
+        active: ['notify','push','client'],
+        edges: [['fanout','notify'], ['notify','push'], ['push','client']]
+      },
+      {
+        title: 'Analytics and ads',
+        desc: 'Engagement events feed analytics and ad targeting/measurement.',
+        active: ['metrics','ads','analytics'],
+        edges: [['client','metrics'], ['metrics','analytics'], ['analytics','ads']]
+      }
+    ]
+  },
+
+  slack: {
+    title: 'Slack',
+    steps: [
+      {
+        title: 'Open workspace and sync',
+        desc: 'Client authenticates and syncs channel list and recent messages.',
+        active: ['client','auth','sync'],
+        edges: [['client','auth'], ['auth','sync']]
+      },
+      {
+        title: 'Send message',
+        desc: 'Message goes to API; permissions checked; event is persisted.',
+        active: ['api','authz','store'],
+        edges: [['client','api'], ['api','authz'], ['api','store']]
+      },
+      {
+        title: 'Fanout and realtime delivery',
+        desc: 'Event is fanned out to channel members over realtime gateways.',
+        active: ['fanout','realtime','client'],
+        edges: [['store','fanout'], ['fanout','realtime'], ['realtime','client']]
+      },
+      {
+        title: 'Search indexing',
+        desc: 'Messages are indexed for fast search across workspace history.',
+        active: ['index','search','store'],
+        edges: [['store','index'], ['index','search']]
+      },
+      {
+        title: 'Files and attachments',
+        desc: 'Files upload to object storage; links and previews update messages.',
+        active: ['upload','obj','cdn'],
+        edges: [['client','upload'], ['upload','obj'], ['obj','cdn']]
+      },
+      {
+        title: 'Integrations and bots',
+        desc: 'Apps receive events via webhooks; bots post messages and actions.',
+        active: ['apps','webhooks','api'],
+        edges: [['fanout','apps'], ['apps','webhooks'], ['webhooks','api']]
+      }
+    ]
+  }
 };
 
 export function flowForSystem(sys) {

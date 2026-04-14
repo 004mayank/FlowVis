@@ -2024,6 +2024,345 @@ const SYSTEM_LAYOUTS = {
     }
   },
 
+  spotify: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Spotify Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','home','recos','rank','search','index','playback','cdn','metrics','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      home: { x: 320, y: 160, label: 'Home API' },
+      recos: { x: 600, y: 160, label: 'Recos' },
+      rank: { x: 880, y: 160, label: 'Ranking' },
+      ab: { x: 1160, y: 160, label: 'Experiments' },
+      search: { x: 320, y: 300, label: 'Search' },
+      index: { x: 600, y: 300, label: 'Index' },
+      playback: { x: 320, y: 440, label: 'Playback API' },
+      cdn: { x: 600, y: 440, label: 'CDN' },
+      drm: { x: 880, y: 440, label: 'DRM/License' },
+      auth: { x: 1160, y: 440, label: 'Auth' },
+      metrics: { x: 880, y: 580, label: 'Telemetry' },
+      analytics: { x: 1160, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','home','home'], ['home','recos','recos']);
+      if (stepIdx === 2) e.push(['recos','rank','rank'], ['rank','ab','ab']);
+      if (stepIdx === 3) e.push(['client','search','search'], ['search','index','index']);
+      if (stepIdx === 4) e.push(['client','playback','play'], ['playback','cdn','cdn']);
+      if (stepIdx === 5) e.push(['playback','drm','drm'], ['drm','auth','auth']);
+      if (stepIdx === 6) e.push(['playback','metrics','metrics'], ['metrics','analytics','analytics'], ['analytics','recos','recos']);
+      return e;
+    }
+  },
+
+  youtube: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'YouTube Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','home','recos','rank','safety','player','cdn','ads','metrics','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      home: { x: 320, y: 160, label: 'Home API' },
+      recos: { x: 600, y: 160, label: 'Recos' },
+      rank: { x: 880, y: 160, label: 'Ranking' },
+      safety: { x: 1160, y: 160, label: 'Safety' },
+      search: { x: 320, y: 300, label: 'Search' },
+      index: { x: 600, y: 300, label: 'Index' },
+      player: { x: 320, y: 440, label: 'Player' },
+      cdn: { x: 600, y: 440, label: 'CDN' },
+      ads: { x: 880, y: 440, label: 'Ads' },
+      auction: { x: 1160, y: 440, label: 'Ad Auction' },
+      upload: { x: 320, y: 580, label: 'Upload' },
+      transcode: { x: 600, y: 580, label: 'Transcode' },
+      catalog: { x: 880, y: 580, label: 'Catalog' },
+      comments: { x: 320, y: 700, label: 'Comments' },
+      write: { x: 600, y: 700, label: 'Writes' },
+      notify: { x: 880, y: 700, label: 'Notify' },
+      metrics: { x: 1160, y: 300, label: 'Metrics' },
+      analytics: { x: 1440, y: 300, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','home','home'], ['home','recos','recos']);
+      if (stepIdx === 2) e.push(['recos','rank','rank'], ['rank','safety','safety']);
+      if (stepIdx === 3) e.push(['client','search','search'], ['search','index','index']);
+      if (stepIdx === 4) e.push(['cdn','client','stream'], ['client','player','play']);
+      if (stepIdx === 5) e.push(['player','ads','ads'], ['ads','auction','auction'], ['ads','metrics','metrics']);
+      if (stepIdx === 6) e.push(['client','upload','upload'], ['upload','transcode','transcode'], ['transcode','catalog','catalog']);
+      if (stepIdx === 7) e.push(['client','comments','comment'], ['comments','write','write'], ['write','notify','notify']);
+      return e;
+    }
+  },
+
+  'disney-plus': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Disney+ Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','catalog','recos','policy','drm','cdn','player','metrics','analytics','profiles','history'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      catalog: { x: 320, y: 160, label: 'Catalog' },
+      recos: { x: 600, y: 160, label: 'Recos' },
+      policy: { x: 880, y: 160, label: 'Policy' },
+      drm: { x: 1160, y: 160, label: 'DRM' },
+      auth: { x: 1440, y: 160, label: 'Auth' },
+      player: { x: 320, y: 300, label: 'Player' },
+      cdn: { x: 600, y: 300, label: 'CDN' },
+      metrics: { x: 880, y: 300, label: 'Telemetry' },
+      analytics: { x: 1160, y: 300, label: 'Analytics' },
+      profiles: { x: 320, y: 440, label: 'Profiles' },
+      history: { x: 600, y: 440, label: 'History' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','catalog','browse'], ['catalog','recos','recos']);
+      if (stepIdx === 2) e.push(['catalog','policy','policy'], ['policy','drm','drm']);
+      if (stepIdx === 3) e.push(['client','drm','license'], ['drm','auth','auth']);
+      if (stepIdx === 4) e.push(['cdn','client','stream'], ['client','player','play']);
+      if (stepIdx === 5) e.push(['player','metrics','metrics'], ['metrics','analytics','analytics'], ['analytics','recos','recos']);
+      if (stepIdx === 6) e.push(['client','profiles','profiles'], ['profiles','history','history'], ['history','recos','recos']);
+      return e;
+    }
+  },
+
+  'prime-video': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Prime Video Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','home','recos','catalog','policy','drm','cdn','player','ads','metrics','analytics','history'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      home: { x: 320, y: 160, label: 'Home API' },
+      recos: { x: 600, y: 160, label: 'Recos' },
+      catalog: { x: 880, y: 160, label: 'Catalog' },
+      policy: { x: 1160, y: 160, label: 'Policy' },
+      drm: { x: 1440, y: 160, label: 'DRM' },
+      auth: { x: 1440, y: 300, label: 'Auth' },
+      player: { x: 320, y: 300, label: 'Player' },
+      cdn: { x: 600, y: 300, label: 'CDN' },
+      ads: { x: 880, y: 300, label: 'Ads' },
+      metrics: { x: 1160, y: 300, label: 'Telemetry' },
+      analytics: { x: 1440, y: 440, label: 'Analytics' },
+      history: { x: 320, y: 440, label: 'History' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','home','home'], ['home','recos','recos']);
+      if (stepIdx === 2) e.push(['home','catalog','meta'], ['catalog','policy','policy'], ['policy','drm','drm']);
+      if (stepIdx === 3) e.push(['client','drm','license'], ['drm','auth','auth']);
+      if (stepIdx === 4) e.push(['cdn','client','stream'], ['client','player','play']);
+      if (stepIdx === 5) e.push(['player','ads','ads'], ['player','metrics','metrics'], ['metrics','analytics','analytics']);
+      if (stepIdx === 6) e.push(['analytics','history','history'], ['history','recos','recos'], ['recos','home','home']);
+      return e;
+    }
+  },
+
+  'apple-music': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Apple Music Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','library','recos','search','index','policy','drm','playback','cdn','metadata','lyrics','metrics','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      library: { x: 320, y: 160, label: 'Library' },
+      recos: { x: 600, y: 160, label: 'Recos' },
+      search: { x: 320, y: 300, label: 'Search' },
+      index: { x: 600, y: 300, label: 'Index' },
+      policy: { x: 880, y: 160, label: 'Policy' },
+      auth: { x: 1160, y: 160, label: 'Auth' },
+      drm: { x: 880, y: 300, label: 'DRM' },
+      playback: { x: 320, y: 440, label: 'Playback' },
+      cdn: { x: 600, y: 440, label: 'CDN' },
+      metadata: { x: 880, y: 440, label: 'Metadata' },
+      lyrics: { x: 1160, y: 440, label: 'Lyrics' },
+      metrics: { x: 880, y: 580, label: 'Telemetry' },
+      analytics: { x: 1160, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','library','sync'], ['library','recos','recos']);
+      if (stepIdx === 2) e.push(['client','search','search'], ['search','index','index']);
+      if (stepIdx === 3) e.push(['client','policy','policy'], ['policy','auth','auth'], ['policy','drm','drm']);
+      if (stepIdx === 4) e.push(['client','playback','play'], ['playback','cdn','cdn']);
+      if (stepIdx === 5) e.push(['playback','metadata','meta'], ['metadata','lyrics','lyrics'], ['lyrics','client','client']);
+      if (stepIdx === 6) e.push(['playback','metrics','metrics'], ['metrics','analytics','analytics'], ['analytics','recos','recos']);
+      return e;
+    }
+  },
+
+  twitch: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Twitch Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','directory','rank','player','cdn','ingest','transcode','chat','realtime','moderation','ads','subs','payouts','metrics','analytics','clips'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Viewer App' },
+      directory: { x: 320, y: 160, label: 'Directory' },
+      rank: { x: 600, y: 160, label: 'Ranking' },
+      player: { x: 320, y: 300, label: 'Player' },
+      cdn: { x: 600, y: 300, label: 'CDN' },
+      streamer: { x: 40, y: 440, label: 'Streamer' },
+      ingest: { x: 320, y: 440, label: 'Ingest' },
+      transcode: { x: 600, y: 440, label: 'Transcode' },
+      chat: { x: 880, y: 300, label: 'Chat' },
+      realtime: { x: 1160, y: 300, label: 'Realtime' },
+      moderation: { x: 1160, y: 440, label: 'Moderation' },
+      ads: { x: 880, y: 440, label: 'Ads' },
+      subs: { x: 880, y: 580, label: 'Subs/Bits' },
+      payouts: { x: 1160, y: 580, label: 'Payouts' },
+      metrics: { x: 600, y: 580, label: 'Telemetry' },
+      analytics: { x: 320, y: 580, label: 'Analytics' },
+      clips: { x: 40, y: 580, label: 'Clips' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','directory','dir'], ['directory','rank','rank']);
+      if (stepIdx === 2) e.push(['client','player','play'], ['cdn','client','stream']);
+      if (stepIdx === 3) e.push(['streamer','ingest','ingest'], ['ingest','transcode','transcode'], ['transcode','cdn','cdn']);
+      if (stepIdx === 4) e.push(['client','chat','chat'], ['chat','realtime','rt'], ['realtime','moderation','mod']);
+      if (stepIdx === 5) e.push(['player','ads','ads'], ['client','subs','subs'], ['subs','payouts','payouts']);
+      if (stepIdx === 6) e.push(['player','metrics','metrics'], ['metrics','analytics','analytics'], ['analytics','clips','clips']);
+      return e;
+    }
+  },
+
+  telegram: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Telegram Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','api','auth','router','storage','push','upload','obj','cdn','fanout','cache','moderation','risk'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      api: { x: 320, y: 240, label: 'API' },
+      auth: { x: 600, y: 240, label: 'Auth' },
+      router: { x: 880, y: 240, label: 'Router' },
+      storage: { x: 1160, y: 240, label: 'Storage' },
+      push: { x: 880, y: 380, label: 'Push' },
+      upload: { x: 320, y: 380, label: 'Upload' },
+      obj: { x: 600, y: 380, label: 'Object Store' },
+      cdn: { x: 880, y: 520, label: 'CDN' },
+      fanout: { x: 1160, y: 380, label: 'Fanout' },
+      cache: { x: 1160, y: 520, label: 'Cache' },
+      moderation: { x: 880, y: 660, label: 'Moderation' },
+      risk: { x: 1160, y: 660, label: 'Risk' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','api','send'], ['api','auth','auth']);
+      if (stepIdx === 2) e.push(['api','router','route'], ['router','storage','store']);
+      if (stepIdx === 3) e.push(['router','push','push'], ['push','client','wake']);
+      if (stepIdx === 4) e.push(['client','upload','upload'], ['upload','obj','store'], ['obj','cdn','cdn']);
+      if (stepIdx === 5) e.push(['router','fanout','fanout'], ['fanout','cache','cache']);
+      if (stepIdx === 6) e.push(['storage','moderation','mod'], ['moderation','risk','risk']);
+      return e;
+    }
+  },
+
+  snapchat: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Snapchat Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','feed','friends','camera','effects','upload','storage','write','router','fanout','cache','stories','rank','ads','metrics','analytics','moderation'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      feed: { x: 320, y: 160, label: 'Feed' },
+      friends: { x: 600, y: 160, label: 'Friends' },
+      camera: { x: 320, y: 300, label: 'Camera' },
+      effects: { x: 600, y: 300, label: 'AR Effects' },
+      upload: { x: 320, y: 440, label: 'Upload' },
+      storage: { x: 600, y: 440, label: 'Storage' },
+      write: { x: 880, y: 440, label: 'Metadata' },
+      router: { x: 880, y: 300, label: 'Router' },
+      fanout: { x: 1160, y: 300, label: 'Fanout' },
+      cache: { x: 1160, y: 440, label: 'Cache' },
+      stories: { x: 880, y: 160, label: 'Stories' },
+      rank: { x: 1160, y: 160, label: 'Ranking' },
+      ads: { x: 1160, y: 580, label: 'Ads' },
+      metrics: { x: 880, y: 580, label: 'Telemetry' },
+      analytics: { x: 600, y: 580, label: 'Analytics' },
+      moderation: { x: 320, y: 580, label: 'Moderation' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','feed','feed'], ['feed','friends','friends']);
+      if (stepIdx === 2) e.push(['camera','effects','effects'], ['effects','client','client']);
+      if (stepIdx === 3) e.push(['client','upload','upload'], ['upload','storage','store'], ['upload','write','meta']);
+      if (stepIdx === 4) e.push(['write','router','route'], ['router','fanout','fanout'], ['fanout','cache','cache']);
+      if (stepIdx === 5) e.push(['cache','stories','stories'], ['stories','rank','rank'], ['rank','ads','ads']);
+      if (stepIdx === 6) e.push(['client','metrics','metrics'], ['metrics','analytics','analytics'], ['analytics','moderation','mod']);
+      return e;
+    }
+  },
+
+  facebook: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Facebook Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','feed','cache','rank','safety','media','cdn','api','write','fanout','notify','push','metrics','analytics','ads'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      feed: { x: 320, y: 160, label: 'Feed' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      rank: { x: 880, y: 160, label: 'Ranking' },
+      safety: { x: 1160, y: 160, label: 'Integrity' },
+      media: { x: 600, y: 300, label: 'Media' },
+      cdn: { x: 880, y: 300, label: 'CDN' },
+      api: { x: 320, y: 300, label: 'API' },
+      write: { x: 600, y: 440, label: 'Write Store' },
+      fanout: { x: 880, y: 440, label: 'Fanout' },
+      notify: { x: 1160, y: 440, label: 'Notify' },
+      push: { x: 1160, y: 300, label: 'Push' },
+      metrics: { x: 600, y: 580, label: 'Metrics' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      ads: { x: 1160, y: 580, label: 'Ads' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','feed','feed'], ['feed','cache','cache']);
+      if (stepIdx === 2) e.push(['feed','rank','rank'], ['rank','safety','safety']);
+      if (stepIdx === 3) e.push(['feed','media','media'], ['media','cdn','cdn'], ['cdn','client','client']);
+      if (stepIdx === 4) e.push(['client','api','post'], ['api','write','write'], ['write','fanout','fanout']);
+      if (stepIdx === 5) e.push(['fanout','notify','notify'], ['notify','push','push'], ['push','client','client']);
+      if (stepIdx === 6) e.push(['client','metrics','metrics'], ['metrics','analytics','analytics'], ['analytics','ads','ads']);
+      return e;
+    }
+  },
+
+  slack: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Slack Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','sync','api','authz','store','fanout','realtime','index','search','upload','obj','cdn','apps','webhooks'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      sync: { x: 600, y: 160, label: 'Sync' },
+      api: { x: 320, y: 300, label: 'API' },
+      authz: { x: 600, y: 300, label: 'AuthZ' },
+      store: { x: 880, y: 300, label: 'Message Store' },
+      fanout: { x: 1160, y: 300, label: 'Fanout' },
+      realtime: { x: 1160, y: 160, label: 'Realtime' },
+      index: { x: 880, y: 160, label: 'Index' },
+      search: { x: 600, y: 440, label: 'Search' },
+      upload: { x: 320, y: 440, label: 'Upload' },
+      obj: { x: 600, y: 580, label: 'Object Store' },
+      cdn: { x: 880, y: 580, label: 'CDN' },
+      apps: { x: 1160, y: 440, label: 'Apps' },
+      webhooks: { x: 1160, y: 580, label: 'Webhooks' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','sync','sync']);
+      if (stepIdx === 2) e.push(['client','api','send'], ['api','authz','authz'], ['api','store','store']);
+      if (stepIdx === 3) e.push(['store','fanout','fanout'], ['fanout','realtime','rt'], ['realtime','client','deliver']);
+      if (stepIdx === 4) e.push(['store','index','index'], ['index','search','search']);
+      if (stepIdx === 5) e.push(['client','upload','upload'], ['upload','obj','obj'], ['obj','cdn','cdn']);
+      if (stepIdx === 6) e.push(['fanout','apps','apps'], ['apps','webhooks','webhooks'], ['webhooks','api','api']);
+      return e;
+    }
+  },
+
   uber: {
     viewBox: '0 0 1000 640',
     nodes: {
@@ -2203,6 +2542,226 @@ const SYSTEM_LAYOUTS = {
       monitor: { x: 720, y: 620, label: 'Monitoring', colorKey: 'stream' },
       compliance: { x: 880, y: 620, label: 'Compliance', colorKey: 'api' },
       reports: { x: 520, y: 620, label: 'Reports', colorKey: 'store' }
+    }
+  }
+
+  ,
+
+  spotify: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','home','recos','rank','search','index','playback','cdn','metrics','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      home: { x: 380, y: 180, label: 'Home API', colorKey: 'api' },
+      recos: { x: 620, y: 180, label: 'Recos', colorKey: 'api' },
+      rank: { x: 860, y: 180, label: 'Ranking', colorKey: 'api' },
+      ab: { x: 1100, y: 180, label: 'Experiments', colorKey: 'api' },
+      search: { x: 380, y: 320, label: 'Search', colorKey: 'api' },
+      index: { x: 620, y: 320, label: 'Index', colorKey: 'store' },
+      playback: { x: 380, y: 460, label: 'Playback', colorKey: 'api' },
+      cdn: { x: 620, y: 460, label: 'CDN', colorKey: 'cdn' },
+      drm: { x: 860, y: 460, label: 'DRM', colorKey: 'api' },
+      auth: { x: 1100, y: 460, label: 'Auth', colorKey: 'api' },
+      metrics: { x: 860, y: 600, label: 'Telemetry', colorKey: 'stream' },
+      analytics: { x: 1100, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  youtube: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','home','recos','rank','safety','player','cdn','ads','metrics','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      home: { x: 380, y: 180, label: 'Home API', colorKey: 'api' },
+      recos: { x: 620, y: 180, label: 'Recos', colorKey: 'api' },
+      rank: { x: 860, y: 180, label: 'Ranking', colorKey: 'api' },
+      safety: { x: 1100, y: 180, label: 'Safety', colorKey: 'api' },
+      search: { x: 380, y: 320, label: 'Search', colorKey: 'api' },
+      index: { x: 620, y: 320, label: 'Index', colorKey: 'store' },
+      player: { x: 380, y: 460, label: 'Player', colorKey: 'client' },
+      cdn: { x: 620, y: 460, label: 'CDN', colorKey: 'cdn' },
+      ads: { x: 860, y: 460, label: 'Ads', colorKey: 'api' },
+      auction: { x: 1100, y: 460, label: 'Ad Auction', colorKey: 'api' },
+      upload: { x: 380, y: 600, label: 'Upload', colorKey: 'api' },
+      transcode: { x: 620, y: 600, label: 'Transcode', colorKey: 'api' },
+      catalog: { x: 860, y: 600, label: 'Catalog', colorKey: 'store' },
+      comments: { x: 380, y: 740, label: 'Comments', colorKey: 'store' },
+      write: { x: 620, y: 740, label: 'Writes', colorKey: 'store' },
+      notify: { x: 860, y: 740, label: 'Notify', colorKey: 'external' },
+      metrics: { x: 860, y: 320, label: 'Metrics', colorKey: 'stream' },
+      analytics: { x: 1100, y: 320, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'disney-plus': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','catalog','recos','policy','drm','cdn','player','metrics','analytics','profiles','history'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      catalog: { x: 380, y: 180, label: 'Catalog', colorKey: 'store' },
+      recos: { x: 620, y: 180, label: 'Recos', colorKey: 'api' },
+      policy: { x: 860, y: 180, label: 'Policy', colorKey: 'api' },
+      drm: { x: 1100, y: 180, label: 'DRM', colorKey: 'api' },
+      cdn: { x: 620, y: 320, label: 'CDN', colorKey: 'cdn' },
+      player: { x: 380, y: 320, label: 'Player', colorKey: 'client' },
+      auth: { x: 1100, y: 320, label: 'Auth', colorKey: 'api' },
+      metrics: { x: 860, y: 320, label: 'Telemetry', colorKey: 'stream' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' },
+      profiles: { x: 380, y: 460, label: 'Profiles', colorKey: 'store' },
+      history: { x: 620, y: 460, label: 'History', colorKey: 'store' }
+    }
+  },
+
+  'prime-video': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','home','recos','catalog','policy','drm','cdn','player','ads','metrics','analytics','history'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      home: { x: 380, y: 180, label: 'Home API', colorKey: 'api' },
+      recos: { x: 620, y: 180, label: 'Recos', colorKey: 'api' },
+      catalog: { x: 860, y: 180, label: 'Catalog', colorKey: 'store' },
+      policy: { x: 1100, y: 180, label: 'Policy', colorKey: 'api' },
+      drm: { x: 1100, y: 320, label: 'DRM', colorKey: 'api' },
+      auth: { x: 860, y: 320, label: 'Auth', colorKey: 'api' },
+      cdn: { x: 620, y: 320, label: 'CDN', colorKey: 'cdn' },
+      player: { x: 380, y: 320, label: 'Player', colorKey: 'client' },
+      ads: { x: 620, y: 460, label: 'Ads', colorKey: 'api' },
+      metrics: { x: 860, y: 460, label: 'Telemetry', colorKey: 'stream' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' },
+      history: { x: 380, y: 460, label: 'History', colorKey: 'store' }
+    }
+  },
+
+  'apple-music': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','library','recos','search','index','policy','drm','playback','cdn','metadata','lyrics','metrics','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      library: { x: 380, y: 180, label: 'Library', colorKey: 'store' },
+      recos: { x: 620, y: 180, label: 'Recos', colorKey: 'api' },
+      search: { x: 380, y: 320, label: 'Search', colorKey: 'api' },
+      index: { x: 620, y: 320, label: 'Index', colorKey: 'store' },
+      policy: { x: 860, y: 180, label: 'Policy', colorKey: 'api' },
+      auth: { x: 1100, y: 180, label: 'Auth', colorKey: 'api' },
+      drm: { x: 860, y: 320, label: 'DRM', colorKey: 'api' },
+      playback: { x: 380, y: 460, label: 'Playback', colorKey: 'api' },
+      cdn: { x: 620, y: 460, label: 'CDN', colorKey: 'cdn' },
+      metadata: { x: 860, y: 460, label: 'Metadata', colorKey: 'store' },
+      lyrics: { x: 1100, y: 460, label: 'Lyrics', colorKey: 'external' },
+      metrics: { x: 860, y: 600, label: 'Telemetry', colorKey: 'stream' },
+      analytics: { x: 1100, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  twitch: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','directory','rank','player','cdn','ingest','transcode','chat','realtime','moderation','ads','subs','payouts','metrics','analytics','clips'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      directory: { x: 380, y: 180, label: 'Directory', colorKey: 'api' },
+      rank: { x: 620, y: 180, label: 'Ranking', colorKey: 'api' },
+      player: { x: 380, y: 320, label: 'Player', colorKey: 'client' },
+      cdn: { x: 620, y: 320, label: 'CDN', colorKey: 'cdn' },
+      streamer: { x: 140, y: 460, label: 'Streamer', colorKey: 'client' },
+      ingest: { x: 380, y: 460, label: 'Ingest', colorKey: 'api' },
+      transcode: { x: 620, y: 460, label: 'Transcode', colorKey: 'api' },
+      chat: { x: 860, y: 320, label: 'Chat', colorKey: 'api' },
+      realtime: { x: 1100, y: 320, label: 'Realtime', colorKey: 'stream' },
+      moderation: { x: 1100, y: 460, label: 'Moderation', colorKey: 'api' },
+      ads: { x: 860, y: 460, label: 'Ads', colorKey: 'api' },
+      subs: { x: 860, y: 600, label: 'Subs/Bits', colorKey: 'api' },
+      payouts: { x: 1100, y: 600, label: 'Payouts', colorKey: 'api' },
+      metrics: { x: 620, y: 600, label: 'Telemetry', colorKey: 'stream' },
+      analytics: { x: 380, y: 600, label: 'Analytics', colorKey: 'store' },
+      clips: { x: 140, y: 600, label: 'Clips', colorKey: 'store' }
+    }
+  },
+
+  telegram: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','api','auth','router','storage','push','upload','obj','cdn','fanout','cache','moderation','risk'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      api: { x: 380, y: 240, label: 'API', colorKey: 'api' },
+      auth: { x: 620, y: 240, label: 'Auth', colorKey: 'api' },
+      router: { x: 860, y: 240, label: 'Router', colorKey: 'api' },
+      storage: { x: 1100, y: 240, label: 'Storage', colorKey: 'store' },
+      push: { x: 860, y: 380, label: 'Push', colorKey: 'external' },
+      upload: { x: 380, y: 380, label: 'Upload', colorKey: 'api' },
+      obj: { x: 620, y: 380, label: 'Object Store', colorKey: 'store' },
+      cdn: { x: 860, y: 520, label: 'CDN', colorKey: 'cdn' },
+      fanout: { x: 1100, y: 380, label: 'Fanout', colorKey: 'queue' },
+      cache: { x: 1100, y: 520, label: 'Cache', colorKey: 'cache' },
+      moderation: { x: 860, y: 660, label: 'Moderation', colorKey: 'api' },
+      risk: { x: 1100, y: 660, label: 'Risk', colorKey: 'api' }
+    }
+  },
+
+  snapchat: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','feed','friends','camera','effects','upload','storage','write','router','fanout','cache','stories','rank','ads','metrics','analytics','moderation'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      feed: { x: 380, y: 180, label: 'Feed', colorKey: 'api' },
+      friends: { x: 620, y: 180, label: 'Friends', colorKey: 'store' },
+      camera: { x: 380, y: 320, label: 'Camera', colorKey: 'client' },
+      effects: { x: 620, y: 320, label: 'AR Effects', colorKey: 'api' },
+      upload: { x: 380, y: 460, label: 'Upload', colorKey: 'api' },
+      storage: { x: 620, y: 460, label: 'Storage', colorKey: 'store' },
+      write: { x: 860, y: 460, label: 'Metadata', colorKey: 'store' },
+      router: { x: 860, y: 320, label: 'Router', colorKey: 'api' },
+      fanout: { x: 1100, y: 320, label: 'Fanout', colorKey: 'queue' },
+      cache: { x: 1100, y: 460, label: 'Cache', colorKey: 'cache' },
+      stories: { x: 860, y: 180, label: 'Stories', colorKey: 'api' },
+      rank: { x: 1100, y: 180, label: 'Ranking', colorKey: 'api' },
+      ads: { x: 1100, y: 600, label: 'Ads', colorKey: 'api' },
+      metrics: { x: 860, y: 600, label: 'Telemetry', colorKey: 'stream' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' },
+      moderation: { x: 380, y: 600, label: 'Moderation', colorKey: 'api' }
+    }
+  },
+
+  facebook: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','feed','cache','rank','safety','media','cdn','api','write','fanout','notify','push','metrics','analytics','ads'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      feed: { x: 380, y: 180, label: 'Feed', colorKey: 'api' },
+      cache: { x: 620, y: 180, label: 'Cache', colorKey: 'cache' },
+      rank: { x: 860, y: 180, label: 'Ranking', colorKey: 'api' },
+      safety: { x: 1100, y: 180, label: 'Integrity', colorKey: 'api' },
+      media: { x: 620, y: 320, label: 'Media', colorKey: 'store' },
+      cdn: { x: 860, y: 320, label: 'CDN', colorKey: 'cdn' },
+      api: { x: 380, y: 320, label: 'API', colorKey: 'api' },
+      write: { x: 620, y: 460, label: 'Write Store', colorKey: 'store' },
+      fanout: { x: 860, y: 460, label: 'Fanout', colorKey: 'queue' },
+      notify: { x: 1100, y: 460, label: 'Notify', colorKey: 'external' },
+      push: { x: 1100, y: 320, label: 'Push', colorKey: 'external' },
+      metrics: { x: 620, y: 600, label: 'Metrics', colorKey: 'stream' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' },
+      ads: { x: 1100, y: 600, label: 'Ads', colorKey: 'api' }
+    }
+  },
+
+  slack: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','sync','api','authz','store','fanout','realtime','index','search','upload','obj','cdn','apps','webhooks'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      sync: { x: 620, y: 180, label: 'Sync', colorKey: 'stream' },
+      api: { x: 380, y: 320, label: 'API', colorKey: 'api' },
+      authz: { x: 620, y: 320, label: 'AuthZ', colorKey: 'api' },
+      store: { x: 860, y: 320, label: 'Message Store', colorKey: 'store' },
+      fanout: { x: 1100, y: 320, label: 'Fanout', colorKey: 'queue' },
+      realtime: { x: 1100, y: 180, label: 'Realtime', colorKey: 'stream' },
+      index: { x: 860, y: 180, label: 'Index', colorKey: 'store' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      upload: { x: 380, y: 460, label: 'Upload', colorKey: 'api' },
+      obj: { x: 620, y: 600, label: 'Object Store', colorKey: 'store' },
+      cdn: { x: 860, y: 600, label: 'CDN', colorKey: 'cdn' },
+      apps: { x: 1100, y: 460, label: 'Apps', colorKey: 'external' },
+      webhooks: { x: 1100, y: 600, label: 'Webhooks', colorKey: 'external' }
     }
   }
 
