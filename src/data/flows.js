@@ -521,6 +521,440 @@ export const FLOWS = {
       }
     ]
   }
+
+  ,
+
+  paypal: {
+    title: 'PayPal',
+    steps: [
+      {
+        title: 'Sign in and fund selection',
+        desc: 'User signs in, selects a funding source (balance, bank, card) and begins checkout.',
+        active: ['client','auth','funding'],
+        edges: [['client','auth'], ['client','funding']]
+      },
+      {
+        title: 'Create payment and risk screening',
+        desc: 'Payment is created; risk engine evaluates device, velocity, and merchant signals.',
+        active: ['api','risk','merchant'],
+        edges: [['client','api'], ['api','risk'], ['api','merchant']]
+      },
+      {
+        title: 'Authorize with bank/card network',
+        desc: 'PayPal routes authorization to bank rails or card networks based on funding source.',
+        active: ['routing','bank','network'],
+        edges: [['api','routing'], ['routing','bank'], ['routing','network']]
+      },
+      {
+        title: 'Capture and ledger update',
+        desc: 'On success, the ledger is updated and balances are adjusted atomically.',
+        active: ['ledger','balances','api'],
+        edges: [['api','ledger'], ['ledger','balances']]
+      },
+      {
+        title: 'Notifications and webhooks',
+        desc: 'Receipts and merchant IPN/webhooks are delivered; status is reflected in the UI.',
+        active: ['notify','webhook','merchant'],
+        edges: [['ledger','notify'], ['notify','client'], ['ledger','webhook'], ['webhook','merchant']]
+      },
+      {
+        title: 'Disputes and refunds',
+        desc: 'Refunds and disputes trigger case management, evidence flows, and reconciliations.',
+        active: ['disputes','refunds','reports'],
+        edges: [['ledger','refunds'], ['refunds','reports'], ['ledger','disputes']]
+      }
+    ]
+  },
+
+  revolut: {
+    title: 'Revolut',
+    steps: [
+      {
+        title: 'Onboarding and KYC',
+        desc: 'User signs up, verifies identity, and passes compliance checks to open an account.',
+        active: ['client','kyc','compliance'],
+        edges: [['client','kyc'], ['kyc','compliance']]
+      },
+      {
+        title: 'Add money / top up',
+        desc: 'User tops up via card or bank transfer; funds are credited after risk rules.',
+        active: ['topup','risk','ledger'],
+        edges: [['client','topup'], ['topup','risk'], ['risk','ledger']]
+      },
+      {
+        title: 'Card authorization',
+        desc: 'A card swipe triggers authorization, limits, and fraud scoring before approval.',
+        active: ['card','auth','fraud'],
+        edges: [['card','auth'], ['auth','fraud'], ['fraud','ledger']]
+      },
+      {
+        title: 'FX and pricing',
+        desc: 'For cross-currency spend, FX engine computes rate, markup, and executes conversion.',
+        active: ['fx','pricing','ledger'],
+        edges: [['auth','fx'], ['fx','pricing'], ['pricing','ledger']]
+      },
+      {
+        title: 'Ledgering and statements',
+        desc: 'Double-entry ledger records transactions and produces statements and insights.',
+        active: ['ledger','statements','analytics'],
+        edges: [['ledger','statements'], ['ledger','analytics']]
+      },
+      {
+        title: 'Alerts and support',
+        desc: 'Real-time alerts are sent; disputes and chargebacks create support cases.',
+        active: ['notify','support','disputes'],
+        edges: [['ledger','notify'], ['notify','client'], ['ledger','support'], ['support','disputes']]
+      }
+    ]
+  },
+
+  wise: {
+    title: 'Wise',
+    steps: [
+      {
+        title: 'Create transfer quote',
+        desc: 'User enters amount and destination; Wise returns fees, rate, and ETA.',
+        active: ['client','quote','pricing'],
+        edges: [['client','quote'], ['quote','pricing']]
+      },
+      {
+        title: 'KYC and funding',
+        desc: 'Compliance checks run; user funds transfer via bank/card/local rails.',
+        active: ['kyc','funding','risk'],
+        edges: [['client','funding'], ['funding','risk'], ['client','kyc']]
+      },
+      {
+        title: 'Local collection',
+        desc: 'Funds are collected into a local account, reducing cross-border movement.',
+        active: ['collection','bank','ledger'],
+        edges: [['funding','collection'], ['collection','bank'], ['collection','ledger']]
+      },
+      {
+        title: 'FX conversion',
+        desc: 'FX engine converts at mid-market rate with transparent fees and executes netting.',
+        active: ['fx','netting','ledger'],
+        edges: [['ledger','fx'], ['fx','netting'], ['netting','ledger']]
+      },
+      {
+        title: 'Local payout',
+        desc: 'Wise pays out locally to recipient bank using domestic rails.',
+        active: ['payout','bank','routing'],
+        edges: [['ledger','routing'], ['routing','payout'], ['payout','bank']]
+      },
+      {
+        title: 'Tracking and notifications',
+        desc: 'Status updates and receipts are sent; failures trigger support workflows.',
+        active: ['tracking','notify','support'],
+        edges: [['payout','tracking'], ['tracking','notify'], ['notify','client'], ['tracking','support']]
+      }
+    ]
+  },
+
+  robinhood: {
+    title: 'Robinhood',
+    steps: [
+      {
+        title: 'Account and KYC',
+        desc: 'User opens an account; KYC/AML checks and suitability rules are applied.',
+        active: ['client','kyc','compliance'],
+        edges: [['client','kyc'], ['kyc','compliance']]
+      },
+      {
+        title: 'Fund account',
+        desc: 'ACH/card funding is initiated; risk limits gate buying power.',
+        active: ['funding','risk','ledger'],
+        edges: [['client','funding'], ['funding','risk'], ['risk','ledger']]
+      },
+      {
+        title: 'Get quote and market data',
+        desc: 'Market data service provides quotes, spreads, and trading halts status.',
+        active: ['marketdata','quotes','client'],
+        edges: [['client','marketdata'], ['marketdata','quotes']]
+      },
+      {
+        title: 'Place order',
+        desc: 'Order is validated for balances, trading rules, and routed to execution venues.',
+        active: ['orders','risk','routing'],
+        edges: [['client','orders'], ['orders','risk'], ['orders','routing']]
+      },
+      {
+        title: 'Execution and fills',
+        desc: 'Broker routes to market maker/exchange; fills are returned and positions update.',
+        active: ['venue','fills','positions'],
+        edges: [['routing','venue'], ['venue','fills'], ['fills','positions']]
+      },
+      {
+        title: 'Clearing and settlement',
+        desc: 'Trades are cleared and settled; ledger updates cash and holdings.',
+        active: ['clearing','settlement','ledger'],
+        edges: [['positions','clearing'], ['clearing','settlement'], ['settlement','ledger']]
+      },
+      {
+        title: 'Statements and tax reporting',
+        desc: 'Statements, confirmations, and tax docs are generated from the ledger.',
+        active: ['reports','tax','ledger'],
+        edges: [['ledger','reports'], ['reports','tax'], ['reports','client']]
+      }
+    ]
+  },
+
+  'cash-app': {
+    title: 'Cash App',
+    steps: [
+      {
+        title: 'Link identity and funding source',
+        desc: 'User verifies identity and links bank/card for cash in/out.',
+        active: ['client','auth','funding'],
+        edges: [['client','auth'], ['client','funding']]
+      },
+      {
+        title: 'Initiate P2P send',
+        desc: 'Sender initiates transfer; recipient lookup and limits apply.',
+        active: ['p2p','lookup','risk'],
+        edges: [['client','p2p'], ['p2p','lookup'], ['p2p','risk']]
+      },
+      {
+        title: 'Risk and fraud checks',
+        desc: 'Device, behavior, and graph signals decide whether to allow or hold.',
+        active: ['risk','fraud','p2p'],
+        edges: [['p2p','risk'], ['risk','fraud']]
+      },
+      {
+        title: 'Ledger transfer',
+        desc: 'Internal ledger posts debit/credit entries and updates balances.',
+        active: ['ledger','balances','p2p'],
+        edges: [['p2p','ledger'], ['ledger','balances']]
+      },
+      {
+        title: 'Cash-out and bank rails',
+        desc: 'If user cashes out, funds move via ACH/instant rails to bank.',
+        active: ['cashout','bank','routing'],
+        edges: [['balances','cashout'], ['cashout','routing'], ['routing','bank']]
+      },
+      {
+        title: 'Notifications and support',
+        desc: 'Receipts and alerts are sent; disputes trigger support case workflows.',
+        active: ['notify','support','disputes'],
+        edges: [['ledger','notify'], ['notify','client'], ['ledger','support'], ['support','disputes']]
+      }
+    ]
+  },
+
+  venmo: {
+    title: 'Venmo',
+    steps: [
+      {
+        title: 'Sign in and select audience',
+        desc: 'User signs in and chooses payment visibility (public/friends/private).',
+        active: ['client','auth','social'],
+        edges: [['client','auth'], ['client','social']]
+      },
+      {
+        title: 'Create payment',
+        desc: 'Payment request is created with payer/payee and optional note/emoji.',
+        active: ['api','p2p','lookup'],
+        edges: [['client','api'], ['api','p2p'], ['p2p','lookup']]
+      },
+      {
+        title: 'Funding and risk checks',
+        desc: 'Funding source is chosen; risk and fraud systems apply limits and holds.',
+        active: ['funding','risk','fraud'],
+        edges: [['p2p','funding'], ['funding','risk'], ['risk','fraud']]
+      },
+      {
+        title: 'Ledger posting',
+        desc: 'Ledger posts debit/credit and updates available balances for both users.',
+        active: ['ledger','balances','p2p'],
+        edges: [['p2p','ledger'], ['ledger','balances']]
+      },
+      {
+        title: 'Social feed update',
+        desc: 'Transaction metadata updates the social feed based on privacy settings.',
+        active: ['social','feed','api'],
+        edges: [['ledger','social'], ['social','feed'], ['feed','client']]
+      },
+      {
+        title: 'Cash-out and disputes',
+        desc: 'Users can cash out to bank; disputes/refunds create case management flows.',
+        active: ['cashout','disputes','support'],
+        edges: [['balances','cashout'], ['ledger','disputes'], ['disputes','support']]
+      }
+    ]
+  },
+
+  binance: {
+    title: 'Binance',
+    steps: [
+      {
+        title: 'Sign in and security checks',
+        desc: 'User signs in with MFA; device and risk checks gate trading and withdrawals.',
+        active: ['client','auth','risk'],
+        edges: [['client','auth'], ['auth','risk']]
+      },
+      {
+        title: 'Deposit (fiat or crypto)',
+        desc: 'Deposits are credited after bank confirmations or blockchain confirmations.',
+        active: ['deposit','payments','custody'],
+        edges: [['client','deposit'], ['deposit','payments'], ['deposit','custody']]
+      },
+      {
+        title: 'Place order',
+        desc: 'Order service validates balances and submits orders to the matching engine.',
+        active: ['orders','match','risk'],
+        edges: [['client','orders'], ['orders','risk'], ['orders','match']]
+      },
+      {
+        title: 'Match and execute',
+        desc: 'Matching engine executes trades and updates balances and positions atomically.',
+        active: ['match','ledger','positions'],
+        edges: [['match','ledger'], ['ledger','positions']]
+      },
+      {
+        title: 'Custody and wallet operations',
+        desc: 'Custody manages keys, hot/cold wallets, and internal transfers with approvals.',
+        active: ['custody','wallet','approvals'],
+        edges: [['ledger','custody'], ['custody','wallet'], ['wallet','approvals']]
+      },
+      {
+        title: 'Withdraw and compliance monitoring',
+        desc: 'Withdrawals run AML checks and are broadcast; monitoring triggers alerts.',
+        active: ['withdraw','compliance','monitor'],
+        edges: [['wallet','withdraw'], ['withdraw','compliance'], ['compliance','monitor']]
+      },
+      {
+        title: 'Reporting and alerts',
+        desc: 'Trade history, tax/export reporting, and user alerts are produced from ledger.',
+        active: ['reports','notify','ledger'],
+        edges: [['ledger','reports'], ['ledger','notify'], ['notify','client']]
+      }
+    ]
+  },
+
+  nubank: {
+    title: 'Nubank',
+    steps: [
+      {
+        title: 'Onboarding and KYC',
+        desc: 'User signs up, verifies identity, and opens an account with limits.',
+        active: ['client','kyc','compliance'],
+        edges: [['client','kyc'], ['kyc','compliance']]
+      },
+      {
+        title: 'Card transaction authorization',
+        desc: 'A card purchase triggers authorization, limits, and fraud scoring.',
+        active: ['card','auth','fraud'],
+        edges: [['card','auth'], ['auth','fraud']]
+      },
+      {
+        title: 'Ledger posting',
+        desc: 'Approved transactions are posted to the ledger and balances are updated.',
+        active: ['ledger','balances','auth'],
+        edges: [['auth','ledger'], ['ledger','balances']]
+      },
+      {
+        title: 'Statements and credit billing',
+        desc: 'Statement cycles compute billing, minimum due, and interest when applicable.',
+        active: ['statements','billing','ledger'],
+        edges: [['ledger','statements'], ['statements','billing']]
+      },
+      {
+        title: 'Insights and notifications',
+        desc: 'Spending categories and insights are computed; real-time alerts are sent.',
+        active: ['analytics','notify','client'],
+        edges: [['ledger','analytics'], ['analytics','notify'], ['notify','client']]
+      },
+      {
+        title: 'Disputes and support',
+        desc: 'Chargebacks and disputes create case workflows; outcomes reconcile with ledger.',
+        active: ['disputes','support','recon'],
+        edges: [['ledger','disputes'], ['disputes','support'], ['support','recon']]
+      }
+    ]
+  },
+
+  monzo: {
+    title: 'Monzo',
+    steps: [
+      {
+        title: 'Sign up and verify',
+        desc: 'User signs up; identity verification and account provisioning completes.',
+        active: ['client','kyc','provision'],
+        edges: [['client','kyc'], ['kyc','provision']]
+      },
+      {
+        title: 'Card auth and controls',
+        desc: 'Card authorization checks limits, merchant category controls, and fraud rules.',
+        active: ['card','auth','fraud'],
+        edges: [['card','auth'], ['auth','fraud']]
+      },
+      {
+        title: 'Ledger posting and balances',
+        desc: 'Ledger posts the transaction and updates available balance and pots.',
+        active: ['ledger','balances','pots'],
+        edges: [['auth','ledger'], ['ledger','balances'], ['balances','pots']]
+      },
+      {
+        title: 'Categories and insights',
+        desc: 'Enrichment categorizes merchants and computes budgets and insights.',
+        active: ['enrich','analytics','client'],
+        edges: [['ledger','enrich'], ['enrich','analytics'], ['analytics','client']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Real-time notifications are sent for transactions and balance changes.',
+        active: ['notify','realtime','client'],
+        edges: [['ledger','realtime'], ['realtime','notify'], ['notify','client']]
+      },
+      {
+        title: 'Support and disputes',
+        desc: 'Support workflows handle disputes, card replacement, and refunds.',
+        active: ['support','disputes','refunds'],
+        edges: [['ledger','refunds'], ['refunds','disputes'], ['disputes','support']]
+      }
+    ]
+  },
+
+  chime: {
+    title: 'Chime',
+    steps: [
+      {
+        title: 'Onboarding and compliance',
+        desc: 'User signs up; KYC/AML and account provisioning completes.',
+        active: ['client','kyc','compliance'],
+        edges: [['client','kyc'], ['kyc','compliance']]
+      },
+      {
+        title: 'Direct deposit and funding',
+        desc: 'Payroll deposits arrive; funds are credited and made available per rules.',
+        active: ['deposit','bank','ledger'],
+        edges: [['bank','deposit'], ['deposit','ledger']]
+      },
+      {
+        title: 'Card purchase authorization',
+        desc: 'Card transactions are authorized with fraud checks and balance validation.',
+        active: ['card','auth','fraud'],
+        edges: [['card','auth'], ['auth','fraud'], ['fraud','ledger']]
+      },
+      {
+        title: 'Ledger and overdraft controls',
+        desc: 'Ledger posts transactions; overdraft/SpotMe logic applies when eligible.',
+        active: ['ledger','balances','overdraft'],
+        edges: [['auth','ledger'], ['ledger','balances'], ['balances','overdraft']]
+      },
+      {
+        title: 'Insights and alerts',
+        desc: 'Spending insights and alerts are computed and delivered in real time.',
+        active: ['analytics','notify','client'],
+        edges: [['ledger','analytics'], ['analytics','notify'], ['notify','client']]
+      },
+      {
+        title: 'Disputes and customer support',
+        desc: 'Chargebacks, refunds, and disputes create support workflows and reconciliations.',
+        active: ['disputes','support','recon'],
+        edges: [['ledger','disputes'], ['disputes','support'], ['support','recon']]
+      }
+    ]
+  }
 };
 
 export function flowForSystem(sys) {
