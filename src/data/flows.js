@@ -4041,6 +4041,428 @@ export const FLOWS = {
       }
     ]
   }
+
+  ,
+
+  'apple-photos': {
+    title: 'Apple Photos',
+    steps: [
+      {
+        title: 'Sync library',
+        desc: 'Client syncs photo library metadata and thumbnails.',
+        active: ['client','auth','metadata','cache'],
+        edges: [['client','auth'], ['auth','metadata'], ['metadata','cache']]
+      },
+      {
+        title: 'Upload photo',
+        desc: 'Upload pipeline stores photo blobs and updates metadata.',
+        active: ['upload','storage','metadata'],
+        edges: [['client','upload'], ['upload','storage'], ['upload','metadata']]
+      },
+      {
+        title: 'Generate derivatives',
+        desc: 'Processing generates thumbnails, previews, and HEIC/JPEG variants.',
+        active: ['processing','derivatives','storage'],
+        edges: [['storage','processing'], ['processing','derivatives'], ['derivatives','storage']]
+      },
+      {
+        title: 'Search and indexing',
+        desc: 'Indexing supports search by people/places/objects.',
+        active: ['index','search','ml'],
+        edges: [['metadata','index'], ['index','search'], ['index','ml']]
+      },
+      {
+        title: 'Memories and suggestions',
+        desc: 'ML pipeline builds memories/suggestions and personalized highlights.',
+        active: ['ml','recos','feed'],
+        edges: [['ml','recos'], ['recos','feed']]
+      },
+      {
+        title: 'Sharing',
+        desc: 'Shared albums enforce permissions and send invites/notifications.',
+        active: ['sharing','authz','notify'],
+        edges: [['client','sharing'], ['sharing','authz'], ['sharing','notify']]
+      }
+    ]
+  },
+
+  'google-photos': {
+    title: 'Google Photos',
+    steps: [
+      {
+        title: 'Backup sync',
+        desc: 'Client syncs metadata and upload queue; manages resumable uploads.',
+        active: ['client','auth','backup','upload'],
+        edges: [['client','auth'], ['client','backup'], ['backup','upload']]
+      },
+      {
+        title: 'Upload and store',
+        desc: 'Uploads land in object storage and update photo metadata store.',
+        active: ['upload','obj','metadata'],
+        edges: [['upload','obj'], ['upload','metadata']]
+      },
+      {
+        title: 'Processing pipeline',
+        desc: 'Processing generates thumbnails, deduping, and formats.',
+        active: ['processing','derivatives','obj'],
+        edges: [['obj','processing'], ['processing','derivatives'], ['derivatives','obj']]
+      },
+      {
+        title: 'ML labeling',
+        desc: 'Vision models label people/places/objects for search.',
+        active: ['ml','labels','index'],
+        edges: [['processing','ml'], ['ml','labels'], ['labels','index']]
+      },
+      {
+        title: 'Search',
+        desc: 'Search queries index and returns results quickly with caching.',
+        active: ['search','index','cache'],
+        edges: [['client','search'], ['search','index'], ['search','cache']]
+      },
+      {
+        title: 'Sharing',
+        desc: 'Sharing links and shared albums enforce access and send notifications.',
+        active: ['sharing','authz','notify'],
+        edges: [['client','sharing'], ['sharing','authz'], ['sharing','notify']]
+      }
+    ]
+  },
+
+  icloud: {
+    title: 'iCloud',
+    steps: [
+      {
+        title: 'Sign in',
+        desc: 'Client authenticates and loads account services and entitlements.',
+        active: ['client','auth','entitlements'],
+        edges: [['client','auth'], ['auth','entitlements']]
+      },
+      {
+        title: 'Sync metadata',
+        desc: 'Sync engine fetches metadata for files/contacts/photos as needed.',
+        active: ['sync','metadata','cache'],
+        edges: [['client','sync'], ['sync','metadata'], ['metadata','cache']]
+      },
+      {
+        title: 'Upload content',
+        desc: 'Uploads store blobs and update metadata; conflict handling applies.',
+        active: ['upload','storage','versions'],
+        edges: [['client','upload'], ['upload','storage'], ['upload','versions']]
+      },
+      {
+        title: 'Share link',
+        desc: 'Share links are created with permissions and audit logs.',
+        active: ['sharing','authz','audit'],
+        edges: [['client','sharing'], ['sharing','authz'], ['authz','audit']]
+      },
+      {
+        title: 'Realtime updates',
+        desc: 'Realtime notifications and deltas keep devices in sync.',
+        active: ['realtime','push','client'],
+        edges: [['sync','realtime'], ['realtime','push'], ['push','client']]
+      },
+      {
+        title: 'Billing',
+        desc: 'Storage plans and billing manage quota and renewals.',
+        active: ['billing','payments','quota'],
+        edges: [['entitlements','quota'], ['quota','billing'], ['billing','payments']]
+      }
+    ]
+  },
+
+  onedrive: {
+    title: 'OneDrive',
+    steps: [
+      {
+        title: 'Sync files',
+        desc: 'Client syncs folder metadata and recent changes; uses caching.',
+        active: ['client','auth','metadata','sync'],
+        edges: [['client','auth'], ['client','sync'], ['sync','metadata']]
+      },
+      {
+        title: 'Upload',
+        desc: 'Resumable upload stores blobs and updates metadata store.',
+        active: ['upload','storage','metadata'],
+        edges: [['client','upload'], ['upload','storage'], ['upload','metadata']]
+      },
+      {
+        title: 'Sharing',
+        desc: 'Sharing links enforce permissions and audit events.',
+        active: ['sharing','authz','audit'],
+        edges: [['client','sharing'], ['sharing','authz'], ['authz','audit']]
+      },
+      {
+        title: 'Realtime updates',
+        desc: 'Change notifications and delta sync keep clients updated.',
+        active: ['realtime','push','client'],
+        edges: [['metadata','realtime'], ['realtime','push'], ['push','client']]
+      },
+      {
+        title: 'Search',
+        desc: 'Indexing supports search across documents and files.',
+        active: ['index','search','metadata'],
+        edges: [['metadata','index'], ['index','search']]
+      },
+      {
+        title: 'Ransomware detection',
+        desc: 'Safety service detects anomalies and supports restore/versioning.',
+        active: ['safety','versions','support'],
+        edges: [['storage','safety'], ['safety','versions'], ['versions','support']]
+      }
+    ]
+  },
+
+  wetransfer: {
+    title: 'WeTransfer',
+    steps: [
+      {
+        title: 'Create transfer',
+        desc: 'Client creates transfer metadata and gets upload URLs.',
+        active: ['client','api','metadata'],
+        edges: [['client','api'], ['api','metadata']]
+      },
+      {
+        title: 'Upload files',
+        desc: 'Uploads go to object store; progress tracked.',
+        active: ['upload','obj','cdn'],
+        edges: [['client','upload'], ['upload','obj'], ['obj','cdn']]
+      },
+      {
+        title: 'Virus scan',
+        desc: 'Scan pipeline checks files and quarantines threats.',
+        active: ['scan','risk','obj'],
+        edges: [['obj','scan'], ['scan','risk']]
+      },
+      {
+        title: 'Generate download link',
+        desc: 'Signed links are created with expiry and access rules.',
+        active: ['links','authz','metadata'],
+        edges: [['metadata','links'], ['links','authz']]
+      },
+      {
+        title: 'Notify recipients',
+        desc: 'Email notifications send download links and tracking.',
+        active: ['notify','email','tracking'],
+        edges: [['links','notify'], ['notify','email'], ['email','tracking']]
+      },
+      {
+        title: 'Download',
+        desc: 'Recipients download via CDN; usage tracked for analytics.',
+        active: ['cdn','analytics','tracking'],
+        edges: [['cdn','tracking'], ['tracking','analytics']]
+      }
+    ]
+  },
+
+  'stripe-connect': {
+    title: 'Stripe Connect',
+    steps: [
+      {
+        title: 'Onboard connected account',
+        desc: 'Platform creates connected account; KYC and verification run.',
+        active: ['platform','connect','kyc'],
+        edges: [['platform','connect'], ['connect','kyc']]
+      },
+      {
+        title: 'Create payment',
+        desc: 'PaymentIntent created; risk and auth flows execute.',
+        active: ['api','pi','risk'],
+        edges: [['platform','api'], ['api','pi'], ['pi','risk']]
+      },
+      {
+        title: 'Route funds',
+        desc: 'Funds routed to connected account with fees and splits.',
+        active: ['routing','ledger','balances'],
+        edges: [['pi','routing'], ['routing','ledger'], ['ledger','balances']]
+      },
+      {
+        title: 'Payouts',
+        desc: 'Payout scheduler triggers payouts to bank accounts.',
+        active: ['payouts','scheduler','bank'],
+        edges: [['balances','payouts'], ['payouts','scheduler'], ['scheduler','bank']]
+      },
+      {
+        title: 'Disputes and refunds',
+        desc: 'Refunds and disputes update ledger and compliance records.',
+        active: ['refunds','disputes','ledger'],
+        edges: [['api','refunds'], ['refunds','ledger'], ['ledger','disputes']]
+      },
+      {
+        title: 'Reporting',
+        desc: 'Reports and reconciliation are generated for platform and accounts.',
+        active: ['reports','recon','analytics'],
+        edges: [['ledger','reports'], ['reports','recon'], ['recon','analytics']]
+      }
+    ]
+  },
+
+  razorpay: {
+    title: 'Razorpay',
+    steps: [
+      {
+        title: 'Create order',
+        desc: 'Merchant creates order; checkout token returned.',
+        active: ['merchant','api','orders'],
+        edges: [['merchant','api'], ['api','orders']]
+      },
+      {
+        title: 'Payment authorization',
+        desc: 'Risk checks run; payment authorized with bank/UPI/card rails.',
+        active: ['risk','routing','bank'],
+        edges: [['orders','risk'], ['risk','routing'], ['routing','bank']]
+      },
+      {
+        title: 'Capture and settle',
+        desc: 'Capture updates ledger; settlement schedule created.',
+        active: ['capture','ledger','settlement'],
+        edges: [['routing','capture'], ['capture','ledger'], ['ledger','settlement']]
+      },
+      {
+        title: 'Webhooks',
+        desc: 'Events delivered to merchant via webhooks.',
+        active: ['events','webhooks','merchant'],
+        edges: [['capture','events'], ['events','webhooks'], ['webhooks','merchant']]
+      },
+      {
+        title: 'Refunds',
+        desc: 'Refunds reverse ledger entries and trigger notifications.',
+        active: ['refunds','ledger','notify'],
+        edges: [['merchant','refunds'], ['refunds','ledger'], ['refunds','notify']]
+      },
+      {
+        title: 'Reporting',
+        desc: 'Reports and reconciliation help merchants settle accounts.',
+        active: ['reports','recon','ledger'],
+        edges: [['ledger','reports'], ['reports','recon']]
+      }
+    ]
+  },
+
+  phonepe: {
+    title: 'PhonePe',
+    steps: [
+      {
+        title: 'Authenticate',
+        desc: 'User authenticates; device binding and risk checks run.',
+        active: ['client','auth','risk'],
+        edges: [['client','auth'], ['auth','risk']]
+      },
+      {
+        title: 'UPI collect/pay',
+        desc: 'Payment intent created; routed to UPI rails and bank.',
+        active: ['payments','routing','upi'],
+        edges: [['client','payments'], ['payments','routing'], ['routing','upi']]
+      },
+      {
+        title: 'Bank authorization',
+        desc: 'Bank authorizes and returns status; ledger updated.',
+        active: ['bank','ledger','status'],
+        edges: [['upi','bank'], ['bank','status'], ['status','ledger']]
+      },
+      {
+        title: 'Notify merchant',
+        desc: 'Callbacks/webhooks notify merchant; receipts generated.',
+        active: ['webhooks','notify','merchant'],
+        edges: [['status','webhooks'], ['webhooks','merchant'], ['status','notify']]
+      },
+      {
+        title: 'Refunds',
+        desc: 'Refund requests reverse ledger and trigger bank reversal.',
+        active: ['refunds','ledger','bank'],
+        edges: [['merchant','refunds'], ['refunds','ledger'], ['refunds','bank']]
+      },
+      {
+        title: 'Insights and reporting',
+        desc: 'Analytics pipeline aggregates transactions and user insights.',
+        active: ['analytics','warehouse','reports'],
+        edges: [['ledger','analytics'], ['analytics','warehouse'], ['warehouse','reports']]
+      }
+    ]
+  },
+
+  groww: {
+    title: 'Groww',
+    steps: [
+      {
+        title: 'KYC and account setup',
+        desc: 'User completes KYC; brokerage account is created.',
+        active: ['client','kyc','accounts'],
+        edges: [['client','kyc'], ['kyc','accounts']]
+      },
+      {
+        title: 'Add funds',
+        desc: 'Payments add funds; ledger updates balances.',
+        active: ['payments','ledger','wallet'],
+        edges: [['client','payments'], ['payments','ledger'], ['ledger','wallet']]
+      },
+      {
+        title: 'Place order',
+        desc: 'Order routed to broker/exchange; risk checks apply.',
+        active: ['orders','risk','broker'],
+        edges: [['client','orders'], ['orders','risk'], ['orders','broker']]
+      },
+      {
+        title: 'Execution and settlement',
+        desc: 'Execution updates positions; settlement reconciles cash/holdings.',
+        active: ['execution','positions','settlement'],
+        edges: [['broker','execution'], ['execution','positions'], ['positions','settlement']]
+      },
+      {
+        title: 'Portfolio analytics',
+        desc: 'Analytics compute P&L, charts, and holdings summaries.',
+        active: ['analytics','warehouse','portfolio'],
+        edges: [['positions','analytics'], ['analytics','warehouse'], ['warehouse','portfolio']]
+      },
+      {
+        title: 'Withdraw funds',
+        desc: 'Withdrawals move funds to bank; compliance checks apply.',
+        active: ['withdraw','bank','compliance'],
+        edges: [['client','withdraw'], ['withdraw','compliance'], ['withdraw','bank']]
+      }
+    ]
+  },
+
+  cred: {
+    title: 'CRED',
+    steps: [
+      {
+        title: 'Link cards and fetch bills',
+        desc: 'User links cards; bill fetchers aggregate statements and due dates.',
+        active: ['client','linking','billfetch'],
+        edges: [['client','linking'], ['linking','billfetch']]
+      },
+      {
+        title: 'Show bill and recommendations',
+        desc: 'Bill UI shows totals; offers and rewards personalized.',
+        active: ['billfetch','offers','rank'],
+        edges: [['billfetch','offers'], ['offers','rank']]
+      },
+      {
+        title: 'Pay bill',
+        desc: 'Payment intent created; routed via payment rails; ledger updated.',
+        active: ['payments','routing','ledger'],
+        edges: [['client','payments'], ['payments','routing'], ['routing','ledger']]
+      },
+      {
+        title: 'Confirm and notify',
+        desc: 'Status updates delivered; receipts and notifications sent.',
+        active: ['status','notify','push'],
+        edges: [['ledger','status'], ['status','notify'], ['notify','push']]
+      },
+      {
+        title: 'Rewards and cashback',
+        desc: 'Rewards computed; wallet updated and offers tracked.',
+        active: ['rewards','wallet','analytics'],
+        edges: [['status','rewards'], ['rewards','wallet'], ['rewards','analytics']]
+      },
+      {
+        title: 'Fraud and risk',
+        desc: 'Risk engine monitors transactions and prevents fraud.',
+        active: ['risk','fraud','ledger'],
+        edges: [['payments','risk'], ['risk','fraud'], ['fraud','ledger']]
+      }
+    ]
+  }
 };
 
 export function flowForSystem(sys) {
