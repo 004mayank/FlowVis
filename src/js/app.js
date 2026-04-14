@@ -2394,7 +2394,7 @@ function renderSystemDiagram(sys, step) {
     const w = on ? 4 : 3;
     // faint dotted baseline always visible + solid overlay when active
     const base = `
-      <path d="M${x1} ${y1} L ${x2} ${y2}" fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="2" stroke-linecap="round" stroke-dasharray="3 10" opacity="0.8"/>
+      <path d="M${x1} ${y1} L ${x2} ${y2}" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 8" opacity="0.95"/>
     `;
     const activePath = on ? `
       <defs>
