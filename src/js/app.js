@@ -2074,30 +2074,41 @@ const ARCH_LAYOUTS = {
       { from: 'refunds', to: 'reports' }
     ],
     nodes: {
-      client: { x: 40, y: 160, label: 'Client' },
-      auth: { x: 340, y: 160, label: 'Auth Service' },
-      funding: { x: 340, y: 260, label: 'Funding Source Vault' },
-      api: { x: 600, y: 200, label: 'Payments API' },
+      // Outside
+      client: { x: 40, y: 190, label: 'Client' },
+
+      // Inside backend: arranged left-to-right in sequence
+      auth: { x: 320, y: 140, label: 'Auth Service' },
+      funding: { x: 320, y: 230, label: 'Funding Source Vault' },
+      api: { x: 600, y: 190, label: 'Payments API' },
       risk: { x: 600, y: 300, label: 'Risk Engine' },
-      merchant: { x: 860, y: 160, label: 'Merchant Integration' },
-      routing: { x: 860, y: 260, label: 'Routing' },
-      bank: { x: 1220, y: 240, label: 'Bank Rails' },
-      network: { x: 1220, y: 330, label: 'Card Networks' },
-      ledger: { x: 860, y: 400, label: 'Ledger' },
-      balances: { x: 1220, y: 430, label: 'Balances' },
-      notify: { x: 600, y: 520, label: 'Notifications' },
-      webhook: { x: 860, y: 520, label: 'Webhooks' },
-      disputes: { x: 860, y: 620, label: 'Disputes' },
-      refunds: { x: 600, y: 620, label: 'Refunds' },
-      reports: { x: 1220, y: 520, label: 'Reporting' }
+      routing: { x: 880, y: 190, label: 'Routing' },
+
+      // External rails (right column)
+      bank: { x: 1220, y: 140, label: 'Bank Rails' },
+      network: { x: 1220, y: 230, label: 'Card Networks' },
+
+      // Core state (right-inside)
+      ledger: { x: 880, y: 300, label: 'Ledger' },
+      balances: { x: 1220, y: 320, label: 'Balances' },
+
+      // Downstream (bottom row)
+      notify: { x: 600, y: 460, label: 'Notifications' },
+      webhook: { x: 880, y: 460, label: 'Webhooks' },
+      reports: { x: 1220, y: 460, label: 'Reporting' },
+      refunds: { x: 600, y: 560, label: 'Refunds' },
+      disputes: { x: 880, y: 560, label: 'Disputes' },
+
+      // Optional integration surface
+      merchant: { x: 1220, y: 560, label: 'Merchant Integration' }
     },
     stepEdges: (stepIdx) => {
       const e = [];
-      if (stepIdx === 1) e.push(['client','auth','signin'], ['client','funding','select']);
-      if (stepIdx === 2) e.push(['client','api','create'], ['api','risk','screen'], ['api','merchant','ctx']);
+      if (stepIdx === 1) e.push(['client','auth','signin'], ['client','funding','select'], ['auth','api','token']);
+      if (stepIdx === 2) e.push(['client','api','create'], ['api','risk','screen']);
       if (stepIdx === 3) e.push(['api','routing','route'], ['routing','bank','bank'], ['routing','network','card']);
-      if (stepIdx === 4) e.push(['api','ledger','post'], ['ledger','balances','update']);
-      if (stepIdx === 5) e.push(['ledger','notify','receipt'], ['ledger','webhook','event'], ['webhook','merchant','deliver']);
+      if (stepIdx === 4) e.push(['routing','ledger','post'], ['ledger','balances','update']);
+      if (stepIdx === 5) e.push(['ledger','notify','receipt'], ['ledger','webhook','event'], ['webhook','merchant','deliver'], ['webhook','reports','logs']);
       if (stepIdx === 6) e.push(['ledger','refunds','refund'], ['ledger','disputes','case'], ['refunds','reports','recon']);
       return e;
     }
