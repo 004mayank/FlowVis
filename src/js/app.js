@@ -1158,18 +1158,774 @@ function renderPlayground() {
   const d = document.getElementById('pg-desc');
   if (d) d.textContent = s?.desc || '';
 
-  // Render WhatsApp diagram if applicable
-  if (PLAYGROUND.sys?.title.toLowerCase() === 'whatsapp') {
-    if (PLAYGROUND.tab === 'system') renderWhatsAppDiagram(steps[PLAYGROUND.step]);
-    if (PLAYGROUND.tab === 'arch') renderWhatsAppArchitecture(steps[PLAYGROUND.step]);
+  // Render per-product diagrams (system + architecture)
+  if (PLAYGROUND.tab === 'system') renderSystemDiagram(PLAYGROUND.sys, steps[PLAYGROUND.step]);
+  if (PLAYGROUND.tab === 'arch') renderArchitectureDiagram(PLAYGROUND.sys, steps[PLAYGROUND.step]);
 
-    // Re-apply zoom after rerender so user zoom doesn't reset
-    if (PLAYGROUND.tab === 'system') wireZoom('wa-diagram', 'z-in', 'z-out', 'z-reset');
-    if (PLAYGROUND.tab === 'arch') wireZoom('wa-arch', 'za-in', 'za-out', 'za-reset');
-  } else {
-    const svg = document.getElementById('wa-diagram');
-    if (svg) svg.innerHTML = `<text x="50" y="80" fill="rgba(255,255,255,0.6)" font-size="18" font-family="Inter, Arial">Flow coming soon for ${escapeXml(PLAYGROUND.sys?.title || '')}</text>`;
+  // Re-apply zoom after rerender so user zoom doesn't reset
+  if (PLAYGROUND.tab === 'system') wireZoom('wa-diagram', 'z-in', 'z-out', 'z-reset');
+  if (PLAYGROUND.tab === 'arch') wireZoom('wa-arch', 'za-in', 'za-out', 'za-reset');
+}
+
+// --------- Product-specific diagram layouts ---------
+
+// Shared system diagram node palette (simple, readable)
+const SYSTEM_NODE_COLORS = {
+  client: 'rgba(99,102,241,0.95)',
+  user: 'rgba(99,102,241,0.95)',
+  device: 'rgba(99,102,241,0.95)',
+
+  api: 'rgba(236,72,153,0.95)',
+  auth: 'rgba(236,72,153,0.95)',
+  gateway: 'rgba(236,72,153,0.95)',
+
+  store: 'rgba(34,197,94,0.95)',
+  db: 'rgba(34,197,94,0.95)',
+  cache: 'rgba(34,197,94,0.95)',
+
+  queue: 'rgba(251,191,36,0.95)',
+  stream: 'rgba(251,191,36,0.95)',
+
+  external: 'rgba(148,163,184,0.95)',
+  cdn: 'rgba(148,163,184,0.95)',
+  network: 'rgba(148,163,184,0.95)'
+};
+
+// System diagram layouts per product id.
+// Each layout defines nodes (id -> {x,y,label,colorKey}).
+const SYSTEM_LAYOUTS = {
+  whatsapp: {
+    viewBox: '0 0 1000 640',
+    nodes: {
+      sender: { x: 120, y: 160, label: 'Sender', colorKey: 'client' },
+      crypto: { x: 300, y: 160, label: 'Encrypt', colorKey: 'api' },
+      keybundle: { x: 300, y: 320, label: 'Keys', colorKey: 'store' },
+      relay: { x: 520, y: 220, label: 'Relay', colorKey: 'api' },
+      push: { x: 720, y: 220, label: 'Push', colorKey: 'external' },
+      decrypt: { x: 720, y: 360, label: 'Decrypt', colorKey: 'api' },
+      recipient: { x: 880, y: 360, label: 'Recipient', colorKey: 'client' }
+    }
+  },
+
+  instagram: {
+    viewBox: '0 0 1000 640',
+    nodes: {
+      client: { x: 120, y: 240, label: 'App', colorKey: 'client' },
+      api: { x: 320, y: 240, label: 'API', colorKey: 'api' },
+      auth: { x: 320, y: 420, label: 'Auth', colorKey: 'api' },
+      feed: { x: 520, y: 180, label: 'Feed', colorKey: 'api' },
+      rank: { x: 520, y: 300, label: 'Ranking', colorKey: 'api' },
+      safety: { x: 520, y: 420, label: 'Safety', colorKey: 'api' },
+      media: { x: 720, y: 180, label: 'Media', colorKey: 'store' },
+      cdn: { x: 880, y: 180, label: 'CDN', colorKey: 'cdn' },
+      write: { x: 720, y: 320, label: 'Writes', colorKey: 'store' },
+      upload: { x: 720, y: 460, label: 'Upload', colorKey: 'api' },
+      obj: { x: 880, y: 460, label: 'Object Store', colorKey: 'store' },
+      fanout: { x: 880, y: 320, label: 'Fanout', colorKey: 'queue' },
+      notify: { x: 880, y: 380, label: 'Notify', colorKey: 'external' },
+      realtime: { x: 720, y: 560, label: 'Realtime', colorKey: 'stream' }
+    }
+  },
+
+  uber: {
+    viewBox: '0 0 1000 640',
+    nodes: {
+      client: { x: 120, y: 280, label: 'Rider App', colorKey: 'client' },
+      driver: { x: 120, y: 440, label: 'Driver App', colorKey: 'client' },
+      api: { x: 320, y: 280, label: 'API', colorKey: 'api' },
+      auth: { x: 320, y: 440, label: 'Auth', colorKey: 'api' },
+      maps: { x: 520, y: 180, label: 'Maps', colorKey: 'external' },
+      pricing: { x: 520, y: 280, label: 'Pricing', colorKey: 'api' },
+      dispatch: { x: 520, y: 420, label: 'Dispatch', colorKey: 'api' },
+      location: { x: 720, y: 420, label: 'Location', colorKey: 'stream' },
+      match: { x: 720, y: 520, label: 'Matching', colorKey: 'api' },
+      routing: { x: 720, y: 280, label: 'Routing', colorKey: 'api' },
+      realtime: { x: 880, y: 420, label: 'Realtime', colorKey: 'stream' },
+      payments: { x: 880, y: 180, label: 'Payments', colorKey: 'api' },
+      ledger: { x: 880, y: 280, label: 'Ledger', colorKey: 'store' },
+      payouts: { x: 880, y: 520, label: 'Payouts', colorKey: 'api' },
+      support: { x: 720, y: 600, label: 'Support', colorKey: 'external' }
+    }
+  },
+
+  netflix: {
+    viewBox: '0 0 1000 640',
+    nodes: {
+      client: { x: 120, y: 280, label: 'Client', colorKey: 'client' },
+      home: { x: 320, y: 200, label: 'Home API', colorKey: 'api' },
+      recos: { x: 520, y: 200, label: 'Recos', colorKey: 'api' },
+      rank: { x: 520, y: 320, label: 'Ranking', colorKey: 'api' },
+      ab: { x: 520, y: 440, label: 'Experiments', colorKey: 'api' },
+      catalog: { x: 320, y: 360, label: 'Catalog', colorKey: 'store' },
+      drm: { x: 520, y: 520, label: 'DRM/License', colorKey: 'api' },
+      cdn: { x: 720, y: 280, label: 'CDN', colorKey: 'cdn' },
+      player: { x: 720, y: 420, label: 'Player', colorKey: 'client' },
+      metrics: { x: 880, y: 420, label: 'QoE Metrics', colorKey: 'stream' },
+      analytics: { x: 880, y: 520, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  stripe: {
+    viewBox: '0 0 1000 640',
+    nodes: {
+      client: { x: 120, y: 240, label: 'Client', colorKey: 'client' },
+      checkout: { x: 320, y: 240, label: 'Checkout', colorKey: 'api' },
+      merchant: { x: 120, y: 420, label: 'Merchant', colorKey: 'client' },
+      api: { x: 320, y: 420, label: 'Stripe API', colorKey: 'api' },
+      pi: { x: 520, y: 420, label: 'PaymentIntent', colorKey: 'store' },
+      sca: { x: 520, y: 240, label: '3DS/SCA', colorKey: 'external' },
+      acq: { x: 720, y: 420, label: 'Acquirer', colorKey: 'external' },
+      network: { x: 880, y: 420, label: 'Card Network', colorKey: 'network' },
+      events: { x: 520, y: 560, label: 'Events', colorKey: 'queue' },
+      webhook: { x: 720, y: 560, label: 'Webhooks', colorKey: 'external' },
+      settle: { x: 720, y: 320, label: 'Settlement', colorKey: 'api' },
+      ledger: { x: 880, y: 320, label: 'Ledger', colorKey: 'store' },
+      reports: { x: 880, y: 200, label: 'Reports', colorKey: 'store' },
+      disputes: { x: 880, y: 560, label: 'Disputes', colorKey: 'api' }
+    }
+  },
+
+  amazon: {
+    viewBox: '0 0 1000 640',
+    nodes: {
+      client: { x: 120, y: 280, label: 'Client', colorKey: 'client' },
+      search: { x: 320, y: 180, label: 'Search', colorKey: 'api' },
+      catalog: { x: 520, y: 180, label: 'Catalog', colorKey: 'store' },
+      reviews: { x: 520, y: 300, label: 'Reviews', colorKey: 'store' },
+      pricing: { x: 520, y: 420, label: 'Pricing', colorKey: 'api' },
+      cart: { x: 320, y: 420, label: 'Cart', colorKey: 'store' },
+      promo: { x: 320, y: 540, label: 'Promotions', colorKey: 'api' },
+      checkout: { x: 720, y: 180, label: 'Checkout', colorKey: 'api' },
+      orders: { x: 720, y: 300, label: 'Orders', colorKey: 'store' },
+      payments: { x: 720, y: 420, label: 'Payments', colorKey: 'api' },
+      wms: { x: 880, y: 300, label: 'Warehouse', colorKey: 'external' },
+      carrier: { x: 880, y: 420, label: 'Carrier', colorKey: 'external' },
+      tracking: { x: 880, y: 180, label: 'Tracking', colorKey: 'stream' },
+      notify: { x: 880, y: 540, label: 'Notify', colorKey: 'external' },
+      returns: { x: 720, y: 540, label: 'Returns', colorKey: 'api' },
+      refunds: { x: 520, y: 540, label: 'Refunds', colorKey: 'api' },
+      inventory: { x: 520, y: 420, label: 'Inventory', colorKey: 'store' }
+    }
+  },
+
+  'google-drive': {
+    viewBox: '0 0 1000 640',
+    nodes: {
+      client: { x: 120, y: 280, label: 'Client', colorKey: 'client' },
+      metadata: { x: 320, y: 220, label: 'Metadata', colorKey: 'store' },
+      sync: { x: 520, y: 220, label: 'Sync', colorKey: 'stream' },
+      upload: { x: 320, y: 380, label: 'Upload', colorKey: 'api' },
+      storage: { x: 520, y: 380, label: 'Storage', colorKey: 'store' },
+      sharing: { x: 720, y: 180, label: 'Sharing', colorKey: 'api' },
+      authz: { x: 720, y: 300, label: 'AuthZ/ACL', colorKey: 'api' },
+      realtime: { x: 720, y: 420, label: 'Realtime', colorKey: 'stream' },
+      merge: { x: 880, y: 420, label: 'Merge', colorKey: 'api' },
+      index: { x: 520, y: 520, label: 'Index', colorKey: 'store' },
+      search: { x: 720, y: 520, label: 'Search', colorKey: 'api' },
+      versions: { x: 880, y: 300, label: 'Versions', colorKey: 'store' },
+      audit: { x: 880, y: 220, label: 'Audit', colorKey: 'store' },
+      cdn: { x: 880, y: 520, label: 'CDN', colorKey: 'cdn' }
+    }
+  },
+
+  github: {
+    viewBox: '0 0 1000 640',
+    nodes: {
+      client: { x: 120, y: 280, label: 'Client', colorKey: 'client' },
+      auth: { x: 320, y: 180, label: 'Auth', colorKey: 'api' },
+      repo: { x: 320, y: 320, label: 'Repo Service', colorKey: 'api' },
+      git: { x: 520, y: 320, label: 'Git Storage', colorKey: 'store' },
+      cache: { x: 720, y: 320, label: 'Cache', colorKey: 'cache' },
+      pr: { x: 520, y: 180, label: 'PRs', colorKey: 'api' },
+      actions: { x: 720, y: 180, label: 'Actions', colorKey: 'queue' },
+      runner: { x: 880, y: 180, label: 'Runner', colorKey: 'external' },
+      comments: { x: 520, y: 480, label: 'Comments', colorKey: 'store' },
+      notify: { x: 720, y: 480, label: 'Notify', colorKey: 'external' },
+      deploy: { x: 880, y: 320, label: 'Deploy', colorKey: 'external' },
+      security: { x: 720, y: 560, label: 'Security', colorKey: 'api' },
+      audit: { x: 880, y: 560, label: 'Audit', colorKey: 'store' }
+    }
+  },
+
+  doordash: {
+    viewBox: '0 0 1000 640',
+    nodes: {
+      client: { x: 120, y: 280, label: 'Client', colorKey: 'client' },
+      search: { x: 320, y: 180, label: 'Discovery', colorKey: 'api' },
+      catalog: { x: 520, y: 180, label: 'Catalog/Menu', colorKey: 'store' },
+      cart: { x: 320, y: 320, label: 'Cart', colorKey: 'store' },
+      pricing: { x: 520, y: 320, label: 'Pricing', colorKey: 'api' },
+      promo: { x: 720, y: 320, label: 'Promos', colorKey: 'api' },
+      orders: { x: 520, y: 460, label: 'Orders', colorKey: 'store' },
+      merchant: { x: 720, y: 460, label: 'Merchant', colorKey: 'external' },
+      dispatch: { x: 320, y: 460, label: 'Dispatch', colorKey: 'api' },
+      location: { x: 320, y: 560, label: 'Location', colorKey: 'stream' },
+      match: { x: 520, y: 560, label: 'Matching', colorKey: 'api' },
+      routing: { x: 720, y: 560, label: 'Routing', colorKey: 'api' },
+      tracking: { x: 880, y: 180, label: 'Tracking', colorKey: 'stream' },
+      realtime: { x: 880, y: 320, label: 'Realtime', colorKey: 'stream' },
+      notify: { x: 880, y: 460, label: 'Notify', colorKey: 'external' },
+      payments: { x: 880, y: 560, label: 'Payments', colorKey: 'api' },
+      ledger: { x: 720, y: 620, label: 'Ledger', colorKey: 'store' },
+      support: { x: 880, y: 620, label: 'Support', colorKey: 'external' }
+    }
+  },
+
+  duolingo: {
+    viewBox: '0 0 1000 640',
+    nodes: {
+      client: { x: 120, y: 280, label: 'Client', colorKey: 'client' },
+      lesson: { x: 320, y: 220, label: 'Lesson Content', colorKey: 'store' },
+      state: { x: 520, y: 220, label: 'User State', colorKey: 'store' },
+      engine: { x: 320, y: 380, label: 'Exercise Engine', colorKey: 'api' },
+      rank: { x: 520, y: 380, label: 'Personalization', colorKey: 'api' },
+      grade: { x: 720, y: 380, label: 'Grading', colorKey: 'api' },
+      recos: { x: 720, y: 220, label: 'Recos', colorKey: 'api' },
+      notify: { x: 880, y: 220, label: 'Notify', colorKey: 'external' },
+      scheduler: { x: 880, y: 320, label: 'Scheduler', colorKey: 'queue' },
+      ab: { x: 520, y: 520, label: 'Experiments', colorKey: 'api' },
+      analytics: { x: 720, y: 520, label: 'Analytics', colorKey: 'stream' },
+      warehouse: { x: 880, y: 520, label: 'Warehouse', colorKey: 'store' }
+    }
+  },
+
+  coinbase: {
+    viewBox: '0 0 1000 640',
+    nodes: {
+      client: { x: 120, y: 280, label: 'Client', colorKey: 'client' },
+      auth: { x: 320, y: 180, label: 'Auth', colorKey: 'api' },
+      risk: { x: 520, y: 180, label: 'Risk', colorKey: 'api' },
+      payments: { x: 320, y: 360, label: 'Fiat Rails', colorKey: 'external' },
+      ledger: { x: 520, y: 360, label: 'Ledger', colorKey: 'store' },
+      custody: { x: 720, y: 360, label: 'Custody', colorKey: 'store' },
+      orders: { x: 320, y: 520, label: 'Orders', colorKey: 'api' },
+      match: { x: 520, y: 520, label: 'Matching', colorKey: 'api' },
+      positions: { x: 720, y: 520, label: 'Positions', colorKey: 'store' },
+      wallet: { x: 880, y: 360, label: 'Wallet', colorKey: 'api' },
+      network: { x: 880, y: 520, label: 'Blockchain', colorKey: 'network' },
+      monitor: { x: 720, y: 620, label: 'Monitoring', colorKey: 'stream' },
+      compliance: { x: 880, y: 620, label: 'Compliance', colorKey: 'api' },
+      reports: { x: 520, y: 620, label: 'Reports', colorKey: 'store' }
+    }
   }
+};
+
+// Architecture layouts per product id.
+// Node ids should match the step.active ids in src/data/flows.js for that product.
+const ARCH_LAYOUTS = {
+  whatsapp: {
+    viewBox: '0 0 1420 760',
+    backendLabel: 'WhatsApp Backend',
+    backend: { x: 320, y: 70, w: 860, h: 630 },
+    nodes: {
+      sender: { x: 40, y: 120, label: 'Sender App' },
+      recipient: { x: 40, y: 200, label: 'Recipient App' },
+      edge: { x: 370, y: 150, label: 'Edge / API Gateway' },
+      auth: { x: 370, y: 240, label: 'Auth Service' },
+      keybundle: { x: 370, y: 330, label: 'Key Bundle Service' },
+      relay: { x: 680, y: 150, label: 'Messaging Relay' },
+      queue: { x: 680, y: 240, label: 'Fanout Queue' },
+      spam: { x: 680, y: 330, label: 'Spam / Abuse Checks' },
+      push: { x: 980, y: 150, label: 'Push Orchestrator' },
+      media: { x: 980, y: 240, label: 'Media Service' },
+      meta: { x: 980, y: 330, label: 'Message Metadata Store' },
+      obj: { x: 980, y: 420, label: 'Media Object Store' },
+      fcm: { x: 1220, y: 150, label: 'FCM / APNs' },
+      cdn: { x: 1220, y: 240, label: 'CDN' }
+    },
+    stepEdges: (stepIdx) => {
+      let edges = [];
+      if (stepIdx === 2) edges.push(['sender','keybundle','keys'], ['sender','edge','send']);
+      if (stepIdx === 3) edges.push(['sender','edge','send'], ['edge','relay','relay'], ['relay','queue','fanout']);
+      if (stepIdx === 4) edges.push(['queue','push','notify'], ['push','fcm','push'], ['fcm','recipient','wake']);
+      if (stepIdx === 5) edges.push(['relay','meta','store']);
+      return edges;
+    }
+  },
+
+  instagram: {
+    viewBox: '0 0 1420 760',
+    backendLabel: 'Instagram Backend',
+    backend: { x: 300, y: 70, w: 900, h: 630 },
+    nodes: {
+      client: { x: 40, y: 150, label: 'Mobile App' },
+      api: { x: 340, y: 150, label: 'API Gateway' },
+      auth: { x: 340, y: 240, label: 'Auth' },
+      feed: { x: 600, y: 150, label: 'Feed Service' },
+      rank: { x: 600, y: 240, label: 'Ranking' },
+      safety: { x: 600, y: 330, label: 'Safety / Integrity' },
+      media: { x: 860, y: 150, label: 'Media Service' },
+      cdn: { x: 1220, y: 150, label: 'CDN' },
+      write: { x: 860, y: 240, label: 'Write Store' },
+      upload: { x: 860, y: 330, label: 'Upload Service' },
+      obj: { x: 860, y: 420, label: 'Object Store' },
+      fanout: { x: 600, y: 420, label: 'Fanout / Cache Updates' },
+      notify: { x: 1220, y: 240, label: 'Push / Email' },
+      realtime: { x: 340, y: 330, label: 'Realtime Gateway' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','api','load'], ['api','feed','get']);
+      if (stepIdx === 2) e.push(['feed','rank','rank'], ['rank','safety','filter']);
+      if (stepIdx === 3) e.push(['api','media','urls'], ['media','cdn','serve'], ['cdn','client','stream']);
+      if (stepIdx === 4) e.push(['client','api','write'], ['api','auth','auth'], ['api','write','persist']);
+      if (stepIdx === 5) e.push(['client','upload','upload'], ['upload','obj','store'], ['upload','write','meta']);
+      if (stepIdx === 6) e.push(['write','fanout','fanout'], ['fanout','notify','notify']);
+      if (stepIdx === 7) e.push(['feed','realtime','publish'], ['realtime','client','deliver']);
+      return e;
+    }
+  },
+
+  uber: {
+    viewBox: '0 0 1420 760',
+    backendLabel: 'Uber Backend',
+    backend: { x: 300, y: 70, w: 900, h: 630 },
+    nodes: {
+      client: { x: 40, y: 150, label: 'Rider App' },
+      driver: { x: 40, y: 240, label: 'Driver App' },
+      api: { x: 340, y: 150, label: 'API Gateway' },
+      auth: { x: 340, y: 240, label: 'Auth' },
+      maps: { x: 1220, y: 150, label: 'Maps Provider' },
+      pricing: { x: 600, y: 150, label: 'Pricing / ETA' },
+      dispatch: { x: 600, y: 240, label: 'Dispatch' },
+      location: { x: 860, y: 240, label: 'Location Stream' },
+      match: { x: 860, y: 330, label: 'Matching' },
+      routing: { x: 860, y: 150, label: 'Routing' },
+      realtime: { x: 600, y: 420, label: 'Realtime Updates' },
+      payments: { x: 600, y: 520, label: 'Payments' },
+      ledger: { x: 860, y: 520, label: 'Ledger' },
+      payouts: { x: 860, y: 610, label: 'Payouts' },
+      support: { x: 1220, y: 240, label: 'Support Tools' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','api','request'], ['api','pricing','estimate'], ['client','maps','geocode']);
+      if (stepIdx === 2) e.push(['client','api','request'], ['api','auth','auth'], ['api','dispatch','dispatch']);
+      if (stepIdx === 3) e.push(['driver','location','gps'], ['location','dispatch','nearby'], ['dispatch','match','match']);
+      if (stepIdx === 4) e.push(['match','routing','route'], ['routing','maps','tiles']);
+      if (stepIdx === 5) e.push(['driver','location','gps'], ['location','realtime','stream'], ['realtime','client','update']);
+      if (stepIdx === 6) e.push(['pricing','payments','charge'], ['payments','ledger','record']);
+      if (stepIdx === 7) e.push(['ledger','payouts','payout'], ['ledger','support','case']);
+      return e;
+    }
+  },
+
+  netflix: {
+    viewBox: '0 0 1420 760',
+    backendLabel: 'Netflix Backend',
+    backend: { x: 300, y: 70, w: 900, h: 630 },
+    nodes: {
+      client: { x: 40, y: 170, label: 'Client App' },
+      home: { x: 340, y: 150, label: 'Home API' },
+      recos: { x: 600, y: 150, label: 'Recos Service' },
+      rank: { x: 600, y: 240, label: 'Ranking' },
+      ab: { x: 600, y: 330, label: 'Experiment Service' },
+      catalog: { x: 340, y: 240, label: 'Catalog' },
+      drm: { x: 340, y: 330, label: 'DRM / License' },
+      cdn: { x: 1220, y: 240, label: 'CDN' },
+      player: { x: 40, y: 320, label: 'Player' },
+      metrics: { x: 860, y: 330, label: 'QoE Telemetry' },
+      analytics: { x: 860, y: 420, label: 'Analytics / Warehouse' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','home','rows'], ['home','recos','recos']);
+      if (stepIdx === 2) e.push(['recos','rank','rank'], ['rank','ab','variant']);
+      if (stepIdx === 3) e.push(['client','catalog','meta'], ['catalog','drm','policy']);
+      if (stepIdx === 4) e.push(['client','drm','license']);
+      if (stepIdx === 5) e.push(['cdn','player','segments'], ['player','client','video']);
+      if (stepIdx === 6) e.push(['player','metrics','qoe']);
+      if (stepIdx === 7) e.push(['metrics','analytics','events'], ['analytics','recos','signals']);
+      return e;
+    }
+  },
+
+  stripe: {
+    viewBox: '0 0 1420 760',
+    backendLabel: 'Stripe Backend',
+    backend: { x: 300, y: 70, w: 900, h: 630 },
+    nodes: {
+      client: { x: 40, y: 150, label: 'Client' },
+      merchant: { x: 40, y: 240, label: 'Merchant Backend' },
+      api: { x: 340, y: 200, label: 'Stripe API' },
+      pi: { x: 600, y: 200, label: 'PaymentIntent' },
+      sca: { x: 1220, y: 150, label: 'Issuer / 3DS' },
+      acq: { x: 860, y: 200, label: 'Acquirer' },
+      network: { x: 1220, y: 240, label: 'Card Network' },
+      events: { x: 600, y: 330, label: 'Events Bus' },
+      webhook: { x: 860, y: 330, label: 'Webhooks' },
+      settle: { x: 860, y: 460, label: 'Settlement' },
+      ledger: { x: 600, y: 460, label: 'Ledger' },
+      reports: { x: 600, y: 570, label: 'Reports' },
+      disputes: { x: 860, y: 570, label: 'Disputes' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','merchant','start']);
+      if (stepIdx === 2) e.push(['merchant','api','create'], ['api','pi','intent']);
+      if (stepIdx === 3) e.push(['client','pi','confirm'], ['pi','sca','3ds']);
+      if (stepIdx === 4) e.push(['pi','acq','route'], ['acq','network','auth']);
+      if (stepIdx === 5) e.push(['events','webhook','event'], ['webhook','merchant','update']);
+      if (stepIdx === 6) e.push(['pi','settle','capture'], ['settle','ledger','entries']);
+      if (stepIdx === 7) e.push(['ledger','reports','recon'], ['ledger','disputes','dispute']);
+      return e;
+    }
+  },
+
+  amazon: {
+    viewBox: '0 0 1420 760',
+    backendLabel: 'Amazon Backend',
+    backend: { x: 300, y: 70, w: 900, h: 630 },
+    nodes: {
+      client: { x: 40, y: 150, label: 'Client' },
+      search: { x: 340, y: 150, label: 'Search' },
+      catalog: { x: 600, y: 150, label: 'Catalog' },
+      reviews: { x: 600, y: 240, label: 'Reviews' },
+      pricing: { x: 600, y: 330, label: 'Pricing' },
+      cart: { x: 340, y: 330, label: 'Cart' },
+      promo: { x: 340, y: 420, label: 'Promotions' },
+      checkout: { x: 860, y: 150, label: 'Checkout' },
+      orders: { x: 860, y: 240, label: 'Orders' },
+      payments: { x: 860, y: 330, label: 'Payments' },
+      wms: { x: 860, y: 420, label: 'Warehouse Mgmt' },
+      carrier: { x: 1220, y: 420, label: 'Carrier' },
+      tracking: { x: 1220, y: 240, label: 'Tracking' },
+      notify: { x: 1220, y: 150, label: 'Notifications' },
+      returns: { x: 860, y: 520, label: 'Returns' },
+      refunds: { x: 600, y: 520, label: 'Refunds' },
+      inventory: { x: 600, y: 420, label: 'Inventory' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','search','query'], ['search','catalog','results']);
+      if (stepIdx === 2) e.push(['catalog','reviews','load'], ['catalog','pricing','price']);
+      if (stepIdx === 3) e.push(['client','cart','add'], ['cart','promo','apply']);
+      if (stepIdx === 4) e.push(['checkout','orders','reserve'], ['orders','payments','charge']);
+      if (stepIdx === 5) e.push(['orders','wms','pickpack'], ['wms','carrier','handoff']);
+      if (stepIdx === 6) e.push(['carrier','tracking','events'], ['tracking','notify','notify']);
+      if (stepIdx === 7) e.push(['returns','refunds','refund'], ['returns','inventory','restock']);
+      return e;
+    }
+  },
+
+  'google-drive': {
+    viewBox: '0 0 1420 760',
+    backendLabel: 'Google Drive Backend',
+    backend: { x: 300, y: 70, w: 900, h: 630 },
+    nodes: {
+      client: { x: 40, y: 160, label: 'Client' },
+      metadata: { x: 340, y: 160, label: 'Metadata Service' },
+      sync: { x: 600, y: 160, label: 'Sync Engine' },
+      upload: { x: 340, y: 260, label: 'Upload Service' },
+      storage: { x: 600, y: 260, label: 'Blob Storage' },
+      sharing: { x: 860, y: 160, label: 'Sharing Service' },
+      authz: { x: 860, y: 260, label: 'ACL / AuthZ' },
+      realtime: { x: 860, y: 360, label: 'Realtime Collab' },
+      merge: { x: 600, y: 360, label: 'OT / Merge' },
+      index: { x: 340, y: 460, label: 'Indexing' },
+      search: { x: 600, y: 460, label: 'Search' },
+      versions: { x: 860, y: 460, label: 'Versions' },
+      audit: { x: 860, y: 560, label: 'Audit Log' },
+      cdn: { x: 1220, y: 460, label: 'CDN' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','metadata','list'], ['metadata','sync','sync']);
+      if (stepIdx === 2) e.push(['client','upload','upload'], ['upload','storage','store']);
+      if (stepIdx === 3) e.push(['client','sharing','share'], ['sharing','authz','acl']);
+      if (stepIdx === 4) e.push(['realtime','merge','merge'], ['merge','storage','persist']);
+      if (stepIdx === 5) e.push(['metadata','index','index'], ['index','search','search']);
+      if (stepIdx === 6) e.push(['storage','versions','versions'], ['storage','audit','audit']);
+      if (stepIdx === 7) e.push(['client','authz','authz'], ['cdn','client','download']);
+      return e;
+    }
+  },
+
+  github: {
+    viewBox: '0 0 1420 760',
+    backendLabel: 'GitHub Backend',
+    backend: { x: 300, y: 70, w: 900, h: 630 },
+    nodes: {
+      client: { x: 40, y: 170, label: 'Client' },
+      auth: { x: 340, y: 150, label: 'Auth' },
+      repo: { x: 340, y: 260, label: 'Repo Service' },
+      git: { x: 600, y: 260, label: 'Git Storage' },
+      cache: { x: 860, y: 260, label: 'Cache/CDN' },
+      pr: { x: 600, y: 150, label: 'PR Service' },
+      actions: { x: 860, y: 150, label: 'Actions' },
+      runner: { x: 1220, y: 150, label: 'Runners' },
+      comments: { x: 600, y: 380, label: 'Comments' },
+      notify: { x: 860, y: 380, label: 'Notifications' },
+      deploy: { x: 1220, y: 260, label: 'Deploy Pipeline' },
+      security: { x: 860, y: 520, label: 'Security Scans' },
+      audit: { x: 600, y: 520, label: 'Audit Logs' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','signin'], ['auth','repo','session']);
+      if (stepIdx === 2) e.push(['repo','git','read'], ['git','cache','cache']);
+      if (stepIdx === 3) e.push(['client','pr','open'], ['pr','repo','diffs']);
+      if (stepIdx === 4) e.push(['pr','actions','workflow'], ['actions','runner','execute']);
+      if (stepIdx === 5) e.push(['pr','comments','review'], ['comments','notify','notify']);
+      if (stepIdx === 6) e.push(['git','deploy','deploy'], ['git','actions','trigger']);
+      if (stepIdx === 7) e.push(['repo','security','scan'], ['security','audit','record']);
+      return e;
+    }
+  },
+
+  doordash: {
+    viewBox: '0 0 1420 760',
+    backendLabel: 'DoorDash Backend',
+    backend: { x: 300, y: 70, w: 900, h: 630 },
+    nodes: {
+      client: { x: 40, y: 150, label: 'Client' },
+      search: { x: 340, y: 150, label: 'Discovery' },
+      catalog: { x: 600, y: 150, label: 'Catalog/Menu' },
+      cart: { x: 340, y: 260, label: 'Cart' },
+      pricing: { x: 600, y: 260, label: 'Pricing' },
+      promo: { x: 860, y: 260, label: 'Promos/Tax' },
+      orders: { x: 600, y: 380, label: 'Orders' },
+      merchant: { x: 860, y: 380, label: 'Merchant Integration' },
+      dispatch: { x: 340, y: 380, label: 'Dispatch' },
+      location: { x: 340, y: 500, label: 'Location Stream' },
+      match: { x: 600, y: 500, label: 'Matching' },
+      routing: { x: 860, y: 500, label: 'Routing' },
+      tracking: { x: 1220, y: 150, label: 'Tracking' },
+      realtime: { x: 1220, y: 260, label: 'Realtime' },
+      notify: { x: 1220, y: 380, label: 'Notifications' },
+      payments: { x: 860, y: 610, label: 'Payments' },
+      ledger: { x: 600, y: 610, label: 'Ledger' },
+      support: { x: 1220, y: 500, label: 'Support' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','search','browse'], ['search','catalog','menus']);
+      if (stepIdx === 2) e.push(['cart','pricing','price'], ['pricing','promo','fees']);
+      if (stepIdx === 3) e.push(['orders','merchant','send'], ['orders','dispatch','dispatch']);
+      if (stepIdx === 4) e.push(['location','dispatch','nearby'], ['dispatch','match','match']);
+      if (stepIdx === 5) e.push(['match','routing','route'], ['routing','tracking','track']);
+      if (stepIdx === 6) e.push(['tracking','realtime','update'], ['realtime','notify','notify']);
+      if (stepIdx === 7) e.push(['payments','ledger','settle'], ['ledger','support','refunds']);
+      return e;
+    }
+  },
+
+  duolingo: {
+    viewBox: '0 0 1420 760',
+    backendLabel: 'Duolingo Backend',
+    backend: { x: 300, y: 70, w: 900, h: 630 },
+    nodes: {
+      client: { x: 40, y: 170, label: 'Client' },
+      lesson: { x: 340, y: 150, label: 'Lesson Service' },
+      state: { x: 600, y: 150, label: 'User State' },
+      engine: { x: 340, y: 270, label: 'Exercise Engine' },
+      rank: { x: 600, y: 270, label: 'Personalization' },
+      grade: { x: 860, y: 270, label: 'Grading' },
+      recos: { x: 860, y: 150, label: 'Recommender' },
+      notify: { x: 1220, y: 150, label: 'Push' },
+      scheduler: { x: 860, y: 390, label: 'Scheduler' },
+      ab: { x: 600, y: 390, label: 'Experiments' },
+      analytics: { x: 860, y: 510, label: 'Analytics' },
+      warehouse: { x: 1220, y: 510, label: 'Warehouse' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','lesson','start'], ['lesson','state','state']);
+      if (stepIdx === 2) e.push(['lesson','engine','serve'], ['engine','rank','select']);
+      if (stepIdx === 3) e.push(['engine','grade','grade'], ['grade','state','update']);
+      if (stepIdx === 4) e.push(['state','recos','signals'], ['recos','engine','next']);
+      if (stepIdx === 5) e.push(['scheduler','notify','push'], ['notify','client','remind']);
+      if (stepIdx === 6) e.push(['ab','engine','variant'], ['engine','analytics','events']);
+      if (stepIdx === 7) e.push(['analytics','warehouse','load'], ['warehouse','recos','train']);
+      return e;
+    }
+  },
+
+  coinbase: {
+    viewBox: '0 0 1420 760',
+    backendLabel: 'Coinbase Backend',
+    backend: { x: 300, y: 70, w: 900, h: 630 },
+    nodes: {
+      client: { x: 40, y: 170, label: 'Client' },
+      auth: { x: 340, y: 150, label: 'Auth' },
+      risk: { x: 600, y: 150, label: 'Risk Engine' },
+      payments: { x: 340, y: 300, label: 'Fiat Rails' },
+      ledger: { x: 600, y: 300, label: 'Ledger' },
+      custody: { x: 860, y: 300, label: 'Custody' },
+      orders: { x: 340, y: 450, label: 'Orders' },
+      match: { x: 600, y: 450, label: 'Matching Engine' },
+      positions: { x: 860, y: 450, label: 'Positions' },
+      wallet: { x: 860, y: 570, label: 'Wallet / Withdrawals' },
+      network: { x: 1220, y: 450, label: 'Blockchain' },
+      monitor: { x: 600, y: 570, label: 'Monitoring' },
+      compliance: { x: 860, y: 670, label: 'Compliance / AML' },
+      reports: { x: 340, y: 570, label: 'Reporting' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','login'], ['auth','risk','risk']);
+      if (stepIdx === 2) e.push(['payments','ledger','credit'], ['ledger','custody','balance']);
+      if (stepIdx === 3) e.push(['client','orders','order'], ['orders','match','submit']);
+      if (stepIdx === 4) e.push(['match','ledger','settle'], ['ledger','positions','positions']);
+      if (stepIdx === 5) e.push(['custody','wallet','withdraw'], ['wallet','risk','checks']);
+      if (stepIdx === 6) e.push(['wallet','risk','checks'], ['wallet','network','broadcast']);
+      if (stepIdx === 7) e.push(['monitor','compliance','alerts'], ['compliance','reports','report']);
+      return e;
+    }
+  }
+};
+
+function systemLayoutFor(sys) {
+  const id = sys?.id;
+  return SYSTEM_LAYOUTS[id] || null;
+}
+
+function archLayoutFor(sys) {
+  const id = sys?.id;
+  return ARCH_LAYOUTS[id] || null;
+}
+
+function renderSystemDiagram(sys, step) {
+  const svg = document.getElementById('wa-diagram');
+  if (!svg) return;
+
+  const layout = systemLayoutFor(sys);
+  if (!layout) {
+    svg.innerHTML = `<text x="50" y="80" fill="rgba(255,255,255,0.6)" font-size="18" font-family="Inter, Arial">System flow coming soon for ${escapeXml(sys?.title || '')}</text>`;
+    return;
+  }
+
+  svg.setAttribute('viewBox', layout.viewBox || '0 0 1000 640');
+
+  const active = new Set(step?.active || []);
+  const stepEdges = step?.edges || [];
+  const eActive = (a, b) => stepEdges.some(e => e[0] === a && e[1] === b);
+
+  const node = (id, cx, cy, label, color) => {
+    const on = active.has(id);
+    const stroke = on ? color : 'rgba(255,255,255,0.16)';
+    const fill = on ? 'rgba(0,0,0,0.20)' : 'rgba(0,0,0,0.10)';
+    const r = 30;
+    const ring1 = on ? `<circle cx="${cx}" cy="${cy}" r="${r + 18}" fill="none" stroke="${color}" stroke-width="2" opacity="0.35"/>` : '';
+    const ring2 = on ? `<circle cx="${cx}" cy="${cy}" r="${r + 8}" fill="none" stroke="${color}" stroke-width="2" opacity="0.65"/>` : '';
+    const glow = on
+      ? `<filter id="glow-${id}"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>`
+      : '';
+    return `
+      ${glow}
+      <g ${on ? `filter="url(#glow-${id})"` : ''}>
+        ${ring1}
+        ${ring2}
+        <circle cx="${cx}" cy="${cy}" r="${r}" fill="${fill}" stroke="${stroke}" stroke-width="3" opacity="${on ? 1 : 0.55}"/>
+        <text x="${cx}" y="${cy + 52}" text-anchor="middle" fill="rgba(240,240,248,0.88)" font-size="13" font-family="Inter, Arial" font-weight="800" opacity="${on ? 1 : 0.65}">${escapeXml(label)}</text>
+      </g>
+    `;
+  };
+
+  const arrow = (x1, y1, x2, y2, on) => {
+    const mid = Math.abs(x1 * 13 + x2 * 7 + y1 * 11 + y2 * 5).toFixed(0);
+    const markerId = `sys-arrow-${mid}`;
+    const stroke = on ? 'rgba(123,125,248,0.9)' : 'rgba(255,255,255,0.12)';
+    const w = on ? 4 : 3;
+    return `
+      <defs>
+        <marker id="${markerId}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="${stroke}"/>
+        </marker>
+      </defs>
+      <path d="M${x1} ${y1} L ${x2} ${y2}" fill="none" stroke="${stroke}" stroke-width="${w}" stroke-linecap="round" opacity="${on ? 0.95 : 0.55}" marker-end="url(#${markerId})"/>
+    `;
+  };
+
+  let edgesSvg = '';
+  for (const [a, b] of stepEdges) {
+    const na = layout.nodes[a];
+    const nb = layout.nodes[b];
+    if (!na || !nb) continue;
+    edgesSvg += arrow(na.x, na.y, nb.x, nb.y, eActive(a, b));
+  }
+
+  let nodesSvg = '';
+  for (const [id, n] of Object.entries(layout.nodes)) {
+    const cKey = n.colorKey || 'api';
+    const color = SYSTEM_NODE_COLORS[cKey] || 'rgba(236,72,153,0.95)';
+    nodesSvg += node(id, n.x, n.y, n.label, color);
+  }
+
+  svg.innerHTML = `
+    <rect x="0" y="0" width="100%" height="100%" fill="rgba(0,0,0,0)"/>
+    ${edgesSvg}
+    ${nodesSvg}
+  `;
+}
+
+function renderArchitectureDiagram(sys, step) {
+  const svg = document.getElementById('wa-arch');
+  if (!svg) return;
+
+  const layout = archLayoutFor(sys);
+  if (!layout) {
+    svg.innerHTML = `<text x="50" y="80" fill="rgba(255,255,255,0.6)" font-size="18" font-family="Inter, Arial">Architecture flow coming soon for ${escapeXml(sys?.title || '')}</text>`;
+    return;
+  }
+
+  svg.setAttribute('viewBox', layout.viewBox || '0 0 1420 760');
+  const active = new Set(step?.active || []);
+
+  const box = (x, y, w, h, label) => `
+    <rect x="${x}" y="${y}" width="${w}" height="${h}" rx="20" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.10)" />
+    <text x="${x + 18}" y="${y + 28}" fill="rgba(240,240,248,0.75)" font-size="14" font-family="Inter, Arial" font-weight="900">${escapeXml(label)}</text>
+  `;
+
+  const n = (id, x, y, label) => {
+    const on = active.has(id);
+    const stroke = on ? 'rgba(236,72,153,0.95)' : 'rgba(255,255,255,0.12)';
+    const fill = on ? 'rgba(236,72,153,0.12)' : 'rgba(255,255,255,0.03)';
+    return `
+      <rect x="${x}" y="${y}" width="240" height="60" rx="16" fill="${fill}" stroke="${stroke}" stroke-width="2" opacity="${on ? 1 : 0.65}"/>
+      <text x="${x + 14}" y="${y + 38}" fill="rgba(240,240,248,0.90)" font-size="14" font-family="Inter, Arial" font-weight="900" opacity="${on ? 1 : 0.65}">${escapeXml(label)}</text>
+    `;
+  };
+
+  const arrowOrtho = (x1, y1, x2, y2, label = '') => {
+    const mid = Math.abs(x1 * 13 + x2 * 7 + y1 * 11 + y2 * 5).toFixed(0);
+    const markerId = `arch-arrow-${mid}`;
+    const mx = Math.round((x1 + x2) / 2);
+    const d = `M${x1} ${y1} L ${mx} ${y1} L ${mx} ${y2} L ${x2} ${y2}`;
+    return `
+      <defs>
+        <marker id="${markerId}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(123,125,248,0.9)"/>
+        </marker>
+      </defs>
+      <path d="${d}" fill="none" stroke="rgba(123,125,248,0.55)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#${markerId})"/>
+      ${label ? `<text x="${mx}" y="${Math.min(y1, y2) - 10}" text-anchor="middle" fill="rgba(123,125,248,0.65)" font-size="12" font-family="Inter, Arial" font-weight="800">${escapeXml(label)}</text>` : ''}
+    `;
+  };
+
+  const stepIdx = (PLAYGROUND.step ?? 0) + 1;
+  const edges = (layout.stepEdges ? layout.stepEdges(stepIdx, sys) : [])
+    .map(([a, b, label]) => {
+      const na = layout.nodes[a];
+      const nb = layout.nodes[b];
+      if (!na || !nb) return '';
+      return arrowOrtho(na.x + 240, na.y + 30, nb.x, nb.y + 30, label || '');
+    })
+    .join('');
+
+  const backend = layout.backend;
+  const backendBox = backend
+    ? box(backend.x, backend.y, backend.w, backend.h, layout.backendLabel || `${sys?.title || 'Product'} Backend`)
+    : '';
+
+  svg.innerHTML = `
+    <rect x="0" y="0" width="100%" height="100%" fill="rgba(0,0,0,0)"/>
+    ${backendBox}
+    ${Object.entries(layout.nodes)
+      .map(([id, nd]) => n(id, nd.x, nd.y, nd.label))
+      .join('')}
+    ${edges}
+  `;
 }
 
 function renderWhatsAppArchitecture(step) {
