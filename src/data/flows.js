@@ -2353,6 +2353,428 @@ export const FLOWS = {
       }
     ]
   }
+
+  ,
+
+  dropbox: {
+    title: 'Dropbox',
+    steps: [
+      {
+        title: 'Open app and list files',
+        desc: 'Client syncs metadata and lists folders quickly using caches.',
+        active: ['client','metadata','sync'],
+        edges: [['client','metadata'], ['metadata','sync']]
+      },
+      {
+        title: 'Upload file',
+        desc: 'Resumable upload streams chunks to storage; retries handle flaky networks.',
+        active: ['client','upload','storage'],
+        edges: [['client','upload'], ['upload','storage']]
+      },
+      {
+        title: 'Index and search',
+        desc: 'Metadata and content indexing power fast search and suggestions.',
+        active: ['index','search','metadata'],
+        edges: [['metadata','index'], ['index','search']]
+      },
+      {
+        title: 'Sharing and permissions',
+        desc: 'Share links and ACLs control access and auditing.',
+        active: ['sharing','authz','audit'],
+        edges: [['client','sharing'], ['sharing','authz'], ['authz','audit']]
+      },
+      {
+        title: 'Sync across devices',
+        desc: 'Sync engine detects changes and propagates updates to devices.',
+        active: ['sync','realtime','client'],
+        edges: [['storage','sync'], ['sync','realtime'], ['realtime','client']]
+      },
+      {
+        title: 'Versioning and recovery',
+        desc: 'Versions and retention allow rollback and recovery after deletions.',
+        active: ['versions','storage','support'],
+        edges: [['storage','versions'], ['versions','support']]
+      }
+    ]
+  },
+
+  gmail: {
+    title: 'Gmail',
+    steps: [
+      {
+        title: 'Sync inbox',
+        desc: 'Client syncs inbox with cached threads and labels for fast load.',
+        active: ['client','inbox','cache'],
+        edges: [['client','inbox'], ['inbox','cache']]
+      },
+      {
+        title: 'Compose and send',
+        desc: 'Message is sent through SMTP pipeline with auth and policy checks.',
+        active: ['client','send','auth'],
+        edges: [['client','send'], ['send','auth']]
+      },
+      {
+        title: 'Spam and security scanning',
+        desc: 'Spam classifier and security scanning check attachments and links.',
+        active: ['spam','security','send'],
+        edges: [['send','spam'], ['spam','security']]
+      },
+      {
+        title: 'Deliver and store',
+        desc: 'Mail is delivered and stored; threads and labels are updated.',
+        active: ['delivery','store','index'],
+        edges: [['security','delivery'], ['delivery','store'], ['store','index']]
+      },
+      {
+        title: 'Search and filters',
+        desc: 'Index supports search; filters and rules apply automatically.',
+        active: ['search','index','filters'],
+        edges: [['index','search'], ['search','filters']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Push notifications inform clients of new mail and updates.',
+        active: ['notify','push','client'],
+        edges: [['delivery','notify'], ['notify','push'], ['push','client']]
+      }
+    ]
+  },
+
+  'microsoft-teams': {
+    title: 'Microsoft Teams',
+    steps: [
+      {
+        title: 'Sign in and sync teams',
+        desc: 'Client authenticates and syncs teams/channels and recent messages.',
+        active: ['client','auth','sync'],
+        edges: [['client','auth'], ['auth','sync']]
+      },
+      {
+        title: 'Send chat message',
+        desc: 'Message is persisted and fanned out via realtime gateways.',
+        active: ['api','store','realtime'],
+        edges: [['client','api'], ['api','store'], ['store','realtime']]
+      },
+      {
+        title: 'Meetings and signaling',
+        desc: 'Meeting join uses signaling and media negotiation to set up calls.',
+        active: ['meet','signaling','media'],
+        edges: [['client','meet'], ['meet','signaling'], ['signaling','media']]
+      },
+      {
+        title: 'Media relay',
+        desc: 'SFU/relay services route audio/video streams for group calls.',
+        active: ['media','sfu','client'],
+        edges: [['client','media'], ['media','sfu'], ['sfu','client']]
+      },
+      {
+        title: 'Files and collaboration',
+        desc: 'Files are stored in cloud storage; permissions and sharing apply.',
+        active: ['files','storage','authz'],
+        edges: [['client','files'], ['files','storage'], ['storage','authz']]
+      },
+      {
+        title: 'Notifications and compliance',
+        desc: 'Notifications deliver updates; compliance tools audit and retain data.',
+        active: ['notify','compliance','audit'],
+        edges: [['store','notify'], ['store','compliance'], ['compliance','audit']]
+      }
+    ]
+  },
+
+  trello: {
+    title: 'Trello',
+    steps: [
+      {
+        title: 'Load boards',
+        desc: 'Client fetches boards, lists, cards and permissions with caching.',
+        active: ['client','boards','cache'],
+        edges: [['client','boards'], ['boards','cache']]
+      },
+      {
+        title: 'Move card (drag/drop)',
+        desc: 'Card update is validated and persisted; activity log is updated.',
+        active: ['api','store','activity'],
+        edges: [['client','api'], ['api','store'], ['store','activity']]
+      },
+      {
+        title: 'Realtime updates',
+        desc: 'Board changes are pushed to connected clients for collaboration.',
+        active: ['realtime','client','store'],
+        edges: [['store','realtime'], ['realtime','client']]
+      },
+      {
+        title: 'Comments and mentions',
+        desc: 'Comments persist and trigger notifications to mentioned users.',
+        active: ['comments','notify','store'],
+        edges: [['client','comments'], ['comments','store'], ['comments','notify']]
+      },
+      {
+        title: 'Attachments',
+        desc: 'Attachments upload to object storage and link to cards.',
+        active: ['upload','obj','store'],
+        edges: [['client','upload'], ['upload','obj'], ['upload','store']]
+      },
+      {
+        title: 'Automation and integrations',
+        desc: 'Rules and integrations run actions and post updates back to boards.',
+        active: ['automation','apps','api'],
+        edges: [['store','automation'], ['automation','apps'], ['apps','api']]
+      }
+    ]
+  },
+
+  asana: {
+    title: 'Asana',
+    steps: [
+      {
+        title: 'Load projects and tasks',
+        desc: 'Client fetches projects and tasks with caching and permissions.',
+        active: ['client','projects','cache'],
+        edges: [['client','projects'], ['projects','cache']]
+      },
+      {
+        title: 'Create/update task',
+        desc: 'Write is validated and persisted; activity stream updates.',
+        active: ['api','store','activity'],
+        edges: [['client','api'], ['api','store'], ['store','activity']]
+      },
+      {
+        title: 'Assignments and notifications',
+        desc: 'Assignment changes trigger notifications and inbox updates.',
+        active: ['notify','inbox','store'],
+        edges: [['store','notify'], ['notify','inbox']]
+      },
+      {
+        title: 'Realtime collaboration',
+        desc: 'Realtime layer pushes updates to collaborators.',
+        active: ['realtime','client','store'],
+        edges: [['store','realtime'], ['realtime','client']]
+      },
+      {
+        title: 'Search and reporting',
+        desc: 'Indexing powers search, dashboards, and reporting.',
+        active: ['index','search','reports'],
+        edges: [['store','index'], ['index','search'], ['search','reports']]
+      },
+      {
+        title: 'Automation and integrations',
+        desc: 'Rules and integrations run workflows and update tasks.',
+        active: ['automation','apps','api'],
+        edges: [['store','automation'], ['automation','apps'], ['apps','api']]
+      }
+    ]
+  },
+
+  clickup: {
+    title: 'ClickUp',
+    steps: [
+      {
+        title: 'Load workspace',
+        desc: 'Client syncs spaces/lists/tasks and permissions.',
+        active: ['client','sync','authz'],
+        edges: [['client','sync'], ['sync','authz']]
+      },
+      {
+        title: 'Create/update task',
+        desc: 'Writes persist task updates; activity log updates.',
+        active: ['api','store','activity'],
+        edges: [['client','api'], ['api','store'], ['store','activity']]
+      },
+      {
+        title: 'Docs and collaboration',
+        desc: 'Docs edits sync and merge in realtime collaboration layer.',
+        active: ['docs','realtime','merge'],
+        edges: [['client','docs'], ['docs','realtime'], ['realtime','merge']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Changes trigger notifications and mentions across workspace.',
+        active: ['notify','push','client'],
+        edges: [['store','notify'], ['notify','push'], ['push','client']]
+      },
+      {
+        title: 'Search and dashboards',
+        desc: 'Indexing powers search and dashboards across tasks and docs.',
+        active: ['index','search','dash'],
+        edges: [['store','index'], ['index','search'], ['search','dash']]
+      },
+      {
+        title: 'Automations and integrations',
+        desc: 'Automations run and integrations deliver events to external tools.',
+        active: ['automation','apps','webhooks'],
+        edges: [['store','automation'], ['automation','apps'], ['apps','webhooks']]
+      }
+    ]
+  },
+
+  evernote: {
+    title: 'Evernote',
+    steps: [
+      {
+        title: 'Sync notes',
+        desc: 'Client syncs notebooks and notes metadata for offline access.',
+        active: ['client','sync','metadata'],
+        edges: [['client','sync'], ['sync','metadata']]
+      },
+      {
+        title: 'Edit note',
+        desc: 'Edits are persisted and conflicts resolved; versions maintained.',
+        active: ['editor','store','versions'],
+        edges: [['client','editor'], ['editor','store'], ['store','versions']]
+      },
+      {
+        title: 'Attachments',
+        desc: 'Images and files upload to object storage and link to notes.',
+        active: ['upload','obj','store'],
+        edges: [['client','upload'], ['upload','obj'], ['upload','store']]
+      },
+      {
+        title: 'Search indexing',
+        desc: 'Indexing supports search and OCR for scanned documents.',
+        active: ['index','search','ocr'],
+        edges: [['store','index'], ['index','ocr'], ['index','search']]
+      },
+      {
+        title: 'Sharing',
+        desc: 'Shared notes use ACLs and link generation with audit logs.',
+        active: ['sharing','authz','audit'],
+        edges: [['client','sharing'], ['sharing','authz'], ['authz','audit']]
+      },
+      {
+        title: 'Notifications and reminders',
+        desc: 'Reminders and notifications keep users engaged.',
+        active: ['notify','scheduler','client'],
+        edges: [['store','scheduler'], ['scheduler','notify'], ['notify','client']]
+      }
+    ]
+  },
+
+  airtable: {
+    title: 'Airtable',
+    steps: [
+      {
+        title: 'Load base and views',
+        desc: 'Client fetches schema, views, and records with caching.',
+        active: ['client','api','schema'],
+        edges: [['client','api'], ['api','schema']]
+      },
+      {
+        title: 'Edit cell',
+        desc: 'Write validates types and permissions; records persist to storage.',
+        active: ['api','authz','store'],
+        edges: [['client','api'], ['api','authz'], ['api','store']]
+      },
+      {
+        title: 'Realtime collaboration',
+        desc: 'Realtime updates push edits to collaborators and resolve conflicts.',
+        active: ['realtime','client','store'],
+        edges: [['store','realtime'], ['realtime','client']]
+      },
+      {
+        title: 'Automations',
+        desc: 'Automation engine runs triggers and actions on record changes.',
+        active: ['automation','queue','store'],
+        edges: [['store','automation'], ['automation','queue']]
+      },
+      {
+        title: 'Integrations and webhooks',
+        desc: 'Webhooks deliver change events to external systems.',
+        active: ['webhooks','apps','api'],
+        edges: [['automation','webhooks'], ['webhooks','apps'], ['apps','api']]
+      },
+      {
+        title: 'Search and analytics',
+        desc: 'Indexing supports search and analytics across bases.',
+        active: ['index','search','analytics'],
+        edges: [['store','index'], ['index','search'], ['search','analytics']]
+      }
+    ]
+  },
+
+  'monday-com': {
+    title: 'Monday.com',
+    steps: [
+      {
+        title: 'Load boards',
+        desc: 'Client loads boards and items with permissions and caching.',
+        active: ['client','boards','cache'],
+        edges: [['client','boards'], ['boards','cache']]
+      },
+      {
+        title: 'Update item',
+        desc: 'Writes are validated and persisted; activity stream updates.',
+        active: ['api','store','activity'],
+        edges: [['client','api'], ['api','store'], ['store','activity']]
+      },
+      {
+        title: 'Automation',
+        desc: 'Automations trigger actions, notifications, and integrations.',
+        active: ['automation','queue','notify'],
+        edges: [['store','automation'], ['automation','queue'], ['automation','notify']]
+      },
+      {
+        title: 'Realtime collaboration',
+        desc: 'Realtime layer pushes updates to collaborators.',
+        active: ['realtime','client','store'],
+        edges: [['store','realtime'], ['realtime','client']]
+      },
+      {
+        title: 'Integrations',
+        desc: 'Integrations deliver events to external tools via webhooks/API.',
+        active: ['apps','webhooks','api'],
+        edges: [['automation','apps'], ['apps','webhooks'], ['webhooks','api']]
+      },
+      {
+        title: 'Dashboards and reporting',
+        desc: 'Dashboards aggregate data and compute reporting metrics.',
+        active: ['reports','analytics','store'],
+        edges: [['store','reports'], ['reports','analytics']]
+      }
+    ]
+  },
+
+  zoom: {
+    title: 'Zoom',
+    steps: [
+      {
+        title: 'Schedule/join meeting',
+        desc: 'Client authenticates and joins meeting using meeting service.',
+        active: ['client','auth','meet'],
+        edges: [['client','auth'], ['client','meet']]
+      },
+      {
+        title: 'Signaling and negotiation',
+        desc: 'Signaling sets up session, exchanges capabilities, and negotiates media.',
+        active: ['signaling','media','client'],
+        edges: [['meet','signaling'], ['signaling','media']]
+      },
+      {
+        title: 'Media relay (SFU)',
+        desc: 'SFU/relay routes audio/video streams and adapts to network conditions.',
+        active: ['sfu','media','client'],
+        edges: [['client','media'], ['media','sfu'], ['sfu','client']]
+      },
+      {
+        title: 'Recording (optional)',
+        desc: 'Cloud recording stores media and generates playback assets.',
+        active: ['record','storage','cdn'],
+        edges: [['sfu','record'], ['record','storage'], ['storage','cdn']]
+      },
+      {
+        title: 'Chat and reactions',
+        desc: 'Meeting chat uses messaging and moderation pipelines.',
+        active: ['chat','realtime','moderation'],
+        edges: [['client','chat'], ['chat','realtime'], ['realtime','moderation']]
+      },
+      {
+        title: 'Telemetry and QoE',
+        desc: 'Metrics feed analytics to improve quality and detect issues.',
+        active: ['metrics','analytics','support'],
+        edges: [['client','metrics'], ['metrics','analytics'], ['analytics','support']]
+      }
+    ]
+  }
 };
 
 export function flowForSystem(sys) {

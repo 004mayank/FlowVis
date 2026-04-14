@@ -2363,6 +2363,341 @@ const SYSTEM_LAYOUTS = {
     }
   },
 
+  dropbox: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Dropbox Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','metadata','sync','upload','storage','index','search','sharing','authz','audit','versions','realtime'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      metadata: { x: 320, y: 160, label: 'Metadata' },
+      sync: { x: 600, y: 160, label: 'Sync Engine' },
+      upload: { x: 320, y: 300, label: 'Upload' },
+      storage: { x: 600, y: 300, label: 'Storage' },
+      index: { x: 880, y: 160, label: 'Index' },
+      search: { x: 1160, y: 160, label: 'Search' },
+      sharing: { x: 880, y: 300, label: 'Sharing' },
+      authz: { x: 1160, y: 300, label: 'AuthZ' },
+      audit: { x: 1440, y: 300, label: 'Audit' },
+      realtime: { x: 1440, y: 160, label: 'Realtime' },
+      versions: { x: 600, y: 440, label: 'Versions' },
+      support: { x: 320, y: 440, label: 'Support' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','metadata','list'], ['metadata','sync','sync']);
+      if (stepIdx === 2) e.push(['client','upload','upload'], ['upload','storage','store']);
+      if (stepIdx === 3) e.push(['metadata','index','index'], ['index','search','search']);
+      if (stepIdx === 4) e.push(['client','sharing','share'], ['sharing','authz','authz'], ['authz','audit','audit']);
+      if (stepIdx === 5) e.push(['storage','sync','sync'], ['sync','realtime','rt'], ['realtime','client','client']);
+      if (stepIdx === 6) e.push(['storage','versions','versions'], ['versions','support','support']);
+      return e;
+    }
+  },
+
+  gmail: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Gmail Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','inbox','cache','send','auth','spam','security','delivery','store','index','search','filters','notify','push'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      inbox: { x: 320, y: 160, label: 'Inbox' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      send: { x: 320, y: 300, label: 'Send' },
+      auth: { x: 600, y: 300, label: 'Auth' },
+      spam: { x: 880, y: 300, label: 'Spam' },
+      security: { x: 1160, y: 300, label: 'Security' },
+      delivery: { x: 880, y: 440, label: 'Delivery' },
+      store: { x: 600, y: 440, label: 'Store' },
+      index: { x: 320, y: 440, label: 'Index' },
+      search: { x: 320, y: 580, label: 'Search' },
+      filters: { x: 600, y: 580, label: 'Filters' },
+      notify: { x: 880, y: 580, label: 'Notify' },
+      push: { x: 1160, y: 580, label: 'Push' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','inbox','sync'], ['inbox','cache','cache']);
+      if (stepIdx === 2) e.push(['client','send','send'], ['send','auth','auth']);
+      if (stepIdx === 3) e.push(['send','spam','spam'], ['spam','security','scan']);
+      if (stepIdx === 4) e.push(['security','delivery','deliver'], ['delivery','store','store'], ['store','index','index']);
+      if (stepIdx === 5) e.push(['index','search','search'], ['search','filters','filters']);
+      if (stepIdx === 6) e.push(['delivery','notify','notify'], ['notify','push','push'], ['push','client','client']);
+      return e;
+    }
+  },
+
+  'microsoft-teams': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Microsoft Teams Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','sync','api','store','realtime','meet','signaling','media','sfu','files','storage','authz','notify','compliance','audit'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      sync: { x: 600, y: 160, label: 'Sync' },
+      api: { x: 320, y: 300, label: 'API' },
+      store: { x: 600, y: 300, label: 'Message Store' },
+      realtime: { x: 880, y: 300, label: 'Realtime' },
+      meet: { x: 320, y: 440, label: 'Meetings' },
+      signaling: { x: 600, y: 440, label: 'Signaling' },
+      media: { x: 880, y: 440, label: 'Media' },
+      sfu: { x: 1160, y: 440, label: 'SFU/Relay' },
+      files: { x: 320, y: 580, label: 'Files' },
+      storage: { x: 600, y: 580, label: 'Storage' },
+      authz: { x: 880, y: 580, label: 'AuthZ' },
+      notify: { x: 1160, y: 300, label: 'Notify' },
+      compliance: { x: 1160, y: 580, label: 'Compliance' },
+      audit: { x: 1440, y: 580, label: 'Audit' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','sync','sync']);
+      if (stepIdx === 2) e.push(['client','api','send'], ['api','store','store'], ['store','realtime','rt']);
+      if (stepIdx === 3) e.push(['client','meet','join'], ['meet','signaling','signal'], ['signaling','media','neg']);
+      if (stepIdx === 4) e.push(['client','media','media'], ['media','sfu','sfu'], ['sfu','client','client']);
+      if (stepIdx === 5) e.push(['client','files','files'], ['files','storage','store'], ['storage','authz','authz']);
+      if (stepIdx === 6) e.push(['store','notify','notify'], ['store','compliance','comp'], ['compliance','audit','audit']);
+      return e;
+    }
+  },
+
+  trello: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Trello Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','boards','cache','api','store','activity','realtime','comments','notify','upload','obj','automation','apps'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      boards: { x: 320, y: 160, label: 'Boards' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      api: { x: 320, y: 300, label: 'API' },
+      store: { x: 600, y: 300, label: 'Store' },
+      activity: { x: 880, y: 300, label: 'Activity' },
+      realtime: { x: 1160, y: 300, label: 'Realtime' },
+      comments: { x: 320, y: 440, label: 'Comments' },
+      notify: { x: 600, y: 440, label: 'Notify' },
+      upload: { x: 320, y: 580, label: 'Upload' },
+      obj: { x: 600, y: 580, label: 'Object Store' },
+      automation: { x: 880, y: 580, label: 'Automation' },
+      apps: { x: 1160, y: 580, label: 'Apps' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','boards','boards'], ['boards','cache','cache']);
+      if (stepIdx === 2) e.push(['client','api','move'], ['api','store','store'], ['store','activity','activity']);
+      if (stepIdx === 3) e.push(['store','realtime','rt'], ['realtime','client','client']);
+      if (stepIdx === 4) e.push(['client','comments','comment'], ['comments','store','store'], ['comments','notify','notify']);
+      if (stepIdx === 5) e.push(['client','upload','upload'], ['upload','obj','obj'], ['upload','store','store']);
+      if (stepIdx === 6) e.push(['store','automation','auto'], ['automation','apps','apps'], ['apps','api','api']);
+      return e;
+    }
+  },
+
+  asana: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Asana Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','projects','cache','api','store','activity','notify','inbox','realtime','index','search','reports','automation','apps'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      projects: { x: 320, y: 160, label: 'Projects' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      api: { x: 320, y: 300, label: 'API' },
+      store: { x: 600, y: 300, label: 'Store' },
+      activity: { x: 880, y: 300, label: 'Activity' },
+      notify: { x: 1160, y: 300, label: 'Notify' },
+      inbox: { x: 1160, y: 440, label: 'Inbox' },
+      realtime: { x: 880, y: 440, label: 'Realtime' },
+      index: { x: 600, y: 440, label: 'Index' },
+      search: { x: 320, y: 440, label: 'Search' },
+      reports: { x: 320, y: 580, label: 'Reports' },
+      automation: { x: 600, y: 580, label: 'Automation' },
+      apps: { x: 880, y: 580, label: 'Apps' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','projects','load'], ['projects','cache','cache']);
+      if (stepIdx === 2) e.push(['client','api','write'], ['api','store','store'], ['store','activity','activity']);
+      if (stepIdx === 3) e.push(['store','notify','notify'], ['notify','inbox','inbox']);
+      if (stepIdx === 4) e.push(['store','realtime','rt'], ['realtime','client','client']);
+      if (stepIdx === 5) e.push(['store','index','index'], ['index','search','search'], ['search','reports','reports']);
+      if (stepIdx === 6) e.push(['store','automation','auto'], ['automation','apps','apps'], ['apps','api','api']);
+      return e;
+    }
+  },
+
+  clickup: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'ClickUp Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','sync','authz','api','store','activity','docs','realtime','merge','notify','push','index','search','dash','automation','apps','webhooks'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      sync: { x: 320, y: 160, label: 'Sync' },
+      authz: { x: 600, y: 160, label: 'AuthZ' },
+      api: { x: 320, y: 300, label: 'API' },
+      store: { x: 600, y: 300, label: 'Store' },
+      activity: { x: 880, y: 300, label: 'Activity' },
+      docs: { x: 320, y: 440, label: 'Docs' },
+      realtime: { x: 600, y: 440, label: 'Realtime' },
+      merge: { x: 880, y: 440, label: 'Merge' },
+      notify: { x: 1160, y: 300, label: 'Notify' },
+      push: { x: 1160, y: 440, label: 'Push' },
+      index: { x: 600, y: 580, label: 'Index' },
+      search: { x: 320, y: 580, label: 'Search' },
+      dash: { x: 40, y: 580, label: 'Dashboards' },
+      automation: { x: 880, y: 580, label: 'Automation' },
+      apps: { x: 1160, y: 580, label: 'Apps' },
+      webhooks: { x: 1160, y: 720, label: 'Webhooks' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','sync','sync'], ['sync','authz','authz']);
+      if (stepIdx === 2) e.push(['client','api','write'], ['api','store','store'], ['store','activity','activity']);
+      if (stepIdx === 3) e.push(['client','docs','docs'], ['docs','realtime','rt'], ['realtime','merge','merge']);
+      if (stepIdx === 4) e.push(['store','notify','notify'], ['notify','push','push'], ['push','client','client']);
+      if (stepIdx === 5) e.push(['store','index','index'], ['index','search','search'], ['search','dash','dash']);
+      if (stepIdx === 6) e.push(['store','automation','auto'], ['automation','apps','apps'], ['apps','webhooks','webhooks']);
+      return e;
+    }
+  },
+
+  evernote: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Evernote Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','sync','metadata','editor','store','versions','upload','obj','index','ocr','search','sharing','authz','audit','notify','scheduler'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      sync: { x: 320, y: 160, label: 'Sync' },
+      metadata: { x: 600, y: 160, label: 'Metadata' },
+      editor: { x: 320, y: 300, label: 'Editor' },
+      store: { x: 600, y: 300, label: 'Store' },
+      versions: { x: 880, y: 300, label: 'Versions' },
+      upload: { x: 320, y: 440, label: 'Upload' },
+      obj: { x: 600, y: 440, label: 'Object Store' },
+      index: { x: 880, y: 440, label: 'Index' },
+      ocr: { x: 1160, y: 440, label: 'OCR' },
+      search: { x: 1160, y: 300, label: 'Search' },
+      sharing: { x: 320, y: 580, label: 'Sharing' },
+      authz: { x: 600, y: 580, label: 'AuthZ' },
+      audit: { x: 880, y: 580, label: 'Audit' },
+      scheduler: { x: 1160, y: 580, label: 'Scheduler' },
+      notify: { x: 1160, y: 720, label: 'Notify' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','sync','sync'], ['sync','metadata','meta']);
+      if (stepIdx === 2) e.push(['client','editor','edit'], ['editor','store','store'], ['store','versions','versions']);
+      if (stepIdx === 3) e.push(['client','upload','upload'], ['upload','obj','obj'], ['upload','store','store']);
+      if (stepIdx === 4) e.push(['store','index','index'], ['index','ocr','ocr'], ['index','search','search']);
+      if (stepIdx === 5) e.push(['client','sharing','share'], ['sharing','authz','authz'], ['authz','audit','audit']);
+      if (stepIdx === 6) e.push(['store','scheduler','sched'], ['scheduler','notify','notify'], ['notify','client','client']);
+      return e;
+    }
+  },
+
+  airtable: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Airtable Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','api','schema','authz','store','realtime','automation','queue','webhooks','apps','index','search','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      api: { x: 320, y: 160, label: 'API' },
+      schema: { x: 600, y: 160, label: 'Schema' },
+      authz: { x: 880, y: 160, label: 'AuthZ' },
+      store: { x: 600, y: 300, label: 'Records' },
+      realtime: { x: 880, y: 300, label: 'Realtime' },
+      automation: { x: 320, y: 300, label: 'Automation' },
+      queue: { x: 40, y: 300, label: 'Queue' },
+      webhooks: { x: 320, y: 440, label: 'Webhooks' },
+      apps: { x: 600, y: 440, label: 'Apps' },
+      index: { x: 880, y: 440, label: 'Index' },
+      search: { x: 1160, y: 440, label: 'Search' },
+      analytics: { x: 1160, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','api','load'], ['api','schema','schema']);
+      if (stepIdx === 2) e.push(['client','api','edit'], ['api','authz','authz'], ['api','store','store']);
+      if (stepIdx === 3) e.push(['store','realtime','rt'], ['realtime','client','client']);
+      if (stepIdx === 4) e.push(['store','automation','auto'], ['automation','queue','queue']);
+      if (stepIdx === 5) e.push(['automation','webhooks','webhook'], ['webhooks','apps','apps'], ['apps','api','api']);
+      if (stepIdx === 6) e.push(['store','index','index'], ['index','search','search'], ['search','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'monday-com': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Monday.com Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','boards','cache','api','store','activity','automation','queue','notify','realtime','apps','webhooks','reports','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      boards: { x: 320, y: 160, label: 'Boards' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      api: { x: 320, y: 300, label: 'API' },
+      store: { x: 600, y: 300, label: 'Store' },
+      activity: { x: 880, y: 300, label: 'Activity' },
+      automation: { x: 320, y: 440, label: 'Automation' },
+      queue: { x: 40, y: 440, label: 'Queue' },
+      notify: { x: 600, y: 440, label: 'Notify' },
+      realtime: { x: 880, y: 440, label: 'Realtime' },
+      apps: { x: 1160, y: 440, label: 'Apps' },
+      webhooks: { x: 1160, y: 580, label: 'Webhooks' },
+      reports: { x: 600, y: 580, label: 'Reports' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','boards','boards'], ['boards','cache','cache']);
+      if (stepIdx === 2) e.push(['client','api','write'], ['api','store','store'], ['store','activity','activity']);
+      if (stepIdx === 3) e.push(['store','automation','auto'], ['automation','queue','queue'], ['automation','notify','notify']);
+      if (stepIdx === 4) e.push(['store','realtime','rt'], ['realtime','client','client']);
+      if (stepIdx === 5) e.push(['automation','apps','apps'], ['apps','webhooks','webhooks'], ['webhooks','api','api']);
+      if (stepIdx === 6) e.push(['store','reports','reports'], ['reports','analytics','analytics']);
+      return e;
+    }
+  },
+
+  zoom: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Zoom Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','meet','signaling','media','sfu','record','storage','cdn','chat','realtime','moderation','metrics','analytics','support'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      meet: { x: 600, y: 160, label: 'Meeting Svc' },
+      signaling: { x: 880, y: 160, label: 'Signaling' },
+      media: { x: 600, y: 300, label: 'Media' },
+      sfu: { x: 880, y: 300, label: 'SFU/Relay' },
+      record: { x: 1160, y: 300, label: 'Recording' },
+      storage: { x: 1160, y: 440, label: 'Storage' },
+      cdn: { x: 880, y: 440, label: 'CDN' },
+      chat: { x: 320, y: 300, label: 'Chat' },
+      realtime: { x: 320, y: 440, label: 'Realtime' },
+      moderation: { x: 600, y: 440, label: 'Moderation' },
+      metrics: { x: 600, y: 580, label: 'Metrics' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      support: { x: 1160, y: 580, label: 'Support' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['client','meet','join']);
+      if (stepIdx === 2) e.push(['meet','signaling','signal'], ['signaling','media','neg']);
+      if (stepIdx === 3) e.push(['client','media','media'], ['media','sfu','sfu'], ['sfu','client','client']);
+      if (stepIdx === 4) e.push(['sfu','record','record'], ['record','storage','store'], ['storage','cdn','cdn']);
+      if (stepIdx === 5) e.push(['client','chat','chat'], ['chat','realtime','rt'], ['realtime','moderation','mod']);
+      if (stepIdx === 6) e.push(['client','metrics','metrics'], ['metrics','analytics','analytics'], ['analytics','support','support']);
+      return e;
+    }
+  },
+
   uber: {
     viewBox: '0 0 1000 640',
     nodes: {
@@ -3505,6 +3840,223 @@ const SYSTEM_LAYOUTS = {
       support: { x: 860, y: 740, label: 'Support', colorKey: 'external' },
       changes: { x: 620, y: 740, label: 'Changes', colorKey: 'api' },
       refunds: { x: 380, y: 740, label: 'Refunds', colorKey: 'api' }
+    }
+  }
+
+  ,
+
+  dropbox: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','metadata','sync','upload','storage','index','search','sharing','authz','audit','versions','realtime'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      metadata: { x: 380, y: 180, label: 'Metadata', colorKey: 'store' },
+      sync: { x: 620, y: 180, label: 'Sync Engine', colorKey: 'stream' },
+      upload: { x: 380, y: 320, label: 'Upload', colorKey: 'api' },
+      storage: { x: 620, y: 320, label: 'Storage', colorKey: 'store' },
+      index: { x: 860, y: 180, label: 'Index', colorKey: 'store' },
+      search: { x: 1100, y: 180, label: 'Search', colorKey: 'api' },
+      sharing: { x: 860, y: 320, label: 'Sharing', colorKey: 'api' },
+      authz: { x: 1100, y: 320, label: 'AuthZ', colorKey: 'api' },
+      audit: { x: 1100, y: 460, label: 'Audit', colorKey: 'store' },
+      realtime: { x: 860, y: 460, label: 'Realtime', colorKey: 'stream' },
+      versions: { x: 620, y: 460, label: 'Versions', colorKey: 'store' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' }
+    }
+  },
+
+  gmail: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','inbox','cache','send','auth','spam','security','delivery','store','index','search','filters','notify','push'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      inbox: { x: 380, y: 180, label: 'Inbox', colorKey: 'api' },
+      cache: { x: 620, y: 180, label: 'Cache', colorKey: 'cache' },
+      send: { x: 380, y: 320, label: 'Send', colorKey: 'api' },
+      auth: { x: 620, y: 320, label: 'Auth', colorKey: 'api' },
+      spam: { x: 860, y: 320, label: 'Spam', colorKey: 'api' },
+      security: { x: 1100, y: 320, label: 'Security', colorKey: 'api' },
+      delivery: { x: 860, y: 460, label: 'Delivery', colorKey: 'api' },
+      store: { x: 620, y: 460, label: 'Store', colorKey: 'store' },
+      index: { x: 380, y: 460, label: 'Index', colorKey: 'store' },
+      search: { x: 380, y: 600, label: 'Search', colorKey: 'api' },
+      filters: { x: 620, y: 600, label: 'Filters', colorKey: 'api' },
+      notify: { x: 860, y: 600, label: 'Notify', colorKey: 'external' },
+      push: { x: 1100, y: 600, label: 'Push', colorKey: 'external' }
+    }
+  },
+
+  'microsoft-teams': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','sync','api','store','realtime','meet','signaling','media','sfu','files','storage','authz','notify','compliance','audit'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      sync: { x: 620, y: 180, label: 'Sync', colorKey: 'stream' },
+      api: { x: 380, y: 320, label: 'API', colorKey: 'api' },
+      store: { x: 620, y: 320, label: 'Message Store', colorKey: 'store' },
+      realtime: { x: 860, y: 320, label: 'Realtime', colorKey: 'stream' },
+      meet: { x: 380, y: 460, label: 'Meetings', colorKey: 'api' },
+      signaling: { x: 620, y: 460, label: 'Signaling', colorKey: 'api' },
+      media: { x: 860, y: 460, label: 'Media', colorKey: 'api' },
+      sfu: { x: 1100, y: 460, label: 'SFU/Relay', colorKey: 'api' },
+      files: { x: 380, y: 600, label: 'Files', colorKey: 'api' },
+      storage: { x: 620, y: 600, label: 'Storage', colorKey: 'store' },
+      authz: { x: 860, y: 600, label: 'AuthZ', colorKey: 'api' },
+      notify: { x: 1100, y: 320, label: 'Notify', colorKey: 'external' },
+      compliance: { x: 1100, y: 600, label: 'Compliance', colorKey: 'api' },
+      audit: { x: 1100, y: 740, label: 'Audit', colorKey: 'store' }
+    }
+  },
+
+  trello: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','boards','cache','api','store','activity','realtime','comments','notify','upload','obj','automation','apps'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      boards: { x: 380, y: 180, label: 'Boards', colorKey: 'api' },
+      cache: { x: 620, y: 180, label: 'Cache', colorKey: 'cache' },
+      api: { x: 380, y: 320, label: 'API', colorKey: 'api' },
+      store: { x: 620, y: 320, label: 'Store', colorKey: 'store' },
+      activity: { x: 860, y: 320, label: 'Activity', colorKey: 'store' },
+      realtime: { x: 1100, y: 320, label: 'Realtime', colorKey: 'stream' },
+      comments: { x: 380, y: 460, label: 'Comments', colorKey: 'store' },
+      notify: { x: 620, y: 460, label: 'Notify', colorKey: 'external' },
+      upload: { x: 380, y: 600, label: 'Upload', colorKey: 'api' },
+      obj: { x: 620, y: 600, label: 'Object Store', colorKey: 'store' },
+      automation: { x: 860, y: 600, label: 'Automation', colorKey: 'api' },
+      apps: { x: 1100, y: 600, label: 'Apps', colorKey: 'external' }
+    }
+  },
+
+  asana: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','projects','cache','api','store','activity','notify','inbox','realtime','index','search','reports','automation','apps'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      projects: { x: 380, y: 180, label: 'Projects', colorKey: 'api' },
+      cache: { x: 620, y: 180, label: 'Cache', colorKey: 'cache' },
+      api: { x: 380, y: 320, label: 'API', colorKey: 'api' },
+      store: { x: 620, y: 320, label: 'Store', colorKey: 'store' },
+      activity: { x: 860, y: 320, label: 'Activity', colorKey: 'store' },
+      notify: { x: 1100, y: 320, label: 'Notify', colorKey: 'external' },
+      inbox: { x: 1100, y: 460, label: 'Inbox', colorKey: 'api' },
+      realtime: { x: 860, y: 460, label: 'Realtime', colorKey: 'stream' },
+      index: { x: 620, y: 460, label: 'Index', colorKey: 'store' },
+      search: { x: 380, y: 460, label: 'Search', colorKey: 'api' },
+      reports: { x: 380, y: 600, label: 'Reports', colorKey: 'store' },
+      automation: { x: 620, y: 600, label: 'Automation', colorKey: 'api' },
+      apps: { x: 860, y: 600, label: 'Apps', colorKey: 'external' }
+    }
+  },
+
+  clickup: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','sync','authz','api','store','activity','docs','realtime','merge','notify','push','index','search','dash','automation','apps','webhooks'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      sync: { x: 380, y: 180, label: 'Sync', colorKey: 'stream' },
+      authz: { x: 620, y: 180, label: 'AuthZ', colorKey: 'api' },
+      api: { x: 380, y: 320, label: 'API', colorKey: 'api' },
+      store: { x: 620, y: 320, label: 'Store', colorKey: 'store' },
+      activity: { x: 860, y: 320, label: 'Activity', colorKey: 'store' },
+      docs: { x: 380, y: 460, label: 'Docs', colorKey: 'api' },
+      realtime: { x: 620, y: 460, label: 'Realtime', colorKey: 'stream' },
+      merge: { x: 860, y: 460, label: 'Merge', colorKey: 'api' },
+      notify: { x: 1100, y: 320, label: 'Notify', colorKey: 'external' },
+      push: { x: 1100, y: 460, label: 'Push', colorKey: 'external' },
+      index: { x: 620, y: 600, label: 'Index', colorKey: 'store' },
+      search: { x: 380, y: 600, label: 'Search', colorKey: 'api' },
+      dash: { x: 140, y: 600, label: 'Dashboards', colorKey: 'store' },
+      automation: { x: 860, y: 600, label: 'Automation', colorKey: 'api' },
+      apps: { x: 1100, y: 600, label: 'Apps', colorKey: 'external' },
+      webhooks: { x: 1100, y: 740, label: 'Webhooks', colorKey: 'external' }
+    }
+  },
+
+  evernote: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','sync','metadata','editor','store','versions','upload','obj','index','ocr','search','sharing','authz','audit','notify','scheduler'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      sync: { x: 380, y: 180, label: 'Sync', colorKey: 'stream' },
+      metadata: { x: 620, y: 180, label: 'Metadata', colorKey: 'store' },
+      editor: { x: 380, y: 320, label: 'Editor', colorKey: 'api' },
+      store: { x: 620, y: 320, label: 'Store', colorKey: 'store' },
+      versions: { x: 860, y: 320, label: 'Versions', colorKey: 'store' },
+      upload: { x: 380, y: 460, label: 'Upload', colorKey: 'api' },
+      obj: { x: 620, y: 460, label: 'Object Store', colorKey: 'store' },
+      index: { x: 860, y: 460, label: 'Index', colorKey: 'store' },
+      ocr: { x: 1100, y: 460, label: 'OCR', colorKey: 'api' },
+      search: { x: 1100, y: 320, label: 'Search', colorKey: 'api' },
+      sharing: { x: 380, y: 600, label: 'Sharing', colorKey: 'api' },
+      authz: { x: 620, y: 600, label: 'AuthZ', colorKey: 'api' },
+      audit: { x: 860, y: 600, label: 'Audit', colorKey: 'store' },
+      scheduler: { x: 1100, y: 600, label: 'Scheduler', colorKey: 'queue' },
+      notify: { x: 1100, y: 740, label: 'Notify', colorKey: 'external' }
+    }
+  },
+
+  airtable: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','api','schema','authz','store','realtime','automation','queue','webhooks','apps','index','search','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      api: { x: 380, y: 180, label: 'API', colorKey: 'api' },
+      schema: { x: 620, y: 180, label: 'Schema', colorKey: 'store' },
+      authz: { x: 860, y: 180, label: 'AuthZ', colorKey: 'api' },
+      store: { x: 620, y: 320, label: 'Records', colorKey: 'store' },
+      realtime: { x: 860, y: 320, label: 'Realtime', colorKey: 'stream' },
+      automation: { x: 380, y: 320, label: 'Automation', colorKey: 'api' },
+      queue: { x: 140, y: 320, label: 'Queue', colorKey: 'queue' },
+      webhooks: { x: 380, y: 460, label: 'Webhooks', colorKey: 'external' },
+      apps: { x: 620, y: 460, label: 'Apps', colorKey: 'external' },
+      index: { x: 860, y: 460, label: 'Index', colorKey: 'store' },
+      search: { x: 1100, y: 460, label: 'Search', colorKey: 'api' },
+      analytics: { x: 1100, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'monday-com': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','boards','cache','api','store','activity','automation','queue','notify','realtime','apps','webhooks','reports','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      boards: { x: 380, y: 180, label: 'Boards', colorKey: 'api' },
+      cache: { x: 620, y: 180, label: 'Cache', colorKey: 'cache' },
+      api: { x: 380, y: 320, label: 'API', colorKey: 'api' },
+      store: { x: 620, y: 320, label: 'Store', colorKey: 'store' },
+      activity: { x: 860, y: 320, label: 'Activity', colorKey: 'store' },
+      automation: { x: 380, y: 460, label: 'Automation', colorKey: 'api' },
+      queue: { x: 140, y: 460, label: 'Queue', colorKey: 'queue' },
+      notify: { x: 620, y: 460, label: 'Notify', colorKey: 'external' },
+      realtime: { x: 860, y: 460, label: 'Realtime', colorKey: 'stream' },
+      apps: { x: 1100, y: 460, label: 'Apps', colorKey: 'external' },
+      webhooks: { x: 1100, y: 600, label: 'Webhooks', colorKey: 'external' },
+      reports: { x: 620, y: 600, label: 'Reports', colorKey: 'store' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  zoom: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','meet','signaling','media','sfu','record','storage','cdn','chat','realtime','moderation','metrics','analytics','support'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      meet: { x: 620, y: 180, label: 'Meeting Svc', colorKey: 'api' },
+      signaling: { x: 860, y: 180, label: 'Signaling', colorKey: 'api' },
+      media: { x: 620, y: 320, label: 'Media', colorKey: 'api' },
+      sfu: { x: 860, y: 320, label: 'SFU/Relay', colorKey: 'api' },
+      record: { x: 1100, y: 320, label: 'Recording', colorKey: 'api' },
+      storage: { x: 1100, y: 460, label: 'Storage', colorKey: 'store' },
+      cdn: { x: 860, y: 460, label: 'CDN', colorKey: 'cdn' },
+      chat: { x: 380, y: 320, label: 'Chat', colorKey: 'api' },
+      realtime: { x: 380, y: 460, label: 'Realtime', colorKey: 'stream' },
+      moderation: { x: 620, y: 460, label: 'Moderation', colorKey: 'api' },
+      metrics: { x: 620, y: 600, label: 'Metrics', colorKey: 'stream' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' },
+      support: { x: 1100, y: 600, label: 'Support', colorKey: 'external' }
     }
   }
 };
