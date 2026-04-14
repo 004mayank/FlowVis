@@ -2569,8 +2569,11 @@ function renderArchitectureDiagram(sys, step) {
     const dir = (y2 >= y1) ? 1 : -1;
     const y1c = y1 + dir * clearance;
     const y2c = y2 - dir * clearance;
-    // Route: out from source, over at mid, down/up, into target
-    const d = `M${x1} ${y1} L ${x1} ${y1c} L ${mx} ${y1c} L ${mx} ${y2c} L ${x2} ${y2c} L ${x2} ${y2}`;
+    // Route primarily left->right: move out horizontally from source, then vertical, then into target.
+    // This avoids weird up/down arrowheads near boxes.
+    const x1c = x1 + clearance;
+    const x2c = x2 - clearance;
+    const d = `M${x1} ${y1} L ${x1c} ${y1} L ${x1c} ${y2} L ${x2c} ${y2} L ${x2} ${y2}`;
     return `
       <defs>
         <marker id="${markerId}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
