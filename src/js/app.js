@@ -3175,6 +3175,712 @@ const SYSTEM_LAYOUTS = {
     }
   },
 
+  // ----- Batch 9 (Architecture) -----
+
+  figma: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Figma Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','files','cache','editor','ops','merge','store','realtime','comments','notify','push','export','render','cdn','sharing','authz','audit'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      files: { x: 600, y: 160, label: 'Files' },
+      cache: { x: 880, y: 160, label: 'Cache' },
+      editor: { x: 320, y: 300, label: 'Editor' },
+      ops: { x: 600, y: 300, label: 'Ops' },
+      merge: { x: 880, y: 300, label: 'Merge' },
+      store: { x: 1160, y: 300, label: 'Store' },
+      realtime: { x: 1160, y: 160, label: 'Realtime' },
+      comments: { x: 320, y: 440, label: 'Comments' },
+      notify: { x: 600, y: 440, label: 'Notify' },
+      push: { x: 880, y: 440, label: 'Push' },
+      export: { x: 320, y: 580, label: 'Export' },
+      render: { x: 600, y: 580, label: 'Render' },
+      cdn: { x: 880, y: 580, label: 'CDN' },
+      sharing: { x: 320, y: 720, label: 'Sharing' },
+      authz: { x: 600, y: 720, label: 'AuthZ' },
+      audit: { x: 880, y: 720, label: 'Audit' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['client','files','file'], ['files','cache','cache']);
+      if (stepIdx === 2) e.push(['client','editor','edit'], ['editor','ops','ops'], ['ops','realtime','rt']);
+      if (stepIdx === 3) e.push(['ops','merge','merge'], ['merge','store','store']);
+      if (stepIdx === 4) e.push(['client','comments','comment'], ['comments','notify','notify'], ['notify','push','push']);
+      if (stepIdx === 5) e.push(['client','export','export'], ['export','render','render'], ['render','cdn','cdn']);
+      if (stepIdx === 6) e.push(['client','sharing','share'], ['sharing','authz','authz'], ['authz','audit','audit']);
+      return e;
+    }
+  },
+
+  canva: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Canva Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','designs','cache','editor','ops','store','realtime','presence','templates','search','assets','export','render','cdn','paywall','entitlements','payments'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      designs: { x: 320, y: 160, label: 'Designs' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      editor: { x: 320, y: 300, label: 'Editor' },
+      ops: { x: 600, y: 300, label: 'Ops' },
+      store: { x: 880, y: 300, label: 'Store' },
+      realtime: { x: 1160, y: 300, label: 'Realtime' },
+      presence: { x: 1160, y: 160, label: 'Presence' },
+      templates: { x: 320, y: 440, label: 'Templates' },
+      search: { x: 600, y: 440, label: 'Search' },
+      assets: { x: 880, y: 440, label: 'Assets' },
+      export: { x: 320, y: 580, label: 'Export' },
+      render: { x: 600, y: 580, label: 'Render' },
+      cdn: { x: 880, y: 580, label: 'CDN' },
+      paywall: { x: 320, y: 720, label: 'Paywall' },
+      entitlements: { x: 600, y: 720, label: 'Entitlements' },
+      payments: { x: 880, y: 720, label: 'Payments' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','designs','open'], ['designs','cache','cache']);
+      if (stepIdx === 2) e.push(['client','editor','edit'], ['editor','ops','ops'], ['ops','store','save']);
+      if (stepIdx === 3) e.push(['store','realtime','rt'], ['realtime','client','client'], ['realtime','presence','presence']);
+      if (stepIdx === 4) e.push(['client','templates','tpl'], ['templates','search','search'], ['search','assets','assets']);
+      if (stepIdx === 5) e.push(['client','export','export'], ['export','render','render'], ['render','cdn','cdn']);
+      if (stepIdx === 6) e.push(['export','paywall','paywall'], ['paywall','entitlements','ent'], ['entitlements','payments','pay']);
+      return e;
+    }
+  },
+
+  photoshop: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Photoshop Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','files','assets','editor','render','gpu','versions','store','sync','merge','export','cdn','sharing','auth','entitlements','payments'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      files: { x: 320, y: 160, label: 'Files' },
+      assets: { x: 600, y: 160, label: 'Assets' },
+      editor: { x: 320, y: 300, label: 'Editor' },
+      render: { x: 600, y: 300, label: 'Render' },
+      gpu: { x: 880, y: 300, label: 'GPU' },
+      versions: { x: 320, y: 440, label: 'Versions' },
+      store: { x: 600, y: 440, label: 'Store' },
+      sync: { x: 880, y: 440, label: 'Sync' },
+      merge: { x: 1160, y: 440, label: 'Merge' },
+      export: { x: 320, y: 580, label: 'Export' },
+      cdn: { x: 600, y: 580, label: 'CDN' },
+      sharing: { x: 880, y: 580, label: 'Sharing' },
+      auth: { x: 320, y: 720, label: 'Auth' },
+      entitlements: { x: 600, y: 720, label: 'Entitlements' },
+      payments: { x: 880, y: 720, label: 'Payments' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','files','open'], ['files','assets','assets']);
+      if (stepIdx === 2) e.push(['client','editor','edit'], ['editor','render','render'], ['render','gpu','gpu']);
+      if (stepIdx === 3) e.push(['editor','versions','version'], ['versions','store','store'], ['store','sync','sync']);
+      if (stepIdx === 4) e.push(['sync','merge','merge'], ['merge','store','store']);
+      if (stepIdx === 5) e.push(['client','export','export'], ['export','cdn','cdn'], ['export','sharing','share']);
+      if (stepIdx === 6) e.push(['client','auth','auth'], ['auth','entitlements','ent'], ['entitlements','payments','pay']);
+      return e;
+    }
+  },
+
+  'google-maps': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Google Maps Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','search','index','tiles','cdn','cache','routing','graph','traffic','location','eta','ugc','store','moderation','ads','auction','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      search: { x: 320, y: 160, label: 'Search' },
+      index: { x: 600, y: 160, label: 'Index' },
+      tiles: { x: 320, y: 300, label: 'Tiles' },
+      cdn: { x: 600, y: 300, label: 'CDN' },
+      cache: { x: 880, y: 300, label: 'Cache' },
+      routing: { x: 320, y: 440, label: 'Routing' },
+      graph: { x: 600, y: 440, label: 'Road Graph' },
+      traffic: { x: 880, y: 440, label: 'Traffic' },
+      location: { x: 320, y: 580, label: 'Location' },
+      eta: { x: 600, y: 580, label: 'ETA' },
+      ugc: { x: 320, y: 720, label: 'UGC' },
+      store: { x: 600, y: 720, label: 'Store' },
+      moderation: { x: 880, y: 720, label: 'Moderation' },
+      ads: { x: 1160, y: 160, label: 'Ads' },
+      auction: { x: 1160, y: 300, label: 'Auction' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','search','search'], ['search','index','index']);
+      if (stepIdx === 2) e.push(['client','tiles','tiles'], ['tiles','cdn','cdn'], ['tiles','cache','cache']);
+      if (stepIdx === 3) e.push(['client','routing','route'], ['routing','graph','graph'], ['traffic','routing','traffic']);
+      if (stepIdx === 4) e.push(['client','location','loc'], ['location','eta','eta'], ['eta','routing','reroute']);
+      if (stepIdx === 5) e.push(['client','ugc','ugc'], ['ugc','store','store'], ['ugc','moderation','mod']);
+      if (stepIdx === 6) e.push(['search','ads','ads'], ['ads','auction','auc'], ['auction','analytics','analytics']);
+      return e;
+    }
+  },
+
+  waze: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Waze Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','tiles','cache','location','traffic','eta','routing','graph','reports','moderation','store','signals','rank','notify','push'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      tiles: { x: 320, y: 160, label: 'Tiles' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      location: { x: 320, y: 300, label: 'Location' },
+      traffic: { x: 600, y: 300, label: 'Traffic' },
+      eta: { x: 880, y: 300, label: 'ETA' },
+      routing: { x: 320, y: 440, label: 'Routing' },
+      graph: { x: 600, y: 440, label: 'Road Graph' },
+      reports: { x: 320, y: 580, label: 'Reports' },
+      moderation: { x: 600, y: 580, label: 'Moderation' },
+      store: { x: 880, y: 580, label: 'Store' },
+      signals: { x: 600, y: 720, label: 'Signals' },
+      rank: { x: 880, y: 720, label: 'Ranking' },
+      notify: { x: 1160, y: 720, label: 'Notify' },
+      push: { x: 1160, y: 580, label: 'Push' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','tiles','tiles'], ['tiles','cache','cache']);
+      if (stepIdx === 2) e.push(['client','location','ping'], ['location','traffic','traffic'], ['traffic','eta','eta']);
+      if (stepIdx === 3) e.push(['client','routing','route'], ['routing','graph','graph'], ['traffic','routing','traffic']);
+      if (stepIdx === 4) e.push(['client','reports','report'], ['reports','moderation','mod'], ['reports','store','store']);
+      if (stepIdx === 5) e.push(['reports','signals','signals'], ['signals','rank','rank'], ['rank','traffic','traffic']);
+      if (stepIdx === 6) e.push(['traffic','notify','notify'], ['notify','push','push'], ['push','client','client']);
+      return e;
+    }
+  },
+
+  zomato: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Zomato Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','catalog','cache','cart','pricing','payments','orders','restaurant','dispatch','courier','realtime','location','eta','support','refunds','ledger'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      catalog: { x: 320, y: 160, label: 'Catalog' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      cart: { x: 320, y: 300, label: 'Cart' },
+      pricing: { x: 600, y: 300, label: 'Pricing' },
+      payments: { x: 880, y: 300, label: 'Payments' },
+      orders: { x: 1160, y: 300, label: 'Orders' },
+      restaurant: { x: 1160, y: 440, label: 'Restaurant' },
+      dispatch: { x: 880, y: 440, label: 'Dispatch' },
+      courier: { x: 600, y: 440, label: 'Courier' },
+      realtime: { x: 320, y: 440, label: 'Realtime' },
+      location: { x: 320, y: 580, label: 'Location' },
+      eta: { x: 600, y: 580, label: 'ETA' },
+      support: { x: 880, y: 580, label: 'Support' },
+      refunds: { x: 1160, y: 580, label: 'Refunds' },
+      ledger: { x: 1160, y: 720, label: 'Ledger' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','catalog','browse'], ['catalog','cache','cache']);
+      if (stepIdx === 2) e.push(['client','cart','cart'], ['cart','pricing','price'], ['pricing','payments','pay']);
+      if (stepIdx === 3) e.push(['payments','orders','order'], ['orders','restaurant','merchant'], ['orders','dispatch','dispatch']);
+      if (stepIdx === 4) e.push(['dispatch','courier','assign'], ['courier','realtime','rt']);
+      if (stepIdx === 5) e.push(['courier','location','loc'], ['location','eta','eta'], ['eta','client','client']);
+      if (stepIdx === 6) e.push(['orders','support','support'], ['support','refunds','refund'], ['refunds','ledger','ledger']);
+      return e;
+    }
+  },
+
+  swiggy: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Swiggy Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','catalog','cache','cart','pricing','payments','orders','restaurant','dispatch','courier','realtime','location','eta','support','refunds','ledger'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      catalog: { x: 320, y: 160, label: 'Catalog' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      cart: { x: 320, y: 300, label: 'Cart' },
+      pricing: { x: 600, y: 300, label: 'Pricing' },
+      payments: { x: 880, y: 300, label: 'Payments' },
+      orders: { x: 1160, y: 300, label: 'Orders' },
+      restaurant: { x: 1160, y: 440, label: 'Restaurant' },
+      dispatch: { x: 880, y: 440, label: 'Dispatch' },
+      courier: { x: 600, y: 440, label: 'Courier' },
+      realtime: { x: 320, y: 440, label: 'Realtime' },
+      location: { x: 320, y: 580, label: 'Location' },
+      eta: { x: 600, y: 580, label: 'ETA' },
+      support: { x: 880, y: 580, label: 'Support' },
+      refunds: { x: 1160, y: 580, label: 'Refunds' },
+      ledger: { x: 1160, y: 720, label: 'Ledger' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','catalog','browse'], ['catalog','cache','cache']);
+      if (stepIdx === 2) e.push(['client','cart','cart'], ['cart','pricing','price'], ['pricing','payments','pay']);
+      if (stepIdx === 3) e.push(['payments','orders','order'], ['orders','restaurant','merchant'], ['orders','dispatch','dispatch']);
+      if (stepIdx === 4) e.push(['dispatch','courier','assign'], ['courier','realtime','rt']);
+      if (stepIdx === 5) e.push(['courier','location','loc'], ['location','eta','eta'], ['eta','client','client']);
+      if (stepIdx === 6) e.push(['orders','support','support'], ['support','refunds','refund'], ['refunds','ledger','ledger']);
+      return e;
+    }
+  },
+
+  instacart: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Instacart Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','catalog','inventory','cart','pricing','payments','dispatch','shopper','realtime','picking','updates','notify','location','eta','support','refunds','ledger'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      catalog: { x: 320, y: 160, label: 'Catalog' },
+      inventory: { x: 600, y: 160, label: 'Inventory' },
+      cart: { x: 320, y: 300, label: 'Cart' },
+      pricing: { x: 600, y: 300, label: 'Pricing' },
+      payments: { x: 880, y: 300, label: 'Payments' },
+      dispatch: { x: 1160, y: 300, label: 'Dispatch' },
+      shopper: { x: 880, y: 440, label: 'Shopper' },
+      realtime: { x: 600, y: 440, label: 'Realtime' },
+      picking: { x: 320, y: 440, label: 'Picking' },
+      updates: { x: 320, y: 580, label: 'Updates' },
+      notify: { x: 600, y: 580, label: 'Notify' },
+      location: { x: 880, y: 580, label: 'Location' },
+      eta: { x: 1160, y: 580, label: 'ETA' },
+      support: { x: 880, y: 720, label: 'Support' },
+      refunds: { x: 1160, y: 720, label: 'Refunds' },
+      ledger: { x: 1160, y: 840, label: 'Ledger' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','catalog','browse'], ['catalog','inventory','inv']);
+      if (stepIdx === 2) e.push(['client','cart','cart'], ['cart','pricing','price'], ['pricing','payments','pay']);
+      if (stepIdx === 3) e.push(['payments','dispatch','dispatch'], ['dispatch','shopper','assign'], ['shopper','realtime','rt']);
+      if (stepIdx === 4) e.push(['shopper','picking','pick'], ['picking','updates','updates'], ['updates','notify','notify']);
+      if (stepIdx === 5) e.push(['shopper','location','loc'], ['location','eta','eta'], ['eta','client','client']);
+      if (stepIdx === 6) e.push(['dispatch','support','support'], ['support','refunds','refund'], ['refunds','ledger','ledger']);
+      return e;
+    }
+  },
+
+  coinbase: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Coinbase Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','risk','payments','ledger','wallet','orders','match','positions','compliance','network','monitor','reports'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      risk: { x: 600, y: 160, label: 'Risk' },
+      payments: { x: 320, y: 300, label: 'Fiat Rails' },
+      ledger: { x: 600, y: 300, label: 'Ledger' },
+      wallet: { x: 880, y: 300, label: 'Wallet' },
+      orders: { x: 320, y: 440, label: 'Orders' },
+      match: { x: 600, y: 440, label: 'Matching' },
+      positions: { x: 880, y: 440, label: 'Positions' },
+      compliance: { x: 1160, y: 300, label: 'Compliance' },
+      network: { x: 1160, y: 440, label: 'Blockchain' },
+      monitor: { x: 880, y: 580, label: 'Monitoring' },
+      reports: { x: 1160, y: 580, label: 'Reports' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','risk','risk']);
+      if (stepIdx === 2) e.push(['client','payments','deposit'], ['payments','ledger','ledger'], ['ledger','wallet','wallet']);
+      if (stepIdx === 3) e.push(['client','orders','order'], ['orders','risk','risk'], ['orders','match','match']);
+      if (stepIdx === 4) e.push(['match','ledger','settle'], ['ledger','positions','positions']);
+      if (stepIdx === 5) e.push(['client','wallet','withdraw'], ['wallet','compliance','comp'], ['wallet','network','broadcast']);
+      if (stepIdx === 6) e.push(['positions','monitor','monitor'], ['monitor','compliance','comp'], ['compliance','reports','reports']);
+      return e;
+    }
+  },
+
+  coinmarketcap: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'CoinMarketCap Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','api','cache','connectors','stream','normalize','aggregate','timeseries','store','alerts','notify','email','ads','auction','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      api: { x: 320, y: 160, label: 'API' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      connectors: { x: 320, y: 300, label: 'Connectors' },
+      stream: { x: 600, y: 300, label: 'Stream' },
+      normalize: { x: 880, y: 300, label: 'Normalize' },
+      aggregate: { x: 1160, y: 300, label: 'Aggregate' },
+      timeseries: { x: 880, y: 440, label: 'Timeseries' },
+      store: { x: 1160, y: 440, label: 'Store' },
+      alerts: { x: 600, y: 440, label: 'Alerts' },
+      notify: { x: 320, y: 440, label: 'Notify' },
+      email: { x: 40, y: 440, label: 'Email' },
+      ads: { x: 880, y: 580, label: 'Ads' },
+      auction: { x: 1160, y: 580, label: 'Auction' },
+      analytics: { x: 1160, y: 720, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','api','api'], ['api','cache','cache']);
+      if (stepIdx === 2) e.push(['connectors','stream','ingest'], ['stream','normalize','normalize']);
+      if (stepIdx === 3) e.push(['normalize','aggregate','agg'], ['aggregate','timeseries','ts'], ['timeseries','store','store']);
+      if (stepIdx === 4) e.push(['api','store','store'], ['store','cache','cache']);
+      if (stepIdx === 5) e.push(['timeseries','alerts','alert'], ['alerts','notify','notify'], ['alerts','email','email']);
+      if (stepIdx === 6) e.push(['api','ads','ads'], ['ads','auction','auc'], ['auction','analytics','analytics']);
+      return e;
+    }
+  },
+
+
+
+  // ----- Batch 9 -----
+
+  figma: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Figma Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','files','cache','editor','ops','realtime','merge','store','comments','notify','push','export','render','cdn','sharing','authz','audit'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      files: { x: 600, y: 160, label: 'Files' },
+      cache: { x: 880, y: 160, label: 'Cache' },
+      editor: { x: 320, y: 300, label: 'Editor' },
+      ops: { x: 600, y: 300, label: 'Ops' },
+      realtime: { x: 880, y: 300, label: 'Realtime' },
+      merge: { x: 1160, y: 300, label: 'Merge' },
+      store: { x: 1160, y: 160, label: 'Store' },
+      comments: { x: 320, y: 440, label: 'Comments' },
+      notify: { x: 600, y: 440, label: 'Notify' },
+      push: { x: 880, y: 440, label: 'Push' },
+      export: { x: 320, y: 580, label: 'Export' },
+      render: { x: 600, y: 580, label: 'Render' },
+      cdn: { x: 880, y: 580, label: 'CDN' },
+      sharing: { x: 320, y: 720, label: 'Sharing' },
+      authz: { x: 600, y: 720, label: 'AuthZ' },
+      audit: { x: 880, y: 720, label: 'Audit' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['client','files','file'], ['files','cache','cache']);
+      if (stepIdx === 2) e.push(['client','editor','edit'], ['editor','ops','ops'], ['ops','realtime','rt']);
+      if (stepIdx === 3) e.push(['ops','merge','merge'], ['merge','store','store']);
+      if (stepIdx === 4) e.push(['client','comments','comment'], ['comments','notify','notify'], ['notify','push','push']);
+      if (stepIdx === 5) e.push(['client','export','export'], ['export','render','render'], ['render','cdn','cdn']);
+      if (stepIdx === 6) e.push(['client','sharing','share'], ['sharing','authz','authz'], ['authz','audit','audit']);
+      return e;
+    }
+  },
+
+  canva: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Canva Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','designs','cache','editor','ops','store','realtime','presence','templates','search','assets','export','render','cdn','paywall','entitlements','payments'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      designs: { x: 320, y: 160, label: 'Designs' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      editor: { x: 320, y: 300, label: 'Editor' },
+      ops: { x: 600, y: 300, label: 'Ops' },
+      store: { x: 880, y: 300, label: 'Store' },
+      realtime: { x: 1160, y: 300, label: 'Realtime' },
+      presence: { x: 1160, y: 160, label: 'Presence' },
+      templates: { x: 320, y: 440, label: 'Templates' },
+      search: { x: 600, y: 440, label: 'Search' },
+      assets: { x: 880, y: 440, label: 'Assets' },
+      export: { x: 320, y: 580, label: 'Export' },
+      render: { x: 600, y: 580, label: 'Render' },
+      cdn: { x: 880, y: 580, label: 'CDN' },
+      paywall: { x: 320, y: 720, label: 'Paywall' },
+      entitlements: { x: 600, y: 720, label: 'Entitlements' },
+      payments: { x: 880, y: 720, label: 'Payments' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','designs','open'], ['designs','cache','cache']);
+      if (stepIdx === 2) e.push(['client','editor','edit'], ['editor','ops','ops'], ['ops','store','save']);
+      if (stepIdx === 3) e.push(['store','realtime','rt'], ['realtime','client','client'], ['realtime','presence','presence']);
+      if (stepIdx === 4) e.push(['client','templates','tpl'], ['templates','search','search'], ['search','assets','assets']);
+      if (stepIdx === 5) e.push(['client','export','export'], ['export','render','render'], ['render','cdn','cdn']);
+      if (stepIdx === 6) e.push(['export','paywall','paywall'], ['paywall','entitlements','ent'], ['entitlements','payments','pay']);
+      return e;
+    }
+  },
+
+  photoshop: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Photoshop Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','files','assets','editor','render','gpu','versions','store','sync','merge','export','cdn','sharing','auth','entitlements','payments'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      files: { x: 320, y: 160, label: 'Files' },
+      assets: { x: 600, y: 160, label: 'Assets' },
+      editor: { x: 320, y: 300, label: 'Editor' },
+      render: { x: 600, y: 300, label: 'Render' },
+      gpu: { x: 880, y: 300, label: 'GPU' },
+      versions: { x: 320, y: 440, label: 'Versions' },
+      store: { x: 600, y: 440, label: 'Store' },
+      sync: { x: 880, y: 440, label: 'Sync' },
+      merge: { x: 1160, y: 440, label: 'Merge' },
+      export: { x: 320, y: 580, label: 'Export' },
+      cdn: { x: 600, y: 580, label: 'CDN' },
+      sharing: { x: 880, y: 580, label: 'Sharing' },
+      auth: { x: 320, y: 720, label: 'Auth' },
+      entitlements: { x: 600, y: 720, label: 'Entitlements' },
+      payments: { x: 880, y: 720, label: 'Payments' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','files','open'], ['files','assets','assets']);
+      if (stepIdx === 2) e.push(['client','editor','edit'], ['editor','render','render'], ['render','gpu','gpu']);
+      if (stepIdx === 3) e.push(['editor','versions','version'], ['versions','store','store'], ['store','sync','sync']);
+      if (stepIdx === 4) e.push(['sync','merge','merge'], ['merge','store','store']);
+      if (stepIdx === 5) e.push(['client','export','export'], ['export','cdn','cdn'], ['export','sharing','share']);
+      if (stepIdx === 6) e.push(['client','auth','auth'], ['auth','entitlements','ent'], ['entitlements','payments','pay']);
+      return e;
+    }
+  },
+
+  'google-maps': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Google Maps Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','search','index','tiles','cdn','cache','routing','graph','traffic','location','eta','ugc','store','moderation','ads','auction','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      search: { x: 320, y: 160, label: 'Search' },
+      index: { x: 600, y: 160, label: 'Index' },
+      tiles: { x: 320, y: 300, label: 'Tiles' },
+      cdn: { x: 600, y: 300, label: 'CDN' },
+      cache: { x: 880, y: 300, label: 'Cache' },
+      routing: { x: 320, y: 440, label: 'Routing' },
+      graph: { x: 600, y: 440, label: 'Road Graph' },
+      traffic: { x: 880, y: 440, label: 'Traffic' },
+      location: { x: 320, y: 580, label: 'Location' },
+      eta: { x: 600, y: 580, label: 'ETA' },
+      ugc: { x: 320, y: 720, label: 'UGC' },
+      store: { x: 600, y: 720, label: 'Store' },
+      moderation: { x: 880, y: 720, label: 'Moderation' },
+      ads: { x: 1160, y: 160, label: 'Ads' },
+      auction: { x: 1160, y: 300, label: 'Auction' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','search','search'], ['search','index','index']);
+      if (stepIdx === 2) e.push(['client','tiles','tiles'], ['tiles','cdn','cdn'], ['tiles','cache','cache']);
+      if (stepIdx === 3) e.push(['client','routing','route'], ['routing','graph','graph'], ['traffic','routing','traffic']);
+      if (stepIdx === 4) e.push(['client','location','loc'], ['location','eta','eta'], ['eta','routing','reroute']);
+      if (stepIdx === 5) e.push(['client','ugc','ugc'], ['ugc','store','store'], ['ugc','moderation','mod']);
+      if (stepIdx === 6) e.push(['search','ads','ads'], ['ads','auction','auc'], ['auction','analytics','analytics']);
+      return e;
+    }
+  },
+
+  waze: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Waze Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','tiles','cache','location','traffic','eta','routing','graph','reports','moderation','store','signals','rank','notify','push'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      tiles: { x: 320, y: 160, label: 'Tiles' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      location: { x: 320, y: 300, label: 'Location' },
+      traffic: { x: 600, y: 300, label: 'Traffic' },
+      eta: { x: 880, y: 300, label: 'ETA' },
+      routing: { x: 320, y: 440, label: 'Routing' },
+      graph: { x: 600, y: 440, label: 'Road Graph' },
+      reports: { x: 320, y: 580, label: 'Reports' },
+      moderation: { x: 600, y: 580, label: 'Moderation' },
+      store: { x: 880, y: 580, label: 'Store' },
+      signals: { x: 600, y: 720, label: 'Signals' },
+      rank: { x: 880, y: 720, label: 'Ranking' },
+      notify: { x: 1160, y: 720, label: 'Notify' },
+      push: { x: 1160, y: 580, label: 'Push' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','tiles','tiles'], ['tiles','cache','cache']);
+      if (stepIdx === 2) e.push(['client','location','ping'], ['location','traffic','traffic'], ['traffic','eta','eta']);
+      if (stepIdx === 3) e.push(['client','routing','route'], ['routing','graph','graph'], ['traffic','routing','traffic']);
+      if (stepIdx === 4) e.push(['client','reports','report'], ['reports','moderation','mod'], ['reports','store','store']);
+      if (stepIdx === 5) e.push(['reports','signals','signals'], ['signals','rank','rank'], ['rank','traffic','traffic']);
+      if (stepIdx === 6) e.push(['traffic','notify','notify'], ['notify','push','push'], ['push','client','client']);
+      return e;
+    }
+  },
+
+  zomato: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Zomato Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','catalog','cache','cart','pricing','payments','orders','restaurant','dispatch','courier','realtime','location','eta','support','refunds','ledger'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      catalog: { x: 320, y: 160, label: 'Catalog' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      cart: { x: 320, y: 300, label: 'Cart' },
+      pricing: { x: 600, y: 300, label: 'Pricing' },
+      payments: { x: 880, y: 300, label: 'Payments' },
+      orders: { x: 1160, y: 300, label: 'Orders' },
+      restaurant: { x: 1160, y: 440, label: 'Restaurant' },
+      dispatch: { x: 880, y: 440, label: 'Dispatch' },
+      courier: { x: 600, y: 440, label: 'Courier' },
+      realtime: { x: 320, y: 440, label: 'Realtime' },
+      location: { x: 320, y: 580, label: 'Location' },
+      eta: { x: 600, y: 580, label: 'ETA' },
+      support: { x: 880, y: 580, label: 'Support' },
+      refunds: { x: 1160, y: 580, label: 'Refunds' },
+      ledger: { x: 1160, y: 720, label: 'Ledger' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','catalog','browse'], ['catalog','cache','cache']);
+      if (stepIdx === 2) e.push(['client','cart','cart'], ['cart','pricing','price'], ['pricing','payments','pay']);
+      if (stepIdx === 3) e.push(['payments','orders','order'], ['orders','restaurant','merchant'], ['orders','dispatch','dispatch']);
+      if (stepIdx === 4) e.push(['dispatch','courier','assign'], ['courier','realtime','rt']);
+      if (stepIdx === 5) e.push(['courier','location','loc'], ['location','eta','eta'], ['eta','client','client']);
+      if (stepIdx === 6) e.push(['orders','support','support'], ['support','refunds','refund'], ['refunds','ledger','ledger']);
+      return e;
+    }
+  },
+
+  swiggy: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Swiggy Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','catalog','cache','cart','pricing','payments','orders','restaurant','dispatch','courier','realtime','location','eta','support','refunds','ledger'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      catalog: { x: 320, y: 160, label: 'Catalog' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      cart: { x: 320, y: 300, label: 'Cart' },
+      pricing: { x: 600, y: 300, label: 'Pricing' },
+      payments: { x: 880, y: 300, label: 'Payments' },
+      orders: { x: 1160, y: 300, label: 'Orders' },
+      restaurant: { x: 1160, y: 440, label: 'Restaurant' },
+      dispatch: { x: 880, y: 440, label: 'Dispatch' },
+      courier: { x: 600, y: 440, label: 'Courier' },
+      realtime: { x: 320, y: 440, label: 'Realtime' },
+      location: { x: 320, y: 580, label: 'Location' },
+      eta: { x: 600, y: 580, label: 'ETA' },
+      support: { x: 880, y: 580, label: 'Support' },
+      refunds: { x: 1160, y: 580, label: 'Refunds' },
+      ledger: { x: 1160, y: 720, label: 'Ledger' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','catalog','browse'], ['catalog','cache','cache']);
+      if (stepIdx === 2) e.push(['client','cart','cart'], ['cart','pricing','price'], ['pricing','payments','pay']);
+      if (stepIdx === 3) e.push(['payments','orders','order'], ['orders','restaurant','merchant'], ['orders','dispatch','dispatch']);
+      if (stepIdx === 4) e.push(['dispatch','courier','assign'], ['courier','realtime','rt']);
+      if (stepIdx === 5) e.push(['courier','location','loc'], ['location','eta','eta'], ['eta','client','client']);
+      if (stepIdx === 6) e.push(['orders','support','support'], ['support','refunds','refund'], ['refunds','ledger','ledger']);
+      return e;
+    }
+  },
+
+  instacart: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Instacart Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','catalog','inventory','cart','pricing','payments','dispatch','shopper','realtime','picking','updates','notify','location','eta','support','refunds','ledger'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      catalog: { x: 320, y: 160, label: 'Catalog' },
+      inventory: { x: 600, y: 160, label: 'Inventory' },
+      cart: { x: 320, y: 300, label: 'Cart' },
+      pricing: { x: 600, y: 300, label: 'Pricing' },
+      payments: { x: 880, y: 300, label: 'Payments' },
+      dispatch: { x: 1160, y: 300, label: 'Dispatch' },
+      shopper: { x: 880, y: 440, label: 'Shopper' },
+      realtime: { x: 600, y: 440, label: 'Realtime' },
+      picking: { x: 320, y: 440, label: 'Picking' },
+      updates: { x: 320, y: 580, label: 'Updates' },
+      notify: { x: 600, y: 580, label: 'Notify' },
+      location: { x: 880, y: 580, label: 'Location' },
+      eta: { x: 1160, y: 580, label: 'ETA' },
+      support: { x: 880, y: 720, label: 'Support' },
+      refunds: { x: 1160, y: 720, label: 'Refunds' },
+      ledger: { x: 1160, y: 840, label: 'Ledger' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','catalog','browse'], ['catalog','inventory','inv']);
+      if (stepIdx === 2) e.push(['client','cart','cart'], ['cart','pricing','price'], ['pricing','payments','pay']);
+      if (stepIdx === 3) e.push(['payments','dispatch','dispatch'], ['dispatch','shopper','assign'], ['shopper','realtime','rt']);
+      if (stepIdx === 4) e.push(['shopper','picking','pick'], ['picking','updates','updates'], ['updates','notify','notify']);
+      if (stepIdx === 5) e.push(['shopper','location','loc'], ['location','eta','eta'], ['eta','client','client']);
+      if (stepIdx === 6) e.push(['dispatch','support','support'], ['support','refunds','refund'], ['refunds','ledger','ledger']);
+      return e;
+    }
+  },
+
+  coinbase: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Coinbase Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','risk','payments','ledger','wallet','orders','match','positions','compliance','network','monitor','reports'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      risk: { x: 600, y: 160, label: 'Risk' },
+      payments: { x: 320, y: 300, label: 'Fiat Rails' },
+      ledger: { x: 600, y: 300, label: 'Ledger' },
+      wallet: { x: 880, y: 300, label: 'Wallet' },
+      orders: { x: 320, y: 440, label: 'Orders' },
+      match: { x: 600, y: 440, label: 'Matching' },
+      positions: { x: 880, y: 440, label: 'Positions' },
+      compliance: { x: 1160, y: 300, label: 'Compliance' },
+      network: { x: 1160, y: 440, label: 'Blockchain' },
+      monitor: { x: 880, y: 580, label: 'Monitoring' },
+      reports: { x: 1160, y: 580, label: 'Reports' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','risk','risk']);
+      if (stepIdx === 2) e.push(['client','payments','deposit'], ['payments','ledger','ledger'], ['ledger','wallet','wallet']);
+      if (stepIdx === 3) e.push(['client','orders','order'], ['orders','risk','risk'], ['orders','match','match']);
+      if (stepIdx === 4) e.push(['match','ledger','settle'], ['ledger','positions','positions']);
+      if (stepIdx === 5) e.push(['client','wallet','withdraw'], ['wallet','compliance','comp'], ['wallet','network','broadcast']);
+      if (stepIdx === 6) e.push(['positions','monitor','monitor'], ['monitor','compliance','comp'], ['compliance','reports','reports']);
+      return e;
+    }
+  },
+
+  coinmarketcap: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'CoinMarketCap Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','api','cache','connectors','stream','normalize','aggregate','timeseries','store','alerts','notify','email','ads','auction','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      api: { x: 320, y: 160, label: 'API' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      connectors: { x: 320, y: 300, label: 'Connectors' },
+      stream: { x: 600, y: 300, label: 'Stream' },
+      normalize: { x: 880, y: 300, label: 'Normalize' },
+      aggregate: { x: 1160, y: 300, label: 'Aggregate' },
+      timeseries: { x: 880, y: 440, label: 'Timeseries' },
+      store: { x: 1160, y: 440, label: 'Store' },
+      alerts: { x: 600, y: 440, label: 'Alerts' },
+      notify: { x: 320, y: 440, label: 'Notify' },
+      email: { x: 40, y: 440, label: 'Email' },
+      ads: { x: 880, y: 580, label: 'Ads' },
+      auction: { x: 1160, y: 580, label: 'Auction' },
+      analytics: { x: 1160, y: 720, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','api','api'], ['api','cache','cache']);
+      if (stepIdx === 2) e.push(['connectors','stream','ingest'], ['stream','normalize','normalize']);
+      if (stepIdx === 3) e.push(['normalize','aggregate','agg'], ['aggregate','timeseries','ts'], ['timeseries','store','store']);
+      if (stepIdx === 4) e.push(['api','store','store'], ['store','cache','cache']);
+      if (stepIdx === 5) e.push(['timeseries','alerts','alert'], ['alerts','notify','notify'], ['alerts','email','email']);
+      if (stepIdx === 6) e.push(['api','ads','ads'], ['ads','auction','auc'], ['auction','analytics','analytics']);
+      return e;
+    }
+  },
+
   duolingo: {
     viewBox: '0 0 1000 640',
     nodes: {
@@ -3210,6 +3916,238 @@ const SYSTEM_LAYOUTS = {
       monitor: { x: 720, y: 620, label: 'Monitoring', colorKey: 'stream' },
       compliance: { x: 880, y: 620, label: 'Compliance', colorKey: 'api' },
       reports: { x: 520, y: 620, label: 'Reports', colorKey: 'store' }
+    }
+  }
+
+  ,
+
+  figma: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','files','cache','editor','ops','realtime','merge','store','comments','notify','push','export','render','cdn','sharing','authz','audit'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      files: { x: 620, y: 180, label: 'Files', colorKey: 'api' },
+      cache: { x: 860, y: 180, label: 'Cache', colorKey: 'cache' },
+      editor: { x: 380, y: 320, label: 'Editor', colorKey: 'api' },
+      ops: { x: 620, y: 320, label: 'Ops', colorKey: 'stream' },
+      realtime: { x: 860, y: 320, label: 'Realtime', colorKey: 'stream' },
+      merge: { x: 1100, y: 320, label: 'Merge', colorKey: 'api' },
+      store: { x: 1100, y: 180, label: 'Store', colorKey: 'store' },
+      comments: { x: 380, y: 460, label: 'Comments', colorKey: 'store' },
+      notify: { x: 620, y: 460, label: 'Notify', colorKey: 'external' },
+      push: { x: 860, y: 460, label: 'Push', colorKey: 'external' },
+      export: { x: 380, y: 600, label: 'Export', colorKey: 'api' },
+      render: { x: 620, y: 600, label: 'Render', colorKey: 'api' },
+      cdn: { x: 860, y: 600, label: 'CDN', colorKey: 'cdn' },
+      sharing: { x: 380, y: 740, label: 'Sharing', colorKey: 'api' },
+      authz: { x: 620, y: 740, label: 'AuthZ', colorKey: 'api' },
+      audit: { x: 860, y: 740, label: 'Audit', colorKey: 'store' }
+    }
+  },
+
+  canva: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','designs','cache','editor','ops','store','realtime','presence','templates','search','assets','export','render','cdn','paywall','entitlements','payments'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      designs: { x: 380, y: 180, label: 'Designs', colorKey: 'api' },
+      cache: { x: 620, y: 180, label: 'Cache', colorKey: 'cache' },
+      editor: { x: 380, y: 320, label: 'Editor', colorKey: 'api' },
+      ops: { x: 620, y: 320, label: 'Ops', colorKey: 'stream' },
+      store: { x: 860, y: 320, label: 'Store', colorKey: 'store' },
+      realtime: { x: 1100, y: 320, label: 'Realtime', colorKey: 'stream' },
+      presence: { x: 1100, y: 180, label: 'Presence', colorKey: 'stream' },
+      templates: { x: 380, y: 460, label: 'Templates', colorKey: 'api' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      assets: { x: 860, y: 460, label: 'Assets', colorKey: 'store' },
+      export: { x: 380, y: 600, label: 'Export', colorKey: 'api' },
+      render: { x: 620, y: 600, label: 'Render', colorKey: 'api' },
+      cdn: { x: 860, y: 600, label: 'CDN', colorKey: 'cdn' },
+      paywall: { x: 380, y: 740, label: 'Paywall', colorKey: 'api' },
+      entitlements: { x: 620, y: 740, label: 'Entitlements', colorKey: 'store' },
+      payments: { x: 860, y: 740, label: 'Payments', colorKey: 'external' }
+    }
+  },
+
+  photoshop: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','files','assets','editor','render','gpu','versions','store','sync','merge','export','cdn','sharing','auth','entitlements','payments'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      files: { x: 380, y: 180, label: 'Files', colorKey: 'api' },
+      assets: { x: 620, y: 180, label: 'Assets', colorKey: 'store' },
+      editor: { x: 380, y: 320, label: 'Editor', colorKey: 'api' },
+      render: { x: 620, y: 320, label: 'Render', colorKey: 'api' },
+      gpu: { x: 860, y: 320, label: 'GPU', colorKey: 'client' },
+      versions: { x: 380, y: 460, label: 'Versions', colorKey: 'store' },
+      store: { x: 620, y: 460, label: 'Store', colorKey: 'store' },
+      sync: { x: 860, y: 460, label: 'Sync', colorKey: 'stream' },
+      merge: { x: 1100, y: 460, label: 'Merge', colorKey: 'api' },
+      export: { x: 380, y: 600, label: 'Export', colorKey: 'api' },
+      cdn: { x: 620, y: 600, label: 'CDN', colorKey: 'cdn' },
+      sharing: { x: 860, y: 600, label: 'Sharing', colorKey: 'api' },
+      auth: { x: 380, y: 740, label: 'Auth', colorKey: 'api' },
+      entitlements: { x: 620, y: 740, label: 'Entitlements', colorKey: 'store' },
+      payments: { x: 860, y: 740, label: 'Payments', colorKey: 'external' }
+    }
+  },
+
+  'google-maps': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','search','index','tiles','cdn','cache','routing','graph','traffic','location','eta','ugc','store','moderation','ads','auction','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      search: { x: 380, y: 180, label: 'Search', colorKey: 'api' },
+      index: { x: 620, y: 180, label: 'Index', colorKey: 'store' },
+      tiles: { x: 380, y: 320, label: 'Tiles', colorKey: 'api' },
+      cdn: { x: 620, y: 320, label: 'CDN', colorKey: 'cdn' },
+      cache: { x: 860, y: 320, label: 'Cache', colorKey: 'cache' },
+      routing: { x: 380, y: 460, label: 'Routing', colorKey: 'api' },
+      graph: { x: 620, y: 460, label: 'Road Graph', colorKey: 'store' },
+      traffic: { x: 860, y: 460, label: 'Traffic', colorKey: 'stream' },
+      location: { x: 380, y: 600, label: 'Location', colorKey: 'stream' },
+      eta: { x: 620, y: 600, label: 'ETA', colorKey: 'api' },
+      ugc: { x: 380, y: 740, label: 'UGC', colorKey: 'api' },
+      store: { x: 620, y: 740, label: 'Store', colorKey: 'store' },
+      moderation: { x: 860, y: 740, label: 'Moderation', colorKey: 'api' },
+      ads: { x: 1100, y: 180, label: 'Ads', colorKey: 'api' },
+      auction: { x: 1100, y: 320, label: 'Auction', colorKey: 'api' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  waze: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','tiles','cache','location','traffic','eta','routing','graph','reports','moderation','store','signals','rank','notify','push'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      tiles: { x: 380, y: 180, label: 'Tiles', colorKey: 'api' },
+      cache: { x: 620, y: 180, label: 'Cache', colorKey: 'cache' },
+      location: { x: 380, y: 320, label: 'Location', colorKey: 'stream' },
+      traffic: { x: 620, y: 320, label: 'Traffic', colorKey: 'stream' },
+      eta: { x: 860, y: 320, label: 'ETA', colorKey: 'api' },
+      routing: { x: 380, y: 460, label: 'Routing', colorKey: 'api' },
+      graph: { x: 620, y: 460, label: 'Road Graph', colorKey: 'store' },
+      reports: { x: 380, y: 600, label: 'Reports', colorKey: 'api' },
+      moderation: { x: 620, y: 600, label: 'Moderation', colorKey: 'api' },
+      store: { x: 860, y: 600, label: 'Store', colorKey: 'store' },
+      signals: { x: 620, y: 740, label: 'Signals', colorKey: 'stream' },
+      rank: { x: 860, y: 740, label: 'Ranking', colorKey: 'api' },
+      notify: { x: 1100, y: 740, label: 'Notify', colorKey: 'external' },
+      push: { x: 1100, y: 600, label: 'Push', colorKey: 'external' }
+    }
+  },
+
+  zomato: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','catalog','cache','cart','pricing','payments','orders','restaurant','dispatch','courier','realtime','location','eta','support','refunds','ledger'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      catalog: { x: 380, y: 180, label: 'Catalog', colorKey: 'api' },
+      cache: { x: 620, y: 180, label: 'Cache', colorKey: 'cache' },
+      cart: { x: 380, y: 320, label: 'Cart', colorKey: 'api' },
+      pricing: { x: 620, y: 320, label: 'Pricing', colorKey: 'api' },
+      payments: { x: 860, y: 320, label: 'Payments', colorKey: 'external' },
+      orders: { x: 1100, y: 320, label: 'Orders', colorKey: 'store' },
+      restaurant: { x: 1100, y: 460, label: 'Restaurant', colorKey: 'external' },
+      dispatch: { x: 860, y: 460, label: 'Dispatch', colorKey: 'api' },
+      courier: { x: 620, y: 460, label: 'Courier', colorKey: 'external' },
+      realtime: { x: 380, y: 460, label: 'Realtime', colorKey: 'stream' },
+      location: { x: 380, y: 600, label: 'Location', colorKey: 'stream' },
+      eta: { x: 620, y: 600, label: 'ETA', colorKey: 'api' },
+      support: { x: 860, y: 600, label: 'Support', colorKey: 'api' },
+      refunds: { x: 1100, y: 600, label: 'Refunds', colorKey: 'api' },
+      ledger: { x: 1100, y: 740, label: 'Ledger', colorKey: 'store' }
+    }
+  },
+
+  swiggy: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','catalog','cache','cart','pricing','payments','orders','restaurant','dispatch','courier','realtime','location','eta','support','refunds','ledger'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      catalog: { x: 380, y: 180, label: 'Catalog', colorKey: 'api' },
+      cache: { x: 620, y: 180, label: 'Cache', colorKey: 'cache' },
+      cart: { x: 380, y: 320, label: 'Cart', colorKey: 'api' },
+      pricing: { x: 620, y: 320, label: 'Pricing', colorKey: 'api' },
+      payments: { x: 860, y: 320, label: 'Payments', colorKey: 'external' },
+      orders: { x: 1100, y: 320, label: 'Orders', colorKey: 'store' },
+      restaurant: { x: 1100, y: 460, label: 'Restaurant', colorKey: 'external' },
+      dispatch: { x: 860, y: 460, label: 'Dispatch', colorKey: 'api' },
+      courier: { x: 620, y: 460, label: 'Courier', colorKey: 'external' },
+      realtime: { x: 380, y: 460, label: 'Realtime', colorKey: 'stream' },
+      location: { x: 380, y: 600, label: 'Location', colorKey: 'stream' },
+      eta: { x: 620, y: 600, label: 'ETA', colorKey: 'api' },
+      support: { x: 860, y: 600, label: 'Support', colorKey: 'api' },
+      refunds: { x: 1100, y: 600, label: 'Refunds', colorKey: 'api' },
+      ledger: { x: 1100, y: 740, label: 'Ledger', colorKey: 'store' }
+    }
+  },
+
+  instacart: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','catalog','inventory','cart','pricing','payments','dispatch','shopper','realtime','picking','updates','notify','location','eta','support','refunds','ledger'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      catalog: { x: 380, y: 180, label: 'Catalog', colorKey: 'api' },
+      inventory: { x: 620, y: 180, label: 'Inventory', colorKey: 'store' },
+      cart: { x: 380, y: 320, label: 'Cart', colorKey: 'api' },
+      pricing: { x: 620, y: 320, label: 'Pricing', colorKey: 'api' },
+      payments: { x: 860, y: 320, label: 'Payments', colorKey: 'external' },
+      dispatch: { x: 1100, y: 320, label: 'Dispatch', colorKey: 'api' },
+      shopper: { x: 860, y: 460, label: 'Shopper', colorKey: 'external' },
+      realtime: { x: 620, y: 460, label: 'Realtime', colorKey: 'stream' },
+      picking: { x: 380, y: 460, label: 'Picking', colorKey: 'api' },
+      updates: { x: 380, y: 600, label: 'Updates', colorKey: 'stream' },
+      notify: { x: 620, y: 600, label: 'Notify', colorKey: 'external' },
+      location: { x: 860, y: 600, label: 'Location', colorKey: 'stream' },
+      eta: { x: 1100, y: 600, label: 'ETA', colorKey: 'api' },
+      support: { x: 860, y: 740, label: 'Support', colorKey: 'api' },
+      refunds: { x: 1100, y: 740, label: 'Refunds', colorKey: 'api' },
+      ledger: { x: 1100, y: 880, label: 'Ledger', colorKey: 'store' }
+    }
+  },
+
+  coinbase: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','risk','payments','ledger','wallet','orders','match','positions','compliance','network','monitor','reports'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      risk: { x: 620, y: 180, label: 'Risk', colorKey: 'api' },
+      payments: { x: 380, y: 320, label: 'Fiat Rails', colorKey: 'external' },
+      ledger: { x: 620, y: 320, label: 'Ledger', colorKey: 'store' },
+      wallet: { x: 860, y: 320, label: 'Wallet', colorKey: 'api' },
+      orders: { x: 380, y: 460, label: 'Orders', colorKey: 'api' },
+      match: { x: 620, y: 460, label: 'Matching', colorKey: 'api' },
+      positions: { x: 860, y: 460, label: 'Positions', colorKey: 'store' },
+      compliance: { x: 1100, y: 320, label: 'Compliance', colorKey: 'api' },
+      network: { x: 1100, y: 460, label: 'Blockchain', colorKey: 'network' },
+      monitor: { x: 860, y: 600, label: 'Monitoring', colorKey: 'stream' },
+      reports: { x: 1100, y: 600, label: 'Reports', colorKey: 'store' }
+    }
+  },
+
+  coinmarketcap: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','api','cache','connectors','stream','normalize','aggregate','timeseries','store','alerts','notify','email','ads','auction','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      api: { x: 380, y: 180, label: 'API', colorKey: 'api' },
+      cache: { x: 620, y: 180, label: 'Cache', colorKey: 'cache' },
+      connectors: { x: 380, y: 320, label: 'Connectors', colorKey: 'external' },
+      stream: { x: 620, y: 320, label: 'Stream', colorKey: 'stream' },
+      normalize: { x: 860, y: 320, label: 'Normalize', colorKey: 'api' },
+      aggregate: { x: 1100, y: 320, label: 'Aggregate', colorKey: 'api' },
+      timeseries: { x: 860, y: 460, label: 'Timeseries', colorKey: 'store' },
+      store: { x: 1100, y: 460, label: 'Store', colorKey: 'store' },
+      alerts: { x: 620, y: 460, label: 'Alerts', colorKey: 'api' },
+      notify: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      email: { x: 140, y: 460, label: 'Email', colorKey: 'external' },
+      ads: { x: 860, y: 600, label: 'Ads', colorKey: 'api' },
+      auction: { x: 1100, y: 600, label: 'Auction', colorKey: 'api' },
+      analytics: { x: 1100, y: 740, label: 'Analytics', colorKey: 'store' }
     }
   }
 
@@ -4878,6 +5816,292 @@ const ARCH_LAYOUTS = {
       if (stepIdx === 4) edges.push(['queue','push','notify'], ['push','fcm','push'], ['fcm','recipient','wake']);
       if (stepIdx === 5) edges.push(['relay','meta','store']);
       return edges;
+    }
+  },
+
+  // ----- Batch 9 (Architecture) -----
+
+  figma: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Figma Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','files','cache','editor','ops','merge','store','realtime','comments','notify','push','export','render','cdn','sharing','authz','audit'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      files: { x: 600, y: 160, label: 'Files' },
+      cache: { x: 880, y: 160, label: 'Cache' },
+      editor: { x: 320, y: 300, label: 'Editor' },
+      ops: { x: 600, y: 300, label: 'Ops' },
+      merge: { x: 880, y: 300, label: 'Merge' },
+      store: { x: 1160, y: 300, label: 'Store' },
+      realtime: { x: 1160, y: 160, label: 'Realtime' },
+      comments: { x: 320, y: 440, label: 'Comments' },
+      notify: { x: 600, y: 440, label: 'Notify' },
+      push: { x: 880, y: 440, label: 'Push' },
+      export: { x: 320, y: 580, label: 'Export' },
+      render: { x: 600, y: 580, label: 'Render' },
+      cdn: { x: 880, y: 580, label: 'CDN' },
+      sharing: { x: 320, y: 720, label: 'Sharing' },
+      authz: { x: 600, y: 720, label: 'AuthZ' },
+      audit: { x: 880, y: 720, label: 'Audit' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['client','files','file'], ['files','cache','cache']);
+      if (stepIdx === 2) e.push(['client','editor','edit'], ['editor','ops','ops'], ['ops','realtime','rt']);
+      if (stepIdx === 3) e.push(['ops','merge','merge'], ['merge','store','store']);
+      if (stepIdx === 4) e.push(['client','comments','comment'], ['comments','notify','notify'], ['notify','push','push']);
+      if (stepIdx === 5) e.push(['client','export','export'], ['export','render','render'], ['render','cdn','cdn']);
+      if (stepIdx === 6) e.push(['client','sharing','share'], ['sharing','authz','authz'], ['authz','audit','audit']);
+      return e;
+    }
+  },
+
+  canva: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Canva Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','designs','cache','editor','ops','store','realtime','presence','templates','search','assets','export','render','cdn','paywall','entitlements','payments'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      designs: { x: 320, y: 160, label: 'Designs' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      editor: { x: 320, y: 300, label: 'Editor' },
+      ops: { x: 600, y: 300, label: 'Ops' },
+      store: { x: 880, y: 300, label: 'Store' },
+      realtime: { x: 1160, y: 300, label: 'Realtime' },
+      presence: { x: 1160, y: 160, label: 'Presence' },
+      templates: { x: 320, y: 440, label: 'Templates' },
+      search: { x: 600, y: 440, label: 'Search' },
+      assets: { x: 880, y: 440, label: 'Assets' },
+      export: { x: 320, y: 580, label: 'Export' },
+      render: { x: 600, y: 580, label: 'Render' },
+      cdn: { x: 880, y: 580, label: 'CDN' },
+      paywall: { x: 320, y: 720, label: 'Paywall' },
+      entitlements: { x: 600, y: 720, label: 'Entitlements' },
+      payments: { x: 880, y: 720, label: 'Payments' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','designs','open'], ['designs','cache','cache']);
+      if (stepIdx === 2) e.push(['client','editor','edit'], ['editor','ops','ops'], ['ops','store','save']);
+      if (stepIdx === 3) e.push(['store','realtime','rt'], ['realtime','client','client'], ['realtime','presence','presence']);
+      if (stepIdx === 4) e.push(['client','templates','tpl'], ['templates','search','search'], ['search','assets','assets']);
+      if (stepIdx === 5) e.push(['client','export','export'], ['export','render','render'], ['render','cdn','cdn']);
+      if (stepIdx === 6) e.push(['export','paywall','paywall'], ['paywall','entitlements','ent'], ['entitlements','payments','pay']);
+      return e;
+    }
+  },
+
+  photoshop: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Photoshop Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','files','assets','editor','render','gpu','versions','store','sync','merge','export','cdn','sharing','auth','entitlements','payments'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      files: { x: 320, y: 160, label: 'Files' },
+      assets: { x: 600, y: 160, label: 'Assets' },
+      editor: { x: 320, y: 300, label: 'Editor' },
+      render: { x: 600, y: 300, label: 'Render' },
+      gpu: { x: 880, y: 300, label: 'GPU' },
+      versions: { x: 320, y: 440, label: 'Versions' },
+      store: { x: 600, y: 440, label: 'Store' },
+      sync: { x: 880, y: 440, label: 'Sync' },
+      merge: { x: 1160, y: 440, label: 'Merge' },
+      export: { x: 320, y: 580, label: 'Export' },
+      cdn: { x: 600, y: 580, label: 'CDN' },
+      sharing: { x: 880, y: 580, label: 'Sharing' },
+      auth: { x: 320, y: 720, label: 'Auth' },
+      entitlements: { x: 600, y: 720, label: 'Entitlements' },
+      payments: { x: 880, y: 720, label: 'Payments' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','files','open'], ['files','assets','assets']);
+      if (stepIdx === 2) e.push(['client','editor','edit'], ['editor','render','render'], ['render','gpu','gpu']);
+      if (stepIdx === 3) e.push(['editor','versions','version'], ['versions','store','store'], ['store','sync','sync']);
+      if (stepIdx === 4) e.push(['sync','merge','merge'], ['merge','store','store']);
+      if (stepIdx === 5) e.push(['client','export','export'], ['export','cdn','cdn'], ['export','sharing','share']);
+      if (stepIdx === 6) e.push(['client','auth','auth'], ['auth','entitlements','ent'], ['entitlements','payments','pay']);
+      return e;
+    }
+  },
+
+  'google-maps': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Google Maps Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','search','index','tiles','cdn','cache','routing','graph','traffic','location','eta','ugc','store','moderation','ads','auction','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      search: { x: 320, y: 160, label: 'Search' },
+      index: { x: 600, y: 160, label: 'Index' },
+      tiles: { x: 320, y: 300, label: 'Tiles' },
+      cdn: { x: 600, y: 300, label: 'CDN' },
+      cache: { x: 880, y: 300, label: 'Cache' },
+      routing: { x: 320, y: 440, label: 'Routing' },
+      graph: { x: 600, y: 440, label: 'Road Graph' },
+      traffic: { x: 880, y: 440, label: 'Traffic' },
+      location: { x: 320, y: 580, label: 'Location' },
+      eta: { x: 600, y: 580, label: 'ETA' },
+      ugc: { x: 320, y: 720, label: 'UGC' },
+      store: { x: 600, y: 720, label: 'Store' },
+      moderation: { x: 880, y: 720, label: 'Moderation' },
+      ads: { x: 1160, y: 160, label: 'Ads' },
+      auction: { x: 1160, y: 300, label: 'Auction' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','search','search'], ['search','index','index']);
+      if (stepIdx === 2) e.push(['client','tiles','tiles'], ['tiles','cdn','cdn'], ['tiles','cache','cache']);
+      if (stepIdx === 3) e.push(['client','routing','route'], ['routing','graph','graph'], ['traffic','routing','traffic']);
+      if (stepIdx === 4) e.push(['client','location','loc'], ['location','eta','eta'], ['eta','routing','reroute']);
+      if (stepIdx === 5) e.push(['client','ugc','ugc'], ['ugc','store','store'], ['ugc','moderation','mod']);
+      if (stepIdx === 6) e.push(['search','ads','ads'], ['ads','auction','auc'], ['auction','analytics','analytics']);
+      return e;
+    }
+  },
+
+  waze: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Waze Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','tiles','cache','location','traffic','eta','routing','graph','reports','moderation','store','signals','rank','notify','push'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      tiles: { x: 320, y: 160, label: 'Tiles' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      location: { x: 320, y: 300, label: 'Location' },
+      traffic: { x: 600, y: 300, label: 'Traffic' },
+      eta: { x: 880, y: 300, label: 'ETA' },
+      routing: { x: 320, y: 440, label: 'Routing' },
+      graph: { x: 600, y: 440, label: 'Road Graph' },
+      reports: { x: 320, y: 580, label: 'Reports' },
+      moderation: { x: 600, y: 580, label: 'Moderation' },
+      store: { x: 880, y: 580, label: 'Store' },
+      signals: { x: 600, y: 720, label: 'Signals' },
+      rank: { x: 880, y: 720, label: 'Ranking' },
+      notify: { x: 1160, y: 720, label: 'Notify' },
+      push: { x: 1160, y: 580, label: 'Push' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','tiles','tiles'], ['tiles','cache','cache']);
+      if (stepIdx === 2) e.push(['client','location','ping'], ['location','traffic','traffic'], ['traffic','eta','eta']);
+      if (stepIdx === 3) e.push(['client','routing','route'], ['routing','graph','graph'], ['traffic','routing','traffic']);
+      if (stepIdx === 4) e.push(['client','reports','report'], ['reports','moderation','mod'], ['reports','store','store']);
+      if (stepIdx === 5) e.push(['reports','signals','signals'], ['signals','rank','rank'], ['rank','traffic','traffic']);
+      if (stepIdx === 6) e.push(['traffic','notify','notify'], ['notify','push','push'], ['push','client','client']);
+      return e;
+    }
+  },
+
+  zomato: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Zomato Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','catalog','cache','cart','pricing','payments','orders','restaurant','dispatch','courier','realtime','location','eta','support','refunds','ledger'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      catalog: { x: 320, y: 160, label: 'Catalog' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      cart: { x: 320, y: 300, label: 'Cart' },
+      pricing: { x: 600, y: 300, label: 'Pricing' },
+      payments: { x: 880, y: 300, label: 'Payments' },
+      orders: { x: 1160, y: 300, label: 'Orders' },
+      restaurant: { x: 1160, y: 440, label: 'Restaurant' },
+      dispatch: { x: 880, y: 440, label: 'Dispatch' },
+      courier: { x: 600, y: 440, label: 'Courier' },
+      realtime: { x: 320, y: 440, label: 'Realtime' },
+      location: { x: 320, y: 580, label: 'Location' },
+      eta: { x: 600, y: 580, label: 'ETA' },
+      support: { x: 880, y: 580, label: 'Support' },
+      refunds: { x: 1160, y: 580, label: 'Refunds' },
+      ledger: { x: 1160, y: 720, label: 'Ledger' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','catalog','browse'], ['catalog','cache','cache']);
+      if (stepIdx === 2) e.push(['client','cart','cart'], ['cart','pricing','price'], ['pricing','payments','pay']);
+      if (stepIdx === 3) e.push(['payments','orders','order'], ['orders','restaurant','merchant'], ['orders','dispatch','dispatch']);
+      if (stepIdx === 4) e.push(['dispatch','courier','assign'], ['courier','realtime','rt']);
+      if (stepIdx === 5) e.push(['courier','location','loc'], ['location','eta','eta'], ['eta','client','client']);
+      if (stepIdx === 6) e.push(['orders','support','support'], ['support','refunds','refund'], ['refunds','ledger','ledger']);
+      return e;
+    }
+  },
+
+  swiggy: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Swiggy Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','catalog','cache','cart','pricing','payments','orders','restaurant','dispatch','courier','realtime','location','eta','support','refunds','ledger'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      catalog: { x: 320, y: 160, label: 'Catalog' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      cart: { x: 320, y: 300, label: 'Cart' },
+      pricing: { x: 600, y: 300, label: 'Pricing' },
+      payments: { x: 880, y: 300, label: 'Payments' },
+      orders: { x: 1160, y: 300, label: 'Orders' },
+      restaurant: { x: 1160, y: 440, label: 'Restaurant' },
+      dispatch: { x: 880, y: 440, label: 'Dispatch' },
+      courier: { x: 600, y: 440, label: 'Courier' },
+      realtime: { x: 320, y: 440, label: 'Realtime' },
+      location: { x: 320, y: 580, label: 'Location' },
+      eta: { x: 600, y: 580, label: 'ETA' },
+      support: { x: 880, y: 580, label: 'Support' },
+      refunds: { x: 1160, y: 580, label: 'Refunds' },
+      ledger: { x: 1160, y: 720, label: 'Ledger' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','catalog','browse'], ['catalog','cache','cache']);
+      if (stepIdx === 2) e.push(['client','cart','cart'], ['cart','pricing','price'], ['pricing','payments','pay']);
+      if (stepIdx === 3) e.push(['payments','orders','order'], ['orders','restaurant','merchant'], ['orders','dispatch','dispatch']);
+      if (stepIdx === 4) e.push(['dispatch','courier','assign'], ['courier','realtime','rt']);
+      if (stepIdx === 5) e.push(['courier','location','loc'], ['location','eta','eta'], ['eta','client','client']);
+      if (stepIdx === 6) e.push(['orders','support','support'], ['support','refunds','refund'], ['refunds','ledger','ledger']);
+      return e;
+    }
+  },
+
+  instacart: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Instacart Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','catalog','inventory','cart','pricing','payments','dispatch','shopper','realtime','picking','updates','notify','location','eta','support','refunds','ledger'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      catalog: { x: 320, y: 160, label: 'Catalog' },
+      inventory: { x: 600, y: 160, label: 'Inventory' },
+      cart: { x: 320, y: 300, label: 'Cart' },
+      pricing: { x: 600, y: 300, label: 'Pricing' },
+      payments: { x: 880, y: 300, label: 'Payments' },
+      dispatch: { x: 1160, y: 300, label: 'Dispatch' },
+      shopper: { x: 880, y: 440, label: 'Shopper' },
+      realtime: { x: 600, y: 440, label: 'Realtime' },
+      picking: { x: 320, y: 440, label: 'Picking' },
+      updates: { x: 320, y: 580, label: 'Updates' },
+      notify: { x: 600, y: 580, label: 'Notify' },
+      location: { x: 880, y: 580, label: 'Location' },
+      eta: { x: 1160, y: 580, label: 'ETA' },
+      support: { x: 880, y: 720, label: 'Support' },
+      refunds: { x: 1160, y: 720, label: 'Refunds' },
+      ledger: { x: 1160, y: 840, label: 'Ledger' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','catalog','browse'], ['catalog','inventory','inv']);
+      if (stepIdx === 2) e.push(['client','cart','cart'], ['cart','pricing','price'], ['pricing','payments','pay']);
+      if (stepIdx === 3) e.push(['payments','dispatch','dispatch'], ['dispatch','shopper','assign'], ['shopper','realtime','rt']);
+      if (stepIdx === 4) e.push(['shopper','picking','pick'], ['picking','updates','updates'], ['updates','notify','notify']);
+      if (stepIdx === 5) e.push(['shopper','location','loc'], ['location','eta','eta'], ['eta','client','client']);
+      if (stepIdx === 6) e.push(['dispatch','support','support'], ['support','refunds','refund'], ['refunds','ledger','ledger']);
+      return e;
     }
   },
 

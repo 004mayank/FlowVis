@@ -3619,6 +3619,428 @@ export const FLOWS = {
       }
     ]
   }
+
+  ,
+
+  figma: {
+    title: 'Figma',
+    steps: [
+      {
+        title: 'Open file',
+        desc: 'Client loads file metadata and document snapshot; caches for fast render.',
+        active: ['client','auth','files','cache'],
+        edges: [['client','auth'], ['client','files'], ['files','cache']]
+      },
+      {
+        title: 'Collaborative edits',
+        desc: 'Edits are sent as operations; realtime service broadcasts to collaborators.',
+        active: ['editor','realtime','ops'],
+        edges: [['client','editor'], ['editor','ops'], ['ops','realtime']]
+      },
+      {
+        title: 'Conflict resolution',
+        desc: 'Server merges concurrent operations and persists document state.',
+        active: ['merge','store','ops'],
+        edges: [['ops','merge'], ['merge','store']]
+      },
+      {
+        title: 'Comments and mentions',
+        desc: 'Comments persist and trigger notifications and mentions.',
+        active: ['comments','notify','push'],
+        edges: [['client','comments'], ['comments','notify'], ['notify','push']]
+      },
+      {
+        title: 'Assets and exports',
+        desc: 'Export jobs render images/PDFs and serve via CDN.',
+        active: ['export','render','cdn'],
+        edges: [['client','export'], ['export','render'], ['render','cdn']]
+      },
+      {
+        title: 'Permissions and sharing',
+        desc: 'Sharing links and permissions enforce access; auditing records changes.',
+        active: ['sharing','authz','audit'],
+        edges: [['client','sharing'], ['sharing','authz'], ['authz','audit']]
+      }
+    ]
+  },
+
+  canva: {
+    title: 'Canva',
+    steps: [
+      {
+        title: 'Open design',
+        desc: 'Client loads design metadata, pages, and assets with caching.',
+        active: ['client','designs','cache'],
+        edges: [['client','designs'], ['designs','cache']]
+      },
+      {
+        title: 'Edit and autosave',
+        desc: 'Edits persist as operations; autosave writes to store.',
+        active: ['editor','ops','store'],
+        edges: [['client','editor'], ['editor','ops'], ['ops','store']]
+      },
+      {
+        title: 'Collaboration',
+        desc: 'Realtime service broadcasts changes and cursors to collaborators.',
+        active: ['realtime','presence','client'],
+        edges: [['store','realtime'], ['realtime','client'], ['realtime','presence']]
+      },
+      {
+        title: 'Templates and assets',
+        desc: 'Template search and asset library fetch images/fonts/videos.',
+        active: ['templates','search','assets'],
+        edges: [['client','templates'], ['templates','search'], ['search','assets']]
+      },
+      {
+        title: 'Export',
+        desc: 'Render pipeline generates PDF/PNG/MP4; served via CDN.',
+        active: ['export','render','cdn'],
+        edges: [['client','export'], ['export','render'], ['render','cdn']]
+      },
+      {
+        title: 'Billing and entitlements',
+        desc: 'Pro features are gated by entitlements and subscription billing.',
+        active: ['paywall','entitlements','payments'],
+        edges: [['export','paywall'], ['paywall','entitlements'], ['entitlements','payments']]
+      }
+    ]
+  },
+
+  photoshop: {
+    title: 'Adobe Photoshop',
+    steps: [
+      {
+        title: 'Open project',
+        desc: 'Client loads local/cloud document and asset references.',
+        active: ['client','files','assets'],
+        edges: [['client','files'], ['files','assets']]
+      },
+      {
+        title: 'Edit operations',
+        desc: 'Edits apply filters and layers; GPU pipeline renders preview.',
+        active: ['editor','render','gpu'],
+        edges: [['client','editor'], ['editor','render'], ['render','gpu']]
+      },
+      {
+        title: 'Autosave / versioning',
+        desc: 'Versions and autosave persist snapshots to store.',
+        active: ['versions','store','sync'],
+        edges: [['editor','versions'], ['versions','store'], ['store','sync']]
+      },
+      {
+        title: 'Cloud sync',
+        desc: 'Sync service uploads changes; resolves conflicts and merges.',
+        active: ['sync','merge','store'],
+        edges: [['sync','merge'], ['merge','store']]
+      },
+      {
+        title: 'Export',
+        desc: 'Export pipeline generates final files and shares links.',
+        active: ['export','cdn','sharing'],
+        edges: [['client','export'], ['export','cdn'], ['export','sharing']]
+      },
+      {
+        title: 'Entitlements',
+        desc: 'Licensing checks entitlements and validates subscription.',
+        active: ['auth','entitlements','payments'],
+        edges: [['client','auth'], ['auth','entitlements'], ['entitlements','payments']]
+      }
+    ]
+  },
+
+  'google-maps': {
+    title: 'Google Maps',
+    steps: [
+      {
+        title: 'Search place',
+        desc: 'Client searches POIs; index and ranking return results.',
+        active: ['client','search','index'],
+        edges: [['client','search'], ['search','index']]
+      },
+      {
+        title: 'Load map tiles',
+        desc: 'Tile service serves vector/raster tiles via CDN with caching.',
+        active: ['tiles','cdn','cache'],
+        edges: [['client','tiles'], ['tiles','cdn'], ['tiles','cache']]
+      },
+      {
+        title: 'Routing',
+        desc: 'Route engine computes path using traffic and road graph.',
+        active: ['routing','graph','traffic'],
+        edges: [['client','routing'], ['routing','graph'], ['traffic','routing']]
+      },
+      {
+        title: 'Navigation updates',
+        desc: 'Location stream updates ETA and reroutes when needed.',
+        active: ['location','eta','routing'],
+        edges: [['client','location'], ['location','eta'], ['eta','routing']]
+      },
+      {
+        title: 'Reviews and photos',
+        desc: 'UGC writes persist reviews/photos and update place profiles.',
+        active: ['ugc','store','moderation'],
+        edges: [['client','ugc'], ['ugc','store'], ['ugc','moderation']]
+      },
+      {
+        title: 'Ads',
+        desc: 'Sponsored results and promoted pins are selected and measured.',
+        active: ['ads','auction','analytics'],
+        edges: [['search','ads'], ['ads','auction'], ['auction','analytics']]
+      }
+    ]
+  },
+
+  waze: {
+    title: 'Waze',
+    steps: [
+      {
+        title: 'Load map and nearby',
+        desc: 'Client loads tiles and nearby roads with caching.',
+        active: ['client','tiles','cache'],
+        edges: [['client','tiles'], ['tiles','cache']]
+      },
+      {
+        title: 'Live traffic',
+        desc: 'Location pings stream into traffic aggregation and ETA models.',
+        active: ['location','traffic','eta'],
+        edges: [['client','location'], ['location','traffic'], ['traffic','eta']]
+      },
+      {
+        title: 'Routing',
+        desc: 'Route engine computes route using incidents and traffic.',
+        active: ['routing','graph','traffic'],
+        edges: [['client','routing'], ['routing','graph'], ['traffic','routing']]
+      },
+      {
+        title: 'Report incident',
+        desc: 'User reports hazards; moderation and validation apply.',
+        active: ['reports','moderation','store'],
+        edges: [['client','reports'], ['reports','moderation'], ['reports','store']]
+      },
+      {
+        title: 'Community validation',
+        desc: 'Crowd signals validate incidents and update map state.',
+        active: ['signals','rank','traffic'],
+        edges: [['reports','signals'], ['signals','rank'], ['rank','traffic']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Alerts for hazards and reroutes are pushed to client.',
+        active: ['notify','push','client'],
+        edges: [['traffic','notify'], ['notify','push'], ['push','client']]
+      }
+    ]
+  },
+
+  zomato: {
+    title: 'Zomato',
+    steps: [
+      {
+        title: 'Browse restaurants',
+        desc: 'Client loads catalog and menus with caching.',
+        active: ['client','catalog','cache'],
+        edges: [['client','catalog'], ['catalog','cache']]
+      },
+      {
+        title: 'Checkout',
+        desc: 'Pricing and promos applied; payment intent created.',
+        active: ['cart','pricing','payments'],
+        edges: [['client','cart'], ['cart','pricing'], ['pricing','payments']]
+      },
+      {
+        title: 'Create order',
+        desc: 'Order is created and sent to restaurant; acceptance tracked.',
+        active: ['orders','restaurant','dispatch'],
+        edges: [['payments','orders'], ['orders','restaurant'], ['orders','dispatch']]
+      },
+      {
+        title: 'Delivery assignment',
+        desc: 'Dispatch assigns courier; realtime updates begin.',
+        active: ['dispatch','courier','realtime'],
+        edges: [['dispatch','courier'], ['courier','realtime']]
+      },
+      {
+        title: 'Tracking and ETA',
+        desc: 'Location stream updates ETA and client tracking.',
+        active: ['location','eta','client'],
+        edges: [['courier','location'], ['location','eta'], ['eta','client']]
+      },
+      {
+        title: 'Support and refunds',
+        desc: 'Issues handled; refunds posted to ledger and payment reversals.',
+        active: ['support','refunds','ledger'],
+        edges: [['orders','support'], ['support','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  swiggy: {
+    title: 'Swiggy',
+    steps: [
+      {
+        title: 'Browse restaurants',
+        desc: 'Client loads catalog and menus with caching.',
+        active: ['client','catalog','cache'],
+        edges: [['client','catalog'], ['catalog','cache']]
+      },
+      {
+        title: 'Checkout',
+        desc: 'Pricing and promos applied; payment intent created.',
+        active: ['cart','pricing','payments'],
+        edges: [['client','cart'], ['cart','pricing'], ['pricing','payments']]
+      },
+      {
+        title: 'Create order',
+        desc: 'Order is created and sent to restaurant; acceptance tracked.',
+        active: ['orders','restaurant','dispatch'],
+        edges: [['payments','orders'], ['orders','restaurant'], ['orders','dispatch']]
+      },
+      {
+        title: 'Delivery assignment',
+        desc: 'Dispatch assigns courier; realtime updates begin.',
+        active: ['dispatch','courier','realtime'],
+        edges: [['dispatch','courier'], ['courier','realtime']]
+      },
+      {
+        title: 'Tracking and ETA',
+        desc: 'Location stream updates ETA and client tracking.',
+        active: ['location','eta','client'],
+        edges: [['courier','location'], ['location','eta'], ['eta','client']]
+      },
+      {
+        title: 'Support and refunds',
+        desc: 'Issues handled; refunds posted to ledger and payment reversals.',
+        active: ['support','refunds','ledger'],
+        edges: [['orders','support'], ['support','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  instacart: {
+    title: 'Instacart',
+    steps: [
+      {
+        title: 'Browse inventory',
+        desc: 'Client loads store inventory, pricing, and availability.',
+        active: ['client','catalog','inventory'],
+        edges: [['client','catalog'], ['catalog','inventory']]
+      },
+      {
+        title: 'Checkout',
+        desc: 'Cart is priced; substitutions rules applied; payment authorized.',
+        active: ['cart','pricing','payments'],
+        edges: [['client','cart'], ['cart','pricing'], ['pricing','payments']]
+      },
+      {
+        title: 'Shopper assignment',
+        desc: 'Dispatch assigns a shopper; job delivered to shopper app.',
+        active: ['dispatch','shopper','realtime'],
+        edges: [['payments','dispatch'], ['dispatch','shopper'], ['shopper','realtime']]
+      },
+      {
+        title: 'Picking and substitutions',
+        desc: 'Picker updates item status; substitutions approvals flow to user.',
+        active: ['picking','updates','notify'],
+        edges: [['shopper','picking'], ['picking','updates'], ['updates','notify']]
+      },
+      {
+        title: 'Delivery tracking',
+        desc: 'Location updates stream; ETA updates shown to user.',
+        active: ['location','eta','client'],
+        edges: [['shopper','location'], ['location','eta'], ['eta','client']]
+      },
+      {
+        title: 'Support and refunds',
+        desc: 'Issues handled; refunds posted to ledger and payment reversals.',
+        active: ['support','refunds','ledger'],
+        edges: [['dispatch','support'], ['support','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  coinbase: {
+    title: 'Coinbase',
+    steps: [
+      {
+        title: 'Sign in and risk checks',
+        desc: 'Client authenticates; risk engine runs checks and device verification.',
+        active: ['client','auth','risk'],
+        edges: [['client','auth'], ['auth','risk']]
+      },
+      {
+        title: 'Deposit funds',
+        desc: 'Fiat rails deposit; ledger updates balances.',
+        active: ['payments','ledger','wallet'],
+        edges: [['client','payments'], ['payments','ledger'], ['ledger','wallet']]
+      },
+      {
+        title: 'Place order',
+        desc: 'Orders routed to matching; risk checks enforced.',
+        active: ['orders','match','risk'],
+        edges: [['client','orders'], ['orders','risk'], ['orders','match']]
+      },
+      {
+        title: 'Trade execution',
+        desc: 'Matching executes trades; ledger settles positions.',
+        active: ['match','ledger','positions'],
+        edges: [['match','ledger'], ['ledger','positions']]
+      },
+      {
+        title: 'Withdraw',
+        desc: 'Wallet and compliance checks; blockchain broadcast if needed.',
+        active: ['wallet','compliance','network'],
+        edges: [['client','wallet'], ['wallet','compliance'], ['wallet','network']]
+      },
+      {
+        title: 'Monitoring and reports',
+        desc: 'Monitoring and compliance produce reports and audit logs.',
+        active: ['monitor','reports','compliance'],
+        edges: [['positions','monitor'], ['monitor','compliance'], ['compliance','reports']]
+      }
+    ]
+  },
+
+  coinmarketcap: {
+    title: 'CoinMarketCap',
+    steps: [
+      {
+        title: 'Load markets page',
+        desc: 'Client requests listings; cache and CDN serve hot data fast.',
+        active: ['client','api','cache'],
+        edges: [['client','api'], ['api','cache']]
+      },
+      {
+        title: 'Ingest exchange feeds',
+        desc: 'Connectors ingest exchange/DEX price feeds into streaming pipeline.',
+        active: ['connectors','stream','normalize'],
+        edges: [['connectors','stream'], ['stream','normalize']]
+      },
+      {
+        title: 'Aggregate prices',
+        desc: 'Aggregation computes index prices and 24h metrics.',
+        active: ['aggregate','timeseries','store'],
+        edges: [['normalize','aggregate'], ['aggregate','timeseries'], ['timeseries','store']]
+      },
+      {
+        title: 'Serve APIs',
+        desc: 'API serves listings, charts, and metadata with caching.',
+        active: ['api','store','cache'],
+        edges: [['api','store'], ['store','cache']]
+      },
+      {
+        title: 'Alerts',
+        desc: 'Price alerts trigger notifications and emails.',
+        active: ['alerts','notify','email'],
+        edges: [['timeseries','alerts'], ['alerts','notify'], ['alerts','email']]
+      },
+      {
+        title: 'Ads and analytics',
+        desc: 'Ads selection and analytics track engagement and conversions.',
+        active: ['ads','auction','analytics'],
+        edges: [['api','ads'], ['ads','auction'], ['auction','analytics']]
+      }
+    ]
+  }
 };
 
 export function flowForSystem(sys) {
