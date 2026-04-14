@@ -2401,12 +2401,31 @@ function renderSystemDiagram(sys, step) {
     `;
   };
 
+  const dot = (x, y, on) => {
+    // small connector dot at endpoints; glows when on
+    const r = 5;
+    const stroke = on ? 'rgba(123,125,248,0.95)' : 'rgba(255,255,255,0.14)';
+    const fill = on ? 'rgba(123,125,248,0.22)' : 'rgba(255,255,255,0.06)';
+    const glow = on
+      ? `<filter id="dot-glow-${x}-${y}"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>`
+      : '';
+    return `
+      ${glow}
+      <circle cx="${x}" cy="${y}" r="${r}" fill="${fill}" stroke="${stroke}" stroke-width="2" opacity="${on ? 0.95 : 0.65}" ${on ? `filter="url(#dot-glow-${x}-${y})"` : ''}/>
+    `;
+  };
+
   let edgesSvg = '';
+  let dotsSvg = '';
   for (const [a, b] of stepEdges) {
     const na = layout.nodes[a];
     const nb = layout.nodes[b];
     if (!na || !nb) continue;
-    edgesSvg += arrow(na.x, na.y, nb.x, nb.y, eActive(a, b));
+    const on = eActive(a, b);
+    edgesSvg += arrow(na.x, na.y, nb.x, nb.y, on);
+    // Endpoint dots for visual continuity
+    dotsSvg += dot(na.x, na.y, on);
+    dotsSvg += dot(nb.x, nb.y, on);
   }
 
   let nodesSvg = '';
@@ -2419,6 +2438,7 @@ function renderSystemDiagram(sys, step) {
   svg.innerHTML = `
     <rect x="0" y="0" width="100%" height="100%" fill="rgba(0,0,0,0)"/>
     ${edgesSvg}
+    ${dotsSvg}
     ${nodesSvg}
   `;
 }
