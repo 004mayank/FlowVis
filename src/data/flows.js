@@ -6994,6 +6994,428 @@ export const FLOWS = {
       }
     ]
   }
+
+  ,
+
+  'samsung-pay': {
+    title: 'Samsung Pay',
+    steps: [
+      {
+        title: 'Provision card',
+        desc: 'Device provisioning tokenizes card with network and issuer.',
+        active: ['device','tokenization','issuer'],
+        edges: [['device','tokenization'], ['tokenization','issuer']]
+      },
+      {
+        title: 'Initiate payment',
+        desc: 'User approves; payment request created; cryptogram generated.',
+        active: ['client','crypto','payments'],
+        edges: [['client','payments'], ['client','crypto'], ['crypto','payments']]
+      },
+      {
+        title: 'Authorization',
+        desc: 'Network routes to issuer; risk checks; auth response returned.',
+        active: ['network','risk','issuer'],
+        edges: [['payments','network'], ['network','issuer'], ['issuer','risk']]
+      },
+      {
+        title: 'Capture and settlement',
+        desc: 'Merchant captures; settlement batches; ledger updated.',
+        active: ['capture','settlement','ledger'],
+        edges: [['issuer','capture'], ['capture','settlement'], ['settlement','ledger']]
+      },
+      {
+        title: 'Receipts and notifications',
+        desc: 'Receipts stored; notifications delivered to device.',
+        active: ['receipts','notify','device'],
+        edges: [['capture','receipts'], ['receipts','notify'], ['notify','device']]
+      },
+      {
+        title: 'Disputes and chargebacks',
+        desc: 'Dispute and chargeback flows adjust ledger and merchant status.',
+        active: ['disputes','chargebacks','ledger'],
+        edges: [['client','disputes'], ['disputes','chargebacks'], ['chargebacks','ledger']]
+      }
+    ]
+  },
+
+  'google-wallet': {
+    title: 'Google Wallet',
+    steps: [
+      {
+        title: 'Add card or pass',
+        desc: 'Provision card/pass; tokenization and issuer validation.',
+        active: ['client','tokenization','issuer'],
+        edges: [['client','tokenization'], ['tokenization','issuer']]
+      },
+      {
+        title: 'Sync wallet',
+        desc: 'Wallet sync stores passes and entitlements; cache used.',
+        active: ['sync','store','cache'],
+        edges: [['client','sync'], ['sync','store'], ['store','cache']]
+      },
+      {
+        title: 'Pay with wallet',
+        desc: 'Payment request created; routed to network and issuer.',
+        active: ['payments','network','issuer'],
+        edges: [['client','payments'], ['payments','network'], ['network','issuer']]
+      },
+      {
+        title: 'Authorization',
+        desc: 'Issuer authorizes; status returned; ledger updated.',
+        active: ['risk','status','ledger'],
+        edges: [['issuer','risk'], ['issuer','status'], ['status','ledger']]
+      },
+      {
+        title: 'Receipts',
+        desc: 'Receipts stored; notifications delivered.',
+        active: ['receipts','notify','client'],
+        edges: [['status','receipts'], ['receipts','notify'], ['notify','client']]
+      },
+      {
+        title: 'Insights',
+        desc: 'Analytics aggregates wallet usage and payments.',
+        active: ['analytics','warehouse','reports'],
+        edges: [['ledger','analytics'], ['analytics','warehouse'], ['warehouse','reports']]
+      }
+    ]
+  },
+
+  mobikwik: {
+    title: 'MobiKwik',
+    steps: [
+      {
+        title: 'Login and load wallet',
+        desc: 'User authenticates; wallet balance and offers loaded.',
+        active: ['client','auth','wallet'],
+        edges: [['client','auth'], ['auth','wallet']]
+      },
+      {
+        title: 'Add money',
+        desc: 'Top-up created; payments processed; ledger updated.',
+        active: ['topup','payments','ledger'],
+        edges: [['client','topup'], ['topup','payments'], ['payments','ledger']]
+      },
+      {
+        title: 'UPI payment',
+        desc: 'UPI payment intent created; routed to bank; status returned.',
+        active: ['payments','upi','bank'],
+        edges: [['client','payments'], ['payments','upi'], ['upi','bank']]
+      },
+      {
+        title: 'Bill pay',
+        desc: 'Bill payment routed to biller network; status updated.',
+        active: ['billpay','routing','biller'],
+        edges: [['client','billpay'], ['billpay','routing'], ['routing','biller']]
+      },
+      {
+        title: 'Cashback and offers',
+        desc: 'Cashback computed; offers personalized.',
+        active: ['rewards','offers','rank'],
+        edges: [['ledger','rewards'], ['rewards','offers'], ['offers','rank']]
+      },
+      {
+        title: 'Support and disputes',
+        desc: 'Disputes and refunds adjust ledger and notify user.',
+        active: ['support','refunds','ledger'],
+        edges: [['client','support'], ['support','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  freecharge: {
+    title: 'Freecharge',
+    steps: [
+      {
+        title: 'Login and load home',
+        desc: 'User authenticates; home offers and wallet state loaded.',
+        active: ['client','auth','home'],
+        edges: [['client','auth'], ['auth','home']]
+      },
+      {
+        title: 'Mobile recharge',
+        desc: 'Recharge request created; payment processed; biller fulfilled.',
+        active: ['recharge','payments','biller'],
+        edges: [['client','recharge'], ['recharge','payments'], ['payments','biller']]
+      },
+      {
+        title: 'UPI payment',
+        desc: 'UPI payment routed to bank; status returned; ledger updated.',
+        active: ['upi','bank','ledger'],
+        edges: [['client','upi'], ['upi','bank'], ['bank','ledger']]
+      },
+      {
+        title: 'Bill pay',
+        desc: 'Bill payment routed to biller network; status updated.',
+        active: ['billpay','routing','biller'],
+        edges: [['client','billpay'], ['billpay','routing'], ['routing','biller']]
+      },
+      {
+        title: 'Cashback',
+        desc: 'Cashback computed and applied; notifications sent.',
+        active: ['rewards','ledger','notify'],
+        edges: [['ledger','rewards'], ['rewards','ledger'], ['rewards','notify']]
+      },
+      {
+        title: 'Support and refunds',
+        desc: 'Support handles issues; refunds adjust ledger.',
+        active: ['support','refunds','ledger'],
+        edges: [['client','support'], ['support','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  'zerodha-kite': {
+    title: 'Zerodha Kite',
+    steps: [
+      {
+        title: 'Login and load markets',
+        desc: 'User authenticates; watchlists and market data stream starts.',
+        active: ['client','auth','marketdata'],
+        edges: [['client','auth'], ['auth','marketdata']]
+      },
+      {
+        title: 'Quote and depth',
+        desc: 'Quotes served from cache/index; orderbook depth loaded.',
+        active: ['quotes','cache','orderbook'],
+        edges: [['client','quotes'], ['quotes','cache'], ['quotes','orderbook']]
+      },
+      {
+        title: 'Place order',
+        desc: 'Order created; risk checks; routed to exchange.',
+        active: ['orders','risk','exchange'],
+        edges: [['client','orders'], ['orders','risk'], ['orders','exchange']]
+      },
+      {
+        title: 'Execution and fills',
+        desc: 'Fills stream back; positions updated; ledger posted.',
+        active: ['fills','positions','ledger'],
+        edges: [['exchange','fills'], ['fills','positions'], ['positions','ledger']]
+      },
+      {
+        title: 'P&L and reporting',
+        desc: 'Analytics computes P&L; reports generated.',
+        active: ['analytics','warehouse','reports'],
+        edges: [['ledger','analytics'], ['analytics','warehouse'], ['warehouse','reports']]
+      },
+      {
+        title: 'Withdraw or add funds',
+        desc: 'Funds transfer routed to bank rails; status notified.',
+        active: ['payments','routing','bank'],
+        edges: [['client','payments'], ['payments','routing'], ['routing','bank']]
+      }
+    ]
+  },
+
+  indmoney: {
+    title: 'INDmoney',
+    steps: [
+      {
+        title: 'Onboard and link accounts',
+        desc: 'User onboarding and linking broker/bank accounts.',
+        active: ['client','auth','integrations'],
+        edges: [['client','auth'], ['auth','integrations']]
+      },
+      {
+        title: 'Sync portfolio',
+        desc: 'Sync ingests holdings and transactions; store updated.',
+        active: ['sync','ingest','store'],
+        edges: [['integrations','sync'], ['sync','ingest'], ['ingest','store']]
+      },
+      {
+        title: 'Net worth dashboard',
+        desc: 'Dashboard served from cache and analytics aggregates.',
+        active: ['dashboard','cache','analytics'],
+        edges: [['client','dashboard'], ['dashboard','cache'], ['store','analytics']]
+      },
+      {
+        title: 'Invest / trade',
+        desc: 'Order created; risk checks; routed to broker.',
+        active: ['orders','risk','broker'],
+        edges: [['client','orders'], ['orders','risk'], ['orders','broker']]
+      },
+      {
+        title: 'Insights',
+        desc: 'Analytics generates insights and recommendations.',
+        active: ['analytics','warehouse','recos'],
+        edges: [['store','analytics'], ['analytics','warehouse'], ['warehouse','recos']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Alerts delivered for goals and market moves.',
+        active: ['notify','push','client'],
+        edges: [['analytics','notify'], ['notify','push'], ['push','client']]
+      }
+    ]
+  },
+
+  'et-money': {
+    title: 'ET Money',
+    steps: [
+      {
+        title: 'Onboard and KYC',
+        desc: 'User onboarding and KYC for investment products.',
+        active: ['client','kyc','accounts'],
+        edges: [['client','kyc'], ['kyc','accounts']]
+      },
+      {
+        title: 'Browse funds',
+        desc: 'Catalog and recommendations surface funds and plans.',
+        active: ['catalog','recos','rank'],
+        edges: [['client','catalog'], ['catalog','recos'], ['recos','rank']]
+      },
+      {
+        title: 'Start SIP / invest',
+        desc: 'Order created; payments routed; ledger updated.',
+        active: ['orders','payments','ledger'],
+        edges: [['client','orders'], ['orders','payments'], ['payments','ledger']]
+      },
+      {
+        title: 'NAV and portfolio updates',
+        desc: 'Ingest NAV updates; portfolio recomputed.',
+        active: ['ingest','portfolio','analytics'],
+        edges: [['ingest','portfolio'], ['portfolio','analytics']]
+      },
+      {
+        title: 'Reports',
+        desc: 'Reporting and exports generated for tax and performance.',
+        active: ['reports','warehouse','exports'],
+        edges: [['ledger','reports'], ['reports','warehouse'], ['warehouse','exports']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Alerts delivered for SIP status and market moves.',
+        active: ['notify','push','client'],
+        edges: [['reports','notify'], ['notify','push'], ['push','client']]
+      }
+    ]
+  },
+
+  slice: {
+    title: 'Slice',
+    steps: [
+      {
+        title: 'Onboard and KYC',
+        desc: 'User onboarding runs KYC and creates account.',
+        active: ['client','kyc','accounts'],
+        edges: [['client','kyc'], ['kyc','accounts']]
+      },
+      {
+        title: 'Issue card / credit line',
+        desc: 'Card issued; limits and controls configured.',
+        active: ['cards','controls','limits'],
+        edges: [['accounts','cards'], ['cards','controls'], ['controls','limits']]
+      },
+      {
+        title: 'Authorize spend',
+        desc: 'Authorization checks risk and limits; decision returned.',
+        active: ['authz','risk','decision'],
+        edges: [['cards','authz'], ['authz','risk'], ['risk','decision']]
+      },
+      {
+        title: 'Ledger and statements',
+        desc: 'Transactions posted to ledger; statements generated.',
+        active: ['ledger','billing','reports'],
+        edges: [['decision','ledger'], ['ledger','billing'], ['billing','reports']]
+      },
+      {
+        title: 'Repayment',
+        desc: 'Repayment routed via UPI/bank; status updated.',
+        active: ['payments','upi','status'],
+        edges: [['client','payments'], ['payments','upi'], ['upi','status']]
+      },
+      {
+        title: 'Collections and disputes',
+        desc: 'Collections handle delinquencies; disputes/refunds adjust ledger.',
+        active: ['collections','disputes','refunds'],
+        edges: [['billing','collections'], ['client','disputes'], ['disputes','refunds']]
+      }
+    ]
+  },
+
+  jupiter: {
+    title: 'Jupiter',
+    steps: [
+      {
+        title: 'Onboard and KYC',
+        desc: 'Onboarding runs KYC and creates account in core banking.',
+        active: ['client','kyc','core'],
+        edges: [['client','kyc'], ['kyc','core']]
+      },
+      {
+        title: 'Login and dashboards',
+        desc: 'Client authenticates and loads balances and transactions.',
+        active: ['client','auth','accounts'],
+        edges: [['client','auth'], ['auth','accounts']]
+      },
+      {
+        title: 'UPI payments',
+        desc: 'UPI payment routed to bank; status returned; ledger updated.',
+        active: ['payments','upi','ledger'],
+        edges: [['client','payments'], ['payments','upi'], ['upi','ledger']]
+      },
+      {
+        title: 'Cards',
+        desc: 'Card issuance and controls managed.',
+        active: ['cards','controls','approvals'],
+        edges: [['accounts','cards'], ['cards','controls'], ['controls','approvals']]
+      },
+      {
+        title: 'Insights',
+        desc: 'Analytics computes spending insights and budgets.',
+        active: ['analytics','warehouse','reports'],
+        edges: [['accounts','analytics'], ['analytics','warehouse'], ['warehouse','reports']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Alerts delivered via push and SMS.',
+        active: ['notify','push','sms'],
+        edges: [['ledger','notify'], ['notify','push'], ['notify','sms']]
+      }
+    ]
+  },
+
+  'fi-money': {
+    title: 'Fi Money',
+    steps: [
+      {
+        title: 'Onboard and KYC',
+        desc: 'Onboarding runs KYC and creates account in core banking.',
+        active: ['client','kyc','core'],
+        edges: [['client','kyc'], ['kyc','core']]
+      },
+      {
+        title: 'Login and dashboards',
+        desc: 'Client authenticates and loads balances and transactions.',
+        active: ['client','auth','accounts'],
+        edges: [['client','auth'], ['auth','accounts']]
+      },
+      {
+        title: 'Payments and transfers',
+        desc: 'Payments routed to UPI/IMPS and executed in core.',
+        active: ['payments','routing','upi'],
+        edges: [['client','payments'], ['payments','routing'], ['routing','upi']]
+      },
+      {
+        title: 'Ledger and status',
+        desc: 'Core posts ledger entries and returns status.',
+        active: ['core','ledger','status'],
+        edges: [['upi','core'], ['core','ledger'], ['core','status']]
+      },
+      {
+        title: 'Insights',
+        desc: 'Analytics computes spending insights and smart money rules.',
+        active: ['analytics','warehouse','rules'],
+        edges: [['ledger','analytics'], ['analytics','warehouse'], ['analytics','rules']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Alerts delivered via push and SMS.',
+        active: ['notify','push','sms'],
+        edges: [['status','notify'], ['notify','push'], ['notify','sms']]
+      }
+    ]
+  }
 };
 
 export function flowForSystem(sys) {

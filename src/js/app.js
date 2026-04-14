@@ -5601,6 +5601,242 @@ const SYSTEM_LAYOUTS = {
 
   ,
 
+  'samsung-pay': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['device','tokenization','issuer','client','crypto','payments','network','risk','capture','settlement','ledger','receipts','notify','disputes','chargebacks'],
+    nodes: {
+      device: { x: 140, y: 180, label: 'Device', colorKey: 'device' },
+      tokenization: { x: 380, y: 180, label: 'Tokenize', colorKey: 'api' },
+      issuer: { x: 620, y: 180, label: 'Issuer', colorKey: 'external' },
+      client: { x: 140, y: 320, label: 'Client', colorKey: 'client' },
+      crypto: { x: 380, y: 320, label: 'Crypto', colorKey: 'api' },
+      payments: { x: 620, y: 320, label: 'Payments', colorKey: 'api' },
+      network: { x: 860, y: 320, label: 'Network', colorKey: 'external' },
+      risk: { x: 1100, y: 320, label: 'Risk', colorKey: 'api' },
+      capture: { x: 620, y: 460, label: 'Capture', colorKey: 'api' },
+      settlement: { x: 860, y: 460, label: 'Settlement', colorKey: 'api' },
+      ledger: { x: 1100, y: 460, label: 'Ledger', colorKey: 'store' },
+      receipts: { x: 620, y: 600, label: 'Receipts', colorKey: 'store' },
+      notify: { x: 380, y: 600, label: 'Notify', colorKey: 'external' },
+      disputes: { x: 860, y: 600, label: 'Disputes', colorKey: 'api' },
+      chargebacks: { x: 1100, y: 600, label: 'Chargebacks', colorKey: 'api' }
+    }
+  },
+
+  'google-wallet': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','tokenization','issuer','sync','store','cache','payments','network','risk','status','ledger','receipts','notify','analytics','warehouse','reports'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      tokenization: { x: 380, y: 180, label: 'Tokenize', colorKey: 'api' },
+      issuer: { x: 620, y: 180, label: 'Issuer', colorKey: 'external' },
+      sync: { x: 380, y: 320, label: 'Sync', colorKey: 'stream' },
+      store: { x: 620, y: 320, label: 'Store', colorKey: 'store' },
+      cache: { x: 860, y: 320, label: 'Cache', colorKey: 'cache' },
+      payments: { x: 380, y: 460, label: 'Payments', colorKey: 'api' },
+      network: { x: 620, y: 460, label: 'Network', colorKey: 'external' },
+      risk: { x: 860, y: 460, label: 'Risk', colorKey: 'api' },
+      status: { x: 1100, y: 460, label: 'Status', colorKey: 'api' },
+      ledger: { x: 860, y: 600, label: 'Ledger', colorKey: 'store' },
+      receipts: { x: 620, y: 600, label: 'Receipts', colorKey: 'store' },
+      notify: { x: 380, y: 600, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 620, y: 740, label: 'Analytics', colorKey: 'stream' },
+      warehouse: { x: 860, y: 740, label: 'Warehouse', colorKey: 'store' },
+      reports: { x: 1100, y: 740, label: 'Reports', colorKey: 'api' }
+    }
+  },
+
+  mobikwik: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','wallet','topup','payments','ledger','upi','bank','billpay','routing','biller','rewards','offers','rank','support','refunds'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      wallet: { x: 620, y: 180, label: 'Wallet', colorKey: 'store' },
+      topup: { x: 380, y: 320, label: 'Top-up', colorKey: 'api' },
+      payments: { x: 620, y: 320, label: 'Payments', colorKey: 'external' },
+      ledger: { x: 860, y: 320, label: 'Ledger', colorKey: 'store' },
+      upi: { x: 380, y: 460, label: 'UPI', colorKey: 'external' },
+      bank: { x: 620, y: 460, label: 'Bank', colorKey: 'external' },
+      billpay: { x: 380, y: 600, label: 'BillPay', colorKey: 'api' },
+      routing: { x: 620, y: 600, label: 'Routing', colorKey: 'api' },
+      biller: { x: 860, y: 600, label: 'Biller', colorKey: 'external' },
+      rewards: { x: 1100, y: 320, label: 'Rewards', colorKey: 'api' },
+      offers: { x: 1100, y: 460, label: 'Offers', colorKey: 'api' },
+      rank: { x: 1100, y: 600, label: 'Ranking', colorKey: 'api' },
+      support: { x: 620, y: 740, label: 'Support', colorKey: 'api' },
+      refunds: { x: 860, y: 740, label: 'Refunds', colorKey: 'api' }
+    }
+  },
+
+  freecharge: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','home','recharge','payments','biller','upi','bank','ledger','billpay','routing','rewards','notify','support','refunds'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      home: { x: 620, y: 180, label: 'Home', colorKey: 'api' },
+      recharge: { x: 380, y: 320, label: 'Recharge', colorKey: 'api' },
+      payments: { x: 620, y: 320, label: 'Payments', colorKey: 'external' },
+      biller: { x: 860, y: 320, label: 'Biller', colorKey: 'external' },
+      upi: { x: 380, y: 460, label: 'UPI', colorKey: 'external' },
+      bank: { x: 620, y: 460, label: 'Bank', colorKey: 'external' },
+      ledger: { x: 860, y: 460, label: 'Ledger', colorKey: 'store' },
+      billpay: { x: 380, y: 600, label: 'BillPay', colorKey: 'api' },
+      routing: { x: 620, y: 600, label: 'Routing', colorKey: 'api' },
+      rewards: { x: 860, y: 600, label: 'Rewards', colorKey: 'api' },
+      notify: { x: 1100, y: 600, label: 'Notify', colorKey: 'external' },
+      support: { x: 620, y: 740, label: 'Support', colorKey: 'api' },
+      refunds: { x: 860, y: 740, label: 'Refunds', colorKey: 'api' }
+    }
+  },
+
+  'zerodha-kite': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','marketdata','quotes','cache','orderbook','orders','risk','exchange','fills','positions','ledger','analytics','warehouse','reports','payments','routing','bank'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      marketdata: { x: 620, y: 180, label: 'Market Data', colorKey: 'stream' },
+      quotes: { x: 380, y: 320, label: 'Quotes', colorKey: 'api' },
+      cache: { x: 620, y: 320, label: 'Cache', colorKey: 'cache' },
+      orderbook: { x: 860, y: 320, label: 'Orderbook', colorKey: 'store' },
+      orders: { x: 380, y: 460, label: 'Orders', colorKey: 'store' },
+      risk: { x: 620, y: 460, label: 'Risk', colorKey: 'api' },
+      exchange: { x: 860, y: 460, label: 'Exchange', colorKey: 'external' },
+      fills: { x: 860, y: 600, label: 'Fills', colorKey: 'stream' },
+      positions: { x: 620, y: 600, label: 'Positions', colorKey: 'store' },
+      ledger: { x: 380, y: 600, label: 'Ledger', colorKey: 'store' },
+      analytics: { x: 620, y: 740, label: 'Analytics', colorKey: 'stream' },
+      warehouse: { x: 860, y: 740, label: 'Warehouse', colorKey: 'store' },
+      reports: { x: 1100, y: 740, label: 'Reports', colorKey: 'api' },
+      payments: { x: 1100, y: 600, label: 'Payments', colorKey: 'api' },
+      routing: { x: 1100, y: 460, label: 'Routing', colorKey: 'api' },
+      bank: { x: 1100, y: 320, label: 'Bank', colorKey: 'external' }
+    }
+  },
+
+  indmoney: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','integrations','sync','ingest','store','dashboard','cache','analytics','warehouse','orders','risk','broker','recos','notify','push'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      integrations: { x: 620, y: 180, label: 'Integrations', colorKey: 'external' },
+      sync: { x: 380, y: 320, label: 'Sync', colorKey: 'stream' },
+      ingest: { x: 620, y: 320, label: 'Ingest', colorKey: 'api' },
+      store: { x: 860, y: 320, label: 'Store', colorKey: 'store' },
+      dashboard: { x: 380, y: 460, label: 'Dashboard', colorKey: 'api' },
+      cache: { x: 620, y: 460, label: 'Cache', colorKey: 'cache' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'stream' },
+      warehouse: { x: 1100, y: 460, label: 'Warehouse', colorKey: 'store' },
+      orders: { x: 380, y: 600, label: 'Orders', colorKey: 'store' },
+      risk: { x: 620, y: 600, label: 'Risk', colorKey: 'api' },
+      broker: { x: 860, y: 600, label: 'Broker', colorKey: 'external' },
+      recos: { x: 1100, y: 600, label: 'Recos', colorKey: 'api' },
+      notify: { x: 860, y: 740, label: 'Notify', colorKey: 'external' },
+      push: { x: 1100, y: 740, label: 'Push', colorKey: 'external' }
+    }
+  },
+
+  'et-money': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','kyc','accounts','catalog','recos','rank','orders','payments','ledger','ingest','portfolio','analytics','reports','warehouse','exports','notify','push'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      kyc: { x: 380, y: 180, label: 'KYC', colorKey: 'api' },
+      accounts: { x: 620, y: 180, label: 'Accounts', colorKey: 'store' },
+      catalog: { x: 380, y: 320, label: 'Catalog', colorKey: 'store' },
+      recos: { x: 620, y: 320, label: 'Recos', colorKey: 'api' },
+      rank: { x: 860, y: 320, label: 'Ranking', colorKey: 'api' },
+      orders: { x: 380, y: 460, label: 'Orders', colorKey: 'store' },
+      payments: { x: 620, y: 460, label: 'Payments', colorKey: 'external' },
+      ledger: { x: 860, y: 460, label: 'Ledger', colorKey: 'store' },
+      ingest: { x: 380, y: 600, label: 'Ingest', colorKey: 'stream' },
+      portfolio: { x: 620, y: 600, label: 'Portfolio', colorKey: 'store' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'stream' },
+      reports: { x: 380, y: 740, label: 'Reports', colorKey: 'api' },
+      warehouse: { x: 620, y: 740, label: 'Warehouse', colorKey: 'store' },
+      exports: { x: 860, y: 740, label: 'Exports', colorKey: 'api' },
+      notify: { x: 1100, y: 600, label: 'Notify', colorKey: 'external' },
+      push: { x: 1100, y: 740, label: 'Push', colorKey: 'external' }
+    }
+  },
+
+  slice: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','kyc','accounts','cards','controls','limits','authz','risk','decision','ledger','billing','reports','payments','upi','status','collections','disputes','refunds'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      kyc: { x: 380, y: 180, label: 'KYC', colorKey: 'api' },
+      accounts: { x: 620, y: 180, label: 'Accounts', colorKey: 'store' },
+      cards: { x: 860, y: 180, label: 'Cards', colorKey: 'api' },
+      controls: { x: 1100, y: 180, label: 'Controls', colorKey: 'store' },
+      limits: { x: 1100, y: 320, label: 'Limits', colorKey: 'store' },
+      authz: { x: 860, y: 320, label: 'AuthZ', colorKey: 'api' },
+      risk: { x: 620, y: 320, label: 'Risk', colorKey: 'api' },
+      decision: { x: 380, y: 320, label: 'Decision', colorKey: 'api' },
+      ledger: { x: 380, y: 460, label: 'Ledger', colorKey: 'store' },
+      billing: { x: 620, y: 460, label: 'Billing', colorKey: 'store' },
+      reports: { x: 860, y: 460, label: 'Reports', colorKey: 'api' },
+      payments: { x: 1100, y: 460, label: 'Payments', colorKey: 'api' },
+      upi: { x: 1100, y: 600, label: 'UPI', colorKey: 'external' },
+      status: { x: 860, y: 600, label: 'Status', colorKey: 'api' },
+      collections: { x: 620, y: 740, label: 'Collections', colorKey: 'api' },
+      disputes: { x: 380, y: 740, label: 'Disputes', colorKey: 'api' },
+      refunds: { x: 860, y: 740, label: 'Refunds', colorKey: 'api' }
+    }
+  },
+
+  jupiter: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','kyc','core','auth','accounts','payments','upi','ledger','cards','controls','approvals','analytics','warehouse','reports','notify','push','sms'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      kyc: { x: 380, y: 180, label: 'KYC', colorKey: 'api' },
+      core: { x: 620, y: 180, label: 'Core', colorKey: 'external' },
+      auth: { x: 380, y: 320, label: 'Auth', colorKey: 'api' },
+      accounts: { x: 620, y: 320, label: 'Accounts', colorKey: 'api' },
+      payments: { x: 380, y: 460, label: 'Payments', colorKey: 'api' },
+      upi: { x: 620, y: 460, label: 'UPI', colorKey: 'external' },
+      ledger: { x: 860, y: 460, label: 'Ledger', colorKey: 'store' },
+      cards: { x: 380, y: 600, label: 'Cards', colorKey: 'api' },
+      controls: { x: 620, y: 600, label: 'Controls', colorKey: 'store' },
+      approvals: { x: 860, y: 600, label: 'Approvals', colorKey: 'api' },
+      analytics: { x: 620, y: 740, label: 'Analytics', colorKey: 'stream' },
+      warehouse: { x: 860, y: 740, label: 'Warehouse', colorKey: 'store' },
+      reports: { x: 1100, y: 740, label: 'Reports', colorKey: 'api' },
+      notify: { x: 1100, y: 600, label: 'Notify', colorKey: 'external' },
+      push: { x: 1100, y: 460, label: 'Push', colorKey: 'external' },
+      sms: { x: 1100, y: 320, label: 'SMS', colorKey: 'external' }
+    }
+  },
+
+  'fi-money': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','kyc','core','auth','accounts','payments','routing','upi','ledger','status','analytics','warehouse','rules','notify','push','sms'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      kyc: { x: 380, y: 180, label: 'KYC', colorKey: 'api' },
+      core: { x: 620, y: 180, label: 'Core', colorKey: 'external' },
+      auth: { x: 380, y: 320, label: 'Auth', colorKey: 'api' },
+      accounts: { x: 620, y: 320, label: 'Accounts', colorKey: 'api' },
+      payments: { x: 380, y: 460, label: 'Payments', colorKey: 'api' },
+      routing: { x: 620, y: 460, label: 'Routing', colorKey: 'api' },
+      upi: { x: 860, y: 460, label: 'UPI', colorKey: 'external' },
+      ledger: { x: 620, y: 600, label: 'Ledger', colorKey: 'store' },
+      status: { x: 860, y: 600, label: 'Status', colorKey: 'api' },
+      analytics: { x: 620, y: 740, label: 'Analytics', colorKey: 'stream' },
+      warehouse: { x: 860, y: 740, label: 'Warehouse', colorKey: 'store' },
+      rules: { x: 1100, y: 740, label: 'Rules', colorKey: 'api' },
+      notify: { x: 1100, y: 600, label: 'Notify', colorKey: 'external' },
+      push: { x: 1100, y: 460, label: 'Push', colorKey: 'external' },
+      sms: { x: 1100, y: 320, label: 'SMS', colorKey: 'external' }
+    }
+  }
+
+  ,
+
   figma: {
     viewBox: '0 0 1200 960',
     primaryPath: ['client','auth','files','cache','editor','ops','realtime','merge','store','comments','notify','push','export','render','cdn','sharing','authz','audit'],
@@ -10015,6 +10251,362 @@ const ARCH_LAYOUTS = {
       if (stepIdx === 4) e.push(['issuer','capture','capture'], ['capture','settlement','settle'], ['settlement','ledger','ledger']);
       if (stepIdx === 5) e.push(['capture','receipts','receipt'], ['receipts','notify','notify'], ['notify','device','device']);
       if (stepIdx === 6) e.push(['client','disputes','dispute'], ['disputes','chargebacks','chargeback'], ['chargebacks','ledger','ledger']);
+      return e;
+    }
+  },
+
+  // ----- Batch 17 (Architecture - from sheet) -----
+
+  'samsung-pay': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Samsung Pay Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['device','tokenization','issuer','client','crypto','payments','network','risk','capture','settlement','ledger','receipts','notify','disputes','chargebacks'],
+    nodes: {
+      device: { x: 40, y: 160, label: 'Device' },
+      tokenization: { x: 320, y: 160, label: 'Tokenize' },
+      issuer: { x: 600, y: 160, label: 'Issuer' },
+      client: { x: 40, y: 300, label: 'Client' },
+      crypto: { x: 320, y: 300, label: 'Crypto' },
+      payments: { x: 600, y: 300, label: 'Payments' },
+      network: { x: 880, y: 300, label: 'Network' },
+      risk: { x: 1160, y: 300, label: 'Risk' },
+      capture: { x: 600, y: 440, label: 'Capture' },
+      settlement: { x: 880, y: 440, label: 'Settlement' },
+      ledger: { x: 1160, y: 440, label: 'Ledger' },
+      receipts: { x: 600, y: 580, label: 'Receipts' },
+      notify: { x: 320, y: 580, label: 'Notify' },
+      disputes: { x: 880, y: 580, label: 'Disputes' },
+      chargebacks: { x: 1160, y: 580, label: 'Chargebacks' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['device','tokenization','token'], ['tokenization','issuer','issuer']);
+      if (stepIdx === 2) e.push(['client','payments','pay'], ['client','crypto','crypto'], ['crypto','payments','cryptogram']);
+      if (stepIdx === 3) e.push(['payments','network','network'], ['network','issuer','issuer'], ['issuer','risk','risk']);
+      if (stepIdx === 4) e.push(['issuer','capture','capture'], ['capture','settlement','settle'], ['settlement','ledger','ledger']);
+      if (stepIdx === 5) e.push(['capture','receipts','receipt'], ['receipts','notify','notify'], ['notify','device','device']);
+      if (stepIdx === 6) e.push(['client','disputes','dispute'], ['disputes','chargebacks','chargeback'], ['chargebacks','ledger','ledger']);
+      return e;
+    }
+  },
+
+  'google-wallet': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Google Wallet Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','tokenization','issuer','sync','store','cache','payments','network','risk','status','ledger','receipts','notify','analytics','warehouse','reports'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      tokenization: { x: 320, y: 160, label: 'Tokenize' },
+      issuer: { x: 600, y: 160, label: 'Issuer' },
+      sync: { x: 320, y: 300, label: 'Sync' },
+      store: { x: 600, y: 300, label: 'Store' },
+      cache: { x: 880, y: 300, label: 'Cache' },
+      payments: { x: 320, y: 440, label: 'Payments' },
+      network: { x: 600, y: 440, label: 'Network' },
+      risk: { x: 880, y: 440, label: 'Risk' },
+      status: { x: 1160, y: 440, label: 'Status' },
+      ledger: { x: 880, y: 580, label: 'Ledger' },
+      receipts: { x: 600, y: 580, label: 'Receipts' },
+      notify: { x: 320, y: 580, label: 'Notify' },
+      analytics: { x: 600, y: 720, label: 'Analytics' },
+      warehouse: { x: 880, y: 720, label: 'Warehouse' },
+      reports: { x: 1160, y: 720, label: 'Reports' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','tokenization','add'], ['tokenization','issuer','issuer']);
+      if (stepIdx === 2) e.push(['client','sync','sync'], ['sync','store','store'], ['store','cache','cache']);
+      if (stepIdx === 3) e.push(['client','payments','pay'], ['payments','network','network'], ['network','issuer','issuer']);
+      if (stepIdx === 4) e.push(['issuer','risk','risk'], ['issuer','status','status'], ['status','ledger','ledger']);
+      if (stepIdx === 5) e.push(['status','receipts','receipt'], ['receipts','notify','notify'], ['notify','client','client']);
+      if (stepIdx === 6) e.push(['ledger','analytics','analytics'], ['analytics','warehouse','warehouse'], ['warehouse','reports','reports']);
+      return e;
+    }
+  },
+
+  mobikwik: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'MobiKwik Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','wallet','topup','payments','ledger','upi','bank','billpay','routing','biller','rewards','offers','rank','support','refunds'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      wallet: { x: 600, y: 160, label: 'Wallet' },
+      topup: { x: 320, y: 300, label: 'Top-up' },
+      payments: { x: 600, y: 300, label: 'Payments' },
+      ledger: { x: 880, y: 300, label: 'Ledger' },
+      upi: { x: 320, y: 440, label: 'UPI' },
+      bank: { x: 600, y: 440, label: 'Bank' },
+      billpay: { x: 320, y: 580, label: 'BillPay' },
+      routing: { x: 600, y: 580, label: 'Routing' },
+      biller: { x: 880, y: 580, label: 'Biller' },
+      rewards: { x: 1160, y: 300, label: 'Rewards' },
+      offers: { x: 1160, y: 440, label: 'Offers' },
+      rank: { x: 1160, y: 580, label: 'Ranking' },
+      support: { x: 600, y: 720, label: 'Support' },
+      refunds: { x: 880, y: 720, label: 'Refunds' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','wallet','wallet']);
+      if (stepIdx === 2) e.push(['client','topup','topup'], ['topup','payments','pay'], ['payments','ledger','ledger']);
+      if (stepIdx === 3) e.push(['client','payments','pay'], ['payments','upi','upi'], ['upi','bank','bank']);
+      if (stepIdx === 4) e.push(['client','billpay','bill'], ['billpay','routing','route'], ['routing','biller','biller']);
+      if (stepIdx === 5) e.push(['ledger','rewards','rewards'], ['rewards','offers','offers'], ['offers','rank','rank']);
+      if (stepIdx === 6) e.push(['client','support','support'], ['support','refunds','refund'], ['refunds','ledger','ledger']);
+      return e;
+    }
+  },
+
+  freecharge: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Freecharge Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','home','recharge','payments','biller','upi','bank','ledger','billpay','routing','rewards','notify','support','refunds'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      home: { x: 600, y: 160, label: 'Home' },
+      recharge: { x: 320, y: 300, label: 'Recharge' },
+      payments: { x: 600, y: 300, label: 'Payments' },
+      biller: { x: 880, y: 300, label: 'Biller' },
+      upi: { x: 320, y: 440, label: 'UPI' },
+      bank: { x: 600, y: 440, label: 'Bank' },
+      ledger: { x: 880, y: 440, label: 'Ledger' },
+      billpay: { x: 320, y: 580, label: 'BillPay' },
+      routing: { x: 600, y: 580, label: 'Routing' },
+      rewards: { x: 880, y: 580, label: 'Rewards' },
+      notify: { x: 1160, y: 580, label: 'Notify' },
+      support: { x: 600, y: 720, label: 'Support' },
+      refunds: { x: 880, y: 720, label: 'Refunds' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','home','home']);
+      if (stepIdx === 2) e.push(['client','recharge','recharge'], ['recharge','payments','pay'], ['payments','biller','biller']);
+      if (stepIdx === 3) e.push(['client','upi','upi'], ['upi','bank','bank'], ['bank','ledger','ledger']);
+      if (stepIdx === 4) e.push(['client','billpay','bill'], ['billpay','routing','route'], ['routing','biller','biller']);
+      if (stepIdx === 5) e.push(['ledger','rewards','rewards'], ['rewards','ledger','apply'], ['rewards','notify','notify']);
+      if (stepIdx === 6) e.push(['client','support','support'], ['support','refunds','refund'], ['refunds','ledger','ledger']);
+      return e;
+    }
+  },
+
+  'zerodha-kite': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Zerodha Kite Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','marketdata','quotes','cache','orderbook','orders','risk','exchange','fills','positions','ledger','analytics','warehouse','reports','payments','routing','bank'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      marketdata: { x: 600, y: 160, label: 'Market Data' },
+      quotes: { x: 320, y: 300, label: 'Quotes' },
+      cache: { x: 600, y: 300, label: 'Cache' },
+      orderbook: { x: 880, y: 300, label: 'Orderbook' },
+      orders: { x: 320, y: 440, label: 'Orders' },
+      risk: { x: 600, y: 440, label: 'Risk' },
+      exchange: { x: 880, y: 440, label: 'Exchange' },
+      fills: { x: 880, y: 580, label: 'Fills' },
+      positions: { x: 600, y: 580, label: 'Positions' },
+      ledger: { x: 320, y: 580, label: 'Ledger' },
+      analytics: { x: 600, y: 720, label: 'Analytics' },
+      warehouse: { x: 880, y: 720, label: 'Warehouse' },
+      reports: { x: 1160, y: 720, label: 'Reports' },
+      payments: { x: 1160, y: 580, label: 'Payments' },
+      routing: { x: 1160, y: 440, label: 'Routing' },
+      bank: { x: 1160, y: 300, label: 'Bank' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','marketdata','md']);
+      if (stepIdx === 2) e.push(['client','quotes','quotes'], ['quotes','cache','cache'], ['quotes','orderbook','depth']);
+      if (stepIdx === 3) e.push(['client','orders','order'], ['orders','risk','risk'], ['orders','exchange','exchange']);
+      if (stepIdx === 4) e.push(['exchange','fills','fills'], ['fills','positions','pos'], ['positions','ledger','ledger']);
+      if (stepIdx === 5) e.push(['ledger','analytics','analytics'], ['analytics','warehouse','warehouse'], ['warehouse','reports','reports']);
+      if (stepIdx === 6) e.push(['client','payments','funds'], ['payments','routing','route'], ['routing','bank','bank']);
+      return e;
+    }
+  },
+
+  indmoney: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'INDmoney Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','integrations','sync','ingest','store','dashboard','cache','analytics','warehouse','orders','risk','broker','recos','notify','push'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      integrations: { x: 600, y: 160, label: 'Integrations' },
+      sync: { x: 320, y: 300, label: 'Sync' },
+      ingest: { x: 600, y: 300, label: 'Ingest' },
+      store: { x: 880, y: 300, label: 'Store' },
+      dashboard: { x: 320, y: 440, label: 'Dashboard' },
+      cache: { x: 600, y: 440, label: 'Cache' },
+      analytics: { x: 880, y: 440, label: 'Analytics' },
+      warehouse: { x: 1160, y: 440, label: 'Warehouse' },
+      orders: { x: 320, y: 580, label: 'Orders' },
+      risk: { x: 600, y: 580, label: 'Risk' },
+      broker: { x: 880, y: 580, label: 'Broker' },
+      recos: { x: 1160, y: 580, label: 'Recos' },
+      notify: { x: 880, y: 720, label: 'Notify' },
+      push: { x: 1160, y: 720, label: 'Push' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','integrations','link']);
+      if (stepIdx === 2) e.push(['integrations','sync','sync'], ['sync','ingest','ingest'], ['ingest','store','store']);
+      if (stepIdx === 3) e.push(['client','dashboard','dash'], ['dashboard','cache','cache'], ['store','analytics','analytics']);
+      if (stepIdx === 4) e.push(['client','orders','order'], ['orders','risk','risk'], ['orders','broker','broker']);
+      if (stepIdx === 5) e.push(['store','analytics','analytics'], ['analytics','warehouse','warehouse'], ['warehouse','recos','recos']);
+      if (stepIdx === 6) e.push(['analytics','notify','notify'], ['notify','push','push'], ['push','client','client']);
+      return e;
+    }
+  },
+
+  'et-money': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'ET Money Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','kyc','accounts','catalog','recos','rank','orders','payments','ledger','ingest','portfolio','analytics','reports','warehouse','exports','notify','push'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      kyc: { x: 320, y: 160, label: 'KYC' },
+      accounts: { x: 600, y: 160, label: 'Accounts' },
+      catalog: { x: 320, y: 300, label: 'Catalog' },
+      recos: { x: 600, y: 300, label: 'Recos' },
+      rank: { x: 880, y: 300, label: 'Ranking' },
+      orders: { x: 320, y: 440, label: 'Orders' },
+      payments: { x: 600, y: 440, label: 'Payments' },
+      ledger: { x: 880, y: 440, label: 'Ledger' },
+      ingest: { x: 320, y: 580, label: 'Ingest' },
+      portfolio: { x: 600, y: 580, label: 'Portfolio' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      reports: { x: 320, y: 720, label: 'Reports' },
+      warehouse: { x: 600, y: 720, label: 'Warehouse' },
+      exports: { x: 880, y: 720, label: 'Exports' },
+      notify: { x: 1160, y: 580, label: 'Notify' },
+      push: { x: 1160, y: 720, label: 'Push' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','kyc','kyc'], ['kyc','accounts','accounts']);
+      if (stepIdx === 2) e.push(['client','catalog','catalog'], ['catalog','recos','recos'], ['recos','rank','rank']);
+      if (stepIdx === 3) e.push(['client','orders','sip'], ['orders','payments','pay'], ['payments','ledger','ledger']);
+      if (stepIdx === 4) e.push(['ingest','portfolio','portfolio'], ['portfolio','analytics','analytics']);
+      if (stepIdx === 5) e.push(['ledger','reports','reports'], ['reports','warehouse','warehouse'], ['warehouse','exports','exports']);
+      if (stepIdx === 6) e.push(['reports','notify','notify'], ['notify','push','push'], ['push','client','client']);
+      return e;
+    }
+  },
+
+  slice: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Slice Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','kyc','accounts','cards','controls','limits','authz','risk','decision','ledger','billing','reports','payments','upi','status','collections','disputes','refunds'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      kyc: { x: 320, y: 160, label: 'KYC' },
+      accounts: { x: 600, y: 160, label: 'Accounts' },
+      cards: { x: 880, y: 160, label: 'Cards' },
+      controls: { x: 1160, y: 160, label: 'Controls' },
+      limits: { x: 1160, y: 300, label: 'Limits' },
+      authz: { x: 880, y: 300, label: 'AuthZ' },
+      risk: { x: 600, y: 300, label: 'Risk' },
+      decision: { x: 320, y: 300, label: 'Decision' },
+      ledger: { x: 320, y: 440, label: 'Ledger' },
+      billing: { x: 600, y: 440, label: 'Billing' },
+      reports: { x: 880, y: 440, label: 'Reports' },
+      payments: { x: 1160, y: 440, label: 'Payments' },
+      upi: { x: 1160, y: 580, label: 'UPI' },
+      status: { x: 880, y: 580, label: 'Status' },
+      collections: { x: 600, y: 720, label: 'Collections' },
+      disputes: { x: 320, y: 720, label: 'Disputes' },
+      refunds: { x: 880, y: 720, label: 'Refunds' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','kyc','kyc'], ['kyc','accounts','accounts']);
+      if (stepIdx === 2) e.push(['accounts','cards','cards'], ['cards','controls','controls'], ['controls','limits','limits']);
+      if (stepIdx === 3) e.push(['cards','authz','authz'], ['authz','risk','risk'], ['risk','decision','decision']);
+      if (stepIdx === 4) e.push(['decision','ledger','ledger'], ['ledger','billing','billing'], ['billing','reports','reports']);
+      if (stepIdx === 5) e.push(['client','payments','repay'], ['payments','upi','upi'], ['upi','status','status']);
+      if (stepIdx === 6) e.push(['billing','collections','collect'], ['client','disputes','dispute'], ['disputes','refunds','refund']);
+      return e;
+    }
+  },
+
+  jupiter: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Jupiter Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','kyc','core','auth','accounts','payments','upi','ledger','cards','controls','approvals','analytics','warehouse','reports','notify','push','sms'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      kyc: { x: 320, y: 160, label: 'KYC' },
+      core: { x: 600, y: 160, label: 'Core' },
+      auth: { x: 320, y: 300, label: 'Auth' },
+      accounts: { x: 600, y: 300, label: 'Accounts' },
+      payments: { x: 320, y: 440, label: 'Payments' },
+      upi: { x: 600, y: 440, label: 'UPI' },
+      ledger: { x: 880, y: 440, label: 'Ledger' },
+      cards: { x: 320, y: 580, label: 'Cards' },
+      controls: { x: 600, y: 580, label: 'Controls' },
+      approvals: { x: 880, y: 580, label: 'Approvals' },
+      analytics: { x: 600, y: 720, label: 'Analytics' },
+      warehouse: { x: 880, y: 720, label: 'Warehouse' },
+      reports: { x: 1160, y: 720, label: 'Reports' },
+      notify: { x: 1160, y: 580, label: 'Notify' },
+      push: { x: 1160, y: 440, label: 'Push' },
+      sms: { x: 1160, y: 300, label: 'SMS' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','kyc','kyc'], ['kyc','core','core']);
+      if (stepIdx === 2) e.push(['client','auth','auth'], ['auth','accounts','accounts']);
+      if (stepIdx === 3) e.push(['client','payments','pay'], ['payments','upi','upi'], ['upi','ledger','ledger']);
+      if (stepIdx === 4) e.push(['accounts','cards','cards'], ['cards','controls','controls'], ['controls','approvals','approve']);
+      if (stepIdx === 5) e.push(['accounts','analytics','analytics'], ['analytics','warehouse','warehouse'], ['warehouse','reports','reports']);
+      if (stepIdx === 6) e.push(['ledger','notify','notify'], ['notify','push','push'], ['notify','sms','sms']);
+      return e;
+    }
+  },
+
+  'fi-money': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Fi Money Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','kyc','core','auth','accounts','payments','routing','upi','ledger','status','analytics','warehouse','rules','notify','push','sms'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      kyc: { x: 320, y: 160, label: 'KYC' },
+      core: { x: 600, y: 160, label: 'Core' },
+      auth: { x: 320, y: 300, label: 'Auth' },
+      accounts: { x: 600, y: 300, label: 'Accounts' },
+      payments: { x: 320, y: 440, label: 'Payments' },
+      routing: { x: 600, y: 440, label: 'Routing' },
+      upi: { x: 880, y: 440, label: 'UPI' },
+      ledger: { x: 600, y: 580, label: 'Ledger' },
+      status: { x: 880, y: 580, label: 'Status' },
+      analytics: { x: 600, y: 720, label: 'Analytics' },
+      warehouse: { x: 880, y: 720, label: 'Warehouse' },
+      rules: { x: 1160, y: 720, label: 'Rules' },
+      notify: { x: 1160, y: 580, label: 'Notify' },
+      push: { x: 1160, y: 440, label: 'Push' },
+      sms: { x: 1160, y: 300, label: 'SMS' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','kyc','kyc'], ['kyc','core','core']);
+      if (stepIdx === 2) e.push(['client','auth','auth'], ['auth','accounts','accounts']);
+      if (stepIdx === 3) e.push(['client','payments','pay'], ['payments','routing','route'], ['routing','upi','upi']);
+      if (stepIdx === 4) e.push(['upi','core','core'], ['core','ledger','ledger'], ['core','status','status']);
+      if (stepIdx === 5) e.push(['ledger','analytics','analytics'], ['analytics','warehouse','warehouse'], ['analytics','rules','rules']);
+      if (stepIdx === 6) e.push(['status','notify','notify'], ['notify','push','push'], ['notify','sms','sms']);
       return e;
     }
   },
