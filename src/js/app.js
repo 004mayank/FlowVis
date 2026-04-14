@@ -1428,8 +1428,8 @@ const SYSTEM_LAYOUTS = {
       notify: { x: 520, y: 560, label: 'Notify', colorKey: 'external' },
       webhook: { x: 720, y: 560, label: 'Webhooks', colorKey: 'external' },
       disputes: { x: 880, y: 560, label: 'Disputes', colorKey: 'api' },
-      refunds: { x: 720, y: 620, label: 'Refunds', colorKey: 'api' },
-      reports: { x: 880, y: 620, label: 'Reports', colorKey: 'store' }
+      refunds: { x: 650, y: 680, label: 'Refunds', colorKey: 'api' },
+      reports: { x: 950, y: 680, label: 'Reports', colorKey: 'store' }
     }
   },
 
