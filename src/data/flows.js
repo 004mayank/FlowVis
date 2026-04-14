@@ -9104,6 +9104,428 @@ export const FLOWS = {
       }
     ]
   }
+
+  ,
+
+  banggood: {
+    title: 'Banggood',
+    steps: [
+      {
+        title: 'Browse and search',
+        desc: 'Client loads search and catalog with caching.',
+        active: ['client','search','catalog'],
+        edges: [['client','search'], ['search','catalog']]
+      },
+      {
+        title: 'Cart and pricing',
+        desc: 'Cart persists; pricing and promos compute totals.',
+        active: ['cart','pricing','promos'],
+        edges: [['client','cart'], ['cart','pricing'], ['pricing','promos']]
+      },
+      {
+        title: 'Checkout',
+        desc: 'Checkout validates address and inventory hold.',
+        active: ['checkout','inventory','hold'],
+        edges: [['cart','checkout'], ['checkout','inventory'], ['inventory','hold']]
+      },
+      {
+        title: 'Payment and order',
+        desc: 'Payment processed with risk checks; order created.',
+        active: ['payments','risk','orders'],
+        edges: [['checkout','payments'], ['payments','risk'], ['payments','orders']]
+      },
+      {
+        title: 'Fulfillment and tracking',
+        desc: 'Fulfillment dispatches; carrier ships; tracking updates.',
+        active: ['fulfillment','carrier','tracking'],
+        edges: [['orders','fulfillment'], ['fulfillment','carrier'], ['carrier','tracking']]
+      },
+      {
+        title: 'Returns and refunds',
+        desc: 'Returns handled; refunds adjust ledger.',
+        active: ['returns','refunds','ledger'],
+        edges: [['client','returns'], ['returns','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  gearbest: {
+    title: 'Gearbest',
+    steps: [
+      {
+        title: 'Browse and search',
+        desc: 'Client loads search and catalog with caching.',
+        active: ['client','search','catalog'],
+        edges: [['client','search'], ['search','catalog']]
+      },
+      {
+        title: 'Cart and pricing',
+        desc: 'Cart persists; pricing and promos compute totals.',
+        active: ['cart','pricing','promos'],
+        edges: [['client','cart'], ['cart','pricing'], ['pricing','promos']]
+      },
+      {
+        title: 'Checkout',
+        desc: 'Checkout validates address and inventory hold.',
+        active: ['checkout','inventory','hold'],
+        edges: [['cart','checkout'], ['checkout','inventory'], ['inventory','hold']]
+      },
+      {
+        title: 'Payment and order',
+        desc: 'Payment processed with risk checks; order created.',
+        active: ['payments','risk','orders'],
+        edges: [['checkout','payments'], ['payments','risk'], ['payments','orders']]
+      },
+      {
+        title: 'Fulfillment and tracking',
+        desc: 'Fulfillment dispatches; carrier ships; tracking updates.',
+        active: ['fulfillment','carrier','tracking'],
+        edges: [['orders','fulfillment'], ['fulfillment','carrier'], ['carrier','tracking']]
+      },
+      {
+        title: 'Returns and refunds',
+        desc: 'Returns handled; refunds adjust ledger.',
+        active: ['returns','refunds','ledger'],
+        edges: [['client','returns'], ['returns','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  overstock: {
+    title: 'Overstock',
+    steps: [
+      {
+        title: 'Browse and search',
+        desc: 'Client loads search and catalog with caching.',
+        active: ['client','search','catalog'],
+        edges: [['client','search'], ['search','catalog']]
+      },
+      {
+        title: 'Cart and pricing',
+        desc: 'Cart persists; pricing and promos compute totals.',
+        active: ['cart','pricing','promos'],
+        edges: [['client','cart'], ['cart','pricing'], ['pricing','promos']]
+      },
+      {
+        title: 'Checkout and payment',
+        desc: 'Payments processed with risk checks; order created.',
+        active: ['checkout','payments','risk'],
+        edges: [['cart','checkout'], ['checkout','payments'], ['payments','risk']]
+      },
+      {
+        title: 'Order and fulfillment',
+        desc: 'Order created; fulfillment ships; tracking updates.',
+        active: ['orders','fulfillment','tracking'],
+        edges: [['payments','orders'], ['orders','fulfillment'], ['fulfillment','tracking']]
+      },
+      {
+        title: 'Support',
+        desc: 'Support handles issues and cancellations.',
+        active: ['support','orders','notify'],
+        edges: [['client','support'], ['support','orders'], ['support','notify']]
+      },
+      {
+        title: 'Returns and refunds',
+        desc: 'Returns handled; refunds adjust ledger.',
+        active: ['returns','refunds','ledger'],
+        edges: [['client','returns'], ['returns','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  houzz: {
+    title: 'Houzz',
+    steps: [
+      {
+        title: 'Browse and search',
+        desc: 'Client loads search and catalog with caching.',
+        active: ['client','search','catalog'],
+        edges: [['client','search'], ['search','catalog']]
+      },
+      {
+        title: 'View product and inspiration',
+        desc: 'Catalog loads product details and images via CDN.',
+        active: ['catalog','cdn','recos'],
+        edges: [['catalog','cdn'], ['catalog','recos']]
+      },
+      {
+        title: 'Message pro',
+        desc: 'Messaging uses realtime and notifications.',
+        active: ['chat','realtime','notify'],
+        edges: [['client','chat'], ['chat','realtime'], ['chat','notify']]
+      },
+      {
+        title: 'Checkout',
+        desc: 'Cart and checkout; payment processed with risk checks.',
+        active: ['cart','checkout','payments'],
+        edges: [['client','cart'], ['cart','checkout'], ['checkout','payments']]
+      },
+      {
+        title: 'Fulfillment',
+        desc: 'Orders fulfilled and shipped; tracking updates.',
+        active: ['orders','fulfillment','tracking'],
+        edges: [['payments','orders'], ['orders','fulfillment'], ['fulfillment','tracking']]
+      },
+      {
+        title: 'Returns and support',
+        desc: 'Support and returns handled; refunds adjust ledger.',
+        active: ['support','refunds','ledger'],
+        edges: [['client','support'], ['support','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  '1mg': {
+    title: '1mg',
+    steps: [
+      {
+        title: 'Browse medicines',
+        desc: 'Client searches catalog; recommendations and cache used.',
+        active: ['client','search','catalog'],
+        edges: [['client','search'], ['search','catalog']]
+      },
+      {
+        title: 'Upload prescription',
+        desc: 'Prescription uploaded; verification workflow starts.',
+        active: ['upload','verification','pharmacy'],
+        edges: [['client','upload'], ['upload','verification'], ['verification','pharmacy']]
+      },
+      {
+        title: 'Cart and checkout',
+        desc: 'Cart persists; checkout computes pricing and availability.',
+        active: ['cart','pricing','checkout'],
+        edges: [['client','cart'], ['cart','pricing'], ['cart','checkout']]
+      },
+      {
+        title: 'Payment and order',
+        desc: 'Payment processed with risk checks; order created.',
+        active: ['payments','risk','orders'],
+        edges: [['checkout','payments'], ['payments','risk'], ['payments','orders']]
+      },
+      {
+        title: 'Fulfillment and delivery',
+        desc: 'Fulfillment dispatches; courier delivers; tracking updates.',
+        active: ['fulfillment','courier','tracking'],
+        edges: [['orders','fulfillment'], ['fulfillment','courier'], ['courier','tracking']]
+      },
+      {
+        title: 'Support and refunds',
+        desc: 'Support handles issues; refunds adjust ledger.',
+        active: ['support','refunds','ledger'],
+        edges: [['orders','support'], ['support','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  pharmeasy: {
+    title: 'PharmEasy',
+    steps: [
+      {
+        title: 'Browse medicines',
+        desc: 'Client searches catalog; recommendations and cache used.',
+        active: ['client','search','catalog'],
+        edges: [['client','search'], ['search','catalog']]
+      },
+      {
+        title: 'Upload prescription',
+        desc: 'Prescription uploaded; verification workflow starts.',
+        active: ['upload','verification','pharmacy'],
+        edges: [['client','upload'], ['upload','verification'], ['verification','pharmacy']]
+      },
+      {
+        title: 'Cart and checkout',
+        desc: 'Cart persists; checkout computes pricing and availability.',
+        active: ['cart','pricing','checkout'],
+        edges: [['client','cart'], ['cart','pricing'], ['cart','checkout']]
+      },
+      {
+        title: 'Payment and order',
+        desc: 'Payment processed with risk checks; order created.',
+        active: ['payments','risk','orders'],
+        edges: [['checkout','payments'], ['payments','risk'], ['payments','orders']]
+      },
+      {
+        title: 'Fulfillment and delivery',
+        desc: 'Fulfillment dispatches; courier delivers; tracking updates.',
+        active: ['fulfillment','courier','tracking'],
+        edges: [['orders','fulfillment'], ['fulfillment','courier'], ['courier','tracking']]
+      },
+      {
+        title: 'Support and refunds',
+        desc: 'Support handles issues; refunds adjust ledger.',
+        active: ['support','refunds','ledger'],
+        edges: [['orders','support'], ['support','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  netmeds: {
+    title: 'Netmeds',
+    steps: [
+      {
+        title: 'Browse medicines',
+        desc: 'Client searches catalog; recommendations and cache used.',
+        active: ['client','search','catalog'],
+        edges: [['client','search'], ['search','catalog']]
+      },
+      {
+        title: 'Upload prescription',
+        desc: 'Prescription uploaded; verification workflow starts.',
+        active: ['upload','verification','pharmacy'],
+        edges: [['client','upload'], ['upload','verification'], ['verification','pharmacy']]
+      },
+      {
+        title: 'Cart and checkout',
+        desc: 'Cart persists; checkout computes pricing and availability.',
+        active: ['cart','pricing','checkout'],
+        edges: [['client','cart'], ['cart','pricing'], ['cart','checkout']]
+      },
+      {
+        title: 'Payment and order',
+        desc: 'Payment processed with risk checks; order created.',
+        active: ['payments','risk','orders'],
+        edges: [['checkout','payments'], ['payments','risk'], ['payments','orders']]
+      },
+      {
+        title: 'Fulfillment and delivery',
+        desc: 'Fulfillment dispatches; courier delivers; tracking updates.',
+        active: ['fulfillment','courier','tracking'],
+        edges: [['orders','fulfillment'], ['fulfillment','courier'], ['courier','tracking']]
+      },
+      {
+        title: 'Support and refunds',
+        desc: 'Support handles issues; refunds adjust ledger.',
+        active: ['support','refunds','ledger'],
+        edges: [['orders','support'], ['support','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  firstcry: {
+    title: 'FirstCry',
+    steps: [
+      {
+        title: 'Browse and search',
+        desc: 'Client loads search and catalog with caching.',
+        active: ['client','search','catalog'],
+        edges: [['client','search'], ['search','catalog']]
+      },
+      {
+        title: 'Cart and pricing',
+        desc: 'Cart persists; pricing and promos compute totals.',
+        active: ['cart','pricing','promos'],
+        edges: [['client','cart'], ['cart','pricing'], ['pricing','promos']]
+      },
+      {
+        title: 'Checkout and payment',
+        desc: 'Payments processed with risk checks; order created.',
+        active: ['checkout','payments','risk'],
+        edges: [['cart','checkout'], ['checkout','payments'], ['payments','risk']]
+      },
+      {
+        title: 'Fulfillment and shipping',
+        desc: 'Orders sent to fulfillment; carrier ships; tracking updates.',
+        active: ['orders','fulfillment','tracking'],
+        edges: [['payments','orders'], ['orders','fulfillment'], ['fulfillment','tracking']]
+      },
+      {
+        title: 'Support',
+        desc: 'Support handles issues and cancellations.',
+        active: ['support','orders','notify'],
+        edges: [['client','support'], ['support','orders'], ['support','notify']]
+      },
+      {
+        title: 'Returns and refunds',
+        desc: 'Returns handled; refunds adjust ledger.',
+        active: ['returns','refunds','ledger'],
+        edges: [['client','returns'], ['returns','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  lenskart: {
+    title: 'Lenskart',
+    steps: [
+      {
+        title: 'Browse products',
+        desc: 'Client searches catalog; recommendations and cache used.',
+        active: ['client','search','catalog'],
+        edges: [['client','search'], ['search','catalog']]
+      },
+      {
+        title: 'Try-on and fitting',
+        desc: 'Try-on experience loads assets and personalization.',
+        active: ['tryon','cdn','recos'],
+        edges: [['client','tryon'], ['tryon','cdn'], ['tryon','recos']]
+      },
+      {
+        title: 'Cart and checkout',
+        desc: 'Cart persists; checkout computes pricing and availability.',
+        active: ['cart','pricing','checkout'],
+        edges: [['client','cart'], ['cart','pricing'], ['cart','checkout']]
+      },
+      {
+        title: 'Payment and order',
+        desc: 'Payment processed with risk checks; order created.',
+        active: ['payments','risk','orders'],
+        edges: [['checkout','payments'], ['payments','risk'], ['payments','orders']]
+      },
+      {
+        title: 'Fulfillment',
+        desc: 'Lab/fulfillment dispatches; tracking updates.',
+        active: ['fulfillment','tracking','notify'],
+        edges: [['orders','fulfillment'], ['fulfillment','tracking'], ['tracking','notify']]
+      },
+      {
+        title: 'Support and returns',
+        desc: 'Support handles issues; returns/refunds adjust ledger.',
+        active: ['support','refunds','ledger'],
+        edges: [['client','support'], ['support','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  pepperfry: {
+    title: 'Pepperfry',
+    steps: [
+      {
+        title: 'Browse and search',
+        desc: 'Client loads search and catalog with caching.',
+        active: ['client','search','catalog'],
+        edges: [['client','search'], ['search','catalog']]
+      },
+      {
+        title: 'Cart and pricing',
+        desc: 'Cart persists; pricing and promos compute totals.',
+        active: ['cart','pricing','promos'],
+        edges: [['client','cart'], ['cart','pricing'], ['pricing','promos']]
+      },
+      {
+        title: 'Checkout and payment',
+        desc: 'Payments processed with risk checks; order created.',
+        active: ['checkout','payments','risk'],
+        edges: [['cart','checkout'], ['checkout','payments'], ['payments','risk']]
+      },
+      {
+        title: 'Fulfillment and delivery',
+        desc: 'Large-item fulfillment scheduled; delivery tracking updates.',
+        active: ['orders','fulfillment','tracking'],
+        edges: [['payments','orders'], ['orders','fulfillment'], ['fulfillment','tracking']]
+      },
+      {
+        title: 'Installation',
+        desc: 'Installation scheduled and completed; notifications sent.',
+        active: ['installation','scheduler','notify'],
+        edges: [['orders','installation'], ['installation','scheduler'], ['scheduler','notify']]
+      },
+      {
+        title: 'Returns and refunds',
+        desc: 'Returns handled; refunds adjust ledger.',
+        active: ['returns','refunds','ledger'],
+        edges: [['client','returns'], ['returns','refunds'], ['refunds','ledger']]
+      }
+    ]
+  }
 };
 
 export function flowForSystem(sys) {
