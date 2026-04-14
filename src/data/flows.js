@@ -1449,6 +1449,482 @@ export const FLOWS = {
       }
     ]
   }
+
+  ,
+
+  ola: {
+    title: 'Ola',
+    steps: [
+      {
+        title: 'Set pickup and destination',
+        desc: 'Rider selects pickup/drop; maps and pricing estimate ETA and fare.',
+        active: ['client','maps','pricing'],
+        edges: [['client','maps'], ['client','pricing']]
+      },
+      {
+        title: 'Request ride',
+        desc: 'Ride request is authorized and sent to dispatch with rider context.',
+        active: ['client','api','auth','dispatch'],
+        edges: [['client','api'], ['api','auth'], ['api','dispatch']]
+      },
+      {
+        title: 'Driver matching',
+        desc: 'Dispatch finds nearby drivers using location streams and constraints.',
+        active: ['dispatch','location','match'],
+        edges: [['location','dispatch'], ['dispatch','match']]
+      },
+      {
+        title: 'Trip routing and live ETA',
+        desc: 'Routing computes path; ETAs update as traffic and driver location change.',
+        active: ['match','routing','maps'],
+        edges: [['match','routing'], ['routing','maps']]
+      },
+      {
+        title: 'Live tracking',
+        desc: 'Driver location updates stream to the rider through realtime services.',
+        active: ['driver','location','realtime','client'],
+        edges: [['driver','location'], ['location','realtime'], ['realtime','client']]
+      },
+      {
+        title: 'Complete trip and payment',
+        desc: 'Fare finalization runs pricing and payments, then updates receipts.',
+        active: ['pricing','payments','ledger'],
+        edges: [['pricing','payments'], ['payments','ledger']]
+      },
+      {
+        title: 'Ratings and support',
+        desc: 'Ratings feed quality systems; disputes and support flows are triggered.',
+        active: ['ratings','support','ledger'],
+        edges: [['ledger','ratings'], ['ledger','support']]
+      }
+    ]
+  },
+
+  airbnb: {
+    title: 'Airbnb',
+    steps: [
+      {
+        title: 'Search and filter stays',
+        desc: 'User searches location/date; ranking selects listings and prices.',
+        active: ['client','search','rank'],
+        edges: [['client','search'], ['search','rank']]
+      },
+      {
+        title: 'View listing and availability',
+        desc: 'Listing details load; availability calendar and rules are checked.',
+        active: ['catalog','availability','pricing'],
+        edges: [['rank','catalog'], ['catalog','availability'], ['catalog','pricing']]
+      },
+      {
+        title: 'Request to book',
+        desc: 'Booking request is created; identity, risk, and policy checks run.',
+        active: ['booking','risk','auth'],
+        edges: [['client','booking'], ['booking','auth'], ['booking','risk']]
+      },
+      {
+        title: 'Payment authorization',
+        desc: 'Payment is authorized; holds and retries are handled securely.',
+        active: ['payments','risk','ledger'],
+        edges: [['booking','payments'], ['payments','risk'], ['payments','ledger']]
+      },
+      {
+        title: 'Host confirmation and messaging',
+        desc: 'Host is notified; messaging coordinates questions and acceptance.',
+        active: ['host','messages','notify'],
+        edges: [['booking','notify'], ['notify','host'], ['host','messages']]
+      },
+      {
+        title: 'Check-in and trip support',
+        desc: 'Itinerary is served; support handles issues, refunds, and changes.',
+        active: ['itinerary','support','changes'],
+        edges: [['booking','itinerary'], ['itinerary','client'], ['booking','support'], ['booking','changes']]
+      },
+      {
+        title: 'Payouts and reviews',
+        desc: 'After stay, payouts settle to host; reviews feed trust and ranking.',
+        active: ['payouts','reviews','trust'],
+        edges: [['ledger','payouts'], ['booking','reviews'], ['reviews','trust']]
+      }
+    ]
+  },
+
+  'booking-com': {
+    title: 'Booking.com',
+    steps: [
+      {
+        title: 'Search hotels and dates',
+        desc: 'User searches destination/date; ranking selects properties and prices.',
+        active: ['client','search','rank'],
+        edges: [['client','search'], ['search','rank']]
+      },
+      {
+        title: 'Check availability and rates',
+        desc: 'Availability, rate plans, and cancellation policies are fetched.',
+        active: ['inventory','pricing','policies'],
+        edges: [['rank','inventory'], ['inventory','pricing'], ['inventory','policies']]
+      },
+      {
+        title: 'Reserve room',
+        desc: 'Reservation is created and inventory is held/confirmed.',
+        active: ['reservation','inventory','confirm'],
+        edges: [['client','reservation'], ['reservation','inventory'], ['reservation','confirm']]
+      },
+      {
+        title: 'Payment and fraud checks',
+        desc: 'Payment is authorized (or pay-at-property); fraud checks run.',
+        active: ['payments','fraud','ledger'],
+        edges: [['reservation','payments'], ['payments','fraud'], ['payments','ledger']]
+      },
+      {
+        title: 'Partner notification',
+        desc: 'Property/partner systems are notified and confirmation is sent.',
+        active: ['partner','notify','client'],
+        edges: [['confirm','notify'], ['notify','partner'], ['notify','client']]
+      },
+      {
+        title: 'Manage booking',
+        desc: 'Changes, cancellations, and refunds follow policy and inventory rules.',
+        active: ['changes','policies','refunds'],
+        edges: [['reservation','changes'], ['changes','policies'], ['changes','refunds']]
+      },
+      {
+        title: 'Reviews and loyalty',
+        desc: 'Post-stay reviews and loyalty benefits feed ranking and retention.',
+        active: ['reviews','loyalty','rank'],
+        edges: [['reservation','reviews'], ['reviews','rank'], ['reservation','loyalty']]
+      }
+    ]
+  },
+
+  makemytrip: {
+    title: 'MakeMyTrip',
+    steps: [
+      {
+        title: 'Search flights/hotels',
+        desc: 'User searches inventory; aggregators fetch prices and availability.',
+        active: ['client','search','aggregator'],
+        edges: [['client','search'], ['search','aggregator']]
+      },
+      {
+        title: 'Price and revalidate',
+        desc: 'Selected itinerary is revalidated to ensure price and seats/rooms still exist.',
+        active: ['revalidate','inventory','pricing'],
+        edges: [['aggregator','revalidate'], ['revalidate','inventory'], ['revalidate','pricing']]
+      },
+      {
+        title: 'Traveler details and risk checks',
+        desc: 'Passenger details collected; risk and policy checks run.',
+        active: ['checkout','risk','auth'],
+        edges: [['client','checkout'], ['checkout','auth'], ['checkout','risk']]
+      },
+      {
+        title: 'Payment authorization',
+        desc: 'Payment is authorized; retries and alternative methods supported.',
+        active: ['payments','gateway','ledger'],
+        edges: [['checkout','payments'], ['payments','gateway'], ['payments','ledger']]
+      },
+      {
+        title: 'Booking confirmation',
+        desc: 'Reservation is confirmed with airline/hotel systems and PNR is created.',
+        active: ['booking','partner','confirm'],
+        edges: [['payments','booking'], ['booking','partner'], ['partner','confirm']]
+      },
+      {
+        title: 'Ticketing and itinerary',
+        desc: 'Tickets/vouchers issued; itinerary delivered to customer and stored.',
+        active: ['ticketing','itinerary','notify'],
+        edges: [['confirm','ticketing'], ['ticketing','itinerary'], ['itinerary','notify']]
+      },
+      {
+        title: 'Changes, cancellations, refunds',
+        desc: 'Post-booking changes follow policies; refunds are processed via payments.',
+        active: ['changes','refunds','support'],
+        edges: [['booking','changes'], ['changes','refunds'], ['changes','support']]
+      }
+    ]
+  },
+
+  lyft: {
+    title: 'Lyft',
+    steps: [
+      {
+        title: 'Set pickup and destination',
+        desc: 'Client geocodes and estimates ETA and fare with pricing service.',
+        active: ['client','maps','pricing'],
+        edges: [['client','maps'], ['client','pricing']]
+      },
+      {
+        title: 'Request ride',
+        desc: 'Ride request is authorized and sent to dispatch.',
+        active: ['client','api','auth','dispatch'],
+        edges: [['client','api'], ['api','auth'], ['api','dispatch']]
+      },
+      {
+        title: 'Matching nearby drivers',
+        desc: 'Dispatch matches drivers using location streams and constraints.',
+        active: ['dispatch','location','match'],
+        edges: [['location','dispatch'], ['dispatch','match']]
+      },
+      {
+        title: 'Route and ETA updates',
+        desc: 'Routing and traffic updates keep ETA current for pickup and dropoff.',
+        active: ['match','routing','maps'],
+        edges: [['match','routing'], ['routing','maps']]
+      },
+      {
+        title: 'Live tracking',
+        desc: 'Realtime updates stream driver location to rider.',
+        active: ['driver','location','realtime','client'],
+        edges: [['driver','location'], ['location','realtime'], ['realtime','client']]
+      },
+      {
+        title: 'Payment and receipt',
+        desc: 'Fare finalization runs pricing and payments then updates receipt.',
+        active: ['pricing','payments','ledger'],
+        edges: [['pricing','payments'], ['payments','ledger']]
+      },
+      {
+        title: 'Ratings and safety/support',
+        desc: 'Ratings and safety tools trigger support flows when needed.',
+        active: ['ratings','safety','support'],
+        edges: [['ledger','ratings'], ['ledger','support'], ['support','safety']]
+      }
+    ]
+  },
+
+  grab: {
+    title: 'Grab',
+    steps: [
+      {
+        title: 'Choose service and location',
+        desc: 'User selects ride/food etc.; maps and pricing estimate cost and ETA.',
+        active: ['client','maps','pricing'],
+        edges: [['client','maps'], ['client','pricing']]
+      },
+      {
+        title: 'Request and authorization',
+        desc: 'Request is authorized; context sent to dispatch.',
+        active: ['client','api','auth','dispatch'],
+        edges: [['client','api'], ['api','auth'], ['api','dispatch']]
+      },
+      {
+        title: 'Matching and supply',
+        desc: 'Dispatch matches driver/partner using location stream and constraints.',
+        active: ['dispatch','location','match'],
+        edges: [['location','dispatch'], ['dispatch','match']]
+      },
+      {
+        title: 'Route and tracking',
+        desc: 'Routing computes path; realtime tracking updates the customer.',
+        active: ['routing','realtime','client'],
+        edges: [['match','routing'], ['routing','realtime'], ['realtime','client']]
+      },
+      {
+        title: 'Complete and charge',
+        desc: 'Pricing finalizes fare; payments charge wallet/card and ledger records.',
+        active: ['pricing','payments','ledger'],
+        edges: [['pricing','payments'], ['payments','ledger']]
+      },
+      {
+        title: 'Promos and rewards',
+        desc: 'Rewards and promotions update wallets, points, and retention systems.',
+        active: ['promo','rewards','ledger'],
+        edges: [['ledger','promo'], ['promo','rewards']]
+      },
+      {
+        title: 'Support and fraud',
+        desc: 'Support workflows handle disputes and fraud detection alerts.',
+        active: ['support','fraud','risk'],
+        edges: [['ledger','support'], ['support','fraud'], ['fraud','risk']]
+      }
+    ]
+  },
+
+  blablacar: {
+    title: 'BlaBlaCar',
+    steps: [
+      {
+        title: 'Search rides',
+        desc: 'Passenger searches routes and dates; matching finds available rides.',
+        active: ['client','search','match'],
+        edges: [['client','search'], ['search','match']]
+      },
+      {
+        title: 'View ride details',
+        desc: 'Ride details, driver profile, seats, and price are shown.',
+        active: ['catalog','profiles','trust'],
+        edges: [['match','catalog'], ['catalog','profiles'], ['profiles','trust']]
+      },
+      {
+        title: 'Request seat',
+        desc: 'Booking request is created and sent to driver for acceptance.',
+        active: ['booking','notify','driver'],
+        edges: [['client','booking'], ['booking','notify'], ['notify','driver']]
+      },
+      {
+        title: 'Payment authorization',
+        desc: 'Payment is authorized; escrow-like hold until ride completes.',
+        active: ['payments','escrow','ledger'],
+        edges: [['booking','payments'], ['payments','escrow'], ['escrow','ledger']]
+      },
+      {
+        title: 'Messaging and coordination',
+        desc: 'Passenger and driver coordinate pickup via messaging and notifications.',
+        active: ['messages','notify','client'],
+        edges: [['booking','messages'], ['messages','notify'], ['notify','client']]
+      },
+      {
+        title: 'Ride completion and payout',
+        desc: 'After completion, funds release to driver and receipts are issued.',
+        active: ['payouts','ledger','notify'],
+        edges: [['ledger','payouts'], ['payouts','notify']]
+      },
+      {
+        title: 'Ratings and disputes',
+        desc: 'Ratings update trust; disputes and refunds are handled via support.',
+        active: ['ratings','support','refunds'],
+        edges: [['payouts','ratings'], ['ledger','refunds'], ['refunds','support']]
+      }
+    ]
+  },
+
+  skyscanner: {
+    title: 'Skyscanner',
+    steps: [
+      {
+        title: 'Search flights',
+        desc: 'User searches routes/dates; metasearch fans out to airlines and OTAs.',
+        active: ['client','search','aggregator'],
+        edges: [['client','search'], ['search','aggregator']]
+      },
+      {
+        title: 'Aggregate offers',
+        desc: 'Results are normalized, deduped, and ranked by price/time/constraints.',
+        active: ['normalize','rank','cache'],
+        edges: [['aggregator','normalize'], ['normalize','rank'], ['rank','cache']]
+      },
+      {
+        title: 'Filter and sort',
+        desc: 'Client applies filters; ranking updates results view and deep links.',
+        active: ['client','rank','ui'],
+        edges: [['rank','ui'], ['ui','client']]
+      },
+      {
+        title: 'Click-out to partner',
+        desc: 'User clicks an offer; Skyscanner redirects to partner with tracking.',
+        active: ['redirect','partner','tracking'],
+        edges: [['client','redirect'], ['redirect','partner'], ['redirect','tracking']]
+      },
+      {
+        title: 'Partner booking flow',
+        desc: 'Booking happens on partner site; conversion events are reported back.',
+        active: ['partner','events','tracking'],
+        edges: [['partner','events'], ['events','tracking']]
+      },
+      {
+        title: 'Attribution and reporting',
+        desc: 'Clicks and conversions feed attribution models and reporting dashboards.',
+        active: ['attribution','reports','analytics'],
+        edges: [['tracking','attribution'], ['attribution','reports'], ['reports','analytics']]
+      }
+    ]
+  },
+
+  expedia: {
+    title: 'Expedia',
+    steps: [
+      {
+        title: 'Search inventory',
+        desc: 'User searches flights/hotels/cars; aggregator fetches prices and availability.',
+        active: ['client','search','aggregator'],
+        edges: [['client','search'], ['search','aggregator']]
+      },
+      {
+        title: 'Select itinerary and revalidate',
+        desc: 'Chosen itinerary is revalidated against supplier inventory and pricing.',
+        active: ['revalidate','inventory','pricing'],
+        edges: [['aggregator','revalidate'], ['revalidate','inventory'], ['revalidate','pricing']]
+      },
+      {
+        title: 'Checkout and traveler details',
+        desc: 'Traveler and payment details captured; fraud and policy checks run.',
+        active: ['checkout','fraud','risk'],
+        edges: [['client','checkout'], ['checkout','fraud'], ['checkout','risk']]
+      },
+      {
+        title: 'Payment authorization',
+        desc: 'Payment is authorized and ledger updated; retries and fallbacks handled.',
+        active: ['payments','gateway','ledger'],
+        edges: [['checkout','payments'], ['payments','gateway'], ['payments','ledger']]
+      },
+      {
+        title: 'Confirm with suppliers',
+        desc: 'Reservation confirmed with airline/hotel supplier systems.',
+        active: ['booking','supplier','confirm'],
+        edges: [['payments','booking'], ['booking','supplier'], ['supplier','confirm']]
+      },
+      {
+        title: 'Itinerary and notifications',
+        desc: 'Itinerary is stored and delivered; updates and reminders are sent.',
+        active: ['itinerary','notify','client'],
+        edges: [['confirm','itinerary'], ['itinerary','notify'], ['notify','client']]
+      },
+      {
+        title: 'Changes, cancellations, refunds',
+        desc: 'Post-booking modifications follow policy; refunds and support workflows run.',
+        active: ['changes','refunds','support'],
+        edges: [['booking','changes'], ['changes','refunds'], ['changes','support']]
+      }
+    ]
+  },
+
+  hopper: {
+    title: 'Hopper',
+    steps: [
+      {
+        title: 'Search flights/hotels',
+        desc: 'User searches; aggregator fetches offers and shows price timeline.',
+        active: ['client','search','aggregator'],
+        edges: [['client','search'], ['search','aggregator']]
+      },
+      {
+        title: 'Price prediction',
+        desc: 'ML models predict whether prices will rise/fall and recommend wait/book.',
+        active: ['ml','pricing','signals'],
+        edges: [['aggregator','signals'], ['signals','ml'], ['ml','pricing']]
+      },
+      {
+        title: 'Watch and alerts',
+        desc: 'User sets watch; alert pipeline notifies on price changes.',
+        active: ['watch','alerts','notify'],
+        edges: [['client','watch'], ['watch','alerts'], ['alerts','notify']]
+      },
+      {
+        title: 'Freeze/guarantee (optional)',
+        desc: 'Optional price freeze/guarantee uses underwriting and risk rules.',
+        active: ['freeze','risk','ledger'],
+        edges: [['pricing','freeze'], ['freeze','risk'], ['risk','ledger']]
+      },
+      {
+        title: 'Book itinerary',
+        desc: 'Checkout captures traveler details; payment is authorized and booking created.',
+        active: ['checkout','payments','booking'],
+        edges: [['client','checkout'], ['checkout','payments'], ['payments','booking']]
+      },
+      {
+        title: 'Confirm with suppliers',
+        desc: 'Reservation is confirmed with airline/hotel; itinerary generated.',
+        active: ['supplier','confirm','itinerary'],
+        edges: [['booking','supplier'], ['supplier','confirm'], ['confirm','itinerary']]
+      },
+      {
+        title: 'Support and changes',
+        desc: 'Changes, cancellations, and support workflows run; refunds update ledger.',
+        active: ['support','changes','refunds'],
+        edges: [['itinerary','support'], ['support','changes'], ['changes','refunds']]
+      }
+    ]
+  }
 };
 
 export function flowForSystem(sys) {
