@@ -4607,7 +4607,7 @@ const SYSTEM_LAYOUTS = {
       apps: { x: 860, y: 600, label: 'Apps', colorKey: 'external' },
       webhooks: { x: 1100, y: 600, label: 'Webhooks', colorKey: 'external' }
     }
-  }
+  },
 };
 
 // Architecture layouts per product id.
@@ -6146,6 +6146,680 @@ const ARCH_LAYOUTS = {
       if (stepIdx === 4) e.push(['ledger','balances','update'], ['balances','overdraft','spotme']);
       if (stepIdx === 5) e.push(['ledger','analytics','insights'], ['analytics','notify','notify'], ['notify','client','alert']);
       if (stepIdx === 6) e.push(['ledger','disputes','case'], ['disputes','support','support'], ['support','recon','recon']);
+      return e;
+    }
+  }
+
+  ,
+
+  // ----- Batch 6 (productivity) -----
+
+  dropbox: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Dropbox Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','metadata','sync','upload','storage','index','search','sharing','authz','audit','versions','realtime'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      metadata: { x: 320, y: 160, label: 'Metadata' },
+      sync: { x: 600, y: 160, label: 'Sync Engine' },
+      upload: { x: 320, y: 300, label: 'Upload' },
+      storage: { x: 600, y: 300, label: 'Storage' },
+      index: { x: 880, y: 160, label: 'Index' },
+      search: { x: 1160, y: 160, label: 'Search' },
+      sharing: { x: 880, y: 300, label: 'Sharing' },
+      authz: { x: 1160, y: 300, label: 'AuthZ' },
+      audit: { x: 1440, y: 300, label: 'Audit' },
+      realtime: { x: 1440, y: 160, label: 'Realtime' },
+      versions: { x: 600, y: 440, label: 'Versions' },
+      support: { x: 320, y: 440, label: 'Support' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','metadata','list'], ['metadata','sync','sync']);
+      if (stepIdx === 2) e.push(['client','upload','upload'], ['upload','storage','store']);
+      if (stepIdx === 3) e.push(['metadata','index','index'], ['index','search','search']);
+      if (stepIdx === 4) e.push(['client','sharing','share'], ['sharing','authz','authz'], ['authz','audit','audit']);
+      if (stepIdx === 5) e.push(['storage','sync','sync'], ['sync','realtime','rt'], ['realtime','client','client']);
+      if (stepIdx === 6) e.push(['storage','versions','versions'], ['versions','support','support']);
+      return e;
+    }
+  },
+
+  gmail: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Gmail Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','inbox','cache','send','auth','spam','security','delivery','store','index','search','filters','notify','push'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      inbox: { x: 320, y: 160, label: 'Inbox' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      send: { x: 320, y: 300, label: 'Send' },
+      auth: { x: 600, y: 300, label: 'Auth' },
+      spam: { x: 880, y: 300, label: 'Spam' },
+      security: { x: 1160, y: 300, label: 'Security' },
+      delivery: { x: 880, y: 440, label: 'Delivery' },
+      store: { x: 600, y: 440, label: 'Store' },
+      index: { x: 320, y: 440, label: 'Index' },
+      search: { x: 320, y: 580, label: 'Search' },
+      filters: { x: 600, y: 580, label: 'Filters' },
+      notify: { x: 880, y: 580, label: 'Notify' },
+      push: { x: 1160, y: 580, label: 'Push' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','inbox','sync'], ['inbox','cache','cache']);
+      if (stepIdx === 2) e.push(['client','send','send'], ['send','auth','auth']);
+      if (stepIdx === 3) e.push(['send','spam','spam'], ['spam','security','scan']);
+      if (stepIdx === 4) e.push(['security','delivery','deliver'], ['delivery','store','store'], ['store','index','index']);
+      if (stepIdx === 5) e.push(['index','search','search'], ['search','filters','filters']);
+      if (stepIdx === 6) e.push(['delivery','notify','notify'], ['notify','push','push'], ['push','client','client']);
+      return e;
+    }
+  },
+
+  'microsoft-teams': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Microsoft Teams Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','sync','api','store','realtime','meet','signaling','media','sfu','files','storage','authz','notify','compliance','audit'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      sync: { x: 600, y: 160, label: 'Sync' },
+      api: { x: 320, y: 300, label: 'API' },
+      store: { x: 600, y: 300, label: 'Message Store' },
+      realtime: { x: 880, y: 300, label: 'Realtime' },
+      meet: { x: 320, y: 440, label: 'Meetings' },
+      signaling: { x: 600, y: 440, label: 'Signaling' },
+      media: { x: 880, y: 440, label: 'Media' },
+      sfu: { x: 1160, y: 440, label: 'SFU/Relay' },
+      files: { x: 320, y: 580, label: 'Files' },
+      storage: { x: 600, y: 580, label: 'Storage' },
+      authz: { x: 880, y: 580, label: 'AuthZ' },
+      notify: { x: 1160, y: 300, label: 'Notify' },
+      compliance: { x: 1160, y: 580, label: 'Compliance' },
+      audit: { x: 1440, y: 580, label: 'Audit' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','sync','sync']);
+      if (stepIdx === 2) e.push(['client','api','send'], ['api','store','store'], ['store','realtime','rt']);
+      if (stepIdx === 3) e.push(['client','meet','join'], ['meet','signaling','signal'], ['signaling','media','neg']);
+      if (stepIdx === 4) e.push(['client','media','media'], ['media','sfu','sfu'], ['sfu','client','client']);
+      if (stepIdx === 5) e.push(['client','files','files'], ['files','storage','store'], ['storage','authz','authz']);
+      if (stepIdx === 6) e.push(['store','notify','notify'], ['store','compliance','comp'], ['compliance','audit','audit']);
+      return e;
+    }
+  },
+
+  trello: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Trello Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','boards','cache','api','store','activity','realtime','comments','notify','upload','obj','automation','apps'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      boards: { x: 320, y: 160, label: 'Boards' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      api: { x: 320, y: 300, label: 'API' },
+      store: { x: 600, y: 300, label: 'Store' },
+      activity: { x: 880, y: 300, label: 'Activity' },
+      realtime: { x: 1160, y: 300, label: 'Realtime' },
+      comments: { x: 320, y: 440, label: 'Comments' },
+      notify: { x: 600, y: 440, label: 'Notify' },
+      upload: { x: 320, y: 580, label: 'Upload' },
+      obj: { x: 600, y: 580, label: 'Object Store' },
+      automation: { x: 880, y: 580, label: 'Automation' },
+      apps: { x: 1160, y: 580, label: 'Apps' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','boards','boards'], ['boards','cache','cache']);
+      if (stepIdx === 2) e.push(['client','api','move'], ['api','store','store'], ['store','activity','activity']);
+      if (stepIdx === 3) e.push(['store','realtime','rt'], ['realtime','client','client']);
+      if (stepIdx === 4) e.push(['client','comments','comment'], ['comments','store','store'], ['comments','notify','notify']);
+      if (stepIdx === 5) e.push(['client','upload','upload'], ['upload','obj','obj'], ['upload','store','store']);
+      if (stepIdx === 6) e.push(['store','automation','auto'], ['automation','apps','apps'], ['apps','api','api']);
+      return e;
+    }
+  },
+
+  asana: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Asana Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','projects','cache','api','store','activity','notify','inbox','realtime','index','search','reports','automation','apps'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      projects: { x: 320, y: 160, label: 'Projects' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      api: { x: 320, y: 300, label: 'API' },
+      store: { x: 600, y: 300, label: 'Store' },
+      activity: { x: 880, y: 300, label: 'Activity' },
+      notify: { x: 1160, y: 300, label: 'Notify' },
+      inbox: { x: 1160, y: 440, label: 'Inbox' },
+      realtime: { x: 880, y: 440, label: 'Realtime' },
+      index: { x: 600, y: 440, label: 'Index' },
+      search: { x: 320, y: 440, label: 'Search' },
+      reports: { x: 320, y: 580, label: 'Reports' },
+      automation: { x: 600, y: 580, label: 'Automation' },
+      apps: { x: 880, y: 580, label: 'Apps' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','projects','load'], ['projects','cache','cache']);
+      if (stepIdx === 2) e.push(['client','api','write'], ['api','store','store'], ['store','activity','activity']);
+      if (stepIdx === 3) e.push(['store','notify','notify'], ['notify','inbox','inbox']);
+      if (stepIdx === 4) e.push(['store','realtime','rt'], ['realtime','client','client']);
+      if (stepIdx === 5) e.push(['store','index','index'], ['index','search','search'], ['search','reports','reports']);
+      if (stepIdx === 6) e.push(['store','automation','auto'], ['automation','apps','apps'], ['apps','api','api']);
+      return e;
+    }
+  },
+
+  clickup: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'ClickUp Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','sync','authz','api','store','activity','docs','realtime','merge','notify','push','index','search','dash','automation','apps','webhooks'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      sync: { x: 320, y: 160, label: 'Sync' },
+      authz: { x: 600, y: 160, label: 'AuthZ' },
+      api: { x: 320, y: 300, label: 'API' },
+      store: { x: 600, y: 300, label: 'Store' },
+      activity: { x: 880, y: 300, label: 'Activity' },
+      docs: { x: 320, y: 440, label: 'Docs' },
+      realtime: { x: 600, y: 440, label: 'Realtime' },
+      merge: { x: 880, y: 440, label: 'Merge' },
+      notify: { x: 1160, y: 300, label: 'Notify' },
+      push: { x: 1160, y: 440, label: 'Push' },
+      index: { x: 600, y: 580, label: 'Index' },
+      search: { x: 320, y: 580, label: 'Search' },
+      dash: { x: 40, y: 580, label: 'Dashboards' },
+      automation: { x: 880, y: 580, label: 'Automation' },
+      apps: { x: 1160, y: 580, label: 'Apps' },
+      webhooks: { x: 1160, y: 720, label: 'Webhooks' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','sync','sync'], ['sync','authz','authz']);
+      if (stepIdx === 2) e.push(['client','api','write'], ['api','store','store'], ['store','activity','activity']);
+      if (stepIdx === 3) e.push(['client','docs','docs'], ['docs','realtime','rt'], ['realtime','merge','merge']);
+      if (stepIdx === 4) e.push(['store','notify','notify'], ['notify','push','push'], ['push','client','client']);
+      if (stepIdx === 5) e.push(['store','index','index'], ['index','search','search'], ['search','dash','dash']);
+      if (stepIdx === 6) e.push(['store','automation','auto'], ['automation','apps','apps'], ['apps','webhooks','webhooks']);
+      return e;
+    }
+  },
+
+  evernote: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Evernote Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','sync','metadata','editor','store','versions','upload','obj','index','ocr','search','sharing','authz','audit','notify','scheduler'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      sync: { x: 320, y: 160, label: 'Sync' },
+      metadata: { x: 600, y: 160, label: 'Metadata' },
+      editor: { x: 320, y: 300, label: 'Editor' },
+      store: { x: 600, y: 300, label: 'Store' },
+      versions: { x: 880, y: 300, label: 'Versions' },
+      upload: { x: 320, y: 440, label: 'Upload' },
+      obj: { x: 600, y: 440, label: 'Object Store' },
+      index: { x: 880, y: 440, label: 'Index' },
+      ocr: { x: 1160, y: 440, label: 'OCR' },
+      search: { x: 1160, y: 300, label: 'Search' },
+      sharing: { x: 320, y: 580, label: 'Sharing' },
+      authz: { x: 600, y: 580, label: 'AuthZ' },
+      audit: { x: 880, y: 580, label: 'Audit' },
+      scheduler: { x: 1160, y: 580, label: 'Scheduler' },
+      notify: { x: 1160, y: 720, label: 'Notify' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','sync','sync'], ['sync','metadata','meta']);
+      if (stepIdx === 2) e.push(['client','editor','edit'], ['editor','store','store'], ['store','versions','versions']);
+      if (stepIdx === 3) e.push(['client','upload','upload'], ['upload','obj','obj'], ['upload','store','store']);
+      if (stepIdx === 4) e.push(['store','index','index'], ['index','ocr','ocr'], ['index','search','search']);
+      if (stepIdx === 5) e.push(['client','sharing','share'], ['sharing','authz','authz'], ['authz','audit','audit']);
+      if (stepIdx === 6) e.push(['store','scheduler','sched'], ['scheduler','notify','notify'], ['notify','client','client']);
+      return e;
+    }
+  },
+
+  airtable: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Airtable Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','api','schema','authz','store','realtime','automation','queue','webhooks','apps','index','search','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      api: { x: 320, y: 160, label: 'API' },
+      schema: { x: 600, y: 160, label: 'Schema' },
+      authz: { x: 880, y: 160, label: 'AuthZ' },
+      store: { x: 600, y: 300, label: 'Records' },
+      realtime: { x: 880, y: 300, label: 'Realtime' },
+      automation: { x: 320, y: 300, label: 'Automation' },
+      queue: { x: 40, y: 300, label: 'Queue' },
+      webhooks: { x: 320, y: 440, label: 'Webhooks' },
+      apps: { x: 600, y: 440, label: 'Apps' },
+      index: { x: 880, y: 440, label: 'Index' },
+      search: { x: 1160, y: 440, label: 'Search' },
+      analytics: { x: 1160, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','api','load'], ['api','schema','schema']);
+      if (stepIdx === 2) e.push(['client','api','edit'], ['api','authz','authz'], ['api','store','store']);
+      if (stepIdx === 3) e.push(['store','realtime','rt'], ['realtime','client','client']);
+      if (stepIdx === 4) e.push(['store','automation','auto'], ['automation','queue','queue']);
+      if (stepIdx === 5) e.push(['automation','webhooks','webhook'], ['webhooks','apps','apps'], ['apps','api','api']);
+      if (stepIdx === 6) e.push(['store','index','index'], ['index','search','search'], ['search','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'monday-com': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Monday.com Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','boards','cache','api','store','activity','automation','queue','notify','realtime','apps','webhooks','reports','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      boards: { x: 320, y: 160, label: 'Boards' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      api: { x: 320, y: 300, label: 'API' },
+      store: { x: 600, y: 300, label: 'Store' },
+      activity: { x: 880, y: 300, label: 'Activity' },
+      automation: { x: 320, y: 440, label: 'Automation' },
+      queue: { x: 40, y: 440, label: 'Queue' },
+      notify: { x: 600, y: 440, label: 'Notify' },
+      realtime: { x: 880, y: 440, label: 'Realtime' },
+      apps: { x: 1160, y: 440, label: 'Apps' },
+      webhooks: { x: 1160, y: 580, label: 'Webhooks' },
+      reports: { x: 600, y: 580, label: 'Reports' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','boards','boards'], ['boards','cache','cache']);
+      if (stepIdx === 2) e.push(['client','api','write'], ['api','store','store'], ['store','activity','activity']);
+      if (stepIdx === 3) e.push(['store','automation','auto'], ['automation','queue','queue'], ['automation','notify','notify']);
+      if (stepIdx === 4) e.push(['store','realtime','rt'], ['realtime','client','client']);
+      if (stepIdx === 5) e.push(['automation','apps','apps'], ['apps','webhooks','webhooks'], ['webhooks','api','api']);
+      if (stepIdx === 6) e.push(['store','reports','reports'], ['reports','analytics','analytics']);
+      return e;
+    }
+  },
+
+  zoom: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Zoom Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','meet','signaling','media','sfu','record','storage','cdn','chat','realtime','moderation','metrics','analytics','support'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      meet: { x: 600, y: 160, label: 'Meeting Svc' },
+      signaling: { x: 880, y: 160, label: 'Signaling' },
+      media: { x: 600, y: 300, label: 'Media' },
+      sfu: { x: 880, y: 300, label: 'SFU/Relay' },
+      record: { x: 1160, y: 300, label: 'Recording' },
+      storage: { x: 1160, y: 440, label: 'Storage' },
+      cdn: { x: 880, y: 440, label: 'CDN' },
+      chat: { x: 320, y: 300, label: 'Chat' },
+      realtime: { x: 320, y: 440, label: 'Realtime' },
+      moderation: { x: 600, y: 440, label: 'Moderation' },
+      metrics: { x: 600, y: 580, label: 'Metrics' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      support: { x: 1160, y: 580, label: 'Support' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['client','meet','join']);
+      if (stepIdx === 2) e.push(['meet','signaling','signal'], ['signaling','media','neg']);
+      if (stepIdx === 3) e.push(['client','media','media'], ['media','sfu','sfu'], ['sfu','client','client']);
+      if (stepIdx === 4) e.push(['sfu','record','record'], ['record','storage','store'], ['storage','cdn','cdn']);
+      if (stepIdx === 5) e.push(['client','chat','chat'], ['chat','realtime','rt'], ['realtime','moderation','mod']);
+      if (stepIdx === 6) e.push(['client','metrics','metrics'], ['metrics','analytics','analytics'], ['analytics','support','support']);
+      return e;
+    }
+  },
+
+  // ----- Batch 7 (random) -----
+
+  discord: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Discord Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','sync','api','store','realtime','voice','signaling','media','sfu','moderation','risk','notify','push'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      sync: { x: 600, y: 160, label: 'Sync' },
+      api: { x: 320, y: 300, label: 'API' },
+      store: { x: 600, y: 300, label: 'Store' },
+      realtime: { x: 880, y: 300, label: 'Realtime' },
+      voice: { x: 320, y: 440, label: 'Voice' },
+      signaling: { x: 600, y: 440, label: 'Signaling' },
+      media: { x: 880, y: 440, label: 'Media' },
+      sfu: { x: 1160, y: 440, label: 'SFU/Relay' },
+      moderation: { x: 880, y: 580, label: 'Moderation' },
+      risk: { x: 1160, y: 580, label: 'Risk' },
+      notify: { x: 600, y: 580, label: 'Notify' },
+      push: { x: 320, y: 580, label: 'Push' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','sync','sync']);
+      if (stepIdx === 2) e.push(['client','api','send'], ['api','store','store'], ['store','realtime','rt']);
+      if (stepIdx === 3) e.push(['client','voice','join'], ['voice','signaling','signal'], ['signaling','media','media']);
+      if (stepIdx === 4) e.push(['client','media','media'], ['media','sfu','sfu'], ['sfu','client','client']);
+      if (stepIdx === 5) e.push(['store','moderation','mod'], ['moderation','risk','risk']);
+      if (stepIdx === 6) e.push(['store','notify','notify'], ['notify','push','push'], ['push','client','client']);
+      return e;
+    }
+  },
+
+  reddit: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Reddit Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','feed','cache','rank','recos','thread','comments','api','write','counters','moderation','policy','risk','notify','push'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      feed: { x: 320, y: 160, label: 'Feed' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      rank: { x: 880, y: 160, label: 'Ranking' },
+      recos: { x: 1160, y: 160, label: 'Recos' },
+      thread: { x: 320, y: 300, label: 'Thread' },
+      comments: { x: 600, y: 300, label: 'Comments' },
+      api: { x: 320, y: 440, label: 'API' },
+      write: { x: 600, y: 440, label: 'Writes' },
+      counters: { x: 880, y: 440, label: 'Counters' },
+      moderation: { x: 600, y: 580, label: 'Moderation' },
+      policy: { x: 880, y: 580, label: 'Policy' },
+      risk: { x: 1160, y: 580, label: 'Risk' },
+      notify: { x: 320, y: 580, label: 'Notify' },
+      push: { x: 40, y: 580, label: 'Push' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','feed','feed'], ['feed','cache','cache']);
+      if (stepIdx === 2) e.push(['feed','rank','rank'], ['rank','recos','recos']);
+      if (stepIdx === 3) e.push(['feed','thread','open'], ['thread','comments','comments'], ['comments','cache','cache']);
+      if (stepIdx === 4) e.push(['client','api','vote'], ['api','write','write'], ['write','counters','counters']);
+      if (stepIdx === 5) e.push(['write','moderation','mod'], ['moderation','policy','policy'], ['policy','risk','risk']);
+      if (stepIdx === 6) e.push(['write','notify','notify'], ['notify','push','push'], ['push','client','client']);
+      return e;
+    }
+  },
+
+  linkedin: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'LinkedIn Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','feed','cache','rank','graph','profile','authz','api','write','fanout','messages','realtime','notify','jobs','recos'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      feed: { x: 320, y: 160, label: 'Feed' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      rank: { x: 880, y: 160, label: 'Ranking' },
+      graph: { x: 1160, y: 160, label: 'Graph' },
+      profile: { x: 320, y: 300, label: 'Profile' },
+      authz: { x: 600, y: 300, label: 'AuthZ' },
+      api: { x: 320, y: 440, label: 'API' },
+      write: { x: 600, y: 440, label: 'Writes' },
+      fanout: { x: 880, y: 440, label: 'Fanout' },
+      messages: { x: 320, y: 580, label: 'Messages' },
+      realtime: { x: 600, y: 580, label: 'Realtime' },
+      notify: { x: 880, y: 580, label: 'Notify' },
+      jobs: { x: 1160, y: 300, label: 'Jobs' },
+      recos: { x: 1160, y: 440, label: 'Recos' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','feed','feed'], ['feed','cache','cache']);
+      if (stepIdx === 2) e.push(['feed','rank','rank'], ['rank','graph','graph']);
+      if (stepIdx === 3) e.push(['client','profile','profile'], ['profile','graph','graph'], ['profile','authz','authz']);
+      if (stepIdx === 4) e.push(['client','api','post'], ['api','write','write'], ['write','fanout','fanout']);
+      if (stepIdx === 5) e.push(['client','messages','msg'], ['messages','realtime','rt'], ['messages','notify','notify']);
+      if (stepIdx === 6) e.push(['client','jobs','jobs'], ['jobs','recos','recos'], ['recos','rank','rank']);
+      return e;
+    }
+  },
+
+  signal: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Signal Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['sender','crypto','keybundle','relay','push','recipient','decrypt','moderation','risk'],
+    nodes: {
+      sender: { x: 40, y: 220, label: 'Sender' },
+      crypto: { x: 320, y: 220, label: 'Encrypt' },
+      keybundle: { x: 600, y: 220, label: 'Keys' },
+      relay: { x: 880, y: 220, label: 'Relay' },
+      push: { x: 1160, y: 220, label: 'Push' },
+      recipient: { x: 40, y: 360, label: 'Recipient' },
+      decrypt: { x: 320, y: 360, label: 'Decrypt' },
+      server: { x: 600, y: 360, label: 'Server' },
+      moderation: { x: 880, y: 500, label: 'Abuse' },
+      risk: { x: 1160, y: 500, label: 'Risk' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['sender','crypto','compose']);
+      if (stepIdx === 2) e.push(['sender','crypto','encrypt'], ['keybundle','crypto','keys']);
+      if (stepIdx === 3) e.push(['crypto','relay','relay'], ['relay','recipient','deliver']);
+      if (stepIdx === 4) e.push(['relay','push','push'], ['push','recipient','wake']);
+      if (stepIdx === 5) e.push(['recipient','decrypt','decrypt']);
+      if (stepIdx === 6) e.push(['server','moderation','report'], ['moderation','risk','risk']);
+      return e;
+    }
+  },
+
+  threads: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Threads Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','feed','cache','rank','recos','api','write','fanout','thread','store','notify','push','moderation','policy','risk'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      feed: { x: 320, y: 160, label: 'Feed' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      rank: { x: 880, y: 160, label: 'Ranking' },
+      recos: { x: 1160, y: 160, label: 'Recos' },
+      api: { x: 320, y: 300, label: 'API' },
+      write: { x: 600, y: 300, label: 'Writes' },
+      fanout: { x: 880, y: 300, label: 'Fanout' },
+      thread: { x: 600, y: 440, label: 'Thread' },
+      store: { x: 880, y: 440, label: 'Store' },
+      notify: { x: 320, y: 440, label: 'Notify' },
+      push: { x: 40, y: 440, label: 'Push' },
+      moderation: { x: 600, y: 580, label: 'Moderation' },
+      policy: { x: 880, y: 580, label: 'Policy' },
+      risk: { x: 1160, y: 580, label: 'Risk' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','feed','feed'], ['feed','cache','cache']);
+      if (stepIdx === 2) e.push(['feed','rank','rank'], ['rank','recos','recos'], ['rank','moderation','safety']);
+      if (stepIdx === 3) e.push(['client','api','post'], ['api','write','write'], ['write','fanout','fanout']);
+      if (stepIdx === 4) e.push(['write','thread','thread'], ['thread','store','store']);
+      if (stepIdx === 5) e.push(['write','notify','notify'], ['notify','push','push'], ['push','client','client']);
+      if (stepIdx === 6) e.push(['store','moderation','mod'], ['moderation','policy','policy'], ['policy','risk','risk']);
+      return e;
+    }
+  },
+
+  messenger: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Messenger Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','api','auth','router','storage','fanout','realtime','notify','push','upload','obj','cdn','moderation','risk'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      api: { x: 320, y: 240, label: 'API' },
+      auth: { x: 600, y: 240, label: 'Auth' },
+      router: { x: 880, y: 240, label: 'Router' },
+      storage: { x: 1160, y: 240, label: 'Storage' },
+      fanout: { x: 880, y: 380, label: 'Fanout' },
+      realtime: { x: 600, y: 380, label: 'Realtime' },
+      notify: { x: 320, y: 380, label: 'Notify' },
+      push: { x: 40, y: 380, label: 'Push' },
+      upload: { x: 600, y: 520, label: 'Upload' },
+      obj: { x: 880, y: 520, label: 'Object Store' },
+      cdn: { x: 1160, y: 520, label: 'CDN' },
+      moderation: { x: 880, y: 660, label: 'Moderation' },
+      risk: { x: 1160, y: 660, label: 'Risk' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','api','send'], ['api','auth','auth']);
+      if (stepIdx === 2) e.push(['api','router','route'], ['router','storage','store']);
+      if (stepIdx === 3) e.push(['router','fanout','fanout'], ['fanout','realtime','rt'], ['realtime','client','client']);
+      if (stepIdx === 4) e.push(['fanout','notify','notify'], ['notify','push','push'], ['push','client','client']);
+      if (stepIdx === 5) e.push(['client','upload','upload'], ['upload','obj','obj'], ['obj','cdn','cdn']);
+      if (stepIdx === 6) e.push(['storage','moderation','mod'], ['moderation','risk','risk']);
+      return e;
+    }
+  },
+
+  'twitter-x': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Twitter (X) Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','timeline','cache','rank','graph','api','write','fanout','upload','obj','cdn','index','search','trends','moderation','notify','push'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      timeline: { x: 320, y: 160, label: 'Timeline' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      rank: { x: 880, y: 160, label: 'Ranking' },
+      graph: { x: 1160, y: 160, label: 'Graph' },
+      api: { x: 320, y: 300, label: 'API' },
+      write: { x: 600, y: 300, label: 'Writes' },
+      fanout: { x: 880, y: 300, label: 'Fanout' },
+      upload: { x: 320, y: 440, label: 'Upload' },
+      obj: { x: 600, y: 440, label: 'Object Store' },
+      cdn: { x: 880, y: 440, label: 'CDN' },
+      index: { x: 1160, y: 300, label: 'Index' },
+      search: { x: 1160, y: 440, label: 'Search' },
+      trends: { x: 1160, y: 580, label: 'Trends' },
+      moderation: { x: 880, y: 580, label: 'Moderation' },
+      notify: { x: 600, y: 580, label: 'Notify' },
+      push: { x: 320, y: 580, label: 'Push' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','timeline','timeline'], ['timeline','cache','cache']);
+      if (stepIdx === 2) e.push(['timeline','rank','rank'], ['rank','graph','graph']);
+      if (stepIdx === 3) e.push(['client','api','tweet'], ['api','write','write'], ['write','fanout','fanout']);
+      if (stepIdx === 4) e.push(['client','upload','upload'], ['upload','obj','obj'], ['obj','cdn','cdn']);
+      if (stepIdx === 5) e.push(['write','index','index'], ['index','search','search'], ['search','trends','trends']);
+      if (stepIdx === 6) e.push(['write','moderation','mod'], ['write','notify','notify'], ['notify','push','push']);
+      return e;
+    }
+  },
+
+  notion: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Notion Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','sync','authz','pages','blocks','cache','editor','store','merge','realtime','index','search','sharing','audit'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      sync: { x: 320, y: 160, label: 'Sync' },
+      authz: { x: 600, y: 160, label: 'AuthZ' },
+      pages: { x: 320, y: 300, label: 'Pages' },
+      blocks: { x: 600, y: 300, label: 'Blocks' },
+      cache: { x: 880, y: 300, label: 'Cache' },
+      editor: { x: 320, y: 440, label: 'Editor' },
+      store: { x: 600, y: 440, label: 'Store' },
+      merge: { x: 880, y: 440, label: 'Merge' },
+      realtime: { x: 1160, y: 440, label: 'Realtime' },
+      index: { x: 600, y: 580, label: 'Index' },
+      search: { x: 880, y: 580, label: 'Search' },
+      sharing: { x: 320, y: 580, label: 'Sharing' },
+      audit: { x: 1160, y: 580, label: 'Audit' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','sync','sync'], ['sync','authz','authz']);
+      if (stepIdx === 2) e.push(['client','pages','page'], ['pages','blocks','blocks'], ['blocks','cache','cache']);
+      if (stepIdx === 3) e.push(['client','editor','edit'], ['editor','store','store'], ['store','merge','merge']);
+      if (stepIdx === 4) e.push(['store','realtime','rt'], ['realtime','client','client']);
+      if (stepIdx === 5) e.push(['store','index','index'], ['index','search','search']);
+      if (stepIdx === 6) e.push(['client','sharing','share'], ['sharing','authz','authz'], ['authz','audit','audit']);
+      return e;
+    }
+  },
+
+  jira: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Jira Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','projects','cache','api','authz','store','workflow','automation','queue','index','search','notify','email','reports','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      projects: { x: 320, y: 160, label: 'Projects' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      api: { x: 320, y: 300, label: 'API' },
+      authz: { x: 600, y: 300, label: 'AuthZ' },
+      store: { x: 880, y: 300, label: 'Issue Store' },
+      workflow: { x: 1160, y: 300, label: 'Workflow' },
+      automation: { x: 1160, y: 440, label: 'Automation' },
+      queue: { x: 880, y: 440, label: 'Queue' },
+      index: { x: 600, y: 440, label: 'Index' },
+      search: { x: 320, y: 440, label: 'Search' },
+      notify: { x: 600, y: 580, label: 'Notify' },
+      email: { x: 320, y: 580, label: 'Email' },
+      reports: { x: 880, y: 580, label: 'Reports' },
+      analytics: { x: 1160, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','projects','load'], ['projects','cache','cache']);
+      if (stepIdx === 2) e.push(['client','api','issue'], ['api','authz','authz'], ['api','store','store']);
+      if (stepIdx === 3) e.push(['store','workflow','wf'], ['workflow','automation','auto'], ['automation','queue','queue']);
+      if (stepIdx === 4) e.push(['store','index','index'], ['index','search','search']);
+      if (stepIdx === 5) e.push(['workflow','notify','notify'], ['notify','email','email'], ['email','client','client']);
+      if (stepIdx === 6) e.push(['store','reports','reports'], ['reports','analytics','analytics']);
+      return e;
+    }
+  },
+
+  calendly: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Calendly Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','availability','calendars','booking','conflicts','hold','events','store','notify','email','sms','changes','apps','webhooks'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      availability: { x: 320, y: 160, label: 'Availability' },
+      calendars: { x: 600, y: 160, label: 'Calendars' },
+      booking: { x: 320, y: 300, label: 'Booking' },
+      conflicts: { x: 600, y: 300, label: 'Conflicts' },
+      hold: { x: 880, y: 300, label: 'Hold Slot' },
+      events: { x: 1160, y: 300, label: 'Events' },
+      store: { x: 1160, y: 440, label: 'Store' },
+      notify: { x: 880, y: 440, label: 'Notify' },
+      email: { x: 600, y: 440, label: 'Email' },
+      sms: { x: 320, y: 440, label: 'SMS' },
+      changes: { x: 600, y: 580, label: 'Changes' },
+      apps: { x: 880, y: 580, label: 'Apps' },
+      webhooks: { x: 1160, y: 580, label: 'Webhooks' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','availability','avail'], ['availability','calendars','cal']);
+      if (stepIdx === 2) e.push(['client','booking','pick'], ['booking','conflicts','check'], ['conflicts','hold','hold']);
+      if (stepIdx === 3) e.push(['hold','events','create'], ['events','calendars','write'], ['events','store','store']);
+      if (stepIdx === 4) e.push(['events','notify','notify'], ['notify','email','email'], ['notify','sms','sms']);
+      if (stepIdx === 5) e.push(['client','changes','change'], ['changes','calendars','update'], ['changes','notify','notify']);
+      if (stepIdx === 6) e.push(['events','apps','apps'], ['apps','webhooks','webhooks'], ['webhooks','api','api']);
       return e;
     }
   }
