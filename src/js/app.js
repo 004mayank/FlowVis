@@ -1724,24 +1724,31 @@ const ARCH_LAYOUTS = {
   },
 
   instagram: {
-    viewBox: '0 0 1420 760',
+    viewBox: '0 0 1760 760',
     backendLabel: 'Instagram Backend',
-    backend: { x: 300, y: 70, w: 900, h: 630 },
+    backend: { x: 300, y: 70, w: 1360, h: 630 },
+    // Baseline (spine) for readability: left-to-right sequence
+    primaryPath: ['client','api','feed','rank','media','cdn'],
     nodes: {
-      client: { x: 40, y: 150, label: 'Mobile App' },
-      api: { x: 340, y: 150, label: 'API Gateway' },
-      auth: { x: 340, y: 240, label: 'Auth' },
-      feed: { x: 600, y: 150, label: 'Feed Service' },
-      rank: { x: 600, y: 240, label: 'Ranking' },
-      safety: { x: 600, y: 330, label: 'Safety / Integrity' },
-      media: { x: 860, y: 150, label: 'Media Service' },
-      cdn: { x: 1220, y: 150, label: 'CDN' },
-      write: { x: 860, y: 240, label: 'Write Store' },
-      upload: { x: 860, y: 330, label: 'Upload Service' },
-      obj: { x: 860, y: 420, label: 'Object Store' },
-      fanout: { x: 600, y: 420, label: 'Fanout / Cache Updates' },
-      notify: { x: 1220, y: 240, label: 'Push / Email' },
-      realtime: { x: 340, y: 330, label: 'Realtime Gateway' }
+      // Outside
+      client: { x: 40, y: 190, label: 'Mobile App' },
+
+      // Core pipeline (spaced)
+      api: { x: 340, y: 190, label: 'API Gateway' },
+      feed: { x: 640, y: 190, label: 'Feed Service' },
+      rank: { x: 940, y: 190, label: 'Ranking' },
+      media: { x: 1240, y: 190, label: 'Media Service' },
+      cdn: { x: 1540, y: 190, label: 'CDN' },
+
+      // Supporting services (lower rows)
+      auth: { x: 340, y: 300, label: 'Auth' },
+      safety: { x: 940, y: 300, label: 'Safety / Integrity' },
+      write: { x: 1240, y: 300, label: 'Write Store' },
+      upload: { x: 1240, y: 410, label: 'Upload Service' },
+      obj: { x: 1540, y: 410, label: 'Object Store' },
+      fanout: { x: 940, y: 410, label: 'Fanout / Cache Updates' },
+      notify: { x: 1540, y: 300, label: 'Push / Email' },
+      realtime: { x: 640, y: 410, label: 'Realtime Gateway' }
     },
     stepEdges: (stepIdx) => {
       const e = [];
