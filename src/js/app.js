@@ -2365,13 +2365,14 @@ function renderSystemDiagram(sys, step) {
   const stepEdges = step?.edges || [];
   const eActive = (a, b) => stepEdges.some(e => e[0] === a && e[1] === b);
 
+  const NODE_R = 44;
   const node = (id, cx, cy, label, color) => {
     const on = active.has(id);
     const stroke = on ? color : 'rgba(255,255,255,0.16)';
     const fill = on ? 'rgba(0,0,0,0.20)' : 'rgba(0,0,0,0.10)';
-    const r = 30;
-    const ring1 = on ? `<circle cx="${cx}" cy="${cy}" r="${r + 18}" fill="none" stroke="${color}" stroke-width="2" opacity="0.35"/>` : '';
-    const ring2 = on ? `<circle cx="${cx}" cy="${cy}" r="${r + 8}" fill="none" stroke="${color}" stroke-width="2" opacity="0.65"/>` : '';
+    const r = NODE_R;
+    const ring1 = on ? `<circle cx="${cx}" cy="${cy}" r="${r + 26}" fill="none" stroke="${color}" stroke-width="2" opacity="0.25"/>` : '';
+    const ring2 = on ? `<circle cx="${cx}" cy="${cy}" r="${r + 12}" fill="none" stroke="${color}" stroke-width="2" opacity="0.55"/>` : '';
     const glow = on
       ? `<filter id="glow-${id}"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>`
       : '';
@@ -2381,7 +2382,7 @@ function renderSystemDiagram(sys, step) {
         ${ring1}
         ${ring2}
         <circle cx="${cx}" cy="${cy}" r="${r}" fill="${fill}" stroke="${stroke}" stroke-width="3" opacity="${on ? 1 : 0.55}"/>
-        <text x="${cx}" y="${cy + 52}" text-anchor="middle" fill="rgba(240,240,248,0.88)" font-size="13" font-family="Inter, Arial" font-weight="800" opacity="${on ? 1 : 0.65}">${escapeXml(label)}</text>
+        <text x="${cx}" y="${cy + 5}" text-anchor="middle" fill="rgba(240,240,248,0.92)" font-size="13" font-family="Inter, Arial" font-weight="900" opacity="${on ? 1 : 0.65}">${escapeXml(label)}</text>
       </g>
     `;
   };
@@ -2391,23 +2392,28 @@ function renderSystemDiagram(sys, step) {
     const markerId = `sys-arrow-${mid}`;
     const stroke = on ? 'rgba(123,125,248,0.9)' : 'rgba(255,255,255,0.12)';
     const w = on ? 4 : 3;
-    return `
+    // faint dotted baseline always visible + solid overlay when active
+    const base = `
+      <path d="M${x1} ${y1} L ${x2} ${y2}" fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="2" stroke-linecap="round" stroke-dasharray="3 10" opacity="0.8"/>
+    `;
+    const activePath = on ? `
       <defs>
         <marker id="${markerId}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="${stroke}"/>
         </marker>
       </defs>
       <path d="M${x1} ${y1} L ${x2} ${y2}" fill="none" stroke="${stroke}" stroke-width="${w}" stroke-linecap="round" opacity="${on ? 0.95 : 0.55}" marker-end="url(#${markerId})"/>
-    `;
+    ` : '';
+    return `${base}${activePath}`;
   };
 
   const dot = (x, y, on) => {
     // small connector dot at endpoints; glows when on
-    const r = 5;
+    const r = 4;
     const stroke = on ? 'rgba(123,125,248,0.95)' : 'rgba(255,255,255,0.14)';
     const fill = on ? 'rgba(123,125,248,0.22)' : 'rgba(255,255,255,0.06)';
     const glow = on
-      ? `<filter id="dot-glow-${x}-${y}"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>`
+      ? `<filter id="dot-glow-${x}-${y}"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>`
       : '';
     return `
       ${glow}
@@ -2415,8 +2421,25 @@ function renderSystemDiagram(sys, step) {
     `;
   };
 
+  const edgeLabel = (x1, y1, x2, y2, text, on) => {
+    if (!text) return '';
+    const mx = (x1 + x2) / 2;
+    const my = (y1 + y2) / 2;
+    // small offset so label sits above the line
+    const dx = x2 - x1;
+    const dy = y2 - y1;
+    const len = Math.max(1, Math.hypot(dx, dy));
+    const ox = (-dy / len) * 12;
+    const oy = (dx / len) * 12;
+    const a = on ? 0.9 : 0.45;
+    return `
+      <text x="${mx + ox}" y="${my + oy}" text-anchor="middle" fill="rgba(123,125,248,${a})" font-size="12" font-family="Inter, Arial" font-weight="900">${escapeXml(text)}</text>
+    `;
+  };
+
   let edgesSvg = '';
   let dotsSvg = '';
+  let labelsSvg = '';
   for (const [a, b] of stepEdges) {
     const na = layout.nodes[a];
     const nb = layout.nodes[b];
@@ -2426,6 +2449,10 @@ function renderSystemDiagram(sys, step) {
     // Endpoint dots for visual continuity
     dotsSvg += dot(na.x, na.y, on);
     dotsSvg += dot(nb.x, nb.y, on);
+
+    // Only show edge label when active (keeps canvas clean)
+    const lbl = step?.edgeLabels?.[`${a}->${b}`];
+    if (on && lbl) labelsSvg += edgeLabel(na.x, na.y, nb.x, nb.y, lbl, on);
   }
 
   let nodesSvg = '';
@@ -2439,6 +2466,7 @@ function renderSystemDiagram(sys, step) {
     <rect x="0" y="0" width="100%" height="100%" fill="rgba(0,0,0,0)"/>
     ${edgesSvg}
     ${dotsSvg}
+    ${labelsSvg}
     ${nodesSvg}
   `;
 }

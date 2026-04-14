@@ -19,19 +19,31 @@ export const FLOWS = {
         title: 'Client encryption',
         desc: "Your app encrypts the message using Signal Protocol and the recipient's key bundle.",
         active: ['sender','crypto','keybundle'],
-        edges: [['sender','crypto'], ['keybundle','crypto']]
+        edges: [['sender','crypto'], ['keybundle','crypto']],
+        edgeLabels: {
+          'sender->crypto': 'plaintext',
+          'keybundle->crypto': 'keys'
+        }
       },
       {
         title: 'Server relay',
         desc: 'WhatsApp servers relay the encrypted packet without reading the content.',
         active: ['relay'],
-        edges: [['crypto','relay'], ['relay','decrypt']]
+        edges: [['crypto','relay'], ['relay','decrypt']],
+        edgeLabels: {
+          'crypto->relay': 'encrypted',
+          'relay->decrypt': 'ciphertext'
+        }
       },
       {
         title: 'Push notification',
         desc: 'If the recipient is offline, push services wake the app to fetch the message.',
         active: ['push','recipient','relay'],
-        edges: [['relay','push'], ['push','recipient']]
+        edges: [['relay','push'], ['push','recipient']],
+        edgeLabels: {
+          'relay->push': 'notify',
+          'push->recipient': 'wake'
+        }
       },
       {
         title: 'Client decryption',
