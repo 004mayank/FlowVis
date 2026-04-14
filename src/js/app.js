@@ -2060,6 +2060,19 @@ const ARCH_LAYOUTS = {
     viewBox: '0 0 1420 760',
     backendLabel: 'PayPal Backend',
     backend: { x: 300, y: 70, w: 900, h: 630 },
+    primaryPath: ['client','auth','api','risk','routing'],
+    primaryBranches: [
+      { from: 'api', to: 'merchant' },
+      { from: 'routing', to: 'bank' },
+      { from: 'routing', to: 'network' },
+      { from: 'routing', to: 'ledger' },
+      { from: 'ledger', to: 'balances' },
+      { from: 'ledger', to: 'notify' },
+      { from: 'ledger', to: 'webhook' },
+      { from: 'ledger', to: 'refunds' },
+      { from: 'ledger', to: 'disputes' },
+      { from: 'refunds', to: 'reports' }
+    ],
     nodes: {
       client: { x: 40, y: 160, label: 'Client' },
       auth: { x: 340, y: 160, label: 'Auth Service' },
@@ -2633,19 +2646,66 @@ function renderArchitectureDiagram(sys, step) {
           <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(123,125,248,0.9)"/>
         </marker>
       </defs>
-      <path d="${d}" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 8" opacity="0.95"/>
-      <path d="${d}" fill="none" stroke="rgba(123,125,248,0.55)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#${markerId})"/>
+      <path d="${d}" fill="none" stroke="rgba(255,255,255,0.20)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 8" opacity="0.95"/>
+      <path d="${d}" fill="none" stroke="rgba(123,125,248,0.55)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.55" marker-end="url(#${markerId})"/>
       ${label ? `<text x="${mx}" y="${Math.min(y1, y2) - 10}" text-anchor="middle" fill="rgba(123,125,248,0.65)" font-size="12" font-family="Inter, Arial" font-weight="800">${escapeXml(label)}</text>` : ''}
     `;
   };
 
+  const uniqPairs = (pairs) => {
+    const seen = new Set();
+    const out = [];
+    for (const [a,b] of pairs) {
+      const k = `${a}->${b}`;
+      if (seen.has(k)) continue;
+      seen.add(k);
+      out.push([a,b]);
+    }
+    return out;
+  };
+
+  const baselineEdges = (() => {
+    // Prefer explicit baseline edges; else use a product-defined primary path; else union of stepEdges.
+    if (layout.baselineEdges?.length) return uniqPairs(layout.baselineEdges);
+    if (layout.primaryPath?.length) {
+      const p = layout.primaryPath;
+      const edges = [];
+      for (let i = 0; i < p.length - 1; i++) edges.push([p[i], p[i+1]]);
+      if (layout.primaryBranches?.length) {
+        for (const br of layout.primaryBranches) edges.push([br.from, br.to]);
+      }
+      return uniqPairs(edges);
+    }
+    const all = [];
+    // fallback: union all step edges for this product
+    const steps = (flowForSystem(sys)?.steps || []);
+    for (const s of steps) {
+      const idx = steps.indexOf(s) + 1;
+      const edges = (layout.stepEdges ? layout.stepEdges(idx, sys) : []);
+      for (const [a,b] of edges) all.push([a,b]);
+    }
+    return uniqPairs(all);
+  })();
+
   const stepIdx = (PLAYGROUND.step ?? 0) + 1;
-  const edges = (layout.stepEdges ? layout.stepEdges(stepIdx, sys) : [])
+
+  // 1) Baseline (faint dotted + non-glowing arrow overlay) for connected architecture graph
+  const baseline = baselineEdges
+    .map(([a, b]) => {
+      const na = layout.nodes[a];
+      const nb = layout.nodes[b];
+      if (!na || !nb) return '';
+      // Connect from right edge of source to left edge of target with padding
+      return arrowOrtho(na.x + 252, na.y + 30, nb.x - 12, nb.y + 30, '');
+    })
+    .join('');
+
+  // 2) Active edges (solid/glow label already handled in arrowOrtho main stroke)
+  const activeEdges = (layout.stepEdges ? layout.stepEdges(stepIdx, sys) : [])
     .map(([a, b, label]) => {
       const na = layout.nodes[a];
       const nb = layout.nodes[b];
       if (!na || !nb) return '';
-      // Connect from right edge of source to left edge of target with more padding
       return arrowOrtho(na.x + 252, na.y + 30, nb.x - 12, nb.y + 30, label || '');
     })
     .join('');
@@ -2661,7 +2721,8 @@ function renderArchitectureDiagram(sys, step) {
     ${Object.entries(layout.nodes)
       .map(([id, nd]) => n(id, nd.x, nd.y, nd.label))
       .join('')}
-    ${edges}
+    ${baseline}
+    ${activeEdges}
   `;
 }
 
