@@ -1466,6 +1466,12 @@ const SYSTEM_LAYOUTS = {
 
   paypal: {
     viewBox: '0 0 1000 640',
+    primaryPath: ['client','api','risk','routing'],
+    primaryBranches: [
+      { from: 'routing', to: 'bank' },
+      { from: 'routing', to: 'network' },
+      { from: 'routing', to: 'ledger' }
+    ],
     nodes: {
       client: { x: 120, y: 260, label: 'Client', colorKey: 'client' },
       auth: { x: 320, y: 180, label: 'Auth', colorKey: 'api' },
@@ -2420,6 +2426,36 @@ function renderSystemDiagram(sys, step) {
   const stepEdges = step?.edges || [];
   const eActive = (a, b) => stepEdges.some(e => e[0] === a && e[1] === b);
 
+  const uniqPairs = (pairs) => {
+    const seen = new Set();
+    const out = [];
+    for (const [a,b] of pairs) {
+      const k = `${a}->${b}`;
+      if (seen.has(k)) continue;
+      seen.add(k);
+      out.push([a,b]);
+    }
+    return out;
+  };
+
+  const baselineEdges = (() => {
+    // Prefer explicit baseline edges; else use primary path; else union-of-edges across steps.
+    if (layout.baselineEdges?.length) return uniqPairs(layout.baselineEdges);
+    if (layout.primaryPath?.length) {
+      const p = layout.primaryPath;
+      const edges = [];
+      for (let i = 0; i < p.length - 1; i++) edges.push([p[i], p[i+1]]);
+      if (layout.primaryBranches?.length) {
+        for (const br of layout.primaryBranches) edges.push([br.from, br.to]);
+      }
+      return uniqPairs(edges);
+    }
+    const flow = flowForSystem(sys);
+    const all = [];
+    for (const s of (flow?.steps || [])) for (const e of (s.edges || [])) all.push(e);
+    return uniqPairs(all);
+  })();
+
   const NODE_R = 44;
   // Expand product layouts on the y-axis to avoid vertical overlap with bigger nodes.
   const scaleLayout = (layout.viewBox ? 1 : 1.35);
@@ -2495,9 +2531,26 @@ function renderSystemDiagram(sys, step) {
     `;
   };
 
+  const mkNode = (n0) => ({ ...n0, x: n0.x * scaleLayout, y: n0.y * scaleLayout * scaleY });
+
   let edgesSvg = '';
   let dotsSvg = '';
   let labelsSvg = '';
+
+  // 1) Baseline: show connected dotted lines + dots for the default graph
+  for (const [a, b] of baselineEdges) {
+    const na0 = layout.nodes[a];
+    const nb0 = layout.nodes[b];
+    const na = na0 ? mkNode(na0) : null;
+    const nb = nb0 ? mkNode(nb0) : null;
+    if (!na || !nb) continue;
+    // not active here; arrow() already draws dotted baseline regardless of `on`
+    edgesSvg += arrow(na.x, na.y, nb.x, nb.y, false);
+    dotsSvg += dot(na.x, na.y, false);
+    dotsSvg += dot(nb.x, nb.y, false);
+  }
+
+  // 2) Active overlay: re-draw step edges as glowing solid + glowing dots
   for (const [a, b] of stepEdges) {
     const na0 = layout.nodes[a];
     const nb0 = layout.nodes[b];
