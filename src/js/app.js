@@ -2359,13 +2359,16 @@ function renderSystemDiagram(sys, step) {
     return;
   }
 
-  svg.setAttribute('viewBox', layout.viewBox || '0 0 1000 640');
+  // If nodes got bigger, ensure we keep enough canvas space so they don't overlap.
+  // Prefer per-product viewBox when set; otherwise default to a roomier canvas.
+  svg.setAttribute('viewBox', layout.viewBox || '0 0 1200 760');
 
   const active = new Set(step?.active || []);
   const stepEdges = step?.edges || [];
   const eActive = (a, b) => stepEdges.some(e => e[0] === a && e[1] === b);
 
   const NODE_R = 44;
+  const scaleLayout = (layout.viewBox ? 1 : 1.35);
   const node = (id, cx, cy, label, color) => {
     const on = active.has(id);
     const stroke = on ? color : 'rgba(255,255,255,0.16)';
@@ -2394,7 +2397,7 @@ function renderSystemDiagram(sys, step) {
     const w = on ? 4 : 3;
     // faint dotted baseline always visible + solid overlay when active
     const base = `
-      <path d="M${x1} ${y1} L ${x2} ${y2}" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 8" opacity="0.95"/>
+      <path d="M${x1} ${y1} L ${x2} ${y2}" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 7" opacity="1"/>
     `;
     const activePath = on ? `
       <defs>
@@ -2441,8 +2444,10 @@ function renderSystemDiagram(sys, step) {
   let dotsSvg = '';
   let labelsSvg = '';
   for (const [a, b] of stepEdges) {
-    const na = layout.nodes[a];
-    const nb = layout.nodes[b];
+    const na0 = layout.nodes[a];
+    const nb0 = layout.nodes[b];
+    const na = na0 ? { ...na0, x: na0.x * scaleLayout, y: na0.y * scaleLayout } : null;
+    const nb = nb0 ? { ...nb0, x: nb0.x * scaleLayout, y: nb0.y * scaleLayout } : null;
     if (!na || !nb) continue;
     const on = eActive(a, b);
     edgesSvg += arrow(na.x, na.y, nb.x, nb.y, on);
@@ -2456,7 +2461,8 @@ function renderSystemDiagram(sys, step) {
   }
 
   let nodesSvg = '';
-  for (const [id, n] of Object.entries(layout.nodes)) {
+  for (const [id, n0] of Object.entries(layout.nodes)) {
+    const n = { ...n0, x: n0.x * scaleLayout, y: n0.y * scaleLayout };
     const cKey = n.colorKey || 'api';
     const color = SYSTEM_NODE_COLORS[cKey] || 'rgba(236,72,153,0.95)';
     nodesSvg += node(id, n.x, n.y, n.label, color);
