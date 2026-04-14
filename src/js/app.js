@@ -2662,7 +2662,7 @@ function renderArchitectureDiagram(sys, step) {
           <path d="M 0 0 L 10 5 L 0 10 z" fill="${on ? strokeOn : strokeOff}"/>
         </marker>
       </defs>
-      <path d="${d}" fill="none" stroke="rgba(255,255,255,0.20)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 8" opacity="0.95"/>
+      <path d="${d}" fill="none" stroke="rgba(255,255,255,0.30)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 7" opacity="1"/>
       <path d="${d}" fill="none" stroke="${on ? strokeOn : strokeOff}" stroke-width="${on ? 4 : 3}" stroke-linecap="round" stroke-linejoin="round" opacity="${on ? 0.92 : 0.55}" marker-end="url(#${markerId})" ${on ? `filter="url(#arch-glow-${mid})"` : ''}/>
       ${label ? `<text x="${mx}" y="${Math.min(y1, y2) - 10}" text-anchor="middle" fill="rgba(123,125,248,0.65)" font-size="12" font-family="Inter, Arial" font-weight="800">${escapeXml(label)}</text>` : ''}
     `;
