@@ -10370,6 +10370,128 @@ export const FLOWS = {
       }
     ]
   }
+
+  ,
+
+  'net-a-porter': {
+    title: 'Net-a-Porter',
+    steps: [
+      { title: 'Browse and search', desc: 'Client loads search and catalog with caching.', active: ['client','search','catalog'], edges: [['client','search'], ['search','catalog']] },
+      { title: 'Cart and pricing', desc: 'Cart persists; pricing and promos compute totals.', active: ['cart','pricing','promos'], edges: [['client','cart'], ['cart','pricing'], ['pricing','promos']] },
+      { title: 'Checkout and payment', desc: 'Checkout validates; payments processed with risk checks; order created.', active: ['checkout','payments','risk'], edges: [['cart','checkout'], ['checkout','payments'], ['payments','risk']] },
+      { title: 'Fulfillment and tracking', desc: 'Fulfillment dispatches; tracking updates; notifications sent.', active: ['orders','fulfillment','tracking'], edges: [['payments','orders'], ['orders','fulfillment'], ['fulfillment','tracking']] },
+      { title: 'Concierge support', desc: 'Support handles delivery changes and issues.', active: ['support','notify','ledger'], edges: [['client','support'], ['support','notify'], ['support','ledger']] },
+      { title: 'Returns and refunds', desc: 'Returns handled; refunds adjust ledger.', active: ['returns','refunds','ledger'], edges: [['client','returns'], ['returns','refunds'], ['refunds','ledger']] }
+    ]
+  },
+
+  rebag: {
+    title: 'Rebag',
+    steps: [
+      { title: 'Browse and valuation', desc: 'Client browses catalog and requests valuation.', active: ['client','catalog','valuation'], edges: [['client','catalog'], ['catalog','valuation']] },
+      { title: 'Offer and checkout', desc: 'Offer created; checkout runs pricing and promos.', active: ['offers','checkout','pricing'], edges: [['valuation','offers'], ['offers','checkout'], ['checkout','pricing']] },
+      { title: 'Payment and order', desc: 'Payment processed with risk checks; order created.', active: ['payments','risk','orders'], edges: [['checkout','payments'], ['payments','risk'], ['payments','orders']] },
+      { title: 'Authentication', desc: 'Item routed to auth center; verification completed.', active: ['shipping','authcenter','verification'], edges: [['orders','shipping'], ['shipping','authcenter'], ['authcenter','verification']] },
+      { title: 'Payout or store credit', desc: 'Payout issued; ledger updated; notifications sent.', active: ['payouts','ledger','notify'], edges: [['verification','payouts'], ['payouts','ledger'], ['payouts','notify']] },
+      { title: 'Disputes and refunds', desc: 'Disputes/refunds adjust ledger.', active: ['disputes','refunds','ledger'], edges: [['client','disputes'], ['disputes','refunds'], ['refunds','ledger']] }
+    ]
+  },
+
+  'the-realreal': {
+    title: 'The RealReal',
+    steps: [
+      { title: 'Consignment intake', desc: 'Consignor schedules intake; item created in catalog.', active: ['client','intake','catalog'], edges: [['client','intake'], ['intake','catalog']] },
+      { title: 'Authentication and pricing', desc: 'Auth center verifies; pricing set; listing published.', active: ['authcenter','verification','pricing'], edges: [['catalog','authcenter'], ['authcenter','verification'], ['verification','pricing']] },
+      { title: 'Buyer checkout', desc: 'Buyer checks out; payments and risk checks run.', active: ['checkout','payments','risk'], edges: [['client','checkout'], ['checkout','payments'], ['payments','risk']] },
+      { title: 'Order fulfillment', desc: 'Fulfillment ships; tracking updates; notifications sent.', active: ['orders','fulfillment','tracking'], edges: [['payments','orders'], ['orders','fulfillment'], ['fulfillment','tracking']] },
+      { title: 'Consignor payout', desc: 'Payout issued to consignor; ledger updated.', active: ['payouts','ledger','notify'], edges: [['orders','payouts'], ['payouts','ledger'], ['payouts','notify']] },
+      { title: 'Returns and disputes', desc: 'Returns and disputes adjust refunds and ledger.', active: ['returns','refunds','disputes'], edges: [['client','returns'], ['returns','refunds'], ['refunds','disputes']] }
+    ]
+  },
+
+  grailed: {
+    title: 'Grailed',
+    steps: [
+      { title: 'Browse and listings', desc: 'Client browses listings and catalog.', active: ['client','catalog','search'], edges: [['client','search'], ['search','catalog']] },
+      { title: 'Offer negotiation', desc: 'Offers negotiated and stored; notifications sent.', active: ['offers','notify','chat'], edges: [['client','offers'], ['offers','chat'], ['offers','notify']] },
+      { title: 'Checkout and payment', desc: 'Payments processed with risk checks; order created.', active: ['checkout','payments','risk'], edges: [['offers','checkout'], ['checkout','payments'], ['payments','risk']] },
+      { title: 'Shipping and tracking', desc: 'Seller ships; tracking updates; notifications sent.', active: ['orders','shipping','tracking'], edges: [['payments','orders'], ['orders','shipping'], ['shipping','tracking']] },
+      { title: 'Payouts', desc: 'Payout released after confirmation; ledger updated.', active: ['payouts','ledger','notify'], edges: [['tracking','payouts'], ['payouts','ledger'], ['payouts','notify']] },
+      { title: 'Disputes and refunds', desc: 'Disputes/refunds adjust ledger.', active: ['disputes','refunds','ledger'], edges: [['client','disputes'], ['disputes','refunds'], ['refunds','ledger']] }
+    ]
+  },
+
+  'etsy-seller': {
+    title: 'Etsy Seller',
+    steps: [
+      { title: 'List product', desc: 'Seller creates listing; catalog updated.', active: ['client','listings','catalog'], edges: [['client','listings'], ['listings','catalog']] },
+      { title: 'Orders and messages', desc: 'Order and message notifications; support tools.', active: ['orders','notify','support'], edges: [['catalog','orders'], ['orders','notify'], ['client','support']] },
+      { title: 'Fulfillment', desc: 'Shipping label purchase; tracking updates.', active: ['fulfillment','carrier','tracking'], edges: [['orders','fulfillment'], ['fulfillment','carrier'], ['carrier','tracking']] },
+      { title: 'Payments and deposits', desc: 'Payouts issued; ledger updated.', active: ['payouts','ledger','payments'], edges: [['orders','payments'], ['payments','payouts'], ['payouts','ledger']] },
+      { title: 'Ads and analytics', desc: 'Ads and analytics updated for seller.', active: ['ads','analytics','catalog'], edges: [['listings','ads'], ['ads','analytics'], ['analytics','catalog']] },
+      { title: 'Returns and cases', desc: 'Cases, refunds, and ledger adjustments.', active: ['returns','refunds','ledger'], edges: [['client','returns'], ['returns','refunds'], ['refunds','ledger']] }
+    ]
+  },
+
+  'shopify-admin': {
+    title: 'Shopify Admin',
+    steps: [
+      { title: 'Manage products', desc: 'Admin creates products; catalog and inventory updated.', active: ['client','catalog','inventory'], edges: [['client','catalog'], ['catalog','inventory']] },
+      { title: 'Orders and fulfillment', desc: 'Orders viewed; fulfillment workflows triggered.', active: ['orders','fulfillment','tracking'], edges: [['catalog','orders'], ['orders','fulfillment'], ['fulfillment','tracking']] },
+      { title: 'Payments and payouts', desc: 'Payments, risk, and payouts managed.', active: ['payments','risk','payouts'], edges: [['orders','payments'], ['payments','risk'], ['payments','payouts']] },
+      { title: 'Apps and webhooks', desc: 'Apps integrate via webhooks and APIs.', active: ['apps','webhooks','api'], edges: [['client','apps'], ['apps','webhooks'], ['webhooks','api']] },
+      { title: 'Analytics', desc: 'Reports and analytics generated.', active: ['analytics','warehouse','catalog'], edges: [['orders','analytics'], ['analytics','warehouse'], ['warehouse','catalog']] },
+      { title: 'Refunds and disputes', desc: 'Refunds/disputes processed; ledger updated.', active: ['refunds','disputes','ledger'], edges: [['orders','refunds'], ['refunds','disputes'], ['refunds','ledger']] }
+    ]
+  },
+
+  ecwid: {
+    title: 'Ecwid',
+    steps: [
+      { title: 'Store setup', desc: 'Merchant sets up store; catalog and settings saved.', active: ['client','catalog','settings'], edges: [['client','settings'], ['settings','catalog']] },
+      { title: 'Embed storefront', desc: 'Storefront embedded; API serves catalog and cart.', active: ['client','api','catalog'], edges: [['client','api'], ['api','catalog']] },
+      { title: 'Checkout and payment', desc: 'Checkout; payments and risk checks run.', active: ['checkout','payments','risk'], edges: [['api','checkout'], ['checkout','payments'], ['payments','risk']] },
+      { title: 'Orders and fulfillment', desc: 'Orders created; fulfillment and tracking updated.', active: ['orders','fulfillment','tracking'], edges: [['payments','orders'], ['orders','fulfillment'], ['fulfillment','tracking']] },
+      { title: 'Marketing', desc: 'Promos and email notifications run.', active: ['promos','notify','analytics'], edges: [['catalog','promos'], ['promos','notify'], ['orders','analytics']] },
+      { title: 'Refunds', desc: 'Refunds processed; ledger updated.', active: ['refunds','ledger','support'], edges: [['orders','refunds'], ['refunds','ledger'], ['client','support']] }
+    ]
+  },
+
+  'squarespace-commerce': {
+    title: 'Squarespace Commerce',
+    steps: [
+      { title: 'Site and product setup', desc: 'Merchant configures site and catalog.', active: ['client','cms','catalog'], edges: [['client','cms'], ['cms','catalog']] },
+      { title: 'Storefront browse', desc: 'Client browses; CDN/cache serves pages and catalog.', active: ['client','cdn','catalog'], edges: [['client','cdn'], ['cdn','catalog']] },
+      { title: 'Checkout and payment', desc: 'Checkout; payments and risk checks run.', active: ['checkout','payments','risk'], edges: [['catalog','checkout'], ['checkout','payments'], ['payments','risk']] },
+      { title: 'Orders and fulfillment', desc: 'Orders created; fulfillment and tracking updated.', active: ['orders','fulfillment','tracking'], edges: [['payments','orders'], ['orders','fulfillment'], ['fulfillment','tracking']] },
+      { title: 'Email and marketing', desc: 'Email campaigns and notifications sent.', active: ['marketing','notify','analytics'], edges: [['client','marketing'], ['marketing','notify'], ['orders','analytics']] },
+      { title: 'Refunds and support', desc: 'Refunds processed; support handles issues.', active: ['refunds','ledger','support'], edges: [['orders','refunds'], ['refunds','ledger'], ['client','support']] }
+    ]
+  },
+
+  'wix-stores': {
+    title: 'Wix Stores',
+    steps: [
+      { title: 'Store setup', desc: 'Merchant configures site and catalog.', active: ['client','cms','catalog'], edges: [['client','cms'], ['cms','catalog']] },
+      { title: 'Browse and cart', desc: 'Client browses; cart persists; pricing and promos applied.', active: ['client','cart','pricing'], edges: [['client','cart'], ['cart','pricing'], ['pricing','promos']] },
+      { title: 'Checkout and payment', desc: 'Checkout; payments and risk checks run.', active: ['checkout','payments','risk'], edges: [['cart','checkout'], ['checkout','payments'], ['payments','risk']] },
+      { title: 'Orders and fulfillment', desc: 'Orders created; fulfillment and tracking updated.', active: ['orders','fulfillment','tracking'], edges: [['payments','orders'], ['orders','fulfillment'], ['fulfillment','tracking']] },
+      { title: 'Marketing and CRM', desc: 'Marketing automations and analytics updated.', active: ['marketing','crm','analytics'], edges: [['client','marketing'], ['marketing','crm'], ['orders','analytics']] },
+      { title: 'Refunds and support', desc: 'Refunds processed; support handles issues.', active: ['refunds','ledger','support'], edges: [['orders','refunds'], ['refunds','ledger'], ['client','support']] }
+    ]
+  },
+
+  magento: {
+    title: 'Magento',
+    steps: [
+      { title: 'Catalog and storefront', desc: 'Storefront serves catalog and search.', active: ['client','search','catalog'], edges: [['client','search'], ['search','catalog']] },
+      { title: 'Cart and promos', desc: 'Cart persists; pricing and promos applied.', active: ['cart','pricing','promos'], edges: [['client','cart'], ['cart','pricing'], ['pricing','promos']] },
+      { title: 'Checkout', desc: 'Checkout validates inventory and shipping options.', active: ['checkout','inventory','fulfillment'], edges: [['cart','checkout'], ['checkout','inventory'], ['checkout','fulfillment']] },
+      { title: 'Payments and risk', desc: 'Payments processed with risk checks; order created.', active: ['payments','risk','orders'], edges: [['checkout','payments'], ['payments','risk'], ['payments','orders']] },
+      { title: 'Fulfillment and tracking', desc: 'Fulfillment ships; tracking updates; notifications sent.', active: ['fulfillment','tracking','notify'], edges: [['orders','fulfillment'], ['fulfillment','tracking'], ['tracking','notify']] },
+      { title: 'Returns and refunds', desc: 'Returns handled; refunds adjust ledger.', active: ['returns','refunds','ledger'], edges: [['client','returns'], ['returns','refunds'], ['refunds','ledger']] }
+    ]
+  }
 };
 
 export function flowForSystem(sys) {
