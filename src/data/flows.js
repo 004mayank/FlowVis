@@ -6572,6 +6572,428 @@ export const FLOWS = {
       }
     ]
   }
+
+  ,
+
+  square: {
+    title: 'Square',
+    steps: [
+      {
+        title: 'Merchant signs in',
+        desc: 'Merchant authenticates; device/session established.',
+        active: ['client','auth','risk'],
+        edges: [['client','auth'], ['auth','risk']]
+      },
+      {
+        title: 'Create checkout',
+        desc: 'Catalog items and pricing loaded; order created.',
+        active: ['catalog','pricing','orders'],
+        edges: [['client','catalog'], ['catalog','pricing'], ['pricing','orders']]
+      },
+      {
+        title: 'Authorize payment',
+        desc: 'Payment authorization runs risk and card network auth.',
+        active: ['payments','authz','network'],
+        edges: [['orders','payments'], ['payments','authz'], ['authz','network']]
+      },
+      {
+        title: 'Capture and receipt',
+        desc: 'Capture posts to ledger; receipt generated; notifications sent.',
+        active: ['capture','ledger','notify'],
+        edges: [['network','capture'], ['capture','ledger'], ['capture','notify']]
+      },
+      {
+        title: 'Payouts',
+        desc: 'Settlement batches payouts to merchant bank account.',
+        active: ['settlement','payouts','bank'],
+        edges: [['ledger','settlement'], ['settlement','payouts'], ['payouts','bank']]
+      },
+      {
+        title: 'Disputes and refunds',
+        desc: 'Disputes/refunds adjust ledger and notify merchant.',
+        active: ['disputes','refunds','ledger'],
+        edges: [['client','disputes'], ['disputes','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  'stripe-dashboard': {
+    title: 'Stripe Dashboard',
+    steps: [
+      {
+        title: 'Sign in',
+        desc: 'Admin authenticates; org and permissions loaded.',
+        active: ['client','auth','org'],
+        edges: [['client','auth'], ['auth','org']]
+      },
+      {
+        title: 'View payments',
+        desc: 'Payments list queried; search index and cache used.',
+        active: ['payments','search','cache'],
+        edges: [['client','payments'], ['payments','search'], ['payments','cache']]
+      },
+      {
+        title: 'Create refund',
+        desc: 'Refund created; ledger updated; notification queued.',
+        active: ['refunds','ledger','notify'],
+        edges: [['payments','refunds'], ['refunds','ledger'], ['refunds','notify']]
+      },
+      {
+        title: 'Dispute management',
+        desc: 'Dispute details loaded; evidence submitted to network.',
+        active: ['disputes','evidence','network'],
+        edges: [['client','disputes'], ['disputes','evidence'], ['evidence','network']]
+      },
+      {
+        title: 'Payouts',
+        desc: 'Payouts view loads settlement batches and bank status.',
+        active: ['payouts','settlement','bank'],
+        edges: [['client','payouts'], ['payouts','settlement'], ['settlement','bank']]
+      },
+      {
+        title: 'Reports',
+        desc: 'Analytics aggregates and exports reports.',
+        active: ['analytics','warehouse','exports'],
+        edges: [['ledger','analytics'], ['analytics','warehouse'], ['warehouse','exports']]
+      }
+    ]
+  },
+
+  'wise-business': {
+    title: 'Wise Business',
+    steps: [
+      {
+        title: 'Onboard and KYB',
+        desc: 'Business onboarding runs KYB and creates account.',
+        active: ['client','kyc','accounts'],
+        edges: [['client','kyc'], ['kyc','accounts']]
+      },
+      {
+        title: 'Fund account',
+        desc: 'Funding via bank transfer/card; ledger updated.',
+        active: ['funding','payments','ledger'],
+        edges: [['client','funding'], ['funding','payments'], ['payments','ledger']]
+      },
+      {
+        title: 'Create transfer',
+        desc: 'Transfer created; FX quote computed; routing selected.',
+        active: ['transfers','fx','routing'],
+        edges: [['client','transfers'], ['transfers','fx'], ['fx','routing']]
+      },
+      {
+        title: 'Compliance checks',
+        desc: 'Risk/compliance checks run before execution.',
+        active: ['risk','compliance','decision'],
+        edges: [['routing','risk'], ['risk','compliance'], ['compliance','decision']]
+      },
+      {
+        title: 'Payout',
+        desc: 'Payout executed via local rails; status updated; notifications sent.',
+        active: ['payouts','rails','notify'],
+        edges: [['decision','payouts'], ['payouts','rails'], ['payouts','notify']]
+      },
+      {
+        title: 'Reconciliation',
+        desc: 'Reconciliation and reports generated for accounting export.',
+        active: ['recon','reports','exports'],
+        edges: [['ledger','recon'], ['recon','reports'], ['reports','exports']]
+      }
+    ]
+  },
+
+  payoneer: {
+    title: 'Payoneer',
+    steps: [
+      {
+        title: 'Onboard and verify',
+        desc: 'KYC verifies user and creates account.',
+        active: ['client','kyc','accounts'],
+        edges: [['client','kyc'], ['kyc','accounts']]
+      },
+      {
+        title: 'Receive funds',
+        desc: 'Incoming payments credited; ledger updated; balance shown.',
+        active: ['incoming','ledger','accounts'],
+        edges: [['incoming','ledger'], ['ledger','accounts']]
+      },
+      {
+        title: 'Withdraw to bank',
+        desc: 'Withdrawal created; routed to bank rails.',
+        active: ['withdrawals','routing','bank'],
+        edges: [['client','withdrawals'], ['withdrawals','routing'], ['routing','bank']]
+      },
+      {
+        title: 'Compliance',
+        desc: 'Risk/compliance checks run before payout.',
+        active: ['risk','compliance','decision'],
+        edges: [['withdrawals','risk'], ['risk','compliance'], ['compliance','decision']]
+      },
+      {
+        title: 'Payout execution',
+        desc: 'Payout executed; status updated; notifications sent.',
+        active: ['payouts','status','notify'],
+        edges: [['decision','payouts'], ['payouts','status'], ['status','notify']]
+      },
+      {
+        title: 'Reporting',
+        desc: 'Reports and exports generated for the user.',
+        active: ['reports','warehouse','exports'],
+        edges: [['ledger','reports'], ['reports','warehouse'], ['warehouse','exports']]
+      }
+    ]
+  },
+
+  remitly: {
+    title: 'Remitly',
+    steps: [
+      {
+        title: 'Onboard and verify',
+        desc: 'KYC verifies user and creates account.',
+        active: ['client','kyc','accounts'],
+        edges: [['client','kyc'], ['kyc','accounts']]
+      },
+      {
+        title: 'Create transfer',
+        desc: 'Transfer created; recipient and payout method selected.',
+        active: ['transfers','recipients','routing'],
+        edges: [['client','transfers'], ['transfers','recipients'], ['recipients','routing']]
+      },
+      {
+        title: 'Fund transfer',
+        desc: 'User funds transfer via card/bank; ledger updated.',
+        active: ['funding','payments','ledger'],
+        edges: [['transfers','funding'], ['funding','payments'], ['payments','ledger']]
+      },
+      {
+        title: 'Compliance checks',
+        desc: 'Risk/compliance checks run before payout.',
+        active: ['risk','compliance','decision'],
+        edges: [['transfers','risk'], ['risk','compliance'], ['compliance','decision']]
+      },
+      {
+        title: 'Payout',
+        desc: 'Payout executed via partner/rails; status updated; notify user.',
+        active: ['payouts','partners','notify'],
+        edges: [['decision','payouts'], ['payouts','partners'], ['payouts','notify']]
+      },
+      {
+        title: 'Support and refunds',
+        desc: 'Issues handled; refunds and reversals update ledger.',
+        active: ['support','refunds','ledger'],
+        edges: [['client','support'], ['support','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  worldremit: {
+    title: 'WorldRemit',
+    steps: [
+      {
+        title: 'Onboard and verify',
+        desc: 'KYC verifies user and creates account.',
+        active: ['client','kyc','accounts'],
+        edges: [['client','kyc'], ['kyc','accounts']]
+      },
+      {
+        title: 'Create transfer',
+        desc: 'Transfer created; recipient and payout method selected.',
+        active: ['transfers','recipients','routing'],
+        edges: [['client','transfers'], ['transfers','recipients'], ['recipients','routing']]
+      },
+      {
+        title: 'Fund transfer',
+        desc: 'User funds transfer via card/bank; ledger updated.',
+        active: ['funding','payments','ledger'],
+        edges: [['transfers','funding'], ['funding','payments'], ['payments','ledger']]
+      },
+      {
+        title: 'Compliance checks',
+        desc: 'Risk/compliance checks run before payout.',
+        active: ['risk','compliance','decision'],
+        edges: [['transfers','risk'], ['risk','compliance'], ['compliance','decision']]
+      },
+      {
+        title: 'Payout',
+        desc: 'Payout executed via partners; status updated; notify user.',
+        active: ['payouts','partners','notify'],
+        edges: [['decision','payouts'], ['payouts','partners'], ['payouts','notify']]
+      },
+      {
+        title: 'Support and refunds',
+        desc: 'Issues handled; refunds and reversals update ledger.',
+        active: ['support','refunds','ledger'],
+        edges: [['client','support'], ['support','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  'western-union-app': {
+    title: 'Western Union App',
+    steps: [
+      {
+        title: 'Onboard and verify',
+        desc: 'KYC verifies user and creates account.',
+        active: ['client','kyc','accounts'],
+        edges: [['client','kyc'], ['kyc','accounts']]
+      },
+      {
+        title: 'Create transfer',
+        desc: 'Transfer created; payout method (cash pickup/bank) selected.',
+        active: ['transfers','recipients','routing'],
+        edges: [['client','transfers'], ['transfers','recipients'], ['recipients','routing']]
+      },
+      {
+        title: 'Fund transfer',
+        desc: 'User funds transfer via card/bank; ledger updated.',
+        active: ['funding','payments','ledger'],
+        edges: [['transfers','funding'], ['funding','payments'], ['payments','ledger']]
+      },
+      {
+        title: 'Compliance checks',
+        desc: 'Risk/compliance checks run before payout.',
+        active: ['risk','compliance','decision'],
+        edges: [['transfers','risk'], ['risk','compliance'], ['compliance','decision']]
+      },
+      {
+        title: 'Payout',
+        desc: 'Payout executed via agent network/rails; status updated; notify user.',
+        active: ['payouts','agents','notify'],
+        edges: [['decision','payouts'], ['payouts','agents'], ['payouts','notify']]
+      },
+      {
+        title: 'Support and refunds',
+        desc: 'Issues handled; refunds and reversals update ledger.',
+        active: ['support','refunds','ledger'],
+        edges: [['client','support'], ['support','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  moneygram: {
+    title: 'MoneyGram',
+    steps: [
+      {
+        title: 'Onboard and verify',
+        desc: 'KYC verifies user and creates account.',
+        active: ['client','kyc','accounts'],
+        edges: [['client','kyc'], ['kyc','accounts']]
+      },
+      {
+        title: 'Create transfer',
+        desc: 'Transfer created; recipient and payout method selected.',
+        active: ['transfers','recipients','routing'],
+        edges: [['client','transfers'], ['transfers','recipients'], ['recipients','routing']]
+      },
+      {
+        title: 'Fund transfer',
+        desc: 'User funds transfer via card/bank; ledger updated.',
+        active: ['funding','payments','ledger'],
+        edges: [['transfers','funding'], ['funding','payments'], ['payments','ledger']]
+      },
+      {
+        title: 'Compliance checks',
+        desc: 'Risk/compliance checks run before payout.',
+        active: ['risk','compliance','decision'],
+        edges: [['transfers','risk'], ['risk','compliance'], ['compliance','decision']]
+      },
+      {
+        title: 'Payout',
+        desc: 'Payout executed via agent network/rails; status updated; notify user.',
+        active: ['payouts','agents','notify'],
+        edges: [['decision','payouts'], ['payouts','agents'], ['payouts','notify']]
+      },
+      {
+        title: 'Support and refunds',
+        desc: 'Issues handled; refunds and reversals update ledger.',
+        active: ['support','refunds','ledger'],
+        edges: [['client','support'], ['support','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  zelle: {
+    title: 'Zelle',
+    steps: [
+      {
+        title: 'Enroll',
+        desc: 'User enrolls phone/email; bank linkage and verification.',
+        active: ['client','enroll','bank'],
+        edges: [['client','enroll'], ['enroll','bank']]
+      },
+      {
+        title: 'Create payment',
+        desc: 'Payment created; routing to bank rails established.',
+        active: ['payments','routing','bank'],
+        edges: [['client','payments'], ['payments','routing'], ['routing','bank']]
+      },
+      {
+        title: 'Authorization',
+        desc: 'Bank authorizes and returns status; ledger updated.',
+        active: ['authz','status','ledger'],
+        edges: [['bank','authz'], ['authz','status'], ['status','ledger']]
+      },
+      {
+        title: 'Recipient notification',
+        desc: 'Recipient notified; can claim if not enrolled.',
+        active: ['notify','recipient','claim'],
+        edges: [['status','notify'], ['notify','recipient'], ['recipient','claim']]
+      },
+      {
+        title: 'Settlement',
+        desc: 'Settlement posts final entries and reconciliation.',
+        active: ['settlement','recon','ledger'],
+        edges: [['status','settlement'], ['settlement','recon'], ['recon','ledger']]
+      },
+      {
+        title: 'Disputes',
+        desc: 'Dispute handling and reversals adjust ledger.',
+        active: ['disputes','refunds','ledger'],
+        edges: [['client','disputes'], ['disputes','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  'apple-pay': {
+    title: 'Apple Pay',
+    steps: [
+      {
+        title: 'Provision card',
+        desc: 'Device provisioning tokenizes card with network and issuer.',
+        active: ['device','tokenization','issuer'],
+        edges: [['device','tokenization'], ['tokenization','issuer']]
+      },
+      {
+        title: 'Initiate payment',
+        desc: 'User approves; payment request created; cryptogram generated.',
+        active: ['client','crypto','payments'],
+        edges: [['client','payments'], ['client','crypto'], ['crypto','payments']]
+      },
+      {
+        title: 'Authorization',
+        desc: 'Network routes to issuer; risk checks; auth response returned.',
+        active: ['network','risk','issuer'],
+        edges: [['payments','network'], ['network','issuer'], ['issuer','risk']]
+      },
+      {
+        title: 'Capture and settlement',
+        desc: 'Merchant captures; settlement batches; ledger updated.',
+        active: ['capture','settlement','ledger'],
+        edges: [['issuer','capture'], ['capture','settlement'], ['settlement','ledger']]
+      },
+      {
+        title: 'Receipts and notifications',
+        desc: 'Receipts stored; notifications delivered to device.',
+        active: ['receipts','notify','device'],
+        edges: [['capture','receipts'], ['receipts','notify'], ['notify','device']]
+      },
+      {
+        title: 'Disputes and chargebacks',
+        desc: 'Dispute and chargeback flows adjust ledger and merchant status.',
+        active: ['disputes','chargebacks','ledger'],
+        edges: [['client','disputes'], ['disputes','chargebacks'], ['chargebacks','ledger']]
+      }
+    ]
+  }
 };
 
 export function flowForSystem(sys) {
