@@ -9645,6 +9645,229 @@ const SYSTEM_LAYOUTS = {
   },
 };
 
+// ----- Batch 26 (System - from sheet) -----
+// NOTE: Layouts appended at end-of-object anchor to avoid accidental insertion into PRODUCT_LINES.
+
+Object.assign(SYSTEM_LAYOUTS, {
+  woocommerce: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','search','catalog','cart','pricing','promos','checkout','inventory','payments','risk','orders','fulfillment','tracking','notify','refunds','ledger','support'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      search: { x: 380, y: 180, label: 'Search', colorKey: 'api' },
+      catalog: { x: 620, y: 180, label: 'Catalog', colorKey: 'store' },
+      cart: { x: 380, y: 320, label: 'Cart', colorKey: 'api' },
+      pricing: { x: 620, y: 320, label: 'Pricing', colorKey: 'api' },
+      promos: { x: 860, y: 320, label: 'Promos', colorKey: 'api' },
+      checkout: { x: 380, y: 460, label: 'Checkout', colorKey: 'api' },
+      inventory: { x: 620, y: 460, label: 'Inventory', colorKey: 'store' },
+      payments: { x: 380, y: 600, label: 'Payments', colorKey: 'external' },
+      risk: { x: 620, y: 600, label: 'Risk', colorKey: 'api' },
+      orders: { x: 860, y: 600, label: 'Orders', colorKey: 'store' },
+      fulfillment: { x: 860, y: 740, label: 'Fulfillment', colorKey: 'api' },
+      tracking: { x: 1100, y: 740, label: 'Tracking', colorKey: 'api' },
+      notify: { x: 620, y: 740, label: 'Notify', colorKey: 'external' },
+      refunds: { x: 380, y: 740, label: 'Refunds', colorKey: 'api' },
+      ledger: { x: 620, y: 860, label: 'Ledger', colorKey: 'store' },
+      support: { x: 380, y: 860, label: 'Support', colorKey: 'api' }
+    }
+  },
+
+  bereal: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','notify','scheduler','upload','obj','write','store','feed','rank','comments','fanout','safety','reports'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      notify: { x: 380, y: 180, label: 'Notify', colorKey: 'external' },
+      scheduler: { x: 620, y: 180, label: 'Scheduler', colorKey: 'queue' },
+      upload: { x: 380, y: 320, label: 'Upload', colorKey: 'api' },
+      obj: { x: 620, y: 320, label: 'Object Store', colorKey: 'store' },
+      write: { x: 860, y: 320, label: 'Writes', colorKey: 'store' },
+      store: { x: 1100, y: 320, label: 'Store', colorKey: 'store' },
+      feed: { x: 860, y: 460, label: 'Feed', colorKey: 'api' },
+      rank: { x: 1100, y: 460, label: 'Ranking', colorKey: 'api' },
+      comments: { x: 380, y: 460, label: 'Comments', colorKey: 'store' },
+      fanout: { x: 620, y: 460, label: 'Fanout', colorKey: 'queue' },
+      safety: { x: 860, y: 600, label: 'Safety', colorKey: 'api' },
+      reports: { x: 620, y: 600, label: 'Reports', colorKey: 'api' }
+    }
+  },
+
+  mastodon: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','feed','cache','write','store','index','outbox','queue','network','inbox','notify','fanout','reports','safety'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      feed: { x: 380, y: 180, label: 'Feed', colorKey: 'api' },
+      cache: { x: 620, y: 180, label: 'Cache', colorKey: 'cache' },
+      write: { x: 380, y: 320, label: 'Writes', colorKey: 'store' },
+      store: { x: 620, y: 320, label: 'Store', colorKey: 'store' },
+      index: { x: 860, y: 320, label: 'Index', colorKey: 'store' },
+      outbox: { x: 860, y: 180, label: 'Outbox', colorKey: 'api' },
+      queue: { x: 1100, y: 180, label: 'Queue', colorKey: 'queue' },
+      network: { x: 1100, y: 320, label: 'Network', colorKey: 'external' },
+      inbox: { x: 860, y: 460, label: 'Inbox', colorKey: 'api' },
+      fanout: { x: 620, y: 460, label: 'Fanout', colorKey: 'queue' },
+      notify: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      reports: { x: 380, y: 600, label: 'Reports', colorKey: 'api' },
+      safety: { x: 620, y: 600, label: 'Safety', colorKey: 'api' }
+    }
+  },
+
+  clubhouse: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','feed','recos','auth','presence','realtime','media','network','safety','store','notify','graph','fanout','obj','cdn'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      feed: { x: 380, y: 180, label: 'Feed', colorKey: 'api' },
+      recos: { x: 620, y: 180, label: 'Recos', colorKey: 'api' },
+      auth: { x: 380, y: 320, label: 'Auth', colorKey: 'api' },
+      presence: { x: 620, y: 320, label: 'Presence', colorKey: 'store' },
+      realtime: { x: 860, y: 320, label: 'Realtime', colorKey: 'stream' },
+      media: { x: 380, y: 460, label: 'Media', colorKey: 'api' },
+      network: { x: 620, y: 460, label: 'Network', colorKey: 'external' },
+      safety: { x: 860, y: 460, label: 'Safety', colorKey: 'api' },
+      store: { x: 1100, y: 460, label: 'Store', colorKey: 'store' },
+      notify: { x: 1100, y: 320, label: 'Notify', colorKey: 'external' },
+      graph: { x: 380, y: 600, label: 'Graph', colorKey: 'store' },
+      fanout: { x: 620, y: 600, label: 'Fanout', colorKey: 'queue' },
+      obj: { x: 860, y: 600, label: 'Object Store', colorKey: 'store' },
+      cdn: { x: 1100, y: 600, label: 'CDN', colorKey: 'cdn' }
+    }
+  },
+
+  geneva: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','search','catalog','write','store','fanout','notify','stream','realtime','events','scheduler','reports','safety','upload','obj','cdn'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      search: { x: 380, y: 180, label: 'Search', colorKey: 'api' },
+      catalog: { x: 620, y: 180, label: 'Catalog', colorKey: 'store' },
+      write: { x: 380, y: 320, label: 'Writes', colorKey: 'store' },
+      store: { x: 620, y: 320, label: 'Store', colorKey: 'store' },
+      fanout: { x: 860, y: 320, label: 'Fanout', colorKey: 'queue' },
+      notify: { x: 1100, y: 320, label: 'Notify', colorKey: 'external' },
+      stream: { x: 620, y: 460, label: 'Stream', colorKey: 'stream' },
+      realtime: { x: 860, y: 460, label: 'Realtime', colorKey: 'stream' },
+      events: { x: 380, y: 460, label: 'Events', colorKey: 'api' },
+      scheduler: { x: 380, y: 600, label: 'Scheduler', colorKey: 'queue' },
+      reports: { x: 620, y: 600, label: 'Reports', colorKey: 'api' },
+      safety: { x: 860, y: 600, label: 'Safety', colorKey: 'api' },
+      upload: { x: 620, y: 740, label: 'Upload', colorKey: 'api' },
+      obj: { x: 860, y: 740, label: 'Object Store', colorKey: 'store' },
+      cdn: { x: 1100, y: 740, label: 'CDN', colorKey: 'cdn' }
+    }
+  },
+
+  'geneva-groups': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','write','store','fanout','notify','stream','realtime','authz','api','events','scheduler','reports','safety'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      write: { x: 380, y: 180, label: 'Writes', colorKey: 'store' },
+      store: { x: 620, y: 180, label: 'Store', colorKey: 'store' },
+      fanout: { x: 860, y: 180, label: 'Fanout', colorKey: 'queue' },
+      notify: { x: 1100, y: 180, label: 'Notify', colorKey: 'external' },
+      stream: { x: 620, y: 320, label: 'Stream', colorKey: 'stream' },
+      realtime: { x: 860, y: 320, label: 'Realtime', colorKey: 'stream' },
+      api: { x: 380, y: 320, label: 'API', colorKey: 'api' },
+      authz: { x: 1100, y: 320, label: 'AuthZ', colorKey: 'api' },
+      events: { x: 380, y: 460, label: 'Events', colorKey: 'api' },
+      scheduler: { x: 620, y: 460, label: 'Scheduler', colorKey: 'queue' },
+      reports: { x: 860, y: 460, label: 'Reports', colorKey: 'api' },
+      safety: { x: 1100, y: 460, label: 'Safety', colorKey: 'api' }
+    }
+  },
+
+  nextdoor: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','feed','rank','write','store','index','comments','fanout','notify','catalog','chat','recos','analytics','reports','safety'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      feed: { x: 380, y: 180, label: 'Feed', colorKey: 'api' },
+      rank: { x: 620, y: 180, label: 'Ranking', colorKey: 'api' },
+      write: { x: 380, y: 320, label: 'Writes', colorKey: 'store' },
+      store: { x: 620, y: 320, label: 'Store', colorKey: 'store' },
+      index: { x: 860, y: 320, label: 'Index', colorKey: 'store' },
+      comments: { x: 380, y: 460, label: 'Comments', colorKey: 'store' },
+      fanout: { x: 620, y: 460, label: 'Fanout', colorKey: 'queue' },
+      notify: { x: 860, y: 460, label: 'Notify', colorKey: 'external' },
+      catalog: { x: 1100, y: 320, label: 'Catalog', colorKey: 'store' },
+      chat: { x: 1100, y: 460, label: 'Chat', colorKey: 'api' },
+      recos: { x: 860, y: 600, label: 'Recos', colorKey: 'api' },
+      analytics: { x: 1100, y: 600, label: 'Analytics', colorKey: 'store' },
+      reports: { x: 380, y: 600, label: 'Reports', colorKey: 'api' },
+      safety: { x: 620, y: 600, label: 'Safety', colorKey: 'api' }
+    }
+  },
+
+  meetup: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','search','catalog','events','store','index','rsvp','risk','scheduler','notify','checkin','analytics','chat','fanout'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      search: { x: 380, y: 180, label: 'Search', colorKey: 'api' },
+      catalog: { x: 620, y: 180, label: 'Catalog', colorKey: 'store' },
+      events: { x: 380, y: 320, label: 'Events', colorKey: 'api' },
+      store: { x: 620, y: 320, label: 'Store', colorKey: 'store' },
+      index: { x: 860, y: 320, label: 'Index', colorKey: 'store' },
+      rsvp: { x: 380, y: 460, label: 'RSVP', colorKey: 'api' },
+      risk: { x: 620, y: 460, label: 'Risk', colorKey: 'api' },
+      scheduler: { x: 860, y: 460, label: 'Scheduler', colorKey: 'queue' },
+      notify: { x: 1100, y: 460, label: 'Notify', colorKey: 'external' },
+      checkin: { x: 380, y: 600, label: 'Check-in', colorKey: 'api' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' },
+      chat: { x: 860, y: 600, label: 'Chat', colorKey: 'api' },
+      fanout: { x: 1100, y: 600, label: 'Fanout', colorKey: 'queue' }
+    }
+  },
+
+  amino: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','feed','recos','write','store','index','chat','stream','realtime','fanout','notify','upload','obj','cdn','reports','safety'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      feed: { x: 380, y: 180, label: 'Feed', colorKey: 'api' },
+      recos: { x: 620, y: 180, label: 'Recos', colorKey: 'api' },
+      write: { x: 380, y: 320, label: 'Writes', colorKey: 'store' },
+      store: { x: 620, y: 320, label: 'Store', colorKey: 'store' },
+      index: { x: 860, y: 320, label: 'Index', colorKey: 'store' },
+      chat: { x: 380, y: 460, label: 'Chat', colorKey: 'api' },
+      stream: { x: 620, y: 460, label: 'Stream', colorKey: 'stream' },
+      realtime: { x: 860, y: 460, label: 'Realtime', colorKey: 'stream' },
+      fanout: { x: 1100, y: 460, label: 'Fanout', colorKey: 'queue' },
+      notify: { x: 1100, y: 320, label: 'Notify', colorKey: 'external' },
+      upload: { x: 380, y: 600, label: 'Upload', colorKey: 'api' },
+      obj: { x: 620, y: 600, label: 'Object Store', colorKey: 'store' },
+      cdn: { x: 860, y: 600, label: 'CDN', colorKey: 'cdn' },
+      reports: { x: 380, y: 740, label: 'Reports', colorKey: 'api' },
+      safety: { x: 620, y: 740, label: 'Safety', colorKey: 'api' }
+    }
+  },
+
+  vsco: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','feed','cache','editor','assets','store','upload','obj','write','cdn','comments','fanout','notify','reports','safety'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      feed: { x: 380, y: 180, label: 'Feed', colorKey: 'api' },
+      cache: { x: 620, y: 180, label: 'Cache', colorKey: 'cache' },
+      editor: { x: 380, y: 320, label: 'Editor', colorKey: 'api' },
+      assets: { x: 620, y: 320, label: 'Assets', colorKey: 'store' },
+      store: { x: 860, y: 320, label: 'Store', colorKey: 'store' },
+      upload: { x: 380, y: 460, label: 'Upload', colorKey: 'api' },
+      obj: { x: 620, y: 460, label: 'Object Store', colorKey: 'store' },
+      write: { x: 860, y: 460, label: 'Writes', colorKey: 'store' },
+      cdn: { x: 1100, y: 460, label: 'CDN', colorKey: 'cdn' },
+      comments: { x: 380, y: 600, label: 'Comments', colorKey: 'store' },
+      fanout: { x: 620, y: 600, label: 'Fanout', colorKey: 'queue' },
+      notify: { x: 860, y: 600, label: 'Notify', colorKey: 'external' },
+      reports: { x: 380, y: 740, label: 'Reports', colorKey: 'api' },
+      safety: { x: 620, y: 740, label: 'Safety', colorKey: 'api' }
+    }
+  }
+});
+
 // Architecture layouts per product id.
 // Node ids should match the step.active ids in src/data/flows.js for that product.
 const ARCH_LAYOUTS = {
@@ -18284,6 +18507,350 @@ const ARCH_LAYOUTS = {
     }
   }
 };
+
+// ----- Batch 26 (Architecture - from sheet) -----
+// NOTE: Appended at end-of-object anchor to avoid accidental insertion into PRODUCT_LINES/SYSTEM_LAYOUTS.
+
+Object.assign(ARCH_LAYOUTS, {
+  woocommerce: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'WooCommerce Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','search','catalog','cart','pricing','promos','checkout','inventory','payments','risk','orders','fulfillment','tracking','notify','refunds','ledger','support'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      search: { x: 320, y: 160, label: 'Search' },
+      catalog: { x: 600, y: 160, label: 'Catalog' },
+      cart: { x: 320, y: 300, label: 'Cart' },
+      pricing: { x: 600, y: 300, label: 'Pricing' },
+      promos: { x: 880, y: 300, label: 'Promos' },
+      checkout: { x: 320, y: 440, label: 'Checkout' },
+      inventory: { x: 600, y: 440, label: 'Inventory' },
+      payments: { x: 320, y: 580, label: 'Payments' },
+      risk: { x: 600, y: 580, label: 'Risk' },
+      orders: { x: 880, y: 580, label: 'Orders' },
+      fulfillment: { x: 880, y: 720, label: 'Fulfillment' },
+      tracking: { x: 1160, y: 720, label: 'Tracking' },
+      notify: { x: 600, y: 720, label: 'Notify' },
+      refunds: { x: 320, y: 720, label: 'Refunds' },
+      ledger: { x: 600, y: 860, label: 'Ledger' },
+      support: { x: 320, y: 860, label: 'Support' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','search','search'], ['search','catalog','catalog']);
+      if (stepIdx === 2) e.push(['client','cart','cart'], ['cart','pricing','price'], ['pricing','promos','promo']);
+      if (stepIdx === 3) e.push(['cart','checkout','checkout'], ['checkout','inventory','inventory'], ['checkout','fulfillment','ship']);
+      if (stepIdx === 4) e.push(['checkout','payments','pay'], ['payments','risk','risk'], ['payments','orders','order']);
+      if (stepIdx === 5) e.push(['orders','fulfillment','fulfill'], ['fulfillment','tracking','track'], ['tracking','notify','notify']);
+      if (stepIdx === 6) e.push(['orders','refunds','refund'], ['refunds','ledger','ledger'], ['client','support','support']);
+      return e;
+    }
+  },
+
+  bereal: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'BeReal Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','notify','scheduler','upload','obj','write','store','feed','rank','comments','fanout','notify2','reports','safety'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      notify: { x: 320, y: 160, label: 'Notify' },
+      scheduler: { x: 600, y: 160, label: 'Scheduler' },
+      upload: { x: 320, y: 300, label: 'Upload' },
+      obj: { x: 600, y: 300, label: 'Object Store' },
+      write: { x: 880, y: 300, label: 'Writes' },
+      store: { x: 1160, y: 300, label: 'Store' },
+      feed: { x: 880, y: 440, label: 'Feed' },
+      rank: { x: 1160, y: 440, label: 'Ranking' },
+      comments: { x: 320, y: 440, label: 'Comments' },
+      fanout: { x: 600, y: 440, label: 'Fanout' },
+      notify2: { x: 880, y: 580, label: 'Notify 2' },
+      reports: { x: 320, y: 580, label: 'Reports' },
+      safety: { x: 600, y: 580, label: 'Safety' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['notify','client','prompt'], ['client','scheduler','schedule']);
+      if (stepIdx === 2) e.push(['client','upload','upload'], ['upload','obj','store']);
+      if (stepIdx === 3) e.push(['upload','write','meta'], ['write','store','store'], ['store','feed','feed']);
+      if (stepIdx === 4) e.push(['client','feed','load'], ['feed','rank','rank']);
+      if (stepIdx === 5) e.push(['client','comments','comment'], ['comments','fanout','fanout'], ['fanout','notify2','notify']);
+      if (stepIdx === 6) e.push(['client','reports','report'], ['reports','safety','safety'], ['safety','store','store']);
+      return e;
+    }
+  },
+
+  mastodon: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Mastodon Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','feed','cache','write','store','index','outbox','queue','network','inbox','fanout','notify','reports','safety'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      feed: { x: 320, y: 160, label: 'Feed' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      write: { x: 320, y: 300, label: 'Writes' },
+      store: { x: 600, y: 300, label: 'Store' },
+      index: { x: 880, y: 300, label: 'Index' },
+      outbox: { x: 880, y: 160, label: 'Outbox' },
+      queue: { x: 1160, y: 160, label: 'Queue' },
+      network: { x: 1160, y: 300, label: 'Network' },
+      inbox: { x: 880, y: 440, label: 'Inbox' },
+      fanout: { x: 600, y: 440, label: 'Fanout' },
+      notify: { x: 320, y: 440, label: 'Notify' },
+      reports: { x: 320, y: 580, label: 'Reports' },
+      safety: { x: 600, y: 580, label: 'Safety' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','feed','timeline'], ['feed','cache','cache']);
+      if (stepIdx === 2) e.push(['client','write','toot'], ['write','store','store'], ['store','index','index']);
+      if (stepIdx === 3) e.push(['store','outbox','outbox'], ['outbox','queue','queue'], ['queue','network','federate']);
+      if (stepIdx === 4) e.push(['network','inbox','inbox'], ['inbox','store','store']);
+      if (stepIdx === 5) e.push(['store','fanout','fanout'], ['fanout','notify','notify'], ['notify','client','client']);
+      if (stepIdx === 6) e.push(['client','reports','report'], ['reports','safety','safety'], ['safety','store','store']);
+      return e;
+    }
+  },
+
+  clubhouse: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Clubhouse Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','feed','recos','auth','presence','realtime','media','network','safety','store','notify','graph','fanout','obj','cdn'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      feed: { x: 320, y: 160, label: 'Feed' },
+      recos: { x: 600, y: 160, label: 'Recos' },
+      auth: { x: 320, y: 300, label: 'Auth' },
+      presence: { x: 600, y: 300, label: 'Presence' },
+      realtime: { x: 880, y: 300, label: 'Realtime' },
+      media: { x: 320, y: 440, label: 'Media' },
+      network: { x: 600, y: 440, label: 'Network' },
+      safety: { x: 880, y: 440, label: 'Safety' },
+      store: { x: 1160, y: 440, label: 'Store' },
+      notify: { x: 1160, y: 300, label: 'Notify' },
+      graph: { x: 320, y: 580, label: 'Graph' },
+      fanout: { x: 600, y: 580, label: 'Fanout' },
+      obj: { x: 880, y: 580, label: 'Object Store' },
+      cdn: { x: 1160, y: 580, label: 'CDN' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','feed','discover'], ['feed','recos','recos']);
+      if (stepIdx === 2) e.push(['client','auth','auth'], ['auth','presence','presence'], ['presence','realtime','join']);
+      if (stepIdx === 3) e.push(['client','media','audio'], ['media','network','relay'], ['network','realtime','rt']);
+      if (stepIdx === 4) e.push(['realtime','safety','mod'], ['safety','store','log'], ['safety','notify','notify']);
+      if (stepIdx === 5) e.push(['client','graph','follow'], ['graph','fanout','fanout'], ['fanout','notify','notify']);
+      if (stepIdx === 6) e.push(['media','obj','store'], ['obj','cdn','cdn'], ['cdn','client','client']);
+      return e;
+    }
+  },
+
+  geneva: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Geneva Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','search','catalog','write','store','fanout','notify','stream','realtime','events','scheduler','reports','safety','upload','obj','cdn'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      search: { x: 320, y: 160, label: 'Search' },
+      catalog: { x: 600, y: 160, label: 'Catalog' },
+      write: { x: 320, y: 300, label: 'Writes' },
+      store: { x: 600, y: 300, label: 'Store' },
+      fanout: { x: 880, y: 300, label: 'Fanout' },
+      notify: { x: 1160, y: 300, label: 'Notify' },
+      stream: { x: 600, y: 440, label: 'Stream' },
+      realtime: { x: 880, y: 440, label: 'Realtime' },
+      events: { x: 320, y: 440, label: 'Events' },
+      scheduler: { x: 320, y: 580, label: 'Scheduler' },
+      reports: { x: 600, y: 580, label: 'Reports' },
+      safety: { x: 880, y: 580, label: 'Safety' },
+      upload: { x: 600, y: 720, label: 'Upload' },
+      obj: { x: 880, y: 720, label: 'Object Store' },
+      cdn: { x: 1160, y: 720, label: 'CDN' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','search','search'], ['search','catalog','catalog']);
+      if (stepIdx === 2) e.push(['client','write','write'], ['write','fanout','fanout'], ['fanout','notify','notify']);
+      if (stepIdx === 3) e.push(['write','stream','stream'], ['stream','realtime','rt'], ['realtime','client','client']);
+      if (stepIdx === 4) e.push(['client','events','event'], ['events','scheduler','sched'], ['scheduler','notify','notify']);
+      if (stepIdx === 5) e.push(['client','reports','report'], ['reports','safety','safety'], ['safety','store','store']);
+      if (stepIdx === 6) e.push(['client','upload','upload'], ['upload','obj','obj'], ['obj','cdn','cdn']);
+      return e;
+    }
+  },
+
+  'geneva-groups': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Geneva Groups Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','write','store','fanout','notify','stream','realtime','api','authz','events','scheduler','reports','safety'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      write: { x: 320, y: 160, label: 'Writes' },
+      store: { x: 600, y: 160, label: 'Store' },
+      fanout: { x: 880, y: 160, label: 'Fanout' },
+      notify: { x: 1160, y: 160, label: 'Notify' },
+      api: { x: 320, y: 300, label: 'API' },
+      stream: { x: 600, y: 300, label: 'Stream' },
+      realtime: { x: 880, y: 300, label: 'Realtime' },
+      authz: { x: 1160, y: 300, label: 'AuthZ' },
+      events: { x: 320, y: 440, label: 'Events' },
+      scheduler: { x: 600, y: 440, label: 'Scheduler' },
+      reports: { x: 880, y: 440, label: 'Reports' },
+      safety: { x: 1160, y: 440, label: 'Safety' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','write','create'], ['write','store','store']);
+      if (stepIdx === 2) e.push(['store','fanout','fanout'], ['fanout','notify','invite'], ['notify','client','client']);
+      if (stepIdx === 3) e.push(['client','write','msg'], ['write','stream','stream'], ['stream','realtime','rt']);
+      if (stepIdx === 4) e.push(['client','api','roles'], ['api','authz','authz'], ['authz','store','store']);
+      if (stepIdx === 5) e.push(['client','events','event'], ['events','scheduler','sched'], ['scheduler','notify','notify']);
+      if (stepIdx === 6) e.push(['client','reports','report'], ['reports','safety','safety'], ['safety','store','store']);
+      return e;
+    }
+  },
+
+  nextdoor: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Nextdoor Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','feed','rank','write','store','index','comments','fanout','notify','catalog','chat','recos','analytics','reports','safety'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      feed: { x: 320, y: 160, label: 'Feed' },
+      rank: { x: 600, y: 160, label: 'Ranking' },
+      write: { x: 320, y: 300, label: 'Writes' },
+      store: { x: 600, y: 300, label: 'Store' },
+      index: { x: 880, y: 300, label: 'Index' },
+      comments: { x: 320, y: 440, label: 'Comments' },
+      fanout: { x: 600, y: 440, label: 'Fanout' },
+      notify: { x: 880, y: 440, label: 'Notify' },
+      catalog: { x: 1160, y: 300, label: 'Catalog' },
+      chat: { x: 1160, y: 440, label: 'Chat' },
+      recos: { x: 880, y: 580, label: 'Recos' },
+      analytics: { x: 1160, y: 580, label: 'Analytics' },
+      reports: { x: 320, y: 580, label: 'Reports' },
+      safety: { x: 600, y: 580, label: 'Safety' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','feed','feed'], ['feed','rank','rank']);
+      if (stepIdx === 2) e.push(['client','write','post'], ['write','store','store'], ['store','index','index']);
+      if (stepIdx === 3) e.push(['client','comments','comment'], ['comments','fanout','fanout'], ['fanout','notify','notify']);
+      if (stepIdx === 4) e.push(['client','catalog','list'], ['catalog','chat','chat'], ['chat','notify','notify']);
+      if (stepIdx === 5) e.push(['feed','recos','recos'], ['recos','analytics','analytics']);
+      if (stepIdx === 6) e.push(['client','reports','report'], ['reports','safety','safety'], ['safety','store','store']);
+      return e;
+    }
+  },
+
+  meetup: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Meetup Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','search','catalog','events','store','index','rsvp','risk','scheduler','notify','checkin','analytics','chat','fanout'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      search: { x: 320, y: 160, label: 'Search' },
+      catalog: { x: 600, y: 160, label: 'Catalog' },
+      events: { x: 320, y: 300, label: 'Events' },
+      store: { x: 600, y: 300, label: 'Store' },
+      index: { x: 880, y: 300, label: 'Index' },
+      rsvp: { x: 320, y: 440, label: 'RSVP' },
+      risk: { x: 600, y: 440, label: 'Risk' },
+      scheduler: { x: 880, y: 440, label: 'Scheduler' },
+      notify: { x: 1160, y: 440, label: 'Notify' },
+      checkin: { x: 320, y: 580, label: 'Check-in' },
+      analytics: { x: 600, y: 580, label: 'Analytics' },
+      chat: { x: 880, y: 580, label: 'Chat' },
+      fanout: { x: 1160, y: 580, label: 'Fanout' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','search','search'], ['search','catalog','catalog']);
+      if (stepIdx === 2) e.push(['client','events','create'], ['events','store','store'], ['store','index','index']);
+      if (stepIdx === 3) e.push(['client','rsvp','rsvp'], ['rsvp','risk','risk'], ['risk','store','store']);
+      if (stepIdx === 4) e.push(['events','scheduler','sched'], ['scheduler','notify','notify'], ['notify','client','client']);
+      if (stepIdx === 5) e.push(['client','checkin','checkin'], ['checkin','analytics','analytics']);
+      if (stepIdx === 6) e.push(['client','chat','chat'], ['chat','fanout','fanout'], ['fanout','notify','notify']);
+      return e;
+    }
+  },
+
+  amino: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Amino Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','feed','recos','write','store','index','chat','stream','realtime','fanout','notify','upload','obj','cdn','reports','safety'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      feed: { x: 320, y: 160, label: 'Feed' },
+      recos: { x: 600, y: 160, label: 'Recos' },
+      write: { x: 320, y: 300, label: 'Writes' },
+      store: { x: 600, y: 300, label: 'Store' },
+      index: { x: 880, y: 300, label: 'Index' },
+      chat: { x: 320, y: 440, label: 'Chat' },
+      stream: { x: 600, y: 440, label: 'Stream' },
+      realtime: { x: 880, y: 440, label: 'Realtime' },
+      fanout: { x: 1160, y: 440, label: 'Fanout' },
+      notify: { x: 1160, y: 300, label: 'Notify' },
+      upload: { x: 320, y: 580, label: 'Upload' },
+      obj: { x: 600, y: 580, label: 'Object Store' },
+      cdn: { x: 880, y: 580, label: 'CDN' },
+      reports: { x: 320, y: 720, label: 'Reports' },
+      safety: { x: 600, y: 720, label: 'Safety' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','feed','feed'], ['feed','recos','recos']);
+      if (stepIdx === 2) e.push(['client','write','post'], ['write','store','store'], ['store','index','index']);
+      if (stepIdx === 3) e.push(['client','chat','chat'], ['chat','stream','stream'], ['stream','realtime','rt']);
+      if (stepIdx === 4) e.push(['store','fanout','fanout'], ['fanout','notify','notify'], ['notify','client','client']);
+      if (stepIdx === 5) e.push(['client','upload','upload'], ['upload','obj','obj'], ['obj','cdn','cdn']);
+      if (stepIdx === 6) e.push(['client','reports','report'], ['reports','safety','safety'], ['safety','store','store']);
+      return e;
+    }
+  },
+
+  vsco: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'VSCO Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','feed','cache','editor','assets','store','upload','obj','write','cdn','comments','fanout','notify','reports','safety'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      feed: { x: 320, y: 160, label: 'Feed' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      editor: { x: 320, y: 300, label: 'Editor' },
+      assets: { x: 600, y: 300, label: 'Assets' },
+      store: { x: 880, y: 300, label: 'Store' },
+      upload: { x: 320, y: 440, label: 'Upload' },
+      obj: { x: 600, y: 440, label: 'Object Store' },
+      write: { x: 880, y: 440, label: 'Writes' },
+      cdn: { x: 1160, y: 440, label: 'CDN' },
+      comments: { x: 320, y: 580, label: 'Comments' },
+      fanout: { x: 600, y: 580, label: 'Fanout' },
+      notify: { x: 880, y: 580, label: 'Notify' },
+      reports: { x: 320, y: 720, label: 'Reports' },
+      safety: { x: 600, y: 720, label: 'Safety' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','feed','feed'], ['feed','cache','cache']);
+      if (stepIdx === 2) e.push(['client','editor','edit'], ['editor','assets','assets'], ['editor','store','draft']);
+      if (stepIdx === 3) e.push(['client','upload','upload'], ['upload','obj','obj'], ['upload','write','meta']);
+      if (stepIdx === 4) e.push(['obj','cdn','cdn'], ['cdn','client','client']);
+      if (stepIdx === 5) e.push(['client','comments','comment'], ['comments','fanout','fanout'], ['fanout','notify','notify']);
+      if (stepIdx === 6) e.push(['client','reports','report'], ['reports','safety','safety'], ['safety','store','store']);
+      return e;
+    }
+  }
+});
 
 function systemLayoutFor(sys) {
   const id = sys?.id;

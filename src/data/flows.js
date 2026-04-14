@@ -10492,6 +10492,128 @@ export const FLOWS = {
       { title: 'Returns and refunds', desc: 'Returns handled; refunds adjust ledger.', active: ['returns','refunds','ledger'], edges: [['client','returns'], ['returns','refunds'], ['refunds','ledger']] }
     ]
   }
+
+  ,
+
+  woocommerce: {
+    title: 'WooCommerce',
+    steps: [
+      { title: 'Storefront browse', desc: 'Client browses products; catalog and search respond.', active: ['client','search','catalog'], edges: [['client','search'], ['search','catalog']] },
+      { title: 'Cart and pricing', desc: 'Cart persists; pricing and promos applied.', active: ['cart','pricing','promos'], edges: [['client','cart'], ['cart','pricing'], ['pricing','promos']] },
+      { title: 'Checkout', desc: 'Checkout validates inventory and shipping.', active: ['checkout','inventory','fulfillment'], edges: [['cart','checkout'], ['checkout','inventory'], ['checkout','fulfillment']] },
+      { title: 'Payments', desc: 'Payment processed with risk checks; order created.', active: ['payments','risk','orders'], edges: [['checkout','payments'], ['payments','risk'], ['payments','orders']] },
+      { title: 'Fulfillment & tracking', desc: 'Fulfillment ships; tracking updates; notifications sent.', active: ['fulfillment','tracking','notify'], edges: [['orders','fulfillment'], ['fulfillment','tracking'], ['tracking','notify']] },
+      { title: 'Refunds', desc: 'Refunds processed and ledger updated.', active: ['refunds','ledger','support'], edges: [['orders','refunds'], ['refunds','ledger'], ['client','support']] }
+    ]
+  },
+
+  bereal: {
+    title: 'BeReal',
+    steps: [
+      { title: 'Daily prompt', desc: 'Client receives prompt and schedules capture.', active: ['client','notify','scheduler'], edges: [['notify','client'], ['client','scheduler']] },
+      { title: 'Capture & upload', desc: 'Client captures and uploads media; object storage persists.', active: ['client','upload','obj'], edges: [['client','upload'], ['upload','obj']] },
+      { title: 'Post creation', desc: 'Post metadata stored; feed updated.', active: ['write','store','feed'], edges: [['upload','write'], ['write','store'], ['store','feed']] },
+      { title: 'Friends feed', desc: 'Feed served and ranked; cache helps latency.', active: ['client','feed','rank'], edges: [['client','feed'], ['feed','rank']] },
+      { title: 'Reactions & comments', desc: 'Interactions stored and fanned out; notifications sent.', active: ['comments','fanout','notify'], edges: [['client','comments'], ['comments','fanout'], ['fanout','notify']] },
+      { title: 'Moderation', desc: 'Safety checks run and actions recorded.', active: ['safety','reports','store'], edges: [['client','reports'], ['reports','safety'], ['safety','store']] }
+    ]
+  },
+
+  mastodon: {
+    title: 'Mastodon',
+    steps: [
+      { title: 'Timeline fetch', desc: 'Client loads home timeline; cache and store serve posts.', active: ['client','feed','cache'], edges: [['client','feed'], ['feed','cache']] },
+      { title: 'Post a toot', desc: 'Post written to store and indexed.', active: ['write','store','index'], edges: [['client','write'], ['write','store'], ['store','index']] },
+      { title: 'Federation outbound', desc: 'Outbox publishes to other instances.', active: ['outbox','queue','network'], edges: [['store','outbox'], ['outbox','queue'], ['queue','network']] },
+      { title: 'Federation inbound', desc: 'Inbox receives and stores remote posts.', active: ['network','inbox','store'], edges: [['network','inbox'], ['inbox','store']] },
+      { title: 'Notifications', desc: 'Mentions and follows generate notifications.', active: ['notify','fanout','client'], edges: [['store','fanout'], ['fanout','notify'], ['notify','client']] },
+      { title: 'Moderation', desc: 'Reports and blocks applied per instance policies.', active: ['reports','safety','store'], edges: [['client','reports'], ['reports','safety'], ['safety','store']] }
+    ]
+  },
+
+  clubhouse: {
+    title: 'Clubhouse',
+    steps: [
+      { title: 'Discover rooms', desc: 'Client loads rooms and recommendations.', active: ['client','feed','recos'], edges: [['client','feed'], ['feed','recos']] },
+      { title: 'Join room', desc: 'Presence updated; realtime session established.', active: ['presence','realtime','auth'], edges: [['client','auth'], ['auth','presence'], ['presence','realtime']] },
+      { title: 'Audio session', desc: 'Media service relays audio; CDN edge assists.', active: ['media','network','realtime'], edges: [['client','media'], ['media','network'], ['network','realtime']] },
+      { title: 'Moderation tools', desc: 'Moderation events stored and enforced.', active: ['safety','store','notify'], edges: [['realtime','safety'], ['safety','store'], ['safety','notify']] },
+      { title: 'Invites & follows', desc: 'Social graph updates and notifications.', active: ['graph','fanout','notify'], edges: [['client','graph'], ['graph','fanout'], ['fanout','notify']] },
+      { title: 'Replays', desc: 'Replays stored and served on demand.', active: ['obj','cdn','client'], edges: [['media','obj'], ['obj','cdn'], ['cdn','client']] }
+    ]
+  },
+
+  geneva: {
+    title: 'Geneva',
+    steps: [
+      { title: 'Communities', desc: 'Client browses communities and channels.', active: ['client','search','catalog'], edges: [['client','search'], ['search','catalog']] },
+      { title: 'Post message', desc: 'Message written; fanout to members.', active: ['write','fanout','notify'], edges: [['client','write'], ['write','fanout'], ['fanout','notify']] },
+      { title: 'Realtime updates', desc: 'Realtime stream pushes updates to clients.', active: ['realtime','stream','client'], edges: [['write','stream'], ['stream','realtime'], ['realtime','client']] },
+      { title: 'Events', desc: 'Events created and reminders scheduled.', active: ['events','scheduler','notify'], edges: [['client','events'], ['events','scheduler'], ['scheduler','notify']] },
+      { title: 'Moderation', desc: 'Reports and moderation actions stored.', active: ['reports','safety','store'], edges: [['client','reports'], ['reports','safety'], ['safety','store']] },
+      { title: 'Media sharing', desc: 'Uploads stored and served via CDN.', active: ['upload','obj','cdn'], edges: [['client','upload'], ['upload','obj'], ['obj','cdn']] }
+    ]
+  },
+
+  'geneva-groups': {
+    title: 'Geneva Groups',
+    steps: [
+      { title: 'Group creation', desc: 'Group metadata stored; invites prepared.', active: ['client','write','store'], edges: [['client','write'], ['write','store']] },
+      { title: 'Invites', desc: 'Invites sent; notifications delivered.', active: ['fanout','notify','client'], edges: [['store','fanout'], ['fanout','notify'], ['notify','client']] },
+      { title: 'Channel messaging', desc: 'Messages written and delivered in realtime.', active: ['write','stream','realtime'], edges: [['client','write'], ['write','stream'], ['stream','realtime']] },
+      { title: 'Member roles', desc: 'AuthZ and roles enforced.', active: ['authz','store','api'], edges: [['client','api'], ['api','authz'], ['authz','store']] },
+      { title: 'Events & RSVPs', desc: 'Events scheduled and reminders sent.', active: ['events','scheduler','notify'], edges: [['client','events'], ['events','scheduler'], ['scheduler','notify']] },
+      { title: 'Moderation', desc: 'Reports and safety actions logged.', active: ['reports','safety','store'], edges: [['client','reports'], ['reports','safety'], ['safety','store']] }
+    ]
+  },
+
+  nextdoor: {
+    title: 'Nextdoor',
+    steps: [
+      { title: 'Neighborhood feed', desc: 'Client loads local feed; ranking and safety applied.', active: ['client','feed','rank'], edges: [['client','feed'], ['feed','rank']] },
+      { title: 'Create post', desc: 'Post written to store and indexed.', active: ['write','store','index'], edges: [['client','write'], ['write','store'], ['store','index']] },
+      { title: 'Comments & thanks', desc: 'Interactions stored; notifications sent.', active: ['comments','notify','fanout'], edges: [['client','comments'], ['comments','fanout'], ['fanout','notify']] },
+      { title: 'Marketplace', desc: 'Listings managed with catalog and messaging.', active: ['catalog','chat','notify'], edges: [['client','catalog'], ['catalog','chat'], ['chat','notify']] },
+      { title: 'Local services', desc: 'Recommendations and leads tracked.', active: ['recos','store','analytics'], edges: [['feed','recos'], ['recos','store'], ['store','analytics']] },
+      { title: 'Reports', desc: 'Reports reviewed; moderation actions stored.', active: ['reports','safety','store'], edges: [['client','reports'], ['reports','safety'], ['safety','store']] }
+    ]
+  },
+
+  meetup: {
+    title: 'Meetup',
+    steps: [
+      { title: 'Discover events', desc: 'Client searches and browses events.', active: ['client','search','catalog'], edges: [['client','search'], ['search','catalog']] },
+      { title: 'Create event', desc: 'Organizer creates event; stored and indexed.', active: ['events','store','index'], edges: [['client','events'], ['events','store'], ['store','index']] },
+      { title: 'RSVP', desc: 'RSVP stored; capacity checks run.', active: ['rsvp','risk','store'], edges: [['client','rsvp'], ['rsvp','risk'], ['risk','store']] },
+      { title: 'Reminders', desc: 'Scheduler sends notifications.', active: ['scheduler','notify','client'], edges: [['events','scheduler'], ['scheduler','notify'], ['notify','client']] },
+      { title: 'Check-in', desc: 'Attendance recorded and analytics updated.', active: ['checkin','store','analytics'], edges: [['client','checkin'], ['checkin','store'], ['store','analytics']] },
+      { title: 'Messaging', desc: 'Group messaging and announcements.', active: ['chat','fanout','notify'], edges: [['client','chat'], ['chat','fanout'], ['fanout','notify']] }
+    ]
+  },
+
+  amino: {
+    title: 'Amino',
+    steps: [
+      { title: 'Communities feed', desc: 'Client loads community feed and recommendations.', active: ['client','feed','recos'], edges: [['client','feed'], ['feed','recos']] },
+      { title: 'Create post', desc: 'Post written and indexed.', active: ['write','store','index'], edges: [['client','write'], ['write','store'], ['store','index']] },
+      { title: 'Chat', desc: 'Realtime chat messages delivered.', active: ['chat','realtime','stream'], edges: [['client','chat'], ['chat','stream'], ['stream','realtime']] },
+      { title: 'Notifications', desc: 'Mentions and follows trigger notifications.', active: ['fanout','notify','client'], edges: [['store','fanout'], ['fanout','notify'], ['notify','client']] },
+      { title: 'Media', desc: 'Uploads stored and served via CDN.', active: ['upload','obj','cdn'], edges: [['client','upload'], ['upload','obj'], ['obj','cdn']] },
+      { title: 'Moderation', desc: 'Reports and safety actions stored.', active: ['reports','safety','store'], edges: [['client','reports'], ['reports','safety'], ['safety','store']] }
+    ]
+  },
+
+  vsco: {
+    title: 'VSCO',
+    steps: [
+      { title: 'Browse feed', desc: 'Client loads feed; ranking and cache applied.', active: ['client','feed','cache'], edges: [['client','feed'], ['feed','cache']] },
+      { title: 'Edit photo', desc: 'Editor applies filters and saves draft.', active: ['editor','store','assets'], edges: [['client','editor'], ['editor','assets'], ['editor','store']] },
+      { title: 'Upload & publish', desc: 'Upload to object store; publish metadata.', active: ['upload','obj','write'], edges: [['client','upload'], ['upload','obj'], ['upload','write']] },
+      { title: 'CDN delivery', desc: 'CDN serves media to clients.', active: ['cdn','obj','client'], edges: [['obj','cdn'], ['cdn','client']] },
+      { title: 'Likes & comments', desc: 'Interactions stored; notifications sent.', active: ['comments','fanout','notify'], edges: [['client','comments'], ['comments','fanout'], ['fanout','notify']] },
+      { title: 'Moderation', desc: 'Safety and reporting workflows applied.', active: ['reports','safety','store'], edges: [['client','reports'], ['reports','safety'], ['safety','store']] }
+    ]
+  }
 };
 
 export function flowForSystem(sys) {
