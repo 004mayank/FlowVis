@@ -10614,6 +10614,128 @@ export const FLOWS = {
       { title: 'Moderation', desc: 'Safety and reporting workflows applied.', active: ['reports','safety','store'], edges: [['client','reports'], ['reports','safety'], ['safety','store']] }
     ]
   }
+
+  ,
+
+  flickr: {
+    title: 'Flickr',
+    steps: [
+      { title: 'Browse photos', desc: 'Client loads feeds and albums; cache accelerates.', active: ['client','feed','cache'], edges: [['client','feed'], ['feed','cache']] },
+      { title: 'Upload photo', desc: 'Upload to object store; metadata written.', active: ['upload','obj','write'], edges: [['client','upload'], ['upload','obj'], ['upload','write']] },
+      { title: 'Photo pages', desc: 'Serve photo page via CDN; fetch metadata from store.', active: ['cdn','store','client'], edges: [['store','cdn'], ['cdn','client']] },
+      { title: 'Search', desc: 'Index powers search and discovery.', active: ['search','index','catalog'], edges: [['client','search'], ['search','index'], ['index','catalog']] },
+      { title: 'Comments and favorites', desc: 'Interactions stored; notifications sent.', active: ['comments','fanout','notify'], edges: [['client','comments'], ['comments','fanout'], ['fanout','notify']] },
+      { title: 'Moderation', desc: 'Reports and safety actions applied.', active: ['reports','safety','store'], edges: [['client','reports'], ['reports','safety'], ['safety','store']] }
+    ]
+  },
+
+  imgur: {
+    title: 'Imgur',
+    steps: [
+      { title: 'Browse gallery', desc: 'Client loads gallery feed; ranking selects posts.', active: ['client','feed','rank'], edges: [['client','feed'], ['feed','rank']] },
+      { title: 'Upload image', desc: 'Upload to object store; metadata written.', active: ['upload','obj','write'], edges: [['client','upload'], ['upload','obj'], ['upload','write']] },
+      { title: 'CDN serve', desc: 'CDN serves media at scale.', active: ['cdn','obj','client'], edges: [['obj','cdn'], ['cdn','client']] },
+      { title: 'Votes and comments', desc: 'Votes/comments stored; feed updates.', active: ['comments','store','feed'], edges: [['client','comments'], ['comments','store'], ['store','feed']] },
+      { title: 'Notifications', desc: 'Fanout sends notifications for replies/mentions.', active: ['fanout','notify','client'], edges: [['store','fanout'], ['fanout','notify'], ['notify','client']] },
+      { title: 'Safety', desc: 'Abuse checks and reports processed.', active: ['safety','reports','store'], edges: [['client','reports'], ['reports','safety'], ['safety','store']] }
+    ]
+  },
+
+  tumblr: {
+    title: 'Tumblr',
+    steps: [
+      { title: 'Dashboard feed', desc: 'Client loads dashboard; ranking and cache applied.', active: ['client','feed','rank'], edges: [['client','feed'], ['feed','rank']] },
+      { title: 'Create post', desc: 'Post written to store and indexed.', active: ['write','store','index'], edges: [['client','write'], ['write','store'], ['store','index']] },
+      { title: 'Media upload', desc: 'Uploads stored and served via CDN.', active: ['upload','obj','cdn'], edges: [['client','upload'], ['upload','obj'], ['obj','cdn']] },
+      { title: 'Reblogs', desc: 'Fanout updates followers feeds.', active: ['fanout','feed','notify'], edges: [['store','fanout'], ['fanout','feed'], ['fanout','notify']] },
+      { title: 'Messages', desc: 'Chat messages delivered in realtime.', active: ['chat','stream','realtime'], edges: [['client','chat'], ['chat','stream'], ['stream','realtime']] },
+      { title: 'Moderation', desc: 'Reports reviewed and actions logged.', active: ['reports','safety','store'], edges: [['client','reports'], ['reports','safety'], ['safety','store']] }
+    ]
+  },
+
+  'hive-social': {
+    title: 'Hive Social',
+    steps: [
+      { title: 'Home feed', desc: 'Client loads feed; ranking selects posts.', active: ['client','feed','rank'], edges: [['client','feed'], ['feed','rank']] },
+      { title: 'Post content', desc: 'Post written to store; media uploaded.', active: ['write','store','upload'], edges: [['client','write'], ['write','store'], ['client','upload']] },
+      { title: 'Media delivery', desc: 'CDN serves media from object store.', active: ['obj','cdn','client'], edges: [['upload','obj'], ['obj','cdn'], ['cdn','client']] },
+      { title: 'Notifications', desc: 'Fanout sends notifications for interactions.', active: ['fanout','notify','client'], edges: [['store','fanout'], ['fanout','notify'], ['notify','client']] },
+      { title: 'Search', desc: 'Index powers search and discovery.', active: ['search','index','store'], edges: [['client','search'], ['search','index'], ['index','store']] },
+      { title: 'Safety', desc: 'Reports and abuse checks processed.', active: ['reports','safety','store'], edges: [['client','reports'], ['reports','safety'], ['safety','store']] }
+    ]
+  },
+
+  lemon8: {
+    title: 'Lemon8',
+    steps: [
+      { title: 'Discover feed', desc: 'Client loads discovery feed; ranking and recos applied.', active: ['client','feed','recos'], edges: [['client','feed'], ['feed','recos']] },
+      { title: 'Create post', desc: 'Post metadata written; media uploaded.', active: ['write','store','upload'], edges: [['client','write'], ['write','store'], ['client','upload']] },
+      { title: 'Media serving', desc: 'Object store + CDN deliver media.', active: ['obj','cdn','client'], edges: [['upload','obj'], ['obj','cdn'], ['cdn','client']] },
+      { title: 'Comments', desc: 'Comments stored; fanout updates.', active: ['comments','fanout','notify'], edges: [['client','comments'], ['comments','fanout'], ['fanout','notify']] },
+      { title: 'Search', desc: 'Index powers search and hashtags.', active: ['search','index','store'], edges: [['client','search'], ['search','index'], ['index','store']] },
+      { title: 'Moderation', desc: 'Safety checks and reports handled.', active: ['safety','reports','store'], edges: [['client','reports'], ['reports','safety'], ['safety','store']] }
+    ]
+  },
+
+  koo: {
+    title: 'Koo',
+    steps: [
+      { title: 'Timeline', desc: 'Client loads timeline; ranking and cache used.', active: ['client','feed','cache'], edges: [['client','feed'], ['feed','cache']] },
+      { title: 'Create post', desc: 'Post written to store and indexed.', active: ['write','store','index'], edges: [['client','write'], ['write','store'], ['store','index']] },
+      { title: 'Notifications', desc: 'Fanout sends notifications for mentions/replies.', active: ['fanout','notify','client'], edges: [['store','fanout'], ['fanout','notify'], ['notify','client']] },
+      { title: 'Search', desc: 'Index powers search and discovery.', active: ['search','index','store'], edges: [['client','search'], ['search','index'], ['index','store']] },
+      { title: 'Messages', desc: 'Chat delivered via realtime stream.', active: ['chat','stream','realtime'], edges: [['client','chat'], ['chat','stream'], ['stream','realtime']] },
+      { title: 'Moderation', desc: 'Reports reviewed and actions stored.', active: ['reports','safety','store'], edges: [['client','reports'], ['reports','safety'], ['safety','store']] }
+    ]
+  },
+
+  sharechat: {
+    title: 'ShareChat',
+    steps: [
+      { title: 'Feed', desc: 'Client loads vernacular feed; recos and ranking applied.', active: ['client','feed','recos'], edges: [['client','feed'], ['feed','recos']] },
+      { title: 'Create post', desc: 'Post written; media uploaded.', active: ['write','store','upload'], edges: [['client','write'], ['write','store'], ['client','upload']] },
+      { title: 'Media delivery', desc: 'CDN serves media from object store.', active: ['obj','cdn','client'], edges: [['upload','obj'], ['obj','cdn'], ['cdn','client']] },
+      { title: 'Comments & likes', desc: 'Interactions stored; notifications sent.', active: ['comments','fanout','notify'], edges: [['client','comments'], ['comments','fanout'], ['fanout','notify']] },
+      { title: 'Search', desc: 'Index powers search and hashtags.', active: ['search','index','store'], edges: [['client','search'], ['search','index'], ['index','store']] },
+      { title: 'Safety', desc: 'Abuse checks and reports processed.', active: ['safety','reports','store'], edges: [['client','reports'], ['reports','safety'], ['safety','store']] }
+    ]
+  },
+
+  moj: {
+    title: 'Moj',
+    steps: [
+      { title: 'Short-video feed', desc: 'Client loads feed; ranking selects videos.', active: ['client','feed','rank'], edges: [['client','feed'], ['feed','rank']] },
+      { title: 'Upload video', desc: 'Upload stored; transcoding pipeline runs.', active: ['upload','obj','transcode'], edges: [['client','upload'], ['upload','obj'], ['obj','transcode']] },
+      { title: 'CDN playback', desc: 'CDN serves video segments.', active: ['cdn','obj','client'], edges: [['obj','cdn'], ['cdn','client']] },
+      { title: 'Engagement', desc: 'Likes/comments stored; notifications.', active: ['comments','fanout','notify'], edges: [['client','comments'], ['comments','fanout'], ['fanout','notify']] },
+      { title: 'Creator tools', desc: 'Analytics and payouts tracked.', active: ['analytics','ledger','store'], edges: [['store','analytics'], ['analytics','ledger'], ['ledger','store']] },
+      { title: 'Safety', desc: 'Moderation and reports handled.', active: ['reports','safety','store'], edges: [['client','reports'], ['reports','safety'], ['safety','store']] }
+    ]
+  },
+
+  josh: {
+    title: 'Josh',
+    steps: [
+      { title: 'Video feed', desc: 'Client loads feed; ranking selects videos.', active: ['client','feed','rank'], edges: [['client','feed'], ['feed','rank']] },
+      { title: 'Upload', desc: 'Upload to object store; transcode pipeline prepares playback.', active: ['upload','obj','transcode'], edges: [['client','upload'], ['upload','obj'], ['obj','transcode']] },
+      { title: 'Playback', desc: 'CDN delivers video segments.', active: ['cdn','obj','client'], edges: [['obj','cdn'], ['cdn','client']] },
+      { title: 'Engagement', desc: 'Likes/comments stored; notifications sent.', active: ['comments','fanout','notify'], edges: [['client','comments'], ['comments','fanout'], ['fanout','notify']] },
+      { title: 'Search', desc: 'Index powers search and discovery.', active: ['search','index','store'], edges: [['client','search'], ['search','index'], ['index','store']] },
+      { title: 'Safety', desc: 'Reports and moderation actions stored.', active: ['reports','safety','store'], edges: [['client','reports'], ['reports','safety'], ['safety','store']] }
+    ]
+  },
+
+  chingari: {
+    title: 'Chingari',
+    steps: [
+      { title: 'Video feed', desc: 'Client loads feed; ranking selects videos.', active: ['client','feed','rank'], edges: [['client','feed'], ['feed','rank']] },
+      { title: 'Upload', desc: 'Upload to object store; transcode pipeline prepares playback.', active: ['upload','obj','transcode'], edges: [['client','upload'], ['upload','obj'], ['obj','transcode']] },
+      { title: 'Playback', desc: 'CDN delivers video segments.', active: ['cdn','obj','client'], edges: [['obj','cdn'], ['cdn','client']] },
+      { title: 'Engagement', desc: 'Likes/comments stored; notifications sent.', active: ['comments','fanout','notify'], edges: [['client','comments'], ['comments','fanout'], ['fanout','notify']] },
+      { title: 'Creator earnings', desc: 'Earnings tracked in ledger; payouts triggered.', active: ['ledger','payouts','store'], edges: [['store','ledger'], ['ledger','payouts'], ['payouts','store']] },
+      { title: 'Safety', desc: 'Reports and moderation actions stored.', active: ['reports','safety','store'], edges: [['client','reports'], ['reports','safety'], ['safety','store']] }
+    ]
+  }
 };
 
 export function flowForSystem(sys) {
