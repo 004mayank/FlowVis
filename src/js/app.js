@@ -3023,6 +3023,74 @@ const ARCH_LAYOUTS = {
     }
   },
 
+  'google-drive': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Google Drive Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','metadata','sync','upload','storage','sharing','authz','realtime','merge','index','search'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      metadata: { x: 320, y: 160, label: 'Metadata' },
+      sync: { x: 600, y: 160, label: 'Sync Engine' },
+      upload: { x: 320, y: 300, label: 'Upload' },
+      storage: { x: 600, y: 300, label: 'Storage' },
+      sharing: { x: 880, y: 160, label: 'Sharing' },
+      authz: { x: 880, y: 300, label: 'ACL/AuthZ' },
+      realtime: { x: 1160, y: 300, label: 'Realtime Collab' },
+      merge: { x: 1440, y: 300, label: 'Merge/OT' },
+      index: { x: 600, y: 460, label: 'Indexing' },
+      search: { x: 880, y: 460, label: 'Search' },
+      versions: { x: 1160, y: 160, label: 'Versions' },
+      audit: { x: 1440, y: 160, label: 'Audit Log' },
+      cdn: { x: 1160, y: 460, label: 'CDN' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','metadata','list'], ['metadata','sync','sync']);
+      if (stepIdx === 2) e.push(['client','upload','upload'], ['upload','storage','store']);
+      if (stepIdx === 3) e.push(['client','sharing','share'], ['sharing','authz','acl']);
+      if (stepIdx === 4) e.push(['realtime','merge','merge'], ['merge','storage','persist']);
+      if (stepIdx === 5) e.push(['metadata','index','index'], ['index','search','search']);
+      if (stepIdx === 6) e.push(['storage','versions','versions'], ['storage','audit','audit']);
+      if (stepIdx === 7) e.push(['client','authz','authz'], ['cdn','client','download']);
+      return e;
+    }
+  },
+
+  'cash-app': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Cash App Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','funding','p2p','risk','ledger','balances','cashout','routing','bank'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      funding: { x: 320, y: 300, label: 'Funding Links' },
+      p2p: { x: 600, y: 240, label: 'P2P Core' },
+      lookup: { x: 600, y: 160, label: 'Recipient Lookup' },
+      risk: { x: 880, y: 160, label: 'Risk Engine' },
+      fraud: { x: 1160, y: 160, label: 'Fraud' },
+      ledger: { x: 880, y: 300, label: 'Ledger' },
+      balances: { x: 1160, y: 300, label: 'Balances' },
+      cashout: { x: 880, y: 440, label: 'Cash Out' },
+      routing: { x: 1160, y: 440, label: 'Routing' },
+      bank: { x: 1440, y: 440, label: 'Bank Rails' },
+      notify: { x: 600, y: 440, label: 'Notifications' },
+      support: { x: 880, y: 580, label: 'Support' },
+      disputes: { x: 1160, y: 580, label: 'Disputes' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','verify'], ['client','funding','link']);
+      if (stepIdx === 2) e.push(['client','p2p','send'], ['p2p','lookup','lookup'], ['p2p','risk','limits']);
+      if (stepIdx === 3) e.push(['p2p','risk','risk'], ['risk','fraud','fraud']);
+      if (stepIdx === 4) e.push(['p2p','ledger','post'], ['ledger','balances','update']);
+      if (stepIdx === 5) e.push(['balances','cashout','cashout'], ['cashout','routing','route'], ['routing','bank','ach']);
+      if (stepIdx === 6) e.push(['ledger','notify','notify'], ['ledger','support','case'], ['support','disputes','dispute']);
+      return e;
+    }
+  },
+
   shopify: {
     viewBox: '0 0 1860 820',
     backendLabel: 'Shopify Backend',
