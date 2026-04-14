@@ -12249,12 +12249,31 @@ const ARCH_LAYOUTS = {
 
 function systemLayoutFor(sys) {
   const id = sys?.id;
-  return SYSTEM_LAYOUTS[id] || null;
+  const nid = normId(id);
+  return SYSTEM_LAYOUTS[id] || SYSTEM_LAYOUTS[nid] || null;
+}
+
+function normId(id) {
+  if (!id) return id;
+  return String(id)
+    .trim()
+    .toLowerCase()
+    // normalize apostrophes/quotes
+    .replace(/[’'"`]/g, '')
+    // normalize dots and plus (keep existing canonical ids elsewhere)
+    .replace(/\./g, '-')
+    .replace(/\+/g, '-plus')
+    // collapse whitespace/underscores to hyphens
+    .replace(/[\s_]+/g, '-')
+    // collapse multiple hyphens
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
 }
 
 function archLayoutFor(sys) {
   const id = sys?.id;
-  return ARCH_LAYOUTS[id] || null;
+  const nid = normId(id);
+  return ARCH_LAYOUTS[id] || ARCH_LAYOUTS[nid] || null;
 }
 
 function renderSystemDiagram(sys, step) {
