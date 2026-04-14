@@ -2060,19 +2060,9 @@ const ARCH_LAYOUTS = {
     viewBox: '0 0 1420 760',
     backendLabel: 'PayPal Backend',
     backend: { x: 300, y: 70, w: 900, h: 630 },
-    primaryPath: ['client','auth','api','risk','routing'],
-    primaryBranches: [
-      { from: 'api', to: 'merchant' },
-      { from: 'routing', to: 'bank' },
-      { from: 'routing', to: 'network' },
-      { from: 'routing', to: 'ledger' },
-      { from: 'ledger', to: 'balances' },
-      { from: 'ledger', to: 'notify' },
-      { from: 'ledger', to: 'webhook' },
-      { from: 'ledger', to: 'refunds' },
-      { from: 'ledger', to: 'disputes' },
-      { from: 'refunds', to: 'reports' }
-    ],
+    // Baseline (spine) should be simple and sequential.
+    // Branches will show only when step edges activate.
+    primaryPath: ['client','auth','api','routing','ledger','reports'],
     nodes: {
       // Outside
       client: { x: 40, y: 190, label: 'Client' },
@@ -2684,15 +2674,13 @@ function renderArchitectureDiagram(sys, step) {
   };
 
   const baselineEdges = (() => {
-    // Prefer explicit baseline edges; else use a product-defined primary path; else union of stepEdges.
+    // Prefer explicit baseline edges; else use ONLY the primary path (spine).
+    // Branches are intentionally NOT part of baseline to keep the default view readable.
     if (layout.baselineEdges?.length) return uniqPairs(layout.baselineEdges);
     if (layout.primaryPath?.length) {
       const p = layout.primaryPath;
       const edges = [];
       for (let i = 0; i < p.length - 1; i++) edges.push([p[i], p[i+1]]);
-      if (layout.primaryBranches?.length) {
-        for (const br of layout.primaryBranches) edges.push([br.from, br.to]);
-      }
       return uniqPairs(edges);
     }
     const all = [];
