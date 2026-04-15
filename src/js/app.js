@@ -12445,6 +12445,544 @@ Object.assign(SYSTEM_LAYOUTS, {
   }
 });
 
+// ----- Batch 48 (System + Architecture - news/read-later/aggregators) -----
+
+Object.assign(SYSTEM_LAYOUTS, {
+  revue: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','editor','drafts','issues','subscribers','segmentation','newsletter','email','deliverability','analytics','payments'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      editor: { x: 380, y: 320, label: 'Editor', colorKey: 'api' },
+      drafts: { x: 620, y: 320, label: 'Drafts', colorKey: 'store' },
+      issues: { x: 860, y: 320, label: 'Issues', colorKey: 'store' },
+      subscribers: { x: 620, y: 180, label: 'Subscribers', colorKey: 'store' },
+      segmentation: { x: 860, y: 180, label: 'Segmentation', colorKey: 'api' },
+      newsletter: { x: 1100, y: 180, label: 'Newsletter', colorKey: 'api' },
+      email: { x: 1100, y: 320, label: 'Email', colorKey: 'external' },
+      deliverability: { x: 860, y: 460, label: 'Deliverability', colorKey: 'api' },
+      analytics: { x: 620, y: 460, label: 'Analytics', colorKey: 'store' },
+      payments: { x: 380, y: 460, label: 'Payments', colorKey: 'external' }
+    }
+  },
+
+  flipboard: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','topics','sources','crawler','ingest','dedupe','rank','feed','search','index','cdn','ads','analytics','moderation'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      topics: { x: 380, y: 320, label: 'Topics', colorKey: 'store' },
+      sources: { x: 620, y: 180, label: 'Sources', colorKey: 'external' },
+      crawler: { x: 620, y: 320, label: 'Crawler', colorKey: 'api' },
+      ingest: { x: 860, y: 320, label: 'Ingest', colorKey: 'queue' },
+      dedupe: { x: 1100, y: 320, label: 'Dedupe', colorKey: 'api' },
+      rank: { x: 860, y: 180, label: 'Ranking', colorKey: 'api' },
+      feed: { x: 1100, y: 180, label: 'Feed', colorKey: 'api' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 460, label: 'Index', colorKey: 'store' },
+      cdn: { x: 1100, y: 460, label: 'CDN', colorKey: 'cdn' },
+      ads: { x: 380, y: 460, label: 'Ads', colorKey: 'api' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' },
+      moderation: { x: 860, y: 600, label: 'Moderation', colorKey: 'api' }
+    }
+  },
+
+  feedly: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','sources','rss','fetcher','ingest','dedupe','topics','feeds','search','index','ml','analytics','notify'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      sources: { x: 620, y: 180, label: 'Sources', colorKey: 'external' },
+      rss: { x: 860, y: 180, label: 'RSS', colorKey: 'external' },
+      fetcher: { x: 620, y: 320, label: 'Fetcher', colorKey: 'api' },
+      ingest: { x: 860, y: 320, label: 'Ingest', colorKey: 'queue' },
+      dedupe: { x: 1100, y: 320, label: 'Dedupe', colorKey: 'api' },
+      topics: { x: 380, y: 320, label: 'Topics', colorKey: 'store' },
+      feeds: { x: 1100, y: 180, label: 'Feeds', colorKey: 'store' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 460, label: 'Index', colorKey: 'store' },
+      ml: { x: 1100, y: 460, label: 'ML Filter', colorKey: 'api' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' },
+      notify: { x: 380, y: 460, label: 'Notify', colorKey: 'external' }
+    }
+  },
+
+  inshorts: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','sources','crawler','summarize','editorial','rank','feed','search','index','notify','ads','analytics','moderation'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      sources: { x: 620, y: 180, label: 'Sources', colorKey: 'external' },
+      crawler: { x: 620, y: 320, label: 'Crawler', colorKey: 'api' },
+      summarize: { x: 860, y: 320, label: 'Summarize', colorKey: 'api' },
+      editorial: { x: 1100, y: 320, label: 'Editorial', colorKey: 'external' },
+      rank: { x: 860, y: 180, label: 'Ranking', colorKey: 'api' },
+      feed: { x: 1100, y: 180, label: 'Feed', colorKey: 'api' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 460, label: 'Index', colorKey: 'store' },
+      notify: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      ads: { x: 1100, y: 460, label: 'Ads', colorKey: 'api' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' },
+      moderation: { x: 860, y: 600, label: 'Moderation', colorKey: 'api' }
+    }
+  },
+
+  dailyhunt: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','sources','ingest','dedupe','lang','rank','feed','search','index','notify','ads','analytics','moderation'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      sources: { x: 620, y: 180, label: 'Sources', colorKey: 'external' },
+      ingest: { x: 620, y: 320, label: 'Ingest', colorKey: 'queue' },
+      dedupe: { x: 860, y: 320, label: 'Dedupe', colorKey: 'api' },
+      lang: { x: 1100, y: 320, label: 'Language', colorKey: 'api' },
+      rank: { x: 860, y: 180, label: 'Ranking', colorKey: 'api' },
+      feed: { x: 1100, y: 180, label: 'Feed', colorKey: 'api' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 460, label: 'Index', colorKey: 'store' },
+      notify: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      ads: { x: 1100, y: 460, label: 'Ads', colorKey: 'api' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' },
+      moderation: { x: 860, y: 600, label: 'Moderation', colorKey: 'api' }
+    }
+  },
+
+  smartnews: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','sources','crawler','ingest','dedupe','rank','feed','offline','cdn','search','index','ads','analytics','moderation'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      sources: { x: 620, y: 180, label: 'Sources', colorKey: 'external' },
+      crawler: { x: 620, y: 320, label: 'Crawler', colorKey: 'api' },
+      ingest: { x: 860, y: 320, label: 'Ingest', colorKey: 'queue' },
+      dedupe: { x: 1100, y: 320, label: 'Dedupe', colorKey: 'api' },
+      rank: { x: 860, y: 180, label: 'Ranking', colorKey: 'api' },
+      feed: { x: 1100, y: 180, label: 'Feed', colorKey: 'api' },
+      offline: { x: 380, y: 320, label: 'Offline Cache', colorKey: 'store' },
+      cdn: { x: 380, y: 460, label: 'CDN', colorKey: 'cdn' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 460, label: 'Index', colorKey: 'store' },
+      ads: { x: 1100, y: 460, label: 'Ads', colorKey: 'api' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' },
+      moderation: { x: 860, y: 600, label: 'Moderation', colorKey: 'api' }
+    }
+  },
+
+  pocket: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','save','parser','read','library','tags','recommend','search','index','offline','sync','metrics','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      save: { x: 380, y: 320, label: 'Save', colorKey: 'api' },
+      parser: { x: 620, y: 320, label: 'Parser', colorKey: 'queue' },
+      read: { x: 860, y: 320, label: 'Reader', colorKey: 'api' },
+      library: { x: 620, y: 180, label: 'Library', colorKey: 'store' },
+      tags: { x: 860, y: 180, label: 'Tags', colorKey: 'store' },
+      recommend: { x: 1100, y: 180, label: 'Recs', colorKey: 'api' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 460, label: 'Index', colorKey: 'store' },
+      offline: { x: 1100, y: 320, label: 'Offline', colorKey: 'store' },
+      sync: { x: 1100, y: 460, label: 'Sync', colorKey: 'api' },
+      metrics: { x: 620, y: 600, label: 'Telemetry', colorKey: 'stream' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  instapaper: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','save','parser','read','library','highlights','search','index','offline','sync','metrics','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      save: { x: 380, y: 320, label: 'Save', colorKey: 'api' },
+      parser: { x: 620, y: 320, label: 'Parser', colorKey: 'queue' },
+      read: { x: 860, y: 320, label: 'Reader', colorKey: 'api' },
+      library: { x: 620, y: 180, label: 'Library', colorKey: 'store' },
+      highlights: { x: 860, y: 180, label: 'Highlights', colorKey: 'store' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 460, label: 'Index', colorKey: 'store' },
+      offline: { x: 1100, y: 320, label: 'Offline', colorKey: 'store' },
+      sync: { x: 1100, y: 460, label: 'Sync', colorKey: 'api' },
+      metrics: { x: 620, y: 600, label: 'Telemetry', colorKey: 'stream' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'google-news': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','sources','crawler','ingest','dedupe','topics','rank','feed','search','index','ads','analytics','moderation'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      sources: { x: 620, y: 180, label: 'Sources', colorKey: 'external' },
+      crawler: { x: 620, y: 320, label: 'Crawler', colorKey: 'api' },
+      ingest: { x: 860, y: 320, label: 'Ingest', colorKey: 'queue' },
+      dedupe: { x: 1100, y: 320, label: 'Dedupe', colorKey: 'api' },
+      topics: { x: 380, y: 320, label: 'Topics', colorKey: 'store' },
+      rank: { x: 860, y: 180, label: 'Ranking', colorKey: 'api' },
+      feed: { x: 1100, y: 180, label: 'Feed', colorKey: 'api' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 460, label: 'Index', colorKey: 'store' },
+      ads: { x: 1100, y: 460, label: 'Ads', colorKey: 'api' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' },
+      moderation: { x: 860, y: 600, label: 'Moderation', colorKey: 'api' }
+    }
+  },
+
+  'apple-news': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','sources','ingest','dedupe','topics','rank','feed','search','index','subscriptions','payments','ads','analytics','moderation'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      sources: { x: 620, y: 180, label: 'Sources', colorKey: 'external' },
+      ingest: { x: 620, y: 320, label: 'Ingest', colorKey: 'queue' },
+      dedupe: { x: 860, y: 320, label: 'Dedupe', colorKey: 'api' },
+      topics: { x: 380, y: 320, label: 'Topics', colorKey: 'store' },
+      rank: { x: 860, y: 180, label: 'Ranking', colorKey: 'api' },
+      feed: { x: 1100, y: 180, label: 'Feed', colorKey: 'api' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 460, label: 'Index', colorKey: 'store' },
+      subscriptions: { x: 1100, y: 320, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 1100, y: 460, label: 'Payments', colorKey: 'external' },
+      ads: { x: 380, y: 460, label: 'Ads', colorKey: 'api' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' },
+      moderation: { x: 860, y: 600, label: 'Moderation', colorKey: 'api' }
+    }
+  }
+});
+
+Object.assign(ARCH_LAYOUTS, {
+  revue: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Revue Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','editor','drafts','issues','subscribers','segmentation','newsletter','email','deliverability','analytics','payments'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      editor: { x: 320, y: 300, label: 'Editor' },
+      drafts: { x: 600, y: 300, label: 'Drafts' },
+      issues: { x: 880, y: 300, label: 'Issues' },
+      subscribers: { x: 600, y: 160, label: 'Subscribers' },
+      segmentation: { x: 880, y: 160, label: 'Segmentation' },
+      newsletter: { x: 1160, y: 160, label: 'Newsletter' },
+      email: { x: 1160, y: 300, label: 'Email' },
+      deliverability: { x: 880, y: 440, label: 'Deliverability' },
+      analytics: { x: 600, y: 440, label: 'Analytics' },
+      payments: { x: 320, y: 440, label: 'Payments' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','editor','edit'], ['editor','drafts','draft']);
+      if(stepIdx===2) e.push(['drafts','issues','publish'], ['issues','newsletter','newsletter']);
+      if(stepIdx===3) e.push(['subscribers','segmentation','segment'], ['segmentation','newsletter','audience']);
+      if(stepIdx===4) e.push(['newsletter','email','send'], ['email','deliverability','deliver']);
+      if(stepIdx===5) e.push(['email','analytics','analytics'], ['analytics','payments','rev']);
+      return e;
+    }
+  },
+
+  flipboard: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Flipboard Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','sources','crawler','ingest','dedupe','rank','feed','search','index','cdn','ads','analytics','moderation'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      sources: { x: 600, y: 160, label: 'Sources' },
+      crawler: { x: 600, y: 300, label: 'Crawler' },
+      ingest: { x: 880, y: 300, label: 'Ingest' },
+      dedupe: { x: 1160, y: 300, label: 'Dedupe' },
+      rank: { x: 880, y: 160, label: 'Ranking' },
+      feed: { x: 1160, y: 160, label: 'Feed' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 880, y: 440, label: 'Index' },
+      cdn: { x: 1160, y: 440, label: 'CDN' },
+      ads: { x: 320, y: 440, label: 'Ads' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      moderation: { x: 600, y: 580, label: 'Moderation' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['sources','crawler','crawl'], ['crawler','ingest','ingest'], ['ingest','dedupe','dedupe']);
+      if(stepIdx===2) e.push(['dedupe','rank','rank'], ['rank','feed','feed']);
+      if(stepIdx===3) e.push(['client','feed','read'], ['feed','cdn','cdn']);
+      if(stepIdx===4) e.push(['client','search','search'], ['search','index','index'], ['index','feed','results']);
+      if(stepIdx===5) e.push(['feed','ads','ads']);
+      if(stepIdx===6) e.push(['feed','analytics','analytics'], ['feed','moderation','mod']);
+      return e;
+    }
+  },
+
+  feedly: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Feedly Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','sources','rss','fetcher','ingest','dedupe','feeds','search','index','ml','analytics','notify'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      sources: { x: 600, y: 160, label: 'Sources' },
+      rss: { x: 880, y: 160, label: 'RSS' },
+      fetcher: { x: 600, y: 300, label: 'Fetcher' },
+      ingest: { x: 880, y: 300, label: 'Ingest' },
+      dedupe: { x: 1160, y: 300, label: 'Dedupe' },
+      feeds: { x: 1160, y: 160, label: 'Feeds' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 880, y: 440, label: 'Index' },
+      ml: { x: 1160, y: 440, label: 'ML Filter' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      notify: { x: 600, y: 580, label: 'Notify' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['rss','fetcher','fetch'], ['fetcher','ingest','ingest'], ['ingest','dedupe','dedupe']);
+      if(stepIdx===2) e.push(['dedupe','feeds','store']);
+      if(stepIdx===3) e.push(['client','search','search'], ['search','index','index'], ['index','feeds','results']);
+      if(stepIdx===4) e.push(['feeds','ml','filter']);
+      if(stepIdx===5) e.push(['feeds','analytics','analytics'], ['analytics','notify','notify']);
+      return e;
+    }
+  },
+
+  inshorts: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Inshorts Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','sources','crawler','summarize','editorial','rank','feed','search','index','notify','ads','analytics','moderation'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      sources: { x: 600, y: 160, label: 'Sources' },
+      crawler: { x: 600, y: 300, label: 'Crawler' },
+      summarize: { x: 880, y: 300, label: 'Summarize' },
+      editorial: { x: 1160, y: 300, label: 'Editorial' },
+      rank: { x: 880, y: 160, label: 'Ranking' },
+      feed: { x: 1160, y: 160, label: 'Feed' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 880, y: 440, label: 'Index' },
+      notify: { x: 320, y: 440, label: 'Notify' },
+      ads: { x: 1160, y: 440, label: 'Ads' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      moderation: { x: 600, y: 580, label: 'Moderation' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['sources','crawler','crawl'], ['crawler','summarize','sum'], ['summarize','editorial','edit']);
+      if(stepIdx===2) e.push(['editorial','rank','rank'], ['rank','feed','feed']);
+      if(stepIdx===3) e.push(['client','feed','read'], ['feed','ads','ads']);
+      if(stepIdx===4) e.push(['client','search','search'], ['search','index','index'], ['index','feed','results']);
+      if(stepIdx===5) e.push(['feed','analytics','analytics'], ['feed','moderation','mod']);
+      return e;
+    }
+  },
+
+  dailyhunt: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Dailyhunt Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','sources','ingest','dedupe','lang','rank','feed','search','index','notify','ads','analytics','moderation'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      sources: { x: 600, y: 160, label: 'Sources' },
+      ingest: { x: 600, y: 300, label: 'Ingest' },
+      dedupe: { x: 880, y: 300, label: 'Dedupe' },
+      lang: { x: 1160, y: 300, label: 'Language' },
+      rank: { x: 880, y: 160, label: 'Ranking' },
+      feed: { x: 1160, y: 160, label: 'Feed' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 880, y: 440, label: 'Index' },
+      notify: { x: 320, y: 440, label: 'Notify' },
+      ads: { x: 1160, y: 440, label: 'Ads' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      moderation: { x: 600, y: 580, label: 'Moderation' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['sources','ingest','ingest'], ['ingest','dedupe','dedupe'], ['dedupe','lang','lang']);
+      if(stepIdx===2) e.push(['lang','rank','rank'], ['rank','feed','feed']);
+      if(stepIdx===3) e.push(['client','feed','read'], ['feed','ads','ads']);
+      if(stepIdx===4) e.push(['client','search','search'], ['search','index','index'], ['index','feed','results']);
+      if(stepIdx===5) e.push(['feed','analytics','analytics'], ['feed','moderation','mod']);
+      return e;
+    }
+  },
+
+  smartnews: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'SmartNews Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','sources','crawler','ingest','dedupe','rank','feed','offline','cdn','search','index','ads','analytics','moderation'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      sources: { x: 600, y: 160, label: 'Sources' },
+      crawler: { x: 600, y: 300, label: 'Crawler' },
+      ingest: { x: 880, y: 300, label: 'Ingest' },
+      dedupe: { x: 1160, y: 300, label: 'Dedupe' },
+      rank: { x: 880, y: 160, label: 'Ranking' },
+      feed: { x: 1160, y: 160, label: 'Feed' },
+      offline: { x: 320, y: 300, label: 'Offline Cache' },
+      cdn: { x: 320, y: 440, label: 'CDN' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 880, y: 440, label: 'Index' },
+      ads: { x: 1160, y: 440, label: 'Ads' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      moderation: { x: 600, y: 580, label: 'Moderation' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['sources','crawler','crawl'], ['crawler','ingest','ingest'], ['ingest','dedupe','dedupe']);
+      if(stepIdx===2) e.push(['dedupe','rank','rank'], ['rank','feed','feed']);
+      if(stepIdx===3) e.push(['feed','offline','cache'], ['offline','cdn','cdn'], ['cdn','client','read']);
+      if(stepIdx===4) e.push(['client','search','search'], ['search','index','index'], ['index','feed','results']);
+      if(stepIdx===5) e.push(['feed','ads','ads']);
+      if(stepIdx===6) e.push(['feed','analytics','analytics'], ['feed','moderation','mod']);
+      return e;
+    }
+  },
+
+  pocket: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Pocket Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','save','parser','read','library','tags','recommend','search','index','offline','sync','metrics','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      save: { x: 320, y: 300, label: 'Save' },
+      parser: { x: 600, y: 300, label: 'Parser' },
+      read: { x: 880, y: 300, label: 'Reader' },
+      library: { x: 600, y: 160, label: 'Library' },
+      tags: { x: 880, y: 160, label: 'Tags' },
+      recommend: { x: 1160, y: 160, label: 'Recs' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 880, y: 440, label: 'Index' },
+      offline: { x: 1160, y: 300, label: 'Offline' },
+      sync: { x: 1160, y: 440, label: 'Sync' },
+      metrics: { x: 600, y: 580, label: 'Telemetry' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','save','save'], ['save','parser','parse'], ['parser','library','store']);
+      if(stepIdx===2) e.push(['library','tags','tags'], ['tags','recommend','recs']);
+      if(stepIdx===3) e.push(['client','read','read'], ['read','offline','offline'], ['offline','sync','sync']);
+      if(stepIdx===4) e.push(['client','search','search'], ['search','index','index'], ['index','library','results']);
+      if(stepIdx===5) e.push(['read','metrics','qoe'], ['metrics','analytics','analytics']);
+      return e;
+    }
+  },
+
+  instapaper: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Instapaper Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','save','parser','read','library','highlights','search','index','offline','sync','metrics','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      save: { x: 320, y: 300, label: 'Save' },
+      parser: { x: 600, y: 300, label: 'Parser' },
+      read: { x: 880, y: 300, label: 'Reader' },
+      library: { x: 600, y: 160, label: 'Library' },
+      highlights: { x: 880, y: 160, label: 'Highlights' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 880, y: 440, label: 'Index' },
+      offline: { x: 1160, y: 300, label: 'Offline' },
+      sync: { x: 1160, y: 440, label: 'Sync' },
+      metrics: { x: 600, y: 580, label: 'Telemetry' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','save','save'], ['save','parser','parse'], ['parser','library','store']);
+      if(stepIdx===2) e.push(['client','read','read'], ['read','highlights','highlight']);
+      if(stepIdx===3) e.push(['read','offline','offline'], ['offline','sync','sync']);
+      if(stepIdx===4) e.push(['client','search','search'], ['search','index','index'], ['index','library','results']);
+      if(stepIdx===5) e.push(['read','metrics','qoe'], ['metrics','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'google-news': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Google News Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','sources','crawler','ingest','dedupe','topics','rank','feed','search','index','ads','analytics','moderation'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      sources: { x: 600, y: 160, label: 'Sources' },
+      crawler: { x: 600, y: 300, label: 'Crawler' },
+      ingest: { x: 880, y: 300, label: 'Ingest' },
+      dedupe: { x: 1160, y: 300, label: 'Dedupe' },
+      topics: { x: 320, y: 300, label: 'Topics' },
+      rank: { x: 880, y: 160, label: 'Ranking' },
+      feed: { x: 1160, y: 160, label: 'Feed' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 880, y: 440, label: 'Index' },
+      ads: { x: 1160, y: 440, label: 'Ads' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      moderation: { x: 600, y: 580, label: 'Moderation' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['sources','crawler','crawl'], ['crawler','ingest','ingest'], ['ingest','dedupe','dedupe']);
+      if(stepIdx===2) e.push(['dedupe','rank','rank'], ['rank','feed','feed'], ['topics','rank','topics']);
+      if(stepIdx===3) e.push(['client','feed','read'], ['feed','ads','ads']);
+      if(stepIdx===4) e.push(['client','search','search'], ['search','index','index'], ['index','feed','results']);
+      if(stepIdx===5) e.push(['feed','analytics','analytics'], ['feed','moderation','mod']);
+      return e;
+    }
+  },
+
+  'apple-news': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Apple News Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','sources','ingest','dedupe','topics','rank','feed','search','index','subscriptions','payments','ads','analytics','moderation'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      sources: { x: 600, y: 160, label: 'Sources' },
+      ingest: { x: 600, y: 300, label: 'Ingest' },
+      dedupe: { x: 880, y: 300, label: 'Dedupe' },
+      topics: { x: 320, y: 300, label: 'Topics' },
+      rank: { x: 880, y: 160, label: 'Ranking' },
+      feed: { x: 1160, y: 160, label: 'Feed' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 880, y: 440, label: 'Index' },
+      subscriptions: { x: 1160, y: 300, label: 'Subscriptions' },
+      payments: { x: 1160, y: 440, label: 'Payments' },
+      ads: { x: 320, y: 440, label: 'Ads' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      moderation: { x: 600, y: 580, label: 'Moderation' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['sources','ingest','ingest'], ['ingest','dedupe','dedupe']);
+      if(stepIdx===2) e.push(['dedupe','rank','rank'], ['rank','feed','feed'], ['topics','rank','topics']);
+      if(stepIdx===3) e.push(['client','feed','read'], ['feed','subscriptions','plus']);
+      if(stepIdx===4) e.push(['subscriptions','payments','pay']);
+      if(stepIdx===5) e.push(['client','search','search'], ['search','index','index'], ['index','feed','results']);
+      if(stepIdx===6) e.push(['feed','ads','ads']);
+      if(stepIdx===7) e.push(['feed','analytics','analytics'], ['feed','moderation','mod']);
+      return e;
+    }
+  }
+});
+
 Object.assign(ARCH_LAYOUTS, {
   'pocket-casts': {
     viewBox: '0 0 1860 820',

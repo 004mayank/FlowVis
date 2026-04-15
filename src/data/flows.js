@@ -3095,6 +3095,396 @@ export const FLOWS = {
     ]
   },
 
+  revue: {
+    title: 'Revue',
+    steps: [
+      {
+        title: 'Author signs in + drafts issue',
+        desc: 'Author logs in, writes in editor, and saves drafts for the next issue.',
+        active: ['client','auth','editor','drafts'],
+        edges: [['client','auth'], ['auth','editor'], ['editor','drafts']]
+      },
+      {
+        title: 'Curate links + publish issue',
+        desc: 'Drafts assembled into an issue and published to the newsletter pipeline.',
+        active: ['drafts','issues','newsletter'],
+        edges: [['drafts','issues'], ['issues','newsletter']]
+      },
+      {
+        title: 'Subscribers + segmentation',
+        desc: 'Subscriber list and segments select the target audience for the issue.',
+        active: ['subscribers','segmentation','newsletter'],
+        edges: [['subscribers','segmentation'], ['segmentation','newsletter']]
+      },
+      {
+        title: 'Send via email + deliverability',
+        desc: 'Newsletter sent via email provider; deliverability tracked and retried.',
+        active: ['newsletter','email','deliverability'],
+        edges: [['newsletter','email'], ['email','deliverability']]
+      },
+      {
+        title: 'Analytics + monetization',
+        desc: 'Opens/clicks feed analytics; paid plans/sponsorships flow to payments.',
+        active: ['analytics','payments'],
+        edges: [['deliverability','analytics'], ['analytics','payments']]
+      }
+    ]
+  },
+
+  flipboard: {
+    title: 'Flipboard',
+    steps: [
+      {
+        title: 'Ingest from sources',
+        desc: 'Crawler fetches from sources; ingest pipeline dedupes and normalizes stories.',
+        active: ['sources','crawler','ingest','dedupe'],
+        edges: [['sources','crawler'], ['crawler','ingest'], ['ingest','dedupe']]
+      },
+      {
+        title: 'Rank + build feed',
+        desc: 'Ranking produces personalized feed from topics and user signals.',
+        active: ['topics','rank','feed'],
+        edges: [['topics','rank'], ['dedupe','rank'], ['rank','feed']]
+      },
+      {
+        title: 'Read in magazine UI',
+        desc: 'Client reads stories; content/assets served via CDN.',
+        active: ['client','feed','cdn'],
+        edges: [['client','feed'], ['feed','cdn']]
+      },
+      {
+        title: 'Search',
+        desc: 'Search hits index and returns matching stories to the feed UI.',
+        active: ['client','search','index','feed'],
+        edges: [['client','search'], ['search','index'], ['index','feed']]
+      },
+      {
+        title: 'Ads + moderation',
+        desc: 'Ads served alongside feed; moderation enforces safety/publisher rules.',
+        active: ['ads','moderation'],
+        edges: [['feed','ads'], ['feed','moderation']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Engagement analytics power ranking and publisher reporting.',
+        active: ['analytics'],
+        edges: [['feed','analytics']]
+      }
+    ]
+  },
+
+  feedly: {
+    title: 'Feedly',
+    steps: [
+      {
+        title: 'Subscribe to feeds + categories',
+        desc: 'User subscribes to sources and organizes them into collections/topics.',
+        active: ['client','auth','sources','topics'],
+        edges: [['client','auth'], ['client','sources'], ['sources','topics']]
+      },
+      {
+        title: 'Fetch RSS + ingest',
+        desc: 'Fetcher polls RSS; ingest pipeline stores items and dedupes/normalizes.',
+        active: ['rss','fetcher','ingest','dedupe','feeds'],
+        edges: [['rss','fetcher'], ['fetcher','ingest'], ['ingest','dedupe'], ['dedupe','feeds']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Search uses index to find items across subscribed sources and topics.',
+        active: ['client','search','index','feeds'],
+        edges: [['client','search'], ['search','index'], ['index','feeds']]
+      },
+      {
+        title: 'ML filtering + prioritization',
+        desc: 'ML filters noise and prioritizes important items for the user feed.',
+        active: ['ml','feeds'],
+        edges: [['feeds','ml'], ['ml','feeds']]
+      },
+      {
+        title: 'Notifications + analytics',
+        desc: 'Alerts for tracked topics; analytics improves filtering and ranking.',
+        active: ['notify','analytics'],
+        edges: [['feeds','analytics'], ['analytics','notify']]
+      }
+    ]
+  },
+
+  inshorts: {
+    title: 'Inshorts',
+    steps: [
+      {
+        title: 'Ingest news from sources',
+        desc: 'Crawler pulls stories from sources and queues them for summarization.',
+        active: ['sources','crawler','summarize'],
+        edges: [['sources','crawler'], ['crawler','summarize']]
+      },
+      {
+        title: 'Summarize + editorial pass',
+        desc: 'Summaries generated and refined by editorial workflows before publishing.',
+        active: ['summarize','editorial'],
+        edges: [['summarize','editorial']]
+      },
+      {
+        title: 'Rank + deliver feed',
+        desc: 'Ranking selects top cards; feed served to clients with personalization.',
+        active: ['rank','feed','client'],
+        edges: [['editorial','rank'], ['rank','feed'], ['client','feed']]
+      },
+      {
+        title: 'Search',
+        desc: 'Search hits index to find stories/topics for the card UI.',
+        active: ['search','index','feed'],
+        edges: [['client','search'], ['search','index'], ['index','feed']]
+      },
+      {
+        title: 'Ads + notifications',
+        desc: 'Ads served with feed; notifications for breaking news.',
+        active: ['ads','notify'],
+        edges: [['feed','ads'], ['feed','notify']]
+      },
+      {
+        title: 'Moderation + analytics',
+        desc: 'Policy enforcement and analytics feed back into ranking and coverage.',
+        active: ['moderation','analytics'],
+        edges: [['feed','moderation'], ['feed','analytics']]
+      }
+    ]
+  },
+
+  dailyhunt: {
+    title: 'Dailyhunt',
+    steps: [
+      {
+        title: 'Ingest + dedupe sources',
+        desc: 'Ingest pipeline pulls from publishers, dedupes, and normalizes items.',
+        active: ['sources','ingest','dedupe'],
+        edges: [['sources','ingest'], ['ingest','dedupe']]
+      },
+      {
+        title: 'Language + localization',
+        desc: 'Language classification/translation supports multi-language feeds.',
+        active: ['lang'],
+        edges: [['dedupe','lang']]
+      },
+      {
+        title: 'Rank + serve feed',
+        desc: 'Ranking builds a personalized feed from localized items.',
+        active: ['rank','feed','client'],
+        edges: [['lang','rank'], ['rank','feed'], ['client','feed']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Search uses index to retrieve stories and topics.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','feed']]
+      },
+      {
+        title: 'Ads + notifications',
+        desc: 'Ads monetize the feed; notifications alert on breaking/local news.',
+        active: ['ads','notify'],
+        edges: [['feed','ads'], ['feed','notify']]
+      },
+      {
+        title: 'Moderation + analytics',
+        desc: 'Moderation enforces policy; analytics improves ranking and content mix.',
+        active: ['moderation','analytics'],
+        edges: [['feed','moderation'], ['feed','analytics']]
+      }
+    ]
+  },
+
+  smartnews: {
+    title: 'SmartNews',
+    steps: [
+      {
+        title: 'Ingest from sources',
+        desc: 'Crawler and ingest pipeline pull from sources and dedupe/normalize stories.',
+        active: ['sources','crawler','ingest','dedupe'],
+        edges: [['sources','crawler'], ['crawler','ingest'], ['ingest','dedupe']]
+      },
+      {
+        title: 'Rank + build feed',
+        desc: 'Ranking produces a personalized feed for the client app.',
+        active: ['rank','feed','client'],
+        edges: [['dedupe','rank'], ['rank','feed'], ['client','feed']]
+      },
+      {
+        title: 'Offline caching',
+        desc: 'Feed items cached for offline reading; assets served via CDN.',
+        active: ['offline','cdn'],
+        edges: [['feed','offline'], ['offline','cdn'], ['cdn','client']]
+      },
+      {
+        title: 'Search',
+        desc: 'Search uses index to retrieve stories and topics.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index']]
+      },
+      {
+        title: 'Ads + moderation',
+        desc: 'Ads monetize; moderation enforces safety and publisher constraints.',
+        active: ['ads','moderation'],
+        edges: [['feed','ads'], ['feed','moderation']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Engagement analytics tune ranking and notifications.',
+        active: ['analytics'],
+        edges: [['feed','analytics']]
+      }
+    ]
+  },
+
+  pocket: {
+    title: 'Pocket',
+    steps: [
+      {
+        title: 'Save a link',
+        desc: 'User saves a URL; parser extracts readable content and stores it in library.',
+        active: ['client','save','parser','library'],
+        edges: [['client','save'], ['save','parser'], ['parser','library']]
+      },
+      {
+        title: 'Tag + recommendations',
+        desc: 'User adds tags; recommendation engine surfaces related reads.',
+        active: ['tags','recommend'],
+        edges: [['library','tags'], ['tags','recommend']]
+      },
+      {
+        title: 'Read offline + sync',
+        desc: 'Reader caches content offline; reading progress syncs across devices.',
+        active: ['read','offline','sync'],
+        edges: [['library','read'], ['read','offline'], ['offline','sync']]
+      },
+      {
+        title: 'Search library',
+        desc: 'Search hits index built from saved items and returns matches.',
+        active: ['search','index','library'],
+        edges: [['client','search'], ['search','index'], ['index','library']]
+      },
+      {
+        title: 'Telemetry + analytics',
+        desc: 'Reading telemetry feeds analytics for ranking and recommendations.',
+        active: ['metrics','analytics'],
+        edges: [['read','metrics'], ['metrics','analytics']]
+      }
+    ]
+  },
+
+  instapaper: {
+    title: 'Instapaper',
+    steps: [
+      {
+        title: 'Save + parse article',
+        desc: 'User saves a link; parser extracts clean text and stores it in library.',
+        active: ['client','save','parser','library'],
+        edges: [['client','save'], ['save','parser'], ['parser','library']]
+      },
+      {
+        title: 'Read + highlights',
+        desc: 'Reader loads text; highlights/notes saved for later retrieval.',
+        active: ['read','highlights'],
+        edges: [['library','read'], ['read','highlights']]
+      },
+      {
+        title: 'Offline + sync',
+        desc: 'Offline copies cached; sync keeps library and progress consistent.',
+        active: ['offline','sync'],
+        edges: [['read','offline'], ['offline','sync']]
+      },
+      {
+        title: 'Search library',
+        desc: 'Search uses index to find saved articles and highlights.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','library']]
+      },
+      {
+        title: 'Telemetry + analytics',
+        desc: 'Engagement telemetry feeds analytics for product improvements.',
+        active: ['metrics','analytics'],
+        edges: [['read','metrics'], ['metrics','analytics']]
+      }
+    ]
+  },
+
+  'google-news': {
+    title: 'Google News',
+    steps: [
+      {
+        title: 'Ingest + dedupe sources',
+        desc: 'Crawler/ingest pipeline pulls from sources and dedupes/normalizes stories.',
+        active: ['sources','crawler','ingest','dedupe'],
+        edges: [['sources','crawler'], ['crawler','ingest'], ['ingest','dedupe']]
+      },
+      {
+        title: 'Topic clustering + ranking',
+        desc: 'Stories clustered by topic; ranking builds personalized feed.',
+        active: ['topics','rank','feed'],
+        edges: [['dedupe','topics'], ['topics','rank'], ['rank','feed']]
+      },
+      {
+        title: 'Read + ads',
+        desc: 'Client reads feed; ads and cards rendered alongside content.',
+        active: ['client','feed','ads'],
+        edges: [['client','feed'], ['feed','ads']]
+      },
+      {
+        title: 'Search',
+        desc: 'Search hits index to find news and topics.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','feed']]
+      },
+      {
+        title: 'Moderation + analytics',
+        desc: 'Policy enforcement and analytics tune ranking and recommendations.',
+        active: ['moderation','analytics'],
+        edges: [['feed','moderation'], ['feed','analytics']]
+      }
+    ]
+  },
+
+  'apple-news': {
+    title: 'Apple News',
+    steps: [
+      {
+        title: 'Ingest publishers + dedupe',
+        desc: 'Ingest pipeline pulls from publishers and dedupes/normalizes stories.',
+        active: ['sources','ingest','dedupe'],
+        edges: [['sources','ingest'], ['ingest','dedupe']]
+      },
+      {
+        title: 'Topics + ranking',
+        desc: 'Topics and user signals drive ranking for the personalized feed.',
+        active: ['topics','rank','feed'],
+        edges: [['dedupe','topics'], ['topics','rank'], ['rank','feed']]
+      },
+      {
+        title: 'News+ subscription access',
+        desc: 'Subscription gates premium content; entitlements verified via payments flow.',
+        active: ['subscriptions','payments'],
+        edges: [['feed','subscriptions'], ['subscriptions','payments']]
+      },
+      {
+        title: 'Read + search',
+        desc: 'Client reads feed and searches via index.',
+        active: ['client','feed','search','index'],
+        edges: [['client','feed'], ['client','search'], ['search','index'], ['index','feed']]
+      },
+      {
+        title: 'Ads + moderation',
+        desc: 'Ads monetize free feed; moderation enforces policies and publisher rules.',
+        active: ['ads','moderation'],
+        edges: [['feed','ads'], ['feed','moderation']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Engagement analytics tune ranking and editorial coverage.',
+        active: ['analytics'],
+        edges: [['feed','analytics']]
+      }
+    ]
+  },
+
   chime: {
     title: 'Chime',
     steps: [
