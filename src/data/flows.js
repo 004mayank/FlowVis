@@ -8165,6 +8165,318 @@ export const FLOWS = {
     ]
   },
 
+  'insight-timer': {
+    title: 'Insight Timer',
+    steps: [
+      {
+        title: 'Browse catalog',
+        desc: 'User signs in and browses meditation and course catalog.',
+        active: ['client','auth','profile','catalog'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','catalog']]
+      },
+      {
+        title: 'Play audio + downloads',
+        desc: 'Audio plays and can be downloaded for offline sessions.',
+        active: ['audio','downloads'],
+        edges: [['catalog','audio'], ['audio','downloads']]
+      },
+      {
+        title: 'Live sessions + community',
+        desc: 'Live meditation sessions and community features engage users.',
+        active: ['live','community'],
+        edges: [['audio','live'], ['live','community']]
+      },
+      {
+        title: 'Recommendations + notifications',
+        desc: 'Recommendations personalize next sessions; notifications drive habit.',
+        active: ['recommendations','notifications'],
+        edges: [['downloads','recommendations'], ['recommendations','notifications']]
+      },
+      {
+        title: 'Subscriptions + payments + analytics',
+        desc: 'Subscription billed; analytics measures engagement and retention.',
+        active: ['subscriptions','payments','analytics'],
+        edges: [['subscriptions','payments'], ['audio','analytics']]
+      }
+    ]
+  },
+
+  balance: {
+    title: 'Balance',
+    steps: [
+      {
+        title: 'Assessment',
+        desc: 'User completes assessment to personalize meditation plan.',
+        active: ['client','auth','profile','assessment'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','assessment']]
+      },
+      {
+        title: 'Plan + sessions',
+        desc: 'Plan generated; sessions scheduled and delivered.',
+        active: ['plan','sessions','audio'],
+        edges: [['assessment','plan'], ['plan','sessions'], ['sessions','audio']]
+      },
+      {
+        title: 'Progress + reminders',
+        desc: 'Progress tracked; reminders keep the habit.',
+        active: ['progress','reminders'],
+        edges: [['sessions','progress'], ['progress','reminders']]
+      },
+      {
+        title: 'Subscription + privacy + analytics',
+        desc: 'Subscription billed; privacy controls data; analytics tracks engagement.',
+        active: ['subscriptions','payments','privacy','analytics'],
+        edges: [['subscriptions','payments'], ['sessions','analytics'], ['privacy','profile']]
+      }
+    ]
+  },
+
+  aura: {
+    title: 'Aura',
+    steps: [
+      {
+        title: 'Personalized recommendations',
+        desc: 'Recommendations personalize catalog and sleep content.',
+        active: ['client','auth','profile','recommendations','catalog'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','recommendations'], ['recommendations','catalog']]
+      },
+      {
+        title: 'Play audio + downloads',
+        desc: 'Audio and stories play; downloads support offline use.',
+        active: ['audio','stories','downloads'],
+        edges: [['catalog','audio'], ['stories','audio'], ['audio','downloads']]
+      },
+      {
+        title: 'Sleep experience + notifications',
+        desc: 'Sleep sessions tracked; notifications drive routine.',
+        active: ['sleep','notifications'],
+        edges: [['downloads','sleep'], ['sleep','notifications']]
+      },
+      {
+        title: 'Subscriptions + payments + analytics + privacy',
+        desc: 'Subscription billed; analytics tracks engagement; privacy controls data.',
+        active: ['subscriptions','payments','analytics','privacy'],
+        edges: [['subscriptions','payments'], ['audio','analytics'], ['privacy','profile']]
+      }
+    ]
+  },
+
+  noom: {
+    title: 'Noom',
+    steps: [
+      {
+        title: 'Onboarding + goals',
+        desc: 'User signs in and sets weight/health goals.',
+        active: ['client','auth','profile','goals'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','goals']]
+      },
+      {
+        title: 'Food logging',
+        desc: 'User logs meals using food database; logging stream persists.',
+        active: ['logging','food'],
+        edges: [['goals','logging'], ['logging','food']]
+      },
+      {
+        title: 'Lessons + coach messaging',
+        desc: 'Lessons delivered; coach supports via messaging.',
+        active: ['lessons','coach','messages'],
+        edges: [['logging','coach'], ['coach','messages'], ['lessons','groups']]
+      },
+      {
+        title: 'Groups + notifications',
+        desc: 'Group engagement and notifications build adherence.',
+        active: ['groups','notifications'],
+        edges: [['groups','notifications']]
+      },
+      {
+        title: 'Subscriptions + payments + analytics + privacy',
+        desc: 'Subscription billed; analytics aggregates trends; privacy controls data.',
+        active: ['subscriptions','payments','analytics','privacy'],
+        edges: [['subscriptions','payments'], ['logging','analytics'], ['privacy','profile']]
+      }
+    ]
+  },
+
+  lifesum: {
+    title: 'Lifesum',
+    steps: [
+      {
+        title: 'Goals + food logging',
+        desc: 'User sets goals and logs meals against food database.',
+        active: ['client','auth','profile','goals','logging','food'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','goals'], ['goals','logging'], ['logging','food']]
+      },
+      {
+        title: 'Recipes + plans',
+        desc: 'Recipes recommended and plans created for diet adherence.',
+        active: ['recipes','plans'],
+        edges: [['food','recipes'], ['recipes','plans']]
+      },
+      {
+        title: 'Tracking + insights',
+        desc: 'Tracking and insights summarize nutrition and progress.',
+        active: ['tracking','insights'],
+        edges: [['logging','tracking'], ['tracking','insights']]
+      },
+      {
+        title: 'Notifications + subscription + privacy + analytics',
+        desc: 'Notifications remind; subscription billed; privacy and analytics manage data.',
+        active: ['notifications','subscriptions','payments','privacy','analytics'],
+        edges: [['insights','notifications'], ['subscriptions','payments'], ['tracking','analytics'], ['privacy','profile']]
+      }
+    ]
+  },
+
+  yazio: {
+    title: 'Yazio',
+    steps: [
+      {
+        title: 'Goals + scan foods',
+        desc: 'User sets goals and scans foods to log meals.',
+        active: ['client','auth','profile','goals','scanner','food'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','goals'], ['scanner','food']]
+      },
+      {
+        title: 'Logging + plans',
+        desc: 'Logging persists meals and contributes to plans.',
+        active: ['logging','plans'],
+        edges: [['food','logging'], ['logging','plans']]
+      },
+      {
+        title: 'Tracking + insights + notifications',
+        desc: 'Tracking and insights summarize progress; notifications remind.',
+        active: ['tracking','insights','notifications'],
+        edges: [['plans','tracking'], ['tracking','insights'], ['insights','notifications']]
+      },
+      {
+        title: 'Subscription + payments + analytics',
+        desc: 'Premium billed; analytics aggregates engagement.',
+        active: ['subscriptions','payments','analytics'],
+        edges: [['subscriptions','payments'], ['tracking','analytics']]
+      }
+    ]
+  },
+
+  fooducate: {
+    title: 'Fooducate',
+    steps: [
+      {
+        title: 'Scan + grade food',
+        desc: 'User scans product and receives nutrition grading.',
+        active: ['client','auth','profile','scanner','food','grading'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','scanner'], ['scanner','food'], ['food','grading']]
+      },
+      {
+        title: 'Alternatives + plans',
+        desc: 'Alternatives recommended and plans suggested.',
+        active: ['alternatives','plans'],
+        edges: [['grading','alternatives'], ['alternatives','plans']]
+      },
+      {
+        title: 'Tracking + content + notifications',
+        desc: 'Tracking logs choices; content educates; notifications drive habit.',
+        active: ['tracking','content','notifications'],
+        edges: [['plans','tracking'], ['tracking','content'], ['content','notifications']]
+      },
+      {
+        title: 'Ads + subscription + payments + analytics',
+        desc: 'Freemium monetization via ads and subscriptions; analytics measures engagement.',
+        active: ['ads','subscriptions','payments','analytics'],
+        edges: [['ads','analytics'], ['subscriptions','payments'], ['tracking','analytics']]
+      }
+    ]
+  },
+
+  eatsure: {
+    title: 'EatSure',
+    steps: [
+      {
+        title: 'Search + build cart',
+        desc: 'User searches catalog and adds menu items to cart.',
+        active: ['client','auth','search','catalog','menu','cart'],
+        edges: [['client','auth'], ['auth','search'], ['search','catalog'], ['catalog','menu'], ['menu','cart']]
+      },
+      {
+        title: 'Checkout + payment',
+        desc: 'Checkout creates order and processes payment.',
+        active: ['checkout','payments','orders'],
+        edges: [['cart','checkout'], ['checkout','payments'], ['checkout','orders']]
+      },
+      {
+        title: 'Dispatch + delivery',
+        desc: 'Dispatch assigns delivery; notifications update status.',
+        active: ['dispatch','delivery','notifications'],
+        edges: [['orders','dispatch'], ['dispatch','delivery'], ['orders','notifications']]
+      },
+      {
+        title: 'Support + analytics',
+        desc: 'Support handles issues; analytics aggregates order metrics.',
+        active: ['support','analytics'],
+        edges: [['client','support'], ['orders','analytics']]
+      }
+    ]
+  },
+
+  dunzo: {
+    title: 'Dunzo',
+    steps: [
+      {
+        title: 'Create task + price',
+        desc: 'User creates a delivery/errand task; pricing estimated.',
+        active: ['client','auth','catalog','tasks','pricing'],
+        edges: [['client','auth'], ['auth','catalog'], ['catalog','tasks'], ['tasks','pricing']]
+      },
+      {
+        title: 'Order + dispatch courier',
+        desc: 'Order created; dispatch assigns courier.',
+        active: ['orders','dispatch','couriers'],
+        edges: [['pricing','orders'], ['orders','dispatch'], ['dispatch','couriers']]
+      },
+      {
+        title: 'Routing + tracking',
+        desc: 'Routing optimizes path; tracking updates user.',
+        active: ['routing','tracking','notifications'],
+        edges: [['couriers','routing'], ['routing','tracking'], ['orders','notifications']]
+      },
+      {
+        title: 'Payment + support + analytics',
+        desc: 'Payments processed; support resolves issues; analytics aggregates performance.',
+        active: ['payments','support','analytics'],
+        edges: [['orders','payments'], ['client','support'], ['orders','analytics']]
+      }
+    ]
+  },
+
+  postmates: {
+    title: 'Postmates',
+    steps: [
+      {
+        title: 'Browse + cart',
+        desc: 'User searches restaurants/stores and adds items to cart.',
+        active: ['client','auth','search','catalog','menu','cart'],
+        edges: [['client','auth'], ['auth','search'], ['search','catalog'], ['catalog','menu'], ['menu','cart']]
+      },
+      {
+        title: 'Checkout + payment',
+        desc: 'Checkout creates order and processes payment.',
+        active: ['checkout','payments','orders'],
+        edges: [['cart','checkout'], ['checkout','payments'], ['checkout','orders']]
+      },
+      {
+        title: 'Dispatch + courier routing',
+        desc: 'Dispatch assigns courier; routing planned; tracking updates user.',
+        active: ['dispatch','couriers','routing','tracking'],
+        edges: [['orders','dispatch'], ['dispatch','couriers'], ['couriers','routing'], ['routing','tracking']]
+      },
+      {
+        title: 'Notifications + support + analytics',
+        desc: 'Notifications update status; support resolves issues; analytics aggregates performance.',
+        active: ['notifications','support','analytics'],
+        edges: [['orders','notifications'], ['client','support'], ['orders','analytics']]
+      }
+    ]
+  },
+
   chime: {
     title: 'Chime',
     steps: [
