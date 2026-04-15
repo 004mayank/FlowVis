@@ -646,46 +646,46 @@ export const FLOWS = {
     title: 'Netflix',
     steps: [
       {
-        title: 'Browse home and rows',
-        desc: 'Client loads personalized rows and artwork from API and caches.',
-        active: ['client','home','recos'],
-        edges: [['client','home'], ['home','recos']]
+        title: 'Open app: home rows + profile context',
+        desc: 'Client loads profile context and personalized home rows with caching and experiments.',
+        active: ['client','home','recos','ab'],
+        edges: [['client','home'], ['home','recos'], ['recos','ab']]
       },
       {
-        title: 'Recommendations and ranking',
-        desc: 'Ranking selects titles using history, embeddings, and experiments.',
-        active: ['recos','rank','ab'],
-        edges: [['recos','rank'], ['rank','ab']]
+        title: 'Recommendations + ranking',
+        desc: 'Ranking uses history, embeddings, and experiments to select titles and artwork variants.',
+        active: ['recos','rank','ab','analytics'],
+        edges: [['recos','rank'], ['rank','ab'], ['rank','analytics']]
       },
       {
-        title: 'Select title and fetch metadata',
-        desc: 'Client requests title metadata, available encodes, and playback policy.',
-        active: ['client','catalog','drm'],
-        edges: [['client','catalog'], ['catalog','drm']]
+        title: 'Select title: metadata + playback policy',
+        desc: 'Client fetches title metadata, encodes, subtitles, and playback policy (geo/device).',
+        active: ['client','catalog','drm','auth'],
+        edges: [['client','catalog'], ['catalog','auth'], ['catalog','drm']]
       },
       {
-        title: 'License and DRM',
-        desc: 'Client obtains DRM license for the device and session before playback.',
-        active: ['client','drm'],
-        edges: [['client','drm']]
+        title: 'DRM license + session setup',
+        desc: 'Client obtains DRM license and initializes playback session keys.',
+        active: ['client','drm','risk'],
+        edges: [['client','drm'], ['drm','risk']]
       },
       {
-        title: 'Start playback from CDN',
-        desc: 'Segments stream from CDN with adaptive bitrate selection.',
+        title: 'Playback from CDN (ABR start)',
+        desc: 'Player starts ABR playback by pulling segments from CDN and selecting initial bitrate.',
         active: ['client','cdn','player'],
         edges: [['cdn','client'], ['client','player']]
       },
       {
-        title: 'Adaptive bitrate switching',
-        desc: 'Player changes quality based on bandwidth, buffer health, and device.',
-        active: ['player','metrics'],
-        edges: [['player','metrics']]
+        title: 'ABR switching + QoE monitoring',
+        desc: 'Player adapts bitrate; QoE signals (rebuffering, startup) are monitored.',
+        active: ['player','metrics','analytics'],
+        edges: [['player','metrics'], ['metrics','analytics']]
       },
       {
-        title: 'Telemetry and engagement',
-        desc: 'Playback events feed analytics to improve quality and recommendations.',
-        active: ['metrics','analytics','recos'],
-        edges: [['metrics','analytics'], ['analytics','recos']]
+        title: 'Telemetry + personalization feedback loop',
+        desc: 'Playback events update analytics; signals feed back into recommendations and experiments.',
+        active: ['metrics','analytics','recos','ab'],
+        edges: [['metrics','analytics'], ['analytics','recos'], ['analytics','ab']]
       }
     ]
   },
@@ -2676,6 +2676,8 @@ export const FLOWS = {
     ]
   },
 
+  // NOTE: Prime Video and Apple Music are defined earlier in this file.
+
   snapchat: {
     title: 'Snapchat',
     steps: [
@@ -2722,39 +2724,39 @@ export const FLOWS = {
     title: 'Facebook',
     steps: [
       {
-        title: 'Load feed',
-        desc: 'Client requests feed; caching and prefetch enable fast rendering.',
-        active: ['client','feed','cache'],
-        edges: [['client','feed'], ['feed','cache']]
+        title: 'Open app: feed + graph context',
+        desc: 'Client loads feed with caching/prefetch; graph context shapes ranking candidates.',
+        active: ['client','feed','cache','graph'],
+        edges: [['client','feed'], ['feed','cache'], ['feed','graph']]
       },
       {
-        title: 'Ranking and integrity',
-        desc: 'Ranking selects posts; integrity/safety filters apply.',
-        active: ['rank','safety','feed'],
-        edges: [['feed','rank'], ['rank','safety']]
+        title: 'Ranking + integrity',
+        desc: 'Ranking selects posts; integrity/safety systems downrank or remove harmful content.',
+        active: ['rank','safety','feed','moderation'],
+        edges: [['feed','rank'], ['rank','safety'], ['safety','moderation']]
       },
       {
-        title: 'Fetch media',
-        desc: 'Media URLs are resolved and content streams from CDN.',
+        title: 'Media fetch (CDN)',
+        desc: 'Media URLs resolved; content streams from CDN with caching.',
         active: ['media','cdn','client'],
         edges: [['feed','media'], ['media','cdn'], ['cdn','client']]
       },
       {
-        title: 'Create post',
-        desc: 'Writes go through API and persist to storage; fanout updates timelines.',
-        active: ['api','write','fanout'],
-        edges: [['client','api'], ['api','write'], ['write','fanout']]
+        title: 'Create post (writes + fanout)',
+        desc: 'Writes persist to storage; fanout updates feeds and notifications.',
+        active: ['api','write','fanout','notify'],
+        edges: [['client','api'], ['api','write'], ['write','fanout'], ['fanout','notify']]
       },
       {
-        title: 'Notifications',
-        desc: 'Notification pipeline sends updates for likes/comments and friend activity.',
-        active: ['notify','push','client'],
-        edges: [['fanout','notify'], ['notify','push'], ['push','client']]
+        title: 'Notifications + realtime updates',
+        desc: 'Notifications and realtime channels deliver likes/comments and friend activity updates.',
+        active: ['notify','push','realtime','client'],
+        edges: [['fanout','notify'], ['notify','push'], ['push','client'], ['fanout','realtime'], ['realtime','client']]
       },
       {
-        title: 'Analytics and ads',
-        desc: 'Engagement events feed analytics and ad targeting/measurement.',
-        active: ['metrics','ads','analytics'],
+        title: 'Analytics + ads measurement',
+        desc: 'Engagement events feed analytics; ads measurement/targeting systems consume signals.',
+        active: ['metrics','analytics','ads'],
         edges: [['client','metrics'], ['metrics','analytics'], ['analytics','ads']]
       }
     ]
@@ -2764,40 +2766,40 @@ export const FLOWS = {
     title: 'Slack',
     steps: [
       {
-        title: 'Open workspace and sync',
-        desc: 'Client authenticates and syncs channel list and recent messages.',
-        active: ['client','auth','sync'],
-        edges: [['client','auth'], ['auth','sync']]
+        title: 'Open workspace: auth + state sync',
+        desc: 'Client authenticates and syncs workspace state, channels, and recent events.',
+        active: ['client','auth','sync','presence'],
+        edges: [['client','auth'], ['auth','sync'], ['sync','presence']]
       },
       {
-        title: 'Send message',
-        desc: 'Message goes to API; permissions checked; event is persisted.',
-        active: ['api','authz','store'],
+        title: 'Send message (authz + persistence)',
+        desc: 'Message hits API; authz checks run; event persisted to message store.',
+        active: ['client','api','authz','store'],
         edges: [['client','api'], ['api','authz'], ['api','store']]
       },
       {
-        title: 'Fanout and realtime delivery',
-        desc: 'Event is fanned out to channel members over realtime gateways.',
+        title: 'Fanout + realtime delivery',
+        desc: 'Event fanned out to channel members over realtime gateways; clients ack receipt.',
         active: ['fanout','realtime','client'],
         edges: [['store','fanout'], ['fanout','realtime'], ['realtime','client']]
       },
       {
         title: 'Search indexing',
-        desc: 'Messages are indexed for fast search across workspace history.',
+        desc: 'Messages and files are indexed for fast search across workspace history.',
         active: ['index','search','store'],
         edges: [['store','index'], ['index','search']]
       },
       {
-        title: 'Files and attachments',
-        desc: 'Files upload to object storage; links and previews update messages.',
-        active: ['upload','obj','cdn'],
-        edges: [['client','upload'], ['upload','obj'], ['obj','cdn']]
+        title: 'Files/attachments + previews',
+        desc: 'Files upload to object storage; previews/thumbnails generated and served via CDN.',
+        active: ['upload','obj','cdn','preview'],
+        edges: [['client','upload'], ['upload','obj'], ['obj','cdn'], ['upload','preview']]
       },
       {
-        title: 'Integrations and bots',
-        desc: 'Apps receive events via webhooks; bots post messages and actions.',
-        active: ['apps','webhooks','api'],
-        edges: [['fanout','apps'], ['apps','webhooks'], ['webhooks','api']]
+        title: 'Apps, bots, and workflows',
+        desc: 'Apps receive events via webhooks; bots/workflows post messages and actions.',
+        active: ['apps','webhooks','api','workflow'],
+        edges: [['fanout','apps'], ['apps','webhooks'], ['webhooks','api'], ['apps','workflow']]
       }
     ]
   }
