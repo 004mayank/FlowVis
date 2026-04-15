@@ -14578,6 +14578,545 @@ Object.assign(SYSTEM_LAYOUTS, {
   }
 });
 
+// ----- Batch 58 (System + Architecture - fitness + running + connected workouts) -----
+
+Object.assign(SYSTEM_LAYOUTS, {
+  sweat: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','programs','workouts','video','streaming','plans','tracking','community','subscriptions','payments','analytics','notifications'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      programs: { x: 860, y: 180, label: 'Programs', colorKey: 'store' },
+      workouts: { x: 1100, y: 180, label: 'Workouts', colorKey: 'store' },
+      streaming: { x: 1100, y: 320, label: 'Streaming', colorKey: 'cdn' },
+      video: { x: 860, y: 320, label: 'Video', colorKey: 'cdn' },
+      plans: { x: 620, y: 320, label: 'Plans', colorKey: 'api' },
+      tracking: { x: 620, y: 460, label: 'Tracking', colorKey: 'stream' },
+      community: { x: 380, y: 320, label: 'Community', colorKey: 'api' },
+      subscriptions: { x: 380, y: 460, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 620, y: 600, label: 'Payments', colorKey: 'external' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' },
+      notifications: { x: 1100, y: 460, label: 'Notify', colorKey: 'external' }
+    }
+  },
+
+  '8fit': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','goals','plans','workouts','nutrition','recipes','tracking','coach','subscriptions','payments','analytics','notifications'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      goals: { x: 860, y: 180, label: 'Goals', colorKey: 'store' },
+      plans: { x: 1100, y: 180, label: 'Plans', colorKey: 'api' },
+      workouts: { x: 860, y: 320, label: 'Workouts', colorKey: 'store' },
+      nutrition: { x: 620, y: 320, label: 'Nutrition', colorKey: 'store' },
+      recipes: { x: 1100, y: 320, label: 'Recipes', colorKey: 'store' },
+      tracking: { x: 620, y: 460, label: 'Tracking', colorKey: 'stream' },
+      coach: { x: 380, y: 320, label: 'Coach', colorKey: 'api' },
+      subscriptions: { x: 380, y: 460, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 620, y: 600, label: 'Payments', colorKey: 'external' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' },
+      notifications: { x: 1100, y: 460, label: 'Notify', colorKey: 'external' }
+    }
+  },
+
+  seven: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','plans','workouts','timer','streaks','tracking','reminders','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      plans: { x: 860, y: 180, label: 'Plans', colorKey: 'store' },
+      workouts: { x: 1100, y: 180, label: 'Workouts', colorKey: 'store' },
+      timer: { x: 620, y: 320, label: 'Timer', colorKey: 'api' },
+      streaks: { x: 860, y: 320, label: 'Streaks', colorKey: 'store' },
+      tracking: { x: 1100, y: 320, label: 'Tracking', colorKey: 'stream' },
+      reminders: { x: 380, y: 320, label: 'Reminders', colorKey: 'external' },
+      subscriptions: { x: 380, y: 460, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 620, y: 460, label: 'Payments', colorKey: 'external' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  jefit: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','library','planner','workouts','tracking','progress','community','ads','subscriptions','payments','analytics','notifications'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      library: { x: 860, y: 180, label: 'Library', colorKey: 'store' },
+      planner: { x: 1100, y: 180, label: 'Planner', colorKey: 'api' },
+      workouts: { x: 860, y: 320, label: 'Workouts', colorKey: 'store' },
+      tracking: { x: 620, y: 320, label: 'Tracking', colorKey: 'stream' },
+      progress: { x: 1100, y: 320, label: 'Progress', colorKey: 'store' },
+      community: { x: 380, y: 320, label: 'Community', colorKey: 'api' },
+      ads: { x: 380, y: 180, label: 'Ads', colorKey: 'api' },
+      subscriptions: { x: 380, y: 460, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 620, y: 460, label: 'Payments', colorKey: 'external' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' },
+      notifications: { x: 1100, y: 460, label: 'Notify', colorKey: 'external' }
+    }
+  },
+
+  strong: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','templates','workouts','timer','tracking','pr','sync','cloud','export','subscriptions','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      templates: { x: 860, y: 180, label: 'Templates', colorKey: 'store' },
+      workouts: { x: 1100, y: 180, label: 'Workouts', colorKey: 'store' },
+      timer: { x: 620, y: 320, label: 'Timer', colorKey: 'api' },
+      tracking: { x: 860, y: 320, label: 'Tracking', colorKey: 'stream' },
+      pr: { x: 1100, y: 320, label: 'PRs', colorKey: 'store' },
+      sync: { x: 380, y: 320, label: 'Sync', colorKey: 'api' },
+      cloud: { x: 140, y: 460, label: 'Cloud', colorKey: 'external' },
+      export: { x: 380, y: 460, label: 'Export', colorKey: 'api' },
+      subscriptions: { x: 620, y: 460, label: 'Subscriptions', colorKey: 'external' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'nike-run-club': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','runs','gps','coach','plans','music','tracking','sync','wearables','community','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      runs: { x: 860, y: 180, label: 'Runs', colorKey: 'store' },
+      gps: { x: 1100, y: 180, label: 'GPS', colorKey: 'external' },
+      coach: { x: 620, y: 320, label: 'Coach', colorKey: 'api' },
+      plans: { x: 860, y: 320, label: 'Plans', colorKey: 'store' },
+      music: { x: 1100, y: 320, label: 'Music', colorKey: 'external' },
+      tracking: { x: 860, y: 460, label: 'Tracking', colorKey: 'stream' },
+      sync: { x: 620, y: 460, label: 'Sync', colorKey: 'api' },
+      wearables: { x: 380, y: 180, label: 'Wearables', colorKey: 'external' },
+      community: { x: 380, y: 320, label: 'Community', colorKey: 'api' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'adidas-running': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','activities','gps','coach','plans','challenges','tracking','sync','wearables','community','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      activities: { x: 860, y: 180, label: 'Activities', colorKey: 'store' },
+      gps: { x: 1100, y: 180, label: 'GPS', colorKey: 'external' },
+      coach: { x: 620, y: 320, label: 'Coach', colorKey: 'api' },
+      plans: { x: 860, y: 320, label: 'Plans', colorKey: 'store' },
+      challenges: { x: 1100, y: 320, label: 'Challenges', colorKey: 'store' },
+      tracking: { x: 860, y: 460, label: 'Tracking', colorKey: 'stream' },
+      sync: { x: 620, y: 460, label: 'Sync', colorKey: 'api' },
+      wearables: { x: 380, y: 180, label: 'Wearables', colorKey: 'external' },
+      community: { x: 380, y: 320, label: 'Community', colorKey: 'api' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  mapmyrun: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','routes','gps','activities','tracking','sync','wearables','community','challenges','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      routes: { x: 860, y: 180, label: 'Routes', colorKey: 'store' },
+      gps: { x: 1100, y: 180, label: 'GPS', colorKey: 'external' },
+      activities: { x: 860, y: 320, label: 'Activities', colorKey: 'store' },
+      tracking: { x: 620, y: 320, label: 'Tracking', colorKey: 'stream' },
+      sync: { x: 620, y: 460, label: 'Sync', colorKey: 'api' },
+      wearables: { x: 380, y: 180, label: 'Wearables', colorKey: 'external' },
+      community: { x: 380, y: 320, label: 'Community', colorKey: 'api' },
+      challenges: { x: 1100, y: 320, label: 'Challenges', colorKey: 'store' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  runkeeper: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','activities','gps','coach','plans','tracking','sync','wearables','community','notifications','analytics','subscriptions'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      activities: { x: 860, y: 180, label: 'Activities', colorKey: 'store' },
+      gps: { x: 1100, y: 180, label: 'GPS', colorKey: 'external' },
+      coach: { x: 620, y: 320, label: 'Coach', colorKey: 'api' },
+      plans: { x: 860, y: 320, label: 'Plans', colorKey: 'store' },
+      tracking: { x: 860, y: 460, label: 'Tracking', colorKey: 'stream' },
+      sync: { x: 620, y: 460, label: 'Sync', colorKey: 'api' },
+      wearables: { x: 380, y: 180, label: 'Wearables', colorKey: 'external' },
+      community: { x: 380, y: 320, label: 'Community', colorKey: 'api' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' },
+      subscriptions: { x: 620, y: 600, label: 'Subscriptions', colorKey: 'external' }
+    }
+  },
+
+  peloton: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','classes','streaming','live','leaderboard','devices','tracking','music','subscriptions','payments','community','analytics','notifications'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      classes: { x: 860, y: 180, label: 'Classes', colorKey: 'store' },
+      streaming: { x: 1100, y: 180, label: 'Streaming', colorKey: 'cdn' },
+      live: { x: 1100, y: 320, label: 'Live', colorKey: 'stream' },
+      leaderboard: { x: 860, y: 320, label: 'Leaderboard', colorKey: 'store' },
+      devices: { x: 380, y: 180, label: 'Devices', colorKey: 'external' },
+      tracking: { x: 620, y: 320, label: 'Tracking', colorKey: 'stream' },
+      music: { x: 620, y: 460, label: 'Music', colorKey: 'external' },
+      subscriptions: { x: 380, y: 320, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 380, y: 460, label: 'Payments', colorKey: 'external' },
+      community: { x: 620, y: 600, label: 'Community', colorKey: 'api' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' },
+      notifications: { x: 1100, y: 600, label: 'Notify', colorKey: 'external' }
+    }
+  }
+});
+
+Object.assign(ARCH_LAYOUTS, {
+  sweat: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Sweat Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','programs','workouts','video','streaming','plans','tracking','community','subscriptions','payments','analytics','notifications'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      programs: { x: 880, y: 160, label: 'Programs' },
+      workouts: { x: 1160, y: 160, label: 'Workouts' },
+      plans: { x: 600, y: 300, label: 'Plans' },
+      video: { x: 880, y: 300, label: 'Video' },
+      streaming: { x: 1160, y: 300, label: 'Streaming' },
+      tracking: { x: 600, y: 440, label: 'Tracking' },
+      community: { x: 320, y: 300, label: 'Community' },
+      subscriptions: { x: 320, y: 440, label: 'Subscriptions' },
+      payments: { x: 600, y: 580, label: 'Payments' },
+      analytics: { x: 880, y: 440, label: 'Analytics' },
+      notifications: { x: 1160, y: 440, label: 'Notify' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profile','profile'], ['profile','programs','program']);
+      if(stepIdx===2) e.push(['programs','plans','plan'], ['plans','workouts','workout']);
+      if(stepIdx===3) e.push(['workouts','video','video'], ['video','streaming','stream']);
+      if(stepIdx===4) e.push(['client','tracking','track'], ['tracking','analytics','analytics']);
+      if(stepIdx===5) e.push(['community','notifications','notify']);
+      if(stepIdx===6) e.push(['subscriptions','payments','pay']);
+      return e;
+    }
+  },
+
+  '8fit': {
+    viewBox: '0 0 1860 820',
+    backendLabel: '8fit Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','goals','plans','workouts','nutrition','recipes','tracking','coach','subscriptions','payments','analytics','notifications'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      goals: { x: 880, y: 160, label: 'Goals' },
+      plans: { x: 1160, y: 160, label: 'Plans' },
+      nutrition: { x: 600, y: 300, label: 'Nutrition' },
+      workouts: { x: 880, y: 300, label: 'Workouts' },
+      recipes: { x: 1160, y: 300, label: 'Recipes' },
+      tracking: { x: 600, y: 440, label: 'Tracking' },
+      coach: { x: 320, y: 300, label: 'Coach' },
+      subscriptions: { x: 320, y: 440, label: 'Subscriptions' },
+      payments: { x: 600, y: 580, label: 'Payments' },
+      analytics: { x: 880, y: 440, label: 'Analytics' },
+      notifications: { x: 1160, y: 440, label: 'Notify' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profile','profile'], ['profile','goals','goals']);
+      if(stepIdx===2) e.push(['goals','plans','plan'], ['plans','workouts','workout']);
+      if(stepIdx===3) e.push(['plans','nutrition','nutrition'], ['nutrition','recipes','recipe']);
+      if(stepIdx===4) e.push(['client','tracking','track'], ['tracking','coach','coach']);
+      if(stepIdx===5) e.push(['subscriptions','payments','pay']);
+      if(stepIdx===6) e.push(['workouts','analytics','analytics'], ['coach','notifications','notify']);
+      return e;
+    }
+  },
+
+  seven: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Seven Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','plans','workouts','timer','streaks','tracking','reminders','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      plans: { x: 880, y: 160, label: 'Plans' },
+      workouts: { x: 1160, y: 160, label: 'Workouts' },
+      timer: { x: 600, y: 300, label: 'Timer' },
+      streaks: { x: 880, y: 300, label: 'Streaks' },
+      tracking: { x: 1160, y: 300, label: 'Tracking' },
+      reminders: { x: 320, y: 300, label: 'Reminders' },
+      subscriptions: { x: 320, y: 440, label: 'Subscriptions' },
+      payments: { x: 600, y: 440, label: 'Payments' },
+      analytics: { x: 880, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profile','profile'], ['profile','plans','plan']);
+      if(stepIdx===2) e.push(['plans','workouts','workout'], ['workouts','timer','timer']);
+      if(stepIdx===3) e.push(['timer','tracking','track'], ['tracking','streaks','streak']);
+      if(stepIdx===4) e.push(['streaks','reminders','remind']);
+      if(stepIdx===5) e.push(['subscriptions','payments','pay']);
+      if(stepIdx===6) e.push(['tracking','analytics','analytics']);
+      return e;
+    }
+  },
+
+  jefit: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'JEFIT Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','library','planner','workouts','tracking','progress','community','ads','subscriptions','payments','analytics','notifications'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      library: { x: 880, y: 160, label: 'Library' },
+      planner: { x: 1160, y: 160, label: 'Planner' },
+      workouts: { x: 880, y: 300, label: 'Workouts' },
+      tracking: { x: 600, y: 300, label: 'Tracking' },
+      progress: { x: 1160, y: 300, label: 'Progress' },
+      community: { x: 320, y: 300, label: 'Community' },
+      ads: { x: 320, y: 160, label: 'Ads' },
+      subscriptions: { x: 320, y: 440, label: 'Subscriptions' },
+      payments: { x: 600, y: 440, label: 'Payments' },
+      analytics: { x: 880, y: 440, label: 'Analytics' },
+      notifications: { x: 1160, y: 440, label: 'Notify' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profile','profile'], ['profile','planner','plan']);
+      if(stepIdx===2) e.push(['library','planner','library'], ['planner','workouts','workout']);
+      if(stepIdx===3) e.push(['client','tracking','track'], ['tracking','progress','progress']);
+      if(stepIdx===4) e.push(['community','notifications','notify']);
+      if(stepIdx===5) e.push(['subscriptions','payments','pay'], ['ads','analytics','ads']);
+      if(stepIdx===6) e.push(['workouts','analytics','analytics']);
+      return e;
+    }
+  },
+
+  strong: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Strong Tracker',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','templates','workouts','timer','tracking','pr','sync','cloud','export','subscriptions','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      templates: { x: 880, y: 160, label: 'Templates' },
+      workouts: { x: 1160, y: 160, label: 'Workouts' },
+      timer: { x: 600, y: 300, label: 'Timer' },
+      tracking: { x: 880, y: 300, label: 'Tracking' },
+      pr: { x: 1160, y: 300, label: 'PRs' },
+      sync: { x: 320, y: 300, label: 'Sync' },
+      cloud: { x: 40, y: 460, label: 'Cloud' },
+      export: { x: 320, y: 440, label: 'Export' },
+      subscriptions: { x: 600, y: 440, label: 'Subscriptions' },
+      analytics: { x: 880, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profile','profile'], ['templates','workouts','template']);
+      if(stepIdx===2) e.push(['workouts','timer','timer'], ['timer','tracking','track']);
+      if(stepIdx===3) e.push(['tracking','pr','pr']);
+      if(stepIdx===4) e.push(['tracking','sync','sync'], ['sync','cloud','cloud']);
+      if(stepIdx===5) e.push(['workouts','export','export']);
+      if(stepIdx===6) e.push(['subscriptions','analytics','sub'], ['workouts','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'nike-run-club': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Nike Run Club',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','runs','gps','coach','plans','music','tracking','sync','wearables','community','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      runs: { x: 880, y: 160, label: 'Runs' },
+      gps: { x: 1160, y: 160, label: 'GPS' },
+      coach: { x: 600, y: 300, label: 'Coach' },
+      plans: { x: 880, y: 300, label: 'Plans' },
+      music: { x: 1160, y: 300, label: 'Music' },
+      tracking: { x: 880, y: 440, label: 'Tracking' },
+      sync: { x: 600, y: 440, label: 'Sync' },
+      wearables: { x: 320, y: 160, label: 'Wearables' },
+      community: { x: 320, y: 300, label: 'Community' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profile','profile'], ['profile','runs','run']);
+      if(stepIdx===2) e.push(['gps','tracking','gps'], ['wearables','tracking','wear'], ['runs','tracking','run']);
+      if(stepIdx===3) e.push(['tracking','coach','coach'], ['coach','plans','plan']);
+      if(stepIdx===4) e.push(['music','client','music']);
+      if(stepIdx===5) e.push(['tracking','sync','sync'], ['sync','analytics','analytics']);
+      if(stepIdx===6) e.push(['community','notifications','notify']);
+      return e;
+    }
+  },
+
+  'adidas-running': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Adidas Running',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','activities','gps','coach','plans','challenges','tracking','sync','wearables','community','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      activities: { x: 880, y: 160, label: 'Activities' },
+      gps: { x: 1160, y: 160, label: 'GPS' },
+      coach: { x: 600, y: 300, label: 'Coach' },
+      plans: { x: 880, y: 300, label: 'Plans' },
+      challenges: { x: 1160, y: 300, label: 'Challenges' },
+      tracking: { x: 880, y: 440, label: 'Tracking' },
+      sync: { x: 600, y: 440, label: 'Sync' },
+      wearables: { x: 320, y: 160, label: 'Wearables' },
+      community: { x: 320, y: 300, label: 'Community' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profile','profile'], ['profile','activities','activity']);
+      if(stepIdx===2) e.push(['gps','tracking','gps'], ['wearables','tracking','wear'], ['activities','tracking','activity']);
+      if(stepIdx===3) e.push(['tracking','coach','coach'], ['coach','plans','plan']);
+      if(stepIdx===4) e.push(['plans','challenges','challenge'], ['challenge','community','community']);
+      if(stepIdx===5) e.push(['tracking','sync','sync'], ['sync','analytics','analytics']);
+      if(stepIdx===6) e.push(['community','notifications','notify']);
+      return e;
+    }
+  },
+
+  mapmyrun: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'MapMyRun',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','routes','gps','activities','tracking','sync','wearables','community','challenges','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      routes: { x: 880, y: 160, label: 'Routes' },
+      gps: { x: 1160, y: 160, label: 'GPS' },
+      activities: { x: 880, y: 300, label: 'Activities' },
+      tracking: { x: 600, y: 300, label: 'Tracking' },
+      sync: { x: 600, y: 440, label: 'Sync' },
+      wearables: { x: 320, y: 160, label: 'Wearables' },
+      community: { x: 320, y: 300, label: 'Community' },
+      challenges: { x: 1160, y: 300, label: 'Challenges' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      analytics: { x: 880, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profile','profile'], ['profile','routes','route']);
+      if(stepIdx===2) e.push(['gps','tracking','gps'], ['activities','tracking','activity'], ['wearables','tracking','wear']);
+      if(stepIdx===3) e.push(['tracking','sync','sync'], ['sync','analytics','analytics']);
+      if(stepIdx===4) e.push(['routes','community','share'], ['community','notifications','notify']);
+      if(stepIdx===5) e.push(['challenges','community','challenge']);
+      return e;
+    }
+  },
+
+  runkeeper: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Runkeeper',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','activities','gps','coach','plans','tracking','sync','wearables','community','notifications','analytics','subscriptions'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      activities: { x: 880, y: 160, label: 'Activities' },
+      gps: { x: 1160, y: 160, label: 'GPS' },
+      coach: { x: 600, y: 300, label: 'Coach' },
+      plans: { x: 880, y: 300, label: 'Plans' },
+      tracking: { x: 880, y: 440, label: 'Tracking' },
+      sync: { x: 600, y: 440, label: 'Sync' },
+      wearables: { x: 320, y: 160, label: 'Wearables' },
+      community: { x: 320, y: 300, label: 'Community' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      subscriptions: { x: 600, y: 580, label: 'Subscriptions' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profile','profile'], ['profile','activities','activity']);
+      if(stepIdx===2) e.push(['gps','tracking','gps'], ['wearables','tracking','wear'], ['activities','tracking','activity']);
+      if(stepIdx===3) e.push(['tracking','coach','coach'], ['coach','plans','plan']);
+      if(stepIdx===4) e.push(['tracking','sync','sync'], ['sync','analytics','analytics']);
+      if(stepIdx===5) e.push(['community','notifications','notify']);
+      if(stepIdx===6) e.push(['subscriptions','client','sub']);
+      return e;
+    }
+  },
+
+  peloton: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Peloton Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','classes','streaming','live','leaderboard','devices','tracking','music','subscriptions','payments','community','analytics','notifications'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      classes: { x: 880, y: 160, label: 'Classes' },
+      streaming: { x: 1160, y: 160, label: 'Streaming' },
+      live: { x: 1160, y: 300, label: 'Live' },
+      leaderboard: { x: 880, y: 300, label: 'Leaderboard' },
+      devices: { x: 320, y: 160, label: 'Devices' },
+      tracking: { x: 600, y: 300, label: 'Tracking' },
+      music: { x: 600, y: 440, label: 'Music' },
+      subscriptions: { x: 320, y: 300, label: 'Subscriptions' },
+      payments: { x: 320, y: 440, label: 'Payments' },
+      community: { x: 600, y: 580, label: 'Community' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      notifications: { x: 1160, y: 580, label: 'Notify' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profile','profile'], ['profile','classes','class']);
+      if(stepIdx===2) e.push(['classes','streaming','stream'], ['streaming','live','live']);
+      if(stepIdx===3) e.push(['devices','tracking','device'], ['tracking','leaderboard','rank']);
+      if(stepIdx===4) e.push(['music','streaming','music']);
+      if(stepIdx===5) e.push(['subscriptions','payments','pay']);
+      if(stepIdx===6) e.push(['community','notifications','notify'], ['tracking','analytics','analytics']);
+      return e;
+    }
+  }
+});
+
 Object.assign(ARCH_LAYOUTS, {
   descript: {
     viewBox: '0 0 1860 820',

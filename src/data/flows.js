@@ -7091,6 +7091,360 @@ export const FLOWS = {
     ]
   },
 
+  sweat: {
+    title: 'Sweat',
+    steps: [
+      {
+        title: 'Sign in + select program',
+        desc: 'User signs in, sets profile, and selects a program and training plan.',
+        active: ['client','auth','profile','programs','plans'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','programs'], ['programs','plans']]
+      },
+      {
+        title: 'Stream workout video',
+        desc: 'Workout video streamed for the session.',
+        active: ['workouts','video','streaming'],
+        edges: [['plans','workouts'], ['workouts','video'], ['video','streaming']]
+      },
+      {
+        title: 'Track session + analytics',
+        desc: 'Tracking logs completion; analytics summarizes progress and engagement.',
+        active: ['tracking','analytics'],
+        edges: [['client','tracking'], ['tracking','analytics']]
+      },
+      {
+        title: 'Community + notifications',
+        desc: 'Community features and notifications drive adherence.',
+        active: ['community','notifications'],
+        edges: [['client','community'], ['community','notifications']]
+      },
+      {
+        title: 'Subscription + payments',
+        desc: 'Subscription status managed via payments provider.',
+        active: ['subscriptions','payments'],
+        edges: [['client','subscriptions'], ['subscriptions','payments']]
+      }
+    ]
+  },
+
+  '8fit': {
+    title: '8fit',
+    steps: [
+      {
+        title: 'Profile + goals',
+        desc: 'User sets profile and goals for workout and nutrition planning.',
+        active: ['client','auth','profile','goals'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','goals']]
+      },
+      {
+        title: 'Plans + workouts',
+        desc: 'Plans generated and workouts scheduled based on goals.',
+        active: ['plans','workouts','coach'],
+        edges: [['goals','plans'], ['plans','workouts'], ['plans','coach']]
+      },
+      {
+        title: 'Nutrition + recipes',
+        desc: 'Nutrition plan created; recipes recommended and tracked.',
+        active: ['nutrition','recipes'],
+        edges: [['plans','nutrition'], ['nutrition','recipes']]
+      },
+      {
+        title: 'Tracking + notifications',
+        desc: 'Tracking logs adherence; notifications prompt sessions and meals.',
+        active: ['tracking','notifications'],
+        edges: [['client','tracking'], ['coach','notifications']]
+      },
+      {
+        title: 'Subscriptions + payments + analytics',
+        desc: 'Premium subscription managed; analytics summarizes progress.',
+        active: ['subscriptions','payments','analytics'],
+        edges: [['client','subscriptions'], ['subscriptions','payments'], ['tracking','analytics']]
+      }
+    ]
+  },
+
+  seven: {
+    title: 'Seven',
+    steps: [
+      {
+        title: 'Pick plan + workout',
+        desc: 'User picks a plan and starts a workout.',
+        active: ['client','auth','plans','workouts'],
+        edges: [['client','auth'], ['auth','plans'], ['plans','workouts']]
+      },
+      {
+        title: 'Timer + tracking',
+        desc: 'Timer runs the 7-minute workout; tracking logs completion.',
+        active: ['timer','tracking'],
+        edges: [['workouts','timer'], ['timer','tracking']]
+      },
+      {
+        title: 'Streaks + reminders',
+        desc: 'Streaks updated; reminders scheduled to maintain habit.',
+        active: ['streaks','reminders'],
+        edges: [['tracking','streaks'], ['streaks','reminders']]
+      },
+      {
+        title: 'Subscriptions + payments',
+        desc: 'Subscription unlocks plans; payments managed externally.',
+        active: ['subscriptions','payments'],
+        edges: [['client','subscriptions'], ['subscriptions','payments']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics summarizes habit adherence and feature usage.',
+        active: ['analytics'],
+        edges: [['tracking','analytics']]
+      }
+    ]
+  },
+
+  jefit: {
+    title: 'JEFIT',
+    steps: [
+      {
+        title: 'Plan workout from library',
+        desc: 'User builds workout plan using exercise library and templates.',
+        active: ['client','auth','library','planner','workouts'],
+        edges: [['client','auth'], ['auth','library'], ['library','planner'], ['planner','workouts']]
+      },
+      {
+        title: 'Track sets + progress',
+        desc: 'Tracking logs sets/reps/weights; progress metrics updated.',
+        active: ['tracking','progress'],
+        edges: [['client','tracking'], ['tracking','progress']]
+      },
+      {
+        title: 'Community + notifications',
+        desc: 'Community features and notifications drive retention.',
+        active: ['community','notifications'],
+        edges: [['client','community'], ['community','notifications']]
+      },
+      {
+        title: 'Ads + subscriptions + payments',
+        desc: 'Freemium model with ads; subscriptions and payments unlock premium.',
+        active: ['ads','subscriptions','payments'],
+        edges: [['ads','analytics'], ['client','subscriptions'], ['subscriptions','payments']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics summarizes engagement and workout adherence.',
+        active: ['analytics'],
+        edges: [['workouts','analytics']]
+      }
+    ]
+  },
+
+  strong: {
+    title: 'Strong',
+    steps: [
+      {
+        title: 'Create workout template',
+        desc: 'User creates templates for recurring workouts.',
+        active: ['client','auth','templates'],
+        edges: [['client','auth'], ['auth','templates']]
+      },
+      {
+        title: 'Run timer + track sets',
+        desc: 'Timer and tracking record sets/reps and rest intervals.',
+        active: ['workouts','timer','tracking'],
+        edges: [['templates','workouts'], ['workouts','timer'], ['timer','tracking']]
+      },
+      {
+        title: 'PRs + progress',
+        desc: 'PRs updated and stored as progress milestones.',
+        active: ['pr'],
+        edges: [['tracking','pr']]
+      },
+      {
+        title: 'Sync + cloud + export',
+        desc: 'Sync saves to cloud; exports create backups/files.',
+        active: ['sync','cloud','export'],
+        edges: [['tracking','sync'], ['sync','cloud'], ['workouts','export']]
+      },
+      {
+        title: 'Subscriptions + analytics',
+        desc: 'Premium unlocks features; analytics tracks usage.',
+        active: ['subscriptions','analytics'],
+        edges: [['client','subscriptions'], ['tracking','analytics']]
+      }
+    ]
+  },
+
+  'nike-run-club': {
+    title: 'Nike Run Club',
+    steps: [
+      {
+        title: 'Start run + GPS',
+        desc: 'User starts a run; GPS and wearables capture signals.',
+        active: ['client','auth','runs','gps','wearables'],
+        edges: [['client','auth'], ['auth','runs'], ['gps','tracking'], ['wearables','tracking']]
+      },
+      {
+        title: 'Track run + sync',
+        desc: 'Tracking logs pace/distance; sync saves to backend.',
+        active: ['tracking','sync'],
+        edges: [['runs','tracking'], ['tracking','sync']]
+      },
+      {
+        title: 'Coach + plans',
+        desc: 'Coach recommends plans based on history and goals.',
+        active: ['coach','plans'],
+        edges: [['tracking','coach'], ['coach','plans']]
+      },
+      {
+        title: 'Community + notifications',
+        desc: 'Community challenges and notifications drive habit.',
+        active: ['community','notifications'],
+        edges: [['community','notifications']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics summarizes performance and engagement.',
+        active: ['analytics'],
+        edges: [['sync','analytics']]
+      }
+    ]
+  },
+
+  'adidas-running': {
+    title: 'Adidas Running',
+    steps: [
+      {
+        title: 'Start activity',
+        desc: 'User starts an activity; GPS and wearables capture data.',
+        active: ['client','auth','activities','gps','wearables'],
+        edges: [['client','auth'], ['auth','activities'], ['gps','tracking'], ['wearables','tracking']]
+      },
+      {
+        title: 'Track + sync',
+        desc: 'Tracking logs activity and sync saves session data.',
+        active: ['tracking','sync'],
+        edges: [['activities','tracking'], ['tracking','sync']]
+      },
+      {
+        title: 'Coach + plans',
+        desc: 'Coach and plans adapt training based on history.',
+        active: ['coach','plans'],
+        edges: [['tracking','coach'], ['coach','plans']]
+      },
+      {
+        title: 'Challenges + community',
+        desc: 'Challenges and community features drive retention.',
+        active: ['challenges','community'],
+        edges: [['plans','challenges'], ['challenges','community']]
+      },
+      {
+        title: 'Notifications + analytics',
+        desc: 'Notifications and analytics support adherence and insights.',
+        active: ['notifications','analytics'],
+        edges: [['community','notifications'], ['sync','analytics']]
+      }
+    ]
+  },
+
+  mapmyrun: {
+    title: 'MapMyRun',
+    steps: [
+      {
+        title: 'Plan route',
+        desc: 'User plans routes and saves them for runs.',
+        active: ['client','auth','routes'],
+        edges: [['client','auth'], ['auth','routes']]
+      },
+      {
+        title: 'Track run',
+        desc: 'GPS and wearables capture run data into tracking.',
+        active: ['gps','wearables','tracking'],
+        edges: [['gps','tracking'], ['wearables','tracking']]
+      },
+      {
+        title: 'Sync + analytics',
+        desc: 'Sync saves activity; analytics summarizes stats.',
+        active: ['sync','analytics'],
+        edges: [['tracking','sync'], ['sync','analytics']]
+      },
+      {
+        title: 'Community + challenges',
+        desc: 'Share activities in community and join challenges.',
+        active: ['community','challenges','notifications'],
+        edges: [['routes','community'], ['challenges','community'], ['community','notifications']]
+      }
+    ]
+  },
+
+  runkeeper: {
+    title: 'Runkeeper',
+    steps: [
+      {
+        title: 'Start run',
+        desc: 'GPS captures run; tracking logs pace/distance.',
+        active: ['client','auth','activities','gps','tracking'],
+        edges: [['client','auth'], ['auth','activities'], ['gps','tracking'], ['activities','tracking']]
+      },
+      {
+        title: 'Coach + plans',
+        desc: 'Plans recommended and adapted based on tracking.',
+        active: ['coach','plans'],
+        edges: [['tracking','coach'], ['coach','plans']]
+      },
+      {
+        title: 'Sync + wearables',
+        desc: 'Sync keeps devices consistent; wearables enrich signals.',
+        active: ['sync','wearables'],
+        edges: [['tracking','sync'], ['wearables','tracking']]
+      },
+      {
+        title: 'Community + notifications + analytics',
+        desc: 'Community and notifications drive habit; analytics summarizes progress.',
+        active: ['community','notifications','analytics'],
+        edges: [['community','notifications'], ['sync','analytics']]
+      },
+      {
+        title: 'Subscriptions',
+        desc: 'Premium subscription unlocks coaching and advanced metrics.',
+        active: ['subscriptions'],
+        edges: [['client','subscriptions']]
+      }
+    ]
+  },
+
+  peloton: {
+    title: 'Peloton',
+    steps: [
+      {
+        title: 'Sign in + subscription',
+        desc: 'User signs in; subscription and payments authorize content access.',
+        active: ['client','auth','subscriptions','payments'],
+        edges: [['client','auth'], ['auth','subscriptions'], ['subscriptions','payments']]
+      },
+      {
+        title: 'Select class + stream',
+        desc: 'User selects class; streaming serves content (live or on-demand).',
+        active: ['classes','streaming','live'],
+        edges: [['profile','classes'], ['classes','streaming'], ['streaming','live']]
+      },
+      {
+        title: 'Device tracking + leaderboard',
+        desc: 'Connected devices stream metrics; leaderboard updates in real time.',
+        active: ['devices','tracking','leaderboard'],
+        edges: [['devices','tracking'], ['tracking','leaderboard']]
+      },
+      {
+        title: 'Music integration',
+        desc: 'Music metadata integrated into class experience.',
+        active: ['music'],
+        edges: [['music','streaming']]
+      },
+      {
+        title: 'Community + notifications + analytics',
+        desc: 'Community features and notifications drive engagement; analytics summarize usage.',
+        active: ['community','notifications','analytics'],
+        edges: [['tracking','analytics'], ['community','notifications']]
+      }
+    ]
+  },
+
   chime: {
     title: 'Chime',
     steps: [
