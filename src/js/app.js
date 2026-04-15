@@ -1722,43 +1722,6 @@ const SYSTEM_LAYOUTS = {
     }
   },
 
-  'booking-com': {
-    viewBox: '0 0 1860 820',
-    backendLabel: 'Booking.com Backend',
-    backend: { x: 300, y: 80, w: 1360, h: 660 },
-    primaryPath: ['client','search','rank','inventory','reservation','payments','ledger','notify'],
-    nodes: {
-      client: { x: 40, y: 240, label: 'Guest App' },
-      search: { x: 320, y: 160, label: 'Search' },
-      rank: { x: 600, y: 160, label: 'Ranking' },
-      inventory: { x: 880, y: 160, label: 'Inventory' },
-      pricing: { x: 1160, y: 160, label: 'Rates' },
-      policies: { x: 1440, y: 160, label: 'Policies' },
-      reservation: { x: 600, y: 300, label: 'Reservation' },
-      confirm: { x: 880, y: 300, label: 'Confirm' },
-      payments: { x: 320, y: 300, label: 'Payments' },
-      fraud: { x: 320, y: 420, label: 'Fraud' },
-      ledger: { x: 40, y: 300, label: 'Ledger' },
-      partner: { x: 1160, y: 300, label: 'Property Partner' },
-      notify: { x: 1440, y: 300, label: 'Notify' },
-      changes: { x: 880, y: 420, label: 'Changes' },
-      refunds: { x: 600, y: 420, label: 'Refunds' },
-      reviews: { x: 1160, y: 420, label: 'Reviews' },
-      loyalty: { x: 1440, y: 420, label: 'Loyalty' }
-    },
-    stepEdges: (stepIdx) => {
-      const e = [];
-      if (stepIdx === 1) e.push(['client','search','query'], ['search','rank','rank']);
-      if (stepIdx === 2) e.push(['rank','inventory','inv'], ['inventory','pricing','rates'], ['inventory','policies','policy']);
-      if (stepIdx === 3) e.push(['client','reservation','reserve'], ['reservation','inventory','hold'], ['reservation','confirm','confirm']);
-      if (stepIdx === 4) e.push(['reservation','payments','pay'], ['payments','fraud','fraud'], ['payments','ledger','ledger']);
-      if (stepIdx === 5) e.push(['confirm','notify','notify'], ['notify','partner','partner'], ['notify','client','client']);
-      if (stepIdx === 6) e.push(['reservation','changes','change'], ['changes','policies','policy'], ['changes','refunds','refund']);
-      if (stepIdx === 7) e.push(['reservation','reviews','reviews'], ['reviews','rank','rank'], ['reservation','loyalty','loyalty']);
-      return e;
-    }
-  },
-
   makemytrip: {
     viewBox: '0 0 1860 820',
     backendLabel: 'MakeMyTrip Backend',
@@ -2095,102 +2058,6 @@ const SYSTEM_LAYOUTS = {
     }
   },
 
-  'disney-plus': {
-    viewBox: '0 0 1860 820',
-    backendLabel: 'Disney+ Backend',
-    backend: { x: 300, y: 80, w: 1360, h: 660 },
-    primaryPath: ['client','catalog','recos','policy','drm','cdn','player','metrics','analytics','profiles','history'],
-    nodes: {
-      client: { x: 40, y: 240, label: 'Client' },
-      catalog: { x: 320, y: 160, label: 'Catalog' },
-      recos: { x: 600, y: 160, label: 'Recos' },
-      policy: { x: 880, y: 160, label: 'Policy' },
-      drm: { x: 1160, y: 160, label: 'DRM' },
-      auth: { x: 1440, y: 160, label: 'Auth' },
-      player: { x: 320, y: 300, label: 'Player' },
-      cdn: { x: 600, y: 300, label: 'CDN' },
-      metrics: { x: 880, y: 300, label: 'Telemetry' },
-      analytics: { x: 1160, y: 300, label: 'Analytics' },
-      profiles: { x: 320, y: 440, label: 'Profiles' },
-      history: { x: 600, y: 440, label: 'History' }
-    },
-    stepEdges: (stepIdx) => {
-      const e = [];
-      if (stepIdx === 1) e.push(['client','catalog','browse'], ['catalog','recos','recos']);
-      if (stepIdx === 2) e.push(['catalog','policy','policy'], ['policy','drm','drm']);
-      if (stepIdx === 3) e.push(['client','drm','license'], ['drm','auth','auth']);
-      if (stepIdx === 4) e.push(['cdn','client','stream'], ['client','player','play']);
-      if (stepIdx === 5) e.push(['player','metrics','metrics'], ['metrics','analytics','analytics'], ['analytics','recos','recos']);
-      if (stepIdx === 6) e.push(['client','profiles','profiles'], ['profiles','history','history'], ['history','recos','recos']);
-      return e;
-    }
-  },
-
-  'prime-video': {
-    viewBox: '0 0 1860 820',
-    backendLabel: 'Prime Video Backend',
-    backend: { x: 300, y: 80, w: 1360, h: 660 },
-    primaryPath: ['client','home','recos','catalog','policy','drm','cdn','player','ads','metrics','analytics','history'],
-    nodes: {
-      client: { x: 40, y: 240, label: 'Client' },
-      home: { x: 320, y: 160, label: 'Home API' },
-      recos: { x: 600, y: 160, label: 'Recos' },
-      catalog: { x: 880, y: 160, label: 'Catalog' },
-      policy: { x: 1160, y: 160, label: 'Policy' },
-      drm: { x: 1440, y: 160, label: 'DRM' },
-      auth: { x: 1440, y: 300, label: 'Auth' },
-      player: { x: 320, y: 300, label: 'Player' },
-      cdn: { x: 600, y: 300, label: 'CDN' },
-      ads: { x: 880, y: 300, label: 'Ads' },
-      metrics: { x: 1160, y: 300, label: 'Telemetry' },
-      analytics: { x: 1440, y: 440, label: 'Analytics' },
-      history: { x: 320, y: 440, label: 'History' }
-    },
-    stepEdges: (stepIdx) => {
-      const e = [];
-      if (stepIdx === 1) e.push(['client','home','home'], ['home','recos','recos']);
-      if (stepIdx === 2) e.push(['home','catalog','meta'], ['catalog','policy','policy'], ['policy','drm','drm']);
-      if (stepIdx === 3) e.push(['client','drm','license'], ['drm','auth','auth']);
-      if (stepIdx === 4) e.push(['cdn','client','stream'], ['client','player','play']);
-      if (stepIdx === 5) e.push(['player','ads','ads'], ['player','metrics','metrics'], ['metrics','analytics','analytics']);
-      if (stepIdx === 6) e.push(['analytics','history','history'], ['history','recos','recos'], ['recos','home','home']);
-      return e;
-    }
-  },
-
-  'apple-music': {
-    viewBox: '0 0 1860 820',
-    backendLabel: 'Apple Music Backend',
-    backend: { x: 300, y: 80, w: 1360, h: 660 },
-    primaryPath: ['client','library','recos','search','index','policy','drm','playback','cdn','metadata','lyrics','metrics','analytics'],
-    nodes: {
-      client: { x: 40, y: 240, label: 'Client' },
-      library: { x: 320, y: 160, label: 'Library' },
-      recos: { x: 600, y: 160, label: 'Recos' },
-      search: { x: 320, y: 300, label: 'Search' },
-      index: { x: 600, y: 300, label: 'Index' },
-      policy: { x: 880, y: 160, label: 'Policy' },
-      auth: { x: 1160, y: 160, label: 'Auth' },
-      drm: { x: 880, y: 300, label: 'DRM' },
-      playback: { x: 320, y: 440, label: 'Playback' },
-      cdn: { x: 600, y: 440, label: 'CDN' },
-      metadata: { x: 880, y: 440, label: 'Metadata' },
-      lyrics: { x: 1160, y: 440, label: 'Lyrics' },
-      metrics: { x: 880, y: 580, label: 'Telemetry' },
-      analytics: { x: 1160, y: 580, label: 'Analytics' }
-    },
-    stepEdges: (stepIdx) => {
-      const e = [];
-      if (stepIdx === 1) e.push(['client','library','sync'], ['library','recos','recos']);
-      if (stepIdx === 2) e.push(['client','search','search'], ['search','index','index']);
-      if (stepIdx === 3) e.push(['client','policy','policy'], ['policy','auth','auth'], ['policy','drm','drm']);
-      if (stepIdx === 4) e.push(['client','playback','play'], ['playback','cdn','cdn']);
-      if (stepIdx === 5) e.push(['playback','metadata','meta'], ['metadata','lyrics','lyrics'], ['lyrics','client','client']);
-      if (stepIdx === 6) e.push(['playback','metrics','metrics'], ['metrics','analytics','analytics'], ['analytics','recos','recos']);
-      return e;
-    }
-  },
-
   twitch: {
     viewBox: '0 0 1860 820',
     backendLabel: 'Twitch Backend',
@@ -2462,7 +2329,6 @@ const SYSTEM_LAYOUTS = {
       return e;
     }
   },
-
   trello: {
     viewBox: '0 0 1860 820',
     backendLabel: 'Trello Backend',
@@ -2627,39 +2493,6 @@ const SYSTEM_LAYOUTS = {
       if (stepIdx === 4) e.push(['store','automation','auto'], ['automation','queue','queue']);
       if (stepIdx === 5) e.push(['automation','webhooks','webhook'], ['webhooks','apps','apps'], ['apps','api','api']);
       if (stepIdx === 6) e.push(['store','index','index'], ['index','search','search'], ['search','analytics','analytics']);
-      return e;
-    }
-  },
-
-  'monday-com': {
-    viewBox: '0 0 1860 820',
-    backendLabel: 'Monday.com Backend',
-    backend: { x: 300, y: 80, w: 1360, h: 660 },
-    primaryPath: ['client','boards','cache','api','store','activity','automation','queue','notify','realtime','apps','webhooks','reports','analytics'],
-    nodes: {
-      client: { x: 40, y: 240, label: 'Client' },
-      boards: { x: 320, y: 160, label: 'Boards' },
-      cache: { x: 600, y: 160, label: 'Cache' },
-      api: { x: 320, y: 300, label: 'API' },
-      store: { x: 600, y: 300, label: 'Store' },
-      activity: { x: 880, y: 300, label: 'Activity' },
-      automation: { x: 320, y: 440, label: 'Automation' },
-      queue: { x: 40, y: 440, label: 'Queue' },
-      notify: { x: 600, y: 440, label: 'Notify' },
-      realtime: { x: 880, y: 440, label: 'Realtime' },
-      apps: { x: 1160, y: 440, label: 'Apps' },
-      webhooks: { x: 1160, y: 580, label: 'Webhooks' },
-      reports: { x: 600, y: 580, label: 'Reports' },
-      analytics: { x: 880, y: 580, label: 'Analytics' }
-    },
-    stepEdges: (stepIdx) => {
-      const e = [];
-      if (stepIdx === 1) e.push(['client','boards','boards'], ['boards','cache','cache']);
-      if (stepIdx === 2) e.push(['client','api','write'], ['api','store','store'], ['store','activity','activity']);
-      if (stepIdx === 3) e.push(['store','automation','auto'], ['automation','queue','queue'], ['automation','notify','notify']);
-      if (stepIdx === 4) e.push(['store','realtime','rt'], ['realtime','client','client']);
-      if (stepIdx === 5) e.push(['automation','apps','apps'], ['apps','webhooks','webhooks'], ['webhooks','api','api']);
-      if (stepIdx === 6) e.push(['store','reports','reports'], ['reports','analytics','analytics']);
       return e;
     }
   },
@@ -2930,7 +2763,6 @@ const SYSTEM_LAYOUTS = {
       return e;
     }
   },
-
   notion: {
     viewBox: '0 0 1860 820',
     backendLabel: 'Notion Backend',
@@ -3309,7 +3141,6 @@ const SYSTEM_LAYOUTS = {
       analytics: { x: 880, y: 520, label: 'Analytics', colorKey: 'store' }
     }
   },
-
   stripe: {
     viewBox: '0 0 1000 640',
     nodes: {
@@ -3372,7 +3203,6 @@ const SYSTEM_LAYOUTS = {
       cdn: { x: 880, y: 520, label: 'CDN', colorKey: 'cdn' }
     }
   },
-
   github: {
     viewBox: '0 0 1000 640',
     nodes: {
@@ -3522,42 +3352,6 @@ const SYSTEM_LAYOUTS = {
       if (stepIdx === 4) e.push(['sync','merge','merge'], ['merge','store','store']);
       if (stepIdx === 5) e.push(['client','export','export'], ['export','cdn','cdn'], ['export','sharing','share']);
       if (stepIdx === 6) e.push(['client','auth','auth'], ['auth','entitlements','ent'], ['entitlements','payments','pay']);
-      return e;
-    }
-  },
-
-  'google-maps': {
-    viewBox: '0 0 1860 820',
-    backendLabel: 'Google Maps Backend',
-    backend: { x: 300, y: 80, w: 1360, h: 660 },
-    primaryPath: ['client','search','index','tiles','cdn','cache','routing','graph','traffic','location','eta','ugc','store','moderation','ads','auction','analytics'],
-    nodes: {
-      client: { x: 40, y: 240, label: 'Client' },
-      search: { x: 320, y: 160, label: 'Search' },
-      index: { x: 600, y: 160, label: 'Index' },
-      tiles: { x: 320, y: 300, label: 'Tiles' },
-      cdn: { x: 600, y: 300, label: 'CDN' },
-      cache: { x: 880, y: 300, label: 'Cache' },
-      routing: { x: 320, y: 440, label: 'Routing' },
-      graph: { x: 600, y: 440, label: 'Road Graph' },
-      traffic: { x: 880, y: 440, label: 'Traffic' },
-      location: { x: 320, y: 580, label: 'Location' },
-      eta: { x: 600, y: 580, label: 'ETA' },
-      ugc: { x: 320, y: 720, label: 'UGC' },
-      store: { x: 600, y: 720, label: 'Store' },
-      moderation: { x: 880, y: 720, label: 'Moderation' },
-      ads: { x: 1160, y: 160, label: 'Ads' },
-      auction: { x: 1160, y: 300, label: 'Auction' },
-      analytics: { x: 1160, y: 440, label: 'Analytics' }
-    },
-    stepEdges: (stepIdx) => {
-      const e = [];
-      if (stepIdx === 1) e.push(['client','search','search'], ['search','index','index']);
-      if (stepIdx === 2) e.push(['client','tiles','tiles'], ['tiles','cdn','cdn'], ['tiles','cache','cache']);
-      if (stepIdx === 3) e.push(['client','routing','route'], ['routing','graph','graph'], ['traffic','routing','traffic']);
-      if (stepIdx === 4) e.push(['client','location','loc'], ['location','eta','eta'], ['eta','routing','reroute']);
-      if (stepIdx === 5) e.push(['client','ugc','ugc'], ['ugc','store','store'], ['ugc','moderation','mod']);
-      if (stepIdx === 6) e.push(['search','ads','ads'], ['ads','auction','auc'], ['auction','analytics','analytics']);
       return e;
     }
   },
@@ -4755,53 +4549,6 @@ const SYSTEM_LAYOUTS = {
       notify: { x: 860, y: 740, label: 'Notify', colorKey: 'external' },
       returns: { x: 380, y: 740, label: 'Returns', colorKey: 'api' },
       refunds: { x: 620, y: 740, label: 'Refunds', colorKey: 'api' }
-    }
-  },
-
-  'booking-com': {
-    viewBox: '0 0 1200 960',
-    primaryPath: ['client','search','inventory','details','availability','cache','booking','pricing','hold','payments','risk','ledger','confirm','partner','notify','changes','refunds'],
-    nodes: {
-      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
-      search: { x: 380, y: 180, label: 'Search', colorKey: 'api' },
-      inventory: { x: 620, y: 180, label: 'Inventory', colorKey: 'store' },
-      details: { x: 380, y: 320, label: 'Details', colorKey: 'api' },
-      availability: { x: 620, y: 320, label: 'Availability', colorKey: 'api' },
-      cache: { x: 860, y: 320, label: 'Cache', colorKey: 'cache' },
-      booking: { x: 380, y: 460, label: 'Booking', colorKey: 'api' },
-      pricing: { x: 620, y: 460, label: 'Pricing', colorKey: 'api' },
-      hold: { x: 860, y: 460, label: 'Hold', colorKey: 'store' },
-      payments: { x: 1100, y: 460, label: 'Payments', colorKey: 'external' },
-      risk: { x: 1100, y: 320, label: 'Risk', colorKey: 'api' },
-      ledger: { x: 860, y: 600, label: 'Ledger', colorKey: 'store' },
-      confirm: { x: 620, y: 600, label: 'Confirm', colorKey: 'api' },
-      partner: { x: 380, y: 600, label: 'Partner', colorKey: 'external' },
-      notify: { x: 1100, y: 600, label: 'Notify', colorKey: 'external' },
-      changes: { x: 620, y: 740, label: 'Changes', colorKey: 'api' },
-      refunds: { x: 860, y: 740, label: 'Refunds', colorKey: 'api' }
-    }
-  },
-
-  'disney-plus': {
-    viewBox: '0 0 1200 960',
-    primaryPath: ['client','auth','entitlements','home','recos','cache','catalog','drm','player','playback','cdn','ads','auction','analytics','metrics','warehouse'],
-    nodes: {
-      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
-      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
-      entitlements: { x: 620, y: 180, label: 'Entitlements', colorKey: 'store' },
-      home: { x: 380, y: 320, label: 'Home', colorKey: 'api' },
-      recos: { x: 620, y: 320, label: 'Recos', colorKey: 'api' },
-      cache: { x: 860, y: 320, label: 'Cache', colorKey: 'cache' },
-      catalog: { x: 380, y: 460, label: 'Catalog', colorKey: 'store' },
-      drm: { x: 620, y: 460, label: 'DRM', colorKey: 'api' },
-      player: { x: 860, y: 460, label: 'Player', colorKey: 'client' },
-      playback: { x: 380, y: 600, label: 'Playback', colorKey: 'api' },
-      cdn: { x: 620, y: 600, label: 'CDN', colorKey: 'cdn' },
-      ads: { x: 860, y: 600, label: 'Ads', colorKey: 'api' },
-      auction: { x: 1100, y: 600, label: 'Auction', colorKey: 'api' },
-      analytics: { x: 860, y: 740, label: 'Analytics', colorKey: 'store' },
-      metrics: { x: 620, y: 740, label: 'Metrics', colorKey: 'stream' },
-      warehouse: { x: 1100, y: 740, label: 'Warehouse', colorKey: 'store' }
     }
   },
 
@@ -7852,30 +7599,6 @@ const SYSTEM_LAYOUTS = {
     }
   },
 
-  'google-maps': {
-    viewBox: '0 0 1200 960',
-    primaryPath: ['client','search','index','tiles','cdn','cache','routing','graph','traffic','location','eta','ugc','store','moderation','ads','auction','analytics'],
-    nodes: {
-      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
-      search: { x: 380, y: 180, label: 'Search', colorKey: 'api' },
-      index: { x: 620, y: 180, label: 'Index', colorKey: 'store' },
-      tiles: { x: 380, y: 320, label: 'Tiles', colorKey: 'api' },
-      cdn: { x: 620, y: 320, label: 'CDN', colorKey: 'cdn' },
-      cache: { x: 860, y: 320, label: 'Cache', colorKey: 'cache' },
-      routing: { x: 380, y: 460, label: 'Routing', colorKey: 'api' },
-      graph: { x: 620, y: 460, label: 'Road Graph', colorKey: 'store' },
-      traffic: { x: 860, y: 460, label: 'Traffic', colorKey: 'stream' },
-      location: { x: 380, y: 600, label: 'Location', colorKey: 'stream' },
-      eta: { x: 620, y: 600, label: 'ETA', colorKey: 'api' },
-      ugc: { x: 380, y: 740, label: 'UGC', colorKey: 'api' },
-      store: { x: 620, y: 740, label: 'Store', colorKey: 'store' },
-      moderation: { x: 860, y: 740, label: 'Moderation', colorKey: 'api' },
-      ads: { x: 1100, y: 180, label: 'Ads', colorKey: 'api' },
-      auction: { x: 1100, y: 320, label: 'Auction', colorKey: 'api' },
-      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
-    }
-  },
-
   waze: {
     viewBox: '0 0 1200 960',
     primaryPath: ['client','tiles','cache','location','traffic','eta','routing','graph','reports','moderation','store','signals','rank','notify','push'],
@@ -8585,7 +8308,6 @@ const SYSTEM_LAYOUTS = {
       disputes: { x: 880, y: 620, label: 'Disputes', colorKey: 'api' }
     }
   },
-
   venmo: {
     viewBox: '0 0 1000 640',
     nodes: {
@@ -9254,29 +8976,6 @@ const SYSTEM_LAYOUTS = {
     }
   },
 
-  'microsoft-teams': {
-    viewBox: '0 0 1200 960',
-    primaryPath: ['client','auth','sync','api','store','realtime','meet','signaling','media','sfu','files','storage','authz','notify','compliance','audit'],
-    nodes: {
-      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
-      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
-      sync: { x: 620, y: 180, label: 'Sync', colorKey: 'stream' },
-      api: { x: 380, y: 320, label: 'API', colorKey: 'api' },
-      store: { x: 620, y: 320, label: 'Message Store', colorKey: 'store' },
-      realtime: { x: 860, y: 320, label: 'Realtime', colorKey: 'stream' },
-      meet: { x: 380, y: 460, label: 'Meetings', colorKey: 'api' },
-      signaling: { x: 620, y: 460, label: 'Signaling', colorKey: 'api' },
-      media: { x: 860, y: 460, label: 'Media', colorKey: 'api' },
-      sfu: { x: 1100, y: 460, label: 'SFU/Relay', colorKey: 'api' },
-      files: { x: 380, y: 600, label: 'Files', colorKey: 'api' },
-      storage: { x: 620, y: 600, label: 'Storage', colorKey: 'store' },
-      authz: { x: 860, y: 600, label: 'AuthZ', colorKey: 'api' },
-      notify: { x: 1100, y: 320, label: 'Notify', colorKey: 'external' },
-      compliance: { x: 1100, y: 600, label: 'Compliance', colorKey: 'api' },
-      audit: { x: 1100, y: 740, label: 'Audit', colorKey: 'store' }
-    }
-  },
-
   trello: {
     viewBox: '0 0 1200 960',
     primaryPath: ['client','boards','cache','api','store','activity','realtime','comments','notify','upload','obj','automation','apps'],
@@ -9553,30 +9252,6 @@ const SYSTEM_LAYOUTS = {
       cdn: { x: 1100, y: 520, label: 'CDN', colorKey: 'cdn' },
       moderation: { x: 860, y: 660, label: 'Moderation', colorKey: 'api' },
       risk: { x: 1100, y: 660, label: 'Risk', colorKey: 'api' }
-    }
-  },
-
-  'twitter-x': {
-    viewBox: '0 0 1200 960',
-    primaryPath: ['client','timeline','cache','rank','graph','api','write','fanout','upload','obj','cdn','index','search','trends','moderation','notify','push'],
-    nodes: {
-      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
-      timeline: { x: 380, y: 180, label: 'Timeline', colorKey: 'api' },
-      cache: { x: 620, y: 180, label: 'Cache', colorKey: 'cache' },
-      rank: { x: 860, y: 180, label: 'Ranking', colorKey: 'api' },
-      graph: { x: 1100, y: 180, label: 'Graph', colorKey: 'store' },
-      api: { x: 380, y: 320, label: 'API', colorKey: 'api' },
-      write: { x: 620, y: 320, label: 'Writes', colorKey: 'store' },
-      fanout: { x: 860, y: 320, label: 'Fanout', colorKey: 'queue' },
-      upload: { x: 380, y: 460, label: 'Upload', colorKey: 'api' },
-      obj: { x: 620, y: 460, label: 'Object Store', colorKey: 'store' },
-      cdn: { x: 860, y: 460, label: 'CDN', colorKey: 'cdn' },
-      index: { x: 1100, y: 320, label: 'Index', colorKey: 'store' },
-      search: { x: 1100, y: 460, label: 'Search', colorKey: 'api' },
-      trends: { x: 1100, y: 600, label: 'Trends', colorKey: 'api' },
-      moderation: { x: 860, y: 600, label: 'Moderation', colorKey: 'api' },
-      notify: { x: 620, y: 600, label: 'Notify', colorKey: 'external' },
-      push: { x: 380, y: 600, label: 'Push', colorKey: 'external' }
     }
   },
 
@@ -11014,42 +10689,6 @@ const ARCH_LAYOUTS = {
       if (stepIdx === 4) e.push(['payments','orders','order'], ['orders','inventory','reserve'], ['orders','fulfillment','fulfill']);
       if (stepIdx === 5) e.push(['fulfillment','carrier','ship'], ['carrier','tracking','track'], ['tracking','notify','notify']);
       if (stepIdx === 6) e.push(['client','returns','return'], ['returns','refunds','refund'], ['refunds','notify','notify']);
-      return e;
-    }
-  },
-
-  'booking-com': {
-    viewBox: '0 0 1860 820',
-    backendLabel: 'Booking.com Backend',
-    backend: { x: 300, y: 80, w: 1360, h: 660 },
-    primaryPath: ['client','search','inventory','details','availability','cache','booking','pricing','hold','payments','risk','ledger','confirm','partner','notify','changes','refunds'],
-    nodes: {
-      client: { x: 40, y: 240, label: 'Client' },
-      search: { x: 320, y: 160, label: 'Search' },
-      inventory: { x: 600, y: 160, label: 'Inventory' },
-      details: { x: 320, y: 300, label: 'Details' },
-      availability: { x: 600, y: 300, label: 'Availability' },
-      cache: { x: 880, y: 300, label: 'Cache' },
-      booking: { x: 320, y: 440, label: 'Booking' },
-      pricing: { x: 600, y: 440, label: 'Pricing' },
-      hold: { x: 880, y: 440, label: 'Hold' },
-      payments: { x: 1160, y: 440, label: 'Payments' },
-      risk: { x: 1160, y: 300, label: 'Risk' },
-      ledger: { x: 880, y: 580, label: 'Ledger' },
-      confirm: { x: 600, y: 580, label: 'Confirm' },
-      partner: { x: 320, y: 580, label: 'Partner' },
-      notify: { x: 1160, y: 580, label: 'Notify' },
-      changes: { x: 600, y: 720, label: 'Changes' },
-      refunds: { x: 880, y: 720, label: 'Refunds' }
-    },
-    stepEdges: (stepIdx) => {
-      const e = [];
-      if (stepIdx === 1) e.push(['client','search','search'], ['search','inventory','inventory']);
-      if (stepIdx === 2) e.push(['search','details','details'], ['details','availability','avail'], ['details','cache','cache']);
-      if (stepIdx === 3) e.push(['client','booking','reserve'], ['booking','pricing','price'], ['pricing','hold','hold']);
-      if (stepIdx === 4) e.push(['booking','payments','pay'], ['payments','risk','risk'], ['payments','ledger','ledger']);
-      if (stepIdx === 5) e.push(['ledger','confirm','confirm'], ['confirm','partner','partner'], ['confirm','notify','notify']);
-      if (stepIdx === 6) e.push(['client','changes','changes'], ['changes','inventory','inventory'], ['changes','refunds','refund']);
       return e;
     }
   },
@@ -16221,74 +15860,6 @@ const ARCH_LAYOUTS = {
       if (stepIdx === 5) e.push(['client','upload','upload'], ['upload','obj','store'], ['upload','write','meta']);
       if (stepIdx === 6) e.push(['write','fanout','fanout'], ['fanout','notify','notify']);
       if (stepIdx === 7) e.push(['feed','realtime','publish'], ['realtime','client','deliver']);
-      return e;
-    }
-  },
-
-  'google-drive': {
-    viewBox: '0 0 1860 820',
-    backendLabel: 'Google Drive Backend',
-    backend: { x: 300, y: 80, w: 1360, h: 660 },
-    primaryPath: ['client','metadata','sync','upload','storage','sharing','authz','realtime','merge','index','search'],
-    nodes: {
-      client: { x: 40, y: 240, label: 'Client' },
-      metadata: { x: 320, y: 160, label: 'Metadata' },
-      sync: { x: 600, y: 160, label: 'Sync Engine' },
-      upload: { x: 320, y: 300, label: 'Upload' },
-      storage: { x: 600, y: 300, label: 'Storage' },
-      sharing: { x: 880, y: 160, label: 'Sharing' },
-      authz: { x: 880, y: 300, label: 'ACL/AuthZ' },
-      realtime: { x: 1160, y: 300, label: 'Realtime Collab' },
-      merge: { x: 1440, y: 300, label: 'Merge/OT' },
-      index: { x: 600, y: 460, label: 'Indexing' },
-      search: { x: 880, y: 460, label: 'Search' },
-      versions: { x: 1160, y: 160, label: 'Versions' },
-      audit: { x: 1440, y: 160, label: 'Audit Log' },
-      cdn: { x: 1160, y: 460, label: 'CDN' }
-    },
-    stepEdges: (stepIdx) => {
-      const e = [];
-      if (stepIdx === 1) e.push(['client','metadata','list'], ['metadata','sync','sync']);
-      if (stepIdx === 2) e.push(['client','upload','upload'], ['upload','storage','store']);
-      if (stepIdx === 3) e.push(['client','sharing','share'], ['sharing','authz','acl']);
-      if (stepIdx === 4) e.push(['realtime','merge','merge'], ['merge','storage','persist']);
-      if (stepIdx === 5) e.push(['metadata','index','index'], ['index','search','search']);
-      if (stepIdx === 6) e.push(['storage','versions','versions'], ['storage','audit','audit']);
-      if (stepIdx === 7) e.push(['client','authz','authz'], ['cdn','client','download']);
-      return e;
-    }
-  },
-
-  'cash-app': {
-    viewBox: '0 0 1860 820',
-    backendLabel: 'Cash App Backend',
-    backend: { x: 300, y: 80, w: 1360, h: 660 },
-    primaryPath: ['client','auth','funding','p2p','risk','ledger','balances','cashout','routing','bank'],
-    nodes: {
-      client: { x: 40, y: 240, label: 'Client' },
-      auth: { x: 320, y: 160, label: 'Auth' },
-      funding: { x: 320, y: 300, label: 'Funding Links' },
-      p2p: { x: 600, y: 240, label: 'P2P Core' },
-      lookup: { x: 600, y: 160, label: 'Recipient Lookup' },
-      risk: { x: 880, y: 160, label: 'Risk Engine' },
-      fraud: { x: 1160, y: 160, label: 'Fraud' },
-      ledger: { x: 880, y: 300, label: 'Ledger' },
-      balances: { x: 1160, y: 300, label: 'Balances' },
-      cashout: { x: 880, y: 440, label: 'Cash Out' },
-      routing: { x: 1160, y: 440, label: 'Routing' },
-      bank: { x: 1440, y: 440, label: 'Bank Rails' },
-      notify: { x: 600, y: 440, label: 'Notifications' },
-      support: { x: 880, y: 580, label: 'Support' },
-      disputes: { x: 1160, y: 580, label: 'Disputes' }
-    },
-    stepEdges: (stepIdx) => {
-      const e = [];
-      if (stepIdx === 1) e.push(['client','auth','verify'], ['client','funding','link']);
-      if (stepIdx === 2) e.push(['client','p2p','send'], ['p2p','lookup','lookup'], ['p2p','risk','limits']);
-      if (stepIdx === 3) e.push(['p2p','risk','risk'], ['risk','fraud','fraud']);
-      if (stepIdx === 4) e.push(['p2p','ledger','post'], ['ledger','balances','update']);
-      if (stepIdx === 5) e.push(['balances','cashout','cashout'], ['cashout','routing','route'], ['routing','bank','ach']);
-      if (stepIdx === 6) e.push(['ledger','notify','notify'], ['ledger','support','case'], ['support','disputes','dispute']);
       return e;
     }
   },
