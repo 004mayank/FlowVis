@@ -7445,6 +7445,372 @@ export const FLOWS = {
     ]
   },
 
+  zwift: {
+    title: 'Zwift',
+    steps: [
+      {
+        title: 'Sign in + join world',
+        desc: 'User signs in; matchmaking places them into a world/instance.',
+        active: ['client','auth','profile','matchmaking','world'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','matchmaking'], ['matchmaking','world']]
+      },
+      {
+        title: 'Connect devices + telemetry',
+        desc: 'Trainer/power meter streams telemetry into realtime session.',
+        active: ['devices','telemetry','realtime'],
+        edges: [['devices','telemetry'], ['telemetry','realtime']]
+      },
+      {
+        title: 'Physics + ride state',
+        desc: 'Physics engine updates ride state and positions in the world.',
+        active: ['physics','rides'],
+        edges: [['telemetry','physics'], ['physics','rides'], ['rides','world']]
+      },
+      {
+        title: 'Leaderboards + events',
+        desc: 'Leaderboards and event participation computed from ride telemetry.',
+        active: ['leaderboards','events'],
+        edges: [['rides','leaderboards'], ['leaderboards','events']]
+      },
+      {
+        title: 'Sync + analytics',
+        desc: 'Sessions synced to profile; analytics summarizes performance.',
+        active: ['sync','analytics'],
+        edges: [['rides','sync'], ['sync','analytics']]
+      },
+      {
+        title: 'Subscription',
+        desc: 'Subscription gates access to world and events.',
+        active: ['subscriptions'],
+        edges: [['subscriptions','auth']]
+      }
+    ]
+  },
+
+  trainerize: {
+    title: 'Trainerize',
+    steps: [
+      {
+        title: 'Coach creates plans',
+        desc: 'Coach builds plans for clients including workouts and nutrition.',
+        active: ['coach','clients','plans','workouts','nutrition'],
+        edges: [['coach','plans'], ['plans','workouts'], ['plans','nutrition'], ['coach','clients']]
+      },
+      {
+        title: 'Client check-ins',
+        desc: 'Client submits check-ins; coach reviews and adjusts plans.',
+        active: ['checkins','coach','plans'],
+        edges: [['client','checkins'], ['checkins','coach'], ['coach','plans']]
+      },
+      {
+        title: 'Messaging',
+        desc: 'Two-way messaging supports accountability and guidance.',
+        active: ['messages'],
+        edges: [['client','messages'], ['messages','coach']]
+      },
+      {
+        title: 'Subscriptions + payments',
+        desc: 'Billing and subscriptions managed via payment provider.',
+        active: ['subscriptions','payments'],
+        edges: [['subscriptions','payments']]
+      },
+      {
+        title: 'Integrations + analytics + notifications',
+        desc: 'Integrations sync activity; analytics measures adherence; notifications remind.',
+        active: ['integrations','analytics','notifications'],
+        edges: [['clients','integrations'], ['workouts','analytics'], ['coach','notifications']]
+      }
+    ]
+  },
+
+  mysugr: {
+    title: 'mySugr',
+    steps: [
+      {
+        title: 'Capture glucose logs',
+        desc: 'User logs glucose and related events; devices can sync readings.',
+        active: ['client','auth','glucose','logs','devices','sync'],
+        edges: [['client','auth'], ['auth','glucose'], ['glucose','logs'], ['devices','sync'], ['sync','logs']]
+      },
+      {
+        title: 'Log carbs + insulin',
+        desc: 'Carbs and insulin logged and linked to glucose context.',
+        active: ['carbs','insulin','logs'],
+        edges: [['carbs','logs'], ['insulin','logs']]
+      },
+      {
+        title: 'Insights + reports',
+        desc: 'Insights generated; reports prepared for sharing with clinicians.',
+        active: ['insights','reports'],
+        edges: [['logs','insights'], ['insights','reports']]
+      },
+      {
+        title: 'Coaching + integrations',
+        desc: 'Coaching programs and integrations support adherence and data sharing.',
+        active: ['coach','integrations'],
+        edges: [['reports','coach'], ['logs','integrations']]
+      },
+      {
+        title: 'Privacy + analytics',
+        desc: 'Privacy controls manage data; analytics aggregates trends.',
+        active: ['privacy','analytics'],
+        edges: [['privacy','logs'], ['logs','analytics']]
+      }
+    ]
+  },
+
+  'glucose-buddy': {
+    title: 'Glucose Buddy',
+    steps: [
+      {
+        title: 'Log glucose + meds',
+        desc: 'User logs glucose and medication events; devices can sync readings.',
+        active: ['client','auth','glucose','logs','meds','devices','sync'],
+        edges: [['client','auth'], ['auth','glucose'], ['glucose','logs'], ['meds','logs'], ['devices','sync'], ['sync','logs']]
+      },
+      {
+        title: 'Insights + reports',
+        desc: 'Insights and reports summarize trends and adherence.',
+        active: ['insights','reports'],
+        edges: [['logs','insights'], ['insights','reports']]
+      },
+      {
+        title: 'Reminders',
+        desc: 'Reminders nudge logging and medication schedules.',
+        active: ['reminders'],
+        edges: [['logs','reminders']]
+      },
+      {
+        title: 'Integrations + privacy + analytics',
+        desc: 'Integrations share data; privacy controls access; analytics aggregates trends.',
+        active: ['integrations','privacy','analytics'],
+        edges: [['logs','integrations'], ['privacy','logs'], ['reports','analytics']]
+      }
+    ]
+  },
+
+  flo: {
+    title: 'Flo',
+    steps: [
+      {
+        title: 'Track cycle + symptoms',
+        desc: 'User logs cycle and symptoms into profile.',
+        active: ['client','auth','profile','cycle','symptoms'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','cycle'], ['cycle','symptoms']]
+      },
+      {
+        title: 'Predictions + insights',
+        desc: 'Predictions generated for cycle phases and reminders.',
+        active: ['predictions'],
+        edges: [['symptoms','predictions']]
+      },
+      {
+        title: 'Content + community + coach',
+        desc: 'Content and community support; coach provides personalized guidance.',
+        active: ['content','community','coach'],
+        edges: [['predictions','coach'], ['content','community']]
+      },
+      {
+        title: 'Subscriptions + payments',
+        desc: 'Premium subscription billed via payments provider.',
+        active: ['subscriptions','payments'],
+        edges: [['subscriptions','payments']]
+      },
+      {
+        title: 'Notifications + analytics + privacy',
+        desc: 'Notifications remind; analytics aggregates trends; privacy controls data.',
+        active: ['notifications','analytics','privacy'],
+        edges: [['predictions','notifications'], ['cycle','analytics'], ['privacy','profile']]
+      }
+    ]
+  },
+
+  clue: {
+    title: 'Clue',
+    steps: [
+      {
+        title: 'Track cycle + symptoms',
+        desc: 'User logs cycle and symptoms; tracking stream persists entries.',
+        active: ['client','auth','profile','cycle','tracking','symptoms'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','cycle'], ['tracking','symptoms']]
+      },
+      {
+        title: 'Predictions + insights',
+        desc: 'Predictions and insights produced from tracking history.',
+        active: ['predictions','insights'],
+        edges: [['symptoms','predictions'], ['predictions','insights']]
+      },
+      {
+        title: 'Content',
+        desc: 'Educational content supports decisions and context.',
+        active: ['content'],
+        edges: [['content','insights']]
+      },
+      {
+        title: 'Subscriptions + payments',
+        desc: 'Premium subscription billed via payments provider.',
+        active: ['subscriptions','payments'],
+        edges: [['subscriptions','payments']]
+      },
+      {
+        title: 'Notifications + analytics + privacy',
+        desc: 'Notifications for reminders; analytics aggregates trends; privacy controls data.',
+        active: ['notifications','analytics','privacy'],
+        edges: [['insights','notifications'], ['cycle','analytics'], ['privacy','profile']]
+      }
+    ]
+  },
+
+  ovia: {
+    title: 'Ovia',
+    steps: [
+      {
+        title: 'Track cycle/pregnancy',
+        desc: 'User logs tracking data for cycle or pregnancy journey.',
+        active: ['client','auth','profile','tracking','pregnancy','cycle'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','tracking'], ['tracking','pregnancy'], ['tracking','cycle']]
+      },
+      {
+        title: 'Insights + content',
+        desc: 'Insights produced and linked to relevant content.',
+        active: ['insights','content'],
+        edges: [['tracking','insights'], ['insights','content']]
+      },
+      {
+        title: 'Coach + community',
+        desc: 'Coach guidance and community discussions support adherence.',
+        active: ['coach','community'],
+        edges: [['insights','coach'], ['coach','community']]
+      },
+      {
+        title: 'Payments + notifications',
+        desc: 'Payments for premium; notifications provide reminders and tips.',
+        active: ['payments','notifications'],
+        edges: [['client','payments'], ['insights','notifications']]
+      },
+      {
+        title: 'Analytics + privacy',
+        desc: 'Analytics summarizes engagement; privacy controls access.',
+        active: ['analytics','privacy'],
+        edges: [['tracking','analytics'], ['privacy','profile']]
+      }
+    ]
+  },
+
+  betterhelp: {
+    title: 'BetterHelp',
+    steps: [
+      {
+        title: 'Onboarding + matching',
+        desc: 'User completes profile; matching pairs them with a therapist.',
+        active: ['client','auth','profile','matching','therapists'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','matching'], ['matching','therapists']]
+      },
+      {
+        title: 'Schedule sessions',
+        desc: 'Sessions scheduled and stored for continuity.',
+        active: ['sessions'],
+        edges: [['therapists','sessions']]
+      },
+      {
+        title: 'Chat + video',
+        desc: 'Therapy delivered via chat and video sessions.',
+        active: ['chat','video'],
+        edges: [['sessions','chat'], ['sessions','video']]
+      },
+      {
+        title: 'Billing + payments',
+        desc: 'Billing cycles and payments handle subscription access.',
+        active: ['billing','payments'],
+        edges: [['billing','payments']]
+      },
+      {
+        title: 'Support + compliance + analytics',
+        desc: 'Support resolves issues; compliance enforces policy; analytics tracks outcomes.',
+        active: ['support','compliance','analytics','notifications'],
+        edges: [['sessions','compliance'], ['sessions','analytics'], ['sessions','notifications'], ['client','support']]
+      }
+    ]
+  },
+
+  talkspace: {
+    title: 'Talkspace',
+    steps: [
+      {
+        title: 'Onboarding + matching',
+        desc: 'User completes profile and matched to therapist.',
+        active: ['client','auth','profile','matching','therapists'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','matching'], ['matching','therapists']]
+      },
+      {
+        title: 'Sessions + messaging',
+        desc: 'Sessions scheduled; async messaging supports ongoing therapy.',
+        active: ['sessions','messages'],
+        edges: [['therapists','sessions'], ['sessions','messages']]
+      },
+      {
+        title: 'Video visits',
+        desc: 'Live video visits for therapy sessions.',
+        active: ['video'],
+        edges: [['sessions','video']]
+      },
+      {
+        title: 'Billing + payments',
+        desc: 'Billing and payments manage subscription access.',
+        active: ['billing','payments'],
+        edges: [['billing','payments']]
+      },
+      {
+        title: 'Support + compliance + analytics',
+        desc: 'Support and compliance guardrails; analytics tracks engagement/outcomes.',
+        active: ['support','compliance','analytics','notifications'],
+        edges: [['sessions','compliance'], ['sessions','analytics'], ['sessions','notifications'], ['client','support']]
+      }
+    ]
+  },
+
+  wysa: {
+    title: 'Wysa',
+    steps: [
+      {
+        title: 'Chatbot sessions',
+        desc: 'User chats with chatbot; content modules used for exercises.',
+        active: ['client','auth','chatbot','content'],
+        edges: [['client','auth'], ['auth','chatbot'], ['chatbot','content']]
+      },
+      {
+        title: 'Check-ins',
+        desc: 'Check-ins track mood and progress over time.',
+        active: ['checkins'],
+        edges: [['chatbot','checkins']]
+      },
+      {
+        title: 'Human coach sessions',
+        desc: 'Optional human coach sessions scheduled and stored.',
+        active: ['coach','sessions'],
+        edges: [['checkins','coach'], ['coach','sessions']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Notifications drive habit and session reminders.',
+        active: ['notifications'],
+        edges: [['sessions','notifications']]
+      },
+      {
+        title: 'Subscriptions + payments',
+        desc: 'Premium plans billed via payments provider.',
+        active: ['subscriptions','payments'],
+        edges: [['subscriptions','payments']]
+      },
+      {
+        title: 'Privacy + compliance + analytics',
+        desc: 'Privacy and compliance controls; analytics aggregates engagement and outcomes.',
+        active: ['privacy','compliance','analytics'],
+        edges: [['privacy','profile'], ['compliance','sessions'], ['sessions','analytics']]
+      }
+    ]
+  },
+
   chime: {
     title: 'Chime',
     steps: [
