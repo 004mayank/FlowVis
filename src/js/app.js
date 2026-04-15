@@ -15006,6 +15006,550 @@ Object.assign(SYSTEM_LAYOUTS, {
   }
 });
 
+// ----- Batch 60 (System + Architecture - mental health + habits + sleep) -----
+
+Object.assign(SYSTEM_LAYOUTS, {
+  youper: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','chatbot','mood','journals','plans','content','insights','coach','notifications','subscriptions','payments','analytics','privacy'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      chatbot: { x: 860, y: 180, label: 'Chatbot', colorKey: 'api' },
+      mood: { x: 1100, y: 180, label: 'Mood', colorKey: 'store' },
+      journals: { x: 620, y: 320, label: 'Journals', colorKey: 'store' },
+      plans: { x: 860, y: 320, label: 'Plans', colorKey: 'api' },
+      content: { x: 1100, y: 320, label: 'Content', colorKey: 'store' },
+      insights: { x: 620, y: 460, label: 'Insights', colorKey: 'api' },
+      coach: { x: 860, y: 460, label: 'Coach', colorKey: 'external' },
+      notifications: { x: 380, y: 320, label: 'Notify', colorKey: 'external' },
+      subscriptions: { x: 380, y: 180, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 380, y: 460, label: 'Payments', colorKey: 'external' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' },
+      privacy: { x: 1100, y: 460, label: 'Privacy', colorKey: 'api' }
+    }
+  },
+
+  minddoc: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','mood','journals','assessments','insights','plans','content','notifications','export','analytics','privacy'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      mood: { x: 860, y: 180, label: 'Mood', colorKey: 'store' },
+      journals: { x: 1100, y: 180, label: 'Journals', colorKey: 'store' },
+      assessments: { x: 620, y: 320, label: 'Assessments', colorKey: 'api' },
+      insights: { x: 860, y: 320, label: 'Insights', colorKey: 'api' },
+      plans: { x: 1100, y: 320, label: 'Plans', colorKey: 'store' },
+      content: { x: 380, y: 320, label: 'Content', colorKey: 'store' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      export: { x: 620, y: 460, label: 'Export', colorKey: 'api' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' },
+      privacy: { x: 1100, y: 460, label: 'Privacy', colorKey: 'api' }
+    }
+  },
+
+  sanvello: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','tools','mood','tracking','journals','coach','community','plans','notifications','subscriptions','payments','analytics','privacy'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      tools: { x: 860, y: 180, label: 'Tools', colorKey: 'store' },
+      mood: { x: 1100, y: 180, label: 'Mood', colorKey: 'store' },
+      tracking: { x: 620, y: 320, label: 'Tracking', colorKey: 'stream' },
+      journals: { x: 860, y: 320, label: 'Journals', colorKey: 'store' },
+      coach: { x: 1100, y: 320, label: 'Coach', colorKey: 'external' },
+      community: { x: 380, y: 320, label: 'Community', colorKey: 'api' },
+      plans: { x: 620, y: 460, label: 'Plans', colorKey: 'store' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      subscriptions: { x: 380, y: 180, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 860, y: 460, label: 'Payments', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' },
+      privacy: { x: 860, y: 600, label: 'Privacy', colorKey: 'api' }
+    }
+  },
+
+  fabulous: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','habits','routines','coach','challenges','tracking','content','notifications','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      habits: { x: 860, y: 180, label: 'Habits', colorKey: 'store' },
+      routines: { x: 1100, y: 180, label: 'Routines', colorKey: 'store' },
+      coach: { x: 620, y: 320, label: 'Coach', colorKey: 'api' },
+      challenges: { x: 860, y: 320, label: 'Challenges', colorKey: 'store' },
+      tracking: { x: 1100, y: 320, label: 'Tracking', colorKey: 'stream' },
+      content: { x: 380, y: 320, label: 'Content', colorKey: 'store' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      subscriptions: { x: 620, y: 460, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 860, y: 460, label: 'Payments', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  stoic: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','journals','prompts','mood','streaks','content','reminders','export','subscriptions','payments','analytics','privacy'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      journals: { x: 860, y: 180, label: 'Journals', colorKey: 'store' },
+      prompts: { x: 1100, y: 180, label: 'Prompts', colorKey: 'store' },
+      mood: { x: 620, y: 320, label: 'Mood', colorKey: 'store' },
+      streaks: { x: 860, y: 320, label: 'Streaks', colorKey: 'store' },
+      content: { x: 1100, y: 320, label: 'Content', colorKey: 'store' },
+      reminders: { x: 380, y: 320, label: 'Reminders', colorKey: 'external' },
+      export: { x: 380, y: 460, label: 'Export', colorKey: 'api' },
+      subscriptions: { x: 620, y: 460, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 860, y: 460, label: 'Payments', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' },
+      privacy: { x: 860, y: 600, label: 'Privacy', colorKey: 'api' }
+    }
+  },
+
+  reflectly: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','journals','mood','insights','prompts','content','streaks','notifications','subscriptions','payments','analytics','privacy'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      journals: { x: 860, y: 180, label: 'Journals', colorKey: 'store' },
+      mood: { x: 1100, y: 180, label: 'Mood', colorKey: 'store' },
+      insights: { x: 620, y: 320, label: 'Insights', colorKey: 'api' },
+      prompts: { x: 860, y: 320, label: 'Prompts', colorKey: 'store' },
+      content: { x: 1100, y: 320, label: 'Content', colorKey: 'store' },
+      streaks: { x: 620, y: 460, label: 'Streaks', colorKey: 'store' },
+      notifications: { x: 380, y: 320, label: 'Notify', colorKey: 'external' },
+      subscriptions: { x: 380, y: 180, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 380, y: 460, label: 'Payments', colorKey: 'external' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' },
+      privacy: { x: 1100, y: 460, label: 'Privacy', colorKey: 'api' }
+    }
+  },
+
+  daylio: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','mood','activities','journals','stats','insights','reminders','export','sync','analytics','privacy'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      mood: { x: 860, y: 180, label: 'Mood', colorKey: 'store' },
+      activities: { x: 1100, y: 180, label: 'Activities', colorKey: 'store' },
+      journals: { x: 620, y: 320, label: 'Journals', colorKey: 'store' },
+      stats: { x: 860, y: 320, label: 'Stats', colorKey: 'store' },
+      insights: { x: 1100, y: 320, label: 'Insights', colorKey: 'api' },
+      reminders: { x: 380, y: 320, label: 'Reminders', colorKey: 'external' },
+      export: { x: 380, y: 460, label: 'Export', colorKey: 'api' },
+      sync: { x: 620, y: 460, label: 'Sync', colorKey: 'api' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' },
+      privacy: { x: 1100, y: 460, label: 'Privacy', colorKey: 'api' }
+    }
+  },
+
+  'sleep-cycle': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','sleep','sensors','processing','stages','alarm','insights','sound','subscriptions','payments','analytics','privacy'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      sleep: { x: 860, y: 180, label: 'Sleep', colorKey: 'store' },
+      sensors: { x: 1100, y: 180, label: 'Sensors', colorKey: 'external' },
+      processing: { x: 620, y: 320, label: 'Processing', colorKey: 'api' },
+      stages: { x: 860, y: 320, label: 'Stages', colorKey: 'api' },
+      alarm: { x: 1100, y: 320, label: 'Alarm', colorKey: 'external' },
+      insights: { x: 620, y: 460, label: 'Insights', colorKey: 'api' },
+      sound: { x: 860, y: 460, label: 'Sound', colorKey: 'cdn' },
+      subscriptions: { x: 380, y: 180, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' },
+      privacy: { x: 1100, y: 600, label: 'Privacy', colorKey: 'api' }
+    }
+  },
+
+  sleepscore: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','sleep','sensors','processing','score','recommendations','insights','devices','sync','subscriptions','payments','analytics','privacy'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      sleep: { x: 860, y: 180, label: 'Sleep', colorKey: 'store' },
+      sensors: { x: 1100, y: 180, label: 'Sensors', colorKey: 'external' },
+      processing: { x: 620, y: 320, label: 'Processing', colorKey: 'api' },
+      score: { x: 860, y: 320, label: 'Score', colorKey: 'api' },
+      recommendations: { x: 1100, y: 320, label: 'Recs', colorKey: 'store' },
+      insights: { x: 620, y: 460, label: 'Insights', colorKey: 'api' },
+      devices: { x: 380, y: 180, label: 'Devices', colorKey: 'external' },
+      sync: { x: 380, y: 320, label: 'Sync', colorKey: 'api' },
+      subscriptions: { x: 380, y: 460, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 620, y: 600, label: 'Payments', colorKey: 'external' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' },
+      privacy: { x: 1100, y: 460, label: 'Privacy', colorKey: 'api' }
+    }
+  },
+
+  'calm-sleep': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','catalog','audio','cdn','downloads','sleep','recommendations','subscriptions','payments','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      catalog: { x: 860, y: 180, label: 'Catalog', colorKey: 'store' },
+      audio: { x: 1100, y: 180, label: 'Audio', colorKey: 'cdn' },
+      cdn: { x: 1100, y: 320, label: 'CDN', colorKey: 'cdn' },
+      downloads: { x: 860, y: 320, label: 'Downloads', colorKey: 'api' },
+      sleep: { x: 620, y: 320, label: 'Sleep', colorKey: 'store' },
+      recommendations: { x: 620, y: 460, label: 'Recs', colorKey: 'api' },
+      subscriptions: { x: 380, y: 180, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  }
+});
+
+Object.assign(ARCH_LAYOUTS, {
+  youper: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Youper Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','chatbot','mood','journals','plans','content','insights','coach','notifications','subscriptions','payments','analytics','privacy'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      chatbot: { x: 880, y: 160, label: 'Chatbot' },
+      mood: { x: 1160, y: 160, label: 'Mood' },
+      journals: { x: 600, y: 300, label: 'Journals' },
+      plans: { x: 880, y: 300, label: 'Plans' },
+      content: { x: 1160, y: 300, label: 'Content' },
+      insights: { x: 600, y: 440, label: 'Insights' },
+      coach: { x: 880, y: 440, label: 'Coach' },
+      notifications: { x: 320, y: 300, label: 'Notify' },
+      subscriptions: { x: 320, y: 160, label: 'Subscriptions' },
+      payments: { x: 320, y: 440, label: 'Payments' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      privacy: { x: 1160, y: 440, label: 'Privacy' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profile','profile'], ['profile','chatbot','chat']);
+      if(stepIdx===2) e.push(['chatbot','mood','mood'], ['mood','journals','journal']);
+      if(stepIdx===3) e.push(['journals','insights','insight'], ['insights','plans','plan']);
+      if(stepIdx===4) e.push(['plans','content','content'], ['insights','coach','coach']);
+      if(stepIdx===5) e.push(['coach','notifications','notify']);
+      if(stepIdx===6) e.push(['subscriptions','payments','pay'], ['insights','analytics','analytics']);
+      return e;
+    }
+  },
+
+  minddoc: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'MindDoc Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','mood','journals','assessments','insights','plans','content','notifications','export','analytics','privacy'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      mood: { x: 880, y: 160, label: 'Mood' },
+      journals: { x: 1160, y: 160, label: 'Journals' },
+      assessments: { x: 600, y: 300, label: 'Assessments' },
+      insights: { x: 880, y: 300, label: 'Insights' },
+      plans: { x: 1160, y: 300, label: 'Plans' },
+      content: { x: 320, y: 300, label: 'Content' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      export: { x: 600, y: 440, label: 'Export' },
+      analytics: { x: 880, y: 440, label: 'Analytics' },
+      privacy: { x: 1160, y: 440, label: 'Privacy' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profile','profile'], ['profile','mood','mood']);
+      if(stepIdx===2) e.push(['mood','journals','journal'], ['journals','assessments','assess']);
+      if(stepIdx===3) e.push(['assessments','insights','insight'], ['insights','plans','plan']);
+      if(stepIdx===4) e.push(['plans','content','content']);
+      if(stepIdx===5) e.push(['insights','notifications','notify'], ['insights','analytics','analytics']);
+      if(stepIdx===6) e.push(['export','client','export'], ['privacy','profile','privacy']);
+      return e;
+    }
+  },
+
+  sanvello: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Sanvello Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','tools','mood','tracking','journals','coach','community','plans','notifications','subscriptions','payments','analytics','privacy'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      tools: { x: 880, y: 160, label: 'Tools' },
+      mood: { x: 1160, y: 160, label: 'Mood' },
+      tracking: { x: 600, y: 300, label: 'Tracking' },
+      journals: { x: 880, y: 300, label: 'Journals' },
+      coach: { x: 1160, y: 300, label: 'Coach' },
+      community: { x: 320, y: 300, label: 'Community' },
+      plans: { x: 600, y: 440, label: 'Plans' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      subscriptions: { x: 320, y: 160, label: 'Subscriptions' },
+      payments: { x: 880, y: 440, label: 'Payments' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' },
+      privacy: { x: 880, y: 580, label: 'Privacy' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profile','profile'], ['profile','tools','tools']);
+      if(stepIdx===2) e.push(['tools','tracking','track'], ['tracking','mood','mood']);
+      if(stepIdx===3) e.push(['tracking','journals','journal'], ['journals','plans','plan']);
+      if(stepIdx===4) e.push(['plans','coach','coach'], ['community','notifications','notify']);
+      if(stepIdx===5) e.push(['subscriptions','payments','pay']);
+      if(stepIdx===6) e.push(['tracking','analytics','analytics'], ['privacy','profile','privacy']);
+      return e;
+    }
+  },
+
+  fabulous: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Fabulous Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','habits','routines','coach','challenges','tracking','content','notifications','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      habits: { x: 880, y: 160, label: 'Habits' },
+      routines: { x: 1160, y: 160, label: 'Routines' },
+      coach: { x: 600, y: 300, label: 'Coach' },
+      challenges: { x: 880, y: 300, label: 'Challenges' },
+      tracking: { x: 1160, y: 300, label: 'Tracking' },
+      content: { x: 320, y: 300, label: 'Content' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      subscriptions: { x: 600, y: 440, label: 'Subscriptions' },
+      payments: { x: 880, y: 440, label: 'Payments' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profile','profile'], ['profile','habits','habit']);
+      if(stepIdx===2) e.push(['habits','routines','routine'], ['routines','tracking','track']);
+      if(stepIdx===3) e.push(['tracking','coach','coach'], ['coach','challenges','challenge']);
+      if(stepIdx===4) e.push(['content','notifications','notify']);
+      if(stepIdx===5) e.push(['subscriptions','payments','pay']);
+      if(stepIdx===6) e.push(['tracking','analytics','analytics']);
+      return e;
+    }
+  },
+
+  stoic: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Stoic Journal',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','journals','prompts','mood','streaks','content','reminders','export','subscriptions','payments','analytics','privacy'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      journals: { x: 880, y: 160, label: 'Journals' },
+      prompts: { x: 1160, y: 160, label: 'Prompts' },
+      mood: { x: 600, y: 300, label: 'Mood' },
+      streaks: { x: 880, y: 300, label: 'Streaks' },
+      content: { x: 1160, y: 300, label: 'Content' },
+      reminders: { x: 320, y: 300, label: 'Reminders' },
+      export: { x: 320, y: 440, label: 'Export' },
+      subscriptions: { x: 600, y: 440, label: 'Subscriptions' },
+      payments: { x: 880, y: 440, label: 'Payments' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' },
+      privacy: { x: 880, y: 580, label: 'Privacy' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profile','profile'], ['profile','journals','journal']);
+      if(stepIdx===2) e.push(['prompts','journals','prompt'], ['journals','mood','mood']);
+      if(stepIdx===3) e.push(['mood','streaks','streak']);
+      if(stepIdx===4) e.push(['journals','content','content'], ['reminders','client','remind']);
+      if(stepIdx===5) e.push(['export','client','export']);
+      if(stepIdx===6) e.push(['subscriptions','payments','pay'], ['journals','analytics','analytics']);
+      return e;
+    }
+  },
+
+  reflectly: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Reflectly Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','journals','mood','insights','prompts','content','streaks','notifications','subscriptions','payments','analytics','privacy'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      journals: { x: 880, y: 160, label: 'Journals' },
+      mood: { x: 1160, y: 160, label: 'Mood' },
+      insights: { x: 600, y: 300, label: 'Insights' },
+      prompts: { x: 880, y: 300, label: 'Prompts' },
+      content: { x: 1160, y: 300, label: 'Content' },
+      streaks: { x: 600, y: 440, label: 'Streaks' },
+      notifications: { x: 320, y: 300, label: 'Notify' },
+      subscriptions: { x: 320, y: 160, label: 'Subscriptions' },
+      payments: { x: 320, y: 440, label: 'Payments' },
+      analytics: { x: 880, y: 440, label: 'Analytics' },
+      privacy: { x: 1160, y: 440, label: 'Privacy' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profile','profile'], ['profile','journals','journal']);
+      if(stepIdx===2) e.push(['journals','mood','mood'], ['journals','insights','insight']);
+      if(stepIdx===3) e.push(['insights','prompts','prompt'], ['prompts','content','content']);
+      if(stepIdx===4) e.push(['mood','streaks','streak'], ['insights','notifications','notify']);
+      if(stepIdx===5) e.push(['subscriptions','payments','pay']);
+      if(stepIdx===6) e.push(['journals','analytics','analytics'], ['privacy','profile','privacy']);
+      return e;
+    }
+  },
+
+  daylio: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Daylio Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','mood','activities','journals','stats','insights','reminders','export','sync','analytics','privacy'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      mood: { x: 880, y: 160, label: 'Mood' },
+      activities: { x: 1160, y: 160, label: 'Activities' },
+      journals: { x: 600, y: 300, label: 'Journals' },
+      stats: { x: 880, y: 300, label: 'Stats' },
+      insights: { x: 1160, y: 300, label: 'Insights' },
+      reminders: { x: 320, y: 300, label: 'Reminders' },
+      export: { x: 320, y: 440, label: 'Export' },
+      sync: { x: 600, y: 440, label: 'Sync' },
+      analytics: { x: 880, y: 440, label: 'Analytics' },
+      privacy: { x: 1160, y: 440, label: 'Privacy' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profile','profile'], ['profile','mood','mood']);
+      if(stepIdx===2) e.push(['mood','activities','activity'], ['activities','journals','journal']);
+      if(stepIdx===3) e.push(['journals','stats','stats'], ['stats','insights','insight']);
+      if(stepIdx===4) e.push(['insights','reminders','remind']);
+      if(stepIdx===5) e.push(['sync','analytics','analytics']);
+      if(stepIdx===6) e.push(['export','client','export'], ['privacy','profile','privacy']);
+      return e;
+    }
+  },
+
+  'sleep-cycle': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Sleep Cycle Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','sleep','sensors','processing','stages','alarm','insights','sound','subscriptions','payments','analytics','privacy'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      sleep: { x: 880, y: 160, label: 'Sleep' },
+      sensors: { x: 1160, y: 160, label: 'Sensors' },
+      processing: { x: 600, y: 300, label: 'Processing' },
+      stages: { x: 880, y: 300, label: 'Stages' },
+      alarm: { x: 1160, y: 300, label: 'Alarm' },
+      insights: { x: 600, y: 440, label: 'Insights' },
+      sound: { x: 880, y: 440, label: 'Sound' },
+      subscriptions: { x: 320, y: 160, label: 'Subscriptions' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' },
+      privacy: { x: 1160, y: 580, label: 'Privacy' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profile','profile'], ['profile','sleep','sleep']);
+      if(stepIdx===2) e.push(['sensors','processing','sense'], ['processing','stages','stage']);
+      if(stepIdx===3) e.push(['stages','alarm','alarm']);
+      if(stepIdx===4) e.push(['stages','insights','insight'], ['sound','sleep','sound']);
+      if(stepIdx===5) e.push(['subscriptions','payments','pay']);
+      if(stepIdx===6) e.push(['sleep','analytics','analytics'], ['privacy','profile','privacy']);
+      return e;
+    }
+  },
+
+  sleepscore: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'SleepScore Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','sleep','sensors','processing','score','recommendations','insights','devices','sync','subscriptions','payments','analytics','privacy'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      sleep: { x: 880, y: 160, label: 'Sleep' },
+      sensors: { x: 1160, y: 160, label: 'Sensors' },
+      processing: { x: 600, y: 300, label: 'Processing' },
+      score: { x: 880, y: 300, label: 'Score' },
+      recommendations: { x: 1160, y: 300, label: 'Recs' },
+      insights: { x: 600, y: 440, label: 'Insights' },
+      devices: { x: 320, y: 160, label: 'Devices' },
+      sync: { x: 320, y: 300, label: 'Sync' },
+      subscriptions: { x: 320, y: 440, label: 'Subscriptions' },
+      payments: { x: 600, y: 580, label: 'Payments' },
+      analytics: { x: 880, y: 440, label: 'Analytics' },
+      privacy: { x: 1160, y: 440, label: 'Privacy' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profile','profile'], ['profile','sleep','sleep']);
+      if(stepIdx===2) e.push(['sensors','processing','sense'], ['processing','score','score']);
+      if(stepIdx===3) e.push(['score','recommendations','recs'], ['recommendations','insights','insight']);
+      if(stepIdx===4) e.push(['devices','sync','sync'], ['sync','analytics','analytics']);
+      if(stepIdx===5) e.push(['subscriptions','payments','pay']);
+      if(stepIdx===6) e.push(['privacy','profile','privacy']);
+      return e;
+    }
+  },
+
+  'calm-sleep': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Calm Sleep',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','catalog','audio','cdn','downloads','sleep','recommendations','subscriptions','payments','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      catalog: { x: 880, y: 160, label: 'Catalog' },
+      audio: { x: 1160, y: 160, label: 'Audio' },
+      cdn: { x: 1160, y: 300, label: 'CDN' },
+      downloads: { x: 880, y: 300, label: 'Downloads' },
+      sleep: { x: 600, y: 300, label: 'Sleep' },
+      recommendations: { x: 600, y: 440, label: 'Recs' },
+      subscriptions: { x: 320, y: 160, label: 'Subscriptions' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      analytics: { x: 880, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profile','profile'], ['profile','catalog','browse']);
+      if(stepIdx===2) e.push(['catalog','audio','select'], ['audio','cdn','cdn']);
+      if(stepIdx===3) e.push(['cdn','downloads','dl'], ['downloads','sleep','play']);
+      if(stepIdx===4) e.push(['sleep','recommendations','recs']);
+      if(stepIdx===5) e.push(['subscriptions','payments','pay']);
+      if(stepIdx===6) e.push(['recommendations','notifications','notify'], ['sleep','analytics','analytics']);
+      return e;
+    }
+  }
+});
+
 Object.assign(ARCH_LAYOUTS, {
   zwift: {
     viewBox: '0 0 1860 820',

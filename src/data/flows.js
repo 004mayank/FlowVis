@@ -7811,6 +7811,360 @@ export const FLOWS = {
     ]
   },
 
+  youper: {
+    title: 'Youper',
+    steps: [
+      {
+        title: 'Onboarding + chatbot entry',
+        desc: 'User signs in, sets profile, and starts a chatbot session.',
+        active: ['client','auth','profile','chatbot'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','chatbot']]
+      },
+      {
+        title: 'Mood + journaling',
+        desc: 'User logs mood and journals; entries feed insights.',
+        active: ['mood','journals','insights'],
+        edges: [['chatbot','mood'], ['mood','journals'], ['journals','insights']]
+      },
+      {
+        title: 'Plans + content',
+        desc: 'Plans and content modules recommended based on insights.',
+        active: ['plans','content'],
+        edges: [['insights','plans'], ['plans','content']]
+      },
+      {
+        title: 'Coach + notifications',
+        desc: 'Optional coach guidance and notifications drive adherence.',
+        active: ['coach','notifications'],
+        edges: [['insights','coach'], ['coach','notifications']]
+      },
+      {
+        title: 'Subscription + privacy + analytics',
+        desc: 'Subscription billed; privacy controls data; analytics aggregates outcomes.',
+        active: ['subscriptions','payments','privacy','analytics'],
+        edges: [['subscriptions','payments'], ['privacy','profile'], ['insights','analytics']]
+      }
+    ]
+  },
+
+  minddoc: {
+    title: 'MindDoc',
+    steps: [
+      {
+        title: 'Mood + journaling',
+        desc: 'User logs mood and journal entries over time.',
+        active: ['client','auth','profile','mood','journals'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','mood'], ['mood','journals']]
+      },
+      {
+        title: 'Assessments',
+        desc: 'Assessments capture structured signals for mental health screening.',
+        active: ['assessments'],
+        edges: [['journals','assessments']]
+      },
+      {
+        title: 'Insights + plans',
+        desc: 'Insights produced; plans recommended for coping and routines.',
+        active: ['insights','plans'],
+        edges: [['assessments','insights'], ['insights','plans']]
+      },
+      {
+        title: 'Content + notifications',
+        desc: 'Content modules delivered and notifications remind adherence.',
+        active: ['content','notifications'],
+        edges: [['plans','content'], ['insights','notifications']]
+      },
+      {
+        title: 'Export + analytics + privacy',
+        desc: 'Export reports; analytics aggregates trends; privacy controls data.',
+        active: ['export','analytics','privacy'],
+        edges: [['insights','export'], ['insights','analytics'], ['privacy','profile']]
+      }
+    ]
+  },
+
+  sanvello: {
+    title: 'Sanvello',
+    steps: [
+      {
+        title: 'Tools + mood tracking',
+        desc: 'User uses CBT tools and logs mood/check-ins.',
+        active: ['client','auth','tools','tracking','mood'],
+        edges: [['client','auth'], ['auth','tools'], ['tools','tracking'], ['tracking','mood']]
+      },
+      {
+        title: 'Journaling + plans',
+        desc: 'Journals feed plans and exercises.',
+        active: ['journals','plans'],
+        edges: [['mood','journals'], ['journals','plans']]
+      },
+      {
+        title: 'Coach + community + notifications',
+        desc: 'Optional coach/community support and notifications drive adherence.',
+        active: ['coach','community','notifications'],
+        edges: [['plans','coach'], ['coach','community'], ['community','notifications']]
+      },
+      {
+        title: 'Subscriptions + payments',
+        desc: 'Premium access billed via payments provider.',
+        active: ['subscriptions','payments'],
+        edges: [['subscriptions','payments']]
+      },
+      {
+        title: 'Analytics + privacy',
+        desc: 'Analytics aggregates trends; privacy controls data access.',
+        active: ['analytics','privacy'],
+        edges: [['tracking','analytics'], ['privacy','profile']]
+      }
+    ]
+  },
+
+  fabulous: {
+    title: 'Fabulous',
+    steps: [
+      {
+        title: 'Set habits + routines',
+        desc: 'User creates habit goals and routines.',
+        active: ['client','auth','profile','habits','routines'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','habits'], ['habits','routines']]
+      },
+      {
+        title: 'Coach guidance',
+        desc: 'Coach content provides prompts and structured guidance.',
+        active: ['coach','content'],
+        edges: [['routines','coach'], ['content','coach']]
+      },
+      {
+        title: 'Challenges + tracking',
+        desc: 'Challenges and tracking log completion and streaks.',
+        active: ['challenges','tracking'],
+        edges: [['coach','challenges'], ['routines','tracking']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Notifications remind daily routines.',
+        active: ['notifications'],
+        edges: [['tracking','notifications']]
+      },
+      {
+        title: 'Subscriptions + payments + analytics',
+        desc: 'Premium subscription billed; analytics aggregates adherence.',
+        active: ['subscriptions','payments','analytics'],
+        edges: [['subscriptions','payments'], ['tracking','analytics']]
+      }
+    ]
+  },
+
+  stoic: {
+    title: 'Stoic',
+    steps: [
+      {
+        title: 'Journal with prompts',
+        desc: 'User journals using prompts; mood logged.',
+        active: ['client','auth','journals','prompts','mood'],
+        edges: [['client','auth'], ['auth','journals'], ['prompts','journals'], ['journals','mood']]
+      },
+      {
+        title: 'Streaks + reminders',
+        desc: 'Streaks updated and reminders scheduled.',
+        active: ['streaks','reminders'],
+        edges: [['mood','streaks'], ['streaks','reminders']]
+      },
+      {
+        title: 'Content',
+        desc: 'Stoic content and lessons delivered based on journaling.',
+        active: ['content'],
+        edges: [['journals','content']]
+      },
+      {
+        title: 'Export + privacy',
+        desc: 'Export journals; privacy controls protect data.',
+        active: ['export','privacy'],
+        edges: [['journals','export'], ['privacy','profile']]
+      },
+      {
+        title: 'Subscriptions + payments + analytics',
+        desc: 'Premium billed; analytics aggregates engagement.',
+        active: ['subscriptions','payments','analytics'],
+        edges: [['subscriptions','payments'], ['journals','analytics']]
+      }
+    ]
+  },
+
+  reflectly: {
+    title: 'Reflectly',
+    steps: [
+      {
+        title: 'Daily journaling + mood',
+        desc: 'User journals daily and logs mood.',
+        active: ['client','auth','profile','journals','mood'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','journals'], ['journals','mood']]
+      },
+      {
+        title: 'Insights + prompts',
+        desc: 'Insights generated and prompts guide reflection.',
+        active: ['insights','prompts'],
+        edges: [['journals','insights'], ['insights','prompts']]
+      },
+      {
+        title: 'Content + streaks',
+        desc: 'Content delivered; streaks tracked for habit building.',
+        active: ['content','streaks'],
+        edges: [['prompts','content'], ['mood','streaks']]
+      },
+      {
+        title: 'Notifications + privacy',
+        desc: 'Notifications remind journaling; privacy controls data.',
+        active: ['notifications','privacy'],
+        edges: [['insights','notifications'], ['privacy','profile']]
+      },
+      {
+        title: 'Subscriptions + payments + analytics',
+        desc: 'Premium billed; analytics aggregates engagement.',
+        active: ['subscriptions','payments','analytics'],
+        edges: [['subscriptions','payments'], ['journals','analytics']]
+      }
+    ]
+  },
+
+  daylio: {
+    title: 'Daylio',
+    steps: [
+      {
+        title: 'Log mood + activities',
+        desc: 'User logs mood and activities; journals store notes.',
+        active: ['client','auth','profile','mood','activities','journals'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','mood'], ['mood','activities'], ['activities','journals']]
+      },
+      {
+        title: 'Stats + insights',
+        desc: 'Stats computed and insights generated from history.',
+        active: ['stats','insights'],
+        edges: [['journals','stats'], ['stats','insights']]
+      },
+      {
+        title: 'Reminders',
+        desc: 'Reminders support daily logging habit.',
+        active: ['reminders'],
+        edges: [['insights','reminders']]
+      },
+      {
+        title: 'Export + sync',
+        desc: 'Export and sync support backups and multi-device use.',
+        active: ['export','sync'],
+        edges: [['stats','export'], ['journals','sync']]
+      },
+      {
+        title: 'Analytics + privacy',
+        desc: 'Analytics aggregates engagement; privacy controls data.',
+        active: ['analytics','privacy'],
+        edges: [['sync','analytics'], ['privacy','profile']]
+      }
+    ]
+  },
+
+  'sleep-cycle': {
+    title: 'Sleep Cycle',
+    steps: [
+      {
+        title: 'Collect sleep signals',
+        desc: 'Sensors collect sleep signals during the night.',
+        active: ['client','auth','profile','sleep','sensors'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','sleep'], ['sensors','sleep']]
+      },
+      {
+        title: 'Process + sleep stages',
+        desc: 'Processing derives sleep stages and patterns.',
+        active: ['processing','stages'],
+        edges: [['sleep','processing'], ['processing','stages']]
+      },
+      {
+        title: 'Smart alarm',
+        desc: 'Alarm triggers in optimal window based on stages.',
+        active: ['alarm'],
+        edges: [['stages','alarm']]
+      },
+      {
+        title: 'Insights + sound',
+        desc: 'Insights summarize sleep; sound features support sleep hygiene.',
+        active: ['insights','sound'],
+        edges: [['stages','insights'], ['sound','sleep']]
+      },
+      {
+        title: 'Subscription + analytics + privacy',
+        desc: 'Premium billed; analytics aggregates trends; privacy controls data.',
+        active: ['subscriptions','payments','analytics','privacy'],
+        edges: [['subscriptions','payments'], ['sleep','analytics'], ['privacy','profile']]
+      }
+    ]
+  },
+
+  sleepscore: {
+    title: 'SleepScore',
+    steps: [
+      {
+        title: 'Collect sleep data',
+        desc: 'Sensors collect sleep signals and sessions are recorded.',
+        active: ['client','auth','profile','sleep','sensors'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','sleep'], ['sensors','sleep']]
+      },
+      {
+        title: 'Processing + score',
+        desc: 'Processing computes sleep score and quality metrics.',
+        active: ['processing','score'],
+        edges: [['sleep','processing'], ['processing','score']]
+      },
+      {
+        title: 'Recommendations + insights',
+        desc: 'Recommendations generated from score; insights explain drivers.',
+        active: ['recommendations','insights'],
+        edges: [['score','recommendations'], ['recommendations','insights']]
+      },
+      {
+        title: 'Devices + sync + analytics',
+        desc: 'Device ecosystem sync; analytics aggregates trends.',
+        active: ['devices','sync','analytics'],
+        edges: [['devices','sync'], ['sync','analytics']]
+      },
+      {
+        title: 'Subscriptions + privacy',
+        desc: 'Premium access billed; privacy controls data.',
+        active: ['subscriptions','payments','privacy'],
+        edges: [['subscriptions','payments'], ['privacy','profile']]
+      }
+    ]
+  },
+
+  'calm-sleep': {
+    title: 'Calm Sleep',
+    steps: [
+      {
+        title: 'Browse catalog',
+        desc: 'User browses the sleep catalog and selects an audio track.',
+        active: ['client','auth','profile','catalog','audio'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','catalog'], ['catalog','audio']]
+      },
+      {
+        title: 'CDN streaming + downloads',
+        desc: 'Audio streams via CDN and can be downloaded for offline use.',
+        active: ['cdn','downloads'],
+        edges: [['audio','cdn'], ['cdn','downloads']]
+      },
+      {
+        title: 'Sleep session',
+        desc: 'Playback supports sleep session and bedtime routine.',
+        active: ['sleep','recommendations'],
+        edges: [['downloads','sleep'], ['sleep','recommendations']]
+      },
+      {
+        title: 'Subscription + notifications + analytics',
+        desc: 'Subscription billed; notifications encourage routine; analytics tracks engagement.',
+        active: ['subscriptions','payments','notifications','analytics'],
+        edges: [['subscriptions','payments'], ['recommendations','notifications'], ['sleep','analytics']]
+      }
+    ]
+  },
+
   chime: {
     title: 'Chime',
     steps: [
