@@ -10800,6 +10800,494 @@ Object.assign(ARCH_LAYOUTS, {
   }
 });
 
+// ----- Batch 34 (Architecture - arch-only fills + new additions) -----
+
+Object.assign(ARCH_LAYOUTS, {
+  'prime-video': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Prime Video Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','home','recos','catalog','policy','drm','auth','cdn','player','ads','metrics','analytics','history'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      home: { x: 320, y: 160, label: 'Home API' },
+      recos: { x: 600, y: 160, label: 'Recos' },
+      catalog: { x: 880, y: 160, label: 'Catalog' },
+      policy: { x: 1160, y: 160, label: 'Policy' },
+      drm: { x: 1160, y: 300, label: 'DRM' },
+      auth: { x: 880, y: 300, label: 'Auth' },
+      cdn: { x: 600, y: 300, label: 'CDN' },
+      player: { x: 320, y: 300, label: 'Player' },
+      ads: { x: 600, y: 440, label: 'Ads' },
+      metrics: { x: 880, y: 440, label: 'Telemetry' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' },
+      history: { x: 320, y: 440, label: 'History' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','home','home'], ['home','recos','recos']);
+      if (stepIdx === 2) e.push(['home','catalog','meta'], ['catalog','policy','policy']);
+      if (stepIdx === 3) e.push(['policy','drm','drm'], ['drm','auth','auth']);
+      if (stepIdx === 4) e.push(['client','player','play'], ['player','cdn','cdn']);
+      if (stepIdx === 5) e.push(['player','ads','ads'], ['player','metrics','metrics']);
+      if (stepIdx === 6) e.push(['metrics','analytics','analytics'], ['analytics','history','history']);
+      return e;
+    }
+  },
+
+  'apple-music': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Apple Music Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','library','recos','search','index','policy','auth','drm','playback','cdn','metadata','lyrics','metrics','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      library: { x: 320, y: 160, label: 'Library' },
+      recos: { x: 600, y: 160, label: 'Recos' },
+      search: { x: 320, y: 300, label: 'Search' },
+      index: { x: 600, y: 300, label: 'Index' },
+      policy: { x: 880, y: 160, label: 'Policy' },
+      auth: { x: 1160, y: 160, label: 'Auth' },
+      drm: { x: 880, y: 300, label: 'DRM' },
+      playback: { x: 320, y: 440, label: 'Playback' },
+      cdn: { x: 600, y: 440, label: 'CDN' },
+      metadata: { x: 880, y: 440, label: 'Metadata' },
+      lyrics: { x: 1160, y: 440, label: 'Lyrics' },
+      metrics: { x: 880, y: 580, label: 'Telemetry' },
+      analytics: { x: 1160, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','library','sync'], ['library','recos','recos']);
+      if (stepIdx === 2) e.push(['client','search','search'], ['search','index','index']);
+      if (stepIdx === 3) e.push(['client','policy','policy'], ['policy','auth','auth'], ['policy','drm','drm']);
+      if (stepIdx === 4) e.push(['client','playback','play'], ['playback','cdn','cdn']);
+      if (stepIdx === 5) e.push(['playback','metadata','meta'], ['metadata','lyrics','lyrics']);
+      if (stepIdx === 6) e.push(['playback','metrics','metrics'], ['metrics','analytics','analytics']);
+      return e;
+    }
+  },
+
+  facebook: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Facebook Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','feed','cache','rank','safety','api','write','fanout','notify','push','media','cdn','metrics','analytics','ads'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      feed: { x: 320, y: 160, label: 'Feed' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      rank: { x: 880, y: 160, label: 'Ranking' },
+      safety: { x: 1160, y: 160, label: 'Integrity' },
+      api: { x: 320, y: 300, label: 'API' },
+      write: { x: 600, y: 440, label: 'Write Store' },
+      fanout: { x: 880, y: 440, label: 'Fanout' },
+      notify: { x: 1160, y: 440, label: 'Notify' },
+      push: { x: 1160, y: 300, label: 'Push' },
+      media: { x: 600, y: 300, label: 'Media' },
+      cdn: { x: 880, y: 300, label: 'CDN' },
+      metrics: { x: 600, y: 580, label: 'Metrics' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      ads: { x: 1160, y: 580, label: 'Ads' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','feed','feed'], ['feed','cache','cache']);
+      if (stepIdx === 2) e.push(['feed','rank','rank'], ['rank','safety','safety']);
+      if (stepIdx === 3) e.push(['feed','media','media'], ['media','cdn','cdn'], ['cdn','client','client']);
+      if (stepIdx === 4) e.push(['client','api','post'], ['api','write','write'], ['write','fanout','fanout']);
+      if (stepIdx === 5) e.push(['fanout','notify','notify'], ['notify','push','push'], ['push','client','client']);
+      if (stepIdx === 6) e.push(['client','metrics','metrics'], ['metrics','analytics','analytics'], ['analytics','ads','ads']);
+      return e;
+    }
+  },
+
+  slack: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Slack Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','sync','api','authz','store','fanout','realtime','index','search','upload','obj','cdn','apps','webhooks'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      sync: { x: 600, y: 160, label: 'Sync' },
+      api: { x: 320, y: 300, label: 'API' },
+      authz: { x: 600, y: 300, label: 'AuthZ' },
+      store: { x: 880, y: 300, label: 'Message Store' },
+      fanout: { x: 1160, y: 300, label: 'Fanout' },
+      realtime: { x: 1160, y: 160, label: 'Realtime' },
+      index: { x: 600, y: 440, label: 'Index' },
+      search: { x: 320, y: 440, label: 'Search' },
+      upload: { x: 320, y: 580, label: 'Upload' },
+      obj: { x: 600, y: 580, label: 'Object Store' },
+      cdn: { x: 880, y: 580, label: 'CDN' },
+      apps: { x: 1160, y: 580, label: 'Apps' },
+      webhooks: { x: 1160, y: 440, label: 'Webhooks' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','auth','auth'], ['auth','sync','sync']);
+      if (stepIdx === 2) e.push(['client','api','send'], ['api','authz','authz'], ['api','store','store']);
+      if (stepIdx === 3) e.push(['store','fanout','fanout'], ['fanout','realtime','rt'], ['realtime','client','client']);
+      if (stepIdx === 4) e.push(['store','index','index'], ['index','search','search']);
+      if (stepIdx === 5) e.push(['client','upload','upload'], ['upload','obj','obj'], ['obj','cdn','cdn']);
+      if (stepIdx === 6) e.push(['store','apps','apps'], ['apps','webhooks','webhooks']);
+      return e;
+    }
+  },
+
+  // New additions (were missing both)
+  'cult-fit': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Cult.fit Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','catalog','schedule','booking','payments','ledger','coach','live','realtime','tracking','recos','notify','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      catalog: { x: 600, y: 160, label: 'Classes/Catalog' },
+      schedule: { x: 880, y: 160, label: 'Schedule' },
+      booking: { x: 600, y: 300, label: 'Booking' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      ledger: { x: 40, y: 300, label: 'Ledger' },
+      coach: { x: 880, y: 300, label: 'Coach Ops' },
+      live: { x: 1160, y: 300, label: 'Live Sessions' },
+      realtime: { x: 1160, y: 440, label: 'Realtime' },
+      tracking: { x: 600, y: 440, label: 'Workout Tracking' },
+      recos: { x: 880, y: 440, label: 'Personalization' },
+      notify: { x: 320, y: 440, label: 'Notify' },
+      analytics: { x: 600, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','catalog','browse']);
+      if(stepIdx===2) e.push(['catalog','schedule','slots'], ['client','booking','book']);
+      if(stepIdx===3) e.push(['booking','payments','pay'], ['payments','ledger','post']);
+      if(stepIdx===4) e.push(['booking','coach','ops'], ['coach','live','live']);
+      if(stepIdx===5) e.push(['live','realtime','rt'], ['realtime','tracking','track']);
+      if(stepIdx===6) e.push(['tracking','recos','recos'], ['recos','notify','notify']);
+      if(stepIdx===7) e.push(['tracking','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'domino-s': {
+    viewBox: '0 0 1860 820',
+    backendLabel: "Domino's Backend",
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','catalog','cart','checkout','payments','orders','pos','kitchen','dispatch','driver','tracking','notify','support','refunds','ledger'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      catalog: { x: 320, y: 160, label: 'Menu' },
+      cart: { x: 320, y: 300, label: 'Cart' },
+      checkout: { x: 600, y: 300, label: 'Checkout' },
+      payments: { x: 880, y: 300, label: 'Payments' },
+      orders: { x: 1160, y: 300, label: 'Orders' },
+      pos: { x: 1440, y: 160, label: 'Store POS' },
+      kitchen: { x: 1440, y: 300, label: 'Kitchen' },
+      dispatch: { x: 1160, y: 440, label: 'Dispatch' },
+      driver: { x: 1440, y: 440, label: 'Driver' },
+      tracking: { x: 880, y: 440, label: 'Tracking' },
+      notify: { x: 600, y: 440, label: 'Notify' },
+      support: { x: 320, y: 440, label: 'Support' },
+      refunds: { x: 600, y: 580, label: 'Refunds' },
+      ledger: { x: 880, y: 580, label: 'Ledger' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','catalog','browse'], ['catalog','cart','cart']);
+      if(stepIdx===2) e.push(['cart','checkout','checkout'], ['checkout','payments','pay']);
+      if(stepIdx===3) e.push(['payments','orders','order'], ['orders','pos','pos']);
+      if(stepIdx===4) e.push(['pos','kitchen','make'], ['kitchen','dispatch','dispatch']);
+      if(stepIdx===5) e.push(['dispatch','driver','assign'], ['driver','tracking','track'], ['tracking','notify','notify']);
+      if(stepIdx===6) e.push(['client','support','support'], ['support','refunds','refund'], ['refunds','ledger','ledger']);
+      return e;
+    }
+  },
+
+  'mcdonald-s-app': {
+    viewBox: '0 0 1860 820',
+    backendLabel: "McDonald's Backend",
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','catalog','offers','cart','checkout','payments','orders','store','kitchen','pickup','notify','loyalty','ledger','support'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      catalog: { x: 600, y: 160, label: 'Menu' },
+      offers: { x: 880, y: 160, label: 'Offers' },
+      cart: { x: 320, y: 300, label: 'Cart' },
+      checkout: { x: 600, y: 300, label: 'Checkout' },
+      payments: { x: 880, y: 300, label: 'Payments' },
+      orders: { x: 1160, y: 300, label: 'Orders' },
+      store: { x: 1440, y: 160, label: 'Store POS' },
+      kitchen: { x: 1440, y: 300, label: 'Kitchen' },
+      pickup: { x: 1160, y: 440, label: 'Pickup' },
+      notify: { x: 880, y: 440, label: 'Notify' },
+      loyalty: { x: 600, y: 440, label: 'Loyalty' },
+      ledger: { x: 320, y: 440, label: 'Ledger' },
+      support: { x: 320, y: 580, label: 'Support' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','catalog','menu']);
+      if(stepIdx===2) e.push(['catalog','offers','offers'], ['offers','cart','apply']);
+      if(stepIdx===3) e.push(['client','cart','cart'], ['cart','checkout','checkout']);
+      if(stepIdx===4) e.push(['checkout','payments','pay'], ['payments','orders','order'], ['payments','ledger','ledger']);
+      if(stepIdx===5) e.push(['orders','store','store'], ['store','kitchen','kitchen'], ['kitchen','pickup','ready']);
+      if(stepIdx===6) e.push(['pickup','notify','notify'], ['notify','client','client'], ['loyalty','client','client']);
+      if(stepIdx===7) e.push(['client','support','support']);
+      return e;
+    }
+  },
+
+  'jd-com': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'JD.com Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','feed','rank','search','index','catalog','cart','checkout','inventory','orders','payments','risk','ledger','fulfillment','carrier','tracking','returns','refunds','notify'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      feed: { x: 320, y: 160, label: 'Feed' },
+      rank: { x: 600, y: 160, label: 'Ranking' },
+      search: { x: 320, y: 300, label: 'Search' },
+      index: { x: 600, y: 300, label: 'Index' },
+      catalog: { x: 880, y: 300, label: 'Catalog' },
+      cart: { x: 320, y: 440, label: 'Cart' },
+      checkout: { x: 600, y: 440, label: 'Checkout' },
+      inventory: { x: 880, y: 440, label: 'Inventory' },
+      orders: { x: 1160, y: 440, label: 'Orders' },
+      payments: { x: 600, y: 580, label: 'Payments' },
+      risk: { x: 880, y: 580, label: 'Risk' },
+      ledger: { x: 1160, y: 580, label: 'Ledger' },
+      fulfillment: { x: 880, y: 720, label: 'Fulfillment' },
+      carrier: { x: 1160, y: 720, label: 'Carrier' },
+      tracking: { x: 1160, y: 300, label: 'Tracking' },
+      returns: { x: 320, y: 720, label: 'Returns' },
+      refunds: { x: 600, y: 720, label: 'Refunds' },
+      notify: { x: 320, y: 580, label: 'Notify' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','feed','feed'], ['feed','rank','rank']);
+      if(stepIdx===2) e.push(['client','search','search'], ['search','index','index'], ['index','catalog','catalog']);
+      if(stepIdx===3) e.push(['client','cart','cart'], ['cart','checkout','checkout'], ['checkout','inventory','inv']);
+      if(stepIdx===4) e.push(['checkout','payments','pay'], ['payments','risk','risk'], ['payments','orders','order']);
+      if(stepIdx===5) e.push(['orders','fulfillment','fulfill'], ['fulfillment','carrier','ship'], ['carrier','tracking','track']);
+      if(stepIdx===6) e.push(['tracking','returns','return'], ['returns','refunds','refund'], ['refunds','ledger','ledger']);
+      return e;
+    }
+  },
+
+  roposo: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Roposo Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','feed','rank','upload','obj','transcode','cdn','catalog','write','comments','fanout','notify','ads','metrics','analytics','moderation'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      feed: { x: 320, y: 160, label: 'Feed' },
+      rank: { x: 600, y: 160, label: 'Ranking' },
+      upload: { x: 320, y: 300, label: 'Upload' },
+      obj: { x: 600, y: 300, label: 'Object Store' },
+      transcode: { x: 880, y: 300, label: 'Transcode' },
+      cdn: { x: 1160, y: 300, label: 'CDN' },
+      catalog: { x: 600, y: 440, label: 'Catalog' },
+      write: { x: 880, y: 440, label: 'Writes' },
+      comments: { x: 320, y: 440, label: 'Comments' },
+      fanout: { x: 1160, y: 440, label: 'Fanout' },
+      notify: { x: 1440, y: 440, label: 'Notify' },
+      ads: { x: 1440, y: 300, label: 'Ads' },
+      metrics: { x: 880, y: 580, label: 'Telemetry' },
+      analytics: { x: 1160, y: 580, label: 'Analytics' },
+      moderation: { x: 320, y: 580, label: 'Moderation' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','feed','feed'], ['feed','rank','rank']);
+      if(stepIdx===2) e.push(['client','upload','upload'], ['upload','obj','obj'], ['obj','transcode','transcode']);
+      if(stepIdx===3) e.push(['transcode','cdn','cdn'], ['cdn','client','client']);
+      if(stepIdx===4) e.push(['client','comments','comment'], ['comments','write','write'], ['write','fanout','fanout']);
+      if(stepIdx===5) e.push(['fanout','notify','notify'], ['rank','ads','ads']);
+      if(stepIdx===6) e.push(['client','metrics','metrics'], ['metrics','analytics','analytics'], ['analytics','moderation','mod']);
+      return e;
+    }
+  },
+
+  likee: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Likee Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','feed','rank','upload','obj','transcode','cdn','write','comments','fanout','notify','ads','metrics','analytics','moderation'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      feed: { x: 320, y: 160, label: 'Feed' },
+      rank: { x: 600, y: 160, label: 'Ranking' },
+      upload: { x: 320, y: 300, label: 'Upload' },
+      obj: { x: 600, y: 300, label: 'Object Store' },
+      transcode: { x: 880, y: 300, label: 'Transcode' },
+      cdn: { x: 1160, y: 300, label: 'CDN' },
+      write: { x: 880, y: 440, label: 'Writes' },
+      comments: { x: 320, y: 440, label: 'Comments' },
+      fanout: { x: 1160, y: 440, label: 'Fanout' },
+      notify: { x: 1440, y: 440, label: 'Notify' },
+      ads: { x: 1440, y: 300, label: 'Ads' },
+      metrics: { x: 880, y: 580, label: 'Telemetry' },
+      analytics: { x: 1160, y: 580, label: 'Analytics' },
+      moderation: { x: 320, y: 580, label: 'Moderation' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','feed','feed'], ['feed','rank','rank']);
+      if(stepIdx===2) e.push(['client','upload','upload'], ['upload','obj','obj'], ['obj','transcode','transcode']);
+      if(stepIdx===3) e.push(['transcode','cdn','cdn'], ['cdn','client','client']);
+      if(stepIdx===4) e.push(['client','comments','comment'], ['comments','write','write'], ['write','fanout','fanout']);
+      if(stepIdx===5) e.push(['fanout','notify','notify'], ['rank','ads','ads']);
+      if(stepIdx===6) e.push(['client','metrics','metrics'], ['metrics','analytics','analytics'], ['analytics','moderation','mod']);
+      return e;
+    }
+  }
+});
+
+// ----- Batch 34 (System - for new additions) -----
+
+Object.assign(SYSTEM_LAYOUTS, {
+  'cult-fit': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','catalog','schedule','booking','payments','ledger','coach','live','realtime','tracking','recos','notify','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      catalog: { x: 620, y: 180, label: 'Catalog', colorKey: 'store' },
+      schedule: { x: 860, y: 180, label: 'Schedule', colorKey: 'api' },
+      booking: { x: 620, y: 320, label: 'Booking', colorKey: 'api' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      ledger: { x: 140, y: 320, label: 'Ledger', colorKey: 'store' },
+      coach: { x: 860, y: 320, label: 'Coach Ops', colorKey: 'external' },
+      live: { x: 1100, y: 320, label: 'Live Sessions', colorKey: 'stream' },
+      realtime: { x: 1100, y: 460, label: 'Realtime', colorKey: 'stream' },
+      tracking: { x: 620, y: 460, label: 'Tracking', colorKey: 'api' },
+      recos: { x: 860, y: 460, label: 'Personalization', colorKey: 'api' },
+      notify: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'domino-s': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','catalog','cart','checkout','payments','orders','pos','kitchen','dispatch','driver','tracking','notify','support','refunds','ledger'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      catalog: { x: 380, y: 180, label: 'Menu', colorKey: 'store' },
+      cart: { x: 380, y: 320, label: 'Cart', colorKey: 'store' },
+      checkout: { x: 620, y: 320, label: 'Checkout', colorKey: 'api' },
+      payments: { x: 860, y: 320, label: 'Payments', colorKey: 'external' },
+      orders: { x: 1100, y: 320, label: 'Orders', colorKey: 'store' },
+      pos: { x: 1100, y: 180, label: 'Store POS', colorKey: 'external' },
+      kitchen: { x: 860, y: 180, label: 'Kitchen', colorKey: 'external' },
+      dispatch: { x: 620, y: 460, label: 'Dispatch', colorKey: 'api' },
+      driver: { x: 860, y: 460, label: 'Driver', colorKey: 'external' },
+      tracking: { x: 1100, y: 460, label: 'Tracking', colorKey: 'stream' },
+      notify: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      support: { x: 380, y: 600, label: 'Support', colorKey: 'external' },
+      refunds: { x: 620, y: 600, label: 'Refunds', colorKey: 'api' },
+      ledger: { x: 860, y: 600, label: 'Ledger', colorKey: 'store' }
+    }
+  },
+
+  'mcdonald-s-app': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','catalog','offers','cart','checkout','payments','orders','store','kitchen','pickup','notify','loyalty','ledger','support'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      catalog: { x: 620, y: 180, label: 'Menu', colorKey: 'store' },
+      offers: { x: 860, y: 180, label: 'Offers', colorKey: 'api' },
+      cart: { x: 380, y: 320, label: 'Cart', colorKey: 'store' },
+      checkout: { x: 620, y: 320, label: 'Checkout', colorKey: 'api' },
+      payments: { x: 860, y: 320, label: 'Payments', colorKey: 'external' },
+      orders: { x: 1100, y: 320, label: 'Orders', colorKey: 'store' },
+      store: { x: 1100, y: 180, label: 'Store POS', colorKey: 'external' },
+      kitchen: { x: 860, y: 460, label: 'Kitchen', colorKey: 'external' },
+      pickup: { x: 1100, y: 460, label: 'Pickup', colorKey: 'api' },
+      notify: { x: 620, y: 460, label: 'Notify', colorKey: 'external' },
+      loyalty: { x: 380, y: 460, label: 'Loyalty', colorKey: 'api' },
+      ledger: { x: 140, y: 320, label: 'Ledger', colorKey: 'store' },
+      support: { x: 380, y: 600, label: 'Support', colorKey: 'external' }
+    }
+  },
+
+  'jd-com': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','feed','rank','search','index','catalog','cart','checkout','inventory','orders','payments','risk','ledger','fulfillment','carrier','tracking','returns','refunds','notify'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      feed: { x: 380, y: 180, label: 'Feed', colorKey: 'api' },
+      rank: { x: 620, y: 180, label: 'Ranking', colorKey: 'api' },
+      search: { x: 380, y: 320, label: 'Search', colorKey: 'api' },
+      index: { x: 620, y: 320, label: 'Index', colorKey: 'store' },
+      catalog: { x: 860, y: 320, label: 'Catalog', colorKey: 'store' },
+      cart: { x: 380, y: 460, label: 'Cart', colorKey: 'store' },
+      checkout: { x: 620, y: 460, label: 'Checkout', colorKey: 'api' },
+      inventory: { x: 860, y: 460, label: 'Inventory', colorKey: 'store' },
+      orders: { x: 1100, y: 460, label: 'Orders', colorKey: 'store' },
+      payments: { x: 620, y: 600, label: 'Payments', colorKey: 'external' },
+      risk: { x: 860, y: 600, label: 'Risk', colorKey: 'api' },
+      ledger: { x: 1100, y: 600, label: 'Ledger', colorKey: 'store' },
+      fulfillment: { x: 860, y: 740, label: 'Fulfillment', colorKey: 'api' },
+      carrier: { x: 1100, y: 740, label: 'Carrier', colorKey: 'external' },
+      tracking: { x: 1100, y: 320, label: 'Tracking', colorKey: 'stream' },
+      returns: { x: 380, y: 740, label: 'Returns', colorKey: 'api' },
+      refunds: { x: 620, y: 740, label: 'Refunds', colorKey: 'api' },
+      notify: { x: 380, y: 600, label: 'Notify', colorKey: 'external' }
+    }
+  },
+
+  roposo: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','feed','rank','upload','obj','transcode','cdn','catalog','write','comments','fanout','notify','ads','metrics','analytics','moderation'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      feed: { x: 380, y: 180, label: 'Feed', colorKey: 'api' },
+      rank: { x: 620, y: 180, label: 'Ranking', colorKey: 'api' },
+      upload: { x: 380, y: 320, label: 'Upload', colorKey: 'api' },
+      obj: { x: 620, y: 320, label: 'Object Store', colorKey: 'store' },
+      transcode: { x: 860, y: 320, label: 'Transcode', colorKey: 'queue' },
+      cdn: { x: 1100, y: 320, label: 'CDN', colorKey: 'cdn' },
+      catalog: { x: 620, y: 460, label: 'Catalog', colorKey: 'store' },
+      write: { x: 860, y: 460, label: 'Writes', colorKey: 'store' },
+      comments: { x: 380, y: 460, label: 'Comments', colorKey: 'store' },
+      fanout: { x: 1100, y: 460, label: 'Fanout', colorKey: 'queue' },
+      notify: { x: 1100, y: 600, label: 'Notify', colorKey: 'external' },
+      ads: { x: 860, y: 600, label: 'Ads', colorKey: 'api' },
+      metrics: { x: 620, y: 600, label: 'Telemetry', colorKey: 'stream' },
+      analytics: { x: 380, y: 600, label: 'Analytics', colorKey: 'store' },
+      moderation: { x: 620, y: 740, label: 'Moderation', colorKey: 'api' }
+    }
+  },
+
+  likee: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','feed','rank','upload','obj','transcode','cdn','write','comments','fanout','notify','ads','metrics','analytics','moderation'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      feed: { x: 380, y: 180, label: 'Feed', colorKey: 'api' },
+      rank: { x: 620, y: 180, label: 'Ranking', colorKey: 'api' },
+      upload: { x: 380, y: 320, label: 'Upload', colorKey: 'api' },
+      obj: { x: 620, y: 320, label: 'Object Store', colorKey: 'store' },
+      transcode: { x: 860, y: 320, label: 'Transcode', colorKey: 'queue' },
+      cdn: { x: 1100, y: 320, label: 'CDN', colorKey: 'cdn' },
+      write: { x: 860, y: 460, label: 'Writes', colorKey: 'store' },
+      comments: { x: 380, y: 460, label: 'Comments', colorKey: 'store' },
+      fanout: { x: 1100, y: 460, label: 'Fanout', colorKey: 'queue' },
+      notify: { x: 1100, y: 600, label: 'Notify', colorKey: 'external' },
+      ads: { x: 860, y: 600, label: 'Ads', colorKey: 'api' },
+      metrics: { x: 620, y: 600, label: 'Telemetry', colorKey: 'stream' },
+      analytics: { x: 380, y: 600, label: 'Analytics', colorKey: 'store' },
+      moderation: { x: 620, y: 740, label: 'Moderation', colorKey: 'api' }
+    }
+  }
+});
+
 
 // ----- Batch 32 (System - from user selection) -----
 
