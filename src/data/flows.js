@@ -4691,6 +4691,420 @@ export const FLOWS = {
     ]
   },
 
+  linear: {
+    title: 'Linear',
+    steps: [
+      {
+        title: 'Sign in + load org',
+        desc: 'User signs in and loads org, teams, and project context.',
+        active: ['client','auth','org','projects'],
+        edges: [['client','auth'], ['auth','org'], ['org','projects']]
+      },
+      {
+        title: 'Create issue + triage',
+        desc: 'Issue created; triage assigns team, priority, and labels.',
+        active: ['issues','triage'],
+        edges: [['client','issues'], ['issues','triage']]
+      },
+      {
+        title: 'Workflow + notifications',
+        desc: 'Workflow updates status; notifications alert assignees and watchers.',
+        active: ['workflow','notifications'],
+        edges: [['triage','workflow'], ['workflow','notifications']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Search uses index across issues/projects to jump quickly.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','issues']]
+      },
+      {
+        title: 'Sync + integrations',
+        desc: 'Sync keeps clients consistent; integrations/webhooks update external tools.',
+        active: ['sync','integrations','webhooks'],
+        edges: [['workflow','sync'], ['sync','integrations'], ['sync','webhooks']]
+      },
+      {
+        title: 'Analytics + audit',
+        desc: 'Analytics track cycle time; audit logs changes for compliance.',
+        active: ['analytics','audit'],
+        edges: [['issues','analytics'], ['issues','audit']]
+      }
+    ]
+  },
+
+  height: {
+    title: 'Height',
+    steps: [
+      {
+        title: 'Open workspace + project',
+        desc: 'User loads workspace and selects a project view.',
+        active: ['client','auth','workspace','projects'],
+        edges: [['client','auth'], ['auth','workspace'], ['workspace','projects']]
+      },
+      {
+        title: 'Create task + workflow',
+        desc: 'Task created; workflow state and ownership assigned.',
+        active: ['tasks','workflow'],
+        edges: [['client','tasks'], ['tasks','workflow']]
+      },
+      {
+        title: 'Automation + notifications',
+        desc: 'Automation triggers rules and notifications for deadlines and changes.',
+        active: ['automation','notify'],
+        edges: [['workflow','automation'], ['automation','notify']]
+      },
+      {
+        title: 'Docs + chat collaboration',
+        desc: 'Docs and chat attach context and sync for team collaboration.',
+        active: ['docs','chat'],
+        edges: [['tasks','docs'], ['docs','chat']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Search uses index across tasks/docs for quick navigation.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','tasks']]
+      },
+      {
+        title: 'Integrations + analytics',
+        desc: 'Integrations sync with external tools; analytics track delivery metrics.',
+        active: ['integrations','analytics'],
+        edges: [['tasks','integrations'], ['tasks','analytics']]
+      }
+    ]
+  },
+
+  basecamp: {
+    title: 'Basecamp',
+    steps: [
+      {
+        title: 'Sign in + open project',
+        desc: 'User signs in and loads project home with tools enabled.',
+        active: ['client','auth','projects'],
+        edges: [['client','auth'], ['auth','projects']]
+      },
+      {
+        title: 'Messages + to-dos',
+        desc: 'Team posts messages and creates to-dos; notifications keep people updated.',
+        active: ['messages','todos','notify'],
+        edges: [['projects','messages'], ['projects','todos'], ['messages','notify']]
+      },
+      {
+        title: 'Docs + files',
+        desc: 'Docs written and files uploaded/served from storage/CDN.',
+        active: ['docs','files'],
+        edges: [['projects','docs'], ['docs','files']]
+      },
+      {
+        title: 'Schedule + chat',
+        desc: 'Schedules coordinate work; chat keeps discussions flowing.',
+        active: ['schedule','chat'],
+        edges: [['projects','schedule'], ['projects','chat']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Search uses index across messages, docs, and to-dos.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','projects']]
+      },
+      {
+        title: 'Integrations + analytics',
+        desc: 'Integrations sync external context; analytics summarize engagement.',
+        active: ['integrations','analytics'],
+        edges: [['projects','integrations'], ['projects','analytics']]
+      }
+    ]
+  },
+
+  wrike: {
+    title: 'Wrike',
+    steps: [
+      {
+        title: 'Open workspace',
+        desc: 'User authenticates and loads workspace with projects and tasks.',
+        active: ['client','auth','workspace','projects'],
+        edges: [['client','auth'], ['auth','workspace'], ['workspace','projects']]
+      },
+      {
+        title: 'Manage tasks + workflow',
+        desc: 'Tasks created and moved through workflow; automation triggers rules.',
+        active: ['tasks','workflow','automation'],
+        edges: [['projects','tasks'], ['tasks','workflow'], ['workflow','automation']]
+      },
+      {
+        title: 'Gantt planning',
+        desc: 'Gantt view computes dependencies and schedules.',
+        active: ['gantt'],
+        edges: [['tasks','gantt']]
+      },
+      {
+        title: 'Files + approvals',
+        desc: 'Files attached and reviewed; approvals update task status.',
+        active: ['files','approval'],
+        edges: [['tasks','files'], ['files','approval'], ['approval','tasks']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Search uses index across tasks and docs.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','tasks']]
+      },
+      {
+        title: 'Integrations + reports',
+        desc: 'Integrations connect tools; reports and analytics track progress.',
+        active: ['integrations','reports','analytics'],
+        edges: [['tasks','integrations'], ['tasks','reports'], ['reports','analytics']]
+      }
+    ]
+  },
+
+  teamwork: {
+    title: 'Teamwork',
+    steps: [
+      {
+        title: 'Create project + tasks',
+        desc: 'Projects created; tasks and milestones planned.',
+        active: ['projects','tasks','milestones'],
+        edges: [['client','projects'], ['projects','tasks'], ['tasks','milestones']]
+      },
+      {
+        title: 'Time tracking + billing',
+        desc: 'Time logs captured and used for billing/invoicing workflows.',
+        active: ['time','billing'],
+        edges: [['client','time'], ['time','billing']]
+      },
+      {
+        title: 'Messages + files',
+        desc: 'Team posts messages and shares files; notifications keep stakeholders updated.',
+        active: ['messages','files','notify'],
+        edges: [['projects','messages'], ['projects','files'], ['messages','notify']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Search uses index across tasks/messages/files.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','projects']]
+      },
+      {
+        title: 'Integrations + reporting',
+        desc: 'Integrations sync external tools; reports/analytics track delivery.',
+        active: ['integrations','reports','analytics'],
+        edges: [['projects','integrations'], ['projects','reports'], ['reports','analytics']]
+      }
+    ]
+  },
+
+  proofhub: {
+    title: 'ProofHub',
+    steps: [
+      {
+        title: 'Project + tasks',
+        desc: 'Create project and tasks; workflow states manage progress.',
+        active: ['projects','tasks','workflow'],
+        edges: [['client','projects'], ['projects','tasks'], ['tasks','workflow']]
+      },
+      {
+        title: 'Files + proofing',
+        desc: 'Files uploaded for review; proofing adds markup/comments.',
+        active: ['files','proofing'],
+        edges: [['tasks','files'], ['files','proofing']]
+      },
+      {
+        title: 'Approvals',
+        desc: 'Approvals capture stakeholder sign-off and update workflow status.',
+        active: ['approvals','notify'],
+        edges: [['proofing','approvals'], ['approvals','notify']]
+      },
+      {
+        title: 'Chat collaboration',
+        desc: 'Team chat provides realtime coordination around tasks and reviews.',
+        active: ['chat'],
+        edges: [['client','chat']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Search uses index to find tasks, files, and messages.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','tasks']]
+      },
+      {
+        title: 'Reports + analytics',
+        desc: 'Reports and analytics track throughput and review cycle times.',
+        active: ['reports','analytics'],
+        edges: [['tasks','reports'], ['reports','analytics']]
+      }
+    ]
+  },
+
+  smartsheet: {
+    title: 'Smartsheet',
+    steps: [
+      {
+        title: 'Open sheet + rows',
+        desc: 'User opens workspace and sheet; rows loaded with permissions enforced.',
+        active: ['client','auth','workspace','sheets','rows','permissions'],
+        edges: [['client','auth'], ['auth','workspace'], ['workspace','sheets'], ['sheets','rows'], ['permissions','sheets']]
+      },
+      {
+        title: 'Formulas + automation',
+        desc: 'Edits trigger formula evaluation and automation workflows.',
+        active: ['formulas','automation'],
+        edges: [['rows','formulas'], ['formulas','automation']]
+      },
+      {
+        title: 'Realtime collaboration',
+        desc: 'Realtime updates sync to collaborators.',
+        active: ['realtime'],
+        edges: [['realtime','client']]
+      },
+      {
+        title: 'Integrations',
+        desc: 'Integrations sync sheet changes to external systems.',
+        active: ['integrations'],
+        edges: [['automation','integrations']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Search uses index across sheets and attachments.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','sheets']]
+      },
+      {
+        title: 'Export + audit + analytics',
+        desc: 'Exports produce files; audit tracks changes; analytics reports usage.',
+        active: ['export','audit','analytics'],
+        edges: [['sheets','export'], ['sheets','audit'], ['sheets','analytics']]
+      }
+    ]
+  },
+
+  quip: {
+    title: 'Quip',
+    steps: [
+      {
+        title: 'Open workspace + doc',
+        desc: 'User signs in and opens a doc with embedded spreadsheet.',
+        active: ['client','auth','workspace','docs','spreadsheets'],
+        edges: [['client','auth'], ['auth','workspace'], ['workspace','docs'], ['docs','spreadsheets']]
+      },
+      {
+        title: 'Comments + collaboration',
+        desc: 'Comments and realtime collaboration keep teammates aligned.',
+        active: ['comments','realtime'],
+        edges: [['docs','comments'], ['docs','realtime'], ['realtime','client']]
+      },
+      {
+        title: 'Permissions',
+        desc: 'Permissions enforce access and sharing rules.',
+        active: ['permissions'],
+        edges: [['docs','permissions']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Search uses index across docs and comments.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','docs']]
+      },
+      {
+        title: 'Export + integrations',
+        desc: 'Exports create files; integrations sync with external tools.',
+        active: ['export','integrations'],
+        edges: [['docs','export'], ['docs','integrations']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics track collaboration and document engagement.',
+        active: ['analytics'],
+        edges: [['docs','analytics']]
+      }
+    ]
+  },
+
+  notability: {
+    title: 'Notability',
+    steps: [
+      {
+        title: 'Create note + ink',
+        desc: 'User creates a note and writes with ink tools; content stored in library.',
+        active: ['client','library','notes','ink'],
+        edges: [['client','library'], ['library','notes'], ['notes','ink']]
+      },
+      {
+        title: 'Record audio',
+        desc: 'Audio recorded alongside notes for replay and study.',
+        active: ['audio'],
+        edges: [['notes','audio']]
+      },
+      {
+        title: 'OCR + indexing',
+        desc: 'OCR extracts text; index enables search across handwritten content.',
+        active: ['ocr','index'],
+        edges: [['notes','ocr'], ['ocr','index']]
+      },
+      {
+        title: 'Search',
+        desc: 'Search hits index and returns matching notes/pages.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','notes']]
+      },
+      {
+        title: 'Sync + cloud',
+        desc: 'Sync replicates notes and audio to cloud and other devices.',
+        active: ['sync','cloud'],
+        edges: [['notes','sync'], ['sync','cloud']]
+      },
+      {
+        title: 'Share + export + backups',
+        desc: 'Share links and exports generate files; backups protect retention.',
+        active: ['share','export','backups'],
+        edges: [['notes','share'], ['notes','export'], ['notes','backups']]
+      }
+    ]
+  },
+
+  goodnotes: {
+    title: 'GoodNotes',
+    steps: [
+      {
+        title: 'Create notebook + template',
+        desc: 'User creates notebook and selects templates/paper styles.',
+        active: ['client','library','notebooks','templates'],
+        edges: [['client','library'], ['library','notebooks'], ['notebooks','templates']]
+      },
+      {
+        title: 'Write with ink',
+        desc: 'Ink strokes persisted to notebook pages.',
+        active: ['ink','notebooks'],
+        edges: [['notebooks','ink']]
+      },
+      {
+        title: 'OCR + indexing',
+        desc: 'OCR extracts text; index enables fast search.',
+        active: ['ocr','index'],
+        edges: [['notebooks','ocr'], ['ocr','index']]
+      },
+      {
+        title: 'Search',
+        desc: 'Search uses index across notebooks and pages.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','notebooks']]
+      },
+      {
+        title: 'Sync + cloud',
+        desc: 'Sync replicates notebooks to cloud and other devices.',
+        active: ['sync','cloud'],
+        edges: [['notebooks','sync'], ['sync','cloud']]
+      },
+      {
+        title: 'Export + share + backup',
+        desc: 'Exports generate PDFs; sharing sends links/files; backups protect retention.',
+        active: ['export','share','backup'],
+        edges: [['notebooks','export'], ['notebooks','share'], ['notebooks','backup']]
+      }
+    ]
+  },
+
   chime: {
     title: 'Chime',
     steps: [

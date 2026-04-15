@@ -13294,6 +13294,562 @@ Object.assign(SYSTEM_LAYOUTS, {
   }
 });
 
+// ----- Batch 52 (System + Architecture - project mgmt + sheets + notes) -----
+
+Object.assign(SYSTEM_LAYOUTS, {
+  linear: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','org','projects','issues','triage','workflow','notifications','search','index','sync','integrations','webhooks','analytics','audit'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      org: { x: 620, y: 180, label: 'Org', colorKey: 'store' },
+      projects: { x: 860, y: 180, label: 'Projects', colorKey: 'store' },
+      issues: { x: 1100, y: 180, label: 'Issues', colorKey: 'store' },
+      triage: { x: 620, y: 320, label: 'Triage', colorKey: 'api' },
+      workflow: { x: 860, y: 320, label: 'Workflow', colorKey: 'queue' },
+      notifications: { x: 380, y: 320, label: 'Notify', colorKey: 'external' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 460, label: 'Index', colorKey: 'store' },
+      sync: { x: 1100, y: 320, label: 'Sync', colorKey: 'api' },
+      integrations: { x: 1100, y: 460, label: 'Integrations', colorKey: 'external' },
+      webhooks: { x: 380, y: 460, label: 'Webhooks', colorKey: 'external' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' },
+      audit: { x: 860, y: 600, label: 'Audit', colorKey: 'store' }
+    }
+  },
+
+  height: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','workspace','projects','tasks','workflow','automation','docs','chat','search','index','integrations','notify','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      workspace: { x: 620, y: 180, label: 'Workspace', colorKey: 'store' },
+      projects: { x: 860, y: 180, label: 'Projects', colorKey: 'store' },
+      tasks: { x: 1100, y: 180, label: 'Tasks', colorKey: 'store' },
+      workflow: { x: 620, y: 320, label: 'Workflow', colorKey: 'queue' },
+      automation: { x: 860, y: 320, label: 'Automation', colorKey: 'api' },
+      docs: { x: 1100, y: 320, label: 'Docs', colorKey: 'store' },
+      chat: { x: 380, y: 320, label: 'Chat', colorKey: 'stream' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 460, label: 'Index', colorKey: 'store' },
+      integrations: { x: 1100, y: 460, label: 'Integrations', colorKey: 'external' },
+      notify: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  basecamp: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','projects','messages','todos','docs','files','schedule','chat','notify','search','index','integrations','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      projects: { x: 620, y: 180, label: 'Projects', colorKey: 'store' },
+      messages: { x: 860, y: 180, label: 'Messages', colorKey: 'store' },
+      todos: { x: 1100, y: 180, label: 'To-dos', colorKey: 'store' },
+      docs: { x: 620, y: 320, label: 'Docs', colorKey: 'store' },
+      files: { x: 860, y: 320, label: 'Files', colorKey: 'cdn' },
+      schedule: { x: 1100, y: 320, label: 'Schedule', colorKey: 'store' },
+      chat: { x: 380, y: 320, label: 'Chat', colorKey: 'stream' },
+      notify: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 460, label: 'Index', colorKey: 'store' },
+      integrations: { x: 1100, y: 460, label: 'Integrations', colorKey: 'external' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  wrike: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','workspace','projects','tasks','gantt','workflow','automation','files','approval','search','index','integrations','reports','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      workspace: { x: 620, y: 180, label: 'Workspace', colorKey: 'store' },
+      projects: { x: 860, y: 180, label: 'Projects', colorKey: 'store' },
+      tasks: { x: 1100, y: 180, label: 'Tasks', colorKey: 'store' },
+      gantt: { x: 620, y: 320, label: 'Gantt', colorKey: 'api' },
+      workflow: { x: 860, y: 320, label: 'Workflow', colorKey: 'queue' },
+      automation: { x: 1100, y: 320, label: 'Automation', colorKey: 'api' },
+      files: { x: 380, y: 320, label: 'Files', colorKey: 'cdn' },
+      approval: { x: 380, y: 460, label: 'Approvals', colorKey: 'api' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 460, label: 'Index', colorKey: 'store' },
+      integrations: { x: 1100, y: 460, label: 'Integrations', colorKey: 'external' },
+      reports: { x: 620, y: 600, label: 'Reports', colorKey: 'store' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  teamwork: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','projects','tasks','milestones','time','billing','messages','files','notify','search','index','integrations','reports','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      projects: { x: 620, y: 180, label: 'Projects', colorKey: 'store' },
+      tasks: { x: 860, y: 180, label: 'Tasks', colorKey: 'store' },
+      milestones: { x: 1100, y: 180, label: 'Milestones', colorKey: 'store' },
+      time: { x: 620, y: 320, label: 'Time', colorKey: 'store' },
+      billing: { x: 860, y: 320, label: 'Billing', colorKey: 'api' },
+      messages: { x: 1100, y: 320, label: 'Messages', colorKey: 'store' },
+      files: { x: 380, y: 320, label: 'Files', colorKey: 'cdn' },
+      notify: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 460, label: 'Index', colorKey: 'store' },
+      integrations: { x: 1100, y: 460, label: 'Integrations', colorKey: 'external' },
+      reports: { x: 620, y: 600, label: 'Reports', colorKey: 'store' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  proofhub: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','projects','tasks','workflow','files','proofing','approvals','chat','notify','search','index','integrations','reports','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      projects: { x: 620, y: 180, label: 'Projects', colorKey: 'store' },
+      tasks: { x: 860, y: 180, label: 'Tasks', colorKey: 'store' },
+      workflow: { x: 1100, y: 180, label: 'Workflow', colorKey: 'queue' },
+      files: { x: 620, y: 320, label: 'Files', colorKey: 'cdn' },
+      proofing: { x: 860, y: 320, label: 'Proofing', colorKey: 'api' },
+      approvals: { x: 1100, y: 320, label: 'Approvals', colorKey: 'api' },
+      chat: { x: 380, y: 320, label: 'Chat', colorKey: 'stream' },
+      notify: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 460, label: 'Index', colorKey: 'store' },
+      integrations: { x: 1100, y: 460, label: 'Integrations', colorKey: 'external' },
+      reports: { x: 620, y: 600, label: 'Reports', colorKey: 'store' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  smartsheet: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','workspace','sheets','rows','formulas','automation','integrations','realtime','permissions','search','index','export','analytics','audit'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      workspace: { x: 620, y: 180, label: 'Workspace', colorKey: 'store' },
+      sheets: { x: 860, y: 180, label: 'Sheets', colorKey: 'store' },
+      rows: { x: 1100, y: 180, label: 'Rows', colorKey: 'store' },
+      formulas: { x: 620, y: 320, label: 'Formulas', colorKey: 'api' },
+      automation: { x: 860, y: 320, label: 'Automation', colorKey: 'queue' },
+      integrations: { x: 1100, y: 320, label: 'Integrations', colorKey: 'external' },
+      realtime: { x: 380, y: 320, label: 'Realtime', colorKey: 'stream' },
+      permissions: { x: 380, y: 180, label: 'Permissions', colorKey: 'api' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 460, label: 'Index', colorKey: 'store' },
+      export: { x: 1100, y: 460, label: 'Export', colorKey: 'api' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' },
+      audit: { x: 860, y: 600, label: 'Audit', colorKey: 'store' }
+    }
+  },
+
+  quip: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','workspace','docs','spreadsheets','comments','realtime','permissions','search','index','export','integrations','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      workspace: { x: 620, y: 180, label: 'Workspace', colorKey: 'store' },
+      docs: { x: 860, y: 180, label: 'Docs', colorKey: 'store' },
+      spreadsheets: { x: 1100, y: 180, label: 'Spreadsheets', colorKey: 'store' },
+      comments: { x: 380, y: 320, label: 'Comments', colorKey: 'store' },
+      realtime: { x: 620, y: 320, label: 'Realtime', colorKey: 'stream' },
+      permissions: { x: 860, y: 320, label: 'Permissions', colorKey: 'api' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 460, label: 'Index', colorKey: 'store' },
+      export: { x: 1100, y: 460, label: 'Export', colorKey: 'api' },
+      integrations: { x: 380, y: 460, label: 'Integrations', colorKey: 'external' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  notability: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','library','notes','ink','audio','search','index','sync','cloud','share','export','ocr','backups','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      library: { x: 380, y: 240, label: 'Library', colorKey: 'store' },
+      notes: { x: 620, y: 180, label: 'Notes', colorKey: 'store' },
+      ink: { x: 860, y: 180, label: 'Ink', colorKey: 'api' },
+      audio: { x: 1100, y: 180, label: 'Audio', colorKey: 'store' },
+      search: { x: 620, y: 320, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 320, label: 'Index', colorKey: 'store' },
+      sync: { x: 380, y: 420, label: 'Sync', colorKey: 'api' },
+      cloud: { x: 140, y: 460, label: 'Cloud', colorKey: 'external' },
+      share: { x: 1100, y: 320, label: 'Share', colorKey: 'external' },
+      export: { x: 620, y: 460, label: 'Export', colorKey: 'api' },
+      ocr: { x: 860, y: 460, label: 'OCR', colorKey: 'api' },
+      backups: { x: 1100, y: 460, label: 'Backups', colorKey: 'external' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  goodnotes: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','library','notebooks','ink','templates','search','index','sync','cloud','share','export','ocr','backup','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      library: { x: 380, y: 240, label: 'Library', colorKey: 'store' },
+      notebooks: { x: 620, y: 180, label: 'Notebooks', colorKey: 'store' },
+      ink: { x: 860, y: 180, label: 'Ink', colorKey: 'api' },
+      templates: { x: 1100, y: 180, label: 'Templates', colorKey: 'store' },
+      search: { x: 620, y: 320, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 320, label: 'Index', colorKey: 'store' },
+      sync: { x: 380, y: 420, label: 'Sync', colorKey: 'api' },
+      cloud: { x: 140, y: 460, label: 'Cloud', colorKey: 'external' },
+      share: { x: 1100, y: 320, label: 'Share', colorKey: 'external' },
+      export: { x: 620, y: 460, label: 'Export', colorKey: 'api' },
+      ocr: { x: 860, y: 460, label: 'OCR', colorKey: 'api' },
+      backup: { x: 1100, y: 460, label: 'Backup', colorKey: 'external' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  }
+});
+
+Object.assign(ARCH_LAYOUTS, {
+  linear: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Linear Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','org','projects','issues','triage','workflow','notifications','search','index','sync','integrations','webhooks','analytics','audit'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      org: { x: 600, y: 160, label: 'Org' },
+      projects: { x: 880, y: 160, label: 'Projects' },
+      issues: { x: 1160, y: 160, label: 'Issues' },
+      triage: { x: 600, y: 300, label: 'Triage' },
+      workflow: { x: 880, y: 300, label: 'Workflow' },
+      notifications: { x: 320, y: 300, label: 'Notify' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 880, y: 440, label: 'Index' },
+      sync: { x: 1160, y: 300, label: 'Sync' },
+      integrations: { x: 1160, y: 440, label: 'Integrations' },
+      webhooks: { x: 320, y: 440, label: 'Webhooks' },
+      analytics: { x: 600, y: 580, label: 'Analytics' },
+      audit: { x: 880, y: 580, label: 'Audit' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','org','org'], ['org','projects','proj']);
+      if(stepIdx===2) e.push(['projects','issues','issue'], ['issues','triage','triage']);
+      if(stepIdx===3) e.push(['triage','workflow','wf'], ['workflow','notifications','notify']);
+      if(stepIdx===4) e.push(['client','search','search'], ['search','index','index'], ['index','issues','results']);
+      if(stepIdx===5) e.push(['workflow','sync','sync'], ['sync','integrations','integrate'], ['sync','webhooks','hooks']);
+      if(stepIdx===6) e.push(['issues','analytics','analytics'], ['issues','audit','audit']);
+      return e;
+    }
+  },
+
+  height: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Height Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','workspace','projects','tasks','workflow','automation','docs','chat','search','index','integrations','notify','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      workspace: { x: 600, y: 160, label: 'Workspace' },
+      projects: { x: 880, y: 160, label: 'Projects' },
+      tasks: { x: 1160, y: 160, label: 'Tasks' },
+      workflow: { x: 600, y: 300, label: 'Workflow' },
+      automation: { x: 880, y: 300, label: 'Automation' },
+      docs: { x: 1160, y: 300, label: 'Docs' },
+      chat: { x: 320, y: 300, label: 'Chat' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 880, y: 440, label: 'Index' },
+      integrations: { x: 1160, y: 440, label: 'Integrations' },
+      notify: { x: 320, y: 440, label: 'Notify' },
+      analytics: { x: 600, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','workspace','ws'], ['workspace','projects','proj']);
+      if(stepIdx===2) e.push(['projects','tasks','task'], ['tasks','workflow','wf']);
+      if(stepIdx===3) e.push(['workflow','automation','auto'], ['automation','notify','notify']);
+      if(stepIdx===4) e.push(['tasks','docs','doc'], ['docs','chat','chat']);
+      if(stepIdx===5) e.push(['client','search','search'], ['search','index','index'], ['index','tasks','results']);
+      if(stepIdx===6) e.push(['tasks','integrations','integrate'], ['tasks','analytics','analytics']);
+      return e;
+    }
+  },
+
+  basecamp: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Basecamp Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','projects','messages','todos','docs','files','schedule','chat','notify','search','index','integrations','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      projects: { x: 600, y: 160, label: 'Projects' },
+      messages: { x: 880, y: 160, label: 'Messages' },
+      todos: { x: 1160, y: 160, label: 'To-dos' },
+      docs: { x: 600, y: 300, label: 'Docs' },
+      files: { x: 880, y: 300, label: 'Files' },
+      schedule: { x: 1160, y: 300, label: 'Schedule' },
+      chat: { x: 320, y: 300, label: 'Chat' },
+      notify: { x: 320, y: 440, label: 'Notify' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 880, y: 440, label: 'Index' },
+      integrations: { x: 1160, y: 440, label: 'Integrations' },
+      analytics: { x: 600, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','projects','proj']);
+      if(stepIdx===2) e.push(['projects','messages','msg'], ['projects','todos','todo'], ['projects','docs','doc']);
+      if(stepIdx===3) e.push(['files','projects','file'], ['schedule','projects','sched']);
+      if(stepIdx===4) e.push(['chat','notify','notify']);
+      if(stepIdx===5) e.push(['client','search','search'], ['search','index','index'], ['index','projects','results']);
+      if(stepIdx===6) e.push(['projects','integrations','integrate'], ['projects','analytics','analytics']);
+      return e;
+    }
+  },
+
+  wrike: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Wrike Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','workspace','projects','tasks','gantt','workflow','automation','files','approval','search','index','integrations','reports','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      workspace: { x: 600, y: 160, label: 'Workspace' },
+      projects: { x: 880, y: 160, label: 'Projects' },
+      tasks: { x: 1160, y: 160, label: 'Tasks' },
+      gantt: { x: 600, y: 300, label: 'Gantt' },
+      workflow: { x: 880, y: 300, label: 'Workflow' },
+      automation: { x: 1160, y: 300, label: 'Automation' },
+      files: { x: 320, y: 300, label: 'Files' },
+      approval: { x: 320, y: 440, label: 'Approvals' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 880, y: 440, label: 'Index' },
+      integrations: { x: 1160, y: 440, label: 'Integrations' },
+      reports: { x: 600, y: 580, label: 'Reports' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','workspace','ws'], ['workspace','projects','proj']);
+      if(stepIdx===2) e.push(['projects','tasks','task'], ['tasks','workflow','wf'], ['workflow','automation','auto']);
+      if(stepIdx===3) e.push(['tasks','gantt','gantt']);
+      if(stepIdx===4) e.push(['files','approval','approve'], ['approval','tasks','status']);
+      if(stepIdx===5) e.push(['client','search','search'], ['search','index','index'], ['index','tasks','results']);
+      if(stepIdx===6) e.push(['tasks','integrations','integrate'], ['tasks','reports','reports'], ['reports','analytics','analytics']);
+      return e;
+    }
+  },
+
+  teamwork: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Teamwork Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','projects','tasks','milestones','time','billing','messages','files','notify','search','index','integrations','reports','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      projects: { x: 600, y: 160, label: 'Projects' },
+      tasks: { x: 880, y: 160, label: 'Tasks' },
+      milestones: { x: 1160, y: 160, label: 'Milestones' },
+      time: { x: 600, y: 300, label: 'Time' },
+      billing: { x: 880, y: 300, label: 'Billing' },
+      messages: { x: 1160, y: 300, label: 'Messages' },
+      files: { x: 320, y: 300, label: 'Files' },
+      notify: { x: 320, y: 440, label: 'Notify' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 880, y: 440, label: 'Index' },
+      integrations: { x: 1160, y: 440, label: 'Integrations' },
+      reports: { x: 600, y: 580, label: 'Reports' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','projects','proj'], ['projects','tasks','task']);
+      if(stepIdx===2) e.push(['tasks','milestones','mile'], ['tasks','messages','msg']);
+      if(stepIdx===3) e.push(['client','time','time'], ['time','billing','bill']);
+      if(stepIdx===4) e.push(['files','projects','file'], ['messages','notify','notify']);
+      if(stepIdx===5) e.push(['client','search','search'], ['search','index','index'], ['index','projects','results']);
+      if(stepIdx===6) e.push(['projects','integrations','integrate'], ['projects','reports','reports'], ['reports','analytics','analytics']);
+      return e;
+    }
+  },
+
+  proofhub: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'ProofHub Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','projects','tasks','workflow','files','proofing','approvals','chat','notify','search','index','integrations','reports','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      projects: { x: 600, y: 160, label: 'Projects' },
+      tasks: { x: 880, y: 160, label: 'Tasks' },
+      workflow: { x: 1160, y: 160, label: 'Workflow' },
+      files: { x: 600, y: 300, label: 'Files' },
+      proofing: { x: 880, y: 300, label: 'Proofing' },
+      approvals: { x: 1160, y: 300, label: 'Approvals' },
+      chat: { x: 320, y: 300, label: 'Chat' },
+      notify: { x: 320, y: 440, label: 'Notify' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 880, y: 440, label: 'Index' },
+      integrations: { x: 1160, y: 440, label: 'Integrations' },
+      reports: { x: 600, y: 580, label: 'Reports' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','projects','proj'], ['projects','tasks','task']);
+      if(stepIdx===2) e.push(['tasks','workflow','wf'], ['workflow','notify','notify']);
+      if(stepIdx===3) e.push(['tasks','files','file'], ['files','proofing','proof'], ['proofing','approvals','approve']);
+      if(stepIdx===4) e.push(['chat','notify','notify']);
+      if(stepIdx===5) e.push(['client','search','search'], ['search','index','index'], ['index','tasks','results']);
+      if(stepIdx===6) e.push(['tasks','integrations','integrate'], ['tasks','reports','reports'], ['reports','analytics','analytics']);
+      return e;
+    }
+  },
+
+  smartsheet: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Smartsheet Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','workspace','sheets','rows','formulas','automation','integrations','realtime','permissions','search','index','export','analytics','audit'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      workspace: { x: 600, y: 160, label: 'Workspace' },
+      sheets: { x: 880, y: 160, label: 'Sheets' },
+      rows: { x: 1160, y: 160, label: 'Rows' },
+      formulas: { x: 600, y: 300, label: 'Formulas' },
+      automation: { x: 880, y: 300, label: 'Automation' },
+      integrations: { x: 1160, y: 300, label: 'Integrations' },
+      realtime: { x: 320, y: 300, label: 'Realtime' },
+      permissions: { x: 320, y: 160, label: 'Permissions' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 880, y: 440, label: 'Index' },
+      export: { x: 1160, y: 440, label: 'Export' },
+      analytics: { x: 600, y: 580, label: 'Analytics' },
+      audit: { x: 880, y: 580, label: 'Audit' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','workspace','ws'], ['workspace','sheets','sheet']);
+      if(stepIdx===2) e.push(['sheets','rows','row'], ['rows','formulas','formula']);
+      if(stepIdx===3) e.push(['formulas','automation','auto'], ['automation','integrations','integrate']);
+      if(stepIdx===4) e.push(['realtime','client','updates'], ['permissions','sheets','perm']);
+      if(stepIdx===5) e.push(['client','search','search'], ['search','index','index'], ['index','sheets','results']);
+      if(stepIdx===6) e.push(['sheets','export','export']);
+      if(stepIdx===7) e.push(['sheets','analytics','analytics'], ['sheets','audit','audit']);
+      return e;
+    }
+  },
+
+  quip: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Quip Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','workspace','docs','spreadsheets','comments','realtime','permissions','search','index','export','integrations','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      workspace: { x: 600, y: 160, label: 'Workspace' },
+      docs: { x: 880, y: 160, label: 'Docs' },
+      spreadsheets: { x: 1160, y: 160, label: 'Spreadsheets' },
+      comments: { x: 320, y: 300, label: 'Comments' },
+      realtime: { x: 600, y: 300, label: 'Realtime' },
+      permissions: { x: 880, y: 300, label: 'Permissions' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 880, y: 440, label: 'Index' },
+      export: { x: 1160, y: 440, label: 'Export' },
+      integrations: { x: 320, y: 440, label: 'Integrations' },
+      analytics: { x: 600, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','workspace','ws'], ['workspace','docs','doc']);
+      if(stepIdx===2) e.push(['docs','spreadsheets','sheet'], ['docs','comments','comment']);
+      if(stepIdx===3) e.push(['docs','realtime','rt'], ['realtime','client','updates'], ['docs','permissions','perm']);
+      if(stepIdx===4) e.push(['client','search','search'], ['search','index','index'], ['index','docs','results']);
+      if(stepIdx===5) e.push(['docs','integrations','integrate']);
+      if(stepIdx===6) e.push(['docs','export','export'], ['docs','analytics','analytics']);
+      return e;
+    }
+  },
+
+  notability: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Notability Storage + Sync',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','library','notes','ink','audio','search','index','sync','cloud','share','export','ocr','backups','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      library: { x: 320, y: 240, label: 'Library' },
+      notes: { x: 600, y: 160, label: 'Notes' },
+      ink: { x: 880, y: 160, label: 'Ink' },
+      audio: { x: 1160, y: 160, label: 'Audio' },
+      search: { x: 600, y: 300, label: 'Search' },
+      index: { x: 880, y: 300, label: 'Index' },
+      sync: { x: 320, y: 380, label: 'Sync' },
+      cloud: { x: 40, y: 460, label: 'Cloud' },
+      share: { x: 1160, y: 300, label: 'Share' },
+      export: { x: 600, y: 440, label: 'Export' },
+      ocr: { x: 880, y: 440, label: 'OCR' },
+      backups: { x: 1160, y: 440, label: 'Backups' },
+      analytics: { x: 600, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','library','open'], ['library','notes','note'], ['notes','ink','ink']);
+      if(stepIdx===2) e.push(['notes','audio','audio']);
+      if(stepIdx===3) e.push(['notes','ocr','ocr'], ['ocr','index','index']);
+      if(stepIdx===4) e.push(['client','search','search'], ['search','index','index'], ['index','notes','results']);
+      if(stepIdx===5) e.push(['notes','sync','sync'], ['sync','cloud','cloud']);
+      if(stepIdx===6) e.push(['notes','share','share'], ['notes','export','export']);
+      if(stepIdx===7) e.push(['notes','backups','backup'], ['notes','analytics','analytics']);
+      return e;
+    }
+  },
+
+  goodnotes: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'GoodNotes Storage + Sync',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','library','notebooks','ink','templates','search','index','sync','cloud','share','export','ocr','backup','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      library: { x: 320, y: 240, label: 'Library' },
+      notebooks: { x: 600, y: 160, label: 'Notebooks' },
+      ink: { x: 880, y: 160, label: 'Ink' },
+      templates: { x: 1160, y: 160, label: 'Templates' },
+      search: { x: 600, y: 300, label: 'Search' },
+      index: { x: 880, y: 300, label: 'Index' },
+      sync: { x: 320, y: 380, label: 'Sync' },
+      cloud: { x: 40, y: 460, label: 'Cloud' },
+      share: { x: 1160, y: 300, label: 'Share' },
+      export: { x: 600, y: 440, label: 'Export' },
+      ocr: { x: 880, y: 440, label: 'OCR' },
+      backup: { x: 1160, y: 440, label: 'Backup' },
+      analytics: { x: 600, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','library','open'], ['library','notebooks','notebook'], ['notebooks','templates','template']);
+      if(stepIdx===2) e.push(['notebooks','ink','ink'], ['notebooks','ocr','ocr'], ['ocr','index','index']);
+      if(stepIdx===3) e.push(['client','search','search'], ['search','index','index'], ['index','notebooks','results']);
+      if(stepIdx===4) e.push(['notebooks','sync','sync'], ['sync','cloud','cloud']);
+      if(stepIdx===5) e.push(['notebooks','share','share'], ['notebooks','export','export']);
+      if(stepIdx===6) e.push(['notebooks','backup','backup'], ['notebooks','analytics','analytics']);
+      return e;
+    }
+  }
+});
+
 Object.assign(ARCH_LAYOUTS, {
   hubspot: {
     viewBox: '0 0 1860 820',
