@@ -11141,6 +11141,306 @@ export const FLOWS = {
     ]
   },
 
+  colab: {
+    title: 'Colab',
+    steps: [
+      {
+        title: 'Open notebook from Drive',
+        desc: 'User authenticates and opens notebook from Drive.',
+        active: ['client','auth','drive','notebooks'],
+        edges: [['client','auth'], ['auth','drive'], ['drive','notebooks']]
+      },
+      {
+        title: 'Run kernel on GPU runtime',
+        desc: 'Kernel runs in runtime with optional GPU and packages.',
+        active: ['kernels','runtime','gpu','packages'],
+        edges: [['notebooks','kernels'], ['kernels','runtime'], ['runtime','gpu'], ['packages','runtime']]
+      },
+      {
+        title: 'Store outputs + share',
+        desc: 'Outputs stored; sharing links notebook with collaborators.',
+        active: ['storage','sharing'],
+        edges: [['runtime','storage'], ['notebooks','sharing']]
+      },
+      {
+        title: 'Logs + analytics + billing',
+        desc: 'Logs captured; analytics tracks usage; billing for pro tiers.',
+        active: ['logs','analytics','billing'],
+        edges: [['runtime','logs'], ['logs','analytics'], ['billing','analytics']]
+      }
+    ]
+  },
+
+  jupyter: {
+    title: 'Jupyter',
+    steps: [
+      {
+        title: 'Open notebook',
+        desc: 'User authenticates and opens notebook with kernel.',
+        active: ['client','auth','notebooks','kernels'],
+        edges: [['client','auth'], ['auth','notebooks'], ['notebooks','kernels']]
+      },
+      {
+        title: 'Execute cells',
+        desc: 'Kernel executes code using runtime and packages; storage persists.',
+        active: ['runtime','packages','storage'],
+        edges: [['kernels','runtime'], ['packages','runtime'], ['runtime','storage']]
+      },
+      {
+        title: 'Extensions + security',
+        desc: 'Extensions added; security controls access.',
+        active: ['extensions','security'],
+        edges: [['extensions','runtime'], ['security','runtime']]
+      },
+      {
+        title: 'Sharing + logs + analytics',
+        desc: 'Sharing notebooks; logs and analytics track usage.',
+        active: ['sharing','logs','analytics'],
+        edges: [['notebooks','sharing'], ['runtime','logs'], ['logs','analytics']]
+      }
+    ]
+  },
+
+  airbyte: {
+    title: 'Airbyte',
+    steps: [
+      {
+        title: 'Configure connectors',
+        desc: 'User configures source and destination connectors.',
+        active: ['client','auth','sources','destinations','connectors','catalog'],
+        edges: [['client','auth'], ['sources','connectors'], ['destinations','connectors'], ['catalog','connectors']]
+      },
+      {
+        title: 'Schedule sync',
+        desc: 'Scheduler triggers sync runs executed by workers.',
+        active: ['scheduler','workers','sync'],
+        edges: [['connectors','scheduler'], ['scheduler','workers'], ['workers','sync']]
+      },
+      {
+        title: 'Move data + store state',
+        desc: 'Sync moves data to destination and stores state/logs.',
+        active: ['storage','monitoring'],
+        edges: [['sync','storage'], ['sync','monitoring']]
+      },
+      {
+        title: 'Alerts + analytics',
+        desc: 'Alerts fire on failures; analytics tracks throughput and reliability.',
+        active: ['alerts','analytics'],
+        edges: [['monitoring','alerts'], ['sync','analytics']]
+      }
+    ]
+  },
+
+  n8n: {
+    title: 'n8n',
+    steps: [
+      {
+        title: 'Design workflow',
+        desc: 'User designs workflows with triggers and nodes.',
+        active: ['client','auth','workflows','triggers','nodes'],
+        edges: [['client','auth'], ['auth','workflows'], ['workflows','triggers'], ['workflows','nodes']]
+      },
+      {
+        title: 'Execute via queue + workers',
+        desc: 'Triggers fire executions; queued and processed by workers calling integrations.',
+        active: ['executions','queue','workers','integrations'],
+        edges: [['triggers','executions'], ['executions','queue'], ['queue','workers'], ['workers','integrations']]
+      },
+      {
+        title: 'Secrets + logs',
+        desc: 'Secrets injected; logs stored for debugging.',
+        active: ['secrets','logs'],
+        edges: [['secrets','nodes'], ['executions','logs']]
+      },
+      {
+        title: 'Analytics + alerts',
+        desc: 'Analytics summarizes runs; alerts notify on failures.',
+        active: ['analytics','alerts'],
+        edges: [['logs','analytics'], ['alerts','client']]
+      }
+    ]
+  },
+
+  zapier: {
+    title: 'Zapier',
+    steps: [
+      {
+        title: 'Create zap',
+        desc: 'User creates zaps with triggers and actions.',
+        active: ['client','auth','zaps','triggers','actions'],
+        edges: [['client','auth'], ['auth','zaps'], ['zaps','triggers'], ['zaps','actions']]
+      },
+      {
+        title: 'Run executions',
+        desc: 'Triggers fire executions; queue processes actions via integrations.',
+        active: ['executions','queue','integrations'],
+        edges: [['triggers','executions'], ['executions','queue'], ['queue','integrations'], ['integrations','actions']]
+      },
+      {
+        title: 'Secrets + logs',
+        desc: 'Secrets manage credentials; logs stored for troubleshooting.',
+        active: ['secrets','logs'],
+        edges: [['secrets','integrations'], ['executions','logs']]
+      },
+      {
+        title: 'Analytics + alerts + billing',
+        desc: 'Analytics and alerts track automation health; billing tracks usage.',
+        active: ['analytics','alerts','billing'],
+        edges: [['logs','analytics'], ['alerts','client'], ['billing','analytics']]
+      }
+    ]
+  },
+
+  'make-integromat': {
+    title: 'Make (Integromat)',
+    steps: [
+      {
+        title: 'Build scenario',
+        desc: 'User builds scenario with modules and triggers.',
+        active: ['client','auth','scenarios','modules','triggers'],
+        edges: [['client','auth'], ['auth','scenarios'], ['scenarios','modules'], ['scenarios','triggers']]
+      },
+      {
+        title: 'Execute scenario',
+        desc: 'Triggers create executions queued and processed by workers.',
+        active: ['executions','queue','workers','integrations'],
+        edges: [['triggers','executions'], ['executions','queue'], ['queue','workers'], ['workers','integrations']]
+      },
+      {
+        title: 'Secrets + billing',
+        desc: 'Secrets manage credentials; billing tracks usage.',
+        active: ['secrets','billing'],
+        edges: [['secrets','modules'], ['billing','analytics']]
+      },
+      {
+        title: 'Analytics + alerts',
+        desc: 'Analytics and alerts track automation health.',
+        active: ['analytics','alerts'],
+        edges: [['executions','analytics'], ['alerts','client']]
+      }
+    ]
+  },
+
+  retool: {
+    title: 'Retool',
+    steps: [
+      {
+        title: 'Build app UI',
+        desc: 'User builds app UI in editor with components.',
+        active: ['client','auth','apps','editor','components'],
+        edges: [['client','auth'], ['auth','apps'], ['apps','editor'], ['editor','components']]
+      },
+      {
+        title: 'Connect data + run queries',
+        desc: 'Queries run through connectors and return data.',
+        active: ['queries','connectors','data'],
+        edges: [['editor','queries'], ['queries','connectors'], ['connectors','data']]
+      },
+      {
+        title: 'Permissions + audit',
+        desc: 'Permissions enforced; audit trails kept.',
+        active: ['permissions','audit'],
+        edges: [['permissions','queries'], ['audit','apps']]
+      },
+      {
+        title: 'Deploy + billing + analytics',
+        desc: 'Deploy app; billing and analytics track usage.',
+        active: ['deploy','billing','analytics'],
+        edges: [['apps','deploy'], ['billing','analytics'], ['audit','analytics']]
+      }
+    ]
+  },
+
+  'roblox-studio': {
+    title: 'Roblox Studio',
+    steps: [
+      {
+        title: 'Edit project + assets',
+        desc: 'Developer edits project and manages assets.',
+        active: ['client','auth','projects','editor','assets'],
+        edges: [['client','auth'], ['auth','projects'], ['projects','editor'], ['editor','assets']]
+      },
+      {
+        title: 'Publish to servers',
+        desc: 'Publish pushes build to servers; datastore stores state.',
+        active: ['publish','servers','datastore'],
+        edges: [['projects','publish'], ['publish','servers'], ['projects','datastore']]
+      },
+      {
+        title: 'Moderation + payments',
+        desc: 'Moderation and payments handle UGC and monetization.',
+        active: ['moderation','payments','notifications'],
+        edges: [['moderation','publish'], ['payments','analytics'], ['publish','notifications']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics tracks engagement and performance.',
+        active: ['analytics'],
+        edges: [['servers','analytics']]
+      }
+    ]
+  },
+
+  'epic-games-store': {
+    title: 'Epic Games Store',
+    steps: [
+      {
+        title: 'Browse + cart',
+        desc: 'User browses catalog/storefront and adds to cart.',
+        active: ['client','auth','catalog','storefront','cart'],
+        edges: [['client','auth'], ['auth','storefront'], ['storefront','catalog'], ['catalog','cart']]
+      },
+      {
+        title: 'Checkout + payment',
+        desc: 'Checkout processes payment and creates order.',
+        active: ['checkout','payments','orders'],
+        edges: [['cart','checkout'], ['checkout','payments'], ['checkout','orders']]
+      },
+      {
+        title: 'Library + downloads',
+        desc: 'Order adds game to library; downloads via CDN.',
+        active: ['library','downloads','cdn'],
+        edges: [['orders','library'], ['library','downloads'], ['downloads','cdn']]
+      },
+      {
+        title: 'Notifications + support + analytics',
+        desc: 'Notifications and support; analytics tracks funnel.',
+        active: ['notifications','support','analytics'],
+        edges: [['orders','notifications'], ['client','support'], ['orders','analytics']]
+      }
+    ]
+  },
+
+  steam: {
+    title: 'Steam',
+    steps: [
+      {
+        title: 'Browse store + purchase',
+        desc: 'User browses store, builds cart, and purchases.',
+        active: ['client','auth','store','catalog','cart','checkout','payments','orders'],
+        edges: [['client','auth'], ['auth','store'], ['store','catalog'], ['catalog','cart'], ['cart','checkout'], ['checkout','payments'], ['checkout','orders']]
+      },
+      {
+        title: 'Library + downloads',
+        desc: 'Order adds to library; downloads through CDN.',
+        active: ['library','downloads','cdn'],
+        edges: [['orders','library'], ['library','downloads'], ['downloads','cdn']]
+      },
+      {
+        title: 'Community + friends',
+        desc: 'Community and friends features drive engagement.',
+        active: ['community','friends','notifications'],
+        edges: [['community','friends'], ['community','notifications']]
+      },
+      {
+        title: 'Support + analytics',
+        desc: 'Support resolves issues; analytics tracks funnel and engagement.',
+        active: ['support','analytics'],
+        edges: [['client','support'], ['orders','analytics']]
+      }
+    ]
+  },
+
   chime: {
     title: 'Chime',
     steps: [
