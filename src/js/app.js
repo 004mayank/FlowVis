@@ -12868,6 +12868,555 @@ Object.assign(SYSTEM_LAYOUTS, {
   }
 });
 
+// ----- Batch 50 (System + Architecture - notes + email/CRM) -----
+
+Object.assign(SYSTEM_LAYOUTS, {
+  bear: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','vault','editor','markdown','tags','search','index','sync','cloud','export','encryption','backups','metrics','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      vault: { x: 380, y: 240, label: 'Notes DB', colorKey: 'store' },
+      editor: { x: 620, y: 180, label: 'Editor', colorKey: 'api' },
+      markdown: { x: 860, y: 180, label: 'Markdown', colorKey: 'api' },
+      tags: { x: 620, y: 320, label: 'Tags', colorKey: 'store' },
+      search: { x: 860, y: 320, label: 'Search', colorKey: 'api' },
+      index: { x: 1100, y: 320, label: 'Index', colorKey: 'store' },
+      sync: { x: 380, y: 420, label: 'Sync', colorKey: 'api' },
+      cloud: { x: 140, y: 460, label: 'Cloud', colorKey: 'external' },
+      export: { x: 620, y: 460, label: 'Export', colorKey: 'api' },
+      encryption: { x: 860, y: 460, label: 'Encryption', colorKey: 'api' },
+      backups: { x: 1100, y: 460, label: 'Backups', colorKey: 'external' },
+      metrics: { x: 620, y: 600, label: 'Telemetry', colorKey: 'stream' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  craft: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','workspace','docs','blocks','realtime','sync','cloud','sharing','publish','export','search','index','permissions','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      workspace: { x: 620, y: 180, label: 'Workspace', colorKey: 'store' },
+      docs: { x: 860, y: 180, label: 'Docs', colorKey: 'store' },
+      blocks: { x: 1100, y: 180, label: 'Blocks', colorKey: 'store' },
+      realtime: { x: 620, y: 320, label: 'Realtime', colorKey: 'stream' },
+      sync: { x: 860, y: 320, label: 'Sync', colorKey: 'api' },
+      cloud: { x: 1100, y: 320, label: 'Cloud', colorKey: 'external' },
+      sharing: { x: 380, y: 320, label: 'Sharing', colorKey: 'external' },
+      publish: { x: 380, y: 460, label: 'Publish', colorKey: 'external' },
+      export: { x: 620, y: 460, label: 'Export', colorKey: 'api' },
+      search: { x: 860, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 1100, y: 460, label: 'Index', colorKey: 'store' },
+      permissions: { x: 620, y: 600, label: 'Permissions', colorKey: 'api' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  superhuman: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','gmail','imap','sync','inbox','search','index','snippets','compose','send','tracking','notify','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      gmail: { x: 620, y: 180, label: 'Gmail API', colorKey: 'external' },
+      imap: { x: 860, y: 180, label: 'IMAP/SMTP', colorKey: 'external' },
+      sync: { x: 620, y: 320, label: 'Sync', colorKey: 'api' },
+      inbox: { x: 860, y: 320, label: 'Inbox Model', colorKey: 'store' },
+      search: { x: 1100, y: 320, label: 'Search', colorKey: 'api' },
+      index: { x: 1100, y: 460, label: 'Index', colorKey: 'store' },
+      snippets: { x: 380, y: 320, label: 'Snippets', colorKey: 'store' },
+      compose: { x: 380, y: 460, label: 'Compose', colorKey: 'api' },
+      send: { x: 620, y: 460, label: 'Send', colorKey: 'external' },
+      tracking: { x: 860, y: 460, label: 'Tracking', colorKey: 'api' },
+      notify: { x: 380, y: 600, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'spark-mail': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','imap','smtp','sync','inbox','smart','search','index','calendar','contacts','notify','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      imap: { x: 620, y: 180, label: 'IMAP', colorKey: 'external' },
+      smtp: { x: 860, y: 180, label: 'SMTP', colorKey: 'external' },
+      sync: { x: 620, y: 320, label: 'Sync', colorKey: 'api' },
+      inbox: { x: 860, y: 320, label: 'Inbox', colorKey: 'store' },
+      smart: { x: 1100, y: 320, label: 'Smart Inbox', colorKey: 'api' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 460, label: 'Index', colorKey: 'store' },
+      calendar: { x: 1100, y: 180, label: 'Calendar', colorKey: 'external' },
+      contacts: { x: 380, y: 320, label: 'Contacts', colorKey: 'external' },
+      notify: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'newton-mail': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','imap','smtp','sync','inbox','search','index','rules','send','tracking','notify','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      imap: { x: 620, y: 180, label: 'IMAP', colorKey: 'external' },
+      smtp: { x: 860, y: 180, label: 'SMTP', colorKey: 'external' },
+      sync: { x: 620, y: 320, label: 'Sync', colorKey: 'api' },
+      inbox: { x: 860, y: 320, label: 'Inbox', colorKey: 'store' },
+      search: { x: 1100, y: 320, label: 'Search', colorKey: 'api' },
+      index: { x: 1100, y: 460, label: 'Index', colorKey: 'store' },
+      rules: { x: 380, y: 320, label: 'Rules', colorKey: 'api' },
+      send: { x: 620, y: 460, label: 'Send', colorKey: 'external' },
+      tracking: { x: 860, y: 460, label: 'Tracking', colorKey: 'api' },
+      notify: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  front: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','channels','ingest','router','inbox','collab','assign','automation','integrations','send','audit','analytics','notifications'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      channels: { x: 620, y: 180, label: 'Channels', colorKey: 'external' },
+      ingest: { x: 620, y: 320, label: 'Ingest', colorKey: 'queue' },
+      router: { x: 860, y: 320, label: 'Router', colorKey: 'api' },
+      inbox: { x: 1100, y: 320, label: 'Shared Inbox', colorKey: 'store' },
+      collab: { x: 380, y: 320, label: 'Collab', colorKey: 'stream' },
+      assign: { x: 1100, y: 180, label: 'Assign', colorKey: 'api' },
+      automation: { x: 860, y: 180, label: 'Automation', colorKey: 'api' },
+      integrations: { x: 620, y: 460, label: 'Integrations', colorKey: 'external' },
+      send: { x: 860, y: 460, label: 'Send', colorKey: 'external' },
+      audit: { x: 1100, y: 460, label: 'Audit Log', colorKey: 'store' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' }
+    }
+  },
+
+  missive: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','imap','smtp','sync','inbox','collab','chat','tasks','search','index','send','notify','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      imap: { x: 620, y: 180, label: 'IMAP', colorKey: 'external' },
+      smtp: { x: 860, y: 180, label: 'SMTP', colorKey: 'external' },
+      sync: { x: 620, y: 320, label: 'Sync', colorKey: 'api' },
+      inbox: { x: 860, y: 320, label: 'Inbox', colorKey: 'store' },
+      collab: { x: 380, y: 320, label: 'Collab', colorKey: 'stream' },
+      chat: { x: 380, y: 460, label: 'Team Chat', colorKey: 'stream' },
+      tasks: { x: 1100, y: 320, label: 'Tasks', colorKey: 'store' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 460, label: 'Index', colorKey: 'store' },
+      send: { x: 1100, y: 460, label: 'Send', colorKey: 'external' },
+      notify: { x: 620, y: 600, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'proton-mail': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','keys','crypto','imap','smtp','bridge','sync','inbox','search','index','send','antiabuse','spam','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      keys: { x: 620, y: 180, label: 'Keys', colorKey: 'store' },
+      crypto: { x: 860, y: 180, label: 'Crypto', colorKey: 'api' },
+      imap: { x: 1100, y: 180, label: 'IMAP', colorKey: 'external' },
+      smtp: { x: 1100, y: 320, label: 'SMTP', colorKey: 'external' },
+      bridge: { x: 860, y: 320, label: 'Bridge', colorKey: 'api' },
+      sync: { x: 620, y: 320, label: 'Sync', colorKey: 'api' },
+      inbox: { x: 620, y: 460, label: 'Mailbox', colorKey: 'store' },
+      search: { x: 860, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 1100, y: 460, label: 'Index', colorKey: 'store' },
+      send: { x: 380, y: 460, label: 'Send', colorKey: 'external' },
+      antiabuse: { x: 380, y: 600, label: 'Anti-Abuse', colorKey: 'api' },
+      spam: { x: 620, y: 600, label: 'Spam', colorKey: 'api' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'zoho-mail': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','imap','smtp','sync','inbox','admin','policies','spam','search','index','send','archive','audit','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      imap: { x: 620, y: 180, label: 'IMAP', colorKey: 'external' },
+      smtp: { x: 860, y: 180, label: 'SMTP', colorKey: 'external' },
+      sync: { x: 620, y: 320, label: 'Sync', colorKey: 'api' },
+      inbox: { x: 860, y: 320, label: 'Mailbox', colorKey: 'store' },
+      admin: { x: 1100, y: 180, label: 'Admin', colorKey: 'api' },
+      policies: { x: 1100, y: 320, label: 'Policies', colorKey: 'api' },
+      spam: { x: 620, y: 460, label: 'Spam', colorKey: 'api' },
+      search: { x: 860, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 1100, y: 460, label: 'Index', colorKey: 'store' },
+      send: { x: 380, y: 460, label: 'Send', colorKey: 'external' },
+      archive: { x: 380, y: 600, label: 'Archive', colorKey: 'store' },
+      audit: { x: 620, y: 600, label: 'Audit', colorKey: 'store' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'zoho-crm': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','accounts','contacts','leads','pipeline','automation','workflows','integrations','email','tasks','reports','analytics','audit'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      accounts: { x: 620, y: 180, label: 'Accounts', colorKey: 'store' },
+      contacts: { x: 860, y: 180, label: 'Contacts', colorKey: 'store' },
+      leads: { x: 1100, y: 180, label: 'Leads', colorKey: 'store' },
+      pipeline: { x: 620, y: 320, label: 'Pipeline', colorKey: 'store' },
+      automation: { x: 860, y: 320, label: 'Automation', colorKey: 'api' },
+      workflows: { x: 1100, y: 320, label: 'Workflows', colorKey: 'queue' },
+      integrations: { x: 380, y: 320, label: 'Integrations', colorKey: 'external' },
+      email: { x: 380, y: 460, label: 'Email', colorKey: 'external' },
+      tasks: { x: 620, y: 460, label: 'Tasks', colorKey: 'store' },
+      reports: { x: 860, y: 460, label: 'Reports', colorKey: 'store' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' },
+      audit: { x: 620, y: 600, label: 'Audit', colorKey: 'store' }
+    }
+  }
+});
+
+Object.assign(ARCH_LAYOUTS, {
+  bear: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Bear Storage + Sync',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','vault','editor','markdown','tags','search','index','sync','cloud','export','encryption','backups','metrics','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      vault: { x: 320, y: 240, label: 'Notes DB' },
+      editor: { x: 600, y: 160, label: 'Editor' },
+      markdown: { x: 880, y: 160, label: 'Markdown' },
+      tags: { x: 600, y: 300, label: 'Tags' },
+      search: { x: 880, y: 300, label: 'Search' },
+      index: { x: 1160, y: 300, label: 'Index' },
+      sync: { x: 320, y: 380, label: 'Sync' },
+      cloud: { x: 40, y: 460, label: 'Cloud' },
+      export: { x: 600, y: 440, label: 'Export' },
+      encryption: { x: 880, y: 440, label: 'Encryption' },
+      backups: { x: 1160, y: 440, label: 'Backups' },
+      metrics: { x: 600, y: 580, label: 'Telemetry' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','vault','open'], ['vault','editor','edit'], ['editor','markdown','md']);
+      if(stepIdx===2) e.push(['vault','tags','tag'], ['tags','index','index']);
+      if(stepIdx===3) e.push(['client','search','search'], ['search','index','index'], ['index','vault','results']);
+      if(stepIdx===4) e.push(['vault','encryption','encrypt'], ['encryption','sync','sync'], ['sync','cloud','cloud']);
+      if(stepIdx===5) e.push(['vault','export','export']);
+      if(stepIdx===6) e.push(['vault','metrics','telemetry'], ['metrics','analytics','analytics']);
+      if(stepIdx===7) e.push(['vault','backups','backup']);
+      return e;
+    }
+  },
+
+  craft: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Craft Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','workspace','docs','blocks','realtime','sync','cloud','sharing','publish','export','search','index','permissions','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      workspace: { x: 600, y: 160, label: 'Workspace' },
+      docs: { x: 880, y: 160, label: 'Docs' },
+      blocks: { x: 1160, y: 160, label: 'Blocks' },
+      realtime: { x: 600, y: 300, label: 'Realtime' },
+      sync: { x: 880, y: 300, label: 'Sync' },
+      cloud: { x: 1160, y: 300, label: 'Cloud' },
+      sharing: { x: 320, y: 300, label: 'Sharing' },
+      publish: { x: 320, y: 440, label: 'Publish' },
+      export: { x: 600, y: 440, label: 'Export' },
+      search: { x: 880, y: 440, label: 'Search' },
+      index: { x: 1160, y: 440, label: 'Index' },
+      permissions: { x: 600, y: 580, label: 'Permissions' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','workspace','ws'], ['workspace','docs','doc']);
+      if(stepIdx===2) e.push(['docs','blocks','blocks'], ['blocks','realtime','rt']);
+      if(stepIdx===3) e.push(['realtime','client','updates'], ['realtime','permissions','perm']);
+      if(stepIdx===4) e.push(['docs','sync','sync'], ['sync','cloud','cloud']);
+      if(stepIdx===5) e.push(['docs','sharing','share'], ['sharing','publish','publish']);
+      if(stepIdx===6) e.push(['client','search','search'], ['search','index','index']);
+      if(stepIdx===7) e.push(['docs','export','export'], ['docs','analytics','analytics']);
+      return e;
+    }
+  },
+
+  superhuman: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Superhuman Mail Sync',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','gmail','imap','sync','inbox','search','index','snippets','compose','send','tracking','notify','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      gmail: { x: 600, y: 160, label: 'Gmail API' },
+      imap: { x: 880, y: 160, label: 'IMAP/SMTP' },
+      sync: { x: 600, y: 300, label: 'Sync' },
+      inbox: { x: 880, y: 300, label: 'Inbox Model' },
+      search: { x: 1160, y: 300, label: 'Search' },
+      index: { x: 1160, y: 440, label: 'Index' },
+      snippets: { x: 320, y: 300, label: 'Snippets' },
+      compose: { x: 320, y: 440, label: 'Compose' },
+      send: { x: 600, y: 440, label: 'Send' },
+      tracking: { x: 880, y: 440, label: 'Tracking' },
+      notify: { x: 320, y: 580, label: 'Notify' },
+      analytics: { x: 600, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','gmail','oauth'], ['gmail','sync','sync']);
+      if(stepIdx===2) e.push(['sync','inbox','model'], ['inbox','index','index']);
+      if(stepIdx===3) e.push(['client','search','search'], ['search','index','index'], ['index','inbox','results']);
+      if(stepIdx===4) e.push(['client','compose','compose'], ['compose','snippets','snippet'], ['compose','send','send'], ['send','imap','smtp']);
+      if(stepIdx===5) e.push(['send','tracking','track'], ['tracking','notify','notify']);
+      if(stepIdx===6) e.push(['inbox','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'spark-mail': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Spark Mail Sync',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','imap','smtp','sync','inbox','smart','search','index','calendar','contacts','notify','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      imap: { x: 600, y: 160, label: 'IMAP' },
+      smtp: { x: 880, y: 160, label: 'SMTP' },
+      sync: { x: 600, y: 300, label: 'Sync' },
+      inbox: { x: 880, y: 300, label: 'Inbox' },
+      smart: { x: 1160, y: 300, label: 'Smart Inbox' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 880, y: 440, label: 'Index' },
+      calendar: { x: 1160, y: 160, label: 'Calendar' },
+      contacts: { x: 320, y: 300, label: 'Contacts' },
+      notify: { x: 320, y: 440, label: 'Notify' },
+      analytics: { x: 600, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','imap','imap'], ['imap','sync','sync']);
+      if(stepIdx===2) e.push(['sync','inbox','inbox'], ['inbox','smart','smart']);
+      if(stepIdx===3) e.push(['client','search','search'], ['search','index','index'], ['index','inbox','results']);
+      if(stepIdx===4) e.push(['client','smtp','send']);
+      if(stepIdx===5) e.push(['calendar','client','calendar'], ['contacts','client','contacts']);
+      if(stepIdx===6) e.push(['inbox','analytics','analytics'], ['smart','notify','notify']);
+      return e;
+    }
+  },
+
+  'newton-mail': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Newton Mail Sync',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','imap','smtp','sync','inbox','search','index','rules','send','tracking','notify','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      imap: { x: 600, y: 160, label: 'IMAP' },
+      smtp: { x: 880, y: 160, label: 'SMTP' },
+      sync: { x: 600, y: 300, label: 'Sync' },
+      inbox: { x: 880, y: 300, label: 'Inbox' },
+      search: { x: 1160, y: 300, label: 'Search' },
+      index: { x: 1160, y: 440, label: 'Index' },
+      rules: { x: 320, y: 300, label: 'Rules' },
+      send: { x: 600, y: 440, label: 'Send' },
+      tracking: { x: 880, y: 440, label: 'Tracking' },
+      notify: { x: 320, y: 440, label: 'Notify' },
+      analytics: { x: 600, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','imap','imap'], ['imap','sync','sync']);
+      if(stepIdx===2) e.push(['sync','inbox','inbox'], ['inbox','index','index']);
+      if(stepIdx===3) e.push(['client','rules','rules'], ['rules','inbox','apply']);
+      if(stepIdx===4) e.push(['client','send','send'], ['send','smtp','smtp'], ['send','tracking','track']);
+      if(stepIdx===5) e.push(['tracking','notify','notify']);
+      if(stepIdx===6) e.push(['inbox','analytics','analytics']);
+      return e;
+    }
+  },
+
+  front: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Front Shared Inbox',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','channels','ingest','router','inbox','collab','assign','automation','integrations','send','audit','analytics','notifications'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      channels: { x: 600, y: 160, label: 'Channels' },
+      ingest: { x: 600, y: 300, label: 'Ingest' },
+      router: { x: 880, y: 300, label: 'Router' },
+      inbox: { x: 1160, y: 300, label: 'Shared Inbox' },
+      collab: { x: 320, y: 300, label: 'Collab' },
+      assign: { x: 1160, y: 160, label: 'Assign' },
+      automation: { x: 880, y: 160, label: 'Automation' },
+      integrations: { x: 600, y: 440, label: 'Integrations' },
+      send: { x: 880, y: 440, label: 'Send' },
+      audit: { x: 1160, y: 440, label: 'Audit Log' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      notifications: { x: 320, y: 440, label: 'Notify' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['channels','ingest','ingest'], ['ingest','router','route'], ['router','inbox','store']);
+      if(stepIdx===2) e.push(['inbox','assign','assign'], ['assign','notifications','notify']);
+      if(stepIdx===3) e.push(['client','collab','collab'], ['collab','inbox','comment']);
+      if(stepIdx===4) e.push(['automation','inbox','rules'], ['inbox','integrations','crm']);
+      if(stepIdx===5) e.push(['client','send','reply'], ['send','channels','deliver']);
+      if(stepIdx===6) e.push(['inbox','audit','audit'], ['inbox','analytics','analytics']);
+      return e;
+    }
+  },
+
+  missive: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Missive Collaboration',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','imap','smtp','sync','inbox','collab','chat','tasks','search','index','send','notify','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      imap: { x: 600, y: 160, label: 'IMAP' },
+      smtp: { x: 880, y: 160, label: 'SMTP' },
+      sync: { x: 600, y: 300, label: 'Sync' },
+      inbox: { x: 880, y: 300, label: 'Inbox' },
+      collab: { x: 320, y: 300, label: 'Collab' },
+      chat: { x: 320, y: 440, label: 'Team Chat' },
+      tasks: { x: 1160, y: 300, label: 'Tasks' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 880, y: 440, label: 'Index' },
+      send: { x: 1160, y: 440, label: 'Send' },
+      notify: { x: 600, y: 580, label: 'Notify' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['imap','sync','sync'], ['sync','inbox','inbox']);
+      if(stepIdx===2) e.push(['client','collab','collab'], ['collab','inbox','comment'], ['chat','collab','chat']);
+      if(stepIdx===3) e.push(['client','tasks','task'], ['tasks','inbox','link']);
+      if(stepIdx===4) e.push(['client','search','search'], ['search','index','index'], ['index','inbox','results']);
+      if(stepIdx===5) e.push(['client','send','send'], ['send','smtp','smtp']);
+      if(stepIdx===6) e.push(['inbox','analytics','analytics'], ['analytics','notify','notify']);
+      return e;
+    }
+  },
+
+  'proton-mail': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Proton Mail Crypto + Mailbox',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','keys','crypto','bridge','sync','inbox','search','index','send','imap','smtp','antiabuse','spam','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      keys: { x: 600, y: 160, label: 'Keys' },
+      crypto: { x: 880, y: 160, label: 'Crypto' },
+      bridge: { x: 880, y: 300, label: 'Bridge' },
+      sync: { x: 600, y: 300, label: 'Sync' },
+      inbox: { x: 600, y: 440, label: 'Mailbox' },
+      search: { x: 880, y: 440, label: 'Search' },
+      index: { x: 1160, y: 440, label: 'Index' },
+      send: { x: 320, y: 440, label: 'Send' },
+      imap: { x: 1160, y: 160, label: 'IMAP' },
+      smtp: { x: 1160, y: 300, label: 'SMTP' },
+      antiabuse: { x: 320, y: 580, label: 'Anti-Abuse' },
+      spam: { x: 600, y: 580, label: 'Spam' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','keys','keys'], ['keys','crypto','crypto']);
+      if(stepIdx===2) e.push(['crypto','sync','sync'], ['sync','inbox','mailbox']);
+      if(stepIdx===3) e.push(['client','search','search'], ['search','index','index'], ['index','inbox','results']);
+      if(stepIdx===4) e.push(['client','send','compose'], ['send','crypto','encrypt'], ['crypto','bridge','bridge'], ['bridge','smtp','smtp']);
+      if(stepIdx===5) e.push(['imap','bridge','imap'], ['bridge','spam','spam'], ['spam','inbox','deliver']);
+      if(stepIdx===6) e.push(['inbox','antiabuse','abuse'], ['inbox','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'zoho-mail': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Zoho Mail',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','imap','smtp','sync','inbox','admin','policies','spam','search','index','send','archive','audit','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      imap: { x: 600, y: 160, label: 'IMAP' },
+      smtp: { x: 880, y: 160, label: 'SMTP' },
+      sync: { x: 600, y: 300, label: 'Sync' },
+      inbox: { x: 880, y: 300, label: 'Mailbox' },
+      admin: { x: 1160, y: 160, label: 'Admin' },
+      policies: { x: 1160, y: 300, label: 'Policies' },
+      spam: { x: 600, y: 440, label: 'Spam' },
+      search: { x: 880, y: 440, label: 'Search' },
+      index: { x: 1160, y: 440, label: 'Index' },
+      send: { x: 320, y: 440, label: 'Send' },
+      archive: { x: 320, y: 580, label: 'Archive' },
+      audit: { x: 600, y: 580, label: 'Audit' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['admin','policies','policy'], ['policies','spam','spam']);
+      if(stepIdx===2) e.push(['imap','sync','sync'], ['sync','inbox','inbox'], ['spam','inbox','deliver']);
+      if(stepIdx===3) e.push(['client','search','search'], ['search','index','index'], ['index','inbox','results']);
+      if(stepIdx===4) e.push(['client','send','send'], ['send','smtp','smtp']);
+      if(stepIdx===5) e.push(['inbox','archive','archive'], ['inbox','audit','audit']);
+      if(stepIdx===6) e.push(['inbox','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'zoho-crm': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Zoho CRM',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','accounts','contacts','leads','pipeline','automation','workflows','integrations','email','tasks','reports','analytics','audit'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      accounts: { x: 600, y: 160, label: 'Accounts' },
+      contacts: { x: 880, y: 160, label: 'Contacts' },
+      leads: { x: 1160, y: 160, label: 'Leads' },
+      pipeline: { x: 600, y: 300, label: 'Pipeline' },
+      automation: { x: 880, y: 300, label: 'Automation' },
+      workflows: { x: 1160, y: 300, label: 'Workflows' },
+      integrations: { x: 320, y: 300, label: 'Integrations' },
+      email: { x: 320, y: 440, label: 'Email' },
+      tasks: { x: 600, y: 440, label: 'Tasks' },
+      reports: { x: 880, y: 440, label: 'Reports' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' },
+      audit: { x: 600, y: 580, label: 'Audit' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','leads','lead'], ['leads','pipeline','pipe']);
+      if(stepIdx===2) e.push(['pipeline','automation','auto'], ['automation','workflows','wf']);
+      if(stepIdx===3) e.push(['workflows','integrations','integrate'], ['integrations','email','email']);
+      if(stepIdx===4) e.push(['pipeline','tasks','tasks'], ['tasks','reports','reports']);
+      if(stepIdx===5) e.push(['reports','analytics','analytics'], ['pipeline','audit','audit']);
+      return e;
+    }
+  }
+});
+
 Object.assign(ARCH_LAYOUTS, {
   newsbreak: {
     viewBox: '0 0 1860 820',

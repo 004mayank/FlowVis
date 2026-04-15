@@ -3893,6 +3893,414 @@ export const FLOWS = {
     ]
   },
 
+  bear: {
+    title: 'Bear',
+    steps: [
+      {
+        title: 'Open notes database',
+        desc: 'Client opens local notes database and loads recent notes and tags.',
+        active: ['client','vault','tags'],
+        edges: [['client','vault'], ['vault','tags']]
+      },
+      {
+        title: 'Write Markdown note',
+        desc: 'Editor writes Markdown; changes persisted to notes DB.',
+        active: ['editor','markdown','vault'],
+        edges: [['client','editor'], ['editor','markdown'], ['markdown','vault']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Index enables fast search across notes and tags.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','vault']]
+      },
+      {
+        title: 'Encrypt + sync',
+        desc: 'Sensitive notes encrypted; sync replicates updates to cloud/devices.',
+        active: ['encryption','sync','cloud'],
+        edges: [['vault','encryption'], ['encryption','sync'], ['sync','cloud']]
+      },
+      {
+        title: 'Export + backups',
+        desc: 'Exports generate files; backups protect long-term retention.',
+        active: ['export','backups'],
+        edges: [['vault','export'], ['vault','backups']]
+      },
+      {
+        title: 'Telemetry + analytics',
+        desc: 'Telemetry and analytics track feature usage and reliability.',
+        active: ['metrics','analytics'],
+        edges: [['client','metrics'], ['metrics','analytics']]
+      }
+    ]
+  },
+
+  craft: {
+    title: 'Craft',
+    steps: [
+      {
+        title: 'Sign in + open workspace',
+        desc: 'User signs in and loads workspace + doc list.',
+        active: ['client','auth','workspace','docs'],
+        edges: [['client','auth'], ['auth','workspace'], ['workspace','docs']]
+      },
+      {
+        title: 'Edit blocks + realtime sync',
+        desc: 'Edits to blocks sync via realtime layer to collaborators and devices.',
+        active: ['blocks','realtime','sync'],
+        edges: [['docs','blocks'], ['blocks','realtime'], ['realtime','sync']]
+      },
+      {
+        title: 'Share + publish',
+        desc: 'Docs shared via links and can be published to the web.',
+        active: ['sharing','publish'],
+        edges: [['docs','sharing'], ['sharing','publish']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Search uses index across docs and blocks for fast retrieval.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','docs']]
+      },
+      {
+        title: 'Export + permissions',
+        desc: 'Exports generate files; permissions enforce access controls.',
+        active: ['export','permissions'],
+        edges: [['docs','export'], ['docs','permissions']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics monitors collaboration and content engagement.',
+        active: ['analytics'],
+        edges: [['docs','analytics']]
+      }
+    ]
+  },
+
+  superhuman: {
+    title: 'Superhuman',
+    steps: [
+      {
+        title: 'Connect account + sync inbox',
+        desc: 'Auth connects to Gmail/IMAP; sync builds local inbox model.',
+        active: ['client','auth','gmail','imap','sync','inbox'],
+        edges: [['client','auth'], ['auth','gmail'], ['gmail','sync'], ['sync','inbox'], ['imap','sync']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Index enables instant search across mail and contacts.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','inbox']]
+      },
+      {
+        title: 'Compose + snippets',
+        desc: 'Compose uses snippets/templates; send via SMTP/Gmail API.',
+        active: ['compose','snippets','send'],
+        edges: [['client','compose'], ['compose','snippets'], ['compose','send'], ['send','imap']]
+      },
+      {
+        title: 'Tracking + notifications',
+        desc: 'Read receipts and follow-ups drive notifications and reminders.',
+        active: ['tracking','notify'],
+        edges: [['send','tracking'], ['tracking','notify']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics measures speed, triage efficiency, and productivity habits.',
+        active: ['analytics'],
+        edges: [['inbox','analytics']]
+      }
+    ]
+  },
+
+  'spark-mail': {
+    title: 'Spark Mail',
+    steps: [
+      {
+        title: 'Connect IMAP + sync',
+        desc: 'Account connects via IMAP; sync downloads messages and threads.',
+        active: ['client','auth','imap','sync','inbox'],
+        edges: [['client','auth'], ['auth','imap'], ['imap','sync'], ['sync','inbox']]
+      },
+      {
+        title: 'Smart Inbox categorization',
+        desc: 'Smart Inbox classifies mail and prioritizes important threads.',
+        active: ['smart','inbox'],
+        edges: [['inbox','smart']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Index powers fast search and filters.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','inbox']]
+      },
+      {
+        title: 'Send mail',
+        desc: 'Compose and send mail via SMTP.',
+        active: ['smtp'],
+        edges: [['client','smtp']]
+      },
+      {
+        title: 'Calendar + contacts',
+        desc: 'Calendar and contacts integrate to schedule and address messages.',
+        active: ['calendar','contacts'],
+        edges: [['calendar','client'], ['contacts','client']]
+      },
+      {
+        title: 'Notifications + analytics',
+        desc: 'Notifications and analytics help manage inbox workflow.',
+        active: ['notify','analytics'],
+        edges: [['smart','notify'], ['inbox','analytics']]
+      }
+    ]
+  },
+
+  'newton-mail': {
+    title: 'Newton Mail',
+    steps: [
+      {
+        title: 'Connect account + sync',
+        desc: 'Account connects via IMAP; sync builds inbox model and threads.',
+        active: ['client','auth','imap','sync','inbox'],
+        edges: [['client','auth'], ['auth','imap'], ['imap','sync'], ['sync','inbox']]
+      },
+      {
+        title: 'Apply rules',
+        desc: 'Rules and automation classify and triage incoming messages.',
+        active: ['rules','inbox'],
+        edges: [['client','rules'], ['rules','inbox']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Index powers fast search across mailboxes.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','inbox']]
+      },
+      {
+        title: 'Send + tracking',
+        desc: 'Send mail via SMTP; tracking monitors opens and follow-ups.',
+        active: ['send','tracking'],
+        edges: [['client','send'], ['send','smtp'], ['send','tracking']]
+      },
+      {
+        title: 'Notifications + analytics',
+        desc: 'Notifications and analytics support productivity features.',
+        active: ['notify','analytics'],
+        edges: [['tracking','notify'], ['inbox','analytics']]
+      }
+    ]
+  },
+
+  front: {
+    title: 'Front',
+    steps: [
+      {
+        title: 'Ingest channels into shared inbox',
+        desc: 'Email/chat/social channels ingested, routed, and stored as conversations.',
+        active: ['channels','ingest','router','inbox'],
+        edges: [['channels','ingest'], ['ingest','router'], ['router','inbox']]
+      },
+      {
+        title: 'Assign owners + SLAs',
+        desc: 'Conversations assigned to teammates; notifications enforce SLAs.',
+        active: ['assign','notifications'],
+        edges: [['inbox','assign'], ['assign','notifications']]
+      },
+      {
+        title: 'Collaborate internally',
+        desc: 'Internal comments and @mentions sync via collaboration layer.',
+        active: ['collab','inbox'],
+        edges: [['client','collab'], ['collab','inbox']]
+      },
+      {
+        title: 'Automation + integrations',
+        desc: 'Rules trigger automation and sync context with external systems (CRM, helpdesk).',
+        active: ['automation','integrations'],
+        edges: [['automation','inbox'], ['inbox','integrations']]
+      },
+      {
+        title: 'Reply + send',
+        desc: 'Replies sent back out to channels; audit log captures actions.',
+        active: ['send','audit'],
+        edges: [['client','send'], ['send','channels'], ['inbox','audit']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics measure response times, workload, and automation impact.',
+        active: ['analytics'],
+        edges: [['inbox','analytics']]
+      }
+    ]
+  },
+
+  missive: {
+    title: 'Missive',
+    steps: [
+      {
+        title: 'Sync inbox',
+        desc: 'IMAP sync downloads messages and threads into inbox model.',
+        active: ['imap','sync','inbox'],
+        edges: [['imap','sync'], ['sync','inbox']]
+      },
+      {
+        title: 'Team collaboration + chat',
+        desc: 'Internal chat and collaboration link directly to email threads.',
+        active: ['collab','chat'],
+        edges: [['client','chat'], ['chat','collab'], ['collab','inbox']]
+      },
+      {
+        title: 'Tasks tied to threads',
+        desc: 'Tasks created and linked to threads for follow-up.',
+        active: ['tasks'],
+        edges: [['client','tasks'], ['tasks','inbox']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Search uses index across mail and tasks.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','inbox']]
+      },
+      {
+        title: 'Send replies',
+        desc: 'Replies sent via SMTP; notifications keep team aligned.',
+        active: ['send','notify'],
+        edges: [['client','send'], ['send','smtp'], ['analytics','notify']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics tracks workload, response times, and team performance.',
+        active: ['analytics'],
+        edges: [['inbox','analytics']]
+      }
+    ]
+  },
+
+  'proton-mail': {
+    title: 'Proton Mail',
+    steps: [
+      {
+        title: 'Auth + key management',
+        desc: 'User authenticates; keys and crypto context prepared for mailbox operations.',
+        active: ['client','auth','keys','crypto'],
+        edges: [['client','auth'], ['auth','keys'], ['keys','crypto']]
+      },
+      {
+        title: 'Sync encrypted mailbox',
+        desc: 'Sync downloads encrypted messages and builds mailbox view.',
+        active: ['sync','inbox'],
+        edges: [['crypto','sync'], ['sync','inbox']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Index enables mailbox search (metadata/content depending on model).',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','inbox']]
+      },
+      {
+        title: 'Compose + encrypt + send',
+        desc: 'Compose encrypted message, send through bridge to SMTP.',
+        active: ['send','crypto','bridge','smtp'],
+        edges: [['client','send'], ['send','crypto'], ['crypto','bridge'], ['bridge','smtp']]
+      },
+      {
+        title: 'Spam + anti-abuse',
+        desc: 'Inbound filtering and anti-abuse protections apply to mailbox.',
+        active: ['spam','antiabuse'],
+        edges: [['imap','bridge'], ['bridge','spam'], ['spam','inbox'], ['inbox','antiabuse']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Operational analytics monitor deliverability and reliability.',
+        active: ['analytics'],
+        edges: [['inbox','analytics']]
+      }
+    ]
+  },
+
+  'zoho-mail': {
+    title: 'Zoho Mail',
+    steps: [
+      {
+        title: 'Admin policies + spam controls',
+        desc: 'Admin sets policies; spam/abuse controls enforce compliance.',
+        active: ['admin','policies','spam'],
+        edges: [['admin','policies'], ['policies','spam']]
+      },
+      {
+        title: 'Sync mailbox',
+        desc: 'IMAP sync builds mailbox model; spam filtering applied.',
+        active: ['imap','sync','inbox','spam'],
+        edges: [['imap','sync'], ['sync','inbox'], ['spam','inbox']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Index supports search across mail, archive, and metadata.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','inbox']]
+      },
+      {
+        title: 'Send mail',
+        desc: 'Outgoing mail sent via SMTP with audit trails.',
+        active: ['send','smtp','audit'],
+        edges: [['client','send'], ['send','smtp'], ['inbox','audit']]
+      },
+      {
+        title: 'Archive + compliance',
+        desc: 'Archiving supports retention and compliance reporting.',
+        active: ['archive','audit'],
+        edges: [['inbox','archive'], ['archive','audit']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics tracks usage, deliverability, and admin outcomes.',
+        active: ['analytics'],
+        edges: [['inbox','analytics']]
+      }
+    ]
+  },
+
+  'zoho-crm': {
+    title: 'Zoho CRM',
+    steps: [
+      {
+        title: 'Capture lead',
+        desc: 'Lead captured via forms/integrations and stored for qualification.',
+        active: ['client','leads'],
+        edges: [['client','leads']]
+      },
+      {
+        title: 'Convert to contact/account',
+        desc: 'Qualified lead converted into contact and account records.',
+        active: ['contacts','accounts'],
+        edges: [['leads','contacts'], ['contacts','accounts']]
+      },
+      {
+        title: 'Move through pipeline',
+        desc: 'Deals tracked through pipeline stages with tasks and reminders.',
+        active: ['pipeline','tasks'],
+        edges: [['accounts','pipeline'], ['pipeline','tasks']]
+      },
+      {
+        title: 'Automation + workflows',
+        desc: 'Automation triggers workflows for follow-ups, scoring, and routing.',
+        active: ['automation','workflows'],
+        edges: [['pipeline','automation'], ['automation','workflows']]
+      },
+      {
+        title: 'Integrations + email outreach',
+        desc: 'Integrations sync context; email outreach sequences update CRM activity.',
+        active: ['integrations','email'],
+        edges: [['workflows','integrations'], ['integrations','email']]
+      },
+      {
+        title: 'Reports + analytics + audit',
+        desc: 'Reports and analytics show performance; audit logs retain compliance trails.',
+        active: ['reports','analytics','audit'],
+        edges: [['pipeline','reports'], ['reports','analytics'], ['pipeline','audit']]
+      }
+    ]
+  },
+
   chime: {
     title: 'Chime',
     steps: [
