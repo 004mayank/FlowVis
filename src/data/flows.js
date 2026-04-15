@@ -2021,6 +2021,348 @@ export const FLOWS = {
     ]
   },
 
+  dailymotion: {
+    title: 'Dailymotion',
+    steps: [
+      {
+        title: 'Open app: home feed + recommendations',
+        desc: 'Client loads home feed; recommendations and ranking select videos.',
+        active: ['client','home','recos'],
+        edges: [['client','home'], ['home','recos']]
+      },
+      {
+        title: 'Search + index retrieval',
+        desc: 'Search queries hit index; catalog resolves metadata and availability.',
+        active: ['client','search','index','catalog'],
+        edges: [['client','search'], ['search','index'], ['index','catalog']]
+      },
+      {
+        title: 'Playback via CDN (ABR)',
+        desc: 'Player streams segments from CDN; QoE metrics captured.',
+        active: ['player','cdn','metrics'],
+        edges: [['client','player'], ['player','cdn'], ['player','metrics']]
+      },
+      {
+        title: 'Creator upload + processing',
+        desc: 'Uploads stored; transcode produces renditions; packaging publishes to CDN.',
+        active: ['upload','obj','transcode','packaging','cdn'],
+        edges: [['client','upload'], ['upload','obj'], ['obj','transcode'], ['transcode','packaging'], ['packaging','cdn']]
+      },
+      {
+        title: 'Ads + measurement',
+        desc: 'Ad decisioning runs; impressions and clicks measured.',
+        active: ['ads','analytics'],
+        edges: [['player','ads'], ['ads','analytics']]
+      },
+      {
+        title: 'Telemetry + moderation',
+        desc: 'Telemetry feeds analytics; moderation enforces content policies.',
+        active: ['metrics','analytics','moderation'],
+        edges: [['metrics','analytics'], ['upload','moderation']]
+      }
+    ]
+  },
+
+  rumble: {
+    title: 'Rumble',
+    steps: [
+      {
+        title: 'Discover content',
+        desc: 'Client loads home feed; recos and ranking select videos.',
+        active: ['client','home','recos'],
+        edges: [['client','home'], ['home','recos']]
+      },
+      {
+        title: 'Search + catalog',
+        desc: 'Search hits index; catalog resolves video metadata.',
+        active: ['client','search','index','catalog'],
+        edges: [['client','search'], ['search','index'], ['index','catalog']]
+      },
+      {
+        title: 'Playback + QoE',
+        desc: 'Playback streams from CDN; QoE telemetry captured.',
+        active: ['player','cdn','metrics'],
+        edges: [['client','player'], ['player','cdn'], ['player','metrics']]
+      },
+      {
+        title: 'Upload + processing',
+        desc: 'Creators upload; transcode and packaging publish renditions to CDN.',
+        active: ['upload','obj','transcode','packaging','cdn'],
+        edges: [['client','upload'], ['upload','obj'], ['obj','transcode'], ['transcode','packaging'], ['packaging','cdn']]
+      },
+      {
+        title: 'Ads and monetization',
+        desc: 'Ads run and are measured; analytics supports revenue attribution.',
+        active: ['ads','analytics'],
+        edges: [['player','ads'], ['ads','analytics']]
+      },
+      {
+        title: 'Moderation + safety',
+        desc: 'Moderation and risk controls enforce policy and reduce abuse.',
+        active: ['moderation','risk'],
+        edges: [['upload','moderation'], ['moderation','risk']]
+      }
+    ]
+  },
+
+  nebula: {
+    title: 'Nebula',
+    steps: [
+      {
+        title: 'Authenticate + subscription entitlements',
+        desc: 'Client signs in; subscription status checked for access.',
+        active: ['client','auth','policy'],
+        edges: [['client','auth'], ['auth','policy']]
+      },
+      {
+        title: 'Browse/search catalog',
+        desc: 'Search hits index; catalog metadata resolved.',
+        active: ['client','search','index','catalog'],
+        edges: [['client','search'], ['search','index'], ['index','catalog']]
+      },
+      {
+        title: 'Playback via CDN',
+        desc: 'Player streams from CDN; telemetry captured.',
+        active: ['player','cdn','metrics'],
+        edges: [['client','player'], ['player','cdn'], ['player','metrics']]
+      },
+      {
+        title: 'Creator upload pipeline',
+        desc: 'Uploads stored; transcode and packaging publish renditions.',
+        active: ['upload','obj','transcode','packaging','cdn'],
+        edges: [['client','upload'], ['upload','obj'], ['obj','transcode'], ['transcode','packaging'], ['packaging','cdn']]
+      },
+      {
+        title: 'Analytics + moderation',
+        desc: 'Analytics informs product decisions; moderation enforces policy.',
+        active: ['analytics','moderation'],
+        edges: [['metrics','analytics'], ['upload','moderation']]
+      }
+    ]
+  },
+
+  curiositystream: {
+    title: 'CuriosityStream',
+    steps: [
+      {
+        title: 'Authenticate + entitlements',
+        desc: 'Subscription entitlements validated for access.',
+        active: ['client','auth','policy'],
+        edges: [['client','auth'], ['auth','policy']]
+      },
+      {
+        title: 'Browse catalog + search',
+        desc: 'Search hits index; catalog returns metadata and collections.',
+        active: ['client','search','index','catalog'],
+        edges: [['client','search'], ['search','index'], ['index','catalog']]
+      },
+      {
+        title: 'Playback via CDN',
+        desc: 'Player streams from CDN; QoE telemetry captured.',
+        active: ['player','cdn','metrics'],
+        edges: [['client','player'], ['player','cdn'], ['player','metrics']]
+      },
+      {
+        title: 'Content ingestion + processing',
+        desc: 'Ingest pipeline stores assets; transcode and packaging publish.',
+        active: ['upload','obj','transcode','packaging','cdn'],
+        edges: [['upload','obj'], ['obj','transcode'], ['transcode','packaging'], ['packaging','cdn']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Engagement and QoE metrics feed analytics.',
+        active: ['analytics'],
+        edges: [['metrics','analytics']]
+      }
+    ]
+  },
+
+  'discovery-plus': {
+    title: 'Discovery+',
+    steps: [
+      {
+        title: 'Sign in + subscription check',
+        desc: 'Auth and subscription entitlements validated; policy applied.',
+        active: ['client','auth','subs','policy'],
+        edges: [['client','auth'], ['auth','subs'], ['subs','policy']]
+      },
+      {
+        title: 'Home rows + recommendations',
+        desc: 'Home feed assembled; recommendations rank titles.',
+        active: ['home','recos','catalog'],
+        edges: [['client','home'], ['home','recos'], ['recos','catalog']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Search hits index and resolves catalog metadata.',
+        active: ['search','index','catalog'],
+        edges: [['client','search'], ['search','index'], ['index','catalog']]
+      },
+      {
+        title: 'DRM + playback via CDN',
+        desc: 'DRM license issued; player streams from CDN with ABR.',
+        active: ['drm','player','cdn','metrics'],
+        edges: [['catalog','drm'], ['drm','player'], ['player','cdn'], ['player','metrics']]
+      },
+      {
+        title: 'Ads (if tiered) + analytics',
+        desc: 'Ads inserted where applicable; analytics and QoE measured.',
+        active: ['ads','analytics','metrics'],
+        edges: [['player','ads'], ['metrics','analytics']]
+      }
+    ]
+  },
+
+  'hbo-go': {
+    title: 'HBO Go',
+    steps: [
+      {
+        title: 'Authenticate + entitlements',
+        desc: 'User signs in; subscription entitlements validated.',
+        active: ['client','auth','subs','policy'],
+        edges: [['client','auth'], ['auth','subs'], ['subs','policy']]
+      },
+      {
+        title: 'Browse catalog',
+        desc: 'Catalog metadata and availability resolved.',
+        active: ['catalog','policy'],
+        edges: [['client','catalog'], ['catalog','policy']]
+      },
+      {
+        title: 'DRM + playback',
+        desc: 'DRM licenses issued; player streams from CDN; telemetry captured.',
+        active: ['drm','player','cdn','metrics'],
+        edges: [['catalog','drm'], ['drm','player'], ['player','cdn'], ['player','metrics']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'QoE and engagement metrics feed analytics.',
+        active: ['analytics'],
+        edges: [['metrics','analytics']]
+      }
+    ]
+  },
+
+  peacock: {
+    title: 'Peacock',
+    steps: [
+      {
+        title: 'Sign in + tier/entitlement',
+        desc: 'User signs in; entitlement/tier determines ads and access.',
+        active: ['client','auth','subs','policy'],
+        edges: [['client','auth'], ['auth','subs'], ['subs','policy']]
+      },
+      {
+        title: 'Home + recommendations',
+        desc: 'Home rows assembled; recos rank content.',
+        active: ['home','recos','catalog'],
+        edges: [['client','home'], ['home','recos'], ['recos','catalog']]
+      },
+      {
+        title: 'DRM + playback via CDN',
+        desc: 'DRM license issued; player streams from CDN with ABR.',
+        active: ['drm','player','cdn','metrics'],
+        edges: [['catalog','drm'], ['drm','player'], ['player','cdn'], ['player','metrics']]
+      },
+      {
+        title: 'Ads + measurement',
+        desc: 'Ads inserted; measurement and analytics recorded.',
+        active: ['ads','analytics'],
+        edges: [['player','ads'], ['metrics','analytics']]
+      }
+    ]
+  },
+
+  sonyliv: {
+    title: 'SonyLIV',
+    steps: [
+      {
+        title: 'Sign in + subscription check',
+        desc: 'Auth and entitlements validated for premium/live content.',
+        active: ['client','auth','subs','policy'],
+        edges: [['client','auth'], ['auth','subs'], ['subs','policy']]
+      },
+      {
+        title: 'Browse catalog + recos',
+        desc: 'Home rows and recos surface shows and live sports.',
+        active: ['home','recos','catalog'],
+        edges: [['client','home'], ['home','recos'], ['recos','catalog']]
+      },
+      {
+        title: 'Playback (DRM + CDN)',
+        desc: 'DRM license issued; player streams from CDN; QoE measured.',
+        active: ['drm','player','cdn','metrics'],
+        edges: [['catalog','drm'], ['drm','player'], ['player','cdn'], ['player','metrics']]
+      },
+      {
+        title: 'Ads + analytics',
+        desc: 'Ads inserted where applicable; analytics recorded.',
+        active: ['ads','analytics'],
+        edges: [['player','ads'], ['metrics','analytics']]
+      }
+    ]
+  },
+
+  zee5: {
+    title: 'Zee5',
+    steps: [
+      {
+        title: 'Sign in + subscription tier',
+        desc: 'Auth and entitlements validated; policy decides access/ads.',
+        active: ['client','auth','subs','policy'],
+        edges: [['client','auth'], ['auth','subs'], ['subs','policy']]
+      },
+      {
+        title: 'Home + recommendations',
+        desc: 'Home rows assembled; recos rank titles by engagement and preference.',
+        active: ['home','recos','catalog'],
+        edges: [['client','home'], ['home','recos'], ['recos','catalog']]
+      },
+      {
+        title: 'Playback (DRM + CDN)',
+        desc: 'DRM license issued; player streams from CDN; QoE measured.',
+        active: ['drm','player','cdn','metrics'],
+        edges: [['catalog','drm'], ['drm','player'], ['player','cdn'], ['player','metrics']]
+      },
+      {
+        title: 'Ads + analytics',
+        desc: 'Ads inserted where applicable; analytics recorded.',
+        active: ['ads','analytics'],
+        edges: [['player','ads'], ['metrics','analytics']]
+      }
+    ]
+  },
+
+  'mx-player': {
+    title: 'MX Player',
+    steps: [
+      {
+        title: 'Home feed + recos',
+        desc: 'Client loads home feed; recos rank content for engagement.',
+        active: ['client','home','recos'],
+        edges: [['client','home'], ['home','recos']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Search hits index; catalog resolves metadata.',
+        active: ['client','search','index','catalog'],
+        edges: [['client','search'], ['search','index'], ['index','catalog']]
+      },
+      {
+        title: 'Playback via CDN',
+        desc: 'Player streams from CDN; telemetry captured; ads may be inserted.',
+        active: ['player','cdn','metrics','ads'],
+        edges: [['client','player'], ['player','cdn'], ['player','metrics'], ['player','ads']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'QoE and engagement metrics feed analytics.',
+        active: ['analytics'],
+        edges: [['metrics','analytics']]
+      }
+    ]
+  },
+
   chime: {
     title: 'Chime',
     steps: [

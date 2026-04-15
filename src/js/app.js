@@ -11809,6 +11809,552 @@ Object.assign(ARCH_LAYOUTS, {
   }
 });
 
+// ----- Batch 45 (System + Architecture - streaming batch for flows) -----
+
+Object.assign(SYSTEM_LAYOUTS, {
+  dailymotion: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','home','recos','search','index','catalog','upload','obj','transcode','packaging','cdn','player','ads','metrics','analytics','moderation'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      home: { x: 380, y: 320, label: 'Home', colorKey: 'api' },
+      recos: { x: 620, y: 320, label: 'Recos', colorKey: 'api' },
+      search: { x: 620, y: 180, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 180, label: 'Index', colorKey: 'store' },
+      catalog: { x: 860, y: 320, label: 'Catalog', colorKey: 'store' },
+      upload: { x: 380, y: 460, label: 'Upload', colorKey: 'api' },
+      obj: { x: 620, y: 460, label: 'Object Store', colorKey: 'store' },
+      transcode: { x: 860, y: 460, label: 'Transcode', colorKey: 'queue' },
+      packaging: { x: 1100, y: 460, label: 'Packaging', colorKey: 'api' },
+      cdn: { x: 1100, y: 320, label: 'CDN', colorKey: 'cdn' },
+      player: { x: 860, y: 240, label: 'Player', colorKey: 'api' },
+      ads: { x: 1100, y: 180, label: 'Ads', colorKey: 'api' },
+      metrics: { x: 620, y: 600, label: 'Telemetry', colorKey: 'stream' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' },
+      moderation: { x: 380, y: 600, label: 'Moderation', colorKey: 'api' }
+    }
+  },
+
+  rumble: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','home','recos','search','index','catalog','upload','obj','transcode','packaging','cdn','player','ads','metrics','analytics','moderation'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      home: { x: 380, y: 320, label: 'Home', colorKey: 'api' },
+      recos: { x: 620, y: 320, label: 'Recos', colorKey: 'api' },
+      search: { x: 620, y: 180, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 180, label: 'Index', colorKey: 'store' },
+      catalog: { x: 860, y: 320, label: 'Catalog', colorKey: 'store' },
+      upload: { x: 380, y: 460, label: 'Upload', colorKey: 'api' },
+      obj: { x: 620, y: 460, label: 'Object Store', colorKey: 'store' },
+      transcode: { x: 860, y: 460, label: 'Transcode', colorKey: 'queue' },
+      packaging: { x: 1100, y: 460, label: 'Packaging', colorKey: 'api' },
+      cdn: { x: 1100, y: 320, label: 'CDN', colorKey: 'cdn' },
+      player: { x: 860, y: 240, label: 'Player', colorKey: 'api' },
+      ads: { x: 1100, y: 180, label: 'Ads', colorKey: 'api' },
+      metrics: { x: 620, y: 600, label: 'Telemetry', colorKey: 'stream' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' },
+      moderation: { x: 380, y: 600, label: 'Moderation', colorKey: 'api' }
+    }
+  },
+
+  nebula: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','subs','policy','catalog','search','index','upload','obj','transcode','packaging','cdn','player','metrics','analytics','moderation'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      subs: { x: 620, y: 180, label: 'Subscriptions', colorKey: 'external' },
+      policy: { x: 860, y: 180, label: 'Policy', colorKey: 'api' },
+      catalog: { x: 860, y: 320, label: 'Catalog', colorKey: 'store' },
+      search: { x: 620, y: 320, label: 'Search', colorKey: 'api' },
+      index: { x: 380, y: 320, label: 'Index', colorKey: 'store' },
+      upload: { x: 380, y: 460, label: 'Upload', colorKey: 'api' },
+      obj: { x: 620, y: 460, label: 'Object Store', colorKey: 'store' },
+      transcode: { x: 860, y: 460, label: 'Transcode', colorKey: 'queue' },
+      packaging: { x: 1100, y: 460, label: 'Packaging', colorKey: 'api' },
+      cdn: { x: 1100, y: 320, label: 'CDN', colorKey: 'cdn' },
+      player: { x: 860, y: 240, label: 'Player', colorKey: 'api' },
+      metrics: { x: 620, y: 600, label: 'Telemetry', colorKey: 'stream' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' },
+      moderation: { x: 380, y: 600, label: 'Moderation', colorKey: 'api' }
+    }
+  },
+
+  curiositystream: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','subs','policy','catalog','search','index','upload','obj','transcode','packaging','cdn','player','metrics','analytics','moderation'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      subs: { x: 620, y: 180, label: 'Subscriptions', colorKey: 'external' },
+      policy: { x: 860, y: 180, label: 'Policy', colorKey: 'api' },
+      catalog: { x: 860, y: 320, label: 'Catalog', colorKey: 'store' },
+      search: { x: 620, y: 320, label: 'Search', colorKey: 'api' },
+      index: { x: 380, y: 320, label: 'Index', colorKey: 'store' },
+      upload: { x: 380, y: 460, label: 'Upload', colorKey: 'api' },
+      obj: { x: 620, y: 460, label: 'Object Store', colorKey: 'store' },
+      transcode: { x: 860, y: 460, label: 'Transcode', colorKey: 'queue' },
+      packaging: { x: 1100, y: 460, label: 'Packaging', colorKey: 'api' },
+      cdn: { x: 1100, y: 320, label: 'CDN', colorKey: 'cdn' },
+      player: { x: 860, y: 240, label: 'Player', colorKey: 'api' },
+      metrics: { x: 620, y: 600, label: 'Telemetry', colorKey: 'stream' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' },
+      moderation: { x: 380, y: 600, label: 'Moderation', colorKey: 'api' }
+    }
+  },
+
+  'discovery-plus': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','subs','policy','home','recos','catalog','search','index','drm','cdn','player','ads','metrics','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      subs: { x: 620, y: 180, label: 'Subscriptions', colorKey: 'external' },
+      policy: { x: 860, y: 180, label: 'Policy', colorKey: 'api' },
+      home: { x: 380, y: 320, label: 'Home', colorKey: 'api' },
+      recos: { x: 620, y: 320, label: 'Recos', colorKey: 'api' },
+      catalog: { x: 860, y: 320, label: 'Catalog', colorKey: 'store' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 380, y: 460, label: 'Index', colorKey: 'store' },
+      drm: { x: 860, y: 460, label: 'DRM', colorKey: 'api' },
+      cdn: { x: 1100, y: 320, label: 'CDN', colorKey: 'cdn' },
+      player: { x: 1100, y: 240, label: 'Player', colorKey: 'api' },
+      ads: { x: 1100, y: 460, label: 'Ads', colorKey: 'api' },
+      metrics: { x: 620, y: 600, label: 'Telemetry', colorKey: 'stream' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'hbo-go': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','subs','policy','catalog','drm','cdn','player','metrics','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      subs: { x: 620, y: 180, label: 'Subscriptions', colorKey: 'external' },
+      policy: { x: 860, y: 180, label: 'Policy', colorKey: 'api' },
+      catalog: { x: 620, y: 320, label: 'Catalog', colorKey: 'store' },
+      drm: { x: 860, y: 320, label: 'DRM', colorKey: 'api' },
+      cdn: { x: 1100, y: 320, label: 'CDN', colorKey: 'cdn' },
+      player: { x: 1100, y: 240, label: 'Player', colorKey: 'api' },
+      metrics: { x: 620, y: 460, label: 'Telemetry', colorKey: 'stream' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  peacock: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','subs','policy','home','recos','catalog','drm','cdn','player','ads','metrics','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      subs: { x: 620, y: 180, label: 'Subscriptions', colorKey: 'external' },
+      policy: { x: 860, y: 180, label: 'Policy', colorKey: 'api' },
+      home: { x: 380, y: 320, label: 'Home', colorKey: 'api' },
+      recos: { x: 620, y: 320, label: 'Recos', colorKey: 'api' },
+      catalog: { x: 860, y: 320, label: 'Catalog', colorKey: 'store' },
+      drm: { x: 860, y: 460, label: 'DRM', colorKey: 'api' },
+      cdn: { x: 1100, y: 320, label: 'CDN', colorKey: 'cdn' },
+      player: { x: 1100, y: 240, label: 'Player', colorKey: 'api' },
+      ads: { x: 1100, y: 460, label: 'Ads', colorKey: 'api' },
+      metrics: { x: 620, y: 600, label: 'Telemetry', colorKey: 'stream' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  sonyliv: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','subs','policy','home','recos','catalog','drm','cdn','player','ads','metrics','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      subs: { x: 620, y: 180, label: 'Subscriptions', colorKey: 'external' },
+      policy: { x: 860, y: 180, label: 'Policy', colorKey: 'api' },
+      home: { x: 380, y: 320, label: 'Home', colorKey: 'api' },
+      recos: { x: 620, y: 320, label: 'Recos', colorKey: 'api' },
+      catalog: { x: 860, y: 320, label: 'Catalog', colorKey: 'store' },
+      drm: { x: 860, y: 460, label: 'DRM', colorKey: 'api' },
+      cdn: { x: 1100, y: 320, label: 'CDN', colorKey: 'cdn' },
+      player: { x: 1100, y: 240, label: 'Player', colorKey: 'api' },
+      ads: { x: 1100, y: 460, label: 'Ads', colorKey: 'api' },
+      metrics: { x: 620, y: 600, label: 'Telemetry', colorKey: 'stream' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  zee5: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','subs','policy','home','recos','catalog','drm','cdn','player','ads','metrics','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      subs: { x: 620, y: 180, label: 'Subscriptions', colorKey: 'external' },
+      policy: { x: 860, y: 180, label: 'Policy', colorKey: 'api' },
+      home: { x: 380, y: 320, label: 'Home', colorKey: 'api' },
+      recos: { x: 620, y: 320, label: 'Recos', colorKey: 'api' },
+      catalog: { x: 860, y: 320, label: 'Catalog', colorKey: 'store' },
+      drm: { x: 860, y: 460, label: 'DRM', colorKey: 'api' },
+      cdn: { x: 1100, y: 320, label: 'CDN', colorKey: 'cdn' },
+      player: { x: 1100, y: 240, label: 'Player', colorKey: 'api' },
+      ads: { x: 1100, y: 460, label: 'Ads', colorKey: 'api' },
+      metrics: { x: 620, y: 600, label: 'Telemetry', colorKey: 'stream' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'mx-player': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','home','recos','catalog','search','index','drm','cdn','player','ads','metrics','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      home: { x: 380, y: 320, label: 'Home', colorKey: 'api' },
+      recos: { x: 620, y: 320, label: 'Recos', colorKey: 'api' },
+      catalog: { x: 860, y: 320, label: 'Catalog', colorKey: 'store' },
+      search: { x: 620, y: 180, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 180, label: 'Index', colorKey: 'store' },
+      drm: { x: 1100, y: 320, label: 'DRM', colorKey: 'api' },
+      cdn: { x: 1100, y: 180, label: 'CDN', colorKey: 'cdn' },
+      player: { x: 1100, y: 240, label: 'Player', colorKey: 'api' },
+      ads: { x: 1100, y: 460, label: 'Ads', colorKey: 'api' },
+      metrics: { x: 620, y: 600, label: 'Telemetry', colorKey: 'stream' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  }
+});
+
+Object.assign(ARCH_LAYOUTS, {
+  dailymotion: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Dailymotion Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','home','recos','search','index','catalog','upload','obj','transcode','packaging','cdn','player','ads','metrics','analytics','moderation'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      home: { x: 320, y: 160, label: 'Home' },
+      recos: { x: 600, y: 160, label: 'Recos' },
+      search: { x: 320, y: 300, label: 'Search' },
+      index: { x: 600, y: 300, label: 'Index' },
+      catalog: { x: 880, y: 160, label: 'Catalog' },
+      upload: { x: 320, y: 440, label: 'Upload' },
+      obj: { x: 600, y: 440, label: 'Object Store' },
+      transcode: { x: 880, y: 440, label: 'Transcode' },
+      packaging: { x: 1160, y: 440, label: 'Packaging' },
+      cdn: { x: 1160, y: 160, label: 'CDN' },
+      player: { x: 880, y: 300, label: 'Player' },
+      ads: { x: 1160, y: 300, label: 'Ads' },
+      metrics: { x: 600, y: 580, label: 'Telemetry' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      moderation: { x: 320, y: 580, label: 'Moderation' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','home','home'], ['home','recos','recos']);
+      if(stepIdx===2) e.push(['client','search','search'], ['search','index','index'], ['index','catalog','catalog']);
+      if(stepIdx===3) e.push(['client','player','play'], ['player','cdn','cdn']);
+      if(stepIdx===4) e.push(['client','upload','upload'], ['upload','obj','obj'], ['obj','transcode','transcode'], ['transcode','packaging','pack'], ['packaging','cdn','cdn']);
+      if(stepIdx===5) e.push(['player','ads','ads']);
+      if(stepIdx===6) e.push(['player','metrics','qoe'], ['metrics','analytics','analytics']);
+      if(stepIdx===7) e.push(['upload','moderation','mod']);
+      return e;
+    }
+  },
+
+  rumble: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Rumble Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','home','recos','search','index','catalog','upload','obj','transcode','packaging','cdn','player','ads','metrics','analytics','moderation'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      home: { x: 320, y: 160, label: 'Home' },
+      recos: { x: 600, y: 160, label: 'Recos' },
+      search: { x: 320, y: 300, label: 'Search' },
+      index: { x: 600, y: 300, label: 'Index' },
+      catalog: { x: 880, y: 160, label: 'Catalog' },
+      upload: { x: 320, y: 440, label: 'Upload' },
+      obj: { x: 600, y: 440, label: 'Object Store' },
+      transcode: { x: 880, y: 440, label: 'Transcode' },
+      packaging: { x: 1160, y: 440, label: 'Packaging' },
+      cdn: { x: 1160, y: 160, label: 'CDN' },
+      player: { x: 880, y: 300, label: 'Player' },
+      ads: { x: 1160, y: 300, label: 'Ads' },
+      metrics: { x: 600, y: 580, label: 'Telemetry' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      moderation: { x: 320, y: 580, label: 'Moderation' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','home','home'], ['home','recos','recos']);
+      if(stepIdx===2) e.push(['client','search','search'], ['search','index','index'], ['index','catalog','catalog']);
+      if(stepIdx===3) e.push(['client','player','play'], ['player','cdn','cdn']);
+      if(stepIdx===4) e.push(['client','upload','upload'], ['upload','obj','obj'], ['obj','transcode','transcode'], ['transcode','packaging','pack'], ['packaging','cdn','cdn']);
+      if(stepIdx===5) e.push(['player','ads','ads']);
+      if(stepIdx===6) e.push(['player','metrics','qoe'], ['metrics','analytics','analytics']);
+      if(stepIdx===7) e.push(['upload','moderation','mod']);
+      return e;
+    }
+  },
+
+  nebula: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Nebula Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','subs','policy','catalog','search','index','upload','obj','transcode','packaging','cdn','player','metrics','analytics','moderation'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      subs: { x: 600, y: 160, label: 'Subscriptions' },
+      policy: { x: 880, y: 160, label: 'Policy' },
+      catalog: { x: 1160, y: 160, label: 'Catalog' },
+      search: { x: 320, y: 300, label: 'Search' },
+      index: { x: 600, y: 300, label: 'Index' },
+      upload: { x: 320, y: 440, label: 'Upload' },
+      obj: { x: 600, y: 440, label: 'Object Store' },
+      transcode: { x: 880, y: 440, label: 'Transcode' },
+      packaging: { x: 1160, y: 440, label: 'Packaging' },
+      cdn: { x: 1160, y: 300, label: 'CDN' },
+      player: { x: 880, y: 300, label: 'Player' },
+      metrics: { x: 600, y: 580, label: 'Telemetry' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      moderation: { x: 320, y: 580, label: 'Moderation' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','subs','subs'], ['subs','policy','policy']);
+      if(stepIdx===2) e.push(['client','search','search'], ['search','index','index'], ['index','catalog','catalog']);
+      if(stepIdx===3) e.push(['policy','player','allow'], ['player','cdn','cdn']);
+      if(stepIdx===4) e.push(['client','upload','upload'], ['upload','obj','obj'], ['obj','transcode','transcode'], ['transcode','packaging','pack'], ['packaging','cdn','cdn']);
+      if(stepIdx===5) e.push(['player','metrics','qoe'], ['metrics','analytics','analytics']);
+      if(stepIdx===6) e.push(['upload','moderation','mod']);
+      return e;
+    }
+  },
+
+  curiositystream: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'CuriosityStream Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','subs','policy','catalog','search','index','upload','obj','transcode','packaging','cdn','player','metrics','analytics','moderation'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      subs: { x: 600, y: 160, label: 'Subscriptions' },
+      policy: { x: 880, y: 160, label: 'Policy' },
+      catalog: { x: 1160, y: 160, label: 'Catalog' },
+      search: { x: 320, y: 300, label: 'Search' },
+      index: { x: 600, y: 300, label: 'Index' },
+      upload: { x: 320, y: 440, label: 'Upload' },
+      obj: { x: 600, y: 440, label: 'Object Store' },
+      transcode: { x: 880, y: 440, label: 'Transcode' },
+      packaging: { x: 1160, y: 440, label: 'Packaging' },
+      cdn: { x: 1160, y: 300, label: 'CDN' },
+      player: { x: 880, y: 300, label: 'Player' },
+      metrics: { x: 600, y: 580, label: 'Telemetry' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      moderation: { x: 320, y: 580, label: 'Moderation' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','subs','subs'], ['subs','policy','policy']);
+      if(stepIdx===2) e.push(['client','search','search'], ['search','index','index'], ['index','catalog','catalog']);
+      if(stepIdx===3) e.push(['policy','player','allow'], ['player','cdn','cdn']);
+      if(stepIdx===4) e.push(['client','upload','upload'], ['upload','obj','obj'], ['obj','transcode','transcode'], ['transcode','packaging','pack'], ['packaging','cdn','cdn']);
+      if(stepIdx===5) e.push(['player','metrics','qoe'], ['metrics','analytics','analytics']);
+      if(stepIdx===6) e.push(['upload','moderation','mod']);
+      return e;
+    }
+  },
+
+  'discovery-plus': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Discovery+ Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','subs','policy','home','recos','catalog','search','index','drm','cdn','player','ads','metrics','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      subs: { x: 600, y: 160, label: 'Subscriptions' },
+      policy: { x: 880, y: 160, label: 'Policy' },
+      home: { x: 320, y: 300, label: 'Home' },
+      recos: { x: 600, y: 300, label: 'Recos' },
+      catalog: { x: 880, y: 300, label: 'Catalog' },
+      search: { x: 320, y: 440, label: 'Search' },
+      index: { x: 600, y: 440, label: 'Index' },
+      drm: { x: 880, y: 440, label: 'DRM' },
+      cdn: { x: 1160, y: 300, label: 'CDN' },
+      player: { x: 1160, y: 200, label: 'Player' },
+      ads: { x: 1160, y: 440, label: 'Ads' },
+      metrics: { x: 600, y: 580, label: 'Telemetry' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','subs','subs'], ['subs','policy','policy']);
+      if(stepIdx===2) e.push(['client','home','home'], ['home','recos','recos'], ['recos','catalog','catalog']);
+      if(stepIdx===3) e.push(['client','search','search'], ['search','index','index'], ['index','catalog','catalog']);
+      if(stepIdx===4) e.push(['catalog','drm','drm'], ['drm','player','license'], ['player','cdn','cdn']);
+      if(stepIdx===5) e.push(['player','ads','ads']);
+      if(stepIdx===6) e.push(['player','metrics','qoe'], ['metrics','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'hbo-go': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'HBO Go Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','subs','policy','catalog','drm','cdn','player','metrics','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      subs: { x: 600, y: 160, label: 'Subscriptions' },
+      policy: { x: 880, y: 160, label: 'Policy' },
+      catalog: { x: 600, y: 300, label: 'Catalog' },
+      drm: { x: 880, y: 300, label: 'DRM' },
+      cdn: { x: 1160, y: 300, label: 'CDN' },
+      player: { x: 1160, y: 200, label: 'Player' },
+      metrics: { x: 600, y: 440, label: 'Telemetry' },
+      analytics: { x: 880, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','subs','subs'], ['subs','policy','policy']);
+      if(stepIdx===2) e.push(['client','catalog','catalog'], ['catalog','policy','policy']);
+      if(stepIdx===3) e.push(['catalog','drm','drm'], ['drm','player','license'], ['player','cdn','cdn']);
+      if(stepIdx===4) e.push(['player','metrics','qoe'], ['metrics','analytics','analytics']);
+      return e;
+    }
+  },
+
+  peacock: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Peacock Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','subs','policy','home','recos','catalog','drm','cdn','player','ads','metrics','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      subs: { x: 600, y: 160, label: 'Subscriptions' },
+      policy: { x: 880, y: 160, label: 'Policy' },
+      home: { x: 320, y: 300, label: 'Home' },
+      recos: { x: 600, y: 300, label: 'Recos' },
+      catalog: { x: 880, y: 300, label: 'Catalog' },
+      drm: { x: 880, y: 440, label: 'DRM' },
+      cdn: { x: 1160, y: 300, label: 'CDN' },
+      player: { x: 1160, y: 200, label: 'Player' },
+      ads: { x: 1160, y: 440, label: 'Ads' },
+      metrics: { x: 600, y: 580, label: 'Telemetry' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','subs','subs'], ['subs','policy','policy']);
+      if(stepIdx===2) e.push(['client','home','home'], ['home','recos','recos'], ['recos','catalog','catalog']);
+      if(stepIdx===3) e.push(['catalog','drm','drm'], ['drm','player','license'], ['player','cdn','cdn']);
+      if(stepIdx===4) e.push(['player','ads','ads']);
+      if(stepIdx===5) e.push(['player','metrics','qoe'], ['metrics','analytics','analytics']);
+      return e;
+    }
+  },
+
+  sonyliv: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'SonyLIV Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','subs','policy','home','recos','catalog','drm','cdn','player','ads','metrics','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      subs: { x: 600, y: 160, label: 'Subscriptions' },
+      policy: { x: 880, y: 160, label: 'Policy' },
+      home: { x: 320, y: 300, label: 'Home' },
+      recos: { x: 600, y: 300, label: 'Recos' },
+      catalog: { x: 880, y: 300, label: 'Catalog' },
+      drm: { x: 880, y: 440, label: 'DRM' },
+      cdn: { x: 1160, y: 300, label: 'CDN' },
+      player: { x: 1160, y: 200, label: 'Player' },
+      ads: { x: 1160, y: 440, label: 'Ads' },
+      metrics: { x: 600, y: 580, label: 'Telemetry' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','subs','subs'], ['subs','policy','policy']);
+      if(stepIdx===2) e.push(['client','home','home'], ['home','recos','recos'], ['recos','catalog','catalog']);
+      if(stepIdx===3) e.push(['catalog','drm','drm'], ['drm','player','license'], ['player','cdn','cdn']);
+      if(stepIdx===4) e.push(['player','ads','ads']);
+      if(stepIdx===5) e.push(['player','metrics','qoe'], ['metrics','analytics','analytics']);
+      return e;
+    }
+  },
+
+  zee5: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Zee5 Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','subs','policy','home','recos','catalog','drm','cdn','player','ads','metrics','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      subs: { x: 600, y: 160, label: 'Subscriptions' },
+      policy: { x: 880, y: 160, label: 'Policy' },
+      home: { x: 320, y: 300, label: 'Home' },
+      recos: { x: 600, y: 300, label: 'Recos' },
+      catalog: { x: 880, y: 300, label: 'Catalog' },
+      drm: { x: 880, y: 440, label: 'DRM' },
+      cdn: { x: 1160, y: 300, label: 'CDN' },
+      player: { x: 1160, y: 200, label: 'Player' },
+      ads: { x: 1160, y: 440, label: 'Ads' },
+      metrics: { x: 600, y: 580, label: 'Telemetry' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','subs','subs'], ['subs','policy','policy']);
+      if(stepIdx===2) e.push(['client','home','home'], ['home','recos','recos'], ['recos','catalog','catalog']);
+      if(stepIdx===3) e.push(['catalog','drm','drm'], ['drm','player','license'], ['player','cdn','cdn']);
+      if(stepIdx===4) e.push(['player','ads','ads']);
+      if(stepIdx===5) e.push(['player','metrics','qoe'], ['metrics','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'mx-player': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'MX Player Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','home','recos','search','index','catalog','drm','cdn','player','ads','metrics','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      home: { x: 320, y: 300, label: 'Home' },
+      recos: { x: 600, y: 300, label: 'Recos' },
+      search: { x: 320, y: 440, label: 'Search' },
+      index: { x: 600, y: 440, label: 'Index' },
+      catalog: { x: 880, y: 300, label: 'Catalog' },
+      drm: { x: 1160, y: 300, label: 'DRM' },
+      cdn: { x: 1160, y: 160, label: 'CDN' },
+      player: { x: 880, y: 160, label: 'Player' },
+      ads: { x: 1160, y: 440, label: 'Ads' },
+      metrics: { x: 600, y: 580, label: 'Telemetry' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','home','home'], ['home','recos','recos']);
+      if(stepIdx===2) e.push(['client','search','search'], ['search','index','index'], ['index','catalog','catalog']);
+      if(stepIdx===3) e.push(['catalog','drm','drm'], ['drm','player','license'], ['player','cdn','cdn']);
+      if(stepIdx===4) e.push(['player','ads','ads']);
+      if(stepIdx===5) e.push(['player','metrics','qoe'], ['metrics','analytics','analytics']);
+      return e;
+    }
+  }
+});
+
 // ----- Batch 35 (System - from user selection) -----
 
 Object.assign(SYSTEM_LAYOUTS, {
