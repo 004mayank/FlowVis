@@ -10355,6 +10355,306 @@ export const FLOWS = {
     ]
   },
 
+  'character-ai': {
+    title: 'Character AI',
+    steps: [
+      {
+        title: 'Pick character + start chat',
+        desc: 'User signs in, browses characters, and starts a chat.',
+        active: ['client','auth','characters','chat'],
+        edges: [['client','auth'], ['auth','characters'], ['characters','chat']]
+      },
+      {
+        title: 'Moderation + memory',
+        desc: 'Moderation filters content; memory stores conversation context.',
+        active: ['moderation','memory'],
+        edges: [['chat','moderation'], ['chat','memory'], ['memory','chat']]
+      },
+      {
+        title: 'Recommendations + notifications',
+        desc: 'Recommendations suggest next characters; notifications re-engage.',
+        active: ['recommendations','notifications'],
+        edges: [['chat','recommendations'], ['recommendations','notifications']]
+      },
+      {
+        title: 'Subscriptions + billing + analytics',
+        desc: 'Subscription billed; analytics tracks engagement and retention.',
+        active: ['subscriptions','billing','analytics'],
+        edges: [['subscriptions','billing'], ['chat','analytics']]
+      }
+    ]
+  },
+
+  replit: {
+    title: 'Replit',
+    steps: [
+      {
+        title: 'Create repl',
+        desc: 'User authenticates, selects workspace, and creates a repl.',
+        active: ['client','auth','workspaces','repls','editor'],
+        edges: [['client','auth'], ['auth','workspaces'], ['workspaces','repls'], ['repls','editor']]
+      },
+      {
+        title: 'Install deps + run',
+        desc: 'Dependencies installed; runtime executes in containers.',
+        active: ['deps','runtime','containers','logs'],
+        edges: [['repls','deps'], ['deps','runtime'], ['runtime','containers'], ['runtime','logs']]
+      },
+      {
+        title: 'Deploy + hosting',
+        desc: 'Deploy builds and publishes to hosting.',
+        active: ['deploy','hosting'],
+        edges: [['containers','deploy'], ['deploy','hosting']]
+      },
+      {
+        title: 'Secrets + billing + analytics',
+        desc: 'Secrets used for env vars; billing and analytics track usage.',
+        active: ['secrets','billing','analytics'],
+        edges: [['secrets','containers'], ['billing','analytics'], ['logs','analytics']]
+      }
+    ]
+  },
+
+  codesandbox: {
+    title: 'CodeSandbox',
+    steps: [
+      {
+        title: 'Create sandbox',
+        desc: 'User authenticates and creates a sandbox from templates/projects.',
+        active: ['client','auth','templates','projects','sandboxes','editor'],
+        edges: [['client','auth'], ['auth','templates'], ['templates','projects'], ['projects','sandboxes'], ['sandboxes','editor']]
+      },
+      {
+        title: 'Run container + preview',
+        desc: 'Dependencies installed; container runs; preview updates.',
+        active: ['deps','containers','preview'],
+        edges: [['sandboxes','deps'], ['deps','containers'], ['containers','preview']]
+      },
+      {
+        title: 'Collaboration',
+        desc: 'Real-time collaboration and sharing in sandbox.',
+        active: ['collab'],
+        edges: [['sandboxes','collab']]
+      },
+      {
+        title: 'Deploy + hosting + analytics',
+        desc: 'Deploy publishes to hosting; analytics tracks usage; billing for paid tiers.',
+        active: ['deploy','hosting','analytics','billing'],
+        edges: [['containers','deploy'], ['deploy','hosting'], ['projects','analytics'], ['billing','analytics']]
+      }
+    ]
+  },
+
+  stackblitz: {
+    title: 'StackBlitz',
+    steps: [
+      {
+        title: 'Open project',
+        desc: 'User authenticates and opens project/workspace in editor.',
+        active: ['client','auth','projects','workspaces','editor'],
+        edges: [['client','auth'], ['auth','projects'], ['projects','workspaces'], ['workspaces','editor']]
+      },
+      {
+        title: 'WebContainers run + preview',
+        desc: 'Deps resolved; WebContainers run app; preview updates.',
+        active: ['deps','webcontainers','preview'],
+        edges: [['workspaces','deps'], ['deps','webcontainers'], ['webcontainers','preview']]
+      },
+      {
+        title: 'Deploy + hosting',
+        desc: 'Deploy publishes to hosting.',
+        active: ['deploy','hosting'],
+        edges: [['webcontainers','deploy'], ['deploy','hosting']]
+      },
+      {
+        title: 'Collab + billing + analytics',
+        desc: 'Collaboration; billing and analytics track usage.',
+        active: ['collab','billing','analytics'],
+        edges: [['workspaces','collab'], ['billing','analytics'], ['projects','analytics']]
+      }
+    ]
+  },
+
+  glitch: {
+    title: 'Glitch',
+    steps: [
+      {
+        title: 'Create project',
+        desc: 'User authenticates and creates a project in editor.',
+        active: ['client','auth','projects','editor'],
+        edges: [['client','auth'], ['auth','projects'], ['projects','editor']]
+      },
+      {
+        title: 'Run app + assets',
+        desc: 'Runtime executes in containers; assets served.',
+        active: ['runtime','containers','assets'],
+        edges: [['editor','runtime'], ['runtime','containers'], ['assets','hosting']]
+      },
+      {
+        title: 'Deploy + hosting',
+        desc: 'Deploy publishes to hosting.',
+        active: ['deploy','hosting'],
+        edges: [['deploy','hosting']]
+      },
+      {
+        title: 'Community + billing + analytics',
+        desc: 'Community features; billing and analytics track usage.',
+        active: ['community','billing','analytics'],
+        edges: [['projects','community'], ['billing','analytics'], ['projects','analytics']]
+      }
+    ]
+  },
+
+  codespaces: {
+    title: 'Codespaces',
+    steps: [
+      {
+        title: 'Launch codespace',
+        desc: 'User authenticates and launches codespace from repo.',
+        active: ['client','auth','repos','codespaces','editor'],
+        edges: [['client','auth'], ['auth','repos'], ['repos','codespaces'], ['codespaces','editor']]
+      },
+      {
+        title: 'Build devcontainer + secrets',
+        desc: 'Devcontainer config builds container; secrets injected.',
+        active: ['devcontainers','containers','secrets'],
+        edges: [['codespaces','devcontainers'], ['devcontainers','containers'], ['secrets','containers']]
+      },
+      {
+        title: 'Ports + preview',
+        desc: 'Ports forwarded and preview accessed.',
+        active: ['ports','preview'],
+        edges: [['containers','ports'], ['ports','preview']]
+      },
+      {
+        title: 'Logs + billing + analytics',
+        desc: 'Logs collected; billing and analytics track usage.',
+        active: ['logs','billing','analytics'],
+        edges: [['containers','logs'], ['logs','analytics'], ['billing','analytics']]
+      }
+    ]
+  },
+
+  sourcegraph: {
+    title: 'Sourcegraph',
+    steps: [
+      {
+        title: 'Sync repos + index',
+        desc: 'Repos synced; indexing builds searchable code graph.',
+        active: ['client','auth','repos','indexing'],
+        edges: [['client','auth'], ['auth','repos'], ['repos','indexing']]
+      },
+      {
+        title: 'Search + code intel',
+        desc: 'Search queries and code intelligence results.',
+        active: ['search','codeintel'],
+        edges: [['indexing','search'], ['indexing','codeintel']]
+      },
+      {
+        title: 'Embeddings + assistant',
+        desc: 'Embeddings power semantic search; assistant answers questions.',
+        active: ['embeddings','assistant'],
+        edges: [['indexing','embeddings'], ['search','assistant']]
+      },
+      {
+        title: 'Audit + security + analytics',
+        desc: 'Audit logs and security controls; analytics tracks usage; billing for tiers.',
+        active: ['audit','security','analytics','billing'],
+        edges: [['audit','security'], ['assistant','analytics'], ['billing','analytics']]
+      }
+    ]
+  },
+
+  sentry: {
+    title: 'Sentry',
+    steps: [
+      {
+        title: 'Send events',
+        desc: 'SDKs send events to ingest and storage.',
+        active: ['sdks','ingest','events'],
+        edges: [['sdks','ingest'], ['ingest','events']]
+      },
+      {
+        title: 'Issues + releases',
+        desc: 'Events grouped into issues; releases correlate deploys.',
+        active: ['issues','releases'],
+        edges: [['events','issues'], ['releases','issues']]
+      },
+      {
+        title: 'Alerts + integrations',
+        desc: 'Alerts trigger and route to integrations.',
+        active: ['alerts','integrations','dashboards'],
+        edges: [['issues','alerts'], ['alerts','integrations'], ['events','dashboards']]
+      },
+      {
+        title: 'Analytics + billing',
+        desc: 'Analytics tracks usage and team health; billing for quota.',
+        active: ['analytics','billing'],
+        edges: [['dashboards','analytics'], ['billing','analytics']]
+      }
+    ]
+  },
+
+  datadog: {
+    title: 'Datadog',
+    steps: [
+      {
+        title: 'Collect telemetry',
+        desc: 'Agents collect metrics/logs/traces and send to ingest.',
+        active: ['agents','metrics','logs','traces','ingest'],
+        edges: [['agents','ingest'], ['agents','metrics'], ['agents','logs'], ['agents','traces']]
+      },
+      {
+        title: 'Store + dashboards',
+        desc: 'Ingest stores telemetry; dashboards visualize.',
+        active: ['storage','dashboards'],
+        edges: [['ingest','storage'], ['storage','dashboards']]
+      },
+      {
+        title: 'Alerts + integrations',
+        desc: 'Alerts trigger and route to integrations.',
+        active: ['alerts','integrations'],
+        edges: [['dashboards','alerts'], ['alerts','integrations']]
+      },
+      {
+        title: 'Analytics + billing',
+        desc: 'Analytics summarizes usage; billing tracks consumption.',
+        active: ['analytics','billing'],
+        edges: [['storage','analytics'], ['billing','analytics']]
+      }
+    ]
+  },
+
+  'new-relic': {
+    title: 'New Relic',
+    steps: [
+      {
+        title: 'Collect telemetry',
+        desc: 'Agents and telemetry pipeline collect metrics/logs/traces.',
+        active: ['agents','telemetry','metrics','logs','traces','ingest'],
+        edges: [['agents','ingest'], ['telemetry','metrics'], ['telemetry','logs'], ['telemetry','traces']]
+      },
+      {
+        title: 'Store + dashboards',
+        desc: 'Ingest stores telemetry; dashboards visualize.',
+        active: ['storage','dashboards'],
+        edges: [['ingest','storage'], ['storage','dashboards']]
+      },
+      {
+        title: 'Alerts + integrations',
+        desc: 'Alerts trigger and route to integrations.',
+        active: ['alerts','integrations'],
+        edges: [['dashboards','alerts'], ['alerts','integrations']]
+      },
+      {
+        title: 'Analytics + billing',
+        desc: 'Analytics summarizes usage; billing tracks consumption.',
+        active: ['analytics','billing'],
+        edges: [['storage','analytics'], ['billing','analytics']]
+      }
+    ]
+  },
+
   chime: {
     title: 'Chime',
     steps: [
