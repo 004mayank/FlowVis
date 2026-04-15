@@ -455,6 +455,49 @@ export const FLOWS = {
       }
     ]
   },
+
+  stripe: {
+    title: 'Stripe',
+    steps: [
+      {
+        title: 'Merchant creates PaymentIntent',
+        desc: 'Backend creates a PaymentIntent to represent the payment and required actions.',
+        active: ['client','api','payments'],
+        edges: [['client','api'], ['api','payments']]
+      },
+      {
+        title: 'Collect payment method',
+        desc: 'Client collects card / wallet details and tokenizes securely.',
+        active: ['client','payments'],
+        edges: [['client','payments']]
+      },
+      {
+        title: 'Authenticate (3DS) if needed',
+        desc: 'Risk checks may require customer authentication via 3DS flows.',
+        active: ['risk','auth'],
+        edges: [['payments','risk'], ['risk','auth']]
+      },
+      {
+        title: 'Authorize with network / issuer',
+        desc: 'Stripe routes authorization to card networks and issuers.',
+        active: ['payments','external','ledger'],
+        edges: [['payments','external'], ['external','ledger']]
+      },
+      {
+        title: 'Confirm + webhooks',
+        desc: 'Stripe confirms status and notifies merchant via webhooks.',
+        active: ['api','notify'],
+        edges: [['ledger','api'], ['api','notify']]
+      },
+      {
+        title: 'Capture / settlement',
+        desc: 'Funds are captured and later settled; ledger records reconciled.',
+        active: ['ledger','analytics'],
+        edges: [['payments','ledger'], ['ledger','analytics']]
+      }
+    ]
+  },
+
   whatsapp: {
     title: 'WhatsApp',
     steps: [
@@ -643,54 +686,6 @@ export const FLOWS = {
         desc: 'Playback events feed analytics to improve quality and recommendations.',
         active: ['metrics','analytics','recos'],
         edges: [['metrics','analytics'], ['analytics','recos']]
-      }
-    ]
-  },
-
-  stripe: {
-    title: 'Stripe',
-    steps: [
-      {
-        title: 'Checkout starts',
-        desc: 'Client initiates a payment and collects payment method details securely.',
-        active: ['client','checkout'],
-        edges: [['client','checkout']]
-      },
-      {
-        title: 'Create payment intent',
-        desc: 'Backend creates a PaymentIntent and returns a client secret for confirmation.',
-        active: ['merchant','api','pi'],
-        edges: [['merchant','api'], ['api','pi']]
-      },
-      {
-        title: 'Confirm and authenticate',
-        desc: 'Client confirms payment and runs SCA or 3DS when required.',
-        active: ['client','pi','sca'],
-        edges: [['client','pi'], ['pi','sca']]
-      },
-      {
-        title: 'Authorize with network',
-        desc: 'Stripe routes to acquirer and card network for authorization decisions.',
-        active: ['pi','acq','network'],
-        edges: [['pi','acq'], ['acq','network']]
-      },
-      {
-        title: 'Webhook to merchant',
-        desc: 'Stripe emits webhook events so merchant systems can fulfill and update UI.',
-        active: ['events','webhook','merchant'],
-        edges: [['events','webhook'], ['webhook','merchant']]
-      },
-      {
-        title: 'Capture and settlement',
-        desc: 'Captures happen immediately or later; settlement moves funds on schedule.',
-        active: ['pi','settle','ledger'],
-        edges: [['pi','settle'], ['settle','ledger']]
-      },
-      {
-        title: 'Reconciliation and disputes',
-        desc: 'Reports, disputes, and payouts are reconciled against ledger entries.',
-        active: ['ledger','reports','disputes'],
-        edges: [['ledger','reports'], ['ledger','disputes']]
       }
     ]
   },
@@ -4403,48 +4398,6 @@ export const FLOWS = {
         desc: 'Issues handled; refunds posted to ledger and payment reversals.',
         active: ['support','refunds','ledger'],
         edges: [['dispatch','support'], ['support','refunds'], ['refunds','ledger']]
-      }
-    ]
-  },
-
-  coinbase: {
-    title: 'Coinbase',
-    steps: [
-      {
-        title: 'Sign in and risk checks',
-        desc: 'Client authenticates; risk engine runs checks and device verification.',
-        active: ['client','auth','risk'],
-        edges: [['client','auth'], ['auth','risk']]
-      },
-      {
-        title: 'Deposit funds',
-        desc: 'Fiat rails deposit; ledger updates balances.',
-        active: ['payments','ledger','wallet'],
-        edges: [['client','payments'], ['payments','ledger'], ['ledger','wallet']]
-      },
-      {
-        title: 'Place order',
-        desc: 'Orders routed to matching; risk checks enforced.',
-        active: ['orders','match','risk'],
-        edges: [['client','orders'], ['orders','risk'], ['orders','match']]
-      },
-      {
-        title: 'Trade execution',
-        desc: 'Matching executes trades; ledger settles positions.',
-        active: ['match','ledger','positions'],
-        edges: [['match','ledger'], ['ledger','positions']]
-      },
-      {
-        title: 'Withdraw',
-        desc: 'Wallet and compliance checks; blockchain broadcast if needed.',
-        active: ['wallet','compliance','network'],
-        edges: [['client','wallet'], ['wallet','compliance'], ['wallet','network']]
-      },
-      {
-        title: 'Monitoring and reports',
-        desc: 'Monitoring and compliance produce reports and audit logs.',
-        active: ['monitor','reports','compliance'],
-        edges: [['positions','monitor'], ['monitor','compliance'], ['compliance','reports']]
       }
     ]
   },
