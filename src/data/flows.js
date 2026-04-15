@@ -11795,6 +11795,348 @@ export const FLOWS = {
     ]
   },
 
+  crazygames: {
+    title: 'CrazyGames',
+    steps: [
+      {
+        title: 'Browse + launch game',
+        desc: 'User browses catalog and launches game via CDN.',
+        active: ['client','catalog','games','cdn'],
+        edges: [['client','catalog'], ['catalog','games'], ['games','cdn']]
+      },
+      {
+        title: 'Ads + analytics',
+        desc: 'Ads monetize sessions; analytics measures performance.',
+        active: ['ads','analytics'],
+        edges: [['games','ads'], ['ads','analytics']]
+      },
+      {
+        title: 'Profiles + recommendations',
+        desc: 'Profiles feed recommendations for discovery loops.',
+        active: ['profiles','recs'],
+        edges: [['profiles','recs'], ['analytics','recs']]
+      },
+      {
+        title: 'Moderation + support',
+        desc: 'Moderation and support handle issues and safety.',
+        active: ['moderation','support','notifications'],
+        edges: [['moderation','support'], ['support','notifications']]
+      }
+    ]
+  },
+
+  'armor-games': {
+    title: 'Armor Games',
+    steps: [
+      {
+        title: 'Browse + play',
+        desc: 'User browses catalog and plays via CDN.',
+        active: ['client','catalog','games','cdn'],
+        edges: [['client','catalog'], ['catalog','games'], ['games','cdn']]
+      },
+      {
+        title: 'Publisher uploads',
+        desc: 'Publishers upload builds that are served by CDN.',
+        active: ['publisher','uploads','cdn'],
+        edges: [['publisher','uploads'], ['uploads','cdn']]
+      },
+      {
+        title: 'Ads + analytics',
+        desc: 'Ads drive monetization; analytics tracks engagement.',
+        active: ['ads','analytics'],
+        edges: [['games','ads'], ['ads','analytics']]
+      },
+      {
+        title: 'Community + moderation',
+        desc: 'Community features require moderation and notifications.',
+        active: ['community','moderation','notifications'],
+        edges: [['community','moderation'], ['moderation','notifications']]
+      }
+    ]
+  },
+
+  kongregate: {
+    title: 'Kongregate',
+    steps: [
+      {
+        title: 'Sign in + play',
+        desc: 'User signs in, browses catalog, and launches game via CDN.',
+        active: ['client','auth','catalog','games','cdn'],
+        edges: [['client','auth'], ['auth','catalog'], ['catalog','games'], ['games','cdn']]
+      },
+      {
+        title: 'SDK events (badges/leaderboards)',
+        desc: 'Game SDK reports achievements and scores.',
+        active: ['sdk','badges','leaderboards'],
+        edges: [['games','sdk'], ['sdk','badges'], ['sdk','leaderboards']]
+      },
+      {
+        title: 'Ads + payments',
+        desc: 'Ads monetize play; payments handle virtual goods.',
+        active: ['ads','payments','profiles'],
+        edges: [['games','ads'], ['payments','profiles']]
+      },
+      {
+        title: 'Community + moderation',
+        desc: 'Community content is moderated; notifications keep users engaged.',
+        active: ['community','moderation','notifications'],
+        edges: [['community','moderation'], ['profiles','notifications']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics aggregates gameplay and monetization metrics.',
+        active: ['analytics'],
+        edges: [['leaderboards','analytics'], ['ads','analytics']]
+      }
+    ]
+  },
+
+  'coolmath-games': {
+    title: 'Coolmath Games',
+    steps: [
+      {
+        title: 'Browse + launch',
+        desc: 'User browses catalog and launches game via CDN.',
+        active: ['client','catalog','games','cdn'],
+        edges: [['client','catalog'], ['catalog','games'], ['games','cdn']]
+      },
+      {
+        title: 'Ads + analytics',
+        desc: 'Ad stack monetizes sessions; analytics measures performance.',
+        active: ['ads','analytics'],
+        edges: [['games','ads'], ['ads','analytics']]
+      },
+      {
+        title: 'Recommendations',
+        desc: 'Recommendations improve discovery loops.',
+        active: ['recommendations'],
+        edges: [['analytics','recommendations']]
+      },
+      {
+        title: 'Support + moderation',
+        desc: 'Support handles issues; moderation handles safety.',
+        active: ['support','moderation','notifications'],
+        edges: [['moderation','support'], ['support','notifications']]
+      }
+    ]
+  },
+
+  lichess: {
+    title: 'Lichess',
+    steps: [
+      {
+        title: 'Login + find match',
+        desc: 'User authenticates, enters lobby, and matchmaking starts game.',
+        active: ['client','auth','lobby','matchmaking','game'],
+        edges: [['client','auth'], ['auth','lobby'], ['lobby','matchmaking'], ['matchmaking','game']]
+      },
+      {
+        title: 'Realtime play',
+        desc: 'Moves stream via realtime channels; game state updates.',
+        active: ['realtime','game'],
+        edges: [['game','realtime']]
+      },
+      {
+        title: 'Analysis + puzzles',
+        desc: 'Post-game analysis and puzzle training loop.',
+        active: ['analysis','puzzles'],
+        edges: [['game','analysis'], ['analysis','puzzles']]
+      },
+      {
+        title: 'Ratings + profiles',
+        desc: 'Rating updates and profile stats.',
+        active: ['ratings','profiles'],
+        edges: [['game','ratings'], ['ratings','profiles']]
+      },
+      {
+        title: 'Anti-cheat + moderation',
+        desc: 'Anti-cheat signals flow into moderation actions and notifications.',
+        active: ['antiCheat','moderation','notifications'],
+        edges: [['antiCheat','moderation'], ['moderation','notifications']]
+      }
+    ]
+  },
+
+  'chess-com': {
+    title: 'Chess.com',
+    steps: [
+      {
+        title: 'Login + match',
+        desc: 'User authenticates, enters lobby, and matchmaking starts game.',
+        active: ['client','auth','lobby','matchmaking','game'],
+        edges: [['client','auth'], ['auth','lobby'], ['lobby','matchmaking'], ['matchmaking','game']]
+      },
+      {
+        title: 'Realtime play',
+        desc: 'Moves stream via realtime channels; game state updates.',
+        active: ['realtime','game'],
+        edges: [['game','realtime']]
+      },
+      {
+        title: 'Lessons + puzzles',
+        desc: 'Lessons and puzzles drive skill improvement.',
+        active: ['lessons','puzzles'],
+        edges: [['lessons','puzzles']]
+      },
+      {
+        title: 'Subscription billing',
+        desc: 'Billing unlocks premium lessons and analysis.',
+        active: ['billing','notifications'],
+        edges: [['lessons','billing'], ['billing','notifications']]
+      },
+      {
+        title: 'Anti-cheat + analytics',
+        desc: 'Anti-cheat flags feed moderation; analytics tracks engagement.',
+        active: ['antiCheat','analytics'],
+        edges: [['antiCheat','moderation'], ['game','analytics']]
+      }
+    ]
+  },
+
+  memrise: {
+    title: 'Memrise',
+    steps: [
+      {
+        title: 'Choose course + lesson',
+        desc: 'User signs in and starts a lesson from a course.',
+        active: ['client','auth','courses','lessons'],
+        edges: [['client','auth'], ['auth','courses'], ['courses','lessons']]
+      },
+      {
+        title: 'Spaced repetition review',
+        desc: 'SRS schedules review and updates progress.',
+        active: ['srs','progress'],
+        edges: [['lessons','srs'], ['srs','progress']]
+      },
+      {
+        title: 'Audio + speaking practice',
+        desc: 'Audio and speaking exercises feed quizzes.',
+        active: ['audio','speaking','quizzes'],
+        edges: [['audio','lessons'], ['speaking','quizzes'], ['quizzes','progress']]
+      },
+      {
+        title: 'Recommendations + analytics',
+        desc: 'Recommendations personalize next lessons; analytics measures retention.',
+        active: ['recommendations','analytics'],
+        edges: [['progress','recommendations'], ['billing','analytics']]
+      },
+      {
+        title: 'Billing + notifications',
+        desc: 'Billing for premium features; notifications drive re-engagement.',
+        active: ['billing','notifications'],
+        edges: [['billing','analytics'], ['notifications','client']]
+      }
+    ]
+  },
+
+  babbel: {
+    title: 'Babbel',
+    steps: [
+      {
+        title: 'Placement + course selection',
+        desc: 'User signs in, takes placement, and selects course level.',
+        active: ['client','auth','placement','courses'],
+        edges: [['client','auth'], ['auth','placement'], ['placement','courses']]
+      },
+      {
+        title: 'Lesson + practice loop',
+        desc: 'Lessons and practice exercises update progress.',
+        active: ['lessons','practice','progress'],
+        edges: [['courses','lessons'], ['lessons','practice'], ['practice','progress']]
+      },
+      {
+        title: 'Audio + speaking',
+        desc: 'Audio and speaking exercises reinforce learning.',
+        active: ['audio','speaking'],
+        edges: [['audio','lessons'], ['speaking','practice']]
+      },
+      {
+        title: 'Subscription billing',
+        desc: 'Billing manages subscriptions and renewals; notifications for retention.',
+        active: ['billing','notifications','analytics'],
+        edges: [['billing','analytics'], ['support','notifications']]
+      },
+      {
+        title: 'Support',
+        desc: 'Support resolves account and billing issues.',
+        active: ['support'],
+        edges: [['support','client']]
+      }
+    ]
+  },
+
+  busuu: {
+    title: 'Busuu',
+    steps: [
+      {
+        title: 'Start lesson + practice',
+        desc: 'User signs in and completes lessons and practice.',
+        active: ['client','auth','courses','lessons','practice'],
+        edges: [['client','auth'], ['auth','courses'], ['courses','lessons'], ['lessons','practice']]
+      },
+      {
+        title: 'Community review',
+        desc: 'Learners submit exercises and receive community reviews.',
+        active: ['community','review','notifications'],
+        edges: [['practice','community'], ['community','review'], ['review','notifications']]
+      },
+      {
+        title: 'Audio + speaking',
+        desc: 'Audio and speaking exercises reinforce pronunciation.',
+        active: ['audio','speaking'],
+        edges: [['audio','lessons'], ['audio','speaking']]
+      },
+      {
+        title: 'Progress + analytics',
+        desc: 'Progress updates and analytics measure outcomes.',
+        active: ['progress','analytics'],
+        edges: [['practice','progress'], ['billing','analytics']]
+      },
+      {
+        title: 'Billing',
+        desc: 'Billing manages subscriptions.',
+        active: ['billing'],
+        edges: [['billing','analytics']]
+      }
+    ]
+  },
+
+  quizlet: {
+    title: 'Quizlet',
+    steps: [
+      {
+        title: 'Create or open study set',
+        desc: 'User signs in and creates/opens a study set in the editor.',
+        active: ['client','auth','sets','editor'],
+        edges: [['client','auth'], ['auth','sets'], ['sets','editor']]
+      },
+      {
+        title: 'Study modes + quizzes',
+        desc: 'Study modes and quizzes update progress.',
+        active: ['study','quizzes','progress'],
+        edges: [['sets','study'], ['study','quizzes'], ['quizzes','progress']]
+      },
+      {
+        title: 'Search + recommendations',
+        desc: 'Search and recommendations help discover sets.',
+        active: ['search','recommendations'],
+        edges: [['search','recommendations'], ['analytics','recommendations']]
+      },
+      {
+        title: 'Moderation + billing',
+        desc: 'Moderation for content; billing for premium features.',
+        active: ['moderation','billing','notifications'],
+        edges: [['moderation','notifications'], ['billing','analytics']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics tracks study performance and retention.',
+        active: ['analytics'],
+        edges: [['progress','analytics']]
+      }
+    ]
+  },
+
   chime: {
     title: 'Chime',
     steps: [

@@ -17701,6 +17701,528 @@ Object.assign(SYSTEM_LAYOUTS, {
   }
 });
 
+// ----- Batch 73 (System + Architecture - browser games + chess + language learning) -----
+
+Object.assign(SYSTEM_LAYOUTS, {
+  crazygames: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','cdn','catalog','games','embed','ads','analytics','profiles','recs','moderation','support','notifications'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Browser', colorKey: 'client' },
+      cdn: { x: 380, y: 180, label: 'CDN', colorKey: 'cdn' },
+      catalog: { x: 620, y: 180, label: 'Catalog', colorKey: 'store' },
+      games: { x: 860, y: 180, label: 'Games', colorKey: 'store' },
+      embed: { x: 1100, y: 180, label: 'Embed', colorKey: 'api' },
+      ads: { x: 380, y: 320, label: 'Ads', colorKey: 'api' },
+      analytics: { x: 1100, y: 320, label: 'Analytics', colorKey: 'store' },
+      profiles: { x: 620, y: 320, label: 'Profiles', colorKey: 'store' },
+      recs: { x: 860, y: 320, label: 'Recs', colorKey: 'api' },
+      moderation: { x: 620, y: 460, label: 'Moderation', colorKey: 'api' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 860, y: 460, label: 'Notify', colorKey: 'external' }
+    }
+  },
+
+  'armor-games': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','cdn','catalog','games','publisher','uploads','ads','analytics','profiles','community','moderation','support','notifications'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Browser', colorKey: 'client' },
+      cdn: { x: 380, y: 180, label: 'CDN', colorKey: 'cdn' },
+      catalog: { x: 620, y: 180, label: 'Catalog', colorKey: 'store' },
+      games: { x: 860, y: 180, label: 'Games', colorKey: 'store' },
+      publisher: { x: 1100, y: 180, label: 'Publisher', colorKey: 'api' },
+      uploads: { x: 1100, y: 320, label: 'Uploads', colorKey: 'store' },
+      ads: { x: 380, y: 320, label: 'Ads', colorKey: 'api' },
+      analytics: { x: 860, y: 320, label: 'Analytics', colorKey: 'store' },
+      profiles: { x: 620, y: 320, label: 'Profiles', colorKey: 'store' },
+      community: { x: 620, y: 460, label: 'Community', colorKey: 'api' },
+      moderation: { x: 860, y: 460, label: 'Moderation', colorKey: 'api' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 1100, y: 460, label: 'Notify', colorKey: 'external' }
+    }
+  },
+
+  kongregate: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','cdn','catalog','games','sdk','badges','leaderboards','ads','payments','profiles','community','moderation','analytics','notifications'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Browser', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      cdn: { x: 620, y: 180, label: 'CDN', colorKey: 'cdn' },
+      catalog: { x: 860, y: 180, label: 'Catalog', colorKey: 'store' },
+      games: { x: 1100, y: 180, label: 'Games', colorKey: 'store' },
+      sdk: { x: 860, y: 320, label: 'Game SDK', colorKey: 'api' },
+      badges: { x: 1100, y: 320, label: 'Badges', colorKey: 'store' },
+      leaderboards: { x: 620, y: 320, label: 'Leaderboards', colorKey: 'store' },
+      ads: { x: 380, y: 320, label: 'Ads', colorKey: 'api' },
+      payments: { x: 380, y: 460, label: 'Payments', colorKey: 'external' },
+      profiles: { x: 620, y: 460, label: 'Profiles', colorKey: 'store' },
+      community: { x: 860, y: 460, label: 'Community', colorKey: 'api' },
+      moderation: { x: 1100, y: 460, label: 'Moderation', colorKey: 'api' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' },
+      notifications: { x: 620, y: 600, label: 'Notify', colorKey: 'external' }
+    }
+  },
+
+  'coolmath-games': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','cdn','catalog','games','embed','ads','analytics','recommendations','moderation','support','notifications'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Browser', colorKey: 'client' },
+      cdn: { x: 380, y: 180, label: 'CDN', colorKey: 'cdn' },
+      catalog: { x: 620, y: 180, label: 'Catalog', colorKey: 'store' },
+      games: { x: 860, y: 180, label: 'Games', colorKey: 'store' },
+      embed: { x: 1100, y: 180, label: 'Embed', colorKey: 'api' },
+      ads: { x: 380, y: 320, label: 'Ads', colorKey: 'api' },
+      analytics: { x: 1100, y: 320, label: 'Analytics', colorKey: 'store' },
+      recommendations: { x: 860, y: 320, label: 'Recs', colorKey: 'api' },
+      moderation: { x: 620, y: 320, label: 'Moderation', colorKey: 'api' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 860, y: 460, label: 'Notify', colorKey: 'external' }
+    }
+  },
+
+  lichess: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','lobby','matchmaking','game','realtime','analysis','puzzles','ratings','profiles','antiCheat','moderation','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      lobby: { x: 620, y: 180, label: 'Lobby', colorKey: 'api' },
+      matchmaking: { x: 860, y: 180, label: 'Matchmaking', colorKey: 'api' },
+      game: { x: 1100, y: 180, label: 'Game', colorKey: 'stream' },
+      realtime: { x: 1100, y: 320, label: 'Realtime', colorKey: 'stream' },
+      analysis: { x: 860, y: 320, label: 'Analysis', colorKey: 'api' },
+      puzzles: { x: 620, y: 320, label: 'Puzzles', colorKey: 'store' },
+      ratings: { x: 620, y: 460, label: 'Ratings', colorKey: 'store' },
+      profiles: { x: 380, y: 320, label: 'Profiles', colorKey: 'store' },
+      antiCheat: { x: 380, y: 460, label: 'Anti-cheat', colorKey: 'api' },
+      moderation: { x: 860, y: 460, label: 'Moderation', colorKey: 'api' },
+      notifications: { x: 140, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'chess-com': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','lobby','matchmaking','game','realtime','analysis','lessons','puzzles','ratings','profiles','antiCheat','billing','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      lobby: { x: 620, y: 180, label: 'Lobby', colorKey: 'api' },
+      matchmaking: { x: 860, y: 180, label: 'Matchmaking', colorKey: 'api' },
+      game: { x: 1100, y: 180, label: 'Game', colorKey: 'stream' },
+      realtime: { x: 1100, y: 320, label: 'Realtime', colorKey: 'stream' },
+      analysis: { x: 860, y: 320, label: 'Analysis', colorKey: 'api' },
+      lessons: { x: 620, y: 320, label: 'Lessons', colorKey: 'store' },
+      puzzles: { x: 620, y: 460, label: 'Puzzles', colorKey: 'store' },
+      ratings: { x: 860, y: 460, label: 'Ratings', colorKey: 'store' },
+      profiles: { x: 380, y: 320, label: 'Profiles', colorKey: 'store' },
+      antiCheat: { x: 380, y: 460, label: 'Anti-cheat', colorKey: 'api' },
+      billing: { x: 140, y: 320, label: 'Billing', colorKey: 'external' },
+      notifications: { x: 140, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  memrise: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','courses','lessons','srs','audio','speaking','quizzes','progress','recommendations','billing','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      courses: { x: 620, y: 180, label: 'Courses', colorKey: 'store' },
+      lessons: { x: 860, y: 180, label: 'Lessons', colorKey: 'api' },
+      srs: { x: 1100, y: 180, label: 'SRS', colorKey: 'api' },
+      audio: { x: 620, y: 320, label: 'Audio', colorKey: 'cdn' },
+      speaking: { x: 860, y: 320, label: 'Speaking', colorKey: 'api' },
+      quizzes: { x: 1100, y: 320, label: 'Quizzes', colorKey: 'api' },
+      progress: { x: 620, y: 460, label: 'Progress', colorKey: 'store' },
+      recommendations: { x: 860, y: 460, label: 'Recs', colorKey: 'api' },
+      billing: { x: 380, y: 320, label: 'Billing', colorKey: 'external' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  babbel: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','courses','lessons','placement','practice','audio','speaking','progress','billing','support','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      courses: { x: 620, y: 180, label: 'Courses', colorKey: 'store' },
+      lessons: { x: 860, y: 180, label: 'Lessons', colorKey: 'api' },
+      placement: { x: 1100, y: 180, label: 'Placement', colorKey: 'api' },
+      practice: { x: 860, y: 320, label: 'Practice', colorKey: 'api' },
+      audio: { x: 620, y: 320, label: 'Audio', colorKey: 'cdn' },
+      speaking: { x: 1100, y: 320, label: 'Speaking', colorKey: 'api' },
+      progress: { x: 620, y: 460, label: 'Progress', colorKey: 'store' },
+      billing: { x: 380, y: 320, label: 'Billing', colorKey: 'external' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 860, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  busuu: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','courses','lessons','practice','community','review','audio','speaking','progress','billing','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      courses: { x: 620, y: 180, label: 'Courses', colorKey: 'store' },
+      lessons: { x: 860, y: 180, label: 'Lessons', colorKey: 'api' },
+      practice: { x: 1100, y: 180, label: 'Practice', colorKey: 'api' },
+      community: { x: 620, y: 320, label: 'Community', colorKey: 'api' },
+      review: { x: 860, y: 320, label: 'Reviews', colorKey: 'api' },
+      audio: { x: 1100, y: 320, label: 'Audio', colorKey: 'cdn' },
+      speaking: { x: 1100, y: 460, label: 'Speaking', colorKey: 'api' },
+      progress: { x: 620, y: 460, label: 'Progress', colorKey: 'store' },
+      billing: { x: 380, y: 320, label: 'Billing', colorKey: 'external' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  quizlet: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','sets','editor','study','quizzes','search','recommendations','progress','billing','moderation','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      sets: { x: 620, y: 180, label: 'Study sets', colorKey: 'store' },
+      editor: { x: 860, y: 180, label: 'Editor', colorKey: 'client' },
+      study: { x: 1100, y: 180, label: 'Study modes', colorKey: 'api' },
+      quizzes: { x: 1100, y: 320, label: 'Quizzes', colorKey: 'api' },
+      search: { x: 620, y: 320, label: 'Search', colorKey: 'api' },
+      recommendations: { x: 860, y: 320, label: 'Recs', colorKey: 'api' },
+      progress: { x: 620, y: 460, label: 'Progress', colorKey: 'store' },
+      billing: { x: 380, y: 320, label: 'Billing', colorKey: 'external' },
+      moderation: { x: 860, y: 460, label: 'Moderation', colorKey: 'api' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  }
+});
+
+Object.assign(ARCH_LAYOUTS, {
+  crazygames: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'CrazyGames',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','cdn','catalog','games','embed','ads','analytics','profiles','recs','moderation','support','notifications'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Browser' },
+      cdn: { x: 320, y: 160, label: 'CDN' },
+      catalog: { x: 600, y: 160, label: 'Catalog' },
+      games: { x: 880, y: 160, label: 'Games' },
+      embed: { x: 1160, y: 160, label: 'Embed' },
+      ads: { x: 320, y: 300, label: 'Ads' },
+      analytics: { x: 1160, y: 300, label: 'Analytics' },
+      profiles: { x: 600, y: 300, label: 'Profiles' },
+      recs: { x: 880, y: 300, label: 'Recs' },
+      moderation: { x: 600, y: 440, label: 'Moderation' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 880, y: 440, label: 'Notify' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','catalog','browse'], ['catalog','games','game'], ['games','cdn','cdn']);
+      if(stepIdx===2) e.push(['games','ads','ads'], ['ads','analytics','measure']);
+      if(stepIdx===3) e.push(['profiles','recs','recs']);
+      if(stepIdx===4) e.push(['moderation','support','mod'], ['support','notifications','notify']);
+      if(stepIdx===5) e.push(['analytics','recs','learn']);
+      return e;
+    }
+  },
+
+  'armor-games': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Armor Games',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','cdn','catalog','games','publisher','uploads','ads','analytics','profiles','community','moderation','support','notifications'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Browser' },
+      cdn: { x: 320, y: 160, label: 'CDN' },
+      catalog: { x: 600, y: 160, label: 'Catalog' },
+      games: { x: 880, y: 160, label: 'Games' },
+      publisher: { x: 1160, y: 160, label: 'Publisher' },
+      uploads: { x: 1160, y: 300, label: 'Uploads' },
+      ads: { x: 320, y: 300, label: 'Ads' },
+      analytics: { x: 880, y: 300, label: 'Analytics' },
+      profiles: { x: 600, y: 300, label: 'Profiles' },
+      community: { x: 600, y: 440, label: 'Community' },
+      moderation: { x: 880, y: 440, label: 'Moderation' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 1160, y: 440, label: 'Notify' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','catalog','browse'], ['catalog','games','game'], ['games','cdn','cdn']);
+      if(stepIdx===2) e.push(['publisher','uploads','upload'], ['uploads','cdn','cdn']);
+      if(stepIdx===3) e.push(['games','ads','ads'], ['ads','analytics','measure']);
+      if(stepIdx===4) e.push(['community','moderation','mod'], ['moderation','notifications','notify']);
+      if(stepIdx===5) e.push(['support','client','support']);
+      return e;
+    }
+  },
+
+  kongregate: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Kongregate',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','cdn','catalog','games','sdk','badges','leaderboards','ads','payments','profiles','community','moderation','analytics','notifications'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Browser' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      cdn: { x: 600, y: 160, label: 'CDN' },
+      catalog: { x: 880, y: 160, label: 'Catalog' },
+      games: { x: 1160, y: 160, label: 'Games' },
+      sdk: { x: 880, y: 300, label: 'Game SDK' },
+      badges: { x: 1160, y: 300, label: 'Badges' },
+      leaderboards: { x: 600, y: 300, label: 'Leaderboards' },
+      ads: { x: 320, y: 300, label: 'Ads' },
+      payments: { x: 320, y: 440, label: 'Payments' },
+      profiles: { x: 600, y: 440, label: 'Profiles' },
+      community: { x: 880, y: 440, label: 'Community' },
+      moderation: { x: 1160, y: 440, label: 'Moderation' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      notifications: { x: 600, y: 580, label: 'Notify' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','catalog','browse'], ['catalog','games','game']);
+      if(stepIdx===2) e.push(['games','sdk','sdk'], ['sdk','leaderboards','score'], ['sdk','badges','badge']);
+      if(stepIdx===3) e.push(['games','ads','ads'], ['ads','analytics','measure']);
+      if(stepIdx===4) e.push(['payments','profiles','entitle'], ['profiles','notifications','notify']);
+      if(stepIdx===5) e.push(['community','moderation','mod']);
+      if(stepIdx===6) e.push(['leaderboards','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'coolmath-games': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Coolmath Games',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','cdn','catalog','games','embed','ads','analytics','recommendations','moderation','support','notifications'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Browser' },
+      cdn: { x: 320, y: 160, label: 'CDN' },
+      catalog: { x: 600, y: 160, label: 'Catalog' },
+      games: { x: 880, y: 160, label: 'Games' },
+      embed: { x: 1160, y: 160, label: 'Embed' },
+      ads: { x: 320, y: 300, label: 'Ads' },
+      analytics: { x: 1160, y: 300, label: 'Analytics' },
+      recommendations: { x: 880, y: 300, label: 'Recs' },
+      moderation: { x: 600, y: 300, label: 'Moderation' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 880, y: 440, label: 'Notify' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','catalog','browse'], ['catalog','games','game'], ['games','cdn','cdn']);
+      if(stepIdx===2) e.push(['games','ads','ads'], ['ads','analytics','measure']);
+      if(stepIdx===3) e.push(['analytics','recommendations','learn']);
+      if(stepIdx===4) e.push(['moderation','support','mod'], ['support','notifications','notify']);
+      return e;
+    }
+  },
+
+  lichess: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Lichess',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','lobby','matchmaking','game','realtime','analysis','puzzles','ratings','profiles','antiCheat','moderation','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      lobby: { x: 600, y: 160, label: 'Lobby' },
+      matchmaking: { x: 880, y: 160, label: 'Matchmaking' },
+      game: { x: 1160, y: 160, label: 'Game' },
+      realtime: { x: 1160, y: 300, label: 'Realtime' },
+      analysis: { x: 880, y: 300, label: 'Analysis' },
+      puzzles: { x: 600, y: 300, label: 'Puzzles' },
+      ratings: { x: 600, y: 440, label: 'Ratings' },
+      profiles: { x: 320, y: 300, label: 'Profiles' },
+      antiCheat: { x: 320, y: 440, label: 'Anti-cheat' },
+      moderation: { x: 880, y: 440, label: 'Moderation' },
+      notifications: { x: 40, y: 440, label: 'Notify' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','lobby','lobby'], ['lobby','matchmaking','match']);
+      if(stepIdx===2) e.push(['matchmaking','game','start'], ['game','realtime','move']);
+      if(stepIdx===3) e.push(['game','analysis','analysis'], ['analysis','puzzles','train']);
+      if(stepIdx===4) e.push(['game','ratings','rating'], ['ratings','profiles','profile']);
+      if(stepIdx===5) e.push(['antiCheat','moderation','ac'], ['moderation','notifications','notify']);
+      if(stepIdx===6) e.push(['game','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'chess-com': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Chess.com',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','lobby','matchmaking','game','realtime','analysis','lessons','puzzles','ratings','profiles','antiCheat','billing','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      lobby: { x: 600, y: 160, label: 'Lobby' },
+      matchmaking: { x: 880, y: 160, label: 'Matchmaking' },
+      game: { x: 1160, y: 160, label: 'Game' },
+      realtime: { x: 1160, y: 300, label: 'Realtime' },
+      analysis: { x: 880, y: 300, label: 'Analysis' },
+      lessons: { x: 600, y: 300, label: 'Lessons' },
+      puzzles: { x: 600, y: 440, label: 'Puzzles' },
+      ratings: { x: 880, y: 440, label: 'Ratings' },
+      profiles: { x: 320, y: 300, label: 'Profiles' },
+      antiCheat: { x: 320, y: 440, label: 'Anti-cheat' },
+      billing: { x: 40, y: 300, label: 'Billing' },
+      notifications: { x: 40, y: 440, label: 'Notify' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','lobby','lobby'], ['lobby','matchmaking','match']);
+      if(stepIdx===2) e.push(['matchmaking','game','start'], ['game','realtime','move']);
+      if(stepIdx===3) e.push(['game','analysis','analysis'], ['analysis','puzzles','train']);
+      if(stepIdx===4) e.push(['lessons','billing','pro'], ['billing','notifications','notify']);
+      if(stepIdx===5) e.push(['antiCheat','moderation','ac']);
+      if(stepIdx===6) e.push(['game','analytics','analytics']);
+      return e;
+    }
+  },
+
+  memrise: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Memrise',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','courses','lessons','srs','audio','speaking','quizzes','progress','recommendations','billing','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      courses: { x: 600, y: 160, label: 'Courses' },
+      lessons: { x: 880, y: 160, label: 'Lessons' },
+      srs: { x: 1160, y: 160, label: 'SRS' },
+      audio: { x: 600, y: 300, label: 'Audio' },
+      speaking: { x: 880, y: 300, label: 'Speaking' },
+      quizzes: { x: 1160, y: 300, label: 'Quizzes' },
+      progress: { x: 600, y: 440, label: 'Progress' },
+      recommendations: { x: 880, y: 440, label: 'Recs' },
+      billing: { x: 320, y: 300, label: 'Billing' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','courses','course'], ['courses','lessons','lesson']);
+      if(stepIdx===2) e.push(['lessons','srs','review'], ['srs','progress','progress']);
+      if(stepIdx===3) e.push(['audio','lessons','audio'], ['speaking','quizzes','speak']);
+      if(stepIdx===4) e.push(['progress','recommendations','recs']);
+      if(stepIdx===5) e.push(['billing','analytics','bill'], ['notifications','client','notify']);
+      return e;
+    }
+  },
+
+  babbel: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Babbel',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','courses','lessons','placement','practice','audio','speaking','progress','billing','support','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      courses: { x: 600, y: 160, label: 'Courses' },
+      lessons: { x: 880, y: 160, label: 'Lessons' },
+      placement: { x: 1160, y: 160, label: 'Placement' },
+      practice: { x: 880, y: 300, label: 'Practice' },
+      audio: { x: 600, y: 300, label: 'Audio' },
+      speaking: { x: 1160, y: 300, label: 'Speaking' },
+      progress: { x: 600, y: 440, label: 'Progress' },
+      billing: { x: 320, y: 300, label: 'Billing' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 880, y: 440, label: 'Notify' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','placement','test'], ['placement','courses','level']);
+      if(stepIdx===2) e.push(['courses','lessons','lesson'], ['lessons','practice','practice']);
+      if(stepIdx===3) e.push(['audio','lessons','audio'], ['speaking','practice','speak']);
+      if(stepIdx===4) e.push(['practice','progress','progress']);
+      if(stepIdx===5) e.push(['billing','analytics','bill'], ['support','notifications','support']);
+      return e;
+    }
+  },
+
+  busuu: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Busuu',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','courses','lessons','practice','community','review','audio','speaking','progress','billing','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      courses: { x: 600, y: 160, label: 'Courses' },
+      lessons: { x: 880, y: 160, label: 'Lessons' },
+      practice: { x: 1160, y: 160, label: 'Practice' },
+      community: { x: 600, y: 300, label: 'Community' },
+      review: { x: 880, y: 300, label: 'Reviews' },
+      audio: { x: 1160, y: 300, label: 'Audio' },
+      speaking: { x: 1160, y: 440, label: 'Speaking' },
+      progress: { x: 600, y: 440, label: 'Progress' },
+      billing: { x: 320, y: 300, label: 'Billing' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      analytics: { x: 880, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','courses','course'], ['courses','lessons','lesson']);
+      if(stepIdx===2) e.push(['lessons','practice','practice'], ['practice','progress','progress']);
+      if(stepIdx===3) e.push(['practice','community','submit'], ['community','review','review']);
+      if(stepIdx===4) e.push(['audio','speaking','speak']);
+      if(stepIdx===5) e.push(['billing','analytics','bill'], ['notifications','client','notify']);
+      return e;
+    }
+  },
+
+  quizlet: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Quizlet',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','sets','editor','study','quizzes','search','recommendations','progress','billing','moderation','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      sets: { x: 600, y: 160, label: 'Study sets' },
+      editor: { x: 880, y: 160, label: 'Editor' },
+      study: { x: 1160, y: 160, label: 'Study modes' },
+      quizzes: { x: 1160, y: 300, label: 'Quizzes' },
+      search: { x: 600, y: 300, label: 'Search' },
+      recommendations: { x: 880, y: 300, label: 'Recs' },
+      progress: { x: 600, y: 440, label: 'Progress' },
+      billing: { x: 320, y: 300, label: 'Billing' },
+      moderation: { x: 880, y: 440, label: 'Moderation' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','sets','set'], ['sets','editor','edit']);
+      if(stepIdx===2) e.push(['sets','study','study'], ['study','quizzes','quiz']);
+      if(stepIdx===3) e.push(['search','recommendations','recs']);
+      if(stepIdx===4) e.push(['quizzes','progress','progress']);
+      if(stepIdx===5) e.push(['moderation','notifications','mod'], ['billing','analytics','bill']);
+      return e;
+    }
+  }
+});
+
 Object.assign(ARCH_LAYOUTS, {
   'xbox-app': {
     viewBox: '0 0 1860 820',
