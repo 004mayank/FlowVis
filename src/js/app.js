@@ -16301,6 +16301,531 @@ Object.assign(SYSTEM_LAYOUTS, {
   }
 });
 
+// ----- Batch 66 (System + Architecture - mobility: carshare + scooters + taxi + transit) -----
+
+Object.assign(SYSTEM_LAYOUTS, {
+  zipcar: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','search','fleet','availability','booking','access','telematics','billing','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      search: { x: 860, y: 180, label: 'Search', colorKey: 'api' },
+      fleet: { x: 1100, y: 180, label: 'Fleet', colorKey: 'store' },
+      availability: { x: 860, y: 320, label: 'Availability', colorKey: 'api' },
+      booking: { x: 620, y: 320, label: 'Booking', colorKey: 'api' },
+      access: { x: 1100, y: 320, label: 'Car Access', colorKey: 'external' },
+      telematics: { x: 860, y: 460, label: 'Telematics', colorKey: 'stream' },
+      billing: { x: 620, y: 460, label: 'Billing', colorKey: 'external' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 380, y: 600, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  lime: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','map','fleet','availability','unlock','ride','telematics','pricing','payments','safety','support','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      map: { x: 620, y: 180, label: 'Map', colorKey: 'api' },
+      fleet: { x: 860, y: 180, label: 'Fleet', colorKey: 'store' },
+      availability: { x: 1100, y: 180, label: 'Availability', colorKey: 'api' },
+      unlock: { x: 620, y: 320, label: 'Unlock', colorKey: 'external' },
+      ride: { x: 860, y: 320, label: 'Ride', colorKey: 'store' },
+      telematics: { x: 1100, y: 320, label: 'Telematics', colorKey: 'stream' },
+      pricing: { x: 860, y: 460, label: 'Pricing', colorKey: 'api' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      safety: { x: 620, y: 460, label: 'Safety', colorKey: 'api' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 380, y: 600, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  bird: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','map','fleet','availability','unlock','ride','telematics','pricing','payments','safety','support','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      map: { x: 620, y: 180, label: 'Map', colorKey: 'api' },
+      fleet: { x: 860, y: 180, label: 'Fleet', colorKey: 'store' },
+      availability: { x: 1100, y: 180, label: 'Availability', colorKey: 'api' },
+      unlock: { x: 620, y: 320, label: 'Unlock', colorKey: 'external' },
+      ride: { x: 860, y: 320, label: 'Ride', colorKey: 'store' },
+      telematics: { x: 1100, y: 320, label: 'Telematics', colorKey: 'stream' },
+      pricing: { x: 860, y: 460, label: 'Pricing', colorKey: 'api' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      safety: { x: 620, y: 460, label: 'Safety', colorKey: 'api' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 380, y: 600, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  tier: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','map','fleet','availability','unlock','ride','telematics','pricing','payments','safety','support','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      map: { x: 620, y: 180, label: 'Map', colorKey: 'api' },
+      fleet: { x: 860, y: 180, label: 'Fleet', colorKey: 'store' },
+      availability: { x: 1100, y: 180, label: 'Availability', colorKey: 'api' },
+      unlock: { x: 620, y: 320, label: 'Unlock', colorKey: 'external' },
+      ride: { x: 860, y: 320, label: 'Ride', colorKey: 'store' },
+      telematics: { x: 1100, y: 320, label: 'Telematics', colorKey: 'stream' },
+      pricing: { x: 860, y: 460, label: 'Pricing', colorKey: 'api' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      safety: { x: 620, y: 460, label: 'Safety', colorKey: 'api' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 380, y: 600, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  bolt: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','riders','request','matching','drivers','routing','tracking','payments','pricing','support','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Rider', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      request: { x: 620, y: 180, label: 'Request', colorKey: 'api' },
+      matching: { x: 860, y: 180, label: 'Matching', colorKey: 'api' },
+      drivers: { x: 1100, y: 180, label: 'Drivers', colorKey: 'external' },
+      routing: { x: 860, y: 320, label: 'Routing', colorKey: 'api' },
+      tracking: { x: 1100, y: 320, label: 'Tracking', colorKey: 'stream' },
+      pricing: { x: 620, y: 320, label: 'Pricing', colorKey: 'api' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 620, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' },
+      riders: { x: 140, y: 120, label: 'App', colorKey: 'client' }
+    }
+  },
+
+  careem: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','request','matching','captains','routing','tracking','payments','pricing','support','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Rider', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      request: { x: 620, y: 180, label: 'Request', colorKey: 'api' },
+      matching: { x: 860, y: 180, label: 'Matching', colorKey: 'api' },
+      captains: { x: 1100, y: 180, label: 'Captains', colorKey: 'external' },
+      routing: { x: 860, y: 320, label: 'Routing', colorKey: 'api' },
+      tracking: { x: 1100, y: 320, label: 'Tracking', colorKey: 'stream' },
+      pricing: { x: 620, y: 320, label: 'Pricing', colorKey: 'api' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 620, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'free-now': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','request','dispatch','taxis','routing','tracking','pricing','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Rider', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      request: { x: 620, y: 180, label: 'Request', colorKey: 'api' },
+      dispatch: { x: 860, y: 180, label: 'Dispatch', colorKey: 'api' },
+      taxis: { x: 1100, y: 180, label: 'Taxis', colorKey: 'external' },
+      routing: { x: 860, y: 320, label: 'Routing', colorKey: 'api' },
+      tracking: { x: 1100, y: 320, label: 'Tracking', colorKey: 'stream' },
+      pricing: { x: 620, y: 320, label: 'Pricing', colorKey: 'api' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 620, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  grabtaxi: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','request','matching','drivers','routing','tracking','pricing','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Rider', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      request: { x: 620, y: 180, label: 'Request', colorKey: 'api' },
+      matching: { x: 860, y: 180, label: 'Matching', colorKey: 'api' },
+      drivers: { x: 1100, y: 180, label: 'Drivers', colorKey: 'external' },
+      routing: { x: 860, y: 320, label: 'Routing', colorKey: 'api' },
+      tracking: { x: 1100, y: 320, label: 'Tracking', colorKey: 'stream' },
+      pricing: { x: 620, y: 320, label: 'Pricing', colorKey: 'api' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 620, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  gojek: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','services','request','matching','drivers','routing','tracking','wallet','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      services: { x: 620, y: 180, label: 'Services', colorKey: 'store' },
+      request: { x: 860, y: 180, label: 'Request', colorKey: 'api' },
+      matching: { x: 1100, y: 180, label: 'Matching', colorKey: 'api' },
+      drivers: { x: 1100, y: 320, label: 'Drivers', colorKey: 'external' },
+      routing: { x: 860, y: 320, label: 'Routing', colorKey: 'api' },
+      tracking: { x: 620, y: 320, label: 'Tracking', colorKey: 'stream' },
+      wallet: { x: 380, y: 320, label: 'Wallet', colorKey: 'external' },
+      payments: { x: 380, y: 460, label: 'Payments', colorKey: 'external' },
+      support: { x: 620, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 860, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  moovit: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','map','transit','routes','realtime','alerts','tickets','payments','ads','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      map: { x: 620, y: 180, label: 'Map', colorKey: 'api' },
+      transit: { x: 860, y: 180, label: 'Transit Data', colorKey: 'external' },
+      routes: { x: 1100, y: 180, label: 'Routes', colorKey: 'api' },
+      realtime: { x: 860, y: 320, label: 'Realtime', colorKey: 'stream' },
+      alerts: { x: 1100, y: 320, label: 'Alerts', colorKey: 'stream' },
+      tickets: { x: 620, y: 320, label: 'Tickets', colorKey: 'store' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      ads: { x: 380, y: 180, label: 'Ads', colorKey: 'api' },
+      notifications: { x: 620, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  }
+});
+
+Object.assign(ARCH_LAYOUTS, {
+  zipcar: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Zipcar',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','search','fleet','availability','booking','access','telematics','billing','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      search: { x: 880, y: 160, label: 'Search' },
+      fleet: { x: 1160, y: 160, label: 'Fleet' },
+      availability: { x: 880, y: 300, label: 'Availability' },
+      booking: { x: 600, y: 300, label: 'Booking' },
+      access: { x: 1160, y: 300, label: 'Car Access' },
+      telematics: { x: 880, y: 440, label: 'Telematics' },
+      billing: { x: 600, y: 440, label: 'Billing' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 320, y: 580, label: 'Notify' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','search','search'], ['search','fleet','fleet']);
+      if(stepIdx===2) e.push(['fleet','availability','avail'], ['availability','booking','book']);
+      if(stepIdx===3) e.push(['booking','payments','pay'], ['booking','access','unlock']);
+      if(stepIdx===4) e.push(['access','telematics','telemetry'], ['telematics','billing','bill']);
+      if(stepIdx===5) e.push(['billing','notifications','notify']);
+      if(stepIdx===6) e.push(['support','client','support'], ['booking','analytics','analytics']);
+      return e;
+    }
+  },
+
+  lime: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Lime',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','map','fleet','availability','unlock','ride','telematics','pricing','payments','safety','support','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      map: { x: 600, y: 160, label: 'Map' },
+      fleet: { x: 880, y: 160, label: 'Fleet' },
+      availability: { x: 1160, y: 160, label: 'Availability' },
+      unlock: { x: 600, y: 300, label: 'Unlock' },
+      ride: { x: 880, y: 300, label: 'Ride' },
+      telematics: { x: 1160, y: 300, label: 'Telematics' },
+      pricing: { x: 880, y: 440, label: 'Pricing' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      safety: { x: 600, y: 440, label: 'Safety' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 320, y: 580, label: 'Notify' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','map','map'], ['map','fleet','fleet']);
+      if(stepIdx===2) e.push(['fleet','availability','avail'], ['availability','unlock','unlock']);
+      if(stepIdx===3) e.push(['unlock','ride','ride'], ['ride','telematics','telemetry']);
+      if(stepIdx===4) e.push(['ride','pricing','price'], ['pricing','payments','pay']);
+      if(stepIdx===5) e.push(['telematics','safety','safety'], ['safety','support','support']);
+      if(stepIdx===6) e.push(['ride','notifications','notify'], ['ride','analytics','analytics']);
+      return e;
+    }
+  },
+
+  bird: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Bird',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','map','fleet','availability','unlock','ride','telematics','pricing','payments','safety','support','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      map: { x: 600, y: 160, label: 'Map' },
+      fleet: { x: 880, y: 160, label: 'Fleet' },
+      availability: { x: 1160, y: 160, label: 'Availability' },
+      unlock: { x: 600, y: 300, label: 'Unlock' },
+      ride: { x: 880, y: 300, label: 'Ride' },
+      telematics: { x: 1160, y: 300, label: 'Telematics' },
+      pricing: { x: 880, y: 440, label: 'Pricing' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      safety: { x: 600, y: 440, label: 'Safety' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 320, y: 580, label: 'Notify' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','map','map'], ['map','fleet','fleet']);
+      if(stepIdx===2) e.push(['fleet','availability','avail'], ['availability','unlock','unlock']);
+      if(stepIdx===3) e.push(['unlock','ride','ride'], ['ride','telematics','telemetry']);
+      if(stepIdx===4) e.push(['ride','pricing','price'], ['pricing','payments','pay']);
+      if(stepIdx===5) e.push(['telematics','safety','safety'], ['safety','support','support']);
+      if(stepIdx===6) e.push(['ride','notifications','notify'], ['ride','analytics','analytics']);
+      return e;
+    }
+  },
+
+  tier: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Tier',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','map','fleet','availability','unlock','ride','telematics','pricing','payments','safety','support','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      map: { x: 600, y: 160, label: 'Map' },
+      fleet: { x: 880, y: 160, label: 'Fleet' },
+      availability: { x: 1160, y: 160, label: 'Availability' },
+      unlock: { x: 600, y: 300, label: 'Unlock' },
+      ride: { x: 880, y: 300, label: 'Ride' },
+      telematics: { x: 1160, y: 300, label: 'Telematics' },
+      pricing: { x: 880, y: 440, label: 'Pricing' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      safety: { x: 600, y: 440, label: 'Safety' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 320, y: 580, label: 'Notify' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','map','map'], ['map','fleet','fleet']);
+      if(stepIdx===2) e.push(['fleet','availability','avail'], ['availability','unlock','unlock']);
+      if(stepIdx===3) e.push(['unlock','ride','ride'], ['ride','telematics','telemetry']);
+      if(stepIdx===4) e.push(['ride','pricing','price'], ['pricing','payments','pay']);
+      if(stepIdx===5) e.push(['telematics','safety','safety'], ['safety','support','support']);
+      if(stepIdx===6) e.push(['ride','notifications','notify'], ['ride','analytics','analytics']);
+      return e;
+    }
+  },
+
+  bolt: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Bolt',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','request','matching','drivers','routing','tracking','payments','pricing','support','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Rider' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      request: { x: 600, y: 160, label: 'Request' },
+      matching: { x: 880, y: 160, label: 'Matching' },
+      drivers: { x: 1160, y: 160, label: 'Drivers' },
+      routing: { x: 880, y: 300, label: 'Routing' },
+      tracking: { x: 1160, y: 300, label: 'Tracking' },
+      pricing: { x: 600, y: 300, label: 'Pricing' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 600, y: 440, label: 'Notify' },
+      analytics: { x: 880, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','request','req']);
+      if(stepIdx===2) e.push(['request','matching','match'], ['matching','drivers','driver']);
+      if(stepIdx===3) e.push(['drivers','tracking','track'], ['routing','tracking','route']);
+      if(stepIdx===4) e.push(['pricing','payments','pay']);
+      if(stepIdx===5) e.push(['tracking','notifications','notify']);
+      if(stepIdx===6) e.push(['tracking','analytics','analytics'], ['support','client','support']);
+      return e;
+    }
+  },
+
+  careem: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Careem',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','request','matching','captains','routing','tracking','payments','pricing','support','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Rider' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      request: { x: 600, y: 160, label: 'Request' },
+      matching: { x: 880, y: 160, label: 'Matching' },
+      captains: { x: 1160, y: 160, label: 'Captains' },
+      routing: { x: 880, y: 300, label: 'Routing' },
+      tracking: { x: 1160, y: 300, label: 'Tracking' },
+      pricing: { x: 600, y: 300, label: 'Pricing' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 600, y: 440, label: 'Notify' },
+      analytics: { x: 880, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','request','req']);
+      if(stepIdx===2) e.push(['request','matching','match'], ['matching','captains','captain']);
+      if(stepIdx===3) e.push(['captains','tracking','track'], ['routing','tracking','route']);
+      if(stepIdx===4) e.push(['pricing','payments','pay']);
+      if(stepIdx===5) e.push(['tracking','notifications','notify']);
+      if(stepIdx===6) e.push(['tracking','analytics','analytics'], ['support','client','support']);
+      return e;
+    }
+  },
+
+  'free-now': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Free Now',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','request','dispatch','taxis','routing','tracking','pricing','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Rider' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      request: { x: 600, y: 160, label: 'Request' },
+      dispatch: { x: 880, y: 160, label: 'Dispatch' },
+      taxis: { x: 1160, y: 160, label: 'Taxis' },
+      routing: { x: 880, y: 300, label: 'Routing' },
+      tracking: { x: 1160, y: 300, label: 'Tracking' },
+      pricing: { x: 600, y: 300, label: 'Pricing' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 600, y: 440, label: 'Notify' },
+      analytics: { x: 880, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','request','req']);
+      if(stepIdx===2) e.push(['request','dispatch','dispatch'], ['dispatch','taxis','taxi']);
+      if(stepIdx===3) e.push(['taxis','tracking','track'], ['routing','tracking','route']);
+      if(stepIdx===4) e.push(['pricing','payments','pay']);
+      if(stepIdx===5) e.push(['tracking','notifications','notify']);
+      if(stepIdx===6) e.push(['tracking','analytics','analytics'], ['support','client','support']);
+      return e;
+    }
+  },
+
+  grabtaxi: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'GrabTaxi',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','request','matching','drivers','routing','tracking','pricing','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Rider' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      request: { x: 600, y: 160, label: 'Request' },
+      matching: { x: 880, y: 160, label: 'Matching' },
+      drivers: { x: 1160, y: 160, label: 'Drivers' },
+      routing: { x: 880, y: 300, label: 'Routing' },
+      tracking: { x: 1160, y: 300, label: 'Tracking' },
+      pricing: { x: 600, y: 300, label: 'Pricing' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 600, y: 440, label: 'Notify' },
+      analytics: { x: 880, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','request','req']);
+      if(stepIdx===2) e.push(['request','matching','match'], ['matching','drivers','driver']);
+      if(stepIdx===3) e.push(['drivers','tracking','track'], ['routing','tracking','route']);
+      if(stepIdx===4) e.push(['pricing','payments','pay']);
+      if(stepIdx===5) e.push(['tracking','notifications','notify']);
+      if(stepIdx===6) e.push(['tracking','analytics','analytics'], ['support','client','support']);
+      return e;
+    }
+  },
+
+  gojek: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Gojek',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','services','request','matching','drivers','routing','tracking','wallet','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      services: { x: 600, y: 160, label: 'Services' },
+      request: { x: 880, y: 160, label: 'Request' },
+      matching: { x: 1160, y: 160, label: 'Matching' },
+      drivers: { x: 1160, y: 300, label: 'Drivers' },
+      routing: { x: 880, y: 300, label: 'Routing' },
+      tracking: { x: 600, y: 300, label: 'Tracking' },
+      wallet: { x: 320, y: 300, label: 'Wallet' },
+      payments: { x: 320, y: 440, label: 'Payments' },
+      support: { x: 600, y: 440, label: 'Support' },
+      notifications: { x: 880, y: 440, label: 'Notify' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','services','svc'], ['services','request','req']);
+      if(stepIdx===2) e.push(['request','matching','match'], ['matching','drivers','driver']);
+      if(stepIdx===3) e.push(['drivers','tracking','track'], ['routing','tracking','route']);
+      if(stepIdx===4) e.push(['wallet','payments','pay']);
+      if(stepIdx===5) e.push(['tracking','notifications','notify']);
+      if(stepIdx===6) e.push(['tracking','analytics','analytics'], ['support','client','support']);
+      return e;
+    }
+  },
+
+  moovit: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Moovit',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','map','transit','routes','realtime','alerts','tickets','payments','ads','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      map: { x: 600, y: 160, label: 'Map' },
+      transit: { x: 880, y: 160, label: 'Transit Data' },
+      routes: { x: 1160, y: 160, label: 'Routes' },
+      realtime: { x: 880, y: 300, label: 'Realtime' },
+      alerts: { x: 1160, y: 300, label: 'Alerts' },
+      tickets: { x: 600, y: 300, label: 'Tickets' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      ads: { x: 320, y: 160, label: 'Ads' },
+      notifications: { x: 600, y: 440, label: 'Notify' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','map','map'], ['map','transit','data']);
+      if(stepIdx===2) e.push(['transit','routes','route'], ['routes','realtime','rt']);
+      if(stepIdx===3) e.push(['realtime','alerts','alert'], ['alerts','notifications','notify']);
+      if(stepIdx===4) e.push(['tickets','payments','pay']);
+      if(stepIdx===5) e.push(['ads','analytics','ads']);
+      if(stepIdx===6) e.push(['routes','analytics','analytics']);
+      return e;
+    }
+  }
+});
+
 Object.assign(ARCH_LAYOUTS, {
   hostelworld: {
     viewBox: '0 0 1860 820',

@@ -9755,6 +9755,306 @@ export const FLOWS = {
     ]
   },
 
+  zipcar: {
+    title: 'Zipcar',
+    steps: [
+      {
+        title: 'Search fleet + availability',
+        desc: 'User searches nearby cars and checks availability.',
+        active: ['client','auth','profile','search','fleet','availability'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','search'], ['search','fleet'], ['fleet','availability']]
+      },
+      {
+        title: 'Booking + payment',
+        desc: 'Booking created and payment authorized.',
+        active: ['booking','payments','billing'],
+        edges: [['availability','booking'], ['booking','payments'], ['booking','billing']]
+      },
+      {
+        title: 'Unlock + telematics',
+        desc: 'Car access unlocks; telematics streams trip data.',
+        active: ['access','telematics','notifications'],
+        edges: [['booking','access'], ['access','telematics'], ['booking','notifications']]
+      },
+      {
+        title: 'Billing + analytics + support',
+        desc: 'Billing finalizes charges; analytics monitors fleet; support handles issues.',
+        active: ['billing','analytics','support'],
+        edges: [['telematics','billing'], ['booking','analytics'], ['client','support']]
+      }
+    ]
+  },
+
+  lime: {
+    title: 'Lime',
+    steps: [
+      {
+        title: 'Find scooter on map',
+        desc: 'User authenticates and finds nearby scooter on map.',
+        active: ['client','auth','map','fleet','availability'],
+        edges: [['client','auth'], ['auth','map'], ['map','fleet'], ['fleet','availability']]
+      },
+      {
+        title: 'Unlock + ride telemetry',
+        desc: 'Unlock starts ride; telematics streams telemetry.',
+        active: ['unlock','ride','telematics'],
+        edges: [['availability','unlock'], ['unlock','ride'], ['ride','telematics']]
+      },
+      {
+        title: 'Pricing + payment',
+        desc: 'Pricing computed and payment processed.',
+        active: ['pricing','payments'],
+        edges: [['ride','pricing'], ['pricing','payments']]
+      },
+      {
+        title: 'Safety + notifications + analytics',
+        desc: 'Safety checks and support; notifications for rules; analytics tracks usage.',
+        active: ['safety','support','notifications','analytics'],
+        edges: [['telematics','safety'], ['safety','support'], ['ride','notifications'], ['ride','analytics']]
+      }
+    ]
+  },
+
+  bird: {
+    title: 'Bird',
+    steps: [
+      {
+        title: 'Discover + unlock',
+        desc: 'User finds scooter and unlocks it.',
+        active: ['client','auth','map','fleet','availability','unlock'],
+        edges: [['client','auth'], ['auth','map'], ['map','fleet'], ['fleet','availability'], ['availability','unlock']]
+      },
+      {
+        title: 'Ride + telematics',
+        desc: 'Ride session tracked via telematics.',
+        active: ['ride','telematics'],
+        edges: [['unlock','ride'], ['ride','telematics']]
+      },
+      {
+        title: 'Pricing + payment',
+        desc: 'Pricing computed and payment processed.',
+        active: ['pricing','payments'],
+        edges: [['ride','pricing'], ['pricing','payments']]
+      },
+      {
+        title: 'Safety + support + analytics',
+        desc: 'Safety policies and support workflows; analytics aggregates usage.',
+        active: ['safety','support','analytics','notifications'],
+        edges: [['telematics','safety'], ['safety','support'], ['ride','analytics'], ['ride','notifications']]
+      }
+    ]
+  },
+
+  tier: {
+    title: 'Tier',
+    steps: [
+      {
+        title: 'Find vehicle + unlock',
+        desc: 'User finds vehicle and unlocks it.',
+        active: ['client','auth','map','fleet','availability','unlock'],
+        edges: [['client','auth'], ['auth','map'], ['map','fleet'], ['fleet','availability'], ['availability','unlock']]
+      },
+      {
+        title: 'Ride + telemetry',
+        desc: 'Ride tracked via telematics.',
+        active: ['ride','telematics'],
+        edges: [['unlock','ride'], ['ride','telematics']]
+      },
+      {
+        title: 'Pricing + payment',
+        desc: 'Pricing computed and payment processed.',
+        active: ['pricing','payments'],
+        edges: [['ride','pricing'], ['pricing','payments']]
+      },
+      {
+        title: 'Safety + notifications + analytics',
+        desc: 'Safety and support workflows; notifications and analytics.',
+        active: ['safety','support','notifications','analytics'],
+        edges: [['telematics','safety'], ['safety','support'], ['ride','notifications'], ['ride','analytics']]
+      }
+    ]
+  },
+
+  bolt: {
+    title: 'Bolt',
+    steps: [
+      {
+        title: 'Request ride',
+        desc: 'Rider signs in and requests a ride.',
+        active: ['client','auth','request','pricing'],
+        edges: [['client','auth'], ['auth','request'], ['request','pricing']]
+      },
+      {
+        title: 'Matching + dispatch',
+        desc: 'Matching assigns a driver; routing computed.',
+        active: ['matching','drivers','routing'],
+        edges: [['request','matching'], ['matching','drivers'], ['drivers','routing']]
+      },
+      {
+        title: 'Tracking + payment',
+        desc: 'Trip tracked; payment processed at end.',
+        active: ['tracking','payments','notifications'],
+        edges: [['drivers','tracking'], ['pricing','payments'], ['tracking','notifications']]
+      },
+      {
+        title: 'Support + analytics',
+        desc: 'Support resolves issues; analytics tracks marketplace health.',
+        active: ['support','analytics'],
+        edges: [['client','support'], ['tracking','analytics']]
+      }
+    ]
+  },
+
+  careem: {
+    title: 'Careem',
+    steps: [
+      {
+        title: 'Request ride',
+        desc: 'Rider signs in and requests ride with price estimate.',
+        active: ['client','auth','request','pricing'],
+        edges: [['client','auth'], ['auth','request'], ['request','pricing']]
+      },
+      {
+        title: 'Matching captains + routing',
+        desc: 'Matching assigns captain; routing computed and tracked.',
+        active: ['matching','captains','routing','tracking'],
+        edges: [['request','matching'], ['matching','captains'], ['captains','tracking'], ['routing','tracking']]
+      },
+      {
+        title: 'Payment + notifications',
+        desc: 'Payment processed; notifications update rider.',
+        active: ['payments','notifications'],
+        edges: [['pricing','payments'], ['tracking','notifications']]
+      },
+      {
+        title: 'Support + analytics',
+        desc: 'Support resolves issues; analytics monitors performance.',
+        active: ['support','analytics'],
+        edges: [['client','support'], ['tracking','analytics']]
+      }
+    ]
+  },
+
+  'free-now': {
+    title: 'Free Now',
+    steps: [
+      {
+        title: 'Request taxi',
+        desc: 'User requests taxi with pricing estimate.',
+        active: ['client','auth','request','pricing'],
+        edges: [['client','auth'], ['auth','request'], ['request','pricing']]
+      },
+      {
+        title: 'Dispatch taxis',
+        desc: 'Dispatch assigns taxi and begins tracking.',
+        active: ['dispatch','taxis','tracking'],
+        edges: [['request','dispatch'], ['dispatch','taxis'], ['taxis','tracking']]
+      },
+      {
+        title: 'Payment + notifications',
+        desc: 'Payment processed and notifications update ride status.',
+        active: ['payments','notifications'],
+        edges: [['pricing','payments'], ['tracking','notifications']]
+      },
+      {
+        title: 'Support + analytics',
+        desc: 'Support resolves issues; analytics tracks dispatch/ETA metrics.',
+        active: ['support','analytics'],
+        edges: [['client','support'], ['tracking','analytics']]
+      }
+    ]
+  },
+
+  grabtaxi: {
+    title: 'GrabTaxi',
+    steps: [
+      {
+        title: 'Request ride',
+        desc: 'Rider requests a taxi/ride with price estimate.',
+        active: ['client','auth','request','pricing'],
+        edges: [['client','auth'], ['auth','request'], ['request','pricing']]
+      },
+      {
+        title: 'Matching + routing',
+        desc: 'Matching assigns driver; routing computed and tracked.',
+        active: ['matching','drivers','routing','tracking'],
+        edges: [['request','matching'], ['matching','drivers'], ['drivers','tracking'], ['routing','tracking']]
+      },
+      {
+        title: 'Payment + notifications',
+        desc: 'Payment processed; notifications update rider.',
+        active: ['payments','notifications'],
+        edges: [['pricing','payments'], ['tracking','notifications']]
+      },
+      {
+        title: 'Support + analytics',
+        desc: 'Support resolves issues; analytics tracks marketplace health.',
+        active: ['support','analytics'],
+        edges: [['client','support'], ['tracking','analytics']]
+      }
+    ]
+  },
+
+  gojek: {
+    title: 'Gojek',
+    steps: [
+      {
+        title: 'Choose service + request',
+        desc: 'User picks service and requests a driver.',
+        active: ['client','auth','services','request'],
+        edges: [['client','auth'], ['auth','services'], ['services','request']]
+      },
+      {
+        title: 'Matching + tracking',
+        desc: 'Matching assigns driver; tracking updates.',
+        active: ['matching','drivers','routing','tracking'],
+        edges: [['request','matching'], ['matching','drivers'], ['drivers','tracking'], ['routing','tracking']]
+      },
+      {
+        title: 'Wallet + payments',
+        desc: 'Wallet handles payments for services.',
+        active: ['wallet','payments'],
+        edges: [['wallet','payments']]
+      },
+      {
+        title: 'Notifications + support + analytics',
+        desc: 'Notifications update; support resolves issues; analytics monitors platform.',
+        active: ['notifications','support','analytics'],
+        edges: [['tracking','notifications'], ['client','support'], ['tracking','analytics']]
+      }
+    ]
+  },
+
+  moovit: {
+    title: 'Moovit',
+    steps: [
+      {
+        title: 'Plan trip',
+        desc: 'User plans trip using transit data and routes.',
+        active: ['client','auth','map','transit','routes'],
+        edges: [['client','auth'], ['auth','map'], ['map','transit'], ['transit','routes']]
+      },
+      {
+        title: 'Realtime updates + alerts',
+        desc: 'Realtime feeds and alerts inform delays and service changes.',
+        active: ['realtime','alerts','notifications'],
+        edges: [['routes','realtime'], ['realtime','alerts'], ['alerts','notifications']]
+      },
+      {
+        title: 'Tickets + payments',
+        desc: 'Tickets purchased via payments provider.',
+        active: ['tickets','payments'],
+        edges: [['tickets','payments']]
+      },
+      {
+        title: 'Ads + analytics',
+        desc: 'Ads monetization and analytics for engagement/route performance.',
+        active: ['ads','analytics'],
+        edges: [['ads','analytics'], ['routes','analytics']]
+      }
+    ]
+  },
+
   chime: {
     title: 'Chime',
     steps: [
