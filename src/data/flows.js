@@ -598,46 +598,46 @@ export const FLOWS = {
     title: 'Uber',
     steps: [
       {
-        title: 'Set pickup and destination',
-        desc: 'Client geocodes addresses and shows ETA and fare estimates.',
-        active: ['client','maps','pricing'],
-        edges: [['client','maps'], ['client','pricing']]
+        title: 'Set pickup + destination (geocoding + ETA)',
+        desc: 'Client geocodes and snaps pickup; pricing and ETA services compute estimates using supply and traffic.',
+        active: ['client','maps','pricing','eta'],
+        edges: [['client','maps'], ['client','pricing'], ['maps','eta']]
       },
       {
-        title: 'Request ride',
-        desc: 'Ride request is authorized and sent to dispatch with rider context.',
-        active: ['client','api','auth','dispatch'],
-        edges: [['client','api'], ['api','auth'], ['api','dispatch']]
+        title: 'Request ride (auth + risk)',
+        desc: 'Request is authorized; risk checks and payment prechecks may run before dispatch.',
+        active: ['client','api','auth','risk','dispatch'],
+        edges: [['client','api'], ['api','auth'], ['auth','risk'], ['api','dispatch']]
       },
       {
-        title: 'Driver matching',
-        desc: 'Dispatch finds nearby drivers using location streams and constraints.',
-        active: ['dispatch','location','match'],
-        edges: [['location','dispatch'], ['dispatch','match']]
+        title: 'Dispatch + matching',
+        desc: 'Dispatch uses realtime driver supply, marketplace constraints, and batching rules to select a driver.',
+        active: ['dispatch','location','match','market'],
+        edges: [['location','dispatch'], ['dispatch','market'], ['dispatch','match']]
       },
       {
-        title: 'Trip acceptance and routing',
-        desc: 'After acceptance, routing computes path and updates live ETAs.',
-        active: ['match','routing','maps'],
-        edges: [['match','routing'], ['routing','maps']]
+        title: 'Acceptance + route plan',
+        desc: 'After acceptance, routing computes the route; pickup ETA and trip ETA are updated continuously.',
+        active: ['match','routing','maps','eta'],
+        edges: [['match','routing'], ['routing','maps'], ['routing','eta']]
       },
       {
-        title: 'Live tracking',
-        desc: 'Driver location updates stream to clients through realtime services.',
-        active: ['driver','location','realtime','client'],
-        edges: [['driver','location'], ['location','realtime'], ['realtime','client']]
+        title: 'Live trip tracking (realtime + notifications)',
+        desc: 'Driver location streams update rider UI; notifications cover arrival, pickup, and safety prompts.',
+        active: ['driver','location','realtime','notify','client'],
+        edges: [['driver','location'], ['location','realtime'], ['realtime','client'], ['realtime','notify'], ['notify','client']]
       },
       {
-        title: 'Complete trip and charge',
-        desc: 'Fare finalization runs pricing and payments, then updates receipts.',
-        active: ['pricing','payments','ledger'],
-        edges: [['pricing','payments'], ['payments','ledger']]
+        title: 'Fare finalization + payments',
+        desc: 'Fare computed from time/distance/tolls/promos; payment is captured and ledger is updated.',
+        active: ['pricing','payments','ledger','promo'],
+        edges: [['pricing','promo'], ['promo','pricing'], ['pricing','payments'], ['payments','ledger']]
       },
       {
-        title: 'Payouts and support',
-        desc: 'Driver payouts, dispute handling, and support workflows are triggered.',
-        active: ['ledger','payouts','support'],
-        edges: [['ledger','payouts'], ['ledger','support']]
+        title: 'Driver payout + support/disputes',
+        desc: 'Payouts are scheduled; support and disputes adjust ledger and trip state when needed.',
+        active: ['ledger','payouts','support','disputes'],
+        edges: [['ledger','payouts'], ['ledger','support'], ['support','disputes']]
       }
     ]
   },
@@ -1906,46 +1906,46 @@ export const FLOWS = {
     title: 'Ola',
     steps: [
       {
-        title: 'Set pickup and destination',
-        desc: 'Rider selects pickup/drop; maps and pricing estimate ETA and fare.',
-        active: ['client','maps','pricing'],
-        edges: [['client','maps'], ['client','pricing']]
+        title: 'Set pickup + destination (geo + ETA)',
+        desc: 'Client geocodes pickup/drop; ETA and fare estimates computed from supply and traffic.',
+        active: ['client','maps','pricing','eta'],
+        edges: [['client','maps'], ['client','pricing'], ['maps','eta']]
       },
       {
-        title: 'Request ride',
-        desc: 'Ride request is authorized and sent to dispatch with rider context.',
-        active: ['client','api','auth','dispatch'],
-        edges: [['client','api'], ['api','auth'], ['api','dispatch']]
+        title: 'Request ride (auth + risk)',
+        desc: 'Request is authorized; risk checks/payment prechecks may run before dispatch.',
+        active: ['client','api','auth','risk','dispatch'],
+        edges: [['client','api'], ['api','auth'], ['auth','risk'], ['api','dispatch']]
       },
       {
-        title: 'Driver matching',
-        desc: 'Dispatch finds nearby drivers using location streams and constraints.',
-        active: ['dispatch','location','match'],
-        edges: [['location','dispatch'], ['dispatch','match']]
+        title: 'Dispatch + matching',
+        desc: 'Dispatch uses realtime supply and constraints (category, incentives, batching) to match drivers.',
+        active: ['dispatch','location','match','market'],
+        edges: [['location','dispatch'], ['dispatch','market'], ['dispatch','match']]
       },
       {
-        title: 'Trip routing and live ETA',
-        desc: 'Routing computes path; ETAs update as traffic and driver location change.',
-        active: ['match','routing','maps'],
-        edges: [['match','routing'], ['routing','maps']]
+        title: 'Route plan + live ETAs',
+        desc: 'Routing computes path; pickup/drop ETAs update as traffic and driver location change.',
+        active: ['match','routing','maps','eta'],
+        edges: [['match','routing'], ['routing','maps'], ['routing','eta']]
       },
       {
-        title: 'Live tracking',
-        desc: 'Driver location updates stream to the rider through realtime services.',
-        active: ['driver','location','realtime','client'],
-        edges: [['driver','location'], ['location','realtime'], ['realtime','client']]
+        title: 'Live tracking + notifications',
+        desc: 'Driver location streams to rider; notifications cover arrival, pickup, and safety prompts.',
+        active: ['driver','location','realtime','notify','client'],
+        edges: [['driver','location'], ['location','realtime'], ['realtime','client'], ['realtime','notify'], ['notify','client']]
       },
       {
-        title: 'Complete trip and payment',
-        desc: 'Fare finalization runs pricing and payments, then updates receipts.',
-        active: ['pricing','payments','ledger'],
-        edges: [['pricing','payments'], ['payments','ledger']]
+        title: 'Fare finalization + payments',
+        desc: 'Fare computed from time/distance/tolls/promos; payment captured and ledger updated.',
+        active: ['pricing','payments','ledger','promo'],
+        edges: [['pricing','promo'], ['promo','pricing'], ['pricing','payments'], ['payments','ledger']]
       },
       {
-        title: 'Ratings and support',
-        desc: 'Ratings feed quality systems; disputes and support flows are triggered.',
-        active: ['ratings','support','ledger'],
-        edges: [['ledger','ratings'], ['ledger','support']]
+        title: 'Ratings, disputes, support',
+        desc: 'Ratings feed quality loops; disputes/support adjust ledger and marketplace rules.',
+        active: ['ratings','support','disputes','ledger'],
+        edges: [['ledger','ratings'], ['ledger','support'], ['support','disputes']]
       }
     ]
   },
@@ -1954,46 +1954,46 @@ export const FLOWS = {
     title: 'Airbnb',
     steps: [
       {
-        title: 'Search and filter stays',
-        desc: 'User searches location/date; ranking selects listings and prices.',
-        active: ['client','search','rank'],
-        edges: [['client','search'], ['search','rank']]
+        title: 'Search + filter stays (ranking + pricing)',
+        desc: 'Search queries are ranked; pricing shows nightly rate, fees, and availability constraints.',
+        active: ['client','search','rank','pricing'],
+        edges: [['client','search'], ['search','rank'], ['rank','pricing']]
       },
       {
-        title: 'View listing and availability',
-        desc: 'Listing details load; availability calendar and rules are checked.',
-        active: ['catalog','availability','pricing'],
-        edges: [['rank','catalog'], ['catalog','availability'], ['catalog','pricing']]
+        title: 'Listing details + calendar availability',
+        desc: 'Listing page composes photos, house rules, calendar availability, and total price breakdown.',
+        active: ['catalog','availability','pricing','policies'],
+        edges: [['rank','catalog'], ['catalog','availability'], ['catalog','pricing'], ['catalog','policies']]
       },
       {
-        title: 'Request to book',
-        desc: 'Booking request is created; identity, risk, and policy checks run.',
-        active: ['booking','risk','auth'],
-        edges: [['client','booking'], ['booking','auth'], ['booking','risk']]
+        title: 'Request to book / Instant Book decisioning',
+        desc: 'Booking request created; identity verification, trust/risk scoring, and policy checks run.',
+        active: ['booking','auth','risk','trust'],
+        edges: [['client','booking'], ['booking','auth'], ['booking','risk'], ['risk','trust']]
       },
       {
-        title: 'Payment authorization',
-        desc: 'Payment is authorized; holds and retries are handled securely.',
+        title: 'Payment authorization + holds',
+        desc: 'Payment is authorized; holds, installments (if supported), and retries are handled securely.',
         active: ['payments','risk','ledger'],
         edges: [['booking','payments'], ['payments','risk'], ['payments','ledger']]
       },
       {
-        title: 'Host confirmation and messaging',
-        desc: 'Host is notified; messaging coordinates questions and acceptance.',
-        active: ['host','messages','notify'],
-        edges: [['booking','notify'], ['notify','host'], ['host','messages']]
+        title: 'Host confirmation + messaging',
+        desc: 'Host notified to accept/decline; messaging supports questions and coordination.',
+        active: ['host','messages','notify','client'],
+        edges: [['booking','notify'], ['notify','host'], ['host','messages'], ['messages','client']]
       },
       {
-        title: 'Check-in and trip support',
-        desc: 'Itinerary is served; support handles issues, refunds, and changes.',
-        active: ['itinerary','support','changes'],
-        edges: [['booking','itinerary'], ['itinerary','client'], ['booking','support'], ['booking','changes']]
+        title: 'Trip lifecycle: itinerary, changes, support',
+        desc: 'Itinerary delivered; changes/cancellations follow policies; support handles incidents and refunds.',
+        active: ['itinerary','changes','support','refunds','policies'],
+        edges: [['booking','itinerary'], ['itinerary','client'], ['booking','changes'], ['changes','policies'], ['booking','support'], ['support','refunds']]
       },
       {
-        title: 'Payouts and reviews',
-        desc: 'After stay, payouts settle to host; reviews feed trust and ranking.',
-        active: ['payouts','reviews','trust'],
-        edges: [['ledger','payouts'], ['booking','reviews'], ['reviews','trust']]
+        title: 'Payouts + reviews (trust loop)',
+        desc: 'After stay, payout settles to host; reviews update trust and future ranking.',
+        active: ['payouts','reviews','trust','ledger'],
+        edges: [['ledger','payouts'], ['booking','reviews'], ['reviews','trust'], ['trust','rank']]
       }
     ]
   },
@@ -2002,46 +2002,46 @@ export const FLOWS = {
     title: 'Booking.com',
     steps: [
       {
-        title: 'Search hotels and dates',
-        desc: 'User searches destination/date; ranking selects properties and prices.',
-        active: ['client','search','rank'],
-        edges: [['client','search'], ['search','rank']]
+        title: 'Search properties + dates',
+        desc: 'Search results ranked by relevance, price, reviews, and availability constraints.',
+        active: ['client','search','rank','pricing'],
+        edges: [['client','search'], ['search','rank'], ['rank','pricing']]
       },
       {
-        title: 'Check availability and rates',
-        desc: 'Availability, rate plans, and cancellation policies are fetched.',
-        active: ['inventory','pricing','policies'],
-        edges: [['rank','inventory'], ['inventory','pricing'], ['inventory','policies']]
+        title: 'Availability + rate plans + policies',
+        desc: 'Rate plans, cancellation policies, and room inventory are resolved (often via partner/channel manager).',
+        active: ['inventory','pricing','policies','partner'],
+        edges: [['rank','inventory'], ['inventory','pricing'], ['inventory','policies'], ['inventory','partner']]
       },
       {
-        title: 'Reserve room',
-        desc: 'Reservation is created and inventory is held/confirmed.',
+        title: 'Reserve room (hold + confirm)',
+        desc: 'Reservation created; inventory held/confirmed and confirmation number generated.',
         active: ['reservation','inventory','confirm'],
         edges: [['client','reservation'], ['reservation','inventory'], ['reservation','confirm']]
       },
       {
-        title: 'Payment and fraud checks',
-        desc: 'Payment is authorized (or pay-at-property); fraud checks run.',
-        active: ['payments','fraud','ledger'],
-        edges: [['reservation','payments'], ['payments','fraud'], ['payments','ledger']]
+        title: 'Payment model + fraud checks',
+        desc: 'Payment may be pay-now, pay-later, or pay-at-property; fraud screening runs on bookings.',
+        active: ['payments','fraud','ledger','risk'],
+        edges: [['reservation','payments'], ['payments','fraud'], ['fraud','risk'], ['payments','ledger']]
       },
       {
-        title: 'Partner notification',
-        desc: 'Property/partner systems are notified and confirmation is sent.',
+        title: 'Partner/property notification',
+        desc: 'Property systems/channel managers are notified; confirmation delivered to guest.',
         active: ['partner','notify','client'],
         edges: [['confirm','notify'], ['notify','partner'], ['notify','client']]
       },
       {
-        title: 'Manage booking',
-        desc: 'Changes, cancellations, and refunds follow policy and inventory rules.',
-        active: ['changes','policies','refunds'],
-        edges: [['reservation','changes'], ['changes','policies'], ['changes','refunds']]
+        title: 'Manage booking (changes/cancel/refund)',
+        desc: 'Changes and cancellations follow policy; inventory updated; refunds processed when applicable.',
+        active: ['changes','policies','refunds','inventory','support'],
+        edges: [['reservation','changes'], ['changes','policies'], ['changes','inventory'], ['changes','refunds'], ['changes','support']]
       },
       {
-        title: 'Reviews and loyalty',
-        desc: 'Post-stay reviews and loyalty benefits feed ranking and retention.',
-        active: ['reviews','loyalty','rank'],
-        edges: [['reservation','reviews'], ['reviews','rank'], ['reservation','loyalty']]
+        title: 'Post-stay: reviews + loyalty',
+        desc: 'Reviews and loyalty benefits feed ranking, trust, and retention loops.',
+        active: ['reviews','loyalty','rank','trust'],
+        edges: [['reservation','reviews'], ['reviews','trust'], ['trust','rank'], ['reservation','loyalty']]
       }
     ]
   },
@@ -2050,46 +2050,46 @@ export const FLOWS = {
     title: 'MakeMyTrip',
     steps: [
       {
-        title: 'Search flights/hotels',
-        desc: 'User searches inventory; aggregators fetch prices and availability.',
-        active: ['client','search','aggregator'],
-        edges: [['client','search'], ['search','aggregator']]
+        title: 'Search flights/hotels (aggregator fanout)',
+        desc: 'Metasearch/aggregator fans out to airlines/hotels/partners for prices and availability.',
+        active: ['client','search','aggregator','cache'],
+        edges: [['client','search'], ['search','aggregator'], ['aggregator','cache']]
       },
       {
-        title: 'Price and revalidate',
-        desc: 'Selected itinerary is revalidated to ensure price and seats/rooms still exist.',
-        active: ['revalidate','inventory','pricing'],
-        edges: [['aggregator','revalidate'], ['revalidate','inventory'], ['revalidate','pricing']]
+        title: 'Price revalidation (anti-stale inventory)',
+        desc: 'Selected itinerary is revalidated to ensure price and seats/rooms are still available.',
+        active: ['revalidate','inventory','pricing','partner'],
+        edges: [['aggregator','revalidate'], ['revalidate','partner'], ['revalidate','inventory'], ['revalidate','pricing']]
       },
       {
-        title: 'Traveler details and risk checks',
-        desc: 'Passenger details collected; risk and policy checks run.',
-        active: ['checkout','risk','auth'],
-        edges: [['client','checkout'], ['checkout','auth'], ['checkout','risk']]
+        title: 'Traveler details + policy + risk',
+        desc: 'Passenger details captured; policy rules and fraud/risk checks applied.',
+        active: ['checkout','auth','risk','policies'],
+        edges: [['client','checkout'], ['checkout','auth'], ['checkout','risk'], ['checkout','policies']]
       },
       {
-        title: 'Payment authorization',
-        desc: 'Payment is authorized; retries and alternative methods supported.',
-        active: ['payments','gateway','ledger'],
-        edges: [['checkout','payments'], ['payments','gateway'], ['payments','ledger']]
+        title: 'Payments (multiple methods) + retries',
+        desc: 'Payment is authorized via gateway/UPI/cards; retries and fallbacks supported.',
+        active: ['payments','gateway','ledger','risk'],
+        edges: [['checkout','payments'], ['payments','risk'], ['payments','gateway'], ['payments','ledger']]
       },
       {
-        title: 'Booking confirmation',
-        desc: 'Reservation is confirmed with airline/hotel systems and PNR is created.',
-        active: ['booking','partner','confirm'],
-        edges: [['payments','booking'], ['booking','partner'], ['partner','confirm']]
+        title: 'Booking confirmation + PNR/voucher',
+        desc: 'Reservation is confirmed with airline/hotel systems; PNR/voucher generated.',
+        active: ['booking','partner','confirm','inventory'],
+        edges: [['payments','booking'], ['booking','partner'], ['partner','confirm'], ['confirm','inventory']]
       },
       {
-        title: 'Ticketing and itinerary',
-        desc: 'Tickets/vouchers issued; itinerary delivered to customer and stored.',
-        active: ['ticketing','itinerary','notify'],
-        edges: [['confirm','ticketing'], ['ticketing','itinerary'], ['itinerary','notify']]
+        title: 'Ticketing + itinerary delivery',
+        desc: 'Tickets/vouchers issued; itinerary stored and delivered with reminders.',
+        active: ['ticketing','itinerary','notify','client'],
+        edges: [['confirm','ticketing'], ['ticketing','itinerary'], ['itinerary','notify'], ['notify','client']]
       },
       {
-        title: 'Changes, cancellations, refunds',
-        desc: 'Post-booking changes follow policies; refunds are processed via payments.',
-        active: ['changes','refunds','support'],
-        edges: [['booking','changes'], ['changes','refunds'], ['changes','support']]
+        title: 'Changes/cancellations + support + refunds',
+        desc: 'Post-booking modifications follow supplier policies; refunds and support workflows run.',
+        active: ['changes','refunds','support','policies'],
+        edges: [['booking','changes'], ['changes','policies'], ['changes','refunds'], ['changes','support']]
       }
     ]
   },
@@ -2098,46 +2098,46 @@ export const FLOWS = {
     title: 'Lyft',
     steps: [
       {
-        title: 'Set pickup and destination',
-        desc: 'Client geocodes and estimates ETA and fare with pricing service.',
-        active: ['client','maps','pricing'],
-        edges: [['client','maps'], ['client','pricing']]
+        title: 'Set pickup + destination (geo + ETA)',
+        desc: 'Client geocodes pickup/drop; ETA and fare estimates computed from supply and traffic.',
+        active: ['client','maps','pricing','eta'],
+        edges: [['client','maps'], ['client','pricing'], ['maps','eta']]
       },
       {
-        title: 'Request ride',
-        desc: 'Ride request is authorized and sent to dispatch.',
-        active: ['client','api','auth','dispatch'],
-        edges: [['client','api'], ['api','auth'], ['api','dispatch']]
+        title: 'Request ride (auth + risk)',
+        desc: 'Request authorized; risk checks/payment prechecks may run before dispatch.',
+        active: ['client','api','auth','risk','dispatch'],
+        edges: [['client','api'], ['api','auth'], ['auth','risk'], ['api','dispatch']]
       },
       {
-        title: 'Matching nearby drivers',
-        desc: 'Dispatch matches drivers using location streams and constraints.',
-        active: ['dispatch','location','match'],
-        edges: [['location','dispatch'], ['dispatch','match']]
+        title: 'Dispatch + matching',
+        desc: 'Dispatch uses realtime supply and marketplace rules to match drivers.',
+        active: ['dispatch','location','match','market'],
+        edges: [['location','dispatch'], ['dispatch','market'], ['dispatch','match']]
       },
       {
-        title: 'Route and ETA updates',
-        desc: 'Routing and traffic updates keep ETA current for pickup and dropoff.',
-        active: ['match','routing','maps'],
-        edges: [['match','routing'], ['routing','maps']]
+        title: 'Route plan + live ETAs',
+        desc: 'Routing computes path; pickup/drop ETAs update with traffic and location changes.',
+        active: ['match','routing','maps','eta'],
+        edges: [['match','routing'], ['routing','maps'], ['routing','eta']]
       },
       {
-        title: 'Live tracking',
-        desc: 'Realtime updates stream driver location to rider.',
-        active: ['driver','location','realtime','client'],
-        edges: [['driver','location'], ['location','realtime'], ['realtime','client']]
+        title: 'Live tracking + notifications',
+        desc: 'Driver location streams to rider; notifications cover arrival/pickup/safety prompts.',
+        active: ['driver','location','realtime','notify','client'],
+        edges: [['driver','location'], ['location','realtime'], ['realtime','client'], ['realtime','notify'], ['notify','client']]
       },
       {
-        title: 'Payment and receipt',
-        desc: 'Fare finalization runs pricing and payments then updates receipt.',
-        active: ['pricing','payments','ledger'],
-        edges: [['pricing','payments'], ['payments','ledger']]
+        title: 'Fare finalization + payments',
+        desc: 'Fare computed from time/distance/tolls/promos; payment captured and ledger updated.',
+        active: ['pricing','payments','ledger','promo'],
+        edges: [['pricing','promo'], ['promo','pricing'], ['pricing','payments'], ['payments','ledger']]
       },
       {
-        title: 'Ratings and safety/support',
-        desc: 'Ratings and safety tools trigger support flows when needed.',
-        active: ['ratings','safety','support'],
-        edges: [['ledger','ratings'], ['ledger','support'], ['support','safety']]
+        title: 'Ratings, safety, support',
+        desc: 'Ratings feed quality loops; safety tools and support flows handle incidents/disputes.',
+        active: ['ratings','safety','support','disputes'],
+        edges: [['ledger','ratings'], ['ledger','support'], ['support','safety'], ['support','disputes']]
       }
     ]
   },
@@ -2146,46 +2146,46 @@ export const FLOWS = {
     title: 'Grab',
     steps: [
       {
-        title: 'Choose service and location',
-        desc: 'User selects ride/food etc.; maps and pricing estimate cost and ETA.',
-        active: ['client','maps','pricing'],
-        edges: [['client','maps'], ['client','pricing']]
+        title: 'Choose service + locations (superapp entry)',
+        desc: 'User selects ride/food/etc.; maps and pricing compute estimates and availability.',
+        active: ['client','maps','pricing','market'],
+        edges: [['client','maps'], ['client','pricing'], ['pricing','market']]
       },
       {
-        title: 'Request and authorization',
-        desc: 'Request is authorized; context sent to dispatch.',
-        active: ['client','api','auth','dispatch'],
-        edges: [['client','api'], ['api','auth'], ['api','dispatch']]
+        title: 'Request (auth + risk)',
+        desc: 'Request authorized; risk checks and wallet/payment checks may run before dispatch.',
+        active: ['client','api','auth','risk','dispatch'],
+        edges: [['client','api'], ['api','auth'], ['auth','risk'], ['api','dispatch']]
       },
       {
-        title: 'Matching and supply',
-        desc: 'Dispatch matches driver/partner using location stream and constraints.',
-        active: ['dispatch','location','match'],
-        edges: [['location','dispatch'], ['dispatch','match']]
+        title: 'Dispatch + matching',
+        desc: 'Dispatch matches driver/partner using realtime supply and marketplace constraints.',
+        active: ['dispatch','location','match','market'],
+        edges: [['location','dispatch'], ['dispatch','market'], ['dispatch','match']]
       },
       {
-        title: 'Route and tracking',
-        desc: 'Routing computes path; realtime tracking updates the customer.',
-        active: ['routing','realtime','client'],
-        edges: [['match','routing'], ['routing','realtime'], ['realtime','client']]
+        title: 'Route plan + realtime tracking',
+        desc: 'Routing computes path; realtime location updates stream to client.',
+        active: ['routing','realtime','client','notify'],
+        edges: [['match','routing'], ['routing','realtime'], ['realtime','client'], ['realtime','notify']]
       },
       {
-        title: 'Complete and charge',
-        desc: 'Pricing finalizes fare; payments charge wallet/card and ledger records.',
-        active: ['pricing','payments','ledger'],
-        edges: [['pricing','payments'], ['payments','ledger']]
+        title: 'Fare finalization + wallet/card charge',
+        desc: 'Fare computed; payments charge wallet/card and ledger records the trip.',
+        active: ['pricing','payments','ledger','promo'],
+        edges: [['pricing','promo'], ['promo','pricing'], ['pricing','payments'], ['payments','ledger']]
       },
       {
-        title: 'Promos and rewards',
-        desc: 'Rewards and promotions update wallets, points, and retention systems.',
-        active: ['promo','rewards','ledger'],
-        edges: [['ledger','promo'], ['promo','rewards']]
+        title: 'Promos + rewards ecosystem',
+        desc: 'Promos and rewards update points/wallets and drive retention loops.',
+        active: ['promo','rewards','ledger','analytics'],
+        edges: [['ledger','promo'], ['promo','rewards'], ['rewards','ledger'], ['ledger','analytics']]
       },
       {
-        title: 'Support and fraud',
-        desc: 'Support workflows handle disputes and fraud detection alerts.',
-        active: ['support','fraud','risk'],
-        edges: [['ledger','support'], ['support','fraud'], ['fraud','risk']]
+        title: 'Support, disputes, fraud',
+        desc: 'Support workflows handle disputes; fraud/risk systems monitor abuse and chargebacks.',
+        active: ['support','fraud','risk','disputes'],
+        edges: [['ledger','support'], ['support','disputes'], ['ledger','fraud'], ['fraud','risk']]
       }
     ]
   },
@@ -2194,46 +2194,46 @@ export const FLOWS = {
     title: 'BlaBlaCar',
     steps: [
       {
-        title: 'Search rides',
-        desc: 'Passenger searches routes and dates; matching finds available rides.',
-        active: ['client','search','match'],
-        edges: [['client','search'], ['search','match']]
+        title: 'Search rides (matching supply)',
+        desc: 'Passenger searches routes/dates; matching ranks rides by trust, detour, and price.',
+        active: ['client','search','match','rank'],
+        edges: [['client','search'], ['search','match'], ['match','rank']]
       },
       {
-        title: 'View ride details',
-        desc: 'Ride details, driver profile, seats, and price are shown.',
-        active: ['catalog','profiles','trust'],
-        edges: [['match','catalog'], ['catalog','profiles'], ['profiles','trust']]
+        title: 'View ride details + trust signals',
+        desc: 'Ride details composed with driver profile, reviews, verification, and cancellation rules.',
+        active: ['catalog','profiles','trust','policies'],
+        edges: [['rank','catalog'], ['catalog','profiles'], ['profiles','trust'], ['catalog','policies']]
       },
       {
-        title: 'Request seat',
-        desc: 'Booking request is created and sent to driver for acceptance.',
-        active: ['booking','notify','driver'],
-        edges: [['client','booking'], ['booking','notify'], ['notify','driver']]
+        title: 'Request seat (availability hold)',
+        desc: 'Seat request created; availability held and driver is notified to accept.',
+        active: ['booking','notify','driver','inventory'],
+        edges: [['client','booking'], ['booking','inventory'], ['booking','notify'], ['notify','driver']]
       },
       {
-        title: 'Payment authorization',
-        desc: 'Payment is authorized; escrow-like hold until ride completes.',
-        active: ['payments','escrow','ledger'],
-        edges: [['booking','payments'], ['payments','escrow'], ['escrow','ledger']]
+        title: 'Payment authorization + escrow hold',
+        desc: 'Payment authorized; escrow holds funds until ride completion/confirmation.',
+        active: ['payments','escrow','ledger','risk'],
+        edges: [['booking','payments'], ['payments','risk'], ['payments','escrow'], ['escrow','ledger']]
       },
       {
-        title: 'Messaging and coordination',
-        desc: 'Passenger and driver coordinate pickup via messaging and notifications.',
+        title: 'Messaging + coordination',
+        desc: 'Passenger and driver coordinate pickup via in-app messaging and notifications.',
         active: ['messages','notify','client'],
         edges: [['booking','messages'], ['messages','notify'], ['notify','client']]
       },
       {
-        title: 'Ride completion and payout',
-        desc: 'After completion, funds release to driver and receipts are issued.',
-        active: ['payouts','ledger','notify'],
-        edges: [['ledger','payouts'], ['payouts','notify']]
+        title: 'Completion confirmation + payout',
+        desc: 'After completion, funds are released to driver; receipts and confirmations sent.',
+        active: ['payouts','ledger','notify','driver'],
+        edges: [['escrow','ledger'], ['ledger','payouts'], ['payouts','notify'], ['notify','driver']]
       },
       {
-        title: 'Ratings and disputes',
-        desc: 'Ratings update trust; disputes and refunds are handled via support.',
-        active: ['ratings','support','refunds'],
-        edges: [['payouts','ratings'], ['ledger','refunds'], ['refunds','support']]
+        title: 'Ratings, disputes, refunds',
+        desc: 'Ratings update trust; disputes and refunds run through case management and ledger adjustments.',
+        active: ['ratings','support','refunds','trust','ledger'],
+        edges: [['payouts','ratings'], ['ratings','trust'], ['ledger','refunds'], ['refunds','support']]
       }
     ]
   },
@@ -2242,37 +2242,37 @@ export const FLOWS = {
     title: 'Skyscanner',
     steps: [
       {
-        title: 'Search flights',
-        desc: 'User searches routes/dates; metasearch fans out to airlines and OTAs.',
-        active: ['client','search','aggregator'],
-        edges: [['client','search'], ['search','aggregator']]
+        title: 'Search flights (metasearch fanout)',
+        desc: 'Query fans out to airline/OTA partners; caches and throttles manage load.',
+        active: ['client','search','aggregator','cache'],
+        edges: [['client','search'], ['search','aggregator'], ['aggregator','cache']]
       },
       {
-        title: 'Aggregate offers',
-        desc: 'Results are normalized, deduped, and ranked by price/time/constraints.',
-        active: ['normalize','rank','cache'],
-        edges: [['aggregator','normalize'], ['normalize','rank'], ['rank','cache']]
+        title: 'Normalize + dedupe + rank offers',
+        desc: 'Offers normalized and deduped; rank orders by price, duration, stops, and user constraints.',
+        active: ['normalize','rank','cache','pricing'],
+        edges: [['aggregator','normalize'], ['normalize','rank'], ['rank','cache'], ['normalize','pricing']]
       },
       {
-        title: 'Filter and sort',
-        desc: 'Client applies filters; ranking updates results view and deep links.',
-        active: ['client','rank','ui'],
-        edges: [['rank','ui'], ['ui','client']]
+        title: 'Filters, sorting, and price alerts',
+        desc: 'Client filters/sorts; optional price alerts subscribe to fare changes.',
+        active: ['client','rank','ui','alerts'],
+        edges: [['rank','ui'], ['ui','client'], ['client','alerts']]
       },
       {
-        title: 'Click-out to partner',
-        desc: 'User clicks an offer; Skyscanner redirects to partner with tracking.',
-        active: ['redirect','partner','tracking'],
-        edges: [['client','redirect'], ['redirect','partner'], ['redirect','tracking']]
+        title: 'Click-out (redirect + tracking)',
+        desc: 'User clicks an offer; redirect to partner includes attribution and tracking.',
+        active: ['redirect','partner','tracking','attribution'],
+        edges: [['client','redirect'], ['redirect','partner'], ['redirect','tracking'], ['tracking','attribution']]
       },
       {
-        title: 'Partner booking flow',
-        desc: 'Booking happens on partner site; conversion events are reported back.',
+        title: 'Partner booking + conversion events',
+        desc: 'Booking happens on partner; conversion events and postbacks reported back.',
         active: ['partner','events','tracking'],
         edges: [['partner','events'], ['events','tracking']]
       },
       {
-        title: 'Attribution and reporting',
+        title: 'Attribution + reporting',
         desc: 'Clicks and conversions feed attribution models and reporting dashboards.',
         active: ['attribution','reports','analytics'],
         edges: [['tracking','attribution'], ['attribution','reports'], ['reports','analytics']]
@@ -2284,46 +2284,46 @@ export const FLOWS = {
     title: 'Expedia',
     steps: [
       {
-        title: 'Search inventory',
-        desc: 'User searches flights/hotels/cars; aggregator fetches prices and availability.',
-        active: ['client','search','aggregator'],
-        edges: [['client','search'], ['search','aggregator']]
+        title: 'Search inventory (multi-vertical aggregator)',
+        desc: 'User searches flights/hotels/cars; aggregator fans out to suppliers with caching.',
+        active: ['client','search','aggregator','cache'],
+        edges: [['client','search'], ['search','aggregator'], ['aggregator','cache']]
       },
       {
-        title: 'Select itinerary and revalidate',
-        desc: 'Chosen itinerary is revalidated against supplier inventory and pricing.',
-        active: ['revalidate','inventory','pricing'],
-        edges: [['aggregator','revalidate'], ['revalidate','inventory'], ['revalidate','pricing']]
+        title: 'Select itinerary + price revalidation',
+        desc: 'Chosen itinerary is revalidated against supplier inventory and pricing to avoid stale offers.',
+        active: ['revalidate','inventory','pricing','supplier'],
+        edges: [['aggregator','revalidate'], ['revalidate','supplier'], ['revalidate','inventory'], ['revalidate','pricing']]
       },
       {
-        title: 'Checkout and traveler details',
-        desc: 'Traveler and payment details captured; fraud and policy checks run.',
-        active: ['checkout','fraud','risk'],
-        edges: [['client','checkout'], ['checkout','fraud'], ['checkout','risk']]
+        title: 'Checkout: traveler details + policy + fraud',
+        desc: 'Traveler details captured; policy and fraud/risk checks applied before payment.',
+        active: ['checkout','auth','risk','policies'],
+        edges: [['client','checkout'], ['checkout','auth'], ['checkout','risk'], ['checkout','policies']]
       },
       {
-        title: 'Payment authorization',
-        desc: 'Payment is authorized and ledger updated; retries and fallbacks handled.',
-        active: ['payments','gateway','ledger'],
-        edges: [['checkout','payments'], ['payments','gateway'], ['payments','ledger']]
+        title: 'Payments + retries',
+        desc: 'Payment authorized via gateway; retries/fallbacks supported; ledger updated.',
+        active: ['payments','gateway','ledger','risk'],
+        edges: [['checkout','payments'], ['payments','risk'], ['payments','gateway'], ['payments','ledger']]
       },
       {
         title: 'Confirm with suppliers',
-        desc: 'Reservation confirmed with airline/hotel supplier systems.',
-        active: ['booking','supplier','confirm'],
-        edges: [['payments','booking'], ['booking','supplier'], ['supplier','confirm']]
+        desc: 'Reservation confirmed with airline/hotel supplier systems; confirmation ids stored.',
+        active: ['booking','supplier','confirm','inventory'],
+        edges: [['payments','booking'], ['booking','supplier'], ['supplier','confirm'], ['confirm','inventory']]
       },
       {
-        title: 'Itinerary and notifications',
-        desc: 'Itinerary is stored and delivered; updates and reminders are sent.',
+        title: 'Itinerary delivery + reminders',
+        desc: 'Itinerary stored and delivered; reminders and updates sent across channels.',
         active: ['itinerary','notify','client'],
         edges: [['confirm','itinerary'], ['itinerary','notify'], ['notify','client']]
       },
       {
-        title: 'Changes, cancellations, refunds',
-        desc: 'Post-booking modifications follow policy; refunds and support workflows run.',
-        active: ['changes','refunds','support'],
-        edges: [['booking','changes'], ['changes','refunds'], ['changes','support']]
+        title: 'Changes/cancellations + refunds',
+        desc: 'Post-booking modifications follow supplier policies; refunds and support workflows run.',
+        active: ['changes','refunds','support','policies'],
+        edges: [['booking','changes'], ['changes','policies'], ['changes','refunds'], ['changes','support']]
       }
     ]
   },
