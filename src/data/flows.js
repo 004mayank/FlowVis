@@ -6689,6 +6689,408 @@ export const FLOWS = {
     ]
   },
 
+  descript: {
+    title: 'Descript',
+    steps: [
+      {
+        title: 'Import media + transcribe',
+        desc: 'Media imported into project; transcription generates editable text.',
+        active: ['client','auth','projects','media','transcribe'],
+        edges: [['client','auth'], ['auth','projects'], ['projects','media'], ['media','transcribe']]
+      },
+      {
+        title: 'Edit via text + timeline',
+        desc: 'Editor edits transcript; timeline updates audio/video cuts.',
+        active: ['editor','timeline'],
+        edges: [['transcribe','editor'], ['editor','timeline']]
+      },
+      {
+        title: 'AI cleanup tools',
+        desc: 'AI tools remove filler words, enhance audio, generate captions.',
+        active: ['ai'],
+        edges: [['timeline','ai']]
+      },
+      {
+        title: 'Render + store',
+        desc: 'Render produces final output; stored and served via CDN.',
+        active: ['render','storage','cdn'],
+        edges: [['ai','render'], ['render','storage'], ['storage','cdn']]
+      },
+      {
+        title: 'Export + publish',
+        desc: 'Export files; publish to external platforms.',
+        active: ['export','publish'],
+        edges: [['storage','export'], ['storage','publish']]
+      },
+      {
+        title: 'Collaboration + analytics',
+        desc: 'Collaboration sync; analytics tracks usage and performance.',
+        active: ['collab','analytics'],
+        edges: [['projects','collab'], ['projects','analytics']]
+      }
+    ]
+  },
+
+  riverside: {
+    title: 'Riverside',
+    steps: [
+      {
+        title: 'Create studio + room',
+        desc: 'Host creates studio and invites participants to a room.',
+        active: ['client','auth','studio','rooms'],
+        edges: [['client','auth'], ['auth','studio'], ['studio','rooms']]
+      },
+      {
+        title: 'Record locally',
+        desc: 'Each participant records high-quality local files during session.',
+        active: ['recording','local'],
+        edges: [['rooms','recording'], ['recording','local']]
+      },
+      {
+        title: 'Upload + sync',
+        desc: 'Local recordings uploaded and synced to backend.',
+        active: ['upload','sync'],
+        edges: [['local','upload'], ['upload','sync']]
+      },
+      {
+        title: 'Transcode + store',
+        desc: 'Transcode produces web-friendly formats; stored and served via CDN.',
+        active: ['transcode','storage','cdn'],
+        edges: [['sync','transcode'], ['transcode','storage'], ['storage','cdn']]
+      },
+      {
+        title: 'Edit + export',
+        desc: 'Editor trims and exports final episode.',
+        active: ['editor','export'],
+        edges: [['storage','editor'], ['editor','export']]
+      },
+      {
+        title: 'Share + analytics',
+        desc: 'Share links to media; analytics track engagement.',
+        active: ['share','analytics'],
+        edges: [['storage','share'], ['storage','analytics']]
+      }
+    ]
+  },
+
+  veed: {
+    title: 'VEED',
+    steps: [
+      {
+        title: 'Start project + upload assets',
+        desc: 'Create project and upload video/audio assets.',
+        active: ['client','auth','projects','upload','assets'],
+        edges: [['client','auth'], ['auth','projects'], ['projects','upload'], ['upload','assets']]
+      },
+      {
+        title: 'Edit timeline',
+        desc: 'Timeline editing, captions, and overlays.',
+        active: ['timeline'],
+        edges: [['assets','timeline']]
+      },
+      {
+        title: 'AI tools',
+        desc: 'AI tools for subtitles, cleanup, and background removal.',
+        active: ['ai'],
+        edges: [['timeline','ai']]
+      },
+      {
+        title: 'Render + store + CDN',
+        desc: 'Render outputs; stored and served via CDN.',
+        active: ['render','storage','cdn'],
+        edges: [['ai','render'], ['render','storage'], ['storage','cdn']]
+      },
+      {
+        title: 'Publish + export',
+        desc: 'Publish to platforms and export files.',
+        active: ['publish','export'],
+        edges: [['storage','publish'], ['storage','export']]
+      },
+      {
+        title: 'Templates + collaboration + analytics',
+        desc: 'Templates speed creation; collab sync; analytics track usage.',
+        active: ['templates','collab','analytics'],
+        edges: [['templates','projects'], ['projects','collab'], ['projects','analytics']]
+      }
+    ]
+  },
+
+  kapwing: {
+    title: 'Kapwing',
+    steps: [
+      {
+        title: 'Open workspace + project',
+        desc: 'User opens workspace and creates a project.',
+        active: ['client','auth','workspace','projects'],
+        edges: [['client','auth'], ['auth','workspace'], ['workspace','projects']]
+      },
+      {
+        title: 'Upload assets + edit timeline',
+        desc: 'Assets uploaded; timeline editing performed with collaboration.',
+        active: ['upload','assets','timeline','collab'],
+        edges: [['projects','upload'], ['upload','assets'], ['assets','timeline'], ['projects','collab']]
+      },
+      {
+        title: 'Render + store + CDN',
+        desc: 'Render output stored and served via CDN.',
+        active: ['render','storage','cdn'],
+        edges: [['timeline','render'], ['render','storage'], ['storage','cdn']]
+      },
+      {
+        title: 'Publish + export',
+        desc: 'Publish and export assets for distribution.',
+        active: ['publish','export'],
+        edges: [['storage','publish'], ['storage','export']]
+      },
+      {
+        title: 'Templates + analytics',
+        desc: 'Templates accelerate workflows; analytics track engagement.',
+        active: ['templates','analytics'],
+        edges: [['templates','projects'], ['projects','analytics']]
+      }
+    ]
+  },
+
+  runway: {
+    title: 'Runway',
+    steps: [
+      {
+        title: 'Create project + assets',
+        desc: 'User creates project and uploads assets into workspace.',
+        active: ['client','auth','workspace','projects','assets'],
+        edges: [['client','auth'], ['auth','workspace'], ['workspace','projects'], ['projects','assets']]
+      },
+      {
+        title: 'Select model',
+        desc: 'Choose model and parameters for generation or editing.',
+        active: ['models'],
+        edges: [['projects','models']]
+      },
+      {
+        title: 'GPU render',
+        desc: 'GPU jobs render outputs and store results.',
+        active: ['gpu','render','storage'],
+        edges: [['models','gpu'], ['gpu','render'], ['render','storage']]
+      },
+      {
+        title: 'CDN + publish/export',
+        desc: 'Serve via CDN, publish to platforms, or export files.',
+        active: ['cdn','publish','export'],
+        edges: [['storage','cdn'], ['storage','publish'], ['storage','export']]
+      },
+      {
+        title: 'Collaboration + analytics + billing',
+        desc: 'Collab workflows; analytics track usage; billing manages credits.',
+        active: ['collab','analytics','billing'],
+        edges: [['projects','collab'], ['projects','analytics'], ['analytics','billing']]
+      }
+    ]
+  },
+
+  synthesia: {
+    title: 'Synthesia',
+    steps: [
+      {
+        title: 'Write script + pick avatar',
+        desc: 'User writes script and selects avatar/template.',
+        active: ['client','auth','workspace','scripts','avatars'],
+        edges: [['client','auth'], ['auth','workspace'], ['workspace','scripts'], ['scripts','avatars']]
+      },
+      {
+        title: 'TTS + render',
+        desc: 'TTS generates voice; render produces avatar video.',
+        active: ['tts','render'],
+        edges: [['scripts','tts'], ['tts','render'], ['avatars','render']]
+      },
+      {
+        title: 'Review',
+        desc: 'Review and approvals before publishing.',
+        active: ['review'],
+        edges: [['render','review']]
+      },
+      {
+        title: 'Store + CDN',
+        desc: 'Store output and serve via CDN.',
+        active: ['storage','cdn'],
+        edges: [['review','storage'], ['storage','cdn']]
+      },
+      {
+        title: 'Publish/export + integrations',
+        desc: 'Publish and export; integrate with LMS and content systems.',
+        active: ['publish','export','integrations'],
+        edges: [['storage','publish'], ['storage','export'], ['workspace','integrations']]
+      },
+      {
+        title: 'Analytics + billing',
+        desc: 'Analytics track usage; billing manages seats/credits.',
+        active: ['analytics','billing'],
+        edges: [['storage','analytics'], ['analytics','billing']]
+      }
+    ]
+  },
+
+  pictory: {
+    title: 'Pictory',
+    steps: [
+      {
+        title: 'Create project + script',
+        desc: 'User creates project and writes/imports script.',
+        active: ['client','auth','projects','scripts'],
+        edges: [['client','auth'], ['auth','projects'], ['projects','scripts']]
+      },
+      {
+        title: 'Select assets + TTS',
+        desc: 'Pick stock assets and generate narration via TTS.',
+        active: ['assets','tts','editor'],
+        edges: [['scripts','tts'], ['assets','editor'], ['tts','editor']]
+      },
+      {
+        title: 'Render + store + CDN',
+        desc: 'Render outputs; store and serve via CDN.',
+        active: ['render','storage','cdn'],
+        edges: [['editor','render'], ['render','storage'], ['storage','cdn']]
+      },
+      {
+        title: 'Publish/export',
+        desc: 'Publish to platforms or export file.',
+        active: ['publish','export'],
+        edges: [['storage','publish'], ['storage','export']]
+      },
+      {
+        title: 'Integrations + analytics',
+        desc: 'Integrations connect channels; analytics track performance.',
+        active: ['integrations','analytics'],
+        edges: [['projects','integrations'], ['storage','analytics']]
+      }
+    ]
+  },
+
+  freeletics: {
+    title: 'Freeletics',
+    steps: [
+      {
+        title: 'Profile + plan selection',
+        desc: 'User signs in, sets profile, and selects training plan.',
+        active: ['client','auth','profile','plans'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','plans']]
+      },
+      {
+        title: 'Coach generates workouts',
+        desc: 'Coach selects workouts based on plan and performance.',
+        active: ['coach','workouts'],
+        edges: [['plans','coach'], ['coach','workouts']]
+      },
+      {
+        title: 'Track sessions + adapt',
+        desc: 'Tracking captures completed sessions and adapts plan.',
+        active: ['tracking','coach'],
+        edges: [['client','tracking'], ['tracking','coach']]
+      },
+      {
+        title: 'Nutrition + notifications',
+        desc: 'Nutrition plans support training; notifications drive adherence.',
+        active: ['nutrition','notifications'],
+        edges: [['nutrition','coach'], ['coach','notifications']]
+      },
+      {
+        title: 'Subscriptions + payments',
+        desc: 'Subscription managed via payments provider.',
+        active: ['subscriptions','payments'],
+        edges: [['client','subscriptions'], ['subscriptions','payments']]
+      },
+      {
+        title: 'Analytics + support',
+        desc: 'Analytics track engagement; support handles issues.',
+        active: ['analytics','support'],
+        edges: [['workouts','analytics'], ['client','support']]
+      }
+    ]
+  },
+
+  fitbod: {
+    title: 'Fitbod',
+    steps: [
+      {
+        title: 'Profile + planner',
+        desc: 'User sets profile and planner builds a workout plan.',
+        active: ['client','auth','profile','planner'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','planner']]
+      },
+      {
+        title: 'Exercise library + workouts',
+        desc: 'Library feeds workouts generated by planner.',
+        active: ['library','workouts'],
+        edges: [['library','planner'], ['planner','workouts']]
+      },
+      {
+        title: 'Tracking + recovery',
+        desc: 'Track sessions; recovery model updates future workouts.',
+        active: ['tracking','recovery'],
+        edges: [['client','tracking'], ['tracking','recovery']]
+      },
+      {
+        title: 'Wearables + sync',
+        desc: 'Wearables sync signals; sync keeps devices consistent.',
+        active: ['wearables','sync'],
+        edges: [['wearables','tracking'], ['tracking','sync']]
+      },
+      {
+        title: 'Subscriptions + payments',
+        desc: 'Premium access managed via subscriptions and payments.',
+        active: ['subscriptions','payments'],
+        edges: [['client','subscriptions'], ['subscriptions','payments']]
+      },
+      {
+        title: 'Analytics + notifications',
+        desc: 'Analytics track progress; notifications drive adherence.',
+        active: ['analytics','notifications'],
+        edges: [['workouts','analytics'], ['planner','notifications']]
+      }
+    ]
+  },
+
+  centr: {
+    title: 'Centr',
+    steps: [
+      {
+        title: 'Profile + programs',
+        desc: 'User sets profile and selects programs for workouts and nutrition.',
+        active: ['client','auth','profile','programs'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','programs']]
+      },
+      {
+        title: 'Workouts + streaming',
+        desc: 'Workout videos streamed; progress tracked.',
+        active: ['workouts','streaming'],
+        edges: [['programs','workouts'], ['streaming','workouts']]
+      },
+      {
+        title: 'Nutrition + recipes',
+        desc: 'Nutrition plans and recipes support coaching.',
+        active: ['nutrition','recipes'],
+        edges: [['programs','nutrition'], ['nutrition','recipes']]
+      },
+      {
+        title: 'Coach + community + notifications',
+        desc: 'Coach and community features drive adherence and motivation.',
+        active: ['coach','community','notifications'],
+        edges: [['programs','coach'], ['client','community'], ['coach','notifications']]
+      },
+      {
+        title: 'Subscriptions + payments',
+        desc: 'Subscriptions managed via payment provider.',
+        active: ['subscriptions','payments'],
+        edges: [['client','subscriptions'], ['subscriptions','payments']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics track engagement and content performance.',
+        active: ['analytics'],
+        edges: [['workouts','analytics']]
+      }
+    ]
+  },
+
   chime: {
     title: 'Chime',
     steps: [

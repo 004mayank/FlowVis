@@ -14359,6 +14359,559 @@ Object.assign(SYSTEM_LAYOUTS, {
   }
 });
 
+// ----- Batch 57 (System + Architecture - video creation + fitness) -----
+
+Object.assign(SYSTEM_LAYOUTS, {
+  descript: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','projects','media','transcribe','editor','timeline','ai','render','export','publish','storage','cdn','collab','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      projects: { x: 620, y: 180, label: 'Projects', colorKey: 'store' },
+      media: { x: 860, y: 180, label: 'Media', colorKey: 'cdn' },
+      transcribe: { x: 1100, y: 180, label: 'Transcribe', colorKey: 'api' },
+      editor: { x: 620, y: 320, label: 'Editor', colorKey: 'api' },
+      timeline: { x: 860, y: 320, label: 'Timeline', colorKey: 'api' },
+      ai: { x: 1100, y: 320, label: 'AI Tools', colorKey: 'api' },
+      render: { x: 860, y: 460, label: 'Render', colorKey: 'api' },
+      export: { x: 620, y: 460, label: 'Export', colorKey: 'api' },
+      publish: { x: 380, y: 460, label: 'Publish', colorKey: 'external' },
+      storage: { x: 1100, y: 460, label: 'Storage', colorKey: 'cdn' },
+      cdn: { x: 1100, y: 600, label: 'CDN', colorKey: 'cdn' },
+      collab: { x: 380, y: 320, label: 'Collab', colorKey: 'stream' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  riverside: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','studio','rooms','recording','local','upload','sync','transcode','editor','storage','cdn','share','export','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      studio: { x: 620, y: 180, label: 'Studio', colorKey: 'api' },
+      rooms: { x: 860, y: 180, label: 'Rooms', colorKey: 'stream' },
+      recording: { x: 1100, y: 180, label: 'Recording', colorKey: 'api' },
+      local: { x: 380, y: 320, label: 'Local Files', colorKey: 'store' },
+      upload: { x: 620, y: 320, label: 'Upload', colorKey: 'queue' },
+      sync: { x: 860, y: 320, label: 'Sync', colorKey: 'api' },
+      transcode: { x: 1100, y: 320, label: 'Transcode', colorKey: 'api' },
+      editor: { x: 620, y: 460, label: 'Editor', colorKey: 'api' },
+      storage: { x: 860, y: 460, label: 'Storage', colorKey: 'cdn' },
+      cdn: { x: 1100, y: 460, label: 'CDN', colorKey: 'cdn' },
+      share: { x: 380, y: 460, label: 'Share', colorKey: 'external' },
+      export: { x: 620, y: 600, label: 'Export', colorKey: 'api' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  veed: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','projects','upload','assets','timeline','ai','render','export','publish','storage','cdn','collab','templates','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      projects: { x: 620, y: 180, label: 'Projects', colorKey: 'store' },
+      upload: { x: 860, y: 180, label: 'Upload', colorKey: 'queue' },
+      assets: { x: 1100, y: 180, label: 'Assets', colorKey: 'cdn' },
+      timeline: { x: 620, y: 320, label: 'Timeline', colorKey: 'api' },
+      ai: { x: 860, y: 320, label: 'AI Tools', colorKey: 'api' },
+      render: { x: 1100, y: 320, label: 'Render', colorKey: 'api' },
+      export: { x: 860, y: 460, label: 'Export', colorKey: 'api' },
+      publish: { x: 620, y: 460, label: 'Publish', colorKey: 'external' },
+      storage: { x: 1100, y: 460, label: 'Storage', colorKey: 'cdn' },
+      cdn: { x: 1100, y: 600, label: 'CDN', colorKey: 'cdn' },
+      collab: { x: 380, y: 320, label: 'Collab', colorKey: 'stream' },
+      templates: { x: 380, y: 180, label: 'Templates', colorKey: 'store' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  kapwing: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','workspace','projects','upload','assets','timeline','collab','render','export','publish','storage','cdn','templates','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      workspace: { x: 620, y: 180, label: 'Workspace', colorKey: 'store' },
+      projects: { x: 860, y: 180, label: 'Projects', colorKey: 'store' },
+      upload: { x: 1100, y: 180, label: 'Upload', colorKey: 'queue' },
+      assets: { x: 1100, y: 320, label: 'Assets', colorKey: 'cdn' },
+      timeline: { x: 620, y: 320, label: 'Timeline', colorKey: 'api' },
+      collab: { x: 380, y: 320, label: 'Collab', colorKey: 'stream' },
+      render: { x: 860, y: 320, label: 'Render', colorKey: 'api' },
+      export: { x: 860, y: 460, label: 'Export', colorKey: 'api' },
+      publish: { x: 620, y: 460, label: 'Publish', colorKey: 'external' },
+      storage: { x: 1100, y: 460, label: 'Storage', colorKey: 'cdn' },
+      cdn: { x: 1100, y: 600, label: 'CDN', colorKey: 'cdn' },
+      templates: { x: 380, y: 180, label: 'Templates', colorKey: 'store' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  runway: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','workspace','projects','assets','models','gpu','render','export','publish','storage','cdn','collab','billing','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      workspace: { x: 620, y: 180, label: 'Workspace', colorKey: 'store' },
+      projects: { x: 860, y: 180, label: 'Projects', colorKey: 'store' },
+      assets: { x: 1100, y: 180, label: 'Assets', colorKey: 'cdn' },
+      models: { x: 620, y: 320, label: 'Models', colorKey: 'api' },
+      gpu: { x: 860, y: 320, label: 'GPU', colorKey: 'external' },
+      render: { x: 1100, y: 320, label: 'Render', colorKey: 'api' },
+      export: { x: 860, y: 460, label: 'Export', colorKey: 'api' },
+      publish: { x: 620, y: 460, label: 'Publish', colorKey: 'external' },
+      storage: { x: 1100, y: 460, label: 'Storage', colorKey: 'cdn' },
+      cdn: { x: 1100, y: 600, label: 'CDN', colorKey: 'cdn' },
+      collab: { x: 380, y: 320, label: 'Collab', colorKey: 'stream' },
+      billing: { x: 380, y: 460, label: 'Billing', colorKey: 'external' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  synthesia: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','workspace','scripts','avatars','tts','render','review','export','publish','storage','cdn','integrations','billing','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      workspace: { x: 620, y: 180, label: 'Workspace', colorKey: 'store' },
+      scripts: { x: 860, y: 180, label: 'Scripts', colorKey: 'store' },
+      avatars: { x: 1100, y: 180, label: 'Avatars', colorKey: 'store' },
+      tts: { x: 620, y: 320, label: 'TTS', colorKey: 'api' },
+      render: { x: 860, y: 320, label: 'Render', colorKey: 'api' },
+      review: { x: 1100, y: 320, label: 'Review', colorKey: 'api' },
+      export: { x: 860, y: 460, label: 'Export', colorKey: 'api' },
+      publish: { x: 620, y: 460, label: 'Publish', colorKey: 'external' },
+      storage: { x: 1100, y: 460, label: 'Storage', colorKey: 'cdn' },
+      cdn: { x: 1100, y: 600, label: 'CDN', colorKey: 'cdn' },
+      integrations: { x: 380, y: 320, label: 'Integrations', colorKey: 'external' },
+      billing: { x: 380, y: 460, label: 'Billing', colorKey: 'external' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  pictory: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','projects','scripts','assets','tts','editor','render','export','publish','storage','cdn','integrations','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      projects: { x: 620, y: 180, label: 'Projects', colorKey: 'store' },
+      scripts: { x: 860, y: 180, label: 'Scripts', colorKey: 'store' },
+      assets: { x: 1100, y: 180, label: 'Assets', colorKey: 'cdn' },
+      tts: { x: 620, y: 320, label: 'TTS', colorKey: 'api' },
+      editor: { x: 860, y: 320, label: 'Editor', colorKey: 'api' },
+      render: { x: 1100, y: 320, label: 'Render', colorKey: 'api' },
+      export: { x: 860, y: 460, label: 'Export', colorKey: 'api' },
+      publish: { x: 620, y: 460, label: 'Publish', colorKey: 'external' },
+      storage: { x: 1100, y: 460, label: 'Storage', colorKey: 'cdn' },
+      cdn: { x: 1100, y: 600, label: 'CDN', colorKey: 'cdn' },
+      integrations: { x: 380, y: 320, label: 'Integrations', colorKey: 'external' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  freeletics: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','plans','workouts','coach','tracking','nutrition','payments','subscriptions','notifications','analytics','support'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      plans: { x: 860, y: 180, label: 'Plans', colorKey: 'store' },
+      workouts: { x: 1100, y: 180, label: 'Workouts', colorKey: 'store' },
+      coach: { x: 860, y: 320, label: 'Coach', colorKey: 'api' },
+      tracking: { x: 620, y: 320, label: 'Tracking', colorKey: 'stream' },
+      nutrition: { x: 1100, y: 320, label: 'Nutrition', colorKey: 'store' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      subscriptions: { x: 380, y: 460, label: 'Subscriptions', colorKey: 'external' },
+      notifications: { x: 620, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' },
+      support: { x: 1100, y: 460, label: 'Support', colorKey: 'external' }
+    }
+  },
+
+  fitbod: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','library','planner','workouts','tracking','recovery','sync','wearables','subscriptions','payments','analytics','notifications'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      library: { x: 860, y: 180, label: 'Library', colorKey: 'store' },
+      planner: { x: 1100, y: 180, label: 'Planner', colorKey: 'api' },
+      workouts: { x: 860, y: 320, label: 'Workouts', colorKey: 'store' },
+      tracking: { x: 620, y: 320, label: 'Tracking', colorKey: 'stream' },
+      recovery: { x: 1100, y: 320, label: 'Recovery', colorKey: 'api' },
+      sync: { x: 380, y: 320, label: 'Sync', colorKey: 'api' },
+      wearables: { x: 380, y: 180, label: 'Wearables', colorKey: 'external' },
+      subscriptions: { x: 380, y: 460, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 620, y: 460, label: 'Payments', colorKey: 'external' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' },
+      notifications: { x: 1100, y: 460, label: 'Notify', colorKey: 'external' }
+    }
+  },
+
+  centr: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','programs','workouts','nutrition','recipes','streaming','coach','community','subscriptions','payments','analytics','notifications'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      programs: { x: 860, y: 180, label: 'Programs', colorKey: 'store' },
+      workouts: { x: 1100, y: 180, label: 'Workouts', colorKey: 'store' },
+      nutrition: { x: 620, y: 320, label: 'Nutrition', colorKey: 'store' },
+      recipes: { x: 860, y: 320, label: 'Recipes', colorKey: 'store' },
+      streaming: { x: 1100, y: 320, label: 'Streaming', colorKey: 'cdn' },
+      coach: { x: 380, y: 320, label: 'Coach', colorKey: 'api' },
+      community: { x: 380, y: 460, label: 'Community', colorKey: 'api' },
+      subscriptions: { x: 620, y: 460, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 860, y: 460, label: 'Payments', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' },
+      notifications: { x: 620, y: 600, label: 'Notify', colorKey: 'external' }
+    }
+  }
+});
+
+Object.assign(ARCH_LAYOUTS, {
+  descript: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Descript Pipeline',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','projects','media','transcribe','editor','timeline','ai','render','export','publish','storage','cdn','collab','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      projects: { x: 600, y: 160, label: 'Projects' },
+      media: { x: 880, y: 160, label: 'Media' },
+      transcribe: { x: 1160, y: 160, label: 'Transcribe' },
+      editor: { x: 600, y: 300, label: 'Editor' },
+      timeline: { x: 880, y: 300, label: 'Timeline' },
+      ai: { x: 1160, y: 300, label: 'AI Tools' },
+      render: { x: 880, y: 440, label: 'Render' },
+      export: { x: 600, y: 440, label: 'Export' },
+      publish: { x: 320, y: 440, label: 'Publish' },
+      storage: { x: 1160, y: 440, label: 'Storage' },
+      cdn: { x: 1160, y: 580, label: 'CDN' },
+      collab: { x: 320, y: 300, label: 'Collab' },
+      analytics: { x: 600, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','projects','proj'], ['projects','media','import']);
+      if(stepIdx===2) e.push(['media','transcribe','stt'], ['transcribe','editor','edit']);
+      if(stepIdx===3) e.push(['editor','timeline','timeline'], ['timeline','ai','ai']);
+      if(stepIdx===4) e.push(['ai','render','render'], ['render','storage','store'], ['storage','cdn','cdn']);
+      if(stepIdx===5) e.push(['storage','publish','publish'], ['storage','export','export']);
+      if(stepIdx===6) e.push(['collab','projects','collab'], ['projects','analytics','analytics']);
+      return e;
+    }
+  },
+
+  riverside: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Riverside Recording',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','studio','rooms','recording','local','upload','sync','transcode','editor','storage','cdn','share','export','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      studio: { x: 600, y: 160, label: 'Studio' },
+      rooms: { x: 880, y: 160, label: 'Rooms' },
+      recording: { x: 1160, y: 160, label: 'Recording' },
+      local: { x: 320, y: 300, label: 'Local Files' },
+      upload: { x: 600, y: 300, label: 'Upload' },
+      sync: { x: 880, y: 300, label: 'Sync' },
+      transcode: { x: 1160, y: 300, label: 'Transcode' },
+      editor: { x: 600, y: 440, label: 'Editor' },
+      storage: { x: 880, y: 440, label: 'Storage' },
+      cdn: { x: 1160, y: 440, label: 'CDN' },
+      share: { x: 320, y: 440, label: 'Share' },
+      export: { x: 600, y: 580, label: 'Export' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','studio','studio'], ['studio','rooms','room']);
+      if(stepIdx===2) e.push(['rooms','recording','record'], ['recording','local','local']);
+      if(stepIdx===3) e.push(['local','upload','upload'], ['upload','sync','sync'], ['sync','transcode','transcode']);
+      if(stepIdx===4) e.push(['transcode','storage','store'], ['storage','cdn','cdn']);
+      if(stepIdx===5) e.push(['storage','editor','edit'], ['editor','export','export']);
+      if(stepIdx===6) e.push(['storage','share','share'], ['storage','analytics','analytics']);
+      return e;
+    }
+  },
+
+  veed: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'VEED Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','projects','upload','assets','timeline','ai','render','export','publish','storage','cdn','collab','templates','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      projects: { x: 600, y: 160, label: 'Projects' },
+      upload: { x: 880, y: 160, label: 'Upload' },
+      assets: { x: 1160, y: 160, label: 'Assets' },
+      timeline: { x: 600, y: 300, label: 'Timeline' },
+      ai: { x: 880, y: 300, label: 'AI Tools' },
+      render: { x: 1160, y: 300, label: 'Render' },
+      export: { x: 880, y: 440, label: 'Export' },
+      publish: { x: 600, y: 440, label: 'Publish' },
+      storage: { x: 1160, y: 440, label: 'Storage' },
+      cdn: { x: 1160, y: 580, label: 'CDN' },
+      collab: { x: 320, y: 300, label: 'Collab' },
+      templates: { x: 320, y: 160, label: 'Templates' },
+      analytics: { x: 600, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['templates','projects','template'], ['client','auth','auth'], ['auth','projects','proj']);
+      if(stepIdx===2) e.push(['projects','upload','upload'], ['upload','assets','assets']);
+      if(stepIdx===3) e.push(['assets','timeline','timeline'], ['timeline','ai','ai']);
+      if(stepIdx===4) e.push(['ai','render','render'], ['render','storage','store'], ['storage','cdn','cdn']);
+      if(stepIdx===5) e.push(['storage','publish','publish'], ['storage','export','export']);
+      if(stepIdx===6) e.push(['collab','projects','collab'], ['projects','analytics','analytics']);
+      return e;
+    }
+  },
+
+  kapwing: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Kapwing Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','workspace','projects','upload','assets','timeline','collab','render','export','publish','storage','cdn','templates','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      workspace: { x: 600, y: 160, label: 'Workspace' },
+      projects: { x: 880, y: 160, label: 'Projects' },
+      upload: { x: 1160, y: 160, label: 'Upload' },
+      assets: { x: 1160, y: 300, label: 'Assets' },
+      timeline: { x: 600, y: 300, label: 'Timeline' },
+      collab: { x: 320, y: 300, label: 'Collab' },
+      render: { x: 880, y: 300, label: 'Render' },
+      export: { x: 880, y: 440, label: 'Export' },
+      publish: { x: 600, y: 440, label: 'Publish' },
+      storage: { x: 1160, y: 440, label: 'Storage' },
+      cdn: { x: 1160, y: 580, label: 'CDN' },
+      templates: { x: 320, y: 160, label: 'Templates' },
+      analytics: { x: 600, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','workspace','ws'], ['workspace','projects','proj']);
+      if(stepIdx===2) e.push(['templates','projects','template'], ['projects','upload','upload'], ['upload','assets','assets']);
+      if(stepIdx===3) e.push(['assets','timeline','timeline'], ['timeline','render','render'], ['render','storage','store']);
+      if(stepIdx===4) e.push(['storage','cdn','cdn'], ['storage','publish','publish'], ['storage','export','export']);
+      if(stepIdx===5) e.push(['collab','projects','collab'], ['projects','analytics','analytics']);
+      return e;
+    }
+  },
+
+  runway: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Runway ML Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','workspace','projects','assets','models','gpu','render','export','publish','storage','cdn','collab','billing','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      workspace: { x: 600, y: 160, label: 'Workspace' },
+      projects: { x: 880, y: 160, label: 'Projects' },
+      assets: { x: 1160, y: 160, label: 'Assets' },
+      models: { x: 600, y: 300, label: 'Models' },
+      gpu: { x: 880, y: 300, label: 'GPU' },
+      render: { x: 1160, y: 300, label: 'Render' },
+      export: { x: 880, y: 440, label: 'Export' },
+      publish: { x: 600, y: 440, label: 'Publish' },
+      storage: { x: 1160, y: 440, label: 'Storage' },
+      cdn: { x: 1160, y: 580, label: 'CDN' },
+      collab: { x: 320, y: 300, label: 'Collab' },
+      billing: { x: 320, y: 440, label: 'Billing' },
+      analytics: { x: 600, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','workspace','ws'], ['workspace','projects','proj']);
+      if(stepIdx===2) e.push(['projects','assets','assets'], ['assets','models','model']);
+      if(stepIdx===3) e.push(['models','gpu','gpu'], ['gpu','render','render'], ['render','storage','store']);
+      if(stepIdx===4) e.push(['storage','cdn','cdn'], ['storage','publish','publish'], ['storage','export','export']);
+      if(stepIdx===5) e.push(['projects','collab','collab'], ['projects','analytics','analytics'], ['analytics','billing','billing']);
+      return e;
+    }
+  },
+
+  synthesia: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Synthesia Pipeline',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','workspace','scripts','avatars','tts','render','review','export','publish','storage','cdn','integrations','billing','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      workspace: { x: 600, y: 160, label: 'Workspace' },
+      scripts: { x: 880, y: 160, label: 'Scripts' },
+      avatars: { x: 1160, y: 160, label: 'Avatars' },
+      tts: { x: 600, y: 300, label: 'TTS' },
+      render: { x: 880, y: 300, label: 'Render' },
+      review: { x: 1160, y: 300, label: 'Review' },
+      export: { x: 880, y: 440, label: 'Export' },
+      publish: { x: 600, y: 440, label: 'Publish' },
+      storage: { x: 1160, y: 440, label: 'Storage' },
+      cdn: { x: 1160, y: 580, label: 'CDN' },
+      integrations: { x: 320, y: 300, label: 'Integrations' },
+      billing: { x: 320, y: 440, label: 'Billing' },
+      analytics: { x: 600, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','workspace','ws'], ['workspace','scripts','script']);
+      if(stepIdx===2) e.push(['scripts','tts','tts'], ['avatars','render','avatar'], ['tts','render','audio']);
+      if(stepIdx===3) e.push(['render','review','review']);
+      if(stepIdx===4) e.push(['review','storage','store'], ['storage','cdn','cdn']);
+      if(stepIdx===5) e.push(['storage','publish','publish'], ['storage','export','export']);
+      if(stepIdx===6) e.push(['workspace','integrations','integrate'], ['storage','analytics','analytics'], ['analytics','billing','billing']);
+      return e;
+    }
+  },
+
+  pictory: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Pictory Pipeline',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','projects','scripts','assets','tts','editor','render','export','publish','storage','cdn','integrations','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      projects: { x: 600, y: 160, label: 'Projects' },
+      scripts: { x: 880, y: 160, label: 'Scripts' },
+      assets: { x: 1160, y: 160, label: 'Assets' },
+      tts: { x: 600, y: 300, label: 'TTS' },
+      editor: { x: 880, y: 300, label: 'Editor' },
+      render: { x: 1160, y: 300, label: 'Render' },
+      export: { x: 880, y: 440, label: 'Export' },
+      publish: { x: 600, y: 440, label: 'Publish' },
+      storage: { x: 1160, y: 440, label: 'Storage' },
+      cdn: { x: 1160, y: 580, label: 'CDN' },
+      integrations: { x: 320, y: 300, label: 'Integrations' },
+      analytics: { x: 600, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','projects','proj'], ['projects','scripts','script']);
+      if(stepIdx===2) e.push(['scripts','tts','tts'], ['assets','editor','assets'], ['tts','editor','audio']);
+      if(stepIdx===3) e.push(['editor','render','render'], ['render','storage','store'], ['storage','cdn','cdn']);
+      if(stepIdx===4) e.push(['storage','publish','publish'], ['storage','export','export']);
+      if(stepIdx===5) e.push(['projects','integrations','integrate'], ['storage','analytics','analytics']);
+      return e;
+    }
+  },
+
+  freeletics: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Freeletics Coaching',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','plans','workouts','coach','tracking','nutrition','payments','subscriptions','notifications','analytics','support'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      plans: { x: 880, y: 160, label: 'Plans' },
+      workouts: { x: 1160, y: 160, label: 'Workouts' },
+      coach: { x: 880, y: 300, label: 'Coach' },
+      tracking: { x: 600, y: 300, label: 'Tracking' },
+      nutrition: { x: 1160, y: 300, label: 'Nutrition' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      subscriptions: { x: 320, y: 440, label: 'Subscriptions' },
+      notifications: { x: 600, y: 440, label: 'Notify' },
+      analytics: { x: 880, y: 440, label: 'Analytics' },
+      support: { x: 1160, y: 440, label: 'Support' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profile','profile'], ['profile','plans','plan']);
+      if(stepIdx===2) e.push(['plans','coach','coach'], ['coach','workouts','workout']);
+      if(stepIdx===3) e.push(['client','tracking','track'], ['tracking','coach','adapt']);
+      if(stepIdx===4) e.push(['nutrition','coach','nutrition']);
+      if(stepIdx===5) e.push(['client','subscriptions','sub'], ['subscriptions','payments','pay']);
+      if(stepIdx===6) e.push(['coach','notifications','notify'], ['workouts','analytics','analytics']);
+      return e;
+    }
+  },
+
+  fitbod: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Fitbod Planner',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','library','planner','workouts','tracking','recovery','sync','wearables','subscriptions','payments','analytics','notifications'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      library: { x: 880, y: 160, label: 'Library' },
+      planner: { x: 1160, y: 160, label: 'Planner' },
+      workouts: { x: 880, y: 300, label: 'Workouts' },
+      tracking: { x: 600, y: 300, label: 'Tracking' },
+      recovery: { x: 1160, y: 300, label: 'Recovery' },
+      sync: { x: 320, y: 300, label: 'Sync' },
+      wearables: { x: 320, y: 160, label: 'Wearables' },
+      subscriptions: { x: 320, y: 440, label: 'Subscriptions' },
+      payments: { x: 600, y: 440, label: 'Payments' },
+      analytics: { x: 880, y: 440, label: 'Analytics' },
+      notifications: { x: 1160, y: 440, label: 'Notify' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profile','profile'], ['profile','planner','plan']);
+      if(stepIdx===2) e.push(['library','planner','library'], ['planner','workouts','workout']);
+      if(stepIdx===3) e.push(['client','tracking','track'], ['tracking','recovery','recover'], ['wearables','tracking','wear']);
+      if(stepIdx===4) e.push(['tracking','sync','sync']);
+      if(stepIdx===5) e.push(['client','subscriptions','sub'], ['subscriptions','payments','pay']);
+      if(stepIdx===6) e.push(['workouts','analytics','analytics'], ['planner','notifications','notify']);
+      return e;
+    }
+  },
+
+  centr: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Centr Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','programs','workouts','nutrition','recipes','streaming','coach','community','subscriptions','payments','analytics','notifications'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      programs: { x: 880, y: 160, label: 'Programs' },
+      workouts: { x: 1160, y: 160, label: 'Workouts' },
+      nutrition: { x: 600, y: 300, label: 'Nutrition' },
+      recipes: { x: 880, y: 300, label: 'Recipes' },
+      streaming: { x: 1160, y: 300, label: 'Streaming' },
+      coach: { x: 320, y: 300, label: 'Coach' },
+      community: { x: 320, y: 440, label: 'Community' },
+      subscriptions: { x: 600, y: 440, label: 'Subscriptions' },
+      payments: { x: 880, y: 440, label: 'Payments' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' },
+      notifications: { x: 600, y: 580, label: 'Notify' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profile','profile'], ['profile','programs','program']);
+      if(stepIdx===2) e.push(['programs','workouts','workout'], ['programs','nutrition','nutrition']);
+      if(stepIdx===3) e.push(['nutrition','recipes','recipe'], ['streaming','workouts','video']);
+      if(stepIdx===4) e.push(['client','community','community'], ['coach','notifications','notify']);
+      if(stepIdx===5) e.push(['client','subscriptions','sub'], ['subscriptions','payments','pay']);
+      if(stepIdx===6) e.push(['workouts','analytics','analytics']);
+      return e;
+    }
+  }
+});
+
 Object.assign(ARCH_LAYOUTS, {
   klaviyo: {
     viewBox: '0 0 1860 820',
