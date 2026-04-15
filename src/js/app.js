@@ -18497,6 +18497,507 @@ Object.assign(SYSTEM_LAYOUTS, {
   }
 });
 
+// ----- Batch 75d (System + Architecture - editing apps set 2) -----
+
+Object.assign(SYSTEM_LAYOUTS, {
+  facetune: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','editor','media','ai','effects','render','export','sharing','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'App', colorKey: 'client' },
+      editor: { x: 380, y: 180, label: 'Editor', colorKey: 'client' },
+      media: { x: 620, y: 180, label: 'Media', colorKey: 'store' },
+      ai: { x: 860, y: 180, label: 'AI', colorKey: 'api' },
+      effects: { x: 1100, y: 180, label: 'Effects', colorKey: 'api' },
+      render: { x: 1100, y: 320, label: 'Render', colorKey: 'api' },
+      export: { x: 860, y: 320, label: 'Export', colorKey: 'api' },
+      sharing: { x: 620, y: 320, label: 'Sharing', colorKey: 'external' },
+      subscriptions: { x: 380, y: 320, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 380, y: 460, label: 'Payments', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  remini: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','media','upload','ai','render','export','storage','subscriptions','payments','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'App', colorKey: 'client' },
+      media: { x: 380, y: 180, label: 'Media', colorKey: 'store' },
+      upload: { x: 620, y: 180, label: 'Upload', colorKey: 'api' },
+      ai: { x: 860, y: 180, label: 'AI', colorKey: 'api' },
+      render: { x: 1100, y: 180, label: 'Render', colorKey: 'api' },
+      export: { x: 860, y: 320, label: 'Export', colorKey: 'api' },
+      storage: { x: 620, y: 320, label: 'Storage', colorKey: 'store' },
+      subscriptions: { x: 380, y: 320, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 380, y: 460, label: 'Payments', colorKey: 'external' },
+      notifications: { x: 620, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  lensa: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','media','editor','ai','render','effects','export','sharing','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'App', colorKey: 'client' },
+      media: { x: 380, y: 180, label: 'Media', colorKey: 'store' },
+      editor: { x: 620, y: 180, label: 'Editor', colorKey: 'client' },
+      ai: { x: 860, y: 180, label: 'AI', colorKey: 'api' },
+      render: { x: 1100, y: 180, label: 'Render', colorKey: 'api' },
+      effects: { x: 1100, y: 320, label: 'Effects', colorKey: 'api' },
+      export: { x: 860, y: 320, label: 'Export', colorKey: 'api' },
+      sharing: { x: 620, y: 320, label: 'Sharing', colorKey: 'external' },
+      subscriptions: { x: 380, y: 320, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 380, y: 460, label: 'Payments', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'capcut-editor': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','editor','media','timeline','effects','templates','ai','render','export','sharing','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'App', colorKey: 'client' },
+      editor: { x: 380, y: 180, label: 'Editor', colorKey: 'client' },
+      media: { x: 620, y: 180, label: 'Media', colorKey: 'store' },
+      timeline: { x: 860, y: 180, label: 'Timeline', colorKey: 'api' },
+      effects: { x: 1100, y: 180, label: 'Effects', colorKey: 'api' },
+      templates: { x: 1100, y: 320, label: 'Templates', colorKey: 'store' },
+      ai: { x: 860, y: 320, label: 'AI tools', colorKey: 'api' },
+      render: { x: 620, y: 320, label: 'Render', colorKey: 'api' },
+      export: { x: 620, y: 460, label: 'Export', colorKey: 'api' },
+      sharing: { x: 860, y: 460, label: 'Sharing', colorKey: 'external' },
+      subscriptions: { x: 380, y: 320, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 380, y: 460, label: 'Payments', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  inshot: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','editor','media','timeline','effects','music','render','export','storage','sharing','ads','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'App', colorKey: 'client' },
+      editor: { x: 380, y: 180, label: 'Editor', colorKey: 'client' },
+      media: { x: 620, y: 180, label: 'Media', colorKey: 'store' },
+      timeline: { x: 860, y: 180, label: 'Timeline', colorKey: 'api' },
+      effects: { x: 1100, y: 180, label: 'Effects', colorKey: 'api' },
+      music: { x: 1100, y: 320, label: 'Music', colorKey: 'store' },
+      render: { x: 860, y: 320, label: 'Render', colorKey: 'api' },
+      export: { x: 620, y: 320, label: 'Export', colorKey: 'api' },
+      storage: { x: 620, y: 460, label: 'Storage', colorKey: 'store' },
+      sharing: { x: 860, y: 460, label: 'Sharing', colorKey: 'external' },
+      ads: { x: 380, y: 320, label: 'Ads', colorKey: 'api' },
+      subscriptions: { x: 380, y: 180, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 380, y: 460, label: 'Payments', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'vn-editor': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','editor','media','timeline','effects','render','export','storage','sharing'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'App', colorKey: 'client' },
+      editor: { x: 380, y: 180, label: 'Editor', colorKey: 'client' },
+      media: { x: 620, y: 180, label: 'Media', colorKey: 'store' },
+      timeline: { x: 860, y: 180, label: 'Timeline', colorKey: 'api' },
+      effects: { x: 1100, y: 180, label: 'Effects', colorKey: 'api' },
+      render: { x: 1100, y: 320, label: 'Render', colorKey: 'api' },
+      export: { x: 860, y: 320, label: 'Export', colorKey: 'api' },
+      storage: { x: 620, y: 320, label: 'Storage', colorKey: 'store' },
+      sharing: { x: 380, y: 320, label: 'Sharing', colorKey: 'external' }
+    }
+  },
+
+  kinemaster: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','projects','timeline','editor','store','assets','effects','render','export','storage','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'App', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      projects: { x: 620, y: 180, label: 'Projects', colorKey: 'store' },
+      timeline: { x: 860, y: 180, label: 'Timeline', colorKey: 'api' },
+      editor: { x: 1100, y: 180, label: 'Editor', colorKey: 'client' },
+      store: { x: 380, y: 320, label: 'Asset store', colorKey: 'store' },
+      assets: { x: 620, y: 320, label: 'Assets', colorKey: 'store' },
+      effects: { x: 860, y: 320, label: 'Effects', colorKey: 'api' },
+      render: { x: 1100, y: 320, label: 'Render', colorKey: 'api' },
+      export: { x: 860, y: 460, label: 'Export', colorKey: 'api' },
+      storage: { x: 620, y: 460, label: 'Storage', colorKey: 'store' },
+      subscriptions: { x: 380, y: 460, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 140, y: 460, label: 'Payments', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  filmorago: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','editor','media','timeline','templates','effects','music','render','export','storage','sharing','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'App', colorKey: 'client' },
+      editor: { x: 380, y: 180, label: 'Editor', colorKey: 'client' },
+      media: { x: 620, y: 180, label: 'Media', colorKey: 'store' },
+      timeline: { x: 860, y: 180, label: 'Timeline', colorKey: 'api' },
+      templates: { x: 1100, y: 180, label: 'Templates', colorKey: 'store' },
+      effects: { x: 1100, y: 320, label: 'Effects', colorKey: 'api' },
+      music: { x: 860, y: 320, label: 'Music', colorKey: 'store' },
+      render: { x: 620, y: 320, label: 'Render', colorKey: 'api' },
+      export: { x: 620, y: 460, label: 'Export', colorKey: 'api' },
+      storage: { x: 860, y: 460, label: 'Storage', colorKey: 'store' },
+      sharing: { x: 1100, y: 460, label: 'Sharing', colorKey: 'external' },
+      subscriptions: { x: 380, y: 320, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 380, y: 460, label: 'Payments', colorKey: 'external' },
+      analytics: { x: 1100, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'alight-motion': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','editor','projects','timeline','keyframes','effects','assets','store','render','export','storage','sharing','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'App', colorKey: 'client' },
+      editor: { x: 380, y: 180, label: 'Editor', colorKey: 'client' },
+      projects: { x: 620, y: 180, label: 'Projects', colorKey: 'store' },
+      timeline: { x: 860, y: 180, label: 'Timeline', colorKey: 'api' },
+      keyframes: { x: 1100, y: 180, label: 'Keyframes', colorKey: 'api' },
+      effects: { x: 1100, y: 320, label: 'Effects', colorKey: 'api' },
+      assets: { x: 860, y: 320, label: 'Assets', colorKey: 'store' },
+      store: { x: 620, y: 320, label: 'Asset store', colorKey: 'store' },
+      render: { x: 380, y: 320, label: 'Render', colorKey: 'api' },
+      export: { x: 380, y: 460, label: 'Export', colorKey: 'api' },
+      storage: { x: 620, y: 460, label: 'Storage', colorKey: 'store' },
+      sharing: { x: 860, y: 460, label: 'Sharing', colorKey: 'external' },
+      subscriptions: { x: 140, y: 320, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 140, y: 460, label: 'Payments', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  mojo: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','templates','editor','assets','fonts','render','export','sharing','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'App', colorKey: 'client' },
+      templates: { x: 380, y: 180, label: 'Templates', colorKey: 'store' },
+      editor: { x: 620, y: 180, label: 'Editor', colorKey: 'client' },
+      assets: { x: 860, y: 180, label: 'Assets', colorKey: 'store' },
+      fonts: { x: 1100, y: 180, label: 'Fonts', colorKey: 'store' },
+      render: { x: 860, y: 320, label: 'Render', colorKey: 'api' },
+      export: { x: 620, y: 320, label: 'Export', colorKey: 'api' },
+      sharing: { x: 380, y: 320, label: 'Sharing', colorKey: 'external' },
+      subscriptions: { x: 140, y: 320, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 140, y: 460, label: 'Payments', colorKey: 'external' },
+      analytics: { x: 1100, y: 320, label: 'Analytics', colorKey: 'store' }
+    }
+  }
+});
+
+Object.assign(ARCH_LAYOUTS, {
+  facetune: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Facetune',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','editor','media','ai','effects','render','export','sharing','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'App' },
+      editor: { x: 320, y: 160, label: 'Editor' },
+      media: { x: 600, y: 160, label: 'Media' },
+      ai: { x: 880, y: 160, label: 'AI' },
+      effects: { x: 1160, y: 160, label: 'Effects' },
+      render: { x: 1160, y: 300, label: 'Render' },
+      export: { x: 880, y: 300, label: 'Export' },
+      sharing: { x: 600, y: 300, label: 'Sharing' },
+      subscriptions: { x: 320, y: 300, label: 'Subscriptions' },
+      payments: { x: 320, y: 440, label: 'Payments' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','editor','open'], ['editor','media','import']);
+      if(stepIdx===2) e.push(['media','ai','ai'], ['ai','effects','fx'], ['effects','render','render']);
+      if(stepIdx===3) e.push(['render','export','export'], ['export','sharing','share']);
+      if(stepIdx===4) e.push(['subscriptions','payments','bill']);
+      if(stepIdx===5) e.push(['export','analytics','analytics']);
+      return e;
+    }
+  },
+
+  remini: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Remini',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','media','upload','ai','render','export','storage','subscriptions','payments','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'App' },
+      media: { x: 320, y: 160, label: 'Media' },
+      upload: { x: 600, y: 160, label: 'Upload' },
+      ai: { x: 880, y: 160, label: 'AI' },
+      render: { x: 1160, y: 160, label: 'Render' },
+      export: { x: 880, y: 300, label: 'Export' },
+      storage: { x: 600, y: 300, label: 'Storage' },
+      subscriptions: { x: 320, y: 300, label: 'Subscriptions' },
+      payments: { x: 320, y: 440, label: 'Payments' },
+      notifications: { x: 600, y: 440, label: 'Notify' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','media','pick'], ['media','upload','upload']);
+      if(stepIdx===2) e.push(['upload','ai','ai'], ['ai','render','render']);
+      if(stepIdx===3) e.push(['render','export','export'], ['export','storage','save']);
+      if(stepIdx===4) e.push(['subscriptions','payments','bill'], ['payments','notifications','notify']);
+      if(stepIdx===5) e.push(['render','analytics','analytics']);
+      return e;
+    }
+  },
+
+  lensa: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Lensa',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','media','editor','ai','render','effects','export','sharing','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'App' },
+      media: { x: 320, y: 160, label: 'Media' },
+      editor: { x: 600, y: 160, label: 'Editor' },
+      ai: { x: 880, y: 160, label: 'AI' },
+      render: { x: 1160, y: 160, label: 'Render' },
+      effects: { x: 1160, y: 300, label: 'Effects' },
+      export: { x: 880, y: 300, label: 'Export' },
+      sharing: { x: 600, y: 300, label: 'Sharing' },
+      subscriptions: { x: 320, y: 300, label: 'Subscriptions' },
+      payments: { x: 320, y: 440, label: 'Payments' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','media','pick'], ['media','editor','edit']);
+      if(stepIdx===2) e.push(['editor','ai','ai'], ['ai','render','render'], ['render','effects','fx']);
+      if(stepIdx===3) e.push(['effects','export','export'], ['export','sharing','share']);
+      if(stepIdx===4) e.push(['subscriptions','payments','bill']);
+      if(stepIdx===5) e.push(['export','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'capcut-editor': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'CapCut Editor',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','editor','media','timeline','effects','templates','ai','render','export','sharing','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'App' },
+      editor: { x: 320, y: 160, label: 'Editor' },
+      media: { x: 600, y: 160, label: 'Media' },
+      timeline: { x: 880, y: 160, label: 'Timeline' },
+      effects: { x: 1160, y: 160, label: 'Effects' },
+      templates: { x: 1160, y: 300, label: 'Templates' },
+      ai: { x: 880, y: 300, label: 'AI tools' },
+      render: { x: 600, y: 300, label: 'Render' },
+      export: { x: 600, y: 440, label: 'Export' },
+      sharing: { x: 880, y: 440, label: 'Sharing' },
+      subscriptions: { x: 320, y: 300, label: 'Subscriptions' },
+      payments: { x: 320, y: 440, label: 'Payments' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','editor','open'], ['editor','media','import'], ['media','timeline','timeline']);
+      if(stepIdx===2) e.push(['timeline','effects','fx'], ['effects','templates','tmpl'], ['templates','render','render']);
+      if(stepIdx===3) e.push(['timeline','ai','ai'], ['ai','render','render']);
+      if(stepIdx===4) e.push(['render','export','export'], ['export','sharing','share']);
+      if(stepIdx===5) e.push(['subscriptions','payments','bill'], ['export','analytics','analytics']);
+      return e;
+    }
+  },
+
+  inshot: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'InShot',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','editor','media','timeline','effects','music','render','export','storage','sharing','ads','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'App' },
+      editor: { x: 320, y: 160, label: 'Editor' },
+      media: { x: 600, y: 160, label: 'Media' },
+      timeline: { x: 880, y: 160, label: 'Timeline' },
+      effects: { x: 1160, y: 160, label: 'Effects' },
+      music: { x: 1160, y: 300, label: 'Music' },
+      render: { x: 880, y: 300, label: 'Render' },
+      export: { x: 600, y: 300, label: 'Export' },
+      storage: { x: 600, y: 440, label: 'Storage' },
+      sharing: { x: 880, y: 440, label: 'Sharing' },
+      ads: { x: 320, y: 300, label: 'Ads' },
+      subscriptions: { x: 320, y: 160, label: 'Subscriptions' },
+      payments: { x: 320, y: 440, label: 'Payments' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','editor','open'], ['editor','media','import'], ['media','timeline','timeline']);
+      if(stepIdx===2) e.push(['timeline','effects','fx'], ['music','timeline','music'], ['effects','render','render']);
+      if(stepIdx===3) e.push(['render','export','export'], ['export','storage','save'], ['storage','sharing','share']);
+      if(stepIdx===4) e.push(['ads','analytics','ads'], ['subscriptions','payments','bill']);
+      if(stepIdx===5) e.push(['export','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'vn-editor': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'VN Editor',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','editor','media','timeline','effects','render','export','storage','sharing'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'App' },
+      editor: { x: 320, y: 160, label: 'Editor' },
+      media: { x: 600, y: 160, label: 'Media' },
+      timeline: { x: 880, y: 160, label: 'Timeline' },
+      effects: { x: 1160, y: 160, label: 'Effects' },
+      render: { x: 1160, y: 300, label: 'Render' },
+      export: { x: 880, y: 300, label: 'Export' },
+      storage: { x: 600, y: 300, label: 'Storage' },
+      sharing: { x: 320, y: 300, label: 'Sharing' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','editor','open'], ['editor','media','import'], ['media','timeline','timeline']);
+      if(stepIdx===2) e.push(['timeline','effects','fx'], ['effects','render','render']);
+      if(stepIdx===3) e.push(['render','export','export'], ['export','storage','save']);
+      if(stepIdx===4) e.push(['storage','sharing','share']);
+      return e;
+    }
+  },
+
+  kinemaster: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Kinemaster',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','projects','timeline','editor','store','assets','effects','render','export','storage','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'App' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      projects: { x: 600, y: 160, label: 'Projects' },
+      timeline: { x: 880, y: 160, label: 'Timeline' },
+      editor: { x: 1160, y: 160, label: 'Editor' },
+      store: { x: 320, y: 300, label: 'Asset store' },
+      assets: { x: 600, y: 300, label: 'Assets' },
+      effects: { x: 880, y: 300, label: 'Effects' },
+      render: { x: 1160, y: 300, label: 'Render' },
+      export: { x: 880, y: 440, label: 'Export' },
+      storage: { x: 600, y: 440, label: 'Storage' },
+      subscriptions: { x: 320, y: 440, label: 'Subscriptions' },
+      payments: { x: 40, y: 440, label: 'Payments' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','projects','proj'], ['projects','timeline','timeline'], ['timeline','editor','edit']);
+      if(stepIdx===2) e.push(['store','assets','asset'], ['assets','effects','fx']);
+      if(stepIdx===3) e.push(['editor','render','render'], ['render','export','export'], ['export','storage','store']);
+      if(stepIdx===4) e.push(['subscriptions','payments','bill']);
+      if(stepIdx===5) e.push(['export','analytics','analytics']);
+      return e;
+    }
+  },
+
+  filmorago: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'FilmoraGo',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','editor','media','timeline','templates','effects','music','render','export','storage','sharing','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'App' },
+      editor: { x: 320, y: 160, label: 'Editor' },
+      media: { x: 600, y: 160, label: 'Media' },
+      timeline: { x: 880, y: 160, label: 'Timeline' },
+      templates: { x: 1160, y: 160, label: 'Templates' },
+      effects: { x: 1160, y: 300, label: 'Effects' },
+      music: { x: 880, y: 300, label: 'Music' },
+      render: { x: 600, y: 300, label: 'Render' },
+      export: { x: 600, y: 440, label: 'Export' },
+      storage: { x: 880, y: 440, label: 'Storage' },
+      sharing: { x: 1160, y: 440, label: 'Sharing' },
+      subscriptions: { x: 320, y: 300, label: 'Subscriptions' },
+      payments: { x: 320, y: 440, label: 'Payments' },
+      analytics: { x: 1160, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','editor','open'], ['editor','media','import'], ['media','timeline','timeline'], ['timeline','templates','tmpl']);
+      if(stepIdx===2) e.push(['templates','effects','fx'], ['music','timeline','music'], ['effects','render','render']);
+      if(stepIdx===3) e.push(['render','export','export'], ['export','storage','save'], ['storage','sharing','share']);
+      if(stepIdx===4) e.push(['subscriptions','payments','bill']);
+      if(stepIdx===5) e.push(['export','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'alight-motion': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Alight Motion',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','editor','projects','timeline','keyframes','effects','assets','store','render','export','storage','sharing','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'App' },
+      editor: { x: 320, y: 160, label: 'Editor' },
+      projects: { x: 600, y: 160, label: 'Projects' },
+      timeline: { x: 880, y: 160, label: 'Timeline' },
+      keyframes: { x: 1160, y: 160, label: 'Keyframes' },
+      effects: { x: 1160, y: 300, label: 'Effects' },
+      assets: { x: 880, y: 300, label: 'Assets' },
+      store: { x: 600, y: 300, label: 'Asset store' },
+      render: { x: 320, y: 300, label: 'Render' },
+      export: { x: 320, y: 440, label: 'Export' },
+      storage: { x: 600, y: 440, label: 'Storage' },
+      sharing: { x: 880, y: 440, label: 'Sharing' },
+      subscriptions: { x: 40, y: 300, label: 'Subscriptions' },
+      payments: { x: 40, y: 440, label: 'Payments' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','editor','open'], ['editor','projects','proj'], ['projects','timeline','timeline']);
+      if(stepIdx===2) e.push(['timeline','keyframes','key'], ['keyframes','effects','fx'], ['store','assets','asset']);
+      if(stepIdx===3) e.push(['effects','render','render'], ['render','export','export'], ['export','storage','store']);
+      if(stepIdx===4) e.push(['storage','sharing','share']);
+      if(stepIdx===5) e.push(['subscriptions','payments','bill'], ['export','analytics','analytics']);
+      return e;
+    }
+  },
+
+  mojo: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Mojo',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','templates','editor','assets','fonts','render','export','sharing','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'App' },
+      templates: { x: 320, y: 160, label: 'Templates' },
+      editor: { x: 600, y: 160, label: 'Editor' },
+      assets: { x: 880, y: 160, label: 'Assets' },
+      fonts: { x: 1160, y: 160, label: 'Fonts' },
+      render: { x: 880, y: 300, label: 'Render' },
+      export: { x: 600, y: 300, label: 'Export' },
+      sharing: { x: 320, y: 300, label: 'Sharing' },
+      subscriptions: { x: 40, y: 300, label: 'Subscriptions' },
+      payments: { x: 40, y: 440, label: 'Payments' },
+      analytics: { x: 1160, y: 300, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','templates','tmpl'], ['templates','editor','edit']);
+      if(stepIdx===2) e.push(['editor','assets','asset'], ['assets','fonts','font'], ['fonts','render','render']);
+      if(stepIdx===3) e.push(['render','export','export'], ['export','sharing','share']);
+      if(stepIdx===4) e.push(['subscriptions','payments','bill']);
+      if(stepIdx===5) e.push(['export','analytics','analytics']);
+      return e;
+    }
+  }
+});
+
 Object.assign(ARCH_LAYOUTS, {
   'fender-play': {
     viewBox: '0 0 1860 820',
