@@ -10620,6 +10620,186 @@ Object.assign(ARCH_LAYOUTS, {
   }
 });
 
+// ----- Batch 33 (Architecture - arch-only fills) -----
+
+Object.assign(ARCH_LAYOUTS, {
+  spotify: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Spotify Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','home','recos','rank','ab','search','index','catalog','playback','cdn','drm','auth','metrics','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      home: { x: 320, y: 160, label: 'Home API' },
+      recos: { x: 600, y: 160, label: 'Recos' },
+      rank: { x: 880, y: 160, label: 'Ranking' },
+      ab: { x: 1160, y: 160, label: 'Experiments' },
+      search: { x: 320, y: 300, label: 'Search' },
+      index: { x: 600, y: 300, label: 'Index' },
+      catalog: { x: 880, y: 300, label: 'Catalog' },
+      playback: { x: 320, y: 440, label: 'Playback' },
+      cdn: { x: 600, y: 440, label: 'CDN' },
+      drm: { x: 880, y: 440, label: 'DRM' },
+      auth: { x: 1160, y: 440, label: 'Auth' },
+      metrics: { x: 880, y: 580, label: 'Telemetry' },
+      analytics: { x: 1160, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','home','home'], ['home','recos','recos']);
+      if (stepIdx === 2) e.push(['recos','rank','rank'], ['rank','ab','variant']);
+      if (stepIdx === 3) e.push(['client','search','search'], ['search','index','index'], ['index','catalog','catalog']);
+      if (stepIdx === 4) e.push(['client','playback','play'], ['playback','cdn','cdn']);
+      if (stepIdx === 5) e.push(['cdn','drm','drm'], ['drm','auth','auth']);
+      if (stepIdx === 6) e.push(['playback','metrics','metrics'], ['metrics','analytics','analytics']);
+      return e;
+    }
+  },
+
+  youtube: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'YouTube Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','home','recos','rank','safety','search','index','player','cdn','ads','auction','upload','transcode','catalog','comments','write','notify','metrics','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      home: { x: 320, y: 160, label: 'Home API' },
+      recos: { x: 600, y: 160, label: 'Recos' },
+      rank: { x: 880, y: 160, label: 'Ranking' },
+      safety: { x: 1160, y: 160, label: 'Safety' },
+      search: { x: 320, y: 300, label: 'Search' },
+      index: { x: 600, y: 300, label: 'Index' },
+      player: { x: 320, y: 440, label: 'Player' },
+      cdn: { x: 600, y: 440, label: 'CDN' },
+      ads: { x: 880, y: 440, label: 'Ads' },
+      auction: { x: 1160, y: 440, label: 'Ad Auction' },
+      upload: { x: 320, y: 580, label: 'Upload' },
+      transcode: { x: 600, y: 580, label: 'Transcode' },
+      catalog: { x: 880, y: 580, label: 'Catalog' },
+      comments: { x: 320, y: 720, label: 'Comments' },
+      write: { x: 600, y: 720, label: 'Writes' },
+      notify: { x: 880, y: 720, label: 'Notify' },
+      metrics: { x: 880, y: 300, label: 'Metrics' },
+      analytics: { x: 1160, y: 300, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','home','home'], ['home','recos','recos']);
+      if (stepIdx === 2) e.push(['recos','rank','rank'], ['rank','safety','safety']);
+      if (stepIdx === 3) e.push(['client','search','search'], ['search','index','index']);
+      if (stepIdx === 4) e.push(['client','player','play'], ['player','cdn','cdn']);
+      if (stepIdx === 5) e.push(['player','ads','ads'], ['ads','auction','auction']);
+      if (stepIdx === 6) e.push(['client','upload','upload'], ['upload','transcode','transcode'], ['transcode','catalog','catalog']);
+      if (stepIdx === 7) e.push(['client','comments','comment'], ['comments','write','write'], ['write','notify','notify']);
+      return e;
+    }
+  },
+
+  twitch: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Twitch Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','directory','rank','player','cdn','streamer','ingest','transcode','chat','realtime','moderation','ads','subs','payouts','metrics','analytics','clips'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Viewer' },
+      directory: { x: 320, y: 160, label: 'Directory' },
+      rank: { x: 600, y: 160, label: 'Ranking' },
+      player: { x: 320, y: 300, label: 'Player' },
+      cdn: { x: 600, y: 300, label: 'CDN' },
+      streamer: { x: 40, y: 440, label: 'Streamer' },
+      ingest: { x: 320, y: 440, label: 'Ingest' },
+      transcode: { x: 600, y: 440, label: 'Transcode' },
+      chat: { x: 880, y: 300, label: 'Chat' },
+      realtime: { x: 1160, y: 300, label: 'Realtime' },
+      moderation: { x: 1160, y: 440, label: 'Moderation' },
+      ads: { x: 880, y: 440, label: 'Ads' },
+      subs: { x: 880, y: 580, label: 'Subs/Bits' },
+      payouts: { x: 1160, y: 580, label: 'Payouts' },
+      metrics: { x: 600, y: 580, label: 'Telemetry' },
+      analytics: { x: 320, y: 580, label: 'Analytics' },
+      clips: { x: 40, y: 580, label: 'Clips' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','directory','dir'], ['directory','rank','rank']);
+      if (stepIdx === 2) e.push(['client','player','play'], ['player','cdn','cdn']);
+      if (stepIdx === 3) e.push(['streamer','ingest','ingest'], ['ingest','transcode','transcode'], ['transcode','cdn','cdn']);
+      if (stepIdx === 4) e.push(['client','chat','chat'], ['chat','realtime','rt'], ['realtime','moderation','mod']);
+      if (stepIdx === 5) e.push(['player','ads','ads'], ['client','subs','subs'], ['subs','payouts','payout']);
+      if (stepIdx === 6) e.push(['player','metrics','metrics'], ['metrics','analytics','analytics'], ['analytics','clips','clips']);
+      return e;
+    }
+  },
+
+  telegram: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Telegram Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','api','auth','router','storage','push','upload','obj','cdn','fanout','cache','moderation','risk'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      api: { x: 320, y: 240, label: 'API' },
+      auth: { x: 600, y: 240, label: 'Auth' },
+      router: { x: 880, y: 240, label: 'Router' },
+      storage: { x: 1160, y: 240, label: 'Storage' },
+      push: { x: 880, y: 380, label: 'Push' },
+      upload: { x: 320, y: 380, label: 'Upload' },
+      obj: { x: 600, y: 380, label: 'Object Store' },
+      cdn: { x: 880, y: 520, label: 'CDN' },
+      fanout: { x: 1160, y: 380, label: 'Fanout' },
+      cache: { x: 1160, y: 520, label: 'Cache' },
+      moderation: { x: 880, y: 660, label: 'Moderation' },
+      risk: { x: 1160, y: 660, label: 'Risk' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','api','send'], ['api','auth','auth']);
+      if (stepIdx === 2) e.push(['api','router','route'], ['router','storage','store']);
+      if (stepIdx === 3) e.push(['router','push','push'], ['push','client','wake']);
+      if (stepIdx === 4) e.push(['client','upload','upload'], ['upload','obj','store'], ['obj','cdn','cdn']);
+      if (stepIdx === 5) e.push(['router','fanout','fanout'], ['fanout','cache','cache']);
+      if (stepIdx === 6) e.push(['storage','moderation','mod'], ['moderation','risk','risk']);
+      return e;
+    }
+  },
+
+  snapchat: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Snapchat Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','feed','friends','camera','effects','upload','storage','write','router','fanout','cache','stories','rank','ads','metrics','analytics','moderation'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      feed: { x: 320, y: 160, label: 'Feed' },
+      friends: { x: 600, y: 160, label: 'Friends' },
+      camera: { x: 320, y: 300, label: 'Camera' },
+      effects: { x: 600, y: 300, label: 'AR Effects' },
+      upload: { x: 320, y: 440, label: 'Upload' },
+      storage: { x: 600, y: 440, label: 'Storage' },
+      write: { x: 880, y: 440, label: 'Metadata' },
+      router: { x: 880, y: 300, label: 'Router' },
+      fanout: { x: 1160, y: 300, label: 'Fanout' },
+      cache: { x: 1160, y: 440, label: 'Cache' },
+      stories: { x: 880, y: 160, label: 'Stories' },
+      rank: { x: 1160, y: 160, label: 'Ranking' },
+      ads: { x: 1160, y: 580, label: 'Ads' },
+      metrics: { x: 880, y: 580, label: 'Telemetry' },
+      analytics: { x: 600, y: 580, label: 'Analytics' },
+      moderation: { x: 320, y: 580, label: 'Moderation' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','feed','feed'], ['feed','friends','friends']);
+      if (stepIdx === 2) e.push(['camera','effects','effects'], ['effects','client','client']);
+      if (stepIdx === 3) e.push(['client','upload','upload'], ['upload','storage','store'], ['upload','write','meta']);
+      if (stepIdx === 4) e.push(['write','router','route'], ['router','fanout','fanout'], ['fanout','cache','cache']);
+      if (stepIdx === 5) e.push(['cache','stories','stories'], ['stories','rank','rank'], ['rank','ads','ads']);
+      if (stepIdx === 6) e.push(['client','metrics','metrics'], ['metrics','analytics','analytics'], ['analytics','moderation','mod']);
+      return e;
+    }
+  }
+});
+
 
 // ----- Batch 32 (System - from user selection) -----
 
