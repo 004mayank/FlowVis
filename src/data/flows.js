@@ -9437,6 +9437,324 @@ export const FLOWS = {
     ]
   },
 
+  hostelworld: {
+    title: 'Hostelworld',
+    steps: [
+      {
+        title: 'Search hostels',
+        desc: 'User searches hostel inventory via host partners.',
+        active: ['client','auth','search','inventory','hostels'],
+        edges: [['client','auth'], ['auth','search'], ['search','inventory'], ['inventory','hostels']]
+      },
+      {
+        title: 'Pricing + booking + payment',
+        desc: 'Pricing computed; booking created; payment processed.',
+        active: ['pricing','booking','payments'],
+        edges: [['hostels','pricing'], ['pricing','booking'], ['booking','payments']]
+      },
+      {
+        title: 'Confirmation + notifications',
+        desc: 'Confirmation generated; notifications sent.',
+        active: ['confirmation','notifications'],
+        edges: [['booking','confirmation'], ['confirmation','notifications']]
+      },
+      {
+        title: 'Messages + reviews',
+        desc: 'Messaging with hostels and review submission after stay.',
+        active: ['messages','reviews'],
+        edges: [['booking','messages'], ['booking','reviews']]
+      },
+      {
+        title: 'Support + analytics',
+        desc: 'Support handles changes; analytics tracks conversion and outcomes.',
+        active: ['support','analytics'],
+        edges: [['client','support'], ['search','analytics']]
+      }
+    ]
+  },
+
+  'trip-com': {
+    title: 'Trip.com',
+    steps: [
+      {
+        title: 'Search inventory',
+        desc: 'User searches flights/hotels via partner inventory.',
+        active: ['client','auth','search','inventory','partners'],
+        edges: [['client','auth'], ['auth','search'], ['search','inventory'], ['inventory','partners']]
+      },
+      {
+        title: 'Pricing + booking + payment',
+        desc: 'Pricing computed; booking created; payment processed.',
+        active: ['pricing','booking','payments'],
+        edges: [['partners','pricing'], ['pricing','booking'], ['booking','payments']]
+      },
+      {
+        title: 'Confirmation + itinerary',
+        desc: 'Confirmation generated and itinerary assembled.',
+        active: ['confirmation','itinerary'],
+        edges: [['booking','confirmation'], ['confirmation','itinerary']]
+      },
+      {
+        title: 'Notifications + support + analytics',
+        desc: 'Notifications deliver updates; support handles changes; analytics tracks funnel.',
+        active: ['notifications','support','analytics'],
+        edges: [['itinerary','notifications'], ['client','support'], ['search','analytics']]
+      }
+    ]
+  },
+
+  cleartrip: {
+    title: 'Cleartrip',
+    steps: [
+      {
+        title: 'Search flights',
+        desc: 'User searches flight inventory via airline partners.',
+        active: ['client','auth','search','inventory','airlines'],
+        edges: [['client','auth'], ['auth','search'], ['search','inventory'], ['inventory','airlines']]
+      },
+      {
+        title: 'Offers + pricing',
+        desc: 'Offers applied and pricing computed.',
+        active: ['offers','pricing'],
+        edges: [['airlines','pricing'], ['offers','pricing']]
+      },
+      {
+        title: 'Booking + payment + confirmation',
+        desc: 'Booking created, payment processed, confirmation generated.',
+        active: ['booking','payments','confirmation'],
+        edges: [['pricing','booking'], ['booking','payments'], ['booking','confirmation']]
+      },
+      {
+        title: 'Itinerary + notifications + support',
+        desc: 'Itinerary delivered; notifications and support for changes.',
+        active: ['itinerary','notifications','support'],
+        edges: [['confirmation','itinerary'], ['itinerary','notifications'], ['client','support']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics tracks conversion and booking outcomes.',
+        active: ['analytics'],
+        edges: [['search','analytics']]
+      }
+    ]
+  },
+
+  yatra: {
+    title: 'Yatra',
+    steps: [
+      {
+        title: 'Search inventory',
+        desc: 'User searches flights/hotels via partner inventory.',
+        active: ['client','auth','search','inventory','partners'],
+        edges: [['client','auth'], ['auth','search'], ['search','inventory'], ['inventory','partners']]
+      },
+      {
+        title: 'Pricing + booking + payment',
+        desc: 'Pricing computed; booking created; payment processed.',
+        active: ['pricing','booking','payments'],
+        edges: [['partners','pricing'], ['pricing','booking'], ['booking','payments']]
+      },
+      {
+        title: 'Confirmation + itinerary + notifications',
+        desc: 'Confirmation generated; itinerary assembled; notifications sent.',
+        active: ['confirmation','itinerary','notifications'],
+        edges: [['booking','confirmation'], ['confirmation','itinerary'], ['itinerary','notifications']]
+      },
+      {
+        title: 'Support + analytics',
+        desc: 'Support handles changes; analytics tracks funnel.',
+        active: ['support','analytics'],
+        edges: [['client','support'], ['search','analytics']]
+      }
+    ]
+  },
+
+  ixigo: {
+    title: 'ixigo',
+    steps: [
+      {
+        title: 'Search trains/buses/flights',
+        desc: 'User searches inventory via providers.',
+        active: ['client','auth','search','inventory','providers'],
+        edges: [['client','auth'], ['auth','search'], ['search','inventory'], ['inventory','providers']]
+      },
+      {
+        title: 'Pricing + booking + payment',
+        desc: 'Pricing computed; booking created; payment processed.',
+        active: ['pricing','booking','payments','tickets'],
+        edges: [['providers','pricing'], ['pricing','booking'], ['booking','payments'], ['booking','tickets']]
+      },
+      {
+        title: 'PNR + alerts',
+        desc: 'PNR status tracked; alerts inform delays/changes.',
+        active: ['pnr','alerts','notifications'],
+        edges: [['tickets','pnr'], ['pnr','alerts'], ['alerts','notifications']]
+      },
+      {
+        title: 'Support + analytics',
+        desc: 'Support handles changes; analytics tracks conversion and outcomes.',
+        active: ['support','analytics'],
+        edges: [['client','support'], ['search','analytics']]
+      }
+    ]
+  },
+
+  redbus: {
+    title: 'RedBus',
+    steps: [
+      {
+        title: 'Search routes + seats',
+        desc: 'User searches operators and selects seats.',
+        active: ['client','auth','search','inventory','operators','seats'],
+        edges: [['client','auth'], ['auth','search'], ['search','inventory'], ['inventory','operators'], ['operators','seats']]
+      },
+      {
+        title: 'Booking + payment',
+        desc: 'Booking created and payment processed.',
+        active: ['booking','payments','ticket'],
+        edges: [['seats','booking'], ['booking','payments'], ['booking','ticket']]
+      },
+      {
+        title: 'PNR + boarding + notifications',
+        desc: 'PNR stored; boarding instructions and notifications sent.',
+        active: ['pnr','boarding','notifications'],
+        edges: [['ticket','pnr'], ['ticket','boarding'], ['ticket','notifications']]
+      },
+      {
+        title: 'Support + analytics',
+        desc: 'Support handles changes; analytics tracks funnel.',
+        active: ['support','analytics'],
+        edges: [['client','support'], ['search','analytics']]
+      }
+    ]
+  },
+
+  flixbus: {
+    title: 'FlixBus',
+    steps: [
+      {
+        title: 'Search routes + seats',
+        desc: 'User searches routes and selects seats.',
+        active: ['client','auth','search','inventory','routes','seats'],
+        edges: [['client','auth'], ['auth','search'], ['search','inventory'], ['inventory','routes'], ['routes','seats']]
+      },
+      {
+        title: 'Booking + payment + ticket',
+        desc: 'Booking created, payment processed, ticket issued.',
+        active: ['booking','payments','ticket'],
+        edges: [['seats','booking'], ['booking','payments'], ['booking','ticket']]
+      },
+      {
+        title: 'Boarding + notifications',
+        desc: 'Boarding instructions and notifications sent.',
+        active: ['boarding','notifications'],
+        edges: [['ticket','boarding'], ['ticket','notifications']]
+      },
+      {
+        title: 'Support + analytics',
+        desc: 'Support handles changes; analytics tracks conversion.',
+        active: ['support','analytics'],
+        edges: [['client','support'], ['search','analytics']]
+      }
+    ]
+  },
+
+  'blablacar-daily': {
+    title: 'BlaBlaCar Daily',
+    steps: [
+      {
+        title: 'Profile + matching',
+        desc: 'User profile used to match rides and commuters.',
+        active: ['client','auth','profile','matches','rides'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','matches'], ['matches','rides']]
+      },
+      {
+        title: 'Messaging + routing',
+        desc: 'Messaging coordinates pickup; routing supports commute.',
+        active: ['messaging','routing'],
+        edges: [['rides','messaging'], ['rides','routing']]
+      },
+      {
+        title: 'Payments + payouts',
+        desc: 'Payments collected and payouts distributed to drivers.',
+        active: ['payments','payouts'],
+        edges: [['rides','payments'], ['payments','payouts']]
+      },
+      {
+        title: 'Ratings + safety + notifications',
+        desc: 'Ratings and safety systems manage trust; notifications update users.',
+        active: ['ratings','safety','notifications'],
+        edges: [['rides','ratings'], ['safety','support'], ['rides','notifications']]
+      },
+      {
+        title: 'Support + analytics',
+        desc: 'Support resolves issues; analytics tracks marketplace health.',
+        active: ['support','analytics'],
+        edges: [['client','support'], ['rides','analytics']]
+      }
+    ]
+  },
+
+  turo: {
+    title: 'Turo',
+    steps: [
+      {
+        title: 'Search listings',
+        desc: 'User searches car listings and availability.',
+        active: ['client','auth','search','listings','availability'],
+        edges: [['client','auth'], ['auth','search'], ['search','listings'], ['listings','availability']]
+      },
+      {
+        title: 'Pricing + booking + payment',
+        desc: 'Pricing computed; booking created; payment processed.',
+        active: ['pricing','booking','payments'],
+        edges: [['availability','pricing'], ['pricing','booking'], ['booking','payments']]
+      },
+      {
+        title: 'Insurance + handoff',
+        desc: 'Insurance coverage selected and handoff coordinated.',
+        active: ['insurance','handoff','notifications'],
+        edges: [['booking','insurance'], ['booking','handoff'], ['handoff','notifications']]
+      },
+      {
+        title: 'Support + analytics',
+        desc: 'Support handles issues; analytics tracks marketplace health.',
+        active: ['support','analytics'],
+        edges: [['client','support'], ['booking','analytics']]
+      }
+    ]
+  },
+
+  getaround: {
+    title: 'Getaround',
+    steps: [
+      {
+        title: 'Search + booking',
+        desc: 'User searches listings and books an available car.',
+        active: ['client','auth','search','listings','availability','booking'],
+        edges: [['client','auth'], ['auth','search'], ['search','listings'], ['listings','availability'], ['availability','booking']]
+      },
+      {
+        title: 'Payment + car access',
+        desc: 'Payment processed and car access unlocked.',
+        active: ['payments','access'],
+        edges: [['booking','payments'], ['booking','access']]
+      },
+      {
+        title: 'Telematics + analytics',
+        desc: 'Telematics streams trip data; analytics aggregates usage.',
+        active: ['telematics','analytics'],
+        edges: [['access','telematics'], ['telematics','analytics']]
+      },
+      {
+        title: 'Notifications + support',
+        desc: 'Notifications for trip events; support resolves issues.',
+        active: ['notifications','support'],
+        edges: [['booking','notifications'], ['client','support']]
+      }
+    ]
+  },
+
   chime: {
     title: 'Chime',
     steps: [
