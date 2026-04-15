@@ -15437,6 +15437,570 @@ Object.assign(SYSTEM_LAYOUTS, {
   }
 });
 
+// ----- Batch 62 (System + Architecture - food delivery platforms + courier app) -----
+
+Object.assign(SYSTEM_LAYOUTS, {
+  chownow: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','search','catalog','menu','cart','checkout','orders','pos','restaurants','dispatch','delivery','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      search: { x: 620, y: 180, label: 'Search', colorKey: 'api' },
+      catalog: { x: 860, y: 180, label: 'Catalog', colorKey: 'store' },
+      menu: { x: 1100, y: 180, label: 'Menu', colorKey: 'store' },
+      cart: { x: 620, y: 320, label: 'Cart', colorKey: 'store' },
+      checkout: { x: 860, y: 320, label: 'Checkout', colorKey: 'api' },
+      orders: { x: 1100, y: 320, label: 'Orders', colorKey: 'store' },
+      restaurants: { x: 1100, y: 460, label: 'Restaurants', colorKey: 'external' },
+      pos: { x: 860, y: 460, label: 'POS', colorKey: 'external' },
+      dispatch: { x: 620, y: 460, label: 'Dispatch', colorKey: 'api' },
+      delivery: { x: 860, y: 600, label: 'Delivery', colorKey: 'external' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 380, y: 600, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  ritual: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','discovery','catalog','menu','cart','checkout','orders','pickup','kitchen','status','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      discovery: { x: 620, y: 180, label: 'Discovery', colorKey: 'api' },
+      catalog: { x: 860, y: 180, label: 'Catalog', colorKey: 'store' },
+      menu: { x: 1100, y: 180, label: 'Menu', colorKey: 'store' },
+      cart: { x: 620, y: 320, label: 'Cart', colorKey: 'store' },
+      checkout: { x: 860, y: 320, label: 'Checkout', colorKey: 'api' },
+      orders: { x: 1100, y: 320, label: 'Orders', colorKey: 'store' },
+      pickup: { x: 620, y: 460, label: 'Pickup', colorKey: 'external' },
+      kitchen: { x: 860, y: 460, label: 'Kitchen', colorKey: 'external' },
+      status: { x: 1100, y: 460, label: 'Status', colorKey: 'stream' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 380, y: 600, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'deliveroo-rider': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['rider','auth','availability','assignments','routing','navigation','tracking','proof','payouts','support','notifications','analytics'],
+    nodes: {
+      rider: { x: 140, y: 240, label: 'Rider App', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      availability: { x: 620, y: 180, label: 'Availability', colorKey: 'stream' },
+      assignments: { x: 860, y: 180, label: 'Assignments', colorKey: 'api' },
+      routing: { x: 1100, y: 180, label: 'Routing', colorKey: 'api' },
+      navigation: { x: 1100, y: 320, label: 'Maps', colorKey: 'external' },
+      tracking: { x: 860, y: 320, label: 'Tracking', colorKey: 'stream' },
+      proof: { x: 620, y: 320, label: 'Proof', colorKey: 'store' },
+      payouts: { x: 380, y: 320, label: 'Payouts', colorKey: 'external' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 620, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  talabat: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','search','catalog','menu','cart','checkout','orders','dispatch','couriers','tracking','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      search: { x: 620, y: 180, label: 'Search', colorKey: 'api' },
+      catalog: { x: 860, y: 180, label: 'Catalog', colorKey: 'store' },
+      menu: { x: 1100, y: 180, label: 'Menu', colorKey: 'store' },
+      cart: { x: 620, y: 320, label: 'Cart', colorKey: 'store' },
+      checkout: { x: 860, y: 320, label: 'Checkout', colorKey: 'api' },
+      orders: { x: 1100, y: 320, label: 'Orders', colorKey: 'store' },
+      dispatch: { x: 620, y: 460, label: 'Dispatch', colorKey: 'api' },
+      couriers: { x: 860, y: 460, label: 'Couriers', colorKey: 'external' },
+      tracking: { x: 1100, y: 460, label: 'Tracking', colorKey: 'stream' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 380, y: 600, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'careem-food': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','search','catalog','menu','cart','checkout','orders','dispatch','captains','tracking','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      search: { x: 620, y: 180, label: 'Search', colorKey: 'api' },
+      catalog: { x: 860, y: 180, label: 'Catalog', colorKey: 'store' },
+      menu: { x: 1100, y: 180, label: 'Menu', colorKey: 'store' },
+      cart: { x: 620, y: 320, label: 'Cart', colorKey: 'store' },
+      checkout: { x: 860, y: 320, label: 'Checkout', colorKey: 'api' },
+      orders: { x: 1100, y: 320, label: 'Orders', colorKey: 'store' },
+      dispatch: { x: 620, y: 460, label: 'Dispatch', colorKey: 'api' },
+      captains: { x: 860, y: 460, label: 'Captains', colorKey: 'external' },
+      tracking: { x: 1100, y: 460, label: 'Tracking', colorKey: 'stream' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 380, y: 600, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  glovo: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','search','catalog','stores','cart','checkout','orders','dispatch','couriers','routing','tracking','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      search: { x: 620, y: 180, label: 'Search', colorKey: 'api' },
+      catalog: { x: 860, y: 180, label: 'Catalog', colorKey: 'store' },
+      stores: { x: 1100, y: 180, label: 'Stores', colorKey: 'store' },
+      cart: { x: 620, y: 320, label: 'Cart', colorKey: 'store' },
+      checkout: { x: 860, y: 320, label: 'Checkout', colorKey: 'api' },
+      orders: { x: 1100, y: 320, label: 'Orders', colorKey: 'store' },
+      dispatch: { x: 620, y: 460, label: 'Dispatch', colorKey: 'api' },
+      couriers: { x: 860, y: 460, label: 'Couriers', colorKey: 'external' },
+      routing: { x: 1100, y: 460, label: 'Routing', colorKey: 'api' },
+      tracking: { x: 620, y: 600, label: 'Tracking', colorKey: 'stream' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 380, y: 600, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'bolt-food': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','search','catalog','menu','cart','checkout','orders','dispatch','couriers','tracking','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      search: { x: 620, y: 180, label: 'Search', colorKey: 'api' },
+      catalog: { x: 860, y: 180, label: 'Catalog', colorKey: 'store' },
+      menu: { x: 1100, y: 180, label: 'Menu', colorKey: 'store' },
+      cart: { x: 620, y: 320, label: 'Cart', colorKey: 'store' },
+      checkout: { x: 860, y: 320, label: 'Checkout', colorKey: 'api' },
+      orders: { x: 1100, y: 320, label: 'Orders', colorKey: 'store' },
+      dispatch: { x: 620, y: 460, label: 'Dispatch', colorKey: 'api' },
+      couriers: { x: 860, y: 460, label: 'Couriers', colorKey: 'external' },
+      tracking: { x: 1100, y: 460, label: 'Tracking', colorKey: 'stream' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 380, y: 600, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  foodpanda: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','search','catalog','menu','cart','checkout','orders','dispatch','riders','tracking','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      search: { x: 620, y: 180, label: 'Search', colorKey: 'api' },
+      catalog: { x: 860, y: 180, label: 'Catalog', colorKey: 'store' },
+      menu: { x: 1100, y: 180, label: 'Menu', colorKey: 'store' },
+      cart: { x: 620, y: 320, label: 'Cart', colorKey: 'store' },
+      checkout: { x: 860, y: 320, label: 'Checkout', colorKey: 'api' },
+      orders: { x: 1100, y: 320, label: 'Orders', colorKey: 'store' },
+      dispatch: { x: 620, y: 460, label: 'Dispatch', colorKey: 'api' },
+      riders: { x: 860, y: 460, label: 'Riders', colorKey: 'external' },
+      tracking: { x: 1100, y: 460, label: 'Tracking', colorKey: 'stream' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 380, y: 600, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  skipthedishes: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','search','catalog','menu','cart','checkout','orders','dispatch','couriers','tracking','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      search: { x: 620, y: 180, label: 'Search', colorKey: 'api' },
+      catalog: { x: 860, y: 180, label: 'Catalog', colorKey: 'store' },
+      menu: { x: 1100, y: 180, label: 'Menu', colorKey: 'store' },
+      cart: { x: 620, y: 320, label: 'Cart', colorKey: 'store' },
+      checkout: { x: 860, y: 320, label: 'Checkout', colorKey: 'api' },
+      orders: { x: 1100, y: 320, label: 'Orders', colorKey: 'store' },
+      dispatch: { x: 620, y: 460, label: 'Dispatch', colorKey: 'api' },
+      couriers: { x: 860, y: 460, label: 'Couriers', colorKey: 'external' },
+      tracking: { x: 1100, y: 460, label: 'Tracking', colorKey: 'stream' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 380, y: 600, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  menulog: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','search','catalog','menu','cart','checkout','orders','dispatch','couriers','tracking','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      search: { x: 620, y: 180, label: 'Search', colorKey: 'api' },
+      catalog: { x: 860, y: 180, label: 'Catalog', colorKey: 'store' },
+      menu: { x: 1100, y: 180, label: 'Menu', colorKey: 'store' },
+      cart: { x: 620, y: 320, label: 'Cart', colorKey: 'store' },
+      checkout: { x: 860, y: 320, label: 'Checkout', colorKey: 'api' },
+      orders: { x: 1100, y: 320, label: 'Orders', colorKey: 'store' },
+      dispatch: { x: 620, y: 460, label: 'Dispatch', colorKey: 'api' },
+      couriers: { x: 860, y: 460, label: 'Couriers', colorKey: 'external' },
+      tracking: { x: 1100, y: 460, label: 'Tracking', colorKey: 'stream' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 380, y: 600, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  }
+});
+
+Object.assign(ARCH_LAYOUTS, {
+  chownow: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'ChowNow Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','search','catalog','menu','cart','checkout','orders','pos','restaurants','dispatch','delivery','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      search: { x: 600, y: 160, label: 'Search' },
+      catalog: { x: 880, y: 160, label: 'Catalog' },
+      menu: { x: 1160, y: 160, label: 'Menu' },
+      cart: { x: 600, y: 300, label: 'Cart' },
+      checkout: { x: 880, y: 300, label: 'Checkout' },
+      orders: { x: 1160, y: 300, label: 'Orders' },
+      restaurants: { x: 1160, y: 440, label: 'Restaurants' },
+      pos: { x: 880, y: 440, label: 'POS' },
+      dispatch: { x: 600, y: 440, label: 'Dispatch' },
+      delivery: { x: 880, y: 580, label: 'Delivery' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 320, y: 580, label: 'Notify' },
+      analytics: { x: 1160, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','search','search'], ['search','catalog','browse']);
+      if(stepIdx===2) e.push(['catalog','menu','menu'], ['menu','cart','cart']);
+      if(stepIdx===3) e.push(['cart','checkout','checkout'], ['checkout','payments','pay']);
+      if(stepIdx===4) e.push(['checkout','orders','order'], ['orders','restaurants','rest'], ['orders','pos','pos']);
+      if(stepIdx===5) e.push(['orders','dispatch','dispatch'], ['dispatch','delivery','deliver']);
+      if(stepIdx===6) e.push(['orders','notifications','notify'], ['orders','analytics','analytics']);
+      return e;
+    }
+  },
+
+  ritual: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Ritual Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','discovery','catalog','menu','cart','checkout','orders','pickup','kitchen','status','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      discovery: { x: 600, y: 160, label: 'Discovery' },
+      catalog: { x: 880, y: 160, label: 'Catalog' },
+      menu: { x: 1160, y: 160, label: 'Menu' },
+      cart: { x: 600, y: 300, label: 'Cart' },
+      checkout: { x: 880, y: 300, label: 'Checkout' },
+      orders: { x: 1160, y: 300, label: 'Orders' },
+      pickup: { x: 600, y: 440, label: 'Pickup' },
+      kitchen: { x: 880, y: 440, label: 'Kitchen' },
+      status: { x: 1160, y: 440, label: 'Status' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 320, y: 580, label: 'Notify' },
+      analytics: { x: 1160, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','discovery','discover'], ['discovery','catalog','browse']);
+      if(stepIdx===2) e.push(['catalog','menu','menu'], ['menu','cart','cart']);
+      if(stepIdx===3) e.push(['cart','checkout','checkout'], ['checkout','payments','pay'], ['checkout','orders','order']);
+      if(stepIdx===4) e.push(['orders','kitchen','kitchen'], ['kitchen','status','status']);
+      if(stepIdx===5) e.push(['status','pickup','pickup'], ['orders','notifications','notify']);
+      if(stepIdx===6) e.push(['orders','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'deliveroo-rider': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Deliveroo Rider',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['rider','auth','availability','assignments','routing','navigation','tracking','proof','payouts','support','notifications','analytics'],
+    nodes: {
+      rider: { x: 40, y: 240, label: 'Rider App' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      availability: { x: 600, y: 160, label: 'Availability' },
+      assignments: { x: 880, y: 160, label: 'Assignments' },
+      routing: { x: 1160, y: 160, label: 'Routing' },
+      navigation: { x: 1160, y: 300, label: 'Maps' },
+      tracking: { x: 880, y: 300, label: 'Tracking' },
+      proof: { x: 600, y: 300, label: 'Proof' },
+      payouts: { x: 320, y: 300, label: 'Payouts' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 600, y: 440, label: 'Notify' },
+      analytics: { x: 880, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['rider','auth','auth'], ['auth','availability','avail']);
+      if(stepIdx===2) e.push(['availability','assignments','assign'], ['assignments','routing','route']);
+      if(stepIdx===3) e.push(['routing','navigation','nav'], ['navigation','tracking','track']);
+      if(stepIdx===4) e.push(['tracking','proof','proof']);
+      if(stepIdx===5) e.push(['proof','payouts','pay']);
+      if(stepIdx===6) e.push(['support','notifications','notify'], ['tracking','analytics','analytics']);
+      return e;
+    }
+  },
+
+  talabat: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Talabat Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','search','catalog','menu','cart','checkout','orders','dispatch','couriers','tracking','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      search: { x: 600, y: 160, label: 'Search' },
+      catalog: { x: 880, y: 160, label: 'Catalog' },
+      menu: { x: 1160, y: 160, label: 'Menu' },
+      cart: { x: 600, y: 300, label: 'Cart' },
+      checkout: { x: 880, y: 300, label: 'Checkout' },
+      orders: { x: 1160, y: 300, label: 'Orders' },
+      dispatch: { x: 600, y: 440, label: 'Dispatch' },
+      couriers: { x: 880, y: 440, label: 'Couriers' },
+      tracking: { x: 1160, y: 440, label: 'Tracking' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 320, y: 580, label: 'Notify' },
+      analytics: { x: 1160, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','search','search'], ['search','catalog','browse']);
+      if(stepIdx===2) e.push(['catalog','menu','menu'], ['menu','cart','cart']);
+      if(stepIdx===3) e.push(['cart','checkout','checkout'], ['checkout','payments','pay'], ['checkout','orders','order']);
+      if(stepIdx===4) e.push(['orders','dispatch','dispatch'], ['dispatch','couriers','assign']);
+      if(stepIdx===5) e.push(['couriers','tracking','track'], ['orders','notifications','notify']);
+      if(stepIdx===6) e.push(['orders','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'careem-food': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Careem Food',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','search','catalog','menu','cart','checkout','orders','dispatch','captains','tracking','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      search: { x: 600, y: 160, label: 'Search' },
+      catalog: { x: 880, y: 160, label: 'Catalog' },
+      menu: { x: 1160, y: 160, label: 'Menu' },
+      cart: { x: 600, y: 300, label: 'Cart' },
+      checkout: { x: 880, y: 300, label: 'Checkout' },
+      orders: { x: 1160, y: 300, label: 'Orders' },
+      dispatch: { x: 600, y: 440, label: 'Dispatch' },
+      captains: { x: 880, y: 440, label: 'Captains' },
+      tracking: { x: 1160, y: 440, label: 'Tracking' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 320, y: 580, label: 'Notify' },
+      analytics: { x: 1160, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','search','search'], ['search','catalog','browse']);
+      if(stepIdx===2) e.push(['catalog','menu','menu'], ['menu','cart','cart']);
+      if(stepIdx===3) e.push(['cart','checkout','checkout'], ['checkout','payments','pay'], ['checkout','orders','order']);
+      if(stepIdx===4) e.push(['orders','dispatch','dispatch'], ['dispatch','captains','assign']);
+      if(stepIdx===5) e.push(['captains','tracking','track'], ['orders','notifications','notify']);
+      if(stepIdx===6) e.push(['orders','analytics','analytics']);
+      return e;
+    }
+  },
+
+  glovo: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Glovo Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','search','catalog','stores','cart','checkout','orders','dispatch','couriers','routing','tracking','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      search: { x: 600, y: 160, label: 'Search' },
+      catalog: { x: 880, y: 160, label: 'Catalog' },
+      stores: { x: 1160, y: 160, label: 'Stores' },
+      cart: { x: 600, y: 300, label: 'Cart' },
+      checkout: { x: 880, y: 300, label: 'Checkout' },
+      orders: { x: 1160, y: 300, label: 'Orders' },
+      dispatch: { x: 600, y: 440, label: 'Dispatch' },
+      couriers: { x: 880, y: 440, label: 'Couriers' },
+      routing: { x: 1160, y: 440, label: 'Routing' },
+      tracking: { x: 600, y: 580, label: 'Tracking' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 320, y: 580, label: 'Notify' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','search','search'], ['search','catalog','browse']);
+      if(stepIdx===2) e.push(['catalog','stores','store'], ['stores','cart','cart']);
+      if(stepIdx===3) e.push(['cart','checkout','checkout'], ['checkout','payments','pay'], ['checkout','orders','order']);
+      if(stepIdx===4) e.push(['orders','dispatch','dispatch'], ['dispatch','couriers','assign']);
+      if(stepIdx===5) e.push(['couriers','routing','route'], ['routing','tracking','track']);
+      if(stepIdx===6) e.push(['orders','notifications','notify'], ['orders','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'bolt-food': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Bolt Food',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','search','catalog','menu','cart','checkout','orders','dispatch','couriers','tracking','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      search: { x: 600, y: 160, label: 'Search' },
+      catalog: { x: 880, y: 160, label: 'Catalog' },
+      menu: { x: 1160, y: 160, label: 'Menu' },
+      cart: { x: 600, y: 300, label: 'Cart' },
+      checkout: { x: 880, y: 300, label: 'Checkout' },
+      orders: { x: 1160, y: 300, label: 'Orders' },
+      dispatch: { x: 600, y: 440, label: 'Dispatch' },
+      couriers: { x: 880, y: 440, label: 'Couriers' },
+      tracking: { x: 1160, y: 440, label: 'Tracking' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 320, y: 580, label: 'Notify' },
+      analytics: { x: 1160, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','search','search'], ['search','catalog','browse']);
+      if(stepIdx===2) e.push(['catalog','menu','menu'], ['menu','cart','cart']);
+      if(stepIdx===3) e.push(['cart','checkout','checkout'], ['checkout','payments','pay'], ['checkout','orders','order']);
+      if(stepIdx===4) e.push(['orders','dispatch','dispatch'], ['dispatch','couriers','assign']);
+      if(stepIdx===5) e.push(['couriers','tracking','track'], ['orders','notifications','notify']);
+      if(stepIdx===6) e.push(['orders','analytics','analytics']);
+      return e;
+    }
+  },
+
+  foodpanda: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Foodpanda',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','search','catalog','menu','cart','checkout','orders','dispatch','riders','tracking','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      search: { x: 600, y: 160, label: 'Search' },
+      catalog: { x: 880, y: 160, label: 'Catalog' },
+      menu: { x: 1160, y: 160, label: 'Menu' },
+      cart: { x: 600, y: 300, label: 'Cart' },
+      checkout: { x: 880, y: 300, label: 'Checkout' },
+      orders: { x: 1160, y: 300, label: 'Orders' },
+      dispatch: { x: 600, y: 440, label: 'Dispatch' },
+      riders: { x: 880, y: 440, label: 'Riders' },
+      tracking: { x: 1160, y: 440, label: 'Tracking' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 320, y: 580, label: 'Notify' },
+      analytics: { x: 1160, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','search','search'], ['search','catalog','browse']);
+      if(stepIdx===2) e.push(['catalog','menu','menu'], ['menu','cart','cart']);
+      if(stepIdx===3) e.push(['cart','checkout','checkout'], ['checkout','payments','pay'], ['checkout','orders','order']);
+      if(stepIdx===4) e.push(['orders','dispatch','dispatch'], ['dispatch','riders','assign']);
+      if(stepIdx===5) e.push(['riders','tracking','track'], ['orders','notifications','notify']);
+      if(stepIdx===6) e.push(['orders','analytics','analytics']);
+      return e;
+    }
+  },
+
+  skipthedishes: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'SkipTheDishes',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','search','catalog','menu','cart','checkout','orders','dispatch','couriers','tracking','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      search: { x: 600, y: 160, label: 'Search' },
+      catalog: { x: 880, y: 160, label: 'Catalog' },
+      menu: { x: 1160, y: 160, label: 'Menu' },
+      cart: { x: 600, y: 300, label: 'Cart' },
+      checkout: { x: 880, y: 300, label: 'Checkout' },
+      orders: { x: 1160, y: 300, label: 'Orders' },
+      dispatch: { x: 600, y: 440, label: 'Dispatch' },
+      couriers: { x: 880, y: 440, label: 'Couriers' },
+      tracking: { x: 1160, y: 440, label: 'Tracking' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 320, y: 580, label: 'Notify' },
+      analytics: { x: 1160, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','search','search'], ['search','catalog','browse']);
+      if(stepIdx===2) e.push(['catalog','menu','menu'], ['menu','cart','cart']);
+      if(stepIdx===3) e.push(['cart','checkout','checkout'], ['checkout','payments','pay'], ['checkout','orders','order']);
+      if(stepIdx===4) e.push(['orders','dispatch','dispatch'], ['dispatch','couriers','assign']);
+      if(stepIdx===5) e.push(['couriers','tracking','track'], ['orders','notifications','notify']);
+      if(stepIdx===6) e.push(['orders','analytics','analytics']);
+      return e;
+    }
+  },
+
+  menulog: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Menulog',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','search','catalog','menu','cart','checkout','orders','dispatch','couriers','tracking','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      search: { x: 600, y: 160, label: 'Search' },
+      catalog: { x: 880, y: 160, label: 'Catalog' },
+      menu: { x: 1160, y: 160, label: 'Menu' },
+      cart: { x: 600, y: 300, label: 'Cart' },
+      checkout: { x: 880, y: 300, label: 'Checkout' },
+      orders: { x: 1160, y: 300, label: 'Orders' },
+      dispatch: { x: 600, y: 440, label: 'Dispatch' },
+      couriers: { x: 880, y: 440, label: 'Couriers' },
+      tracking: { x: 1160, y: 440, label: 'Tracking' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 320, y: 580, label: 'Notify' },
+      analytics: { x: 1160, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','search','search'], ['search','catalog','browse']);
+      if(stepIdx===2) e.push(['catalog','menu','menu'], ['menu','cart','cart']);
+      if(stepIdx===3) e.push(['cart','checkout','checkout'], ['checkout','payments','pay'], ['checkout','orders','order']);
+      if(stepIdx===4) e.push(['orders','dispatch','dispatch'], ['dispatch','couriers','assign']);
+      if(stepIdx===5) e.push(['couriers','tracking','track'], ['orders','notifications','notify']);
+      if(stepIdx===6) e.push(['orders','analytics','analytics']);
+      return e;
+    }
+  }
+});
+
 Object.assign(ARCH_LAYOUTS, {
   'insight-timer': {
     viewBox: '0 0 1860 820',

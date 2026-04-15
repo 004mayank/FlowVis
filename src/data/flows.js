@@ -8477,6 +8477,324 @@ export const FLOWS = {
     ]
   },
 
+  chownow: {
+    title: 'ChowNow',
+    steps: [
+      {
+        title: 'Search + build cart',
+        desc: 'User searches restaurants and builds a cart from menus.',
+        active: ['client','auth','search','catalog','menu','cart'],
+        edges: [['client','auth'], ['auth','search'], ['search','catalog'], ['catalog','menu'], ['menu','cart']]
+      },
+      {
+        title: 'Checkout + payment',
+        desc: 'Checkout creates order and processes payment.',
+        active: ['checkout','payments','orders'],
+        edges: [['cart','checkout'], ['checkout','payments'], ['checkout','orders']]
+      },
+      {
+        title: 'Restaurant + POS fulfillment',
+        desc: 'Order routed to restaurant systems and POS for preparation.',
+        active: ['restaurants','pos','orders'],
+        edges: [['orders','restaurants'], ['orders','pos']]
+      },
+      {
+        title: 'Dispatch + delivery + notifications',
+        desc: 'Dispatch coordinates delivery; notifications update status.',
+        active: ['dispatch','delivery','notifications'],
+        edges: [['orders','dispatch'], ['dispatch','delivery'], ['orders','notifications']]
+      },
+      {
+        title: 'Support + analytics',
+        desc: 'Support resolves issues; analytics aggregates order metrics.',
+        active: ['support','analytics'],
+        edges: [['client','support'], ['orders','analytics']]
+      }
+    ]
+  },
+
+  ritual: {
+    title: 'Ritual',
+    steps: [
+      {
+        title: 'Discovery + menu',
+        desc: 'User discovers nearby pickup options and views menu.',
+        active: ['client','auth','discovery','catalog','menu'],
+        edges: [['client','auth'], ['auth','discovery'], ['discovery','catalog'], ['catalog','menu']]
+      },
+      {
+        title: 'Cart + checkout + payment',
+        desc: 'User checks out and pays; order created.',
+        active: ['cart','checkout','payments','orders'],
+        edges: [['menu','cart'], ['cart','checkout'], ['checkout','payments'], ['checkout','orders']]
+      },
+      {
+        title: 'Kitchen prep + status',
+        desc: 'Kitchen receives order and status updates stream to app.',
+        active: ['kitchen','status','notifications'],
+        edges: [['orders','kitchen'], ['kitchen','status'], ['orders','notifications']]
+      },
+      {
+        title: 'Pickup',
+        desc: 'Pickup flow coordinates arrival and handoff.',
+        active: ['pickup'],
+        edges: [['status','pickup']]
+      },
+      {
+        title: 'Support + analytics',
+        desc: 'Support and analytics for order outcomes and reliability.',
+        active: ['support','analytics'],
+        edges: [['client','support'], ['orders','analytics']]
+      }
+    ]
+  },
+
+  'deliveroo-rider': {
+    title: 'Deliveroo Rider',
+    steps: [
+      {
+        title: 'Go online + availability',
+        desc: 'Rider authenticates and sets availability for dispatch.',
+        active: ['rider','auth','availability'],
+        edges: [['rider','auth'], ['auth','availability']]
+      },
+      {
+        title: 'Receive assignment',
+        desc: 'Assignments delivered to rider app.',
+        active: ['assignments','notifications'],
+        edges: [['availability','assignments'], ['assignments','notifications']]
+      },
+      {
+        title: 'Routing + navigation + tracking',
+        desc: 'Routing planned, navigation used, and tracking updates dispatched.',
+        active: ['routing','navigation','tracking'],
+        edges: [['assignments','routing'], ['routing','navigation'], ['navigation','tracking']]
+      },
+      {
+        title: 'Proof of delivery + payouts',
+        desc: 'Proof captured; payouts calculated and executed.',
+        active: ['proof','payouts'],
+        edges: [['tracking','proof'], ['proof','payouts']]
+      },
+      {
+        title: 'Support + analytics',
+        desc: 'Support resolves issues; analytics monitors performance.',
+        active: ['support','analytics'],
+        edges: [['rider','support'], ['tracking','analytics']]
+      }
+    ]
+  },
+
+  talabat: {
+    title: 'Talabat',
+    steps: [
+      {
+        title: 'Browse + cart',
+        desc: 'User browses restaurants and builds cart.',
+        active: ['client','auth','search','catalog','menu','cart'],
+        edges: [['client','auth'], ['auth','search'], ['search','catalog'], ['catalog','menu'], ['menu','cart']]
+      },
+      {
+        title: 'Checkout + payment',
+        desc: 'Checkout creates order and processes payment.',
+        active: ['checkout','payments','orders'],
+        edges: [['cart','checkout'], ['checkout','payments'], ['checkout','orders']]
+      },
+      {
+        title: 'Dispatch + courier tracking',
+        desc: 'Dispatch assigns courier; tracking updates customer.',
+        active: ['dispatch','couriers','tracking','notifications'],
+        edges: [['orders','dispatch'], ['dispatch','couriers'], ['couriers','tracking'], ['orders','notifications']]
+      },
+      {
+        title: 'Support + analytics',
+        desc: 'Support resolves issues; analytics aggregates operations.',
+        active: ['support','analytics'],
+        edges: [['client','support'], ['orders','analytics']]
+      }
+    ]
+  },
+
+  'careem-food': {
+    title: 'Careem Food',
+    steps: [
+      {
+        title: 'Browse + cart',
+        desc: 'User browses menus and builds cart.',
+        active: ['client','auth','search','catalog','menu','cart'],
+        edges: [['client','auth'], ['auth','search'], ['search','catalog'], ['catalog','menu'], ['menu','cart']]
+      },
+      {
+        title: 'Checkout + payment',
+        desc: 'Checkout creates order and processes payment.',
+        active: ['checkout','payments','orders'],
+        edges: [['cart','checkout'], ['checkout','payments'], ['checkout','orders']]
+      },
+      {
+        title: 'Dispatch captains + tracking',
+        desc: 'Dispatch assigns captains; tracking updates customer.',
+        active: ['dispatch','captains','tracking','notifications'],
+        edges: [['orders','dispatch'], ['dispatch','captains'], ['captains','tracking'], ['orders','notifications']]
+      },
+      {
+        title: 'Support + analytics',
+        desc: 'Support resolves issues; analytics aggregates operations.',
+        active: ['support','analytics'],
+        edges: [['client','support'], ['orders','analytics']]
+      }
+    ]
+  },
+
+  glovo: {
+    title: 'Glovo',
+    steps: [
+      {
+        title: 'Browse stores + cart',
+        desc: 'User browses stores and builds cart for delivery.',
+        active: ['client','auth','search','catalog','stores','cart'],
+        edges: [['client','auth'], ['auth','search'], ['search','catalog'], ['catalog','stores'], ['stores','cart']]
+      },
+      {
+        title: 'Checkout + payment',
+        desc: 'Checkout creates order and processes payment.',
+        active: ['checkout','payments','orders'],
+        edges: [['cart','checkout'], ['checkout','payments'], ['checkout','orders']]
+      },
+      {
+        title: 'Dispatch + routing + tracking',
+        desc: 'Dispatch assigns courier; routing planned; tracking updates user.',
+        active: ['dispatch','couriers','routing','tracking','notifications'],
+        edges: [['orders','dispatch'], ['dispatch','couriers'], ['couriers','routing'], ['routing','tracking'], ['orders','notifications']]
+      },
+      {
+        title: 'Support + analytics',
+        desc: 'Support resolves issues; analytics aggregates operations.',
+        active: ['support','analytics'],
+        edges: [['client','support'], ['orders','analytics']]
+      }
+    ]
+  },
+
+  'bolt-food': {
+    title: 'Bolt Food',
+    steps: [
+      {
+        title: 'Browse + cart',
+        desc: 'User browses menus and builds cart.',
+        active: ['client','auth','search','catalog','menu','cart'],
+        edges: [['client','auth'], ['auth','search'], ['search','catalog'], ['catalog','menu'], ['menu','cart']]
+      },
+      {
+        title: 'Checkout + payment',
+        desc: 'Checkout creates order and processes payment.',
+        active: ['checkout','payments','orders'],
+        edges: [['cart','checkout'], ['checkout','payments'], ['checkout','orders']]
+      },
+      {
+        title: 'Dispatch + tracking',
+        desc: 'Dispatch assigns courier; tracking updates customer.',
+        active: ['dispatch','couriers','tracking','notifications'],
+        edges: [['orders','dispatch'], ['dispatch','couriers'], ['couriers','tracking'], ['orders','notifications']]
+      },
+      {
+        title: 'Support + analytics',
+        desc: 'Support resolves issues; analytics aggregates operations.',
+        active: ['support','analytics'],
+        edges: [['client','support'], ['orders','analytics']]
+      }
+    ]
+  },
+
+  foodpanda: {
+    title: 'Foodpanda',
+    steps: [
+      {
+        title: 'Browse + cart',
+        desc: 'User browses menus and builds cart.',
+        active: ['client','auth','search','catalog','menu','cart'],
+        edges: [['client','auth'], ['auth','search'], ['search','catalog'], ['catalog','menu'], ['menu','cart']]
+      },
+      {
+        title: 'Checkout + payment',
+        desc: 'Checkout creates order and processes payment.',
+        active: ['checkout','payments','orders'],
+        edges: [['cart','checkout'], ['checkout','payments'], ['checkout','orders']]
+      },
+      {
+        title: 'Dispatch riders + tracking',
+        desc: 'Dispatch assigns rider; tracking updates customer.',
+        active: ['dispatch','riders','tracking','notifications'],
+        edges: [['orders','dispatch'], ['dispatch','riders'], ['riders','tracking'], ['orders','notifications']]
+      },
+      {
+        title: 'Support + analytics',
+        desc: 'Support resolves issues; analytics aggregates operations.',
+        active: ['support','analytics'],
+        edges: [['client','support'], ['orders','analytics']]
+      }
+    ]
+  },
+
+  skipthedishes: {
+    title: 'SkipTheDishes',
+    steps: [
+      {
+        title: 'Browse + cart',
+        desc: 'User browses menus and builds cart.',
+        active: ['client','auth','search','catalog','menu','cart'],
+        edges: [['client','auth'], ['auth','search'], ['search','catalog'], ['catalog','menu'], ['menu','cart']]
+      },
+      {
+        title: 'Checkout + payment',
+        desc: 'Checkout creates order and processes payment.',
+        active: ['checkout','payments','orders'],
+        edges: [['cart','checkout'], ['checkout','payments'], ['checkout','orders']]
+      },
+      {
+        title: 'Dispatch + tracking',
+        desc: 'Dispatch assigns courier; tracking updates customer.',
+        active: ['dispatch','couriers','tracking','notifications'],
+        edges: [['orders','dispatch'], ['dispatch','couriers'], ['couriers','tracking'], ['orders','notifications']]
+      },
+      {
+        title: 'Support + analytics',
+        desc: 'Support resolves issues; analytics aggregates operations.',
+        active: ['support','analytics'],
+        edges: [['client','support'], ['orders','analytics']]
+      }
+    ]
+  },
+
+  menulog: {
+    title: 'Menulog',
+    steps: [
+      {
+        title: 'Browse + cart',
+        desc: 'User browses menus and builds cart.',
+        active: ['client','auth','search','catalog','menu','cart'],
+        edges: [['client','auth'], ['auth','search'], ['search','catalog'], ['catalog','menu'], ['menu','cart']]
+      },
+      {
+        title: 'Checkout + payment',
+        desc: 'Checkout creates order and processes payment.',
+        active: ['checkout','payments','orders'],
+        edges: [['cart','checkout'], ['checkout','payments'], ['checkout','orders']]
+      },
+      {
+        title: 'Dispatch + tracking',
+        desc: 'Dispatch assigns courier; tracking updates customer.',
+        active: ['dispatch','couriers','tracking','notifications'],
+        edges: [['orders','dispatch'], ['dispatch','couriers'], ['couriers','tracking'], ['orders','notifications']]
+      },
+      {
+        title: 'Support + analytics',
+        desc: 'Support resolves issues; analytics aggregates operations.',
+        active: ['support','analytics'],
+        edges: [['client','support'], ['orders','analytics']]
+      }
+    ]
+  },
+
   chime: {
     title: 'Chime',
     steps: [
