@@ -2735,6 +2735,366 @@ export const FLOWS = {
     ]
   },
 
+  'pocket-casts': {
+    title: 'Pocket Casts',
+    steps: [
+      {
+        title: 'Sign in + library sync',
+        desc: 'Client signs in and syncs subscriptions and listening state across devices.',
+        active: ['client','auth','library','sync'],
+        edges: [['client','auth'], ['auth','library'], ['library','sync']]
+      },
+      {
+        title: 'RSS polling + feed updates',
+        desc: 'Feed updater polls RSS and updates catalog with new episodes.',
+        active: ['feed','rss','catalog'],
+        edges: [['rss','feed'], ['feed','catalog']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Search hits index and resolves catalog metadata for podcasts/episodes.',
+        active: ['client','search','index','catalog'],
+        edges: [['client','search'], ['search','index'], ['index','catalog']]
+      },
+      {
+        title: 'Downloads + playback',
+        desc: 'Episodes downloaded from CDN/files; player plays and updates progress.',
+        active: ['downloads','cdn','player','sync'],
+        edges: [['catalog','downloads'], ['downloads','cdn'], ['cdn','player'], ['player','sync']]
+      },
+      {
+        title: 'Telemetry + analytics',
+        desc: 'Playback telemetry feeds analytics for QoE and discovery improvements.',
+        active: ['metrics','analytics'],
+        edges: [['player','metrics'], ['metrics','analytics']]
+      }
+    ]
+  },
+
+  overcast: {
+    title: 'Overcast',
+    steps: [
+      {
+        title: 'Library + settings sync',
+        desc: 'Client loads subscriptions, playlists, and playback settings.',
+        active: ['client','auth','library','sync'],
+        edges: [['client','auth'], ['auth','library'], ['library','sync']]
+      },
+      {
+        title: 'Search + catalog',
+        desc: 'Search hits index; catalog resolves podcasts and episodes.',
+        active: ['client','search','index','catalog'],
+        edges: [['client','search'], ['search','index'], ['index','catalog']]
+      },
+      {
+        title: 'Download + playback',
+        desc: 'Episode downloaded from CDN/files and played; progress saved.',
+        active: ['downloads','cdn','player','sync'],
+        edges: [['catalog','downloads'], ['downloads','cdn'], ['cdn','player'], ['player','sync']]
+      },
+      {
+        title: 'Smart Speed + Voice Boost',
+        desc: 'Playback enhancements run locally while telemetry captures QoE.',
+        active: ['smart','metrics'],
+        edges: [['player','smart'], ['player','metrics']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Telemetry feeds analytics for feature improvements.',
+        active: ['analytics'],
+        edges: [['metrics','analytics']]
+      }
+    ]
+  },
+
+  castbox: {
+    title: 'Castbox',
+    steps: [
+      {
+        title: 'Home feed + recommendations',
+        desc: 'Client loads home feed; recommendations rank shows and episodes.',
+        active: ['client','home','recos'],
+        edges: [['client','home'], ['home','recos']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Search hits index; catalog resolves metadata.',
+        active: ['client','search','index','catalog'],
+        edges: [['client','search'], ['search','index'], ['index','catalog']]
+      },
+      {
+        title: 'RSS ingest',
+        desc: 'RSS sources ingested to keep catalog up to date.',
+        active: ['rss','ingest','catalog'],
+        edges: [['rss','ingest'], ['ingest','catalog']]
+      },
+      {
+        title: 'Playback + ads',
+        desc: 'Player streams/downloads audio; ads may be inserted; telemetry captured.',
+        active: ['player','cdn','ads','metrics'],
+        edges: [['catalog','player'], ['player','cdn'], ['player','ads'], ['player','metrics']]
+      },
+      {
+        title: 'Moderation + analytics',
+        desc: 'Moderation and analytics enforce policy and improve discovery.',
+        active: ['moderation','analytics'],
+        edges: [['catalog','moderation'], ['metrics','analytics']]
+      }
+    ]
+  },
+
+  audible: {
+    title: 'Audible',
+    steps: [
+      {
+        title: 'Browse store + search',
+        desc: 'Client browses store; search hits index; catalog resolves audiobook metadata.',
+        active: ['client','store','search','index','catalog'],
+        edges: [['client','store'], ['client','search'], ['search','index'], ['index','catalog']]
+      },
+      {
+        title: 'Purchase + entitlements',
+        desc: 'Payment processed (credits/subscription); entitlements added to library/ledger.',
+        active: ['payments','ledger','library'],
+        edges: [['store','payments'], ['payments','ledger'], ['ledger','library']]
+      },
+      {
+        title: 'DRM + download',
+        desc: 'DRM licenses issued; downloads served via CDN.',
+        active: ['drm','downloads','cdn'],
+        edges: [['library','drm'], ['drm','downloads'], ['downloads','cdn']]
+      },
+      {
+        title: 'Playback + bookmarks',
+        desc: 'Player plays with bookmarks; progress sync and telemetry captured.',
+        active: ['player','metrics'],
+        edges: [['cdn','player'], ['player','metrics']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'QoE and engagement metrics feed analytics.',
+        active: ['analytics'],
+        edges: [['metrics','analytics']]
+      }
+    ]
+  },
+
+  storytel: {
+    title: 'Storytel',
+    steps: [
+      {
+        title: 'Sign in + subscription policy',
+        desc: 'Auth and entitlements validated; policy enforces access and device limits.',
+        active: ['client','auth','subs','policy'],
+        edges: [['client','auth'], ['auth','subs'], ['subs','policy']]
+      },
+      {
+        title: 'Browse/search catalog',
+        desc: 'Search hits index; catalog resolves titles and rights.',
+        active: ['client','search','index','catalog'],
+        edges: [['client','search'], ['search','index'], ['index','catalog']]
+      },
+      {
+        title: 'DRM + playback',
+        desc: 'DRM licenses issued; playback streams via CDN; telemetry captured.',
+        active: ['drm','player','cdn','metrics'],
+        edges: [['catalog','drm'], ['drm','player'], ['player','cdn'], ['player','metrics']]
+      },
+      {
+        title: 'Downloads (offline)',
+        desc: 'Offline downloads stored encrypted; synced across devices.',
+        active: ['downloads','library'],
+        edges: [['catalog','downloads'], ['downloads','library']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Engagement and QoE metrics feed analytics.',
+        active: ['analytics'],
+        edges: [['metrics','analytics']]
+      }
+    ]
+  },
+
+  scribd: {
+    title: 'Scribd',
+    steps: [
+      {
+        title: 'Sign in + subscription check',
+        desc: 'Auth and subscription policy validated for access.',
+        active: ['client','auth','subs','policy'],
+        edges: [['client','auth'], ['auth','subs'], ['subs','policy']]
+      },
+      {
+        title: 'Search + catalog',
+        desc: 'Search hits index; catalog resolves books/docs/audiobooks.',
+        active: ['client','search','index','catalog'],
+        edges: [['client','search'], ['search','index'], ['index','catalog']]
+      },
+      {
+        title: 'Read/listen (CDN)',
+        desc: 'Reader/player streams content via CDN; downloads supported.',
+        active: ['reader','cdn','downloads','metrics'],
+        edges: [['catalog','reader'], ['reader','cdn'], ['catalog','downloads'], ['reader','metrics']]
+      },
+      {
+        title: 'DRM/policy enforcement',
+        desc: 'DRM and policy enforce access rules and device limits.',
+        active: ['drm','policy'],
+        edges: [['catalog','drm'], ['drm','policy']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Engagement and QoE feed analytics.',
+        active: ['analytics'],
+        edges: [['metrics','analytics']]
+      }
+    ]
+  },
+
+  kindle: {
+    title: 'Kindle',
+    steps: [
+      {
+        title: 'Store browse + purchase',
+        desc: 'User browses store; purchases add entitlements to library.',
+        active: ['client','store','catalog','library'],
+        edges: [['client','store'], ['store','catalog'], ['catalog','library']]
+      },
+      {
+        title: 'Download + DRM',
+        desc: 'DRM and downloads deliver encrypted book assets to device.',
+        active: ['drm','downloads'],
+        edges: [['library','drm'], ['drm','downloads']]
+      },
+      {
+        title: 'Read + sync progress',
+        desc: 'Reader updates progress and syncs highlights/bookmarks across devices.',
+        active: ['reader','sync'],
+        edges: [['downloads','reader'], ['reader','sync']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Search hits index; catalog resolves results.',
+        active: ['search','index','catalog'],
+        edges: [['client','search'], ['search','index'], ['index','catalog']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Reading telemetry feeds analytics and recommendations.',
+        active: ['metrics','analytics'],
+        edges: [['reader','metrics'], ['metrics','analytics']]
+      }
+    ]
+  },
+
+  wattpad: {
+    title: 'Wattpad',
+    steps: [
+      {
+        title: 'Open feed + ranking',
+        desc: 'Client loads feed; ranking selects stories based on engagement and preferences.',
+        active: ['client','feed','rank','stories'],
+        edges: [['client','feed'], ['feed','rank'], ['rank','stories']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Search hits index; resolves stories and authors.',
+        active: ['client','search','index','stories'],
+        edges: [['client','search'], ['search','index'], ['index','stories']]
+      },
+      {
+        title: 'Read chapters',
+        desc: 'Chapter content served; reading progress captured.',
+        active: ['chapters','analytics'],
+        edges: [['stories','chapters'], ['chapters','analytics']]
+      },
+      {
+        title: 'Write/publish',
+        desc: 'Writer drafts and publishes chapters; moderation runs.',
+        active: ['writer','drafts','chapters','moderation'],
+        edges: [['client','writer'], ['writer','drafts'], ['drafts','chapters'], ['chapters','moderation']]
+      },
+      {
+        title: 'Comments + notifications',
+        desc: 'Comments persist; notifications sent; safety enforcement applies.',
+        active: ['comments','notify','moderation'],
+        edges: [['client','comments'], ['comments','notify'], ['comments','moderation']]
+      }
+    ]
+  },
+
+  ghost: {
+    title: 'Ghost',
+    steps: [
+      {
+        title: 'Author signs in + writes post',
+        desc: 'Author uses editor; post saved and published to site.',
+        active: ['client','auth','editor','posts'],
+        edges: [['client','auth'], ['auth','editor'], ['editor','posts']]
+      },
+      {
+        title: 'Site render + CDN',
+        desc: 'Site renders posts with themes; assets served via CDN.',
+        active: ['themes','site','cdn'],
+        edges: [['posts','themes'], ['themes','site'], ['site','cdn']]
+      },
+      {
+        title: 'Members + subscriptions',
+        desc: 'Members sign up; payments create entitlements.',
+        active: ['members','payments'],
+        edges: [['site','members'], ['members','payments']]
+      },
+      {
+        title: 'Newsletter sends',
+        desc: 'Newsletter composed; emails sent via provider; deliverability tracked.',
+        active: ['newsletter','email','analytics'],
+        edges: [['posts','newsletter'], ['newsletter','email'], ['email','analytics']]
+      },
+      {
+        title: 'Search + indexing',
+        desc: 'Search uses index built from posts/content.',
+        active: ['search','index','posts'],
+        edges: [['client','search'], ['search','index'], ['index','posts']]
+      }
+    ]
+  },
+
+  beehiiv: {
+    title: 'Beehiiv',
+    steps: [
+      {
+        title: 'Author signs in + writes newsletter',
+        desc: 'Author uses editor; newsletter post saved and previewed.',
+        active: ['client','auth','editor','posts'],
+        edges: [['client','auth'], ['auth','editor'], ['editor','posts']]
+      },
+      {
+        title: 'Subscribers + segmentation',
+        desc: 'Subscriber lists updated; segmentation selects audience.',
+        active: ['subscribers','segmentation'],
+        edges: [['subscribers','segmentation']]
+      },
+      {
+        title: 'Send campaign via email',
+        desc: 'Newsletter sent via email provider; deliverability monitored.',
+        active: ['newsletter','email','deliverability'],
+        edges: [['posts','newsletter'], ['newsletter','email'], ['email','deliverability']]
+      },
+      {
+        title: 'Referrals + growth loops',
+        desc: 'Referral programs drive growth; analytics measures conversions.',
+        active: ['referrals','analytics'],
+        edges: [['email','referrals'], ['referrals','analytics']]
+      },
+      {
+        title: 'Monetization',
+        desc: 'Paid subscriptions and sponsorships flow through payments and reporting.',
+        active: ['payments','analytics'],
+        edges: [['subscribers','payments'], ['payments','analytics']]
+      }
+    ]
+  },
+
   chime: {
     title: 'Chime',
     steps: [
