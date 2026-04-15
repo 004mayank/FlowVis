@@ -6311,6 +6311,384 @@ export const FLOWS = {
     ]
   },
 
+  klaviyo: {
+    title: 'Klaviyo',
+    steps: [
+      {
+        title: 'Ingest profiles + events',
+        desc: 'Profiles and events flow in from ecommerce integrations and tracking.',
+        active: ['client','auth','profiles','events'],
+        edges: [['client','auth'], ['auth','profiles'], ['profiles','events']]
+      },
+      {
+        title: 'Segment audience',
+        desc: 'Segments computed from profiles and event history.',
+        active: ['segments'],
+        edges: [['events','segments']]
+      },
+      {
+        title: 'Campaigns + flows',
+        desc: 'Campaigns and automated flows created using templates.',
+        active: ['campaigns','flows','templates'],
+        edges: [['segments','campaigns'], ['campaigns','templates'], ['campaigns','flows']]
+      },
+      {
+        title: 'Send + deliverability',
+        desc: 'Sends executed; deliverability safeguards reputation and inbox placement.',
+        active: ['send','deliverability'],
+        edges: [['flows','send'], ['send','deliverability']]
+      },
+      {
+        title: 'Tracking + analytics',
+        desc: 'Opens/clicks tracked and feed analytics dashboards.',
+        active: ['tracking','analytics'],
+        edges: [['send','tracking'], ['tracking','analytics']]
+      },
+      {
+        title: 'Integrations + compliance',
+        desc: 'Integrations sync back conversions; compliance manages consent/opt-outs.',
+        active: ['integrations','compliance'],
+        edges: [['events','integrations'], ['profiles','compliance']]
+      }
+    ]
+  },
+
+  sendgrid: {
+    title: 'SendGrid',
+    steps: [
+      {
+        title: 'Authenticate via API/SMTP',
+        desc: 'Client authenticates and submits mail via API or SMTP.',
+        active: ['client','auth','api','smtp'],
+        edges: [['client','auth'], ['auth','api'], ['auth','smtp']]
+      },
+      {
+        title: 'Build message from template + list',
+        desc: 'Templates and lists/segments determine personalization and audience.',
+        active: ['templates','lists','segments'],
+        edges: [['lists','segments'], ['templates','api'], ['segments','send']]
+      },
+      {
+        title: 'Queue send + MTA',
+        desc: 'Send queued; MTA handles delivery using IP pools.',
+        active: ['send','mta','ip-pool'],
+        edges: [['api','send'], ['send','mta'], ['mta','ip-pool']]
+      },
+      {
+        title: 'Deliverability + suppression',
+        desc: 'Deliverability monitoring updates suppression lists (bounces/complaints).',
+        active: ['deliverability','suppression'],
+        edges: [['mta','deliverability'], ['deliverability','suppression']]
+      },
+      {
+        title: 'Tracking + webhooks',
+        desc: 'Events tracked and delivered to clients via webhooks.',
+        active: ['tracking','webhooks'],
+        edges: [['mta','tracking'], ['tracking','webhooks']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics aggregates send, deliverability, and engagement metrics.',
+        active: ['analytics'],
+        edges: [['tracking','analytics']]
+      }
+    ]
+  },
+
+  'brevo-sendinblue': {
+    title: 'Brevo (Sendinblue)',
+    steps: [
+      {
+        title: 'Import contacts + segments',
+        desc: 'Contacts imported and segmented for targeting.',
+        active: ['client','auth','contacts','segments'],
+        edges: [['client','auth'], ['auth','contacts'], ['contacts','segments']]
+      },
+      {
+        title: 'Create campaign + automation',
+        desc: 'Campaigns and automation journeys authored.',
+        active: ['campaigns','automation'],
+        edges: [['segments','campaigns'], ['campaigns','automation']]
+      },
+      {
+        title: 'Send via email/SMS',
+        desc: 'Automation triggers email and SMS sends.',
+        active: ['send','email','sms'],
+        edges: [['automation','send'], ['send','email'], ['send','sms']]
+      },
+      {
+        title: 'Deliverability + tracking',
+        desc: 'Deliverability monitored; engagement tracked.',
+        active: ['deliverability','tracking'],
+        edges: [['send','deliverability'], ['send','tracking']]
+      },
+      {
+        title: 'CRM + analytics + compliance',
+        desc: 'CRM stores engagement context; analytics and compliance manage reporting/consent.',
+        active: ['crm','analytics','compliance'],
+        edges: [['tracking','crm'], ['tracking','analytics'], ['contacts','compliance']]
+      },
+      {
+        title: 'Integrations',
+        desc: 'Integrations sync conversions and lifecycle stages to external tools.',
+        active: ['integrations'],
+        edges: [['crm','integrations']]
+      }
+    ]
+  },
+
+  'canva-docs': {
+    title: 'Canva Docs',
+    steps: [
+      {
+        title: 'Open workspace + doc',
+        desc: 'User opens workspace and loads doc with permissions enforced.',
+        active: ['client','auth','workspace','docs','permissions'],
+        edges: [['client','auth'], ['auth','workspace'], ['workspace','docs'], ['permissions','docs']]
+      },
+      {
+        title: 'Edit blocks + assets',
+        desc: 'Blocks edited; assets pulled from library and served via CDN.',
+        active: ['blocks','assets','cdn'],
+        edges: [['docs','blocks'], ['assets','cdn']]
+      },
+      {
+        title: 'Realtime + comments',
+        desc: 'Realtime collaboration syncs edits; comments support review.',
+        active: ['realtime','comments'],
+        edges: [['docs','realtime'], ['realtime','client'], ['docs','comments']]
+      },
+      {
+        title: 'Templates + export',
+        desc: 'Templates bootstrap content; exports generate shareable files.',
+        active: ['templates','export'],
+        edges: [['templates','docs'], ['docs','export']]
+      },
+      {
+        title: 'Share + search',
+        desc: 'Sharing controls access; search uses index to find docs quickly.',
+        active: ['share','search','index'],
+        edges: [['docs','share'], ['client','search'], ['search','index'], ['index','docs']]
+      }
+    ]
+  },
+
+  gamma: {
+    title: 'Gamma',
+    steps: [
+      {
+        title: 'Create deck',
+        desc: 'User creates a deck and adds cards/pages.',
+        active: ['client','auth','workspace','decks','cards'],
+        edges: [['client','auth'], ['auth','workspace'], ['workspace','decks'], ['decks','cards']]
+      },
+      {
+        title: 'Generate content + assets',
+        desc: 'Generator produces drafts; assets stored and served via CDN.',
+        active: ['generator','assets','cdn'],
+        edges: [['cards','generator'], ['assets','cdn']]
+      },
+      {
+        title: 'Collaboration + comments',
+        desc: 'Collab sync and comments support teamwork and review.',
+        active: ['collab','comments'],
+        edges: [['decks','collab'], ['collab','client'], ['decks','comments']]
+      },
+      {
+        title: 'Publish/share + export',
+        desc: 'Publish to web, share links, and export to PDF.',
+        active: ['publish','share','export'],
+        edges: [['decks','publish'], ['decks','export'], ['decks','share']]
+      },
+      {
+        title: 'Analytics + billing',
+        desc: 'Analytics tracks views/engagement; billing manages subscriptions.',
+        active: ['analytics','billing'],
+        edges: [['decks','analytics'], ['analytics','billing']]
+      }
+    ]
+  },
+
+  tome: {
+    title: 'Tome',
+    steps: [
+      {
+        title: 'Create deck + pages',
+        desc: 'User creates a deck and edits pages.',
+        active: ['client','auth','workspace','decks','pages'],
+        edges: [['client','auth'], ['auth','workspace'], ['workspace','decks'], ['decks','pages']]
+      },
+      {
+        title: 'Generate content + assets',
+        desc: 'Generator helps author; assets served via CDN.',
+        active: ['generator','assets','cdn'],
+        edges: [['pages','generator'], ['assets','cdn']]
+      },
+      {
+        title: 'Collab + comments',
+        desc: 'Collaboration syncs changes; comments for review.',
+        active: ['collab','comments'],
+        edges: [['decks','collab'], ['collab','client'], ['decks','comments']]
+      },
+      {
+        title: 'Publish/share + export',
+        desc: 'Publish to web, share links, and export deck.',
+        active: ['publish','share','export'],
+        edges: [['decks','publish'], ['decks','export'], ['decks','share']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics track views and engagement.',
+        active: ['analytics'],
+        edges: [['decks','analytics']]
+      }
+    ]
+  },
+
+  pitch: {
+    title: 'Pitch',
+    steps: [
+      {
+        title: 'Open deck + slides',
+        desc: 'User opens deck and edits slides.',
+        active: ['client','auth','workspace','decks','slides'],
+        edges: [['client','auth'], ['auth','workspace'], ['workspace','decks'], ['decks','slides']]
+      },
+      {
+        title: 'Templates + assets',
+        desc: 'Templates and assets used to build slide content; assets served via CDN.',
+        active: ['templates','assets','cdn'],
+        edges: [['templates','slides'], ['assets','cdn']]
+      },
+      {
+        title: 'Realtime collaboration + comments',
+        desc: 'Realtime sync and comments support teamwork.',
+        active: ['realtime','comments'],
+        edges: [['decks','realtime'], ['realtime','client'], ['decks','comments']]
+      },
+      {
+        title: 'Permissions + export',
+        desc: 'Permissions control access; export generates PDF/PPT.',
+        active: ['permissions','export'],
+        edges: [['permissions','decks'], ['decks','export']]
+      },
+      {
+        title: 'Present + integrations + analytics',
+        desc: 'Present mode; integrations sync; analytics track engagement.',
+        active: ['present','integrations','analytics'],
+        edges: [['decks','present'], ['decks','integrations'], ['decks','analytics']]
+      }
+    ]
+  },
+
+  'beautiful-ai': {
+    title: 'Beautiful.ai',
+    steps: [
+      {
+        title: 'Create deck',
+        desc: 'User creates a deck and adds slides.',
+        active: ['client','auth','workspace','decks','slides'],
+        edges: [['client','auth'], ['auth','workspace'], ['workspace','decks'], ['decks','slides']]
+      },
+      {
+        title: 'Designer + templates',
+        desc: 'Designer applies layout rules; templates speed composition.',
+        active: ['designer','templates'],
+        edges: [['slides','designer'], ['templates','slides']]
+      },
+      {
+        title: 'Assets + CDN',
+        desc: 'Assets stored and served via CDN.',
+        active: ['assets','cdn'],
+        edges: [['slides','assets'], ['assets','cdn']]
+      },
+      {
+        title: 'Share + export + present',
+        desc: 'Share links; export; present mode for live presentations.',
+        active: ['share','export','present'],
+        edges: [['decks','share'], ['decks','export'], ['decks','present']]
+      },
+      {
+        title: 'Analytics + billing',
+        desc: 'Analytics track engagement; billing manages subscription tiers.',
+        active: ['analytics','billing'],
+        edges: [['decks','analytics'], ['analytics','billing']]
+      }
+    ]
+  },
+
+  loom: {
+    title: 'Loom',
+    steps: [
+      {
+        title: 'Record video',
+        desc: 'Recorder captures screen/cam; upload queue created.',
+        active: ['client','auth','recorder','upload'],
+        edges: [['client','auth'], ['auth','recorder'], ['recorder','upload']]
+      },
+      {
+        title: 'Transcode + store',
+        desc: 'Video transcoded and stored; CDN serves playback.',
+        active: ['transcode','storage','cdn'],
+        edges: [['upload','transcode'], ['transcode','storage'], ['storage','cdn']]
+      },
+      {
+        title: 'Play + comments',
+        desc: 'Player streams from CDN; viewers comment on timeline.',
+        active: ['player','comments'],
+        edges: [['client','player'], ['player','cdn'], ['player','comments']]
+      },
+      {
+        title: 'Sharing + search',
+        desc: 'Sharing controls access; search/index enables discovery.',
+        active: ['sharing','search','index'],
+        edges: [['storage','sharing'], ['client','search'], ['search','index'], ['index','storage']]
+      },
+      {
+        title: 'Integrations + analytics',
+        desc: 'Integrations embed videos in tools; analytics track engagement.',
+        active: ['integrations','analytics'],
+        edges: [['storage','integrations'], ['player','analytics']]
+      }
+    ]
+  },
+
+  'screen-studio': {
+    title: 'Screen Studio',
+    steps: [
+      {
+        title: 'Record + edit timeline',
+        desc: 'Record screen; edit on timeline with effects.',
+        active: ['client','recorder','timeline','effects'],
+        edges: [['client','recorder'], ['recorder','timeline'], ['timeline','effects']]
+      },
+      {
+        title: 'Render + export',
+        desc: 'Render pipeline exports final video to library.',
+        active: ['render','export','library'],
+        edges: [['effects','render'], ['render','export'], ['export','library']]
+      },
+      {
+        title: 'Store + share',
+        desc: 'Store locally and share links/files.',
+        active: ['storage','share'],
+        edges: [['library','storage'], ['library','share']]
+      },
+      {
+        title: 'Upload + CDN',
+        desc: 'Upload to hosting; CDN serves the video.',
+        active: ['upload','cdn'],
+        edges: [['library','upload'], ['upload','cdn']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics track usage and performance.',
+        active: ['analytics'],
+        edges: [['library','analytics']]
+      }
+    ]
+  },
+
   chime: {
     title: 'Chime',
     steps: [

@@ -14142,6 +14142,560 @@ Object.assign(SYSTEM_LAYOUTS, {
   }
 });
 
+// ----- Batch 56 (System + Architecture - email infra + creator docs + async video) -----
+
+Object.assign(SYSTEM_LAYOUTS, {
+  klaviyo: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profiles','events','segments','campaigns','flows','templates','send','deliverability','tracking','integrations','analytics','compliance'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profiles: { x: 620, y: 180, label: 'Profiles', colorKey: 'store' },
+      events: { x: 860, y: 180, label: 'Events', colorKey: 'stream' },
+      segments: { x: 1100, y: 180, label: 'Segments', colorKey: 'api' },
+      campaigns: { x: 620, y: 320, label: 'Campaigns', colorKey: 'store' },
+      flows: { x: 860, y: 320, label: 'Flows', colorKey: 'queue' },
+      templates: { x: 1100, y: 320, label: 'Templates', colorKey: 'store' },
+      send: { x: 1100, y: 460, label: 'Send', colorKey: 'external' },
+      deliverability: { x: 860, y: 460, label: 'Deliverability', colorKey: 'api' },
+      tracking: { x: 620, y: 460, label: 'Tracking', colorKey: 'api' },
+      integrations: { x: 380, y: 320, label: 'Integrations', colorKey: 'external' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' },
+      compliance: { x: 860, y: 600, label: 'Compliance', colorKey: 'api' }
+    }
+  },
+
+  sendgrid: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','api','smtp','templates','lists','segments','send','mta','ip-pool','deliverability','webhooks','tracking','analytics','suppression'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      api: { x: 620, y: 180, label: 'API', colorKey: 'api' },
+      smtp: { x: 860, y: 180, label: 'SMTP', colorKey: 'external' },
+      templates: { x: 1100, y: 180, label: 'Templates', colorKey: 'store' },
+      lists: { x: 620, y: 320, label: 'Lists', colorKey: 'store' },
+      segments: { x: 860, y: 320, label: 'Segments', colorKey: 'api' },
+      send: { x: 1100, y: 320, label: 'Send', colorKey: 'queue' },
+      mta: { x: 1100, y: 460, label: 'MTA', colorKey: 'external' },
+      'ip-pool': { x: 860, y: 460, label: 'IP Pool', colorKey: 'api' },
+      deliverability: { x: 620, y: 460, label: 'Deliverability', colorKey: 'api' },
+      webhooks: { x: 380, y: 320, label: 'Webhooks', colorKey: 'external' },
+      tracking: { x: 380, y: 460, label: 'Tracking', colorKey: 'api' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' },
+      suppression: { x: 860, y: 600, label: 'Suppression', colorKey: 'store' }
+    }
+  },
+
+  'brevo-sendinblue': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','contacts','segments','campaigns','automation','sms','email','send','deliverability','tracking','crm','integrations','analytics','compliance'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      contacts: { x: 620, y: 180, label: 'Contacts', colorKey: 'store' },
+      segments: { x: 860, y: 180, label: 'Segments', colorKey: 'api' },
+      campaigns: { x: 1100, y: 180, label: 'Campaigns', colorKey: 'store' },
+      automation: { x: 860, y: 320, label: 'Automation', colorKey: 'queue' },
+      sms: { x: 620, y: 320, label: 'SMS', colorKey: 'external' },
+      email: { x: 1100, y: 320, label: 'Email', colorKey: 'external' },
+      send: { x: 1100, y: 460, label: 'Send', colorKey: 'queue' },
+      deliverability: { x: 860, y: 460, label: 'Deliverability', colorKey: 'api' },
+      tracking: { x: 620, y: 460, label: 'Tracking', colorKey: 'api' },
+      crm: { x: 620, y: 600, label: 'CRM', colorKey: 'store' },
+      integrations: { x: 380, y: 320, label: 'Integrations', colorKey: 'external' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' },
+      compliance: { x: 1100, y: 600, label: 'Compliance', colorKey: 'api' }
+    }
+  },
+
+  'canva-docs': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','workspace','docs','blocks','templates','assets','cdn','realtime','comments','permissions','export','share','search','index'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      workspace: { x: 620, y: 180, label: 'Workspace', colorKey: 'store' },
+      docs: { x: 860, y: 180, label: 'Docs', colorKey: 'store' },
+      blocks: { x: 1100, y: 180, label: 'Blocks', colorKey: 'store' },
+      templates: { x: 620, y: 320, label: 'Templates', colorKey: 'store' },
+      assets: { x: 860, y: 320, label: 'Assets', colorKey: 'cdn' },
+      cdn: { x: 1100, y: 320, label: 'CDN', colorKey: 'cdn' },
+      realtime: { x: 620, y: 460, label: 'Realtime', colorKey: 'stream' },
+      comments: { x: 860, y: 460, label: 'Comments', colorKey: 'store' },
+      permissions: { x: 380, y: 320, label: 'Permissions', colorKey: 'api' },
+      export: { x: 1100, y: 460, label: 'Export', colorKey: 'api' },
+      share: { x: 380, y: 460, label: 'Share', colorKey: 'external' },
+      search: { x: 620, y: 600, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 600, label: 'Index', colorKey: 'store' }
+    }
+  },
+
+  gamma: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','workspace','decks','cards','generator','assets','cdn','collab','comments','export','publish','share','analytics','billing'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      workspace: { x: 620, y: 180, label: 'Workspace', colorKey: 'store' },
+      decks: { x: 860, y: 180, label: 'Decks', colorKey: 'store' },
+      cards: { x: 1100, y: 180, label: 'Cards', colorKey: 'store' },
+      generator: { x: 620, y: 320, label: 'Generator', colorKey: 'api' },
+      assets: { x: 860, y: 320, label: 'Assets', colorKey: 'cdn' },
+      cdn: { x: 1100, y: 320, label: 'CDN', colorKey: 'cdn' },
+      collab: { x: 620, y: 460, label: 'Collab', colorKey: 'stream' },
+      comments: { x: 860, y: 460, label: 'Comments', colorKey: 'store' },
+      export: { x: 1100, y: 460, label: 'Export', colorKey: 'api' },
+      publish: { x: 380, y: 460, label: 'Publish', colorKey: 'external' },
+      share: { x: 380, y: 320, label: 'Share', colorKey: 'external' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' },
+      billing: { x: 860, y: 600, label: 'Billing', colorKey: 'external' }
+    }
+  },
+
+  tome: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','workspace','decks','pages','generator','assets','cdn','collab','comments','export','publish','share','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      workspace: { x: 620, y: 180, label: 'Workspace', colorKey: 'store' },
+      decks: { x: 860, y: 180, label: 'Decks', colorKey: 'store' },
+      pages: { x: 1100, y: 180, label: 'Pages', colorKey: 'store' },
+      generator: { x: 620, y: 320, label: 'Generator', colorKey: 'api' },
+      assets: { x: 860, y: 320, label: 'Assets', colorKey: 'cdn' },
+      cdn: { x: 1100, y: 320, label: 'CDN', colorKey: 'cdn' },
+      collab: { x: 620, y: 460, label: 'Collab', colorKey: 'stream' },
+      comments: { x: 860, y: 460, label: 'Comments', colorKey: 'store' },
+      export: { x: 1100, y: 460, label: 'Export', colorKey: 'api' },
+      publish: { x: 380, y: 460, label: 'Publish', colorKey: 'external' },
+      share: { x: 380, y: 320, label: 'Share', colorKey: 'external' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  pitch: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','workspace','decks','slides','templates','assets','cdn','realtime','comments','permissions','export','present','integrations','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      workspace: { x: 620, y: 180, label: 'Workspace', colorKey: 'store' },
+      decks: { x: 860, y: 180, label: 'Decks', colorKey: 'store' },
+      slides: { x: 1100, y: 180, label: 'Slides', colorKey: 'store' },
+      templates: { x: 620, y: 320, label: 'Templates', colorKey: 'store' },
+      assets: { x: 860, y: 320, label: 'Assets', colorKey: 'cdn' },
+      cdn: { x: 1100, y: 320, label: 'CDN', colorKey: 'cdn' },
+      realtime: { x: 620, y: 460, label: 'Realtime', colorKey: 'stream' },
+      comments: { x: 860, y: 460, label: 'Comments', colorKey: 'store' },
+      permissions: { x: 380, y: 320, label: 'Permissions', colorKey: 'api' },
+      export: { x: 1100, y: 460, label: 'Export', colorKey: 'api' },
+      present: { x: 380, y: 460, label: 'Present', colorKey: 'external' },
+      integrations: { x: 620, y: 600, label: 'Integrations', colorKey: 'external' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'beautiful-ai': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','workspace','decks','slides','designer','templates','assets','cdn','export','present','share','analytics','billing'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      workspace: { x: 620, y: 180, label: 'Workspace', colorKey: 'store' },
+      decks: { x: 860, y: 180, label: 'Decks', colorKey: 'store' },
+      slides: { x: 1100, y: 180, label: 'Slides', colorKey: 'store' },
+      designer: { x: 620, y: 320, label: 'Designer', colorKey: 'api' },
+      templates: { x: 860, y: 320, label: 'Templates', colorKey: 'store' },
+      assets: { x: 1100, y: 320, label: 'Assets', colorKey: 'cdn' },
+      cdn: { x: 1100, y: 460, label: 'CDN', colorKey: 'cdn' },
+      export: { x: 860, y: 460, label: 'Export', colorKey: 'api' },
+      present: { x: 380, y: 460, label: 'Present', colorKey: 'external' },
+      share: { x: 380, y: 320, label: 'Share', colorKey: 'external' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' },
+      billing: { x: 860, y: 600, label: 'Billing', colorKey: 'external' }
+    }
+  },
+
+  loom: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','recorder','upload','transcode','storage','cdn','player','comments','sharing','search','index','integrations','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      recorder: { x: 380, y: 320, label: 'Recorder', colorKey: 'api' },
+      upload: { x: 620, y: 320, label: 'Upload', colorKey: 'queue' },
+      transcode: { x: 860, y: 320, label: 'Transcode', colorKey: 'api' },
+      storage: { x: 1100, y: 320, label: 'Storage', colorKey: 'cdn' },
+      cdn: { x: 1100, y: 180, label: 'CDN', colorKey: 'cdn' },
+      player: { x: 860, y: 180, label: 'Player', colorKey: 'api' },
+      comments: { x: 620, y: 180, label: 'Comments', colorKey: 'store' },
+      sharing: { x: 380, y: 460, label: 'Sharing', colorKey: 'external' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 460, label: 'Index', colorKey: 'store' },
+      integrations: { x: 1100, y: 460, label: 'Integrations', colorKey: 'external' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'screen-studio': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','recorder','timeline','effects','render','export','library','storage','share','upload','cdn','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      recorder: { x: 380, y: 180, label: 'Recorder', colorKey: 'api' },
+      timeline: { x: 620, y: 180, label: 'Timeline', colorKey: 'api' },
+      effects: { x: 860, y: 180, label: 'Effects', colorKey: 'api' },
+      render: { x: 1100, y: 180, label: 'Render', colorKey: 'api' },
+      export: { x: 860, y: 320, label: 'Export', colorKey: 'api' },
+      library: { x: 620, y: 320, label: 'Library', colorKey: 'store' },
+      storage: { x: 380, y: 320, label: 'Storage', colorKey: 'store' },
+      share: { x: 1100, y: 320, label: 'Share', colorKey: 'external' },
+      upload: { x: 620, y: 460, label: 'Upload', colorKey: 'queue' },
+      cdn: { x: 860, y: 460, label: 'CDN', colorKey: 'cdn' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  }
+});
+
+Object.assign(ARCH_LAYOUTS, {
+  klaviyo: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Klaviyo Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profiles','events','segments','campaigns','flows','templates','send','deliverability','tracking','integrations','analytics','compliance'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profiles: { x: 600, y: 160, label: 'Profiles' },
+      events: { x: 880, y: 160, label: 'Events' },
+      segments: { x: 1160, y: 160, label: 'Segments' },
+      campaigns: { x: 600, y: 300, label: 'Campaigns' },
+      flows: { x: 880, y: 300, label: 'Flows' },
+      templates: { x: 1160, y: 300, label: 'Templates' },
+      send: { x: 1160, y: 440, label: 'Send' },
+      deliverability: { x: 880, y: 440, label: 'Deliverability' },
+      tracking: { x: 600, y: 440, label: 'Tracking' },
+      integrations: { x: 320, y: 300, label: 'Integrations' },
+      analytics: { x: 600, y: 580, label: 'Analytics' },
+      compliance: { x: 880, y: 580, label: 'Compliance' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profiles','profile'], ['profiles','events','events']);
+      if(stepIdx===2) e.push(['events','segments','segment'], ['segments','campaigns','campaign']);
+      if(stepIdx===3) e.push(['campaigns','templates','template'], ['campaigns','flows','flow']);
+      if(stepIdx===4) e.push(['flows','send','send'], ['send','deliverability','deliver']);
+      if(stepIdx===5) e.push(['send','tracking','track'], ['tracking','analytics','analytics']);
+      if(stepIdx===6) e.push(['events','integrations','integrate']);
+      if(stepIdx===7) e.push(['profiles','compliance','compliance']);
+      return e;
+    }
+  },
+
+  sendgrid: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'SendGrid Email Infra',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','api','smtp','templates','lists','segments','send','mta','ip-pool','deliverability','webhooks','tracking','analytics','suppression'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      api: { x: 600, y: 160, label: 'API' },
+      smtp: { x: 880, y: 160, label: 'SMTP' },
+      templates: { x: 1160, y: 160, label: 'Templates' },
+      lists: { x: 600, y: 300, label: 'Lists' },
+      segments: { x: 880, y: 300, label: 'Segments' },
+      send: { x: 1160, y: 300, label: 'Send' },
+      mta: { x: 1160, y: 440, label: 'MTA' },
+      'ip-pool': { x: 880, y: 440, label: 'IP Pool' },
+      deliverability: { x: 600, y: 440, label: 'Deliverability' },
+      webhooks: { x: 320, y: 300, label: 'Webhooks' },
+      tracking: { x: 320, y: 440, label: 'Tracking' },
+      analytics: { x: 600, y: 580, label: 'Analytics' },
+      suppression: { x: 880, y: 580, label: 'Suppression' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','api','api'], ['auth','smtp','smtp']);
+      if(stepIdx===2) e.push(['lists','segments','segment'], ['segments','send','send'], ['templates','send','template']);
+      if(stepIdx===3) e.push(['send','mta','mta'], ['mta','ip-pool','ip']);
+      if(stepIdx===4) e.push(['mta','deliverability','deliver'], ['deliverability','suppression','suppress']);
+      if(stepIdx===5) e.push(['mta','tracking','track'], ['tracking','analytics','analytics']);
+      if(stepIdx===6) e.push(['mta','webhooks','hook']);
+      return e;
+    }
+  },
+
+  'brevo-sendinblue': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Brevo Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','contacts','segments','campaigns','automation','sms','email','send','deliverability','tracking','crm','integrations','analytics','compliance'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      contacts: { x: 600, y: 160, label: 'Contacts' },
+      segments: { x: 880, y: 160, label: 'Segments' },
+      campaigns: { x: 1160, y: 160, label: 'Campaigns' },
+      automation: { x: 880, y: 300, label: 'Automation' },
+      sms: { x: 600, y: 300, label: 'SMS' },
+      email: { x: 1160, y: 300, label: 'Email' },
+      send: { x: 1160, y: 440, label: 'Send' },
+      deliverability: { x: 880, y: 440, label: 'Deliverability' },
+      tracking: { x: 600, y: 440, label: 'Tracking' },
+      crm: { x: 600, y: 580, label: 'CRM' },
+      integrations: { x: 320, y: 300, label: 'Integrations' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      compliance: { x: 1160, y: 580, label: 'Compliance' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','contacts','contacts'], ['contacts','segments','segment']);
+      if(stepIdx===2) e.push(['segments','campaigns','campaign'], ['campaigns','automation','auto']);
+      if(stepIdx===3) e.push(['automation','send','send'], ['send','email','email'], ['send','sms','sms']);
+      if(stepIdx===4) e.push(['send','deliverability','deliver'], ['send','tracking','track']);
+      if(stepIdx===5) e.push(['tracking','analytics','analytics'], ['contacts','crm','crm']);
+      if(stepIdx===6) e.push(['contacts','integrations','integrate']);
+      if(stepIdx===7) e.push(['contacts','compliance','compliance']);
+      return e;
+    }
+  },
+
+  'canva-docs': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Canva Docs Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','workspace','docs','blocks','templates','assets','cdn','realtime','comments','permissions','export','share','search','index'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      workspace: { x: 600, y: 160, label: 'Workspace' },
+      docs: { x: 880, y: 160, label: 'Docs' },
+      blocks: { x: 1160, y: 160, label: 'Blocks' },
+      templates: { x: 600, y: 300, label: 'Templates' },
+      assets: { x: 880, y: 300, label: 'Assets' },
+      cdn: { x: 1160, y: 300, label: 'CDN' },
+      realtime: { x: 600, y: 440, label: 'Realtime' },
+      comments: { x: 880, y: 440, label: 'Comments' },
+      permissions: { x: 320, y: 300, label: 'Permissions' },
+      export: { x: 1160, y: 440, label: 'Export' },
+      share: { x: 320, y: 440, label: 'Share' },
+      search: { x: 600, y: 580, label: 'Search' },
+      index: { x: 880, y: 580, label: 'Index' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','workspace','ws'], ['workspace','docs','doc']);
+      if(stepIdx===2) e.push(['docs','blocks','block'], ['templates','docs','template'], ['assets','cdn','cdn']);
+      if(stepIdx===3) e.push(['docs','realtime','rt'], ['realtime','client','updates'], ['docs','comments','comment']);
+      if(stepIdx===4) e.push(['permissions','docs','perm'], ['share','docs','share']);
+      if(stepIdx===5) e.push(['client','search','search'], ['search','index','index'], ['index','docs','results']);
+      if(stepIdx===6) e.push(['docs','export','export']);
+      return e;
+    }
+  },
+
+  gamma: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Gamma Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','workspace','decks','cards','generator','assets','cdn','collab','comments','export','publish','share','analytics','billing'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      workspace: { x: 600, y: 160, label: 'Workspace' },
+      decks: { x: 880, y: 160, label: 'Decks' },
+      cards: { x: 1160, y: 160, label: 'Cards' },
+      generator: { x: 600, y: 300, label: 'Generator' },
+      assets: { x: 880, y: 300, label: 'Assets' },
+      cdn: { x: 1160, y: 300, label: 'CDN' },
+      collab: { x: 600, y: 440, label: 'Collab' },
+      comments: { x: 880, y: 440, label: 'Comments' },
+      export: { x: 1160, y: 440, label: 'Export' },
+      publish: { x: 320, y: 440, label: 'Publish' },
+      share: { x: 320, y: 300, label: 'Share' },
+      analytics: { x: 600, y: 580, label: 'Analytics' },
+      billing: { x: 880, y: 580, label: 'Billing' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','workspace','ws'], ['workspace','decks','deck']);
+      if(stepIdx===2) e.push(['deck','generator','gen'], ['generator','cards','cards'], ['assets','cdn','cdn']);
+      if(stepIdx===3) e.push(['decks','collab','rt'], ['collab','client','updates'], ['decks','comments','comment']);
+      if(stepIdx===4) e.push(['decks','publish','publish'], ['decks','share','share']);
+      if(stepIdx===5) e.push(['decks','export','export']);
+      if(stepIdx===6) e.push(['decks','analytics','analytics'], ['analytics','billing','billing']);
+      return e;
+    }
+  },
+
+  tome: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Tome Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','workspace','decks','pages','generator','assets','cdn','collab','comments','export','publish','share','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      workspace: { x: 600, y: 160, label: 'Workspace' },
+      decks: { x: 880, y: 160, label: 'Decks' },
+      pages: { x: 1160, y: 160, label: 'Pages' },
+      generator: { x: 600, y: 300, label: 'Generator' },
+      assets: { x: 880, y: 300, label: 'Assets' },
+      cdn: { x: 1160, y: 300, label: 'CDN' },
+      collab: { x: 600, y: 440, label: 'Collab' },
+      comments: { x: 880, y: 440, label: 'Comments' },
+      export: { x: 1160, y: 440, label: 'Export' },
+      publish: { x: 320, y: 440, label: 'Publish' },
+      share: { x: 320, y: 300, label: 'Share' },
+      analytics: { x: 600, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','workspace','ws'], ['workspace','decks','deck']);
+      if(stepIdx===2) e.push(['deck','generator','gen'], ['generator','pages','pages'], ['assets','cdn','cdn']);
+      if(stepIdx===3) e.push(['decks','collab','rt'], ['collab','client','updates'], ['decks','comments','comment']);
+      if(stepIdx===4) e.push(['decks','publish','publish'], ['decks','share','share']);
+      if(stepIdx===5) e.push(['decks','export','export']);
+      if(stepIdx===6) e.push(['decks','analytics','analytics']);
+      return e;
+    }
+  },
+
+  pitch: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Pitch Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','workspace','decks','slides','templates','assets','cdn','realtime','comments','permissions','export','present','integrations','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      workspace: { x: 600, y: 160, label: 'Workspace' },
+      decks: { x: 880, y: 160, label: 'Decks' },
+      slides: { x: 1160, y: 160, label: 'Slides' },
+      templates: { x: 600, y: 300, label: 'Templates' },
+      assets: { x: 880, y: 300, label: 'Assets' },
+      cdn: { x: 1160, y: 300, label: 'CDN' },
+      realtime: { x: 600, y: 440, label: 'Realtime' },
+      comments: { x: 880, y: 440, label: 'Comments' },
+      permissions: { x: 320, y: 300, label: 'Permissions' },
+      export: { x: 1160, y: 440, label: 'Export' },
+      present: { x: 320, y: 440, label: 'Present' },
+      integrations: { x: 600, y: 580, label: 'Integrations' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','workspace','ws'], ['workspace','decks','deck']);
+      if(stepIdx===2) e.push(['deck','slides','slide'], ['templates','slides','template'], ['assets','cdn','cdn']);
+      if(stepIdx===3) e.push(['decks','realtime','rt'], ['realtime','client','updates'], ['decks','comments','comment']);
+      if(stepIdx===4) e.push(['permissions','decks','perm'], ['decks','export','export']);
+      if(stepIdx===5) e.push(['decks','integrations','integrate']);
+      if(stepIdx===6) e.push(['decks','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'beautiful-ai': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Beautiful.ai Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','workspace','decks','slides','designer','templates','assets','cdn','export','present','share','analytics','billing'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      workspace: { x: 600, y: 160, label: 'Workspace' },
+      decks: { x: 880, y: 160, label: 'Decks' },
+      slides: { x: 1160, y: 160, label: 'Slides' },
+      designer: { x: 600, y: 300, label: 'Designer' },
+      templates: { x: 880, y: 300, label: 'Templates' },
+      assets: { x: 1160, y: 300, label: 'Assets' },
+      cdn: { x: 1160, y: 440, label: 'CDN' },
+      export: { x: 880, y: 440, label: 'Export' },
+      present: { x: 320, y: 440, label: 'Present' },
+      share: { x: 320, y: 300, label: 'Share' },
+      analytics: { x: 600, y: 580, label: 'Analytics' },
+      billing: { x: 880, y: 580, label: 'Billing' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','workspace','ws'], ['workspace','decks','deck']);
+      if(stepIdx===2) e.push(['deck','designer','design'], ['designer','slides','slides'], ['templates','slides','template']);
+      if(stepIdx===3) e.push(['slides','assets','assets'], ['assets','cdn','cdn']);
+      if(stepIdx===4) e.push(['decks','share','share'], ['decks','export','export'], ['decks','present','present']);
+      if(stepIdx===5) e.push(['decks','analytics','analytics'], ['analytics','billing','billing']);
+      return e;
+    }
+  },
+
+  loom: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Loom Video Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','recorder','upload','transcode','storage','cdn','player','comments','sharing','search','index','integrations','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      recorder: { x: 320, y: 300, label: 'Recorder' },
+      upload: { x: 600, y: 300, label: 'Upload' },
+      transcode: { x: 880, y: 300, label: 'Transcode' },
+      storage: { x: 1160, y: 300, label: 'Storage' },
+      cdn: { x: 1160, y: 160, label: 'CDN' },
+      player: { x: 880, y: 160, label: 'Player' },
+      comments: { x: 600, y: 160, label: 'Comments' },
+      sharing: { x: 320, y: 440, label: 'Sharing' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 880, y: 440, label: 'Index' },
+      integrations: { x: 1160, y: 440, label: 'Integrations' },
+      analytics: { x: 600, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','recorder','rec'], ['recorder','upload','upload']);
+      if(stepIdx===2) e.push(['upload','transcode','transcode'], ['transcode','storage','store'], ['storage','cdn','cdn']);
+      if(stepIdx===3) e.push(['client','player','play'], ['player','cdn','stream']);
+      if(stepIdx===4) e.push(['player','comments','comment'], ['comments','sharing','share']);
+      if(stepIdx===5) e.push(['client','search','search'], ['search','index','index'], ['index','storage','results']);
+      if(stepIdx===6) e.push(['storage','integrations','integrate']);
+      if(stepIdx===7) e.push(['player','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'screen-studio': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Screen Studio Pipeline',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','recorder','timeline','effects','render','export','library','storage','share','upload','cdn','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      recorder: { x: 320, y: 160, label: 'Recorder' },
+      timeline: { x: 600, y: 160, label: 'Timeline' },
+      effects: { x: 880, y: 160, label: 'Effects' },
+      render: { x: 1160, y: 160, label: 'Render' },
+      export: { x: 880, y: 300, label: 'Export' },
+      library: { x: 600, y: 300, label: 'Library' },
+      storage: { x: 320, y: 300, label: 'Storage' },
+      share: { x: 1160, y: 300, label: 'Share' },
+      upload: { x: 600, y: 440, label: 'Upload' },
+      cdn: { x: 880, y: 440, label: 'CDN' },
+      analytics: { x: 600, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','recorder','rec'], ['recorder','timeline','timeline'], ['timeline','effects','fx']);
+      if(stepIdx===2) e.push(['effects','render','render'], ['render','export','export']);
+      if(stepIdx===3) e.push(['export','library','library'], ['library','storage','store']);
+      if(stepIdx===4) e.push(['library','share','share']);
+      if(stepIdx===5) e.push(['library','upload','upload'], ['upload','cdn','cdn']);
+      if(stepIdx===6) e.push(['library','analytics','analytics']);
+      return e;
+    }
+  }
+});
+
 Object.assign(ARCH_LAYOUTS, {
   xero: {
     viewBox: '0 0 1860 820',
