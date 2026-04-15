@@ -9125,6 +9125,318 @@ export const FLOWS = {
     ]
   },
 
+  'dunkin-app': {
+    title: 'Dunkin App',
+    steps: [
+      {
+        title: 'Sign in + pick store',
+        desc: 'User signs in and selects a nearby store for pickup.',
+        active: ['client','auth','profile','stores'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','stores']]
+      },
+      {
+        title: 'Build order + checkout',
+        desc: 'User builds cart from menu and checks out.',
+        active: ['menu','cart','checkout','payments','orders'],
+        edges: [['stores','menu'], ['menu','cart'], ['cart','checkout'], ['checkout','payments'], ['checkout','orders']]
+      },
+      {
+        title: 'Pickup + notifications',
+        desc: 'Pickup workflow and notifications update order readiness.',
+        active: ['pickup','notifications'],
+        edges: [['orders','pickup'], ['orders','notifications']]
+      },
+      {
+        title: 'Loyalty + offers',
+        desc: 'Loyalty accrues points; offers apply discounts and promos.',
+        active: ['loyalty','offers'],
+        edges: [['orders','loyalty'], ['offers','cart']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics tracks engagement and order performance.',
+        active: ['analytics'],
+        edges: [['orders','analytics']]
+      }
+    ]
+  },
+
+  'blue-apron': {
+    title: 'Blue Apron',
+    steps: [
+      {
+        title: 'Choose plan + recipes',
+        desc: 'User selects plan and recipes for the week.',
+        active: ['client','auth','profile','plans','recipes'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','plans'], ['plans','recipes']]
+      },
+      {
+        title: 'Cart + checkout + payment',
+        desc: 'Checkout creates order and processes payment.',
+        active: ['cart','checkout','payments','orders'],
+        edges: [['recipes','cart'], ['cart','checkout'], ['checkout','payments'], ['checkout','orders']]
+      },
+      {
+        title: 'Inventory + warehouse picking',
+        desc: 'Inventory allocated and warehouse picks/assembles kits.',
+        active: ['inventory','warehouse'],
+        edges: [['orders','inventory'], ['inventory','warehouse']]
+      },
+      {
+        title: 'Shipping + notifications',
+        desc: 'Shipping fulfilled; notifications keep user updated.',
+        active: ['shipping','notifications'],
+        edges: [['warehouse','shipping'], ['orders','notifications']]
+      },
+      {
+        title: 'Support + analytics',
+        desc: 'Support handles issues; analytics aggregates fulfillment KPIs.',
+        active: ['support','analytics'],
+        edges: [['client','support'], ['orders','analytics']]
+      }
+    ]
+  },
+
+  hellofresh: {
+    title: 'HelloFresh',
+    steps: [
+      {
+        title: 'Preferences + meal selection',
+        desc: 'User sets preferences and selects meals for plan.',
+        active: ['client','auth','profile','preferences','plans','recipes'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','preferences'], ['preferences','plans'], ['plans','recipes']]
+      },
+      {
+        title: 'Cart + checkout + payment',
+        desc: 'Checkout creates order and processes payment.',
+        active: ['cart','checkout','payments','orders'],
+        edges: [['recipes','cart'], ['cart','checkout'], ['checkout','payments'], ['checkout','orders']]
+      },
+      {
+        title: 'Inventory + fulfillment + shipping',
+        desc: 'Inventory allocated; fulfillment packs kits; shipping delivered.',
+        active: ['inventory','fulfillment','shipping'],
+        edges: [['orders','inventory'], ['inventory','fulfillment'], ['fulfillment','shipping']]
+      },
+      {
+        title: 'Notifications + support + analytics',
+        desc: 'Notifications update status; support handles issues; analytics tracks KPIs.',
+        active: ['notifications','support','analytics'],
+        edges: [['orders','notifications'], ['client','support'], ['orders','analytics']]
+      }
+    ]
+  },
+
+  freshly: {
+    title: 'Freshly',
+    steps: [
+      {
+        title: 'Browse meals + checkout',
+        desc: 'User browses prepared meals and checks out.',
+        active: ['client','auth','profile','catalog','meals','cart','checkout'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','catalog'], ['catalog','meals'], ['meals','cart'], ['cart','checkout']]
+      },
+      {
+        title: 'Payment + order creation',
+        desc: 'Payment processed and order created.',
+        active: ['payments','orders'],
+        edges: [['checkout','payments'], ['checkout','orders']]
+      },
+      {
+        title: 'Kitchen + shipping',
+        desc: 'Kitchen prepares meals; shipping delivers.',
+        active: ['kitchen','inventory','shipping'],
+        edges: [['orders','inventory'], ['inventory','kitchen'], ['kitchen','shipping']]
+      },
+      {
+        title: 'Notifications + support + analytics',
+        desc: 'Notifications update status; support resolves issues; analytics tracks KPIs.',
+        active: ['notifications','support','analytics'],
+        edges: [['orders','notifications'], ['client','support'], ['orders','analytics']]
+      }
+    ]
+  },
+
+  gousto: {
+    title: 'Gousto',
+    steps: [
+      {
+        title: 'Choose recipes',
+        desc: 'User selects weekly recipes and plan.',
+        active: ['client','auth','profile','plans','recipes'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','plans'], ['plans','recipes']]
+      },
+      {
+        title: 'Checkout + payment',
+        desc: 'Checkout creates order and processes payment.',
+        active: ['cart','checkout','payments','orders'],
+        edges: [['recipes','cart'], ['cart','checkout'], ['checkout','payments'], ['checkout','orders']]
+      },
+      {
+        title: 'Inventory + fulfillment + shipping',
+        desc: 'Inventory allocated; fulfillment packs kits; shipping delivered.',
+        active: ['inventory','fulfillment','shipping'],
+        edges: [['orders','inventory'], ['inventory','fulfillment'], ['fulfillment','shipping']]
+      },
+      {
+        title: 'Notifications + support + analytics',
+        desc: 'Notifications update status; support handles issues; analytics tracks KPIs.',
+        active: ['notifications','support','analytics'],
+        edges: [['orders','notifications'], ['client','support'], ['orders','analytics']]
+      }
+    ]
+  },
+
+  everyplate: {
+    title: 'EveryPlate',
+    steps: [
+      {
+        title: 'Select plan + recipes',
+        desc: 'User selects plan and recipes for the week.',
+        active: ['client','auth','profile','plans','recipes'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','plans'], ['plans','recipes']]
+      },
+      {
+        title: 'Checkout + payment',
+        desc: 'Checkout creates order and processes payment.',
+        active: ['cart','checkout','payments','orders'],
+        edges: [['recipes','cart'], ['cart','checkout'], ['checkout','payments'], ['checkout','orders']]
+      },
+      {
+        title: 'Fulfillment + shipping',
+        desc: 'Fulfillment packs kits from inventory; shipping delivers.',
+        active: ['inventory','fulfillment','shipping'],
+        edges: [['orders','inventory'], ['inventory','fulfillment'], ['fulfillment','shipping']]
+      },
+      {
+        title: 'Notifications + support + analytics',
+        desc: 'Notifications update status; support resolves issues; analytics tracks KPIs.',
+        active: ['notifications','support','analytics'],
+        edges: [['orders','notifications'], ['client','support'], ['orders','analytics']]
+      }
+    ]
+  },
+
+  'home-chef': {
+    title: 'Home Chef',
+    steps: [
+      {
+        title: 'Select meals',
+        desc: 'User selects meals/recipes and plan.',
+        active: ['client','auth','profile','plans','recipes'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','plans'], ['plans','recipes']]
+      },
+      {
+        title: 'Checkout + payment',
+        desc: 'Checkout creates order and processes payment.',
+        active: ['cart','checkout','payments','orders'],
+        edges: [['recipes','cart'], ['cart','checkout'], ['checkout','payments'], ['checkout','orders']]
+      },
+      {
+        title: 'Fulfillment + shipping',
+        desc: 'Fulfillment packs kits from inventory; shipping delivered.',
+        active: ['inventory','fulfillment','shipping'],
+        edges: [['orders','inventory'], ['inventory','fulfillment'], ['fulfillment','shipping']]
+      },
+      {
+        title: 'Notifications + support + analytics',
+        desc: 'Notifications update status; support resolves issues; analytics tracks KPIs.',
+        active: ['notifications','support','analytics'],
+        edges: [['orders','notifications'], ['client','support'], ['orders','analytics']]
+      }
+    ]
+  },
+
+  rome2rio: {
+    title: 'Rome2Rio',
+    steps: [
+      {
+        title: 'Search routes',
+        desc: 'User searches multi-modal routes between locations.',
+        active: ['client','auth','search','routes'],
+        edges: [['client','auth'], ['auth','search'], ['search','routes']]
+      },
+      {
+        title: 'Provider availability + pricing',
+        desc: 'Providers supply availability; pricing computed.',
+        active: ['providers','availability','pricing'],
+        edges: [['routes','providers'], ['providers','availability'], ['availability','pricing']]
+      },
+      {
+        title: 'Booking + payment',
+        desc: 'Booking created and payment processed.',
+        active: ['booking','payments','tickets'],
+        edges: [['pricing','booking'], ['booking','payments'], ['booking','tickets']]
+      },
+      {
+        title: 'Notifications + support + analytics',
+        desc: 'Notifications deliver ticket/updates; support handles changes; analytics tracks funnel.',
+        active: ['notifications','support','analytics'],
+        edges: [['tickets','notifications'], ['client','support'], ['search','analytics']]
+      }
+    ]
+  },
+
+  omio: {
+    title: 'Omio',
+    steps: [
+      {
+        title: 'Search inventory',
+        desc: 'User searches train/bus/flight inventory via providers.',
+        active: ['client','auth','search','inventory','providers'],
+        edges: [['client','auth'], ['auth','search'], ['search','inventory'], ['inventory','providers']]
+      },
+      {
+        title: 'Pricing + booking',
+        desc: 'Pricing computed and booking created.',
+        active: ['pricing','booking','payments'],
+        edges: [['providers','pricing'], ['pricing','booking'], ['booking','payments']]
+      },
+      {
+        title: 'Tickets + account',
+        desc: 'Tickets issued and stored in account.',
+        active: ['tickets','account'],
+        edges: [['booking','tickets'], ['tickets','account']]
+      },
+      {
+        title: 'Notifications + support + analytics',
+        desc: 'Notifications deliver updates; support handles changes; analytics tracks funnel.',
+        active: ['notifications','support','analytics'],
+        edges: [['tickets','notifications'], ['client','support'], ['search','analytics']]
+      }
+    ]
+  },
+
+  agoda: {
+    title: 'Agoda',
+    steps: [
+      {
+        title: 'Search hotels',
+        desc: 'User searches hotel inventory and availability via partners.',
+        active: ['client','auth','search','inventory','partners'],
+        edges: [['client','auth'], ['auth','search'], ['search','inventory'], ['inventory','partners']]
+      },
+      {
+        title: 'Pricing + booking + payment',
+        desc: 'Pricing computed; booking created; payment processed.',
+        active: ['pricing','booking','payments'],
+        edges: [['partners','pricing'], ['pricing','booking'], ['booking','payments']]
+      },
+      {
+        title: 'Confirmation + notifications',
+        desc: 'Confirmation generated and notifications sent.',
+        active: ['confirmation','notifications'],
+        edges: [['booking','confirmation'], ['confirmation','notifications']]
+      },
+      {
+        title: 'Support + analytics',
+        desc: 'Support handles changes/cancellations; analytics tracks conversion.',
+        active: ['support','analytics'],
+        edges: [['client','support'], ['search','analytics']]
+      }
+    ]
+  },
+
   chime: {
     title: 'Chime',
     steps: [

@@ -15876,6 +15876,558 @@ Object.assign(SYSTEM_LAYOUTS, {
   }
 });
 
+// ----- Batch 64 (System + Architecture - QSR + meal kits + travel search/booking) -----
+
+Object.assign(SYSTEM_LAYOUTS, {
+  'dunkin-app': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','stores','menu','cart','checkout','orders','pickup','loyalty','offers','payments','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      stores: { x: 860, y: 180, label: 'Stores', colorKey: 'store' },
+      menu: { x: 1100, y: 180, label: 'Menu', colorKey: 'store' },
+      cart: { x: 620, y: 320, label: 'Cart', colorKey: 'store' },
+      checkout: { x: 860, y: 320, label: 'Checkout', colorKey: 'api' },
+      orders: { x: 1100, y: 320, label: 'Orders', colorKey: 'store' },
+      pickup: { x: 1100, y: 460, label: 'Pickup', colorKey: 'external' },
+      loyalty: { x: 620, y: 460, label: 'Loyalty', colorKey: 'store' },
+      offers: { x: 860, y: 460, label: 'Offers', colorKey: 'store' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'blue-apron': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','plans','recipes','cart','checkout','orders','warehouse','inventory','shipping','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      plans: { x: 860, y: 180, label: 'Plans', colorKey: 'store' },
+      recipes: { x: 1100, y: 180, label: 'Recipes', colorKey: 'store' },
+      cart: { x: 620, y: 320, label: 'Cart', colorKey: 'store' },
+      checkout: { x: 860, y: 320, label: 'Checkout', colorKey: 'api' },
+      orders: { x: 1100, y: 320, label: 'Orders', colorKey: 'store' },
+      warehouse: { x: 620, y: 460, label: 'Warehouse', colorKey: 'external' },
+      inventory: { x: 860, y: 460, label: 'Inventory', colorKey: 'store' },
+      shipping: { x: 1100, y: 460, label: 'Shipping', colorKey: 'external' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 380, y: 600, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  hellofresh: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','plans','recipes','preferences','cart','checkout','orders','fulfillment','inventory','shipping','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      plans: { x: 860, y: 180, label: 'Plans', colorKey: 'store' },
+      recipes: { x: 1100, y: 180, label: 'Recipes', colorKey: 'store' },
+      preferences: { x: 620, y: 320, label: 'Prefs', colorKey: 'store' },
+      cart: { x: 860, y: 320, label: 'Cart', colorKey: 'store' },
+      checkout: { x: 1100, y: 320, label: 'Checkout', colorKey: 'api' },
+      orders: { x: 1100, y: 460, label: 'Orders', colorKey: 'store' },
+      fulfillment: { x: 860, y: 460, label: 'Fulfillment', colorKey: 'external' },
+      inventory: { x: 620, y: 460, label: 'Inventory', colorKey: 'store' },
+      shipping: { x: 620, y: 600, label: 'Shipping', colorKey: 'external' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 380, y: 600, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  freshly: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','catalog','meals','cart','checkout','orders','kitchen','inventory','shipping','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      catalog: { x: 860, y: 180, label: 'Catalog', colorKey: 'store' },
+      meals: { x: 1100, y: 180, label: 'Meals', colorKey: 'store' },
+      cart: { x: 620, y: 320, label: 'Cart', colorKey: 'store' },
+      checkout: { x: 860, y: 320, label: 'Checkout', colorKey: 'api' },
+      orders: { x: 1100, y: 320, label: 'Orders', colorKey: 'store' },
+      kitchen: { x: 860, y: 460, label: 'Kitchen', colorKey: 'external' },
+      inventory: { x: 620, y: 460, label: 'Inventory', colorKey: 'store' },
+      shipping: { x: 1100, y: 460, label: 'Shipping', colorKey: 'external' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 380, y: 600, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  gousto: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','plans','recipes','cart','checkout','orders','fulfillment','inventory','shipping','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      plans: { x: 860, y: 180, label: 'Plans', colorKey: 'store' },
+      recipes: { x: 1100, y: 180, label: 'Recipes', colorKey: 'store' },
+      cart: { x: 620, y: 320, label: 'Cart', colorKey: 'store' },
+      checkout: { x: 860, y: 320, label: 'Checkout', colorKey: 'api' },
+      orders: { x: 1100, y: 320, label: 'Orders', colorKey: 'store' },
+      fulfillment: { x: 860, y: 460, label: 'Fulfillment', colorKey: 'external' },
+      inventory: { x: 620, y: 460, label: 'Inventory', colorKey: 'store' },
+      shipping: { x: 1100, y: 460, label: 'Shipping', colorKey: 'external' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 380, y: 600, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  everyplate: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','plans','recipes','cart','checkout','orders','fulfillment','inventory','shipping','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      plans: { x: 860, y: 180, label: 'Plans', colorKey: 'store' },
+      recipes: { x: 1100, y: 180, label: 'Recipes', colorKey: 'store' },
+      cart: { x: 620, y: 320, label: 'Cart', colorKey: 'store' },
+      checkout: { x: 860, y: 320, label: 'Checkout', colorKey: 'api' },
+      orders: { x: 1100, y: 320, label: 'Orders', colorKey: 'store' },
+      fulfillment: { x: 860, y: 460, label: 'Fulfillment', colorKey: 'external' },
+      inventory: { x: 620, y: 460, label: 'Inventory', colorKey: 'store' },
+      shipping: { x: 1100, y: 460, label: 'Shipping', colorKey: 'external' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 380, y: 600, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'home-chef': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','plans','recipes','cart','checkout','orders','fulfillment','inventory','shipping','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      plans: { x: 860, y: 180, label: 'Plans', colorKey: 'store' },
+      recipes: { x: 1100, y: 180, label: 'Recipes', colorKey: 'store' },
+      cart: { x: 620, y: 320, label: 'Cart', colorKey: 'store' },
+      checkout: { x: 860, y: 320, label: 'Checkout', colorKey: 'api' },
+      orders: { x: 1100, y: 320, label: 'Orders', colorKey: 'store' },
+      fulfillment: { x: 860, y: 460, label: 'Fulfillment', colorKey: 'external' },
+      inventory: { x: 620, y: 460, label: 'Inventory', colorKey: 'store' },
+      shipping: { x: 1100, y: 460, label: 'Shipping', colorKey: 'external' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 380, y: 600, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  rome2rio: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','search','routes','providers','pricing','availability','booking','payments','tickets','notifications','support','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      search: { x: 620, y: 180, label: 'Search', colorKey: 'api' },
+      routes: { x: 860, y: 180, label: 'Routes', colorKey: 'api' },
+      providers: { x: 1100, y: 180, label: 'Providers', colorKey: 'external' },
+      pricing: { x: 860, y: 320, label: 'Pricing', colorKey: 'api' },
+      availability: { x: 1100, y: 320, label: 'Availability', colorKey: 'external' },
+      booking: { x: 620, y: 320, label: 'Booking', colorKey: 'api' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      tickets: { x: 860, y: 460, label: 'Tickets', colorKey: 'store' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      support: { x: 620, y: 460, label: 'Support', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  omio: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','search','inventory','providers','pricing','booking','payments','tickets','account','notifications','support','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      search: { x: 620, y: 180, label: 'Search', colorKey: 'api' },
+      inventory: { x: 860, y: 180, label: 'Inventory', colorKey: 'api' },
+      providers: { x: 1100, y: 180, label: 'Providers', colorKey: 'external' },
+      pricing: { x: 860, y: 320, label: 'Pricing', colorKey: 'api' },
+      booking: { x: 620, y: 320, label: 'Booking', colorKey: 'api' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      tickets: { x: 1100, y: 320, label: 'Tickets', colorKey: 'store' },
+      account: { x: 620, y: 460, label: 'Account', colorKey: 'store' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      support: { x: 860, y: 460, label: 'Support', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  agoda: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','search','inventory','partners','pricing','booking','payments','confirmation','support','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      search: { x: 620, y: 180, label: 'Search', colorKey: 'api' },
+      inventory: { x: 860, y: 180, label: 'Inventory', colorKey: 'api' },
+      partners: { x: 1100, y: 180, label: 'Partners', colorKey: 'external' },
+      pricing: { x: 860, y: 320, label: 'Pricing', colorKey: 'api' },
+      booking: { x: 620, y: 320, label: 'Booking', colorKey: 'api' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      confirmation: { x: 1100, y: 320, label: 'Confirm', colorKey: 'store' },
+      support: { x: 620, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  }
+});
+
+Object.assign(ARCH_LAYOUTS, {
+  'dunkin-app': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Dunkin App',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','stores','menu','cart','checkout','orders','pickup','loyalty','offers','payments','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      stores: { x: 880, y: 160, label: 'Stores' },
+      menu: { x: 1160, y: 160, label: 'Menu' },
+      cart: { x: 600, y: 300, label: 'Cart' },
+      checkout: { x: 880, y: 300, label: 'Checkout' },
+      orders: { x: 1160, y: 300, label: 'Orders' },
+      pickup: { x: 1160, y: 440, label: 'Pickup' },
+      loyalty: { x: 600, y: 440, label: 'Loyalty' },
+      offers: { x: 880, y: 440, label: 'Offers' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profile','profile'], ['profile','stores','stores']);
+      if(stepIdx===2) e.push(['stores','menu','menu'], ['menu','cart','cart']);
+      if(stepIdx===3) e.push(['cart','checkout','checkout'], ['checkout','payments','pay'], ['checkout','orders','order']);
+      if(stepIdx===4) e.push(['orders','pickup','pickup'], ['orders','notifications','notify']);
+      if(stepIdx===5) e.push(['orders','loyalty','loyalty'], ['offers','cart','offer']);
+      if(stepIdx===6) e.push(['orders','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'blue-apron': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Blue Apron',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','plans','recipes','cart','checkout','orders','warehouse','inventory','shipping','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      plans: { x: 880, y: 160, label: 'Plans' },
+      recipes: { x: 1160, y: 160, label: 'Recipes' },
+      cart: { x: 600, y: 300, label: 'Cart' },
+      checkout: { x: 880, y: 300, label: 'Checkout' },
+      orders: { x: 1160, y: 300, label: 'Orders' },
+      warehouse: { x: 600, y: 440, label: 'Warehouse' },
+      inventory: { x: 880, y: 440, label: 'Inventory' },
+      shipping: { x: 1160, y: 440, label: 'Shipping' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 320, y: 580, label: 'Notify' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profile','profile'], ['profile','plans','plan']);
+      if(stepIdx===2) e.push(['plans','recipes','recipe'], ['recipes','cart','cart']);
+      if(stepIdx===3) e.push(['cart','checkout','checkout'], ['checkout','payments','pay'], ['checkout','orders','order']);
+      if(stepIdx===4) e.push(['orders','inventory','alloc'], ['inventory','warehouse','pick']);
+      if(stepIdx===5) e.push(['warehouse','shipping','ship'], ['orders','notifications','notify']);
+      if(stepIdx===6) e.push(['orders','analytics','analytics']);
+      return e;
+    }
+  },
+
+  hellofresh: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'HelloFresh',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','plans','recipes','preferences','cart','checkout','orders','fulfillment','inventory','shipping','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      plans: { x: 880, y: 160, label: 'Plans' },
+      recipes: { x: 1160, y: 160, label: 'Recipes' },
+      preferences: { x: 600, y: 300, label: 'Prefs' },
+      cart: { x: 880, y: 300, label: 'Cart' },
+      checkout: { x: 1160, y: 300, label: 'Checkout' },
+      orders: { x: 1160, y: 440, label: 'Orders' },
+      fulfillment: { x: 880, y: 440, label: 'Fulfillment' },
+      inventory: { x: 600, y: 440, label: 'Inventory' },
+      shipping: { x: 600, y: 580, label: 'Shipping' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 320, y: 580, label: 'Notify' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profile','profile'], ['profile','preferences','prefs']);
+      if(stepIdx===2) e.push(['preferences','plans','plan'], ['plans','recipes','recipe']);
+      if(stepIdx===3) e.push(['recipes','cart','cart'], ['cart','checkout','checkout'], ['checkout','payments','pay']);
+      if(stepIdx===4) e.push(['checkout','orders','order'], ['orders','inventory','alloc']);
+      if(stepIdx===5) e.push(['inventory','fulfillment','pack'], ['fulfillment','shipping','ship']);
+      if(stepIdx===6) e.push(['orders','notifications','notify'], ['orders','analytics','analytics']);
+      return e;
+    }
+  },
+
+  freshly: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Freshly',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','catalog','meals','cart','checkout','orders','kitchen','inventory','shipping','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      catalog: { x: 880, y: 160, label: 'Catalog' },
+      meals: { x: 1160, y: 160, label: 'Meals' },
+      cart: { x: 600, y: 300, label: 'Cart' },
+      checkout: { x: 880, y: 300, label: 'Checkout' },
+      orders: { x: 1160, y: 300, label: 'Orders' },
+      kitchen: { x: 880, y: 440, label: 'Kitchen' },
+      inventory: { x: 600, y: 440, label: 'Inventory' },
+      shipping: { x: 1160, y: 440, label: 'Shipping' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 320, y: 580, label: 'Notify' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','catalog','browse'], ['catalog','meals','meal']);
+      if(stepIdx===2) e.push(['meals','cart','cart'], ['cart','checkout','checkout']);
+      if(stepIdx===3) e.push(['checkout','payments','pay'], ['checkout','orders','order']);
+      if(stepIdx===4) e.push(['orders','inventory','alloc'], ['inventory','kitchen','cook']);
+      if(stepIdx===5) e.push(['kitchen','shipping','ship'], ['orders','notifications','notify']);
+      if(stepIdx===6) e.push(['orders','analytics','analytics']);
+      return e;
+    }
+  },
+
+  gousto: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Gousto',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','plans','recipes','cart','checkout','orders','fulfillment','inventory','shipping','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      plans: { x: 880, y: 160, label: 'Plans' },
+      recipes: { x: 1160, y: 160, label: 'Recipes' },
+      cart: { x: 600, y: 300, label: 'Cart' },
+      checkout: { x: 880, y: 300, label: 'Checkout' },
+      orders: { x: 1160, y: 300, label: 'Orders' },
+      fulfillment: { x: 880, y: 440, label: 'Fulfillment' },
+      inventory: { x: 600, y: 440, label: 'Inventory' },
+      shipping: { x: 1160, y: 440, label: 'Shipping' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 320, y: 580, label: 'Notify' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','plans','plan'], ['plans','recipes','recipe']);
+      if(stepIdx===2) e.push(['recipes','cart','cart'], ['cart','checkout','checkout']);
+      if(stepIdx===3) e.push(['checkout','payments','pay'], ['checkout','orders','order']);
+      if(stepIdx===4) e.push(['orders','inventory','alloc'], ['inventory','fulfillment','pack']);
+      if(stepIdx===5) e.push(['fulfillment','shipping','ship'], ['orders','notifications','notify']);
+      if(stepIdx===6) e.push(['orders','analytics','analytics']);
+      return e;
+    }
+  },
+
+  everyplate: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'EveryPlate',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','plans','recipes','cart','checkout','orders','fulfillment','inventory','shipping','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      plans: { x: 880, y: 160, label: 'Plans' },
+      recipes: { x: 1160, y: 160, label: 'Recipes' },
+      cart: { x: 600, y: 300, label: 'Cart' },
+      checkout: { x: 880, y: 300, label: 'Checkout' },
+      orders: { x: 1160, y: 300, label: 'Orders' },
+      fulfillment: { x: 880, y: 440, label: 'Fulfillment' },
+      inventory: { x: 600, y: 440, label: 'Inventory' },
+      shipping: { x: 1160, y: 440, label: 'Shipping' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 320, y: 580, label: 'Notify' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','plans','plan'], ['plans','recipes','recipe']);
+      if(stepIdx===2) e.push(['recipes','cart','cart'], ['cart','checkout','checkout']);
+      if(stepIdx===3) e.push(['checkout','payments','pay'], ['checkout','orders','order']);
+      if(stepIdx===4) e.push(['orders','inventory','alloc'], ['inventory','fulfillment','pack']);
+      if(stepIdx===5) e.push(['fulfillment','shipping','ship'], ['orders','notifications','notify']);
+      if(stepIdx===6) e.push(['orders','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'home-chef': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Home Chef',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','plans','recipes','cart','checkout','orders','fulfillment','inventory','shipping','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      plans: { x: 880, y: 160, label: 'Plans' },
+      recipes: { x: 1160, y: 160, label: 'Recipes' },
+      cart: { x: 600, y: 300, label: 'Cart' },
+      checkout: { x: 880, y: 300, label: 'Checkout' },
+      orders: { x: 1160, y: 300, label: 'Orders' },
+      fulfillment: { x: 880, y: 440, label: 'Fulfillment' },
+      inventory: { x: 600, y: 440, label: 'Inventory' },
+      shipping: { x: 1160, y: 440, label: 'Shipping' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 320, y: 580, label: 'Notify' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','plans','plan'], ['plans','recipes','recipe']);
+      if(stepIdx===2) e.push(['recipes','cart','cart'], ['cart','checkout','checkout']);
+      if(stepIdx===3) e.push(['checkout','payments','pay'], ['checkout','orders','order']);
+      if(stepIdx===4) e.push(['orders','inventory','alloc'], ['inventory','fulfillment','pack']);
+      if(stepIdx===5) e.push(['fulfillment','shipping','ship'], ['orders','notifications','notify']);
+      if(stepIdx===6) e.push(['orders','analytics','analytics']);
+      return e;
+    }
+  },
+
+  rome2rio: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Rome2Rio',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','search','routes','providers','pricing','availability','booking','payments','tickets','notifications','support','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      search: { x: 600, y: 160, label: 'Search' },
+      routes: { x: 880, y: 160, label: 'Routes' },
+      providers: { x: 1160, y: 160, label: 'Providers' },
+      pricing: { x: 880, y: 300, label: 'Pricing' },
+      availability: { x: 1160, y: 300, label: 'Availability' },
+      booking: { x: 600, y: 300, label: 'Booking' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      tickets: { x: 880, y: 440, label: 'Tickets' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      support: { x: 600, y: 440, label: 'Support' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','search','search'], ['search','routes','routes']);
+      if(stepIdx===2) e.push(['routes','providers','provider'], ['providers','availability','avail']);
+      if(stepIdx===3) e.push(['availability','pricing','price'], ['pricing','booking','book']);
+      if(stepIdx===4) e.push(['booking','payments','pay'], ['booking','tickets','ticket']);
+      if(stepIdx===5) e.push(['tickets','notifications','notify'], ['support','client','support']);
+      if(stepIdx===6) e.push(['search','analytics','analytics']);
+      return e;
+    }
+  },
+
+  omio: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Omio',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','search','inventory','providers','pricing','booking','payments','tickets','account','notifications','support','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      search: { x: 600, y: 160, label: 'Search' },
+      inventory: { x: 880, y: 160, label: 'Inventory' },
+      providers: { x: 1160, y: 160, label: 'Providers' },
+      pricing: { x: 880, y: 300, label: 'Pricing' },
+      booking: { x: 600, y: 300, label: 'Booking' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      tickets: { x: 1160, y: 300, label: 'Tickets' },
+      account: { x: 600, y: 440, label: 'Account' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      support: { x: 880, y: 440, label: 'Support' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','search','search'], ['search','inventory','inv']);
+      if(stepIdx===2) e.push(['inventory','providers','provider'], ['providers','pricing','price']);
+      if(stepIdx===3) e.push(['pricing','booking','book'], ['booking','payments','pay']);
+      if(stepIdx===4) e.push(['booking','tickets','ticket'], ['tickets','account','acct']);
+      if(stepIdx===5) e.push(['tickets','notifications','notify'], ['support','client','support']);
+      if(stepIdx===6) e.push(['search','analytics','analytics']);
+      return e;
+    }
+  },
+
+  agoda: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Agoda',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','search','inventory','partners','pricing','booking','payments','confirmation','support','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      search: { x: 600, y: 160, label: 'Search' },
+      inventory: { x: 880, y: 160, label: 'Inventory' },
+      partners: { x: 1160, y: 160, label: 'Partners' },
+      pricing: { x: 880, y: 300, label: 'Pricing' },
+      booking: { x: 600, y: 300, label: 'Booking' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      confirmation: { x: 1160, y: 300, label: 'Confirm' },
+      support: { x: 600, y: 440, label: 'Support' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      analytics: { x: 880, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','search','search'], ['search','inventory','inv']);
+      if(stepIdx===2) e.push(['inventory','partners','partner'], ['partners','pricing','price']);
+      if(stepIdx===3) e.push(['pricing','booking','book'], ['booking','payments','pay']);
+      if(stepIdx===4) e.push(['booking','confirmation','confirm'], ['confirmation','notifications','notify']);
+      if(stepIdx===5) e.push(['support','client','support']);
+      if(stepIdx===6) e.push(['search','analytics','analytics']);
+      return e;
+    }
+  }
+});
+
 Object.assign(ARCH_LAYOUTS, {
   'zomato-business': {
     viewBox: '0 0 1860 820',
