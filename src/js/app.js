@@ -10255,6 +10255,607 @@ Object.assign(ARCH_LAYOUTS, {
   }
 });
 
+// ----- Batch 32 (Architecture - from user selection) -----
+
+Object.assign(ARCH_LAYOUTS, {
+  ola: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Ola Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','api','auth','dispatch','location','match','routing','realtime','payments','ledger','ratings','support','safety'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Rider App' },
+      driver: { x: 40, y: 340, label: 'Driver App' },
+      maps: { x: 320, y: 140, label: 'Maps' },
+      pricing: { x: 320, y: 240, label: 'Pricing/ETA' },
+      api: { x: 320, y: 340, label: 'API' },
+      auth: { x: 600, y: 340, label: 'Auth' },
+      dispatch: { x: 600, y: 240, label: 'Dispatch' },
+      location: { x: 600, y: 140, label: 'Location' },
+      match: { x: 880, y: 240, label: 'Matching' },
+      routing: { x: 880, y: 140, label: 'Routing' },
+      realtime: { x: 1160, y: 240, label: 'Realtime' },
+      payments: { x: 1160, y: 140, label: 'Payments' },
+      ledger: { x: 1440, y: 140, label: 'Ledger' },
+      ratings: { x: 1440, y: 340, label: 'Ratings' },
+      support: { x: 1160, y: 340, label: 'Support' },
+      safety: { x: 880, y: 340, label: 'Safety' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','maps','geo'], ['client','pricing','estimate']);
+      if (stepIdx === 2) e.push(['client','api','request'], ['api','auth','auth'], ['api','dispatch','dispatch']);
+      if (stepIdx === 3) e.push(['driver','location','gps'], ['location','dispatch','nearby'], ['dispatch','match','match']);
+      if (stepIdx === 4) e.push(['match','routing','route'], ['routing','maps','tiles']);
+      if (stepIdx === 5) e.push(['driver','location','gps'], ['location','realtime','stream'], ['realtime','client','update']);
+      if (stepIdx === 6) e.push(['pricing','payments','charge'], ['payments','ledger','post']);
+      if (stepIdx === 7) e.push(['ledger','ratings','rate'], ['ledger','support','support'], ['support','safety','safety']);
+      return e;
+    }
+  },
+
+  airbnb: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Airbnb Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','search','rank','catalog','availability','pricing','booking','auth','risk','payments','ledger','notify','host','messages','itinerary','support','changes','payouts','reviews','trust'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Guest App' },
+      search: { x: 320, y: 160, label: 'Search' },
+      rank: { x: 600, y: 160, label: 'Ranking' },
+      catalog: { x: 880, y: 160, label: 'Listings' },
+      availability: { x: 1160, y: 160, label: 'Availability' },
+      pricing: { x: 1440, y: 160, label: 'Pricing' },
+      booking: { x: 600, y: 300, label: 'Booking' },
+      auth: { x: 320, y: 300, label: 'Identity' },
+      risk: { x: 880, y: 300, label: 'Risk' },
+      payments: { x: 320, y: 420, label: 'Payments' },
+      ledger: { x: 40, y: 420, label: 'Ledger' },
+      host: { x: 1440, y: 300, label: 'Host' },
+      notify: { x: 1160, y: 420, label: 'Notify' },
+      messages: { x: 1440, y: 420, label: 'Messages' },
+      itinerary: { x: 880, y: 420, label: 'Itinerary' },
+      support: { x: 600, y: 540, label: 'Support' },
+      changes: { x: 320, y: 540, label: 'Changes' },
+      payouts: { x: 40, y: 540, label: 'Payouts' },
+      reviews: { x: 880, y: 540, label: 'Reviews' },
+      trust: { x: 1160, y: 540, label: 'Trust' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','search','query'], ['search','rank','rank']);
+      if (stepIdx === 2) e.push(['rank','catalog','listing'], ['catalog','availability','check'], ['catalog','pricing','price']);
+      if (stepIdx === 3) e.push(['client','booking','request'], ['booking','auth','id'], ['booking','risk','risk']);
+      if (stepIdx === 4) e.push(['booking','payments','pay'], ['payments','risk','risk'], ['payments','ledger','ledger']);
+      if (stepIdx === 5) e.push(['booking','notify','notify'], ['notify','host','host'], ['host','messages','msg']);
+      if (stepIdx === 6) e.push(['booking','itinerary','itinerary'], ['itinerary','client','serve'], ['booking','support','support'], ['booking','changes','change']);
+      if (stepIdx === 7) e.push(['ledger','payouts','payout'], ['booking','reviews','review'], ['reviews','trust','trust']);
+      return e;
+    }
+  },
+
+  'booking-com': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Booking.com Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','search','rank','inventory','pricing','policies','reservation','confirm','payments','fraud','ledger','partner','notify','changes','refunds','reviews','loyalty'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Guest App' },
+      search: { x: 320, y: 160, label: 'Search' },
+      rank: { x: 600, y: 160, label: 'Ranking' },
+      inventory: { x: 880, y: 160, label: 'Inventory' },
+      pricing: { x: 1160, y: 160, label: 'Rates' },
+      policies: { x: 1440, y: 160, label: 'Policies' },
+      reservation: { x: 600, y: 300, label: 'Reservation' },
+      confirm: { x: 880, y: 300, label: 'Confirm' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      fraud: { x: 320, y: 420, label: 'Fraud' },
+      ledger: { x: 40, y: 300, label: 'Ledger' },
+      partner: { x: 1160, y: 300, label: 'Property Partner' },
+      notify: { x: 1440, y: 300, label: 'Notify' },
+      changes: { x: 880, y: 420, label: 'Changes' },
+      refunds: { x: 600, y: 420, label: 'Refunds' },
+      reviews: { x: 1160, y: 420, label: 'Reviews' },
+      loyalty: { x: 1440, y: 420, label: 'Loyalty' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','search','query'], ['search','rank','rank']);
+      if (stepIdx === 2) e.push(['rank','inventory','inv'], ['inventory','pricing','rates'], ['inventory','policies','policy']);
+      if (stepIdx === 3) e.push(['client','reservation','reserve'], ['reservation','inventory','hold'], ['reservation','confirm','confirm']);
+      if (stepIdx === 4) e.push(['reservation','payments','pay'], ['payments','fraud','fraud'], ['payments','ledger','ledger']);
+      if (stepIdx === 5) e.push(['confirm','notify','notify'], ['notify','partner','partner'], ['notify','client','client']);
+      if (stepIdx === 6) e.push(['reservation','changes','change'], ['changes','policies','policy'], ['changes','refunds','refund']);
+      if (stepIdx === 7) e.push(['reservation','reviews','reviews'], ['reviews','rank','rank'], ['reservation','loyalty','loyalty']);
+      return e;
+    }
+  },
+
+  makemytrip: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'MakeMyTrip Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','search','aggregator','revalidate','inventory','pricing','checkout','auth','risk','payments','gateway','ledger','booking','partner','confirm','ticketing','itinerary','notify','changes','refunds','support'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      search: { x: 320, y: 160, label: 'Search' },
+      aggregator: { x: 600, y: 160, label: 'Aggregator' },
+      revalidate: { x: 880, y: 160, label: 'Revalidate' },
+      inventory: { x: 1160, y: 160, label: 'Inventory' },
+      pricing: { x: 1440, y: 160, label: 'Pricing' },
+      checkout: { x: 600, y: 300, label: 'Checkout' },
+      auth: { x: 320, y: 300, label: 'Identity' },
+      risk: { x: 880, y: 300, label: 'Risk' },
+      payments: { x: 320, y: 420, label: 'Payments' },
+      gateway: { x: 600, y: 420, label: 'Gateway' },
+      ledger: { x: 40, y: 420, label: 'Ledger' },
+      booking: { x: 880, y: 420, label: 'Booking' },
+      partner: { x: 1160, y: 420, label: 'Partner' },
+      confirm: { x: 1440, y: 420, label: 'Confirm' },
+      ticketing: { x: 880, y: 540, label: 'Ticketing' },
+      itinerary: { x: 600, y: 540, label: 'Itinerary' },
+      notify: { x: 320, y: 540, label: 'Notify' },
+      changes: { x: 880, y: 660, label: 'Changes' },
+      refunds: { x: 600, y: 660, label: 'Refunds' },
+      support: { x: 320, y: 660, label: 'Support' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','search','query'], ['search','aggregator','agg']);
+      if (stepIdx === 2) e.push(['aggregator','revalidate','reval'], ['revalidate','inventory','inv'], ['revalidate','pricing','price']);
+      if (stepIdx === 3) e.push(['client','checkout','details'], ['checkout','auth','id'], ['checkout','risk','risk']);
+      if (stepIdx === 4) e.push(['checkout','payments','pay'], ['payments','gateway','gateway'], ['payments','ledger','ledger']);
+      if (stepIdx === 5) e.push(['payments','booking','book'], ['booking','partner','partner'], ['partner','confirm','confirm']);
+      if (stepIdx === 6) e.push(['confirm','ticketing','ticket'], ['ticketing','itinerary','itinerary'], ['itinerary','notify','notify']);
+      if (stepIdx === 7) e.push(['booking','changes','change'], ['changes','refunds','refund'], ['changes','support','support']);
+      return e;
+    }
+  },
+
+  lyft: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Lyft Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','api','auth','dispatch','location','match','routing','realtime','payments','ledger','ratings','support','safety'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Rider App' },
+      driver: { x: 40, y: 340, label: 'Driver App' },
+      maps: { x: 320, y: 140, label: 'Maps' },
+      pricing: { x: 320, y: 240, label: 'Pricing/ETA' },
+      api: { x: 320, y: 340, label: 'API' },
+      auth: { x: 600, y: 340, label: 'Auth' },
+      dispatch: { x: 600, y: 240, label: 'Dispatch' },
+      location: { x: 600, y: 140, label: 'Location' },
+      match: { x: 880, y: 240, label: 'Matching' },
+      routing: { x: 880, y: 140, label: 'Routing' },
+      realtime: { x: 1160, y: 240, label: 'Realtime' },
+      payments: { x: 1160, y: 140, label: 'Payments' },
+      ledger: { x: 1440, y: 140, label: 'Ledger' },
+      ratings: { x: 1440, y: 340, label: 'Ratings' },
+      support: { x: 1160, y: 340, label: 'Support' },
+      safety: { x: 880, y: 340, label: 'Safety' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','maps','geo'], ['client','pricing','estimate']);
+      if (stepIdx === 2) e.push(['client','api','request'], ['api','auth','auth'], ['api','dispatch','dispatch']);
+      if (stepIdx === 3) e.push(['driver','location','gps'], ['location','dispatch','nearby'], ['dispatch','match','match']);
+      if (stepIdx === 4) e.push(['match','routing','route'], ['routing','maps','tiles']);
+      if (stepIdx === 5) e.push(['driver','location','gps'], ['location','realtime','stream'], ['realtime','client','update']);
+      if (stepIdx === 6) e.push(['pricing','payments','charge'], ['payments','ledger','post']);
+      if (stepIdx === 7) e.push(['ledger','ratings','rate'], ['ledger','support','support'], ['support','safety','safety']);
+      return e;
+    }
+  },
+
+  grab: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Grab Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','api','auth','dispatch','location','match','routing','realtime','payments','ledger','safety','support'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Rider App' },
+      driver: { x: 40, y: 340, label: 'Driver App' },
+      maps: { x: 320, y: 140, label: 'Maps' },
+      pricing: { x: 320, y: 240, label: 'Pricing/ETA' },
+      api: { x: 320, y: 340, label: 'API' },
+      auth: { x: 600, y: 340, label: 'Auth' },
+      dispatch: { x: 600, y: 240, label: 'Dispatch' },
+      location: { x: 600, y: 140, label: 'Location' },
+      match: { x: 880, y: 240, label: 'Matching' },
+      routing: { x: 880, y: 140, label: 'Routing' },
+      realtime: { x: 1160, y: 240, label: 'Realtime' },
+      payments: { x: 1160, y: 140, label: 'Payments' },
+      ledger: { x: 1440, y: 140, label: 'Ledger' },
+      safety: { x: 880, y: 340, label: 'Safety' },
+      support: { x: 1160, y: 340, label: 'Support' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','maps','geo'], ['client','pricing','estimate']);
+      if (stepIdx === 2) e.push(['client','api','request'], ['api','auth','auth'], ['api','dispatch','dispatch']);
+      if (stepIdx === 3) e.push(['driver','location','gps'], ['location','dispatch','nearby'], ['dispatch','match','match']);
+      if (stepIdx === 4) e.push(['match','routing','route'], ['routing','maps','tiles']);
+      if (stepIdx === 5) e.push(['driver','location','gps'], ['location','realtime','stream'], ['realtime','client','update']);
+      if (stepIdx === 6) e.push(['pricing','payments','charge'], ['payments','ledger','post']);
+      if (stepIdx === 7) e.push(['ledger','support','support'], ['support','safety','safety']);
+      return e;
+    }
+  },
+
+  blablacar: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'BlaBlaCar Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','search','matching','pricing','booking','payments','ledger','itinerary','chat','realtime','ratings','support','fraud','notify'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      search: { x: 320, y: 160, label: 'Search' },
+      matching: { x: 600, y: 160, label: 'Matching' },
+      pricing: { x: 880, y: 160, label: 'Pricing' },
+      booking: { x: 600, y: 300, label: 'Booking' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      ledger: { x: 40, y: 300, label: 'Ledger' },
+      itinerary: { x: 880, y: 300, label: 'Itinerary' },
+      chat: { x: 320, y: 440, label: 'Chat' },
+      realtime: { x: 600, y: 440, label: 'Realtime' },
+      ratings: { x: 880, y: 440, label: 'Ratings' },
+      fraud: { x: 1160, y: 300, label: 'Fraud' },
+      support: { x: 1160, y: 440, label: 'Support' },
+      notify: { x: 600, y: 580, label: 'Notify' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','search','search'], ['search','matching','match']);
+      if (stepIdx === 2) e.push(['matching','pricing','price'], ['client','booking','book']);
+      if (stepIdx === 3) e.push(['booking','payments','pay'], ['payments','ledger','post']);
+      if (stepIdx === 4) e.push(['booking','itinerary','itinerary'], ['itinerary','client','client']);
+      if (stepIdx === 5) e.push(['client','chat','chat'], ['chat','realtime','rt'], ['realtime','notify','notify']);
+      if (stepIdx === 6) e.push(['client','ratings','rate'], ['ratings','support','support']);
+      if (stepIdx === 7) e.push(['booking','fraud','fraud']);
+      return e;
+    }
+  },
+
+  skyscanner: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Skyscanner Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','search','cache','aggregator','partners','pricing','revalidate','ranking','ads','deeplink','booking','payments','itinerary','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      search: { x: 320, y: 160, label: 'Search' },
+      cache: { x: 600, y: 160, label: 'Cache' },
+      aggregator: { x: 880, y: 160, label: 'Aggregator' },
+      partners: { x: 1160, y: 160, label: 'Airlines/OTAs' },
+      pricing: { x: 880, y: 300, label: 'Pricing' },
+      revalidate: { x: 1160, y: 300, label: 'Revalidate' },
+      ranking: { x: 600, y: 300, label: 'Ranking' },
+      ads: { x: 320, y: 300, label: 'Ads' },
+      deeplink: { x: 320, y: 440, label: 'Deep Link' },
+      booking: { x: 600, y: 440, label: 'Booking' },
+      payments: { x: 880, y: 440, label: 'Payments' },
+      itinerary: { x: 1160, y: 440, label: 'Itinerary' },
+      analytics: { x: 600, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','search','search'], ['search','cache','cache']);
+      if (stepIdx === 2) e.push(['search','aggregator','agg'], ['aggregator','partners','partners']);
+      if (stepIdx === 3) e.push(['partners','pricing','price'], ['pricing','revalidate','reval']);
+      if (stepIdx === 4) e.push(['pricing','ranking','rank'], ['ranking','ads','ads']);
+      if (stepIdx === 5) e.push(['ranking','deeplink','link'], ['deeplink','booking','booking']);
+      if (stepIdx === 6) e.push(['booking','payments','pay'], ['payments','itinerary','itinerary']);
+      if (stepIdx === 7) e.push(['itinerary','analytics','analytics']);
+      return e;
+    }
+  },
+
+  expedia: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Expedia Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','search','aggregator','inventory','pricing','revalidate','checkout','payments','booking','ticketing','itinerary','partner','notify','support','refunds'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      search: { x: 320, y: 160, label: 'Search' },
+      aggregator: { x: 600, y: 160, label: 'Aggregator' },
+      inventory: { x: 880, y: 160, label: 'Inventory' },
+      pricing: { x: 1160, y: 160, label: 'Pricing' },
+      revalidate: { x: 880, y: 300, label: 'Revalidate' },
+      checkout: { x: 600, y: 300, label: 'Checkout' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      partner: { x: 1160, y: 300, label: 'Partner' },
+      booking: { x: 880, y: 440, label: 'Booking' },
+      ticketing: { x: 1160, y: 440, label: 'Ticketing' },
+      itinerary: { x: 600, y: 440, label: 'Itinerary' },
+      notify: { x: 320, y: 440, label: 'Notify' },
+      support: { x: 320, y: 580, label: 'Support' },
+      refunds: { x: 600, y: 580, label: 'Refunds' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','search','search'], ['search','aggregator','agg']);
+      if (stepIdx === 2) e.push(['aggregator','inventory','inv'], ['inventory','pricing','price']);
+      if (stepIdx === 3) e.push(['pricing','revalidate','reval'], ['revalidate','partner','partner']);
+      if (stepIdx === 4) e.push(['client','checkout','checkout'], ['checkout','payments','pay']);
+      if (stepIdx === 5) e.push(['payments','booking','book'], ['booking','ticketing','ticket']);
+      if (stepIdx === 6) e.push(['ticketing','itinerary','itinerary'], ['itinerary','notify','notify']);
+      if (stepIdx === 7) e.push(['client','support','support'], ['support','refunds','refund']);
+      return e;
+    }
+  },
+
+  netflix: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Netflix Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','home','recos','rank','ab','catalog','drm','cdn','player','metrics','analytics','profiles','history'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      home: { x: 320, y: 160, label: 'Home' },
+      recos: { x: 600, y: 160, label: 'Recos' },
+      rank: { x: 880, y: 160, label: 'Ranking' },
+      ab: { x: 1160, y: 160, label: 'Experiments' },
+      profiles: { x: 320, y: 300, label: 'Profiles' },
+      history: { x: 320, y: 440, label: 'History' },
+      catalog: { x: 600, y: 300, label: 'Catalog' },
+      drm: { x: 880, y: 300, label: 'DRM' },
+      cdn: { x: 600, y: 440, label: 'CDN' },
+      player: { x: 320, y: 580, label: 'Player' },
+      metrics: { x: 880, y: 440, label: 'Telemetry' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e = [];
+      if (stepIdx === 1) e.push(['client','home','rows'], ['home','recos','recos']);
+      if (stepIdx === 2) e.push(['recos','rank','rank'], ['rank','ab','variant']);
+      if (stepIdx === 3) e.push(['client','catalog','meta'], ['catalog','drm','policy']);
+      if (stepIdx === 4) e.push(['client','drm','license']);
+      if (stepIdx === 5) e.push(['cdn','player','segments'], ['player','client','video']);
+      if (stepIdx === 6) e.push(['player','metrics','qoe']);
+      if (stepIdx === 7) e.push(['metrics','analytics','events'], ['analytics','recos','signals']);
+      return e;
+    }
+  }
+});
+
+
+// ----- Batch 32 (System - from user selection) -----
+
+Object.assign(SYSTEM_LAYOUTS, {
+  ola: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','driver','maps','pricing','api','auth','dispatch','location','match','routing','realtime','payments','ledger','ratings','support','safety'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Rider', colorKey: 'client' },
+      driver: { x: 140, y: 380, label: 'Driver', colorKey: 'client' },
+      maps: { x: 380, y: 160, label: 'Maps', colorKey: 'external' },
+      pricing: { x: 380, y: 260, label: 'Pricing/ETA', colorKey: 'api' },
+      api: { x: 380, y: 380, label: 'API', colorKey: 'api' },
+      auth: { x: 620, y: 380, label: 'Auth', colorKey: 'api' },
+      dispatch: { x: 620, y: 260, label: 'Dispatch', colorKey: 'api' },
+      location: { x: 620, y: 160, label: 'Location', colorKey: 'stream' },
+      match: { x: 860, y: 260, label: 'Matching', colorKey: 'api' },
+      routing: { x: 860, y: 160, label: 'Routing', colorKey: 'api' },
+      realtime: { x: 1100, y: 260, label: 'Realtime', colorKey: 'stream' },
+      payments: { x: 1100, y: 160, label: 'Payments', colorKey: 'api' },
+      ledger: { x: 1100, y: 380, label: 'Ledger', colorKey: 'store' },
+      ratings: { x: 860, y: 380, label: 'Ratings', colorKey: 'store' },
+      support: { x: 620, y: 520, label: 'Support', colorKey: 'external' },
+      safety: { x: 860, y: 520, label: 'Safety', colorKey: 'external' }
+    }
+  },
+
+  airbnb: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','search','rank','catalog','availability','pricing','booking','auth','risk','payments','ledger','notify','host','messages','itinerary','support','changes','payouts','reviews','trust'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      search: { x: 380, y: 180, label: 'Search', colorKey: 'api' },
+      rank: { x: 620, y: 180, label: 'Ranking', colorKey: 'api' },
+      catalog: { x: 860, y: 180, label: 'Listings', colorKey: 'store' },
+      availability: { x: 1100, y: 180, label: 'Availability', colorKey: 'store' },
+      pricing: { x: 1100, y: 320, label: 'Pricing', colorKey: 'api' },
+      booking: { x: 620, y: 320, label: 'Booking', colorKey: 'api' },
+      auth: { x: 380, y: 320, label: 'Identity', colorKey: 'api' },
+      risk: { x: 860, y: 320, label: 'Risk', colorKey: 'api' },
+      payments: { x: 380, y: 460, label: 'Payments', colorKey: 'api' },
+      ledger: { x: 140, y: 460, label: 'Ledger', colorKey: 'store' },
+      host: { x: 1100, y: 460, label: 'Host', colorKey: 'external' },
+      notify: { x: 860, y: 460, label: 'Notify', colorKey: 'external' },
+      messages: { x: 1100, y: 600, label: 'Messages', colorKey: 'api' },
+      itinerary: { x: 620, y: 600, label: 'Itinerary', colorKey: 'store' },
+      support: { x: 380, y: 600, label: 'Support', colorKey: 'external' },
+      changes: { x: 140, y: 600, label: 'Changes', colorKey: 'api' },
+      payouts: { x: 140, y: 740, label: 'Payouts', colorKey: 'api' },
+      reviews: { x: 380, y: 740, label: 'Reviews', colorKey: 'store' },
+      trust: { x: 620, y: 740, label: 'Trust', colorKey: 'api' }
+    }
+  },
+
+  'booking-com': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','search','rank','inventory','pricing','policies','reservation','confirm','payments','fraud','ledger','partner','notify','changes','refunds','reviews','loyalty'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      search: { x: 380, y: 180, label: 'Search', colorKey: 'api' },
+      rank: { x: 620, y: 180, label: 'Ranking', colorKey: 'api' },
+      inventory: { x: 860, y: 180, label: 'Inventory', colorKey: 'store' },
+      pricing: { x: 1100, y: 180, label: 'Rates', colorKey: 'api' },
+      policies: { x: 1100, y: 320, label: 'Policies', colorKey: 'store' },
+      reservation: { x: 620, y: 320, label: 'Reservation', colorKey: 'api' },
+      confirm: { x: 860, y: 320, label: 'Confirm', colorKey: 'api' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      fraud: { x: 380, y: 460, label: 'Fraud', colorKey: 'api' },
+      ledger: { x: 140, y: 320, label: 'Ledger', colorKey: 'store' },
+      partner: { x: 1100, y: 460, label: 'Partner', colorKey: 'external' },
+      notify: { x: 860, y: 460, label: 'Notify', colorKey: 'external' },
+      changes: { x: 620, y: 600, label: 'Changes', colorKey: 'api' },
+      refunds: { x: 380, y: 600, label: 'Refunds', colorKey: 'api' },
+      reviews: { x: 860, y: 600, label: 'Reviews', colorKey: 'store' },
+      loyalty: { x: 1100, y: 600, label: 'Loyalty', colorKey: 'api' }
+    }
+  },
+
+  makemytrip: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','search','aggregator','revalidate','inventory','pricing','checkout','auth','risk','payments','gateway','ledger','booking','partner','confirm','ticketing','itinerary','notify','changes','refunds','support'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      search: { x: 380, y: 180, label: 'Search', colorKey: 'api' },
+      aggregator: { x: 620, y: 180, label: 'Aggregator', colorKey: 'api' },
+      revalidate: { x: 860, y: 180, label: 'Revalidate', colorKey: 'api' },
+      inventory: { x: 1100, y: 180, label: 'Inventory', colorKey: 'store' },
+      pricing: { x: 1100, y: 320, label: 'Pricing', colorKey: 'api' },
+      checkout: { x: 620, y: 320, label: 'Checkout', colorKey: 'api' },
+      auth: { x: 380, y: 320, label: 'Identity', colorKey: 'api' },
+      risk: { x: 860, y: 320, label: 'Risk', colorKey: 'api' },
+      payments: { x: 380, y: 460, label: 'Payments', colorKey: 'external' },
+      gateway: { x: 620, y: 460, label: 'Gateway', colorKey: 'api' },
+      ledger: { x: 140, y: 460, label: 'Ledger', colorKey: 'store' },
+      booking: { x: 860, y: 460, label: 'Booking', colorKey: 'api' },
+      partner: { x: 1100, y: 460, label: 'Partner', colorKey: 'external' },
+      confirm: { x: 1100, y: 600, label: 'Confirm', colorKey: 'api' },
+      ticketing: { x: 860, y: 600, label: 'Ticketing', colorKey: 'api' },
+      itinerary: { x: 620, y: 600, label: 'Itinerary', colorKey: 'store' },
+      notify: { x: 380, y: 600, label: 'Notify', colorKey: 'external' },
+      changes: { x: 860, y: 740, label: 'Changes', colorKey: 'api' },
+      refunds: { x: 620, y: 740, label: 'Refunds', colorKey: 'api' },
+      support: { x: 380, y: 740, label: 'Support', colorKey: 'external' }
+    }
+  },
+
+  lyft: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','driver','maps','pricing','api','auth','dispatch','location','match','routing','realtime','payments','ledger','ratings','support','safety'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Rider', colorKey: 'client' },
+      driver: { x: 140, y: 380, label: 'Driver', colorKey: 'client' },
+      maps: { x: 380, y: 160, label: 'Maps', colorKey: 'external' },
+      pricing: { x: 380, y: 260, label: 'Pricing/ETA', colorKey: 'api' },
+      api: { x: 380, y: 380, label: 'API', colorKey: 'api' },
+      auth: { x: 620, y: 380, label: 'Auth', colorKey: 'api' },
+      dispatch: { x: 620, y: 260, label: 'Dispatch', colorKey: 'api' },
+      location: { x: 620, y: 160, label: 'Location', colorKey: 'stream' },
+      match: { x: 860, y: 260, label: 'Matching', colorKey: 'api' },
+      routing: { x: 860, y: 160, label: 'Routing', colorKey: 'api' },
+      realtime: { x: 1100, y: 260, label: 'Realtime', colorKey: 'stream' },
+      payments: { x: 1100, y: 160, label: 'Payments', colorKey: 'api' },
+      ledger: { x: 1100, y: 380, label: 'Ledger', colorKey: 'store' },
+      ratings: { x: 860, y: 380, label: 'Ratings', colorKey: 'store' },
+      support: { x: 620, y: 520, label: 'Support', colorKey: 'external' },
+      safety: { x: 860, y: 520, label: 'Safety', colorKey: 'external' }
+    }
+  },
+
+  grab: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','driver','maps','pricing','api','auth','dispatch','location','match','routing','realtime','payments','ledger','safety','support'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Rider', colorKey: 'client' },
+      driver: { x: 140, y: 380, label: 'Driver', colorKey: 'client' },
+      maps: { x: 380, y: 160, label: 'Maps', colorKey: 'external' },
+      pricing: { x: 380, y: 260, label: 'Pricing/ETA', colorKey: 'api' },
+      api: { x: 380, y: 380, label: 'API', colorKey: 'api' },
+      auth: { x: 620, y: 380, label: 'Auth', colorKey: 'api' },
+      dispatch: { x: 620, y: 260, label: 'Dispatch', colorKey: 'api' },
+      location: { x: 620, y: 160, label: 'Location', colorKey: 'stream' },
+      match: { x: 860, y: 260, label: 'Matching', colorKey: 'api' },
+      routing: { x: 860, y: 160, label: 'Routing', colorKey: 'api' },
+      realtime: { x: 1100, y: 260, label: 'Realtime', colorKey: 'stream' },
+      payments: { x: 1100, y: 160, label: 'Payments', colorKey: 'api' },
+      ledger: { x: 1100, y: 380, label: 'Ledger', colorKey: 'store' },
+      safety: { x: 860, y: 380, label: 'Safety', colorKey: 'external' },
+      support: { x: 620, y: 520, label: 'Support', colorKey: 'external' }
+    }
+  },
+
+  blablacar: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','search','matching','pricing','booking','payments','ledger','itinerary','chat','realtime','ratings','support','fraud','notify'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      search: { x: 380, y: 180, label: 'Search', colorKey: 'api' },
+      matching: { x: 620, y: 180, label: 'Matching', colorKey: 'api' },
+      pricing: { x: 860, y: 180, label: 'Pricing', colorKey: 'api' },
+      booking: { x: 620, y: 320, label: 'Booking', colorKey: 'api' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      ledger: { x: 140, y: 320, label: 'Ledger', colorKey: 'store' },
+      itinerary: { x: 860, y: 320, label: 'Itinerary', colorKey: 'store' },
+      chat: { x: 380, y: 460, label: 'Chat', colorKey: 'api' },
+      realtime: { x: 620, y: 460, label: 'Realtime', colorKey: 'stream' },
+      ratings: { x: 860, y: 460, label: 'Ratings', colorKey: 'store' },
+      fraud: { x: 1100, y: 320, label: 'Fraud', colorKey: 'api' },
+      support: { x: 1100, y: 460, label: 'Support', colorKey: 'external' },
+      notify: { x: 620, y: 600, label: 'Notify', colorKey: 'external' }
+    }
+  },
+
+  skyscanner: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','search','cache','aggregator','partners','pricing','revalidate','ranking','deeplink','booking','payments','itinerary','analytics','ads'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      search: { x: 380, y: 180, label: 'Search', colorKey: 'api' },
+      cache: { x: 620, y: 180, label: 'Cache', colorKey: 'cache' },
+      aggregator: { x: 860, y: 180, label: 'Aggregator', colorKey: 'api' },
+      partners: { x: 1100, y: 180, label: 'Airlines/OTAs', colorKey: 'external' },
+      pricing: { x: 860, y: 320, label: 'Pricing', colorKey: 'api' },
+      revalidate: { x: 1100, y: 320, label: 'Revalidate', colorKey: 'api' },
+      ranking: { x: 620, y: 320, label: 'Ranking', colorKey: 'api' },
+      ads: { x: 380, y: 320, label: 'Ads', colorKey: 'api' },
+      deeplink: { x: 380, y: 460, label: 'Deep Link', colorKey: 'external' },
+      booking: { x: 620, y: 460, label: 'Booking', colorKey: 'api' },
+      payments: { x: 860, y: 460, label: 'Payments', colorKey: 'external' },
+      itinerary: { x: 1100, y: 460, label: 'Itinerary', colorKey: 'store' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  expedia: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','search','aggregator','inventory','pricing','revalidate','checkout','payments','booking','ticketing','itinerary','partner','notify','support','refunds'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      search: { x: 380, y: 180, label: 'Search', colorKey: 'api' },
+      aggregator: { x: 620, y: 180, label: 'Aggregator', colorKey: 'api' },
+      inventory: { x: 860, y: 180, label: 'Inventory', colorKey: 'store' },
+      pricing: { x: 1100, y: 180, label: 'Pricing', colorKey: 'api' },
+      revalidate: { x: 860, y: 320, label: 'Revalidate', colorKey: 'api' },
+      checkout: { x: 620, y: 320, label: 'Checkout', colorKey: 'api' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      booking: { x: 860, y: 460, label: 'Booking', colorKey: 'api' },
+      ticketing: { x: 1100, y: 460, label: 'Ticketing', colorKey: 'api' },
+      itinerary: { x: 620, y: 460, label: 'Itinerary', colorKey: 'store' },
+      partner: { x: 1100, y: 320, label: 'Partner', colorKey: 'external' },
+      notify: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      support: { x: 380, y: 600, label: 'Support', colorKey: 'external' },
+      refunds: { x: 620, y: 600, label: 'Refunds', colorKey: 'api' }
+    }
+  },
+
+  netflix: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','home','recos','rank','ab','catalog','drm','cdn','player','metrics','analytics','profiles','history'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      home: { x: 380, y: 180, label: 'Home API', colorKey: 'api' },
+      recos: { x: 620, y: 180, label: 'Recos', colorKey: 'api' },
+      rank: { x: 860, y: 180, label: 'Ranking', colorKey: 'api' },
+      ab: { x: 1100, y: 180, label: 'Experiments', colorKey: 'api' },
+      catalog: { x: 620, y: 320, label: 'Catalog', colorKey: 'store' },
+      drm: { x: 860, y: 320, label: 'DRM', colorKey: 'api' },
+      cdn: { x: 620, y: 460, label: 'CDN', colorKey: 'cdn' },
+      player: { x: 380, y: 460, label: 'Player', colorKey: 'client' },
+      metrics: { x: 860, y: 460, label: 'Telemetry', colorKey: 'stream' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' },
+      profiles: { x: 380, y: 320, label: 'Profiles', colorKey: 'store' },
+      history: { x: 380, y: 600, label: 'History', colorKey: 'store' }
+    }
+  }
+});
+
 
 // ----- Batch 31 (System - from user selection) -----
 
