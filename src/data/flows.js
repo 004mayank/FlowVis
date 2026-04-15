@@ -1666,46 +1666,46 @@ export const FLOWS = {
     title: 'Meesho',
     steps: [
       {
-        title: 'Browse catalog and recommendations',
-        desc: 'User discovers products through feeds, categories, and recommendations.',
-        active: ['client','feed','catalog'],
-        edges: [['client','feed'], ['feed','catalog']]
+        title: 'Discovery feed (WhatsApp-first commerce)',
+        desc: 'User discovers low-cost products via feeds, social sharing, and lightweight product pages.',
+        active: ['client','feed','catalog','rank'],
+        edges: [['client','feed'], ['feed','rank'], ['rank','catalog']]
       },
       {
-        title: 'Product page and pricing',
-        desc: 'Product details load with supplier price, shipping fees, and margins.',
-        active: ['catalog','pricing','offers'],
-        edges: [['catalog','pricing'], ['pricing','offers']]
+        title: 'PDP: supplier price, shipping fee, margin',
+        desc: 'Product details compose supplier price, shipping, COD eligibility, and margins.',
+        active: ['catalog','pricing','offers','risk'],
+        edges: [['catalog','pricing'], ['pricing','offers'], ['offers','risk']]
       },
       {
-        title: 'Place order (often COD)',
-        desc: 'Order is created; COD eligibility and fraud checks run.',
-        active: ['checkout','orders','risk'],
-        edges: [['client','checkout'], ['checkout','risk'], ['checkout','orders']]
+        title: 'Place order: COD + fraud checks',
+        desc: 'Order creation runs fraud checks; COD orders require eligibility and address validation.',
+        active: ['checkout','orders','risk','cod'],
+        edges: [['client','checkout'], ['checkout','risk'], ['checkout','cod'], ['checkout','orders']]
       },
       {
-        title: 'Supplier assignment',
-        desc: 'Order is assigned to supplier; supplier confirms availability and ships.',
-        active: ['orders','supplier','inventory'],
-        edges: [['orders','supplier'], ['supplier','inventory']]
+        title: 'Supplier assignment + confirmation',
+        desc: 'Order routes to supplier; supplier confirms availability and creates shipment.',
+        active: ['orders','supplier','inventory','wms'],
+        edges: [['orders','supplier'], ['supplier','inventory'], ['supplier','wms']]
       },
       {
-        title: 'Logistics and tracking',
-        desc: 'Carrier pickup, routing, and tracking updates are published.',
-        active: ['carrier','tracking','notify'],
-        edges: [['supplier','carrier'], ['carrier','tracking'], ['tracking','notify']]
+        title: 'Logistics + last-mile tracking',
+        desc: 'Carrier pickup and routing; tracking timeline updates are pushed to the user.',
+        active: ['carrier','tracking','notify','client'],
+        edges: [['supplier','carrier'], ['carrier','tracking'], ['tracking','notify'], ['notify','client']]
       },
       {
-        title: 'Cash collection and settlement',
-        desc: 'For COD, cash is collected and settled; ledger reconciles payouts.',
-        active: ['cod','ledger','payouts'],
-        edges: [['carrier','cod'], ['cod','ledger'], ['ledger','payouts']]
+        title: 'COD cash collection + settlement',
+        desc: 'For COD, cash is collected; settlements reconcile payouts and returns leakage.',
+        active: ['cod','ledger','payouts','recon'],
+        edges: [['carrier','cod'], ['cod','ledger'], ['ledger','payouts'], ['ledger','recon']]
       },
       {
-        title: 'Returns and refunds',
-        desc: 'Returns are processed; refunds and supplier chargebacks are handled.',
-        active: ['returns','refunds','support'],
-        edges: [['tracking','returns'], ['returns','refunds'], ['returns','support']]
+        title: 'Returns + refunds + supplier chargebacks',
+        desc: 'Returns create reverse logistics; refunds and supplier chargebacks are reconciled.',
+        active: ['returns','refunds','support','supplier'],
+        edges: [['tracking','returns'], ['returns','refunds'], ['returns','support'], ['returns','supplier']]
       }
     ]
   },
@@ -1714,46 +1714,46 @@ export const FLOWS = {
     title: 'Ajio',
     steps: [
       {
-        title: 'Browse and search',
-        desc: 'Customer browses catalog; search and ranking select products.',
-        active: ['client','search','catalog'],
-        edges: [['client','search'], ['search','catalog']]
+        title: 'Browse + search + personalization',
+        desc: 'Search and ranking surface products using inventory, price, and user intent.',
+        active: ['client','search','catalog','rank'],
+        edges: [['client','search'], ['search','rank'], ['rank','catalog']]
       },
       {
-        title: 'Product page and inventory',
-        desc: 'Variant availability, pricing, and offers load with delivery promise.',
-        active: ['catalog','inventory','pricing'],
-        edges: [['catalog','inventory'], ['catalog','pricing']]
+        title: 'PDP: variants, inventory, pricing, delivery promise',
+        desc: 'PDP composes variant availability, pricing, offers, and delivery promise.',
+        active: ['catalog','inventory','pricing','offers','promise'],
+        edges: [['catalog','inventory'], ['catalog','pricing'], ['pricing','offers'], ['inventory','promise']]
       },
       {
-        title: 'Add to cart',
-        desc: 'Cart computes totals, promos, taxes, and shipping.',
-        active: ['cart','promo','tax'],
-        edges: [['client','cart'], ['cart','promo'], ['cart','tax']]
+        title: 'Cart: promos, taxes, shipping',
+        desc: 'Cart totals computed; promos/coupons and shipping fees applied.',
+        active: ['cart','promo','tax','shipping'],
+        edges: [['client','cart'], ['cart','promo'], ['cart','tax'], ['cart','shipping']]
       },
       {
-        title: 'Checkout and payment',
-        desc: 'Order is placed; payment authorization and risk checks run.',
-        active: ['checkout','payments','risk'],
-        edges: [['cart','checkout'], ['checkout','risk'], ['checkout','payments']]
+        title: 'Checkout: auth, risk, payment',
+        desc: 'Checkout validates address, runs risk checks, and authorizes payment.',
+        active: ['checkout','auth','risk','payments'],
+        edges: [['cart','checkout'], ['checkout','auth'], ['checkout','risk'], ['checkout','payments']]
       },
       {
-        title: 'Fulfillment',
-        desc: 'Warehouse picks/packs and hands off to carrier; tracking starts.',
-        active: ['orders','wms','carrier'],
-        edges: [['checkout','orders'], ['orders','wms'], ['wms','carrier']]
+        title: 'Order creation + allocation',
+        desc: 'Order is created; inventory allocated and pick tasks are generated.',
+        active: ['orders','inventory','wms'],
+        edges: [['checkout','orders'], ['orders','inventory'], ['orders','wms']]
       },
       {
-        title: 'Tracking and notifications',
-        desc: 'Shipment events update order timeline and notify the customer.',
-        active: ['tracking','notify','client'],
-        edges: [['carrier','tracking'], ['tracking','notify'], ['notify','client']]
+        title: 'Shipping + tracking + notifications',
+        desc: 'Carrier pickup; tracking timeline updates and notifications are pushed to the user.',
+        active: ['carrier','tracking','notify','client'],
+        edges: [['wms','carrier'], ['carrier','tracking'], ['tracking','notify'], ['notify','client']]
       },
       {
-        title: 'Returns and refunds',
-        desc: 'Returns pickup and QC; refunds are issued after verification.',
-        active: ['returns','qc','refunds'],
-        edges: [['tracking','returns'], ['returns','qc'], ['qc','refunds']]
+        title: 'Returns, QC, refunds',
+        desc: 'Returns generate reverse pickup; QC gates refunds and restocking.',
+        active: ['returns','qc','refunds','support','inventory'],
+        edges: [['tracking','returns'], ['returns','qc'], ['qc','refunds'], ['returns','support'], ['returns','inventory']]
       }
     ]
   },
@@ -1762,46 +1762,46 @@ export const FLOWS = {
     title: 'Zalando',
     steps: [
       {
-        title: 'Browse and personalization',
-        desc: 'User browses fashion catalog; personalization selects items and promos.',
-        active: ['client','catalog','rank'],
-        edges: [['client','catalog'], ['catalog','rank']]
+        title: 'Discovery + search (fashion personalization)',
+        desc: 'Search and discovery are personalized by brand affinity, sizes, and trends.',
+        active: ['client','search','catalog','rank'],
+        edges: [['client','search'], ['search','rank'], ['rank','catalog']]
       },
       {
-        title: 'Product page and availability',
-        desc: 'Variant availability and delivery promise are computed by inventory.',
-        active: ['catalog','inventory','pricing'],
-        edges: [['catalog','inventory'], ['catalog','pricing']]
+        title: 'PDP: variants, size availability, pricing, promise',
+        desc: 'PDP composes size availability by warehouse, pricing, and delivery promise.',
+        active: ['catalog','inventory','pricing','promise'],
+        edges: [['catalog','inventory'], ['catalog','pricing'], ['inventory','promise']]
       },
       {
-        title: 'Cart and checkout prep',
-        desc: 'Cart totals computed with discounts, taxes, and shipping options.',
-        active: ['cart','promo','tax'],
-        edges: [['client','cart'], ['cart','promo'], ['cart','tax']]
+        title: 'Cart + promotions',
+        desc: 'Cart totals, promos, and taxes computed; shipping options determined.',
+        active: ['cart','promo','tax','shipping'],
+        edges: [['client','cart'], ['cart','promo'], ['cart','tax'], ['cart','shipping']]
       },
       {
-        title: 'Checkout and payment',
-        desc: 'Payment is authorized; fraud and address checks run.',
-        active: ['checkout','payments','fraud'],
-        edges: [['cart','checkout'], ['checkout','fraud'], ['checkout','payments']]
+        title: 'Checkout: auth, risk, payment',
+        desc: 'Checkout validates address, runs fraud screening, and authorizes payment.',
+        active: ['checkout','auth','risk','payments'],
+        edges: [['cart','checkout'], ['checkout','auth'], ['checkout','risk'], ['checkout','payments']]
       },
       {
-        title: 'Warehouse fulfillment',
-        desc: 'Fulfillment center picks/packs and ships; carrier integration posts tracking.',
-        active: ['orders','wms','carrier'],
-        edges: [['checkout','orders'], ['orders','wms'], ['wms','carrier']]
+        title: 'Fulfillment + carrier handoff',
+        desc: 'Warehouse picks/packs; carrier handoff and tracking events update order timeline.',
+        active: ['orders','wms','carrier','tracking'],
+        edges: [['checkout','orders'], ['orders','wms'], ['wms','carrier'], ['carrier','tracking']]
       },
       {
-        title: 'Delivery and notifications',
+        title: 'Delivery notifications',
         desc: 'Delivery events update timeline and notifications are sent.',
         active: ['tracking','notify','client'],
-        edges: [['carrier','tracking'], ['tracking','notify'], ['notify','client']]
+        edges: [['tracking','notify'], ['notify','client']]
       },
       {
-        title: 'Returns and refunds',
-        desc: 'Returns are common; reverse logistics triggers refunds and restocking.',
-        active: ['returns','refunds','inventory'],
-        edges: [['tracking','returns'], ['returns','refunds'], ['returns','inventory']]
+        title: 'Returns (high frequency) + refund',
+        desc: 'Returns create reverse logistics; inspection/QC gates refund and restock.',
+        active: ['returns','qc','refunds','inventory','support'],
+        edges: [['tracking','returns'], ['returns','qc'], ['qc','refunds'], ['returns','inventory'], ['returns','support']]
       }
     ]
   },
@@ -1810,46 +1810,46 @@ export const FLOWS = {
     title: 'ASOS',
     steps: [
       {
-        title: 'Browse and search',
-        desc: 'User browses catalog; search and personalization select products.',
-        active: ['client','search','catalog'],
-        edges: [['client','search'], ['search','catalog']]
+        title: 'Browse + search (fast fashion discovery)',
+        desc: 'Search and discovery optimize for trends, size availability, and conversion.',
+        active: ['client','search','catalog','rank'],
+        edges: [['client','search'], ['search','rank'], ['rank','catalog']]
       },
       {
-        title: 'Product page',
-        desc: 'Product details load with size availability, pricing, and delivery promise.',
-        active: ['catalog','inventory','pricing'],
-        edges: [['catalog','inventory'], ['catalog','pricing']]
+        title: 'PDP: variants, inventory, promotions',
+        desc: 'PDP composes variants, inventory, pricing, and promotions.',
+        active: ['catalog','inventory','pricing','offers'],
+        edges: [['catalog','inventory'], ['catalog','pricing'], ['pricing','offers']]
       },
       {
-        title: 'Cart',
-        desc: 'Cart totals computed with discounts, taxes, and shipping options.',
-        active: ['cart','promo','tax'],
-        edges: [['client','cart'], ['cart','promo'], ['cart','tax']]
+        title: 'Basket: totals + shipping',
+        desc: 'Basket totals computed; promos, taxes, and shipping rates applied.',
+        active: ['cart','promo','tax','shipping'],
+        edges: [['client','cart'], ['cart','promo'], ['cart','tax'], ['cart','shipping']]
       },
       {
-        title: 'Checkout and payment',
-        desc: 'Order is placed; payment is authorized; fraud checks may hold.',
-        active: ['checkout','payments','fraud'],
-        edges: [['cart','checkout'], ['checkout','fraud'], ['checkout','payments']]
+        title: 'Checkout: address validation + fraud + payment',
+        desc: 'Checkout validates address, runs fraud screening, and authorizes payment.',
+        active: ['checkout','auth','risk','payments'],
+        edges: [['cart','checkout'], ['checkout','auth'], ['checkout','risk'], ['checkout','payments']]
       },
       {
-        title: 'Fulfillment',
-        desc: 'Warehouse picks/packs and ships; carrier integration provides tracking.',
-        active: ['orders','wms','carrier'],
-        edges: [['checkout','orders'], ['orders','wms'], ['wms','carrier']]
+        title: 'Fulfillment + delivery tracking',
+        desc: 'Warehouse picks/packs; carrier tracking updates the order timeline.',
+        active: ['orders','wms','carrier','tracking','notify'],
+        edges: [['checkout','orders'], ['orders','wms'], ['wms','carrier'], ['carrier','tracking'], ['tracking','notify']]
       },
       {
-        title: 'Tracking and notifications',
+        title: 'Customer updates',
         desc: 'Shipping events update order timeline and send notifications.',
         active: ['tracking','notify','client'],
-        edges: [['carrier','tracking'], ['tracking','notify'], ['notify','client']]
+        edges: [['tracking','notify'], ['notify','client']]
       },
       {
-        title: 'Returns and refunds',
-        desc: 'Returns process handles reverse logistics and refunds.',
-        active: ['returns','refunds','support'],
-        edges: [['tracking','returns'], ['returns','refunds'], ['returns','support']]
+        title: 'Returns + refunds',
+        desc: 'Returns flow through reverse logistics and QC; refunds issued and inventory updated.',
+        active: ['returns','qc','refunds','inventory','support'],
+        edges: [['tracking','returns'], ['returns','qc'], ['qc','refunds'], ['returns','inventory'], ['returns','support']]
       }
     ]
   },
@@ -1858,46 +1858,46 @@ export const FLOWS = {
     title: 'Wayfair',
     steps: [
       {
-        title: 'Browse and search',
-        desc: 'User searches furniture catalog; ranking considers availability and shipping.',
-        active: ['client','search','catalog'],
-        edges: [['client','search'], ['search','catalog']]
+        title: 'Browse + search (large catalog)',
+        desc: 'Search and recommendations filter massive inventory with faceting and availability.',
+        active: ['client','search','catalog','rank'],
+        edges: [['client','search'], ['search','rank'], ['rank','catalog']]
       },
       {
-        title: 'Product details and delivery quote',
-        desc: 'Product details load with bulky-item shipping estimates and delivery scheduling.',
-        active: ['catalog','shipping','pricing'],
-        edges: [['catalog','shipping'], ['catalog','pricing']]
+        title: 'PDP: delivery promise + freight rules',
+        desc: 'Delivery promise and shipping rules (freight/white glove) are computed.',
+        active: ['catalog','pricing','promise','shipping'],
+        edges: [['catalog','pricing'], ['pricing','shipping'], ['shipping','promise']]
       },
       {
-        title: 'Cart and checkout prep',
-        desc: 'Cart totals computed; delivery slots and service add-ons may be selected.',
-        active: ['cart','delivery','tax'],
-        edges: [['client','cart'], ['cart','delivery'], ['cart','tax']]
+        title: 'Cart: services + delivery slot',
+        desc: 'Cart includes services (assembly/white glove) and delivery slot selection.',
+        active: ['cart','services','delivery','tax'],
+        edges: [['client','cart'], ['cart','services'], ['cart','delivery'], ['cart','tax']]
       },
       {
-        title: 'Checkout and payment',
-        desc: 'Order is placed; payment is authorized and fraud checks run.',
-        active: ['checkout','payments','fraud'],
-        edges: [['cart','checkout'], ['checkout','fraud'], ['checkout','payments']]
+        title: 'Checkout: address + fraud + payment',
+        desc: 'Checkout validates address, runs fraud screening, and authorizes payment.',
+        active: ['checkout','auth','risk','payments'],
+        edges: [['cart','checkout'], ['checkout','auth'], ['checkout','risk'], ['checkout','payments']]
       },
       {
-        title: 'Supplier / warehouse fulfillment',
-        desc: 'Order routed to supplier/warehouse; pick/pack and freight booking starts.',
-        active: ['orders','wms','supplier'],
-        edges: [['checkout','orders'], ['orders','supplier'], ['orders','wms']]
+        title: 'Fulfillment: multi-origin + freight booking',
+        desc: 'Order may split across suppliers; freight booking and warehouse workflows start.',
+        active: ['orders','wms','supplier','carrier'],
+        edges: [['checkout','orders'], ['orders','supplier'], ['orders','wms'], ['wms','carrier']]
       },
       {
-        title: 'Freight and tracking',
-        desc: 'Freight carrier tracking updates; delivery appointment is coordinated.',
-        active: ['carrier','tracking','notify'],
-        edges: [['wms','carrier'], ['carrier','tracking'], ['tracking','notify']]
+        title: 'Tracking + appointment scheduling',
+        desc: 'Tracking updates flow; delivery appointment is coordinated for bulky items.',
+        active: ['carrier','tracking','notify','schedule'],
+        edges: [['carrier','tracking'], ['tracking','notify'], ['tracking','schedule']]
       },
       {
-        title: 'Returns and refunds',
-        desc: 'Returns for bulky items involve reverse logistics; refunds and support cases follow.',
-        active: ['returns','refunds','support'],
-        edges: [['tracking','returns'], ['returns','support'], ['returns','refunds']]
+        title: 'Returns: pickup, inspection, refund',
+        desc: 'Bulky-item returns require pickup scheduling; inspection gates refund and disposition.',
+        active: ['returns','schedule','qc','refunds','support'],
+        edges: [['tracking','returns'], ['returns','schedule'], ['returns','qc'], ['qc','refunds'], ['returns','support']]
       }
     ]
   }
@@ -4696,40 +4696,40 @@ export const FLOWS = {
     title: 'Razorpay',
     steps: [
       {
-        title: 'Create order',
-        desc: 'Merchant creates order; checkout token returned.',
-        active: ['merchant','api','orders'],
-        edges: [['merchant','api'], ['api','orders']]
+        title: 'Merchant creates order + opens checkout',
+        desc: 'Merchant backend creates an order; client loads Razorpay Checkout with amount, currency, and metadata.',
+        active: ['merchant','api','orders','client'],
+        edges: [['merchant','api'], ['api','orders'], ['merchant','client']]
       },
       {
-        title: 'Payment authorization',
-        desc: 'Risk checks run; payment authorized with bank/UPI/card rails.',
-        active: ['risk','routing','bank'],
-        edges: [['orders','risk'], ['risk','routing'], ['routing','bank']]
+        title: 'Select method (UPI/cards/netbanking) + risk checks',
+        desc: 'Checkout supports multiple Indian rails; risk screening gates the attempt before routing.',
+        active: ['client','payments','risk','routing'],
+        edges: [['client','payments'], ['payments','risk'], ['risk','routing']]
       },
       {
-        title: 'Capture and settle',
-        desc: 'Capture updates ledger; settlement schedule created.',
-        active: ['capture','ledger','settlement'],
-        edges: [['routing','capture'], ['capture','ledger'], ['ledger','settlement']]
+        title: 'Authorize/capture on rails',
+        desc: 'Routes to bank/PSP/acquirer; success/failure returned and captured when applicable.',
+        active: ['routing','bank','capture','ledger'],
+        edges: [['routing','bank'], ['bank','capture'], ['capture','ledger']]
       },
       {
-        title: 'Webhooks',
-        desc: 'Events delivered to merchant via webhooks.',
-        active: ['events','webhooks','merchant'],
-        edges: [['capture','events'], ['events','webhooks'], ['webhooks','merchant']]
+        title: 'Webhook + reconciliation events',
+        desc: 'Status events delivered to merchant; retries and idempotency ensure consistency.',
+        active: ['events','webhooks','merchant','notify'],
+        edges: [['ledger','events'], ['events','webhooks'], ['webhooks','merchant'], ['events','notify']]
       },
       {
-        title: 'Refunds',
-        desc: 'Refunds reverse ledger entries and trigger notifications.',
-        active: ['refunds','ledger','notify'],
-        edges: [['merchant','refunds'], ['refunds','ledger'], ['refunds','notify']]
+        title: 'Settlements/payouts',
+        desc: 'Settlement batches reconcile with bank reports and schedule merchant payouts.',
+        active: ['settlement','recon','merchant','ledger'],
+        edges: [['ledger','settlement'], ['settlement','recon'], ['settlement','merchant']]
       },
       {
-        title: 'Reporting',
-        desc: 'Reports and reconciliation help merchants settle accounts.',
-        active: ['reports','recon','ledger'],
-        edges: [['ledger','reports'], ['reports','recon']]
+        title: 'Refunds + disputes + reporting',
+        desc: 'Refunds/chargebacks adjust ledger; reporting supports finance ops and audits.',
+        active: ['refunds','disputes','reports','ledger'],
+        edges: [['merchant','refunds'], ['refunds','ledger'], ['ledger','disputes'], ['ledger','reports']]
       }
     ]
   },
@@ -4738,40 +4738,40 @@ export const FLOWS = {
     title: 'PhonePe',
     steps: [
       {
-        title: 'Authenticate',
-        desc: 'User authenticates; device binding and risk checks run.',
-        active: ['client','auth','risk'],
-        edges: [['client','auth'], ['auth','risk']]
+        title: 'Initiate UPI payment (QR/UPI ID)',
+        desc: 'User scans QR or selects contact; app creates a UPI intent and validates context.',
+        active: ['client','auth','payments','upi'],
+        edges: [['client','auth'], ['client','payments'], ['payments','upi']]
       },
       {
-        title: 'UPI collect/pay',
-        desc: 'Payment intent created; routed to UPI rails and bank.',
-        active: ['payments','routing','upi'],
-        edges: [['client','payments'], ['payments','routing'], ['routing','upi']]
+        title: 'UPI PIN + device/risk checks',
+        desc: 'User enters UPI PIN; device binding and risk checks gate submission to PSP/banks.',
+        active: ['auth','risk','routing'],
+        edges: [['auth','risk'], ['risk','routing']]
       },
       {
-        title: 'Bank authorization',
-        desc: 'Bank authorizes and returns status; ledger updated.',
-        active: ['bank','ledger','status'],
-        edges: [['upi','bank'], ['bank','status'], ['status','ledger']]
+        title: 'Route via PSP + UPI switch + bank auth',
+        desc: 'Routes to PSP/UPI switch and payer bank; success/failure returned with reference ids.',
+        active: ['psp','switch','bank','status'],
+        edges: [['routing','psp'], ['psp','switch'], ['switch','bank'], ['bank','status']]
       },
       {
-        title: 'Notify merchant',
-        desc: 'Callbacks/webhooks notify merchant; receipts generated.',
-        active: ['webhooks','notify','merchant'],
-        edges: [['status','webhooks'], ['webhooks','merchant'], ['status','notify']]
+        title: 'Ledgering + receipt + callbacks',
+        desc: 'Ledger entries recorded; receipt shown; merchant callbacks/webhooks notified.',
+        active: ['ledger','notify','webhooks','merchant','client'],
+        edges: [['status','ledger'], ['ledger','notify'], ['notify','client'], ['ledger','webhooks'], ['webhooks','merchant']]
       },
       {
-        title: 'Refunds',
-        desc: 'Refund requests reverse ledger and trigger bank reversal.',
-        active: ['refunds','ledger','bank'],
-        edges: [['merchant','refunds'], ['refunds','ledger'], ['refunds','bank']]
+        title: 'Reconciliation + settlements',
+        desc: 'Reconciliation aligns PSP/bank reports; merchant settlements happen for QR payments.',
+        active: ['recon','settlements','ledger'],
+        edges: [['ledger','recon'], ['recon','settlements']]
       },
       {
-        title: 'Insights and reporting',
-        desc: 'Analytics pipeline aggregates transactions and user insights.',
-        active: ['analytics','warehouse','reports'],
-        edges: [['ledger','analytics'], ['analytics','warehouse'], ['warehouse','reports']]
+        title: 'Disputes, reversals, refunds, analytics',
+        desc: 'Failures/disputes create cases; reversals/refunds processed; analytics monitors fraud and performance.',
+        active: ['disputes','refunds','analytics','risk'],
+        edges: [['ledger','disputes'], ['disputes','refunds'], ['ledger','analytics'], ['analytics','risk']]
       }
     ]
   },
@@ -5285,39 +5285,39 @@ export const FLOWS = {
     steps: [
       {
         title: 'Select Klarna at checkout',
-        desc: 'User chooses Klarna; merchant creates a payment session.',
-        active: ['client','merchant','checkout'],
-        edges: [['client','checkout'], ['merchant','checkout']]
+        desc: 'Customer selects Klarna; merchant creates a Klarna session with cart + identity signals.',
+        active: ['client','checkout','merchant','api'],
+        edges: [['client','checkout'], ['checkout','merchant'], ['merchant','api']]
       },
       {
-        title: 'Credit decision',
-        desc: 'Risk and eligibility checks run using identity and transaction signals.',
-        active: ['risk','auth','decision'],
-        edges: [['checkout','risk'], ['risk','auth'], ['risk','decision']]
+        title: 'Risk + credit decisioning',
+        desc: 'Identity verification, fraud screening, and credit eligibility checks are executed.',
+        active: ['risk','auth','decision','identity'],
+        edges: [['api','risk'], ['risk','identity'], ['risk','auth'], ['risk','decision']]
       },
       {
-        title: 'Create order and authorize',
-        desc: 'Order is created; authorization token returned to merchant.',
-        active: ['orders','authz','merchant'],
-        edges: [['decision','orders'], ['orders','authz'], ['authz','merchant']]
+        title: 'Authorize BNPL plan',
+        desc: 'Klarna authorizes the pay-later plan; authorization returned for order placement.',
+        active: ['orders','authz','merchant','ledger'],
+        edges: [['decision','orders'], ['orders','authz'], ['authz','merchant'], ['orders','ledger']]
       },
       {
-        title: 'Fulfillment and capture',
-        desc: 'Merchant ships; capture triggers settlement and ledger updates.',
-        active: ['capture','ledger','settlement'],
+        title: 'Fulfillment confirmation + capture',
+        desc: 'Merchant confirms shipment; capture triggers settlement and ledger updates.',
+        active: ['capture','ledger','settlement','merchant'],
         edges: [['merchant','capture'], ['capture','ledger'], ['ledger','settlement']]
       },
       {
-        title: 'Repayments',
-        desc: 'Installment billing schedules repayments and handles collections.',
-        active: ['billing','payments','collections'],
-        edges: [['settlement','billing'], ['billing','payments'], ['billing','collections']]
+        title: 'Installment billing + collections',
+        desc: 'Billing schedules installments; collections handles failed payments and reminders.',
+        active: ['billing','payments','collections','notify'],
+        edges: [['settlement','billing'], ['billing','payments'], ['billing','collections'], ['billing','notify']]
       },
       {
-        title: 'Disputes and returns',
-        desc: 'Returns/disputes adjust ledger and communicate with merchant.',
-        active: ['disputes','refunds','merchant'],
-        edges: [['client','disputes'], ['disputes','refunds'], ['refunds','merchant']]
+        title: 'Returns, refunds, disputes',
+        desc: 'Refunds adjust installment schedule; disputes/returns are handled with merchant coordination.',
+        active: ['refunds','disputes','merchant','ledger','billing'],
+        edges: [['client','disputes'], ['disputes','refunds'], ['refunds','ledger'], ['refunds','billing'], ['refunds','merchant']]
       }
     ]
   },
@@ -5326,40 +5326,40 @@ export const FLOWS = {
     title: 'Daraz',
     steps: [
       {
-        title: 'Browse and search',
-        desc: 'Client loads catalog via search and caching.',
-        active: ['client','search','catalog'],
-        edges: [['client','search'], ['search','catalog']]
+        title: 'Browse + search (marketplace)',
+        desc: 'Search and discovery blend relevance, price, and inventory with caching.',
+        active: ['client','search','catalog','rank'],
+        edges: [['client','search'], ['search','rank'], ['rank','catalog']]
       },
       {
-        title: 'Add to cart and price',
-        desc: 'Cart updates; pricing service calculates totals and promos.',
-        active: ['cart','pricing','promos'],
-        edges: [['client','cart'], ['cart','pricing'], ['pricing','promos']]
+        title: 'Cart: pricing + promos',
+        desc: 'Cart totals calculated with promos, taxes, and delivery fees.',
+        active: ['cart','pricing','promos','tax','shipping'],
+        edges: [['client','cart'], ['cart','pricing'], ['pricing','promos'], ['cart','tax'], ['cart','shipping']]
       },
       {
-        title: 'Checkout and payment',
-        desc: 'Payment intent created; risk checks and payment rails invoked.',
+        title: 'Checkout: payments + risk',
+        desc: 'Payment intent created; fraud/risk checks gate and retries handle failures.',
         active: ['checkout','payments','risk'],
-        edges: [['cart','checkout'], ['checkout','payments'], ['payments','risk']]
+        edges: [['cart','checkout'], ['checkout','risk'], ['checkout','payments']]
       },
       {
-        title: 'Create order',
-        desc: 'Order is created; inventory reserved; confirmation sent.',
-        active: ['orders','inventory','notify'],
-        edges: [['payments','orders'], ['orders','inventory'], ['orders','notify']]
+        title: 'Order + inventory reservation',
+        desc: 'Order is created; inventory reserved and confirmation sent to customer and seller.',
+        active: ['orders','inventory','notify','seller'],
+        edges: [['payments','orders'], ['orders','inventory'], ['orders','notify'], ['orders','seller']]
       },
       {
-        title: 'Fulfillment and shipping',
-        desc: 'Warehouse/3PL processes shipment; tracking updates.',
-        active: ['fulfillment','carrier','tracking'],
-        edges: [['orders','fulfillment'], ['fulfillment','carrier'], ['carrier','tracking']]
+        title: 'Fulfillment (3PL/seller) + tracking',
+        desc: 'Fulfillment processes shipment; logistics updates tracking timeline.',
+        active: ['fulfillment','carrier','tracking','notify'],
+        edges: [['orders','fulfillment'], ['fulfillment','carrier'], ['carrier','tracking'], ['tracking','notify']]
       },
       {
-        title: 'Returns and refunds',
-        desc: 'Returns processed; refunds posted to ledger and payment reversal.',
-        active: ['returns','refunds','ledger'],
-        edges: [['client','returns'], ['returns','refunds'], ['refunds','ledger']]
+        title: 'Returns, disputes, refunds',
+        desc: 'Returns/disputes go through policy and inspections; refunds adjust ledger and payment status.',
+        active: ['returns','refunds','ledger','support','risk'],
+        edges: [['client','returns'], ['returns','support'], ['returns','refunds'], ['refunds','ledger'], ['returns','risk']]
       }
     ]
   },
@@ -5368,40 +5368,40 @@ export const FLOWS = {
     title: 'Shopee',
     steps: [
       {
-        title: 'Load home feed',
-        desc: 'Client loads home feed, categories and personalized deals.',
-        active: ['client','feed','rank'],
-        edges: [['client','feed'], ['feed','rank']]
+        title: 'Home feed + deals personalization',
+        desc: 'Home feed ranks deals using personalization, price, and engagement signals.',
+        active: ['client','feed','rank','catalog'],
+        edges: [['client','feed'], ['feed','rank'], ['rank','catalog']]
       },
       {
-        title: 'Search products',
-        desc: 'Search queries index and returns ranked results.',
-        active: ['search','index','rank'],
+        title: 'Search + index',
+        desc: 'Search queries hit index; ranking applies relevance and conversion models.',
+        active: ['client','search','index','rank'],
         edges: [['client','search'], ['search','index'], ['search','rank']]
       },
       {
-        title: 'Checkout',
-        desc: 'Cart pricing and promos applied; payment intent created.',
-        active: ['cart','pricing','payments'],
-        edges: [['client','cart'], ['cart','pricing'], ['pricing','payments']]
+        title: 'Cart + checkout (pricing, promos, risk)',
+        desc: 'Cart priced with promos; checkout runs risk checks and authorizes payment.',
+        active: ['cart','pricing','payments','risk'],
+        edges: [['client','cart'], ['cart','pricing'], ['pricing','payments'], ['payments','risk']]
       },
       {
-        title: 'Order and escrow',
-        desc: 'Order created; escrow/ledger tracks payment state.',
-        active: ['orders','escrow','ledger'],
-        edges: [['payments','orders'], ['orders','escrow'], ['escrow','ledger']]
+        title: 'Order + escrow',
+        desc: 'Order created; escrow holds funds until delivery/acceptance.',
+        active: ['orders','escrow','ledger','seller'],
+        edges: [['payments','orders'], ['orders','escrow'], ['escrow','ledger'], ['orders','seller']]
       },
       {
-        title: 'Shipping and tracking',
-        desc: 'Logistics assigns carrier and updates tracking.',
-        active: ['logistics','carrier','tracking'],
-        edges: [['orders','logistics'], ['logistics','carrier'], ['carrier','tracking']]
+        title: 'Logistics + last-mile tracking',
+        desc: 'Logistics assigns carrier; tracking updates are published and user notified.',
+        active: ['logistics','carrier','tracking','notify'],
+        edges: [['orders','logistics'], ['logistics','carrier'], ['carrier','tracking'], ['tracking','notify']]
       },
       {
-        title: 'Returns/refunds',
-        desc: 'Disputes and refunds adjust ledger and notify parties.',
-        active: ['returns','refunds','notify'],
-        edges: [['client','returns'], ['returns','refunds'], ['refunds','notify']]
+        title: 'Disputes, returns, refunds',
+        desc: 'Disputes and refunds adjust escrow/ledger and notify buyer/seller.',
+        active: ['returns','refunds','notify','escrow','support'],
+        edges: [['client','returns'], ['returns','support'], ['returns','refunds'], ['refunds','escrow'], ['refunds','notify']]
       }
     ]
   },
