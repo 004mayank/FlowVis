@@ -6,6 +6,455 @@
  */
 
 export const FLOWS = {
+  wechat: {
+    title: 'WeChat',
+    steps: [
+      {
+        title: 'Open chat and authenticate',
+        desc: 'Client loads session; auth refreshes tokens and establishes identity.',
+        active: ['client','auth'],
+        edges: [['client','auth']]
+      },
+      {
+        title: 'Send a message (sync + realtime)',
+        desc: 'Message is written, acknowledged, and routed for realtime delivery.',
+        active: ['client','chat','realtime','storage'],
+        edges: [['client','chat'], ['chat','realtime'], ['realtime','storage']]
+      },
+      {
+        title: 'Fanout to recipients',
+        desc: 'Backend fans out the message to online devices and queues for offline.',
+        active: ['storage','fanout','notify'],
+        edges: [['storage','fanout'], ['fanout','notify']]
+      },
+      {
+        title: 'Push + delivery on device',
+        desc: 'Push wakes offline clients; devices fetch and render the message.',
+        active: ['notify','push','client'],
+        edges: [['notify','push'], ['push','client']]
+      },
+      {
+        title: 'Share media to Moments',
+        desc: 'Media uploads are processed and attached to a social feed post.',
+        active: ['client','media','moments'],
+        edges: [['client','media'], ['media','moments']]
+      },
+      {
+        title: 'Payments / mini program actions',
+        desc: 'Transactions and mini program calls run through risk controls.',
+        active: ['client','payments','miniapps','risk'],
+        edges: [['client','payments'], ['client','miniapps'], ['payments','risk'], ['miniapps','risk']]
+      },
+      {
+        title: 'Analytics + safety signals',
+        desc: 'Events are aggregated to improve delivery, spam control, and UX.',
+        active: ['analytics','risk'],
+        edges: [['client','analytics']]
+      }
+    ]
+  },
+
+  qq: {
+    title: 'QQ',
+    steps: [
+      {
+        title: 'Login and load profile',
+        desc: 'Client authenticates and loads user profile and settings.',
+        active: ['client','auth','profiles'],
+        edges: [['client','auth'], ['auth','profiles']]
+      },
+      {
+        title: 'Start a group chat',
+        desc: 'Client posts a message to group chat; groups service resolves members.',
+        active: ['client','chat','groups'],
+        edges: [['client','chat'], ['chat','groups']]
+      },
+      {
+        title: 'Realtime delivery + store',
+        desc: 'Messages stream through realtime and persist to the message store.',
+        active: ['realtime','storage'],
+        edges: [['groups','realtime'], ['realtime','storage']]
+      },
+      {
+        title: 'Fanout and notifications',
+        desc: 'Fanout triggers notify + push for offline recipients.',
+        active: ['fanout','notify','push'],
+        edges: [['storage','fanout'], ['fanout','notify'], ['notify','push']]
+      },
+      {
+        title: 'Share media / files',
+        desc: 'Media is uploaded and linked from chat messages.',
+        active: ['media','chat'],
+        edges: [['client','media'], ['media','chat']]
+      },
+      {
+        title: 'Games / integrations',
+        desc: 'In-app games route through integrations and are surfaced in chats.',
+        active: ['games','chat'],
+        edges: [['client','games'], ['games','chat']]
+      },
+      {
+        title: 'Moderation + risk',
+        desc: 'Safety and anti-abuse checks run on content and accounts.',
+        active: ['moderation','risk'],
+        edges: [['chat','moderation'], ['moderation','risk']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Telemetry improves performance and abuse detection.',
+        active: ['analytics'],
+        edges: [['client','analytics']]
+      }
+    ]
+  },
+
+  peanut: {
+    title: 'Peanut',
+    steps: [
+      {
+        title: 'Create profile and preferences',
+        desc: 'User sets up identity and matching preferences.',
+        active: ['client','auth','profiles'],
+        edges: [['client','auth'], ['auth','profiles']]
+      },
+      {
+        title: 'Discover communities and people',
+        desc: 'Discovery surfaces groups, topics, and suggested connections.',
+        active: ['discover','matching'],
+        edges: [['profiles','discover'], ['discover','matching']]
+      },
+      {
+        title: 'Match and start chat',
+        desc: 'A match enables messaging with realtime delivery.',
+        active: ['chat','realtime'],
+        edges: [['matching','chat'], ['chat','realtime']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Notify and push bring users back for replies and updates.',
+        active: ['notify','push','client'],
+        edges: [['chat','notify'], ['notify','push'], ['push','client']]
+      },
+      {
+        title: 'Safety: blocks and reports',
+        desc: 'Users can block/report; safety systems enforce actions.',
+        active: ['safety','report','block'],
+        edges: [['client','safety'], ['safety','report'], ['safety','block']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Events inform matching quality and retention improvements.',
+        active: ['analytics'],
+        edges: [['client','analytics']]
+      }
+    ]
+  },
+
+  fishbowl: {
+    title: 'Fishbowl',
+    steps: [
+      {
+        title: 'Verify work identity',
+        desc: 'User verifies employment; identity is separated from public posting.',
+        active: ['client','auth','identity','anon'],
+        edges: [['client','auth'], ['auth','identity'], ['identity','anon']]
+      },
+      {
+        title: 'Browse feed and topics',
+        desc: 'Client loads topic feed, personalized to interests and org.',
+        active: ['feed','topics'],
+        edges: [['client','feed'], ['feed','topics']]
+      },
+      {
+        title: 'Post anonymously',
+        desc: 'Post is written via anon layer and stored for distribution.',
+        active: ['post','anon'],
+        edges: [['client','post'], ['post','anon']]
+      },
+      {
+        title: 'Comments and engagement',
+        desc: 'Comment writes update threads; feed reflects new activity.',
+        active: ['comments','feed'],
+        edges: [['client','comments'], ['comments','feed']]
+      },
+      {
+        title: 'Moderation and policy enforcement',
+        desc: 'Content is reviewed; policy decisions apply removals/limits.',
+        active: ['moderation','policy'],
+        edges: [['post','moderation'], ['moderation','policy']]
+      },
+      {
+        title: 'Search',
+        desc: 'Search queries hit an index built from posts and topics.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index']]
+      },
+      {
+        title: 'Notifications + analytics',
+        desc: 'Mentions/replies notify users; analytics tracks community health.',
+        active: ['notify','analytics'],
+        edges: [['post','notify'], ['post','analytics']]
+      }
+    ]
+  },
+
+  blind: {
+    title: 'Blind',
+    steps: [
+      {
+        title: 'Verify work identity',
+        desc: 'Users verify workplace; posting remains anonymous to peers.',
+        active: ['client','auth','identity','anon'],
+        edges: [['client','auth'], ['auth','identity'], ['identity','anon']]
+      },
+      {
+        title: 'Browse channels and feed',
+        desc: 'Client loads channel feed and trending discussions.',
+        active: ['feed','channels'],
+        edges: [['client','feed'], ['feed','channels']]
+      },
+      {
+        title: 'Post and comment',
+        desc: 'Writes go through anon layer to stores for threads.',
+        active: ['post','comments','anon'],
+        edges: [['client','post'], ['post','anon'], ['client','comments']]
+      },
+      {
+        title: 'Moderation, policy, and risk',
+        desc: 'Anti-abuse checks and moderation actions enforce rules.',
+        active: ['moderation','policy','risk'],
+        edges: [['post','moderation'], ['moderation','policy'], ['policy','risk']]
+      },
+      {
+        title: 'Search and indexing',
+        desc: 'Search uses an index updated from channel and post writes.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index']]
+      },
+      {
+        title: 'Notifications + analytics',
+        desc: 'Replies and mentions notify; analytics measures abuse and engagement.',
+        active: ['notify','analytics'],
+        edges: [['post','notify'], ['post','analytics']]
+      }
+    ]
+  },
+
+  polywork: {
+    title: 'Polywork',
+    steps: [
+      {
+        title: 'Authenticate and load profile',
+        desc: 'Client authenticates and loads identity and profile graph.',
+        active: ['client','auth','profiles','graph'],
+        edges: [['client','auth'], ['auth','profiles'], ['profiles','graph']]
+      },
+      {
+        title: 'Publish a post / update',
+        desc: 'User posts content; it is stored and becomes eligible for feed.',
+        active: ['content'],
+        edges: [['client','content']]
+      },
+      {
+        title: 'Assemble feed + recommendations',
+        desc: 'Feed is built using graph signals and recommendation service.',
+        active: ['feed','recommend'],
+        edges: [['content','feed'], ['graph','recommend'], ['recommend','feed']]
+      },
+      {
+        title: 'Search across people and work',
+        desc: 'Search hits an index built from profiles and content.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index']]
+      },
+      {
+        title: 'Direct messages and notifications',
+        desc: 'Messaging triggers notify + push for replies.',
+        active: ['messages','notify','push'],
+        edges: [['client','messages'], ['messages','notify'], ['notify','push']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Telemetry improves ranking, recommendations, and spam controls.',
+        active: ['analytics'],
+        edges: [['feed','analytics']]
+      }
+    ]
+  },
+
+  lunchclub: {
+    title: 'Lunchclub',
+    steps: [
+      {
+        title: 'Onboard + connect calendar',
+        desc: 'User signs in and connects calendar for availability.',
+        active: ['client','auth','profiles','calendar'],
+        edges: [['client','auth'], ['auth','profiles'], ['profiles','calendar']]
+      },
+      {
+        title: 'Compute availability',
+        desc: 'Availability service derives free slots from calendar events.',
+        active: ['availability'],
+        edges: [['calendar','availability']]
+      },
+      {
+        title: 'Run matching',
+        desc: 'Matching pairs users based on goals, profile signals, and timing.',
+        active: ['matching'],
+        edges: [['availability','matching']]
+      },
+      {
+        title: 'Schedule meeting',
+        desc: 'Scheduling books a slot and sends confirmations.',
+        active: ['scheduling','notify','push'],
+        edges: [['matching','scheduling'], ['scheduling','notify'], ['notify','push']]
+      },
+      {
+        title: 'Join video call',
+        desc: 'Clients join video; session health and feedback are recorded.',
+        active: ['video','feedback'],
+        edges: [['client','video'], ['video','feedback']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Outcomes improve matching quality and safety.',
+        active: ['analytics'],
+        edges: [['feedback','analytics']]
+      }
+    ]
+  },
+
+  shapr: {
+    title: 'Shapr',
+    steps: [
+      {
+        title: 'Create profile and intent',
+        desc: 'User sets up profile and selects intent (networking, hiring, etc.).',
+        active: ['client','auth','profiles'],
+        edges: [['client','auth'], ['auth','profiles']]
+      },
+      {
+        title: 'Discover and match',
+        desc: 'Discovery and matching propose connections.',
+        active: ['discover','matching'],
+        edges: [['profiles','discover'], ['discover','matching']]
+      },
+      {
+        title: 'Chat after match',
+        desc: 'Messaging enabled; realtime delivery provides responsiveness.',
+        active: ['chat','realtime'],
+        edges: [['matching','chat'], ['chat','realtime']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Notify and push drive re-engagement for messages.',
+        active: ['notify','push'],
+        edges: [['chat','notify'], ['notify','push']]
+      },
+      {
+        title: 'Safety controls',
+        desc: 'Blocks and reports prevent abuse and protect users.',
+        active: ['safety','report','block'],
+        edges: [['client','safety'], ['safety','report'], ['safety','block']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Telemetry improves match quality and reduces abuse.',
+        active: ['analytics'],
+        edges: [['client','analytics']]
+      }
+    ]
+  },
+
+  circle: {
+    title: 'Circle',
+    steps: [
+      {
+        title: 'Sign in and load community',
+        desc: 'User authenticates; membership and community config are loaded.',
+        active: ['client','auth','members','communities'],
+        edges: [['client','auth'], ['auth','members'], ['members','communities']]
+      },
+      {
+        title: 'Create a post',
+        desc: 'Post is stored and distributed to the community feed.',
+        active: ['posts'],
+        edges: [['client','posts']]
+      },
+      {
+        title: 'Comment and chat',
+        desc: 'Comments update threads; chat uses realtime delivery.',
+        active: ['comments','chat','realtime'],
+        edges: [['client','comments'], ['client','chat'], ['chat','realtime']]
+      },
+      {
+        title: 'Search',
+        desc: 'Search queries use an index built from posts and members.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index']]
+      },
+      {
+        title: 'Moderation and policy',
+        desc: 'Moderators enforce rules; policy decisions apply actions.',
+        active: ['moderation','policy'],
+        edges: [['posts','moderation'], ['moderation','policy']]
+      },
+      {
+        title: 'Notifications and analytics',
+        desc: 'Mentions/replies notify members; analytics tracks retention.',
+        active: ['notify','analytics'],
+        edges: [['posts','notify'], ['posts','analytics']]
+      }
+    ]
+  },
+
+  vimeo: {
+    title: 'Vimeo',
+    steps: [
+      {
+        title: 'Creator uploads video',
+        desc: 'Client uploads to ingest; object storage persists raw asset.',
+        active: ['client','upload','obj'],
+        edges: [['client','upload'], ['upload','obj']]
+      },
+      {
+        title: 'Transcode and package',
+        desc: 'Transcode produces renditions; packaging prepares HLS/DASH.',
+        active: ['transcode','packaging'],
+        edges: [['obj','transcode'], ['transcode','packaging']]
+      },
+      {
+        title: 'Publish to catalog + CDN',
+        desc: 'Catalog metadata is updated and segments are served via CDN.',
+        active: ['catalog','cdn'],
+        edges: [['packaging','cdn'], ['packaging','catalog']]
+      },
+      {
+        title: 'Viewer discovers video',
+        desc: 'Search hits index and resolves catalog metadata.',
+        active: ['search','index','catalog'],
+        edges: [['client','search'], ['search','index'], ['index','catalog']]
+      },
+      {
+        title: 'Playback',
+        desc: 'Player requests segments from CDN and streams to client.',
+        active: ['player','cdn','client'],
+        edges: [['client','player'], ['player','cdn'], ['cdn','client']]
+      },
+      {
+        title: 'Monetization + analytics',
+        desc: 'Ads/analytics capture viewing, QoE, and monetization events.',
+        active: ['ads','analytics'],
+        edges: [['player','ads'], ['player','analytics']]
+      },
+      {
+        title: 'Moderation',
+        desc: 'Content is checked for policy violations and takedowns.',
+        active: ['moderation'],
+        edges: [['upload','moderation']]
+      }
+    ]
+  },
   whatsapp: {
     title: 'WhatsApp',
     steps: [

@@ -11471,6 +11471,344 @@ Object.assign(ARCH_LAYOUTS, {
   }
 });
 
+// ----- Batch 36 (Architecture - flow + layouts) -----
+
+Object.assign(ARCH_LAYOUTS, {
+  wechat: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'WeChat Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','chat','realtime','store','fanout','moments','media','payments','miniapps','risk','notify','push','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      chat: { x: 600, y: 160, label: 'Chat API' },
+      realtime: { x: 880, y: 160, label: 'Realtime' },
+      store: { x: 1160, y: 160, label: 'Message Store' },
+      fanout: { x: 1160, y: 300, label: 'Fanout' },
+      moments: { x: 600, y: 300, label: 'Moments' },
+      media: { x: 880, y: 300, label: 'Media' },
+      payments: { x: 880, y: 440, label: 'Payments' },
+      miniapps: { x: 600, y: 440, label: 'Mini Programs' },
+      risk: { x: 1160, y: 440, label: 'Risk' },
+      notify: { x: 600, y: 580, label: 'Notify' },
+      push: { x: 320, y: 580, label: 'Push' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','chat','chat']);
+      if(stepIdx===2) e.push(['chat','realtime','rt'], ['realtime','store','store']);
+      if(stepIdx===3) e.push(['store','fanout','fanout'], ['fanout','notify','notify'], ['notify','push','push'], ['push','client','client']);
+      if(stepIdx===4) e.push(['client','moments','moments'], ['moments','media','media']);
+      if(stepIdx===5) e.push(['client','payments','pay'], ['payments','risk','risk']);
+      if(stepIdx===6) e.push(['client','miniapps','mini'], ['miniapps','risk','risk']);
+      if(stepIdx===7) e.push(['store','analytics','analytics']);
+      return e;
+    }
+  },
+
+  qq: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'QQ Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profiles','chat','groups','realtime','store','fanout','media','games','moderation','risk','notify','push','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profiles: { x: 600, y: 160, label: 'Profiles' },
+      chat: { x: 600, y: 300, label: 'Chat API' },
+      groups: { x: 880, y: 300, label: 'Groups' },
+      realtime: { x: 1160, y: 300, label: 'Realtime' },
+      store: { x: 1160, y: 160, label: 'Message Store' },
+      fanout: { x: 1160, y: 440, label: 'Fanout' },
+      media: { x: 600, y: 440, label: 'Media' },
+      games: { x: 880, y: 440, label: 'Games' },
+      moderation: { x: 880, y: 580, label: 'Moderation' },
+      risk: { x: 1160, y: 580, label: 'Risk' },
+      notify: { x: 600, y: 580, label: 'Notify' },
+      push: { x: 320, y: 580, label: 'Push' },
+      analytics: { x: 600, y: 720, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profiles','profiles']);
+      if(stepIdx===2) e.push(['client','chat','chat'], ['chat','groups','groups']);
+      if(stepIdx===3) e.push(['groups','realtime','rt'], ['realtime','store','store']);
+      if(stepIdx===4) e.push(['store','fanout','fanout'], ['fanout','notify','notify'], ['notify','push','push'], ['push','client','client']);
+      if(stepIdx===5) e.push(['client','media','media']);
+      if(stepIdx===6) e.push(['client','games','games']);
+      if(stepIdx===7) e.push(['store','moderation','mod'], ['moderation','risk','risk']);
+      if(stepIdx===8) e.push(['store','analytics','analytics']);
+      return e;
+    }
+  },
+
+  peanut: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Peanut Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profiles','discovery','matching','chat','realtime','safety','reports','blocks','notify','push','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profiles: { x: 600, y: 160, label: 'Profiles' },
+      discovery: { x: 880, y: 160, label: 'Discovery' },
+      matching: { x: 1160, y: 160, label: 'Matching' },
+      chat: { x: 600, y: 300, label: 'Chat' },
+      realtime: { x: 880, y: 300, label: 'Realtime' },
+      safety: { x: 1160, y: 300, label: 'Safety' },
+      reports: { x: 880, y: 440, label: 'Reports' },
+      blocks: { x: 1160, y: 440, label: 'Blocks' },
+      notify: { x: 600, y: 440, label: 'Notify' },
+      push: { x: 320, y: 440, label: 'Push' },
+      analytics: { x: 600, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profiles','profiles']);
+      if(stepIdx===2) e.push(['profiles','discovery','discover'], ['discovery','matching','match']);
+      if(stepIdx===3) e.push(['client','chat','chat'], ['chat','realtime','rt']);
+      if(stepIdx===4) e.push(['realtime','notify','notify'], ['notify','push','push'], ['push','client','client']);
+      if(stepIdx===5) e.push(['client','safety','safety'], ['safety','reports','reports'], ['safety','blocks','blocks']);
+      if(stepIdx===6) e.push(['profiles','analytics','analytics']);
+      return e;
+    }
+  },
+
+  fishbowl: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Fishbowl Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','identity','anon','feed','topics','posts','comments','moderation','policy','search','index','notify','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      identity: { x: 600, y: 160, label: 'Work Identity' },
+      anon: { x: 880, y: 160, label: 'Anon Layer' },
+      feed: { x: 320, y: 300, label: 'Feed' },
+      topics: { x: 600, y: 300, label: 'Topics' },
+      posts: { x: 880, y: 300, label: 'Posts' },
+      comments: { x: 1160, y: 300, label: 'Comments' },
+      moderation: { x: 880, y: 440, label: 'Moderation' },
+      policy: { x: 1160, y: 440, label: 'Policy' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 600, y: 580, label: 'Index' },
+      notify: { x: 320, y: 440, label: 'Notify' },
+      analytics: { x: 320, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','identity','verify'], ['identity','anon','anon']);
+      if(stepIdx===2) e.push(['client','feed','feed'], ['feed','topics','topics']);
+      if(stepIdx===3) e.push(['client','posts','post'], ['posts','comments','comment']);
+      if(stepIdx===4) e.push(['posts','moderation','mod'], ['moderation','policy','policy']);
+      if(stepIdx===5) e.push(['client','search','search'], ['search','index','index']);
+      if(stepIdx===6) e.push(['posts','notify','notify']);
+      if(stepIdx===7) e.push(['posts','analytics','analytics']);
+      return e;
+    }
+  },
+
+  blind: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Blind Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','identity','anon','feed','channels','posts','comments','moderation','policy','search','index','notify','risk','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      identity: { x: 600, y: 160, label: 'Work Identity' },
+      anon: { x: 880, y: 160, label: 'Anon Layer' },
+      feed: { x: 320, y: 300, label: 'Feed' },
+      channels: { x: 600, y: 300, label: 'Channels' },
+      posts: { x: 880, y: 300, label: 'Posts' },
+      comments: { x: 1160, y: 300, label: 'Comments' },
+      moderation: { x: 880, y: 440, label: 'Moderation' },
+      policy: { x: 1160, y: 440, label: 'Policy' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 600, y: 580, label: 'Index' },
+      notify: { x: 320, y: 440, label: 'Notify' },
+      risk: { x: 1160, y: 580, label: 'Risk' },
+      analytics: { x: 320, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','identity','verify'], ['identity','anon','anon']);
+      if(stepIdx===2) e.push(['client','feed','feed'], ['feed','channels','channels']);
+      if(stepIdx===3) e.push(['client','posts','post'], ['posts','comments','comment']);
+      if(stepIdx===4) e.push(['posts','moderation','mod'], ['moderation','policy','policy'], ['policy','risk','risk']);
+      if(stepIdx===5) e.push(['client','search','search'], ['search','index','index']);
+      if(stepIdx===6) e.push(['posts','notify','notify']);
+      if(stepIdx===7) e.push(['posts','analytics','analytics']);
+      return e;
+    }
+  },
+
+  polywork: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Polywork Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profiles','graph','content','feed','recommend','search','index','messages','notify','push','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profiles: { x: 600, y: 160, label: 'Profiles' },
+      graph: { x: 880, y: 160, label: 'Graph' },
+      content: { x: 320, y: 300, label: 'Content' },
+      feed: { x: 600, y: 300, label: 'Feed' },
+      recommend: { x: 880, y: 300, label: 'Recommendations' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 880, y: 440, label: 'Index' },
+      messages: { x: 600, y: 580, label: 'Messages' },
+      notify: { x: 320, y: 440, label: 'Notify' },
+      push: { x: 40, y: 440, label: 'Push' },
+      analytics: { x: 600, y: 720, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profiles','profiles']);
+      if(stepIdx===2) e.push(['profiles','graph','graph'], ['graph','recommend','recos']);
+      if(stepIdx===3) e.push(['client','content','publish'], ['content','feed','feed']);
+      if(stepIdx===4) e.push(['client','search','search'], ['search','index','index']);
+      if(stepIdx===5) e.push(['client','messages','msg'], ['messages','notify','notify'], ['notify','push','push']);
+      if(stepIdx===6) e.push(['feed','analytics','analytics']);
+      return e;
+    }
+  },
+
+  lunchclub: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Lunchclub Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profiles','calendar','availability','matching','scheduling','video','notify','push','feedback','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profiles: { x: 600, y: 160, label: 'Profiles' },
+      calendar: { x: 880, y: 160, label: 'Calendar' },
+      availability: { x: 1160, y: 160, label: 'Availability' },
+      matching: { x: 880, y: 300, label: 'Matching' },
+      scheduling: { x: 1160, y: 300, label: 'Scheduling' },
+      video: { x: 880, y: 440, label: 'Video' },
+      notify: { x: 600, y: 440, label: 'Notify' },
+      push: { x: 320, y: 440, label: 'Push' },
+      feedback: { x: 1160, y: 440, label: 'Feedback' },
+      analytics: { x: 600, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profiles','profiles']);
+      if(stepIdx===2) e.push(['profiles','calendar','sync'], ['calendar','availability','avail']);
+      if(stepIdx===3) e.push(['availability','matching','match'], ['matching','scheduling','schedule']);
+      if(stepIdx===4) e.push(['scheduling','notify','notify'], ['notify','push','push'], ['push','client','client']);
+      if(stepIdx===5) e.push(['client','video','join'], ['video','feedback','feedback']);
+      if(stepIdx===6) e.push(['feedback','analytics','analytics']);
+      return e;
+    }
+  },
+
+  shapr: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Shapr Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profiles','discovery','matching','chat','realtime','safety','reports','blocks','notify','push','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profiles: { x: 600, y: 160, label: 'Profiles' },
+      discovery: { x: 880, y: 160, label: 'Discovery' },
+      matching: { x: 1160, y: 160, label: 'Matching' },
+      chat: { x: 600, y: 300, label: 'Chat' },
+      realtime: { x: 880, y: 300, label: 'Realtime' },
+      safety: { x: 1160, y: 300, label: 'Safety' },
+      reports: { x: 880, y: 440, label: 'Reports' },
+      blocks: { x: 1160, y: 440, label: 'Blocks' },
+      notify: { x: 600, y: 440, label: 'Notify' },
+      push: { x: 320, y: 440, label: 'Push' },
+      analytics: { x: 600, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profiles','profiles']);
+      if(stepIdx===2) e.push(['profiles','discovery','discover'], ['discovery','matching','match']);
+      if(stepIdx===3) e.push(['client','chat','chat'], ['chat','realtime','rt']);
+      if(stepIdx===4) e.push(['realtime','notify','notify'], ['notify','push','push'], ['push','client','client']);
+      if(stepIdx===5) e.push(['client','safety','safety'], ['safety','reports','reports'], ['safety','blocks','blocks']);
+      if(stepIdx===6) e.push(['profiles','analytics','analytics']);
+      return e;
+    }
+  },
+
+  circle: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Circle Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','members','communities','posts','comments','chat','realtime','search','index','moderation','policy','notify','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      members: { x: 600, y: 160, label: 'Members' },
+      communities: { x: 880, y: 160, label: 'Communities' },
+      posts: { x: 600, y: 300, label: 'Posts' },
+      comments: { x: 880, y: 300, label: 'Comments' },
+      chat: { x: 1160, y: 300, label: 'Chat' },
+      realtime: { x: 1160, y: 440, label: 'Realtime' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 880, y: 440, label: 'Index' },
+      moderation: { x: 880, y: 580, label: 'Moderation' },
+      policy: { x: 1160, y: 580, label: 'Policy' },
+      notify: { x: 320, y: 440, label: 'Notify' },
+      analytics: { x: 600, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','members','members'], ['members','communities','communities']);
+      if(stepIdx===2) e.push(['client','posts','post'], ['posts','comments','comment']);
+      if(stepIdx===3) e.push(['client','chat','chat'], ['chat','realtime','rt'], ['realtime','client','client']);
+      if(stepIdx===4) e.push(['client','search','search'], ['search','index','index']);
+      if(stepIdx===5) e.push(['posts','moderation','mod'], ['moderation','policy','policy']);
+      if(stepIdx===6) e.push(['posts','notify','notify']);
+      if(stepIdx===7) e.push(['posts','analytics','analytics']);
+      return e;
+    }
+  },
+
+  vimeo: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Vimeo Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','upload','obj','transcode','packaging','cdn','catalog','search','index','player','analytics','ads','moderation'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      upload: { x: 320, y: 300, label: 'Upload' },
+      obj: { x: 600, y: 300, label: 'Object Store' },
+      transcode: { x: 880, y: 300, label: 'Transcode' },
+      packaging: { x: 1160, y: 300, label: 'Packaging' },
+      cdn: { x: 1160, y: 160, label: 'CDN' },
+      catalog: { x: 600, y: 160, label: 'Catalog' },
+      search: { x: 320, y: 440, label: 'Search' },
+      index: { x: 600, y: 440, label: 'Index' },
+      player: { x: 880, y: 160, label: 'Player' },
+      analytics: { x: 880, y: 440, label: 'Analytics' },
+      ads: { x: 1160, y: 440, label: 'Ads' },
+      moderation: { x: 600, y: 580, label: 'Moderation' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','upload','upload']);
+      if(stepIdx===2) e.push(['upload','obj','store'], ['obj','transcode','transcode']);
+      if(stepIdx===3) e.push(['transcode','packaging','package'], ['packaging','cdn','cdn']);
+      if(stepIdx===4) e.push(['client','search','search'], ['search','index','index'], ['index','catalog','catalog']);
+      if(stepIdx===5) e.push(['client','player','play'], ['player','cdn','cdn']);
+      if(stepIdx===6) e.push(['player','ads','ads'], ['player','analytics','analytics']);
+      if(stepIdx===7) e.push(['upload','moderation','mod']);
+      return e;
+    }
+  }
+});
+
 // ----- Batch 35 (System - from user selection) -----
 
 Object.assign(SYSTEM_LAYOUTS, {
@@ -11670,6 +12008,218 @@ Object.assign(SYSTEM_LAYOUTS, {
       push: { x: 140, y: 460, label: 'Push', colorKey: 'external' },
       moderation: { x: 860, y: 460, label: 'Moderation', colorKey: 'api' },
       analytics: { x: 620, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  }
+});
+
+// ----- Batch 36 (System - flow + layouts) -----
+
+Object.assign(SYSTEM_LAYOUTS, {
+  wechat: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','contacts','chat','media','moments','payments','miniapps','realtime','storage','fanout','notify','push','risk','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      contacts: { x: 620, y: 180, label: 'Contacts', colorKey: 'store' },
+      chat: { x: 380, y: 320, label: 'Chat', colorKey: 'api' },
+      realtime: { x: 620, y: 320, label: 'Realtime', colorKey: 'stream' },
+      storage: { x: 860, y: 320, label: 'Message Store', colorKey: 'store' },
+      fanout: { x: 1100, y: 320, label: 'Fanout', colorKey: 'queue' },
+      media: { x: 380, y: 460, label: 'Media', colorKey: 'api' },
+      moments: { x: 620, y: 460, label: 'Moments', colorKey: 'api' },
+      payments: { x: 860, y: 180, label: 'Payments', colorKey: 'external' },
+      miniapps: { x: 860, y: 460, label: 'Mini Programs', colorKey: 'api' },
+      notify: { x: 620, y: 600, label: 'Notify', colorKey: 'external' },
+      push: { x: 380, y: 600, label: 'Push', colorKey: 'external' },
+      risk: { x: 1100, y: 460, label: 'Risk', colorKey: 'api' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  qq: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profiles','chat','groups','realtime','storage','fanout','media','games','notify','push','moderation','risk','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profiles: { x: 620, y: 180, label: 'Profiles', colorKey: 'store' },
+      chat: { x: 380, y: 320, label: 'Chat', colorKey: 'api' },
+      groups: { x: 620, y: 320, label: 'Groups', colorKey: 'api' },
+      realtime: { x: 860, y: 320, label: 'Realtime', colorKey: 'stream' },
+      storage: { x: 1100, y: 320, label: 'Message Store', colorKey: 'store' },
+      fanout: { x: 1100, y: 460, label: 'Fanout', colorKey: 'queue' },
+      media: { x: 380, y: 460, label: 'Media', colorKey: 'api' },
+      games: { x: 620, y: 460, label: 'Games', colorKey: 'api' },
+      notify: { x: 860, y: 460, label: 'Notify', colorKey: 'external' },
+      push: { x: 380, y: 600, label: 'Push', colorKey: 'external' },
+      moderation: { x: 620, y: 600, label: 'Moderation', colorKey: 'api' },
+      risk: { x: 860, y: 600, label: 'Risk', colorKey: 'api' },
+      analytics: { x: 1100, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  peanut: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profiles','discover','matching','chat','realtime','safety','report','block','notify','push','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profiles: { x: 620, y: 180, label: 'Profiles', colorKey: 'store' },
+      discover: { x: 860, y: 180, label: 'Discovery', colorKey: 'api' },
+      matching: { x: 1100, y: 180, label: 'Matching', colorKey: 'api' },
+      chat: { x: 620, y: 320, label: 'Chat', colorKey: 'api' },
+      realtime: { x: 860, y: 320, label: 'Realtime', colorKey: 'stream' },
+      safety: { x: 1100, y: 320, label: 'Safety', colorKey: 'api' },
+      report: { x: 860, y: 460, label: 'Reports', colorKey: 'store' },
+      block: { x: 1100, y: 460, label: 'Blocks', colorKey: 'store' },
+      notify: { x: 620, y: 460, label: 'Notify', colorKey: 'external' },
+      push: { x: 380, y: 460, label: 'Push', colorKey: 'external' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  fishbowl: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','identity','feed','topics','post','comments','anon','moderation','policy','search','index','notify','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      identity: { x: 620, y: 180, label: 'Work Identity', colorKey: 'api' },
+      anon: { x: 860, y: 180, label: 'Anon Layer', colorKey: 'api' },
+      feed: { x: 380, y: 320, label: 'Feed', colorKey: 'api' },
+      topics: { x: 620, y: 320, label: 'Topics', colorKey: 'store' },
+      post: { x: 860, y: 320, label: 'Posts', colorKey: 'store' },
+      comments: { x: 1100, y: 320, label: 'Comments', colorKey: 'store' },
+      moderation: { x: 860, y: 460, label: 'Moderation', colorKey: 'api' },
+      policy: { x: 1100, y: 460, label: 'Policy', colorKey: 'api' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 620, y: 600, label: 'Index', colorKey: 'store' },
+      notify: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 380, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  blind: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','identity','feed','channels','post','comments','anon','moderation','policy','search','index','notify','risk','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      identity: { x: 620, y: 180, label: 'Work Identity', colorKey: 'api' },
+      anon: { x: 860, y: 180, label: 'Anon Layer', colorKey: 'api' },
+      feed: { x: 380, y: 320, label: 'Feed', colorKey: 'api' },
+      channels: { x: 620, y: 320, label: 'Channels', colorKey: 'store' },
+      post: { x: 860, y: 320, label: 'Posts', colorKey: 'store' },
+      comments: { x: 1100, y: 320, label: 'Comments', colorKey: 'store' },
+      moderation: { x: 860, y: 460, label: 'Moderation', colorKey: 'api' },
+      policy: { x: 1100, y: 460, label: 'Policy', colorKey: 'api' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 620, y: 600, label: 'Index', colorKey: 'store' },
+      notify: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      risk: { x: 1100, y: 600, label: 'Risk', colorKey: 'api' },
+      analytics: { x: 380, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  polywork: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profiles','graph','content','feed','search','index','messages','notify','push','recommend','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profiles: { x: 620, y: 180, label: 'Profiles', colorKey: 'store' },
+      graph: { x: 860, y: 180, label: 'Graph', colorKey: 'store' },
+      content: { x: 380, y: 320, label: 'Content', colorKey: 'store' },
+      feed: { x: 620, y: 320, label: 'Feed', colorKey: 'api' },
+      search: { x: 860, y: 320, label: 'Search', colorKey: 'api' },
+      index: { x: 1100, y: 320, label: 'Index', colorKey: 'store' },
+      messages: { x: 620, y: 460, label: 'Messages', colorKey: 'api' },
+      notify: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      push: { x: 140, y: 460, label: 'Push', colorKey: 'external' },
+      recommend: { x: 860, y: 460, label: 'Recommendations', colorKey: 'api' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  lunchclub: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profiles','calendar','availability','matching','scheduling','video','notify','push','feedback','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profiles: { x: 620, y: 180, label: 'Profiles', colorKey: 'store' },
+      calendar: { x: 860, y: 180, label: 'Calendar', colorKey: 'external' },
+      availability: { x: 1100, y: 180, label: 'Availability', colorKey: 'api' },
+      matching: { x: 860, y: 320, label: 'Matching', colorKey: 'api' },
+      scheduling: { x: 1100, y: 320, label: 'Scheduling', colorKey: 'api' },
+      video: { x: 860, y: 460, label: 'Video', colorKey: 'stream' },
+      notify: { x: 620, y: 460, label: 'Notify', colorKey: 'external' },
+      push: { x: 380, y: 460, label: 'Push', colorKey: 'external' },
+      feedback: { x: 1100, y: 460, label: 'Feedback', colorKey: 'store' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  shapr: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profiles','discover','matching','chat','realtime','safety','report','block','notify','push','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profiles: { x: 620, y: 180, label: 'Profiles', colorKey: 'store' },
+      discover: { x: 860, y: 180, label: 'Discovery', colorKey: 'api' },
+      matching: { x: 1100, y: 180, label: 'Matching', colorKey: 'api' },
+      chat: { x: 620, y: 320, label: 'Chat', colorKey: 'api' },
+      realtime: { x: 860, y: 320, label: 'Realtime', colorKey: 'stream' },
+      safety: { x: 1100, y: 320, label: 'Safety', colorKey: 'api' },
+      report: { x: 860, y: 460, label: 'Reports', colorKey: 'store' },
+      block: { x: 1100, y: 460, label: 'Blocks', colorKey: 'store' },
+      notify: { x: 620, y: 460, label: 'Notify', colorKey: 'external' },
+      push: { x: 380, y: 460, label: 'Push', colorKey: 'external' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  circle: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','members','communities','posts','comments','chat','realtime','search','index','moderation','policy','notify','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      members: { x: 620, y: 180, label: 'Members', colorKey: 'store' },
+      communities: { x: 860, y: 180, label: 'Communities', colorKey: 'store' },
+      posts: { x: 380, y: 320, label: 'Posts', colorKey: 'store' },
+      comments: { x: 620, y: 320, label: 'Comments', colorKey: 'store' },
+      chat: { x: 860, y: 320, label: 'Chat', colorKey: 'api' },
+      realtime: { x: 1100, y: 320, label: 'Realtime', colorKey: 'stream' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 460, label: 'Index', colorKey: 'store' },
+      moderation: { x: 860, y: 600, label: 'Moderation', colorKey: 'api' },
+      policy: { x: 1100, y: 600, label: 'Policy', colorKey: 'api' },
+      notify: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 380, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  vimeo: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','upload','obj','transcode','packaging','cdn','catalog','search','index','player','analytics','ads','moderation'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      upload: { x: 380, y: 320, label: 'Upload', colorKey: 'api' },
+      obj: { x: 620, y: 320, label: 'Object Store', colorKey: 'store' },
+      transcode: { x: 860, y: 320, label: 'Transcode', colorKey: 'queue' },
+      packaging: { x: 1100, y: 320, label: 'Packaging', colorKey: 'api' },
+      cdn: { x: 1100, y: 180, label: 'CDN', colorKey: 'cdn' },
+      catalog: { x: 620, y: 180, label: 'Catalog', colorKey: 'store' },
+      search: { x: 380, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 620, y: 460, label: 'Index', colorKey: 'store' },
+      player: { x: 860, y: 180, label: 'Player', colorKey: 'api' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' },
+      ads: { x: 1100, y: 460, label: 'Ads', colorKey: 'api' },
+      moderation: { x: 620, y: 600, label: 'Moderation', colorKey: 'api' }
     }
   }
 });
