@@ -12026,6 +12026,533 @@ Object.assign(SYSTEM_LAYOUTS, {
   }
 });
 
+// ----- Batch 46 (System + Architecture - streaming batch 2 for flows) -----
+
+Object.assign(SYSTEM_LAYOUTS, {
+  voot: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','subs','policy','home','recos','catalog','search','index','drm','cdn','player','ads','metrics','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      subs: { x: 620, y: 180, label: 'Subscriptions', colorKey: 'external' },
+      policy: { x: 860, y: 180, label: 'Policy', colorKey: 'api' },
+      home: { x: 380, y: 320, label: 'Home', colorKey: 'api' },
+      recos: { x: 620, y: 320, label: 'Recos', colorKey: 'api' },
+      catalog: { x: 860, y: 320, label: 'Catalog', colorKey: 'store' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 380, y: 460, label: 'Index', colorKey: 'store' },
+      drm: { x: 860, y: 460, label: 'DRM', colorKey: 'api' },
+      cdn: { x: 1100, y: 320, label: 'CDN', colorKey: 'cdn' },
+      player: { x: 1100, y: 240, label: 'Player', colorKey: 'api' },
+      ads: { x: 1100, y: 460, label: 'Ads', colorKey: 'api' },
+      metrics: { x: 620, y: 600, label: 'Telemetry', colorKey: 'stream' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  crunchyroll: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','subs','policy','catalog','search','index','drm','cdn','player','ads','metrics','analytics','moderation'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      subs: { x: 620, y: 180, label: 'Subscriptions', colorKey: 'external' },
+      policy: { x: 860, y: 180, label: 'Policy', colorKey: 'api' },
+      catalog: { x: 860, y: 320, label: 'Catalog', colorKey: 'store' },
+      search: { x: 620, y: 320, label: 'Search', colorKey: 'api' },
+      index: { x: 380, y: 320, label: 'Index', colorKey: 'store' },
+      drm: { x: 1100, y: 320, label: 'DRM', colorKey: 'api' },
+      cdn: { x: 1100, y: 180, label: 'CDN', colorKey: 'cdn' },
+      player: { x: 860, y: 240, label: 'Player', colorKey: 'api' },
+      ads: { x: 1100, y: 460, label: 'Ads', colorKey: 'api' },
+      metrics: { x: 620, y: 600, label: 'Telemetry', colorKey: 'stream' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' },
+      moderation: { x: 380, y: 600, label: 'Moderation', colorKey: 'api' }
+    }
+  },
+
+  funimation: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','subs','policy','catalog','search','index','drm','cdn','player','ads','metrics','analytics','moderation'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      subs: { x: 620, y: 180, label: 'Subscriptions', colorKey: 'external' },
+      policy: { x: 860, y: 180, label: 'Policy', colorKey: 'api' },
+      catalog: { x: 860, y: 320, label: 'Catalog', colorKey: 'store' },
+      search: { x: 620, y: 320, label: 'Search', colorKey: 'api' },
+      index: { x: 380, y: 320, label: 'Index', colorKey: 'store' },
+      drm: { x: 1100, y: 320, label: 'DRM', colorKey: 'api' },
+      cdn: { x: 1100, y: 180, label: 'CDN', colorKey: 'cdn' },
+      player: { x: 860, y: 240, label: 'Player', colorKey: 'api' },
+      ads: { x: 1100, y: 460, label: 'Ads', colorKey: 'api' },
+      metrics: { x: 620, y: 600, label: 'Telemetry', colorKey: 'stream' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' },
+      moderation: { x: 380, y: 600, label: 'Moderation', colorKey: 'api' }
+    }
+  },
+
+  tubi: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','home','recos','catalog','search','index','cdn','player','ads','auction','metrics','analytics','moderation'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      home: { x: 380, y: 240, label: 'Home', colorKey: 'api' },
+      recos: { x: 620, y: 240, label: 'Recos', colorKey: 'api' },
+      catalog: { x: 860, y: 240, label: 'Catalog', colorKey: 'store' },
+      search: { x: 380, y: 380, label: 'Search', colorKey: 'api' },
+      index: { x: 620, y: 380, label: 'Index', colorKey: 'store' },
+      cdn: { x: 1100, y: 240, label: 'CDN', colorKey: 'cdn' },
+      player: { x: 860, y: 380, label: 'Player', colorKey: 'api' },
+      ads: { x: 1100, y: 380, label: 'Ads', colorKey: 'api' },
+      auction: { x: 1100, y: 520, label: 'Ad Auction', colorKey: 'api' },
+      metrics: { x: 620, y: 520, label: 'Telemetry', colorKey: 'stream' },
+      analytics: { x: 860, y: 520, label: 'Analytics', colorKey: 'store' },
+      moderation: { x: 380, y: 520, label: 'Moderation', colorKey: 'api' }
+    }
+  },
+
+  'pluto-tv': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','home','guide','channels','catalog','ads','auction','cdn','player','metrics','analytics','moderation'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      home: { x: 380, y: 180, label: 'Home', colorKey: 'api' },
+      guide: { x: 620, y: 180, label: 'Live Guide', colorKey: 'api' },
+      channels: { x: 860, y: 180, label: 'Channels', colorKey: 'store' },
+      catalog: { x: 620, y: 320, label: 'Catalog', colorKey: 'store' },
+      ads: { x: 860, y: 320, label: 'Ads', colorKey: 'api' },
+      auction: { x: 1100, y: 320, label: 'Ad Auction', colorKey: 'api' },
+      cdn: { x: 1100, y: 180, label: 'CDN', colorKey: 'cdn' },
+      player: { x: 860, y: 460, label: 'Player', colorKey: 'api' },
+      metrics: { x: 620, y: 460, label: 'Telemetry', colorKey: 'stream' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' },
+      moderation: { x: 380, y: 460, label: 'Moderation', colorKey: 'api' }
+    }
+  },
+
+  plex: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','library','catalog','search','index','transcode','cdn','player','devices','sync','metrics','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      library: { x: 620, y: 180, label: 'Library', colorKey: 'store' },
+      catalog: { x: 860, y: 180, label: 'Catalog', colorKey: 'store' },
+      search: { x: 380, y: 320, label: 'Search', colorKey: 'api' },
+      index: { x: 620, y: 320, label: 'Index', colorKey: 'store' },
+      transcode: { x: 860, y: 320, label: 'Transcode', colorKey: 'queue' },
+      cdn: { x: 1100, y: 320, label: 'CDN/Relay', colorKey: 'cdn' },
+      player: { x: 1100, y: 240, label: 'Player', colorKey: 'api' },
+      devices: { x: 620, y: 460, label: 'Devices', colorKey: 'external' },
+      sync: { x: 860, y: 460, label: 'Sync', colorKey: 'api' },
+      metrics: { x: 620, y: 600, label: 'Telemetry', colorKey: 'stream' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  kodi: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','library','plugins','sources','catalog','player','cdn','transcode','devices','settings','metrics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      library: { x: 380, y: 180, label: 'Library', colorKey: 'store' },
+      plugins: { x: 620, y: 180, label: 'Add-ons', colorKey: 'api' },
+      sources: { x: 860, y: 180, label: 'Sources', colorKey: 'external' },
+      catalog: { x: 620, y: 320, label: 'Catalog', colorKey: 'store' },
+      player: { x: 860, y: 320, label: 'Player', colorKey: 'api' },
+      cdn: { x: 1100, y: 320, label: 'CDN/Files', colorKey: 'cdn' },
+      transcode: { x: 860, y: 460, label: 'Transcode', colorKey: 'queue' },
+      devices: { x: 380, y: 320, label: 'Devices', colorKey: 'external' },
+      settings: { x: 380, y: 460, label: 'Settings', colorKey: 'api' },
+      metrics: { x: 620, y: 600, label: 'Telemetry', colorKey: 'stream' }
+    }
+  },
+
+  'apple-tv': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','subs','policy','channels','catalog','search','index','drm','cdn','player','metrics','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      subs: { x: 620, y: 180, label: 'Subscriptions', colorKey: 'external' },
+      policy: { x: 860, y: 180, label: 'Policy', colorKey: 'api' },
+      channels: { x: 380, y: 320, label: 'Channels', colorKey: 'store' },
+      catalog: { x: 620, y: 320, label: 'Catalog', colorKey: 'store' },
+      search: { x: 860, y: 320, label: 'Search', colorKey: 'api' },
+      index: { x: 1100, y: 320, label: 'Index', colorKey: 'store' },
+      drm: { x: 1100, y: 180, label: 'DRM', colorKey: 'api' },
+      cdn: { x: 1100, y: 240, label: 'CDN', colorKey: 'cdn' },
+      player: { x: 860, y: 240, label: 'Player', colorKey: 'api' },
+      metrics: { x: 620, y: 460, label: 'Telemetry', colorKey: 'stream' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'youtube-studio': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','creator','upload','obj','transcode','processing','catalog','monetization','ads','analytics','moderation','notify'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      creator: { x: 620, y: 180, label: 'Creator', colorKey: 'external' },
+      upload: { x: 380, y: 320, label: 'Upload', colorKey: 'api' },
+      obj: { x: 620, y: 320, label: 'Object Store', colorKey: 'store' },
+      transcode: { x: 860, y: 320, label: 'Transcode', colorKey: 'queue' },
+      processing: { x: 1100, y: 320, label: 'Processing', colorKey: 'api' },
+      catalog: { x: 860, y: 180, label: 'Catalog', colorKey: 'store' },
+      monetization: { x: 1100, y: 180, label: 'Monetization', colorKey: 'api' },
+      ads: { x: 1100, y: 460, label: 'Ads', colorKey: 'api' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' },
+      moderation: { x: 620, y: 460, label: 'Moderation', colorKey: 'api' },
+      notify: { x: 380, y: 460, label: 'Notify', colorKey: 'external' }
+    }
+  },
+
+  anchor: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','creator','record','upload','obj','processing','rss','distribution','ads','analytics','payments','support'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      creator: { x: 620, y: 180, label: 'Creator', colorKey: 'external' },
+      record: { x: 380, y: 320, label: 'Recorder', colorKey: 'api' },
+      upload: { x: 620, y: 320, label: 'Upload', colorKey: 'api' },
+      obj: { x: 860, y: 320, label: 'Object Store', colorKey: 'store' },
+      processing: { x: 1100, y: 320, label: 'Processing', colorKey: 'api' },
+      rss: { x: 860, y: 180, label: 'RSS/Feeds', colorKey: 'api' },
+      distribution: { x: 1100, y: 180, label: 'Distribution', colorKey: 'external' },
+      ads: { x: 1100, y: 460, label: 'Ads', colorKey: 'api' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' },
+      payments: { x: 620, y: 460, label: 'Payments', colorKey: 'external' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' }
+    }
+  }
+});
+
+Object.assign(ARCH_LAYOUTS, {
+  voot: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Voot Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','subs','policy','home','recos','catalog','search','index','drm','cdn','player','ads','metrics','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      subs: { x: 600, y: 160, label: 'Subscriptions' },
+      policy: { x: 880, y: 160, label: 'Policy' },
+      home: { x: 320, y: 300, label: 'Home' },
+      recos: { x: 600, y: 300, label: 'Recos' },
+      catalog: { x: 880, y: 300, label: 'Catalog' },
+      search: { x: 320, y: 440, label: 'Search' },
+      index: { x: 600, y: 440, label: 'Index' },
+      drm: { x: 880, y: 440, label: 'DRM' },
+      cdn: { x: 1160, y: 300, label: 'CDN' },
+      player: { x: 1160, y: 200, label: 'Player' },
+      ads: { x: 1160, y: 440, label: 'Ads' },
+      metrics: { x: 600, y: 580, label: 'Telemetry' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','subs','subs'], ['subs','policy','policy']);
+      if(stepIdx===2) e.push(['client','home','home'], ['home','recos','recos'], ['recos','catalog','catalog']);
+      if(stepIdx===3) e.push(['client','search','search'], ['search','index','index'], ['index','catalog','catalog']);
+      if(stepIdx===4) e.push(['catalog','drm','drm'], ['drm','player','license'], ['player','cdn','cdn']);
+      if(stepIdx===5) e.push(['player','ads','ads']);
+      if(stepIdx===6) e.push(['player','metrics','qoe'], ['metrics','analytics','analytics']);
+      return e;
+    }
+  },
+
+  crunchyroll: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Crunchyroll Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','subs','policy','catalog','search','index','drm','cdn','player','ads','metrics','analytics','moderation'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      subs: { x: 600, y: 160, label: 'Subscriptions' },
+      policy: { x: 880, y: 160, label: 'Policy' },
+      catalog: { x: 1160, y: 160, label: 'Catalog' },
+      search: { x: 320, y: 300, label: 'Search' },
+      index: { x: 600, y: 300, label: 'Index' },
+      drm: { x: 1160, y: 300, label: 'DRM' },
+      cdn: { x: 1160, y: 440, label: 'CDN' },
+      player: { x: 880, y: 300, label: 'Player' },
+      ads: { x: 880, y: 440, label: 'Ads' },
+      metrics: { x: 600, y: 580, label: 'Telemetry' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      moderation: { x: 320, y: 580, label: 'Moderation' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','subs','subs'], ['subs','policy','policy']);
+      if(stepIdx===2) e.push(['client','search','search'], ['search','index','index'], ['index','catalog','catalog']);
+      if(stepIdx===3) e.push(['catalog','drm','drm'], ['drm','player','license'], ['player','cdn','cdn']);
+      if(stepIdx===4) e.push(['player','ads','ads']);
+      if(stepIdx===5) e.push(['player','metrics','qoe'], ['metrics','analytics','analytics']);
+      if(stepIdx===6) e.push(['catalog','moderation','mod']);
+      return e;
+    }
+  },
+
+  funimation: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Funimation Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','subs','policy','catalog','search','index','drm','cdn','player','ads','metrics','analytics','moderation'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      subs: { x: 600, y: 160, label: 'Subscriptions' },
+      policy: { x: 880, y: 160, label: 'Policy' },
+      catalog: { x: 1160, y: 160, label: 'Catalog' },
+      search: { x: 320, y: 300, label: 'Search' },
+      index: { x: 600, y: 300, label: 'Index' },
+      drm: { x: 1160, y: 300, label: 'DRM' },
+      cdn: { x: 1160, y: 440, label: 'CDN' },
+      player: { x: 880, y: 300, label: 'Player' },
+      ads: { x: 880, y: 440, label: 'Ads' },
+      metrics: { x: 600, y: 580, label: 'Telemetry' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      moderation: { x: 320, y: 580, label: 'Moderation' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','subs','subs'], ['subs','policy','policy']);
+      if(stepIdx===2) e.push(['client','search','search'], ['search','index','index'], ['index','catalog','catalog']);
+      if(stepIdx===3) e.push(['catalog','drm','drm'], ['drm','player','license'], ['player','cdn','cdn']);
+      if(stepIdx===4) e.push(['player','ads','ads']);
+      if(stepIdx===5) e.push(['player','metrics','qoe'], ['metrics','analytics','analytics']);
+      if(stepIdx===6) e.push(['catalog','moderation','mod']);
+      return e;
+    }
+  },
+
+  tubi: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Tubi Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','home','recos','catalog','search','index','cdn','player','ads','auction','metrics','analytics','moderation'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      home: { x: 320, y: 160, label: 'Home' },
+      recos: { x: 600, y: 160, label: 'Recos' },
+      catalog: { x: 880, y: 160, label: 'Catalog' },
+      search: { x: 320, y: 300, label: 'Search' },
+      index: { x: 600, y: 300, label: 'Index' },
+      player: { x: 880, y: 300, label: 'Player' },
+      cdn: { x: 1160, y: 160, label: 'CDN' },
+      ads: { x: 1160, y: 300, label: 'Ads' },
+      auction: { x: 1160, y: 440, label: 'Ad Auction' },
+      metrics: { x: 600, y: 440, label: 'Telemetry' },
+      analytics: { x: 880, y: 440, label: 'Analytics' },
+      moderation: { x: 320, y: 440, label: 'Moderation' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','home','home'], ['home','recos','recos'], ['recos','catalog','catalog']);
+      if(stepIdx===2) e.push(['client','search','search'], ['search','index','index'], ['index','catalog','catalog']);
+      if(stepIdx===3) e.push(['client','player','play'], ['player','cdn','cdn']);
+      if(stepIdx===4) e.push(['player','ads','ads'], ['ads','auction','auction']);
+      if(stepIdx===5) e.push(['player','metrics','qoe'], ['metrics','analytics','analytics']);
+      if(stepIdx===6) e.push(['catalog','moderation','mod']);
+      return e;
+    }
+  },
+
+  'pluto-tv': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Pluto TV Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','home','guide','channels','catalog','ads','auction','cdn','player','metrics','analytics','moderation'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      home: { x: 320, y: 160, label: 'Home' },
+      guide: { x: 600, y: 160, label: 'Live Guide' },
+      channels: { x: 880, y: 160, label: 'Channels' },
+      catalog: { x: 600, y: 300, label: 'Catalog' },
+      player: { x: 880, y: 300, label: 'Player' },
+      cdn: { x: 1160, y: 160, label: 'CDN' },
+      ads: { x: 1160, y: 300, label: 'Ads' },
+      auction: { x: 1160, y: 440, label: 'Ad Auction' },
+      metrics: { x: 600, y: 440, label: 'Telemetry' },
+      analytics: { x: 880, y: 440, label: 'Analytics' },
+      moderation: { x: 320, y: 440, label: 'Moderation' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','home','home'], ['home','guide','guide']);
+      if(stepIdx===2) e.push(['guide','channels','channels'], ['channels','catalog','meta']);
+      if(stepIdx===3) e.push(['client','player','play'], ['player','cdn','cdn']);
+      if(stepIdx===4) e.push(['player','ads','ads'], ['ads','auction','auction']);
+      if(stepIdx===5) e.push(['player','metrics','qoe'], ['metrics','analytics','analytics']);
+      if(stepIdx===6) e.push(['catalog','moderation','mod']);
+      return e;
+    }
+  },
+
+  plex: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Plex Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','library','catalog','search','index','transcode','cdn','player','devices','sync','metrics','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      library: { x: 600, y: 160, label: 'Library' },
+      catalog: { x: 880, y: 160, label: 'Catalog' },
+      search: { x: 320, y: 300, label: 'Search' },
+      index: { x: 600, y: 300, label: 'Index' },
+      transcode: { x: 880, y: 300, label: 'Transcode' },
+      cdn: { x: 1160, y: 300, label: 'CDN/Relay' },
+      player: { x: 1160, y: 160, label: 'Player' },
+      devices: { x: 600, y: 440, label: 'Devices' },
+      sync: { x: 880, y: 440, label: 'Sync' },
+      metrics: { x: 600, y: 580, label: 'Telemetry' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','library','library'], ['library','catalog','meta']);
+      if(stepIdx===2) e.push(['client','search','search'], ['search','index','index'], ['index','catalog','catalog']);
+      if(stepIdx===3) e.push(['catalog','player','play'], ['player','cdn','relay']);
+      if(stepIdx===4) e.push(['player','transcode','transcode'], ['transcode','cdn','cdn']);
+      if(stepIdx===5) e.push(['library','sync','sync'], ['sync','devices','devices']);
+      if(stepIdx===6) e.push(['player','metrics','qoe'], ['metrics','analytics','analytics']);
+      return e;
+    }
+  },
+
+  kodi: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Kodi Local System',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','library','plugins','sources','catalog','player','cdn','transcode','devices','settings','metrics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      library: { x: 320, y: 160, label: 'Library' },
+      plugins: { x: 600, y: 160, label: 'Add-ons' },
+      sources: { x: 880, y: 160, label: 'Sources' },
+      catalog: { x: 600, y: 300, label: 'Catalog' },
+      player: { x: 880, y: 300, label: 'Player' },
+      cdn: { x: 1160, y: 300, label: 'Files/CDN' },
+      transcode: { x: 880, y: 440, label: 'Transcode' },
+      devices: { x: 320, y: 300, label: 'Devices' },
+      settings: { x: 320, y: 440, label: 'Settings' },
+      metrics: { x: 600, y: 580, label: 'Telemetry' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','library','library'], ['library','catalog','catalog']);
+      if(stepIdx===2) e.push(['client','plugins','addons'], ['plugins','sources','sources']);
+      if(stepIdx===3) e.push(['catalog','player','play'], ['player','cdn','stream']);
+      if(stepIdx===4) e.push(['player','transcode','transcode']);
+      if(stepIdx===5) e.push(['client','settings','settings'], ['settings','player','apply']);
+      if(stepIdx===6) e.push(['player','metrics','qoe']);
+      return e;
+    }
+  },
+
+  'apple-tv': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Apple TV Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','subs','policy','channels','catalog','search','index','drm','cdn','player','metrics','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      subs: { x: 600, y: 160, label: 'Subscriptions' },
+      policy: { x: 880, y: 160, label: 'Policy' },
+      channels: { x: 320, y: 300, label: 'Channels' },
+      catalog: { x: 600, y: 300, label: 'Catalog' },
+      search: { x: 880, y: 300, label: 'Search' },
+      index: { x: 1160, y: 300, label: 'Index' },
+      drm: { x: 1160, y: 160, label: 'DRM' },
+      cdn: { x: 1160, y: 440, label: 'CDN' },
+      player: { x: 880, y: 440, label: 'Player' },
+      metrics: { x: 600, y: 580, label: 'Telemetry' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','subs','subs'], ['subs','policy','policy']);
+      if(stepIdx===2) e.push(['policy','channels','channels'], ['channels','catalog','catalog']);
+      if(stepIdx===3) e.push(['client','search','search'], ['search','index','index'], ['index','catalog','catalog']);
+      if(stepIdx===4) e.push(['catalog','drm','drm'], ['drm','player','license'], ['player','cdn','cdn']);
+      if(stepIdx===5) e.push(['player','metrics','qoe'], ['metrics','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'youtube-studio': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'YouTube Studio Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','upload','obj','transcode','processing','catalog','monetization','ads','analytics','moderation','notify'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      upload: { x: 320, y: 300, label: 'Upload' },
+      obj: { x: 600, y: 300, label: 'Object Store' },
+      transcode: { x: 880, y: 300, label: 'Transcode' },
+      processing: { x: 1160, y: 300, label: 'Processing' },
+      catalog: { x: 600, y: 160, label: 'Catalog' },
+      monetization: { x: 880, y: 160, label: 'Monetization' },
+      ads: { x: 1160, y: 160, label: 'Ads' },
+      analytics: { x: 880, y: 440, label: 'Analytics' },
+      moderation: { x: 600, y: 440, label: 'Moderation' },
+      notify: { x: 320, y: 440, label: 'Notify' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','upload','upload']);
+      if(stepIdx===2) e.push(['upload','obj','obj'], ['obj','transcode','transcode'], ['transcode','processing','process']);
+      if(stepIdx===3) e.push(['processing','catalog','publish'], ['catalog','monetization','monetize']);
+      if(stepIdx===4) e.push(['monetization','ads','ads']);
+      if(stepIdx===5) e.push(['catalog','analytics','analytics']);
+      if(stepIdx===6) e.push(['processing','moderation','mod']);
+      if(stepIdx===7) e.push(['analytics','notify','notify'], ['notify','client','client']);
+      return e;
+    }
+  },
+
+  anchor: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Anchor Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','record','upload','obj','processing','rss','distribution','ads','analytics','payments','support'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      record: { x: 320, y: 300, label: 'Recorder' },
+      upload: { x: 600, y: 300, label: 'Upload' },
+      obj: { x: 880, y: 300, label: 'Object Store' },
+      processing: { x: 1160, y: 300, label: 'Processing' },
+      rss: { x: 600, y: 160, label: 'RSS/Feeds' },
+      distribution: { x: 880, y: 160, label: 'Distribution' },
+      ads: { x: 1160, y: 160, label: 'Ads' },
+      analytics: { x: 880, y: 440, label: 'Analytics' },
+      payments: { x: 600, y: 440, label: 'Payments' },
+      support: { x: 320, y: 440, label: 'Support' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','record','record']);
+      if(stepIdx===2) e.push(['record','upload','upload'], ['upload','obj','obj']);
+      if(stepIdx===3) e.push(['obj','processing','process'], ['processing','rss','rss']);
+      if(stepIdx===4) e.push(['rss','distribution','dist'], ['distribution','ads','ads']);
+      if(stepIdx===5) e.push(['processing','analytics','analytics']);
+      if(stepIdx===6) e.push(['client','payments','payments'], ['payments','analytics','rev']);
+      if(stepIdx===7) e.push(['client','support','support']);
+      return e;
+    }
+  }
+});
+
 Object.assign(ARCH_LAYOUTS, {
   dailymotion: {
     viewBox: '0 0 1860 820',

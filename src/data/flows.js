@@ -2363,6 +2363,378 @@ export const FLOWS = {
     ]
   },
 
+  voot: {
+    title: 'Voot',
+    steps: [
+      {
+        title: 'Sign in + subscription tier',
+        desc: 'Auth and entitlements validated; policy decides access/ads.',
+        active: ['client','auth','subs','policy'],
+        edges: [['client','auth'], ['auth','subs'], ['subs','policy']]
+      },
+      {
+        title: 'Home rows + recommendations',
+        desc: 'Home feed assembled; recos rank content by engagement and preference.',
+        active: ['home','recos','catalog'],
+        edges: [['client','home'], ['home','recos'], ['recos','catalog']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Search hits index; catalog resolves metadata.',
+        active: ['search','index','catalog'],
+        edges: [['client','search'], ['search','index'], ['index','catalog']]
+      },
+      {
+        title: 'DRM + playback via CDN',
+        desc: 'DRM license issued; player streams from CDN; QoE telemetry captured.',
+        active: ['drm','player','cdn','metrics'],
+        edges: [['catalog','drm'], ['drm','player'], ['player','cdn'], ['player','metrics']]
+      },
+      {
+        title: 'Ads + analytics',
+        desc: 'Ads inserted where applicable; analytics recorded.',
+        active: ['ads','analytics'],
+        edges: [['player','ads'], ['metrics','analytics']]
+      }
+    ]
+  },
+
+  crunchyroll: {
+    title: 'Crunchyroll',
+    steps: [
+      {
+        title: 'Sign in + subscription check',
+        desc: 'Auth and subscription entitlements validated; region rights applied.',
+        active: ['client','auth','subs','policy'],
+        edges: [['client','auth'], ['auth','subs'], ['subs','policy']]
+      },
+      {
+        title: 'Browse/search catalog',
+        desc: 'Search hits index; catalog resolves series, episodes, and rights.',
+        active: ['search','index','catalog','policy'],
+        edges: [['client','search'], ['search','index'], ['index','catalog'], ['catalog','policy']]
+      },
+      {
+        title: 'DRM + playback',
+        desc: 'DRM license issued; player streams via CDN with ABR.',
+        active: ['drm','player','cdn','metrics'],
+        edges: [['catalog','drm'], ['drm','player'], ['player','cdn'], ['player','metrics']]
+      },
+      {
+        title: 'Ads + measurement (if tiered)',
+        desc: 'Ads inserted for ad-supported tiers; measurement recorded.',
+        active: ['ads','analytics'],
+        edges: [['player','ads'], ['metrics','analytics']]
+      },
+      {
+        title: 'Moderation + safety',
+        desc: 'Content and community moderation enforce policy.',
+        active: ['moderation','risk'],
+        edges: [['catalog','moderation'], ['moderation','risk']]
+      }
+    ]
+  },
+
+  funimation: {
+    title: 'Funimation',
+    steps: [
+      {
+        title: 'Sign in + entitlements',
+        desc: 'Auth and entitlements validated; rights and device limits applied.',
+        active: ['client','auth','subs','policy'],
+        edges: [['client','auth'], ['auth','subs'], ['subs','policy']]
+      },
+      {
+        title: 'Browse catalog + search',
+        desc: 'Search hits index; catalog resolves metadata and availability.',
+        active: ['search','index','catalog'],
+        edges: [['client','search'], ['search','index'], ['index','catalog']]
+      },
+      {
+        title: 'DRM + playback via CDN',
+        desc: 'DRM license issued; player streams from CDN; QoE measured.',
+        active: ['drm','player','cdn','metrics'],
+        edges: [['catalog','drm'], ['drm','player'], ['player','cdn'], ['player','metrics']]
+      },
+      {
+        title: 'Ads + analytics',
+        desc: 'Ads inserted where applicable; analytics recorded.',
+        active: ['ads','analytics'],
+        edges: [['player','ads'], ['metrics','analytics']]
+      },
+      {
+        title: 'Moderation',
+        desc: 'Moderation enforces content policy and safety controls.',
+        active: ['moderation','risk'],
+        edges: [['catalog','moderation'], ['moderation','risk']]
+      }
+    ]
+  },
+
+  tubi: {
+    title: 'Tubi',
+    steps: [
+      {
+        title: 'Home + recommendations',
+        desc: 'Client loads home feed; recos rank content for engagement.',
+        active: ['client','home','recos','catalog'],
+        edges: [['client','home'], ['home','recos'], ['recos','catalog']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Search hits index; catalog resolves metadata.',
+        active: ['client','search','index','catalog'],
+        edges: [['client','search'], ['search','index'], ['index','catalog']]
+      },
+      {
+        title: 'Playback via CDN',
+        desc: 'Player streams from CDN with ABR; telemetry captured.',
+        active: ['player','cdn','metrics'],
+        edges: [['client','player'], ['player','cdn'], ['player','metrics']]
+      },
+      {
+        title: 'Ads + auction',
+        desc: 'Ad decisioning runs auctions; impressions measured.',
+        active: ['ads','auction','analytics'],
+        edges: [['player','ads'], ['ads','auction'], ['metrics','analytics']]
+      },
+      {
+        title: 'Moderation + analytics',
+        desc: 'Policy enforcement and analytics improve safety and quality.',
+        active: ['moderation','analytics'],
+        edges: [['catalog','moderation'], ['metrics','analytics']]
+      }
+    ]
+  },
+
+  'pluto-tv': {
+    title: 'Pluto TV',
+    steps: [
+      {
+        title: 'Home + live guide',
+        desc: 'Client loads channel guide and curated rows for live and VOD.',
+        active: ['client','home','guide','channels'],
+        edges: [['client','home'], ['home','guide'], ['guide','channels']]
+      },
+      {
+        title: 'Select channel/program',
+        desc: 'Catalog resolves program metadata and stream manifest.',
+        active: ['catalog','channels'],
+        edges: [['channels','catalog']]
+      },
+      {
+        title: 'Playback + CDN',
+        desc: 'Player streams from CDN; QoE telemetry captured.',
+        active: ['player','cdn','metrics'],
+        edges: [['client','player'], ['player','cdn'], ['player','metrics']]
+      },
+      {
+        title: 'Ads + auction',
+        desc: 'Ad breaks use auction/decisioning; measurement recorded.',
+        active: ['ads','auction','analytics'],
+        edges: [['player','ads'], ['ads','auction'], ['metrics','analytics']]
+      },
+      {
+        title: 'Moderation',
+        desc: 'Moderation and policy enforcement handle content safety.',
+        active: ['moderation'],
+        edges: [['catalog','moderation']]
+      }
+    ]
+  },
+
+  plex: {
+    title: 'Plex',
+    steps: [
+      {
+        title: 'Sign in + library discovery',
+        desc: 'Client authenticates and discovers server libraries and catalogs.',
+        active: ['client','auth','library','catalog'],
+        edges: [['client','auth'], ['auth','library'], ['library','catalog']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Search queries hit index; catalog resolves metadata.',
+        active: ['client','search','index','catalog'],
+        edges: [['client','search'], ['search','index'], ['index','catalog']]
+      },
+      {
+        title: 'Playback + transcode decision',
+        desc: 'Player selects direct play vs transcode; relay/CDN serves stream.',
+        active: ['player','transcode','cdn','metrics'],
+        edges: [['catalog','player'], ['player','transcode'], ['transcode','cdn'], ['player','metrics']]
+      },
+      {
+        title: 'Device sync + casting',
+        desc: 'Sync aligns device state; casting and multi-device playback supported.',
+        active: ['devices','sync'],
+        edges: [['client','sync'], ['sync','devices']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Playback telemetry feeds analytics.',
+        active: ['analytics'],
+        edges: [['metrics','analytics']]
+      }
+    ]
+  },
+
+  kodi: {
+    title: 'Kodi',
+    steps: [
+      {
+        title: 'Local library indexing',
+        desc: 'Kodi indexes local/network media into library metadata.',
+        active: ['client','library'],
+        edges: [['client','library']]
+      },
+      {
+        title: 'Add-ons + sources',
+        desc: 'Add-ons connect to external sources and catalogs.',
+        active: ['plugins','sources','catalog'],
+        edges: [['client','plugins'], ['plugins','sources'], ['sources','catalog']]
+      },
+      {
+        title: 'Playback',
+        desc: 'Player streams from files/CDN sources; transcode optional.',
+        active: ['player','cdn','transcode'],
+        edges: [['catalog','player'], ['player','cdn'], ['player','transcode']]
+      },
+      {
+        title: 'Settings + device control',
+        desc: 'Settings and devices control playback and libraries.',
+        active: ['settings','devices'],
+        edges: [['client','settings'], ['settings','devices']]
+      },
+      {
+        title: 'Telemetry',
+        desc: 'Telemetry captures QoE locally or via add-ons.',
+        active: ['metrics'],
+        edges: [['player','metrics']]
+      }
+    ]
+  },
+
+  'apple-tv': {
+    title: 'Apple TV',
+    steps: [
+      {
+        title: 'Sign in + entitlements',
+        desc: 'Auth and entitlements validated for Apple TV+ and channel subscriptions.',
+        active: ['client','auth','subs','policy'],
+        edges: [['client','auth'], ['auth','subs'], ['subs','policy']]
+      },
+      {
+        title: 'Channels + unified catalog',
+        desc: 'Channels and catalog unify metadata across providers.',
+        active: ['channels','catalog'],
+        edges: [['policy','channels'], ['channels','catalog']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Search hits index; catalog resolves availability.',
+        active: ['search','index','catalog'],
+        edges: [['client','search'], ['search','index'], ['index','catalog']]
+      },
+      {
+        title: 'DRM + playback',
+        desc: 'DRM license issued; player streams via CDN; telemetry captured.',
+        active: ['drm','player','cdn','metrics'],
+        edges: [['catalog','drm'], ['drm','player'], ['player','cdn'], ['player','metrics']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'QoE and engagement metrics feed analytics.',
+        active: ['analytics'],
+        edges: [['metrics','analytics']]
+      }
+    ]
+  },
+
+  'youtube-studio': {
+    title: 'YouTube Studio',
+    steps: [
+      {
+        title: 'Authenticate + channel context',
+        desc: 'Creator signs in; channel context and permissions loaded.',
+        active: ['client','auth','creator'],
+        edges: [['client','auth'], ['auth','creator']]
+      },
+      {
+        title: 'Upload + object storage',
+        desc: 'Upload stores raw video; resumable uploads handle retries.',
+        active: ['upload','obj'],
+        edges: [['client','upload'], ['upload','obj']]
+      },
+      {
+        title: 'Transcode + processing pipeline',
+        desc: 'Transcode generates renditions; processing runs thumbnails and metadata.',
+        active: ['transcode','processing','catalog'],
+        edges: [['obj','transcode'], ['transcode','processing'], ['processing','catalog']]
+      },
+      {
+        title: 'Monetization + ads setup',
+        desc: 'Monetization eligibility and ad settings configured; policies enforced.',
+        active: ['monetization','ads','policy'],
+        edges: [['catalog','monetization'], ['monetization','ads'], ['monetization','policy']]
+      },
+      {
+        title: 'Moderation + policy checks',
+        desc: 'Content checks and policy enforcement gate publish/monetization.',
+        active: ['moderation','policy'],
+        edges: [['processing','moderation'], ['moderation','policy']]
+      },
+      {
+        title: 'Analytics + notifications',
+        desc: 'Creator analytics computed; notifications sent for strikes and performance.',
+        active: ['analytics','notify'],
+        edges: [['catalog','analytics'], ['analytics','notify'], ['notify','client']]
+      }
+    ]
+  },
+
+  anchor: {
+    title: 'Anchor',
+    steps: [
+      {
+        title: 'Authenticate + creator setup',
+        desc: 'Creator signs in; show/profile setup completed.',
+        active: ['client','auth','creator'],
+        edges: [['client','auth'], ['auth','creator']]
+      },
+      {
+        title: 'Record/edit episode',
+        desc: 'Creator records/edits audio; episode draft created.',
+        active: ['record','client'],
+        edges: [['client','record']]
+      },
+      {
+        title: 'Upload + processing',
+        desc: 'Audio uploaded; processing normalizes loudness and produces assets.',
+        active: ['upload','obj','processing'],
+        edges: [['client','upload'], ['upload','obj'], ['obj','processing']]
+      },
+      {
+        title: 'Publish RSS + distribute',
+        desc: 'RSS updated; distribution pushes to podcast directories.',
+        active: ['rss','distribution'],
+        edges: [['processing','rss'], ['rss','distribution']]
+      },
+      {
+        title: 'Monetization (ads/sponsorships)',
+        desc: 'Ads and sponsorship workflows run; revenue tracked.',
+        active: ['ads','payments','analytics'],
+        edges: [['processing','ads'], ['ads','payments'], ['payments','analytics']]
+      },
+      {
+        title: 'Analytics + support',
+        desc: 'Listener analytics computed; support handles content issues and takedowns.',
+        active: ['analytics','support'],
+        edges: [['processing','analytics'], ['client','support']]
+      }
+    ]
+  },
+
   chime: {
     title: 'Chime',
     steps: [
