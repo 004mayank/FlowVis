@@ -18694,6 +18694,752 @@ Object.assign(SYSTEM_LAYOUTS, {
   }
 });
 
+// ----- Batch 75e (System + Architecture - creator links + commerce + communities) -----
+
+Object.assign(SYSTEM_LAYOUTS, {
+  unfold: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','templates','editor','assets','fonts','render','export','sharing','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'App', colorKey: 'client' },
+      templates: { x: 380, y: 180, label: 'Templates', colorKey: 'store' },
+      editor: { x: 620, y: 180, label: 'Editor', colorKey: 'client' },
+      assets: { x: 860, y: 180, label: 'Assets', colorKey: 'store' },
+      fonts: { x: 1100, y: 180, label: 'Fonts', colorKey: 'store' },
+      render: { x: 860, y: 320, label: 'Render', colorKey: 'api' },
+      export: { x: 620, y: 320, label: 'Export', colorKey: 'api' },
+      sharing: { x: 380, y: 320, label: 'Sharing', colorKey: 'external' },
+      subscriptions: { x: 140, y: 320, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 140, y: 460, label: 'Payments', colorKey: 'external' },
+      analytics: { x: 1100, y: 320, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  linktree: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','pages','editor','links','publish','cdn','analytics','integrations','subscriptions','payments','notifications'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      pages: { x: 620, y: 180, label: 'Pages', colorKey: 'store' },
+      editor: { x: 860, y: 180, label: 'Editor', colorKey: 'client' },
+      links: { x: 1100, y: 180, label: 'Links', colorKey: 'store' },
+      publish: { x: 860, y: 320, label: 'Publish', colorKey: 'api' },
+      cdn: { x: 1100, y: 320, label: 'CDN', colorKey: 'cdn' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' },
+      integrations: { x: 620, y: 320, label: 'Integrations', colorKey: 'external' },
+      subscriptions: { x: 380, y: 320, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 380, y: 460, label: 'Payments', colorKey: 'external' },
+      notifications: { x: 620, y: 460, label: 'Notify', colorKey: 'external' }
+    }
+  },
+
+  beacons: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','pages','editor','links','forms','contacts','publish','cdn','analytics','store','subscriptions','payments'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      pages: { x: 620, y: 180, label: 'Pages', colorKey: 'store' },
+      editor: { x: 860, y: 180, label: 'Editor', colorKey: 'client' },
+      links: { x: 1100, y: 180, label: 'Links', colorKey: 'store' },
+      forms: { x: 860, y: 320, label: 'Forms', colorKey: 'api' },
+      contacts: { x: 1100, y: 320, label: 'Contacts', colorKey: 'store' },
+      publish: { x: 620, y: 320, label: 'Publish', colorKey: 'api' },
+      cdn: { x: 620, y: 460, label: 'CDN', colorKey: 'cdn' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' },
+      store: { x: 860, y: 460, label: 'Store', colorKey: 'api' },
+      subscriptions: { x: 380, y: 320, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 380, y: 460, label: 'Payments', colorKey: 'external' }
+    }
+  },
+
+  'stan-store': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','store','products','checkout','payments','orders','delivery','email','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      store: { x: 620, y: 180, label: 'Store', colorKey: 'api' },
+      products: { x: 860, y: 180, label: 'Products', colorKey: 'store' },
+      checkout: { x: 1100, y: 180, label: 'Checkout', colorKey: 'api' },
+      payments: { x: 1100, y: 320, label: 'Payments', colorKey: 'external' },
+      orders: { x: 860, y: 320, label: 'Orders', colorKey: 'store' },
+      delivery: { x: 620, y: 320, label: 'Delivery', colorKey: 'api' },
+      email: { x: 380, y: 320, label: 'Email', colorKey: 'external' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  gumroad: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','products','assets','checkout','payments','orders','delivery','email','notifications','payouts','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      products: { x: 620, y: 180, label: 'Products', colorKey: 'store' },
+      assets: { x: 860, y: 180, label: 'Assets', colorKey: 'store' },
+      checkout: { x: 1100, y: 180, label: 'Checkout', colorKey: 'api' },
+      payments: { x: 1100, y: 320, label: 'Payments', colorKey: 'external' },
+      orders: { x: 860, y: 320, label: 'Orders', colorKey: 'store' },
+      delivery: { x: 620, y: 320, label: 'Delivery', colorKey: 'api' },
+      email: { x: 380, y: 320, label: 'Email', colorKey: 'external' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      payouts: { x: 620, y: 460, label: 'Payouts', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'lemon-squeezy': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','products','licenses','checkout','tax','payments','orders','delivery','email','subscriptions','billing','notifications','payouts','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      products: { x: 620, y: 180, label: 'Products', colorKey: 'store' },
+      licenses: { x: 860, y: 180, label: 'Licenses', colorKey: 'store' },
+      checkout: { x: 1100, y: 180, label: 'Checkout', colorKey: 'api' },
+      tax: { x: 1100, y: 320, label: 'Tax', colorKey: 'api' },
+      payments: { x: 860, y: 320, label: 'Payments', colorKey: 'external' },
+      orders: { x: 620, y: 320, label: 'Orders', colorKey: 'store' },
+      delivery: { x: 380, y: 320, label: 'Delivery', colorKey: 'api' },
+      email: { x: 140, y: 320, label: 'Email', colorKey: 'external' },
+      subscriptions: { x: 380, y: 180, label: 'Subscriptions', colorKey: 'external' },
+      billing: { x: 380, y: 460, label: 'Billing', colorKey: 'external' },
+      notifications: { x: 140, y: 460, label: 'Notify', colorKey: 'external' },
+      payouts: { x: 620, y: 460, label: 'Payouts', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'ko-fi': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','pages','goals','checkout','payments','orders','subscriptions','posts','products','delivery','notifications','payouts','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      pages: { x: 620, y: 180, label: 'Pages', colorKey: 'store' },
+      goals: { x: 860, y: 180, label: 'Goals', colorKey: 'store' },
+      checkout: { x: 1100, y: 180, label: 'Checkout', colorKey: 'api' },
+      payments: { x: 1100, y: 320, label: 'Payments', colorKey: 'external' },
+      orders: { x: 860, y: 320, label: 'Orders', colorKey: 'store' },
+      subscriptions: { x: 620, y: 320, label: 'Memberships', colorKey: 'external' },
+      posts: { x: 380, y: 320, label: 'Posts', colorKey: 'api' },
+      products: { x: 620, y: 460, label: 'Products', colorKey: 'store' },
+      delivery: { x: 860, y: 460, label: 'Delivery', colorKey: 'api' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      payouts: { x: 620, y: 600, label: 'Payouts', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  patreon: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','creator','tiers','subscriptions','payments','billing','posts','access','community','messaging','notifications','payouts','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      creator: { x: 620, y: 180, label: 'Creator', colorKey: 'store' },
+      tiers: { x: 860, y: 180, label: 'Tiers', colorKey: 'store' },
+      subscriptions: { x: 1100, y: 180, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 1100, y: 320, label: 'Payments', colorKey: 'external' },
+      billing: { x: 860, y: 320, label: 'Billing', colorKey: 'external' },
+      posts: { x: 620, y: 320, label: 'Posts', colorKey: 'api' },
+      access: { x: 380, y: 320, label: 'Access', colorKey: 'api' },
+      community: { x: 620, y: 460, label: 'Community', colorKey: 'api' },
+      messaging: { x: 860, y: 460, label: 'Messaging', colorKey: 'stream' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      payouts: { x: 620, y: 600, label: 'Payouts', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'buy-me-a-coffee': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','pages','products','checkout','payments','orders','delivery','messaging','notifications','subscriptions','posts','payouts','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      pages: { x: 620, y: 180, label: 'Pages', colorKey: 'store' },
+      products: { x: 860, y: 180, label: 'Products', colorKey: 'store' },
+      checkout: { x: 1100, y: 180, label: 'Checkout', colorKey: 'api' },
+      payments: { x: 1100, y: 320, label: 'Payments', colorKey: 'external' },
+      orders: { x: 860, y: 320, label: 'Orders', colorKey: 'store' },
+      delivery: { x: 620, y: 320, label: 'Delivery', colorKey: 'api' },
+      messaging: { x: 380, y: 320, label: 'Messaging', colorKey: 'stream' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      subscriptions: { x: 620, y: 460, label: 'Memberships', colorKey: 'external' },
+      posts: { x: 860, y: 460, label: 'Posts', colorKey: 'api' },
+      payouts: { x: 620, y: 600, label: 'Payouts', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  subbly: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','products','plans','checkout','subscriptions','billing','payments','invoices','orders','fulfillment','integrations','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Merchant', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      products: { x: 620, y: 180, label: 'Products', colorKey: 'store' },
+      plans: { x: 860, y: 180, label: 'Plans', colorKey: 'store' },
+      checkout: { x: 1100, y: 180, label: 'Checkout', colorKey: 'api' },
+      subscriptions: { x: 1100, y: 320, label: 'Subscriptions', colorKey: 'external' },
+      billing: { x: 860, y: 320, label: 'Billing', colorKey: 'external' },
+      payments: { x: 620, y: 320, label: 'Payments', colorKey: 'external' },
+      invoices: { x: 380, y: 320, label: 'Invoices', colorKey: 'store' },
+      orders: { x: 620, y: 460, label: 'Orders', colorKey: 'store' },
+      fulfillment: { x: 860, y: 460, label: 'Fulfillment', colorKey: 'external' },
+      integrations: { x: 1100, y: 460, label: 'Integrations', colorKey: 'external' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  teachable: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','creator','courses','content','checkout','payments','enrollments','access','video','cdn','progress','quizzes','certificates','payouts','analytics','email','notifications'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      creator: { x: 620, y: 180, label: 'Creator', colorKey: 'store' },
+      courses: { x: 860, y: 180, label: 'Courses', colorKey: 'store' },
+      content: { x: 1100, y: 180, label: 'Content', colorKey: 'store' },
+      checkout: { x: 1100, y: 320, label: 'Checkout', colorKey: 'api' },
+      payments: { x: 860, y: 320, label: 'Payments', colorKey: 'external' },
+      enrollments: { x: 620, y: 320, label: 'Enrollments', colorKey: 'store' },
+      access: { x: 380, y: 320, label: 'Access', colorKey: 'api' },
+      video: { x: 860, y: 460, label: 'Video', colorKey: 'cdn' },
+      cdn: { x: 1100, y: 460, label: 'CDN', colorKey: 'cdn' },
+      progress: { x: 620, y: 460, label: 'Progress', colorKey: 'store' },
+      quizzes: { x: 380, y: 460, label: 'Quizzes', colorKey: 'api' },
+      certificates: { x: 380, y: 600, label: 'Certificates', colorKey: 'store' },
+      payouts: { x: 620, y: 600, label: 'Payouts', colorKey: 'external' },
+      analytics: { x: 1100, y: 600, label: 'Analytics', colorKey: 'store' },
+      email: { x: 140, y: 460, label: 'Email', colorKey: 'external' },
+      notifications: { x: 140, y: 600, label: 'Notify', colorKey: 'external' }
+    }
+  },
+
+  kajabi: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','site','products','content','funnels','email','automation','checkout','payments','memberships','access','community','notifications','affiliates','payouts','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Creator', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      site: { x: 620, y: 180, label: 'Site', colorKey: 'store' },
+      products: { x: 860, y: 180, label: 'Products', colorKey: 'store' },
+      content: { x: 1100, y: 180, label: 'Content', colorKey: 'store' },
+      funnels: { x: 620, y: 320, label: 'Funnels', colorKey: 'api' },
+      email: { x: 380, y: 320, label: 'Email', colorKey: 'external' },
+      automation: { x: 380, y: 460, label: 'Automation', colorKey: 'api' },
+      checkout: { x: 1100, y: 320, label: 'Checkout', colorKey: 'api' },
+      payments: { x: 860, y: 320, label: 'Payments', colorKey: 'external' },
+      memberships: { x: 620, y: 460, label: 'Memberships', colorKey: 'store' },
+      access: { x: 860, y: 460, label: 'Access', colorKey: 'api' },
+      community: { x: 1100, y: 460, label: 'Community', colorKey: 'api' },
+      notifications: { x: 140, y: 460, label: 'Notify', colorKey: 'external' },
+      affiliates: { x: 620, y: 600, label: 'Affiliates', colorKey: 'store' },
+      payouts: { x: 860, y: 600, label: 'Payouts', colorKey: 'external' },
+      analytics: { x: 1100, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  podia: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','products','content','checkout','payments','orders','access','email','automation','community','messaging','notifications','affiliates','payouts','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Creator', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      products: { x: 620, y: 180, label: 'Products', colorKey: 'store' },
+      content: { x: 860, y: 180, label: 'Content', colorKey: 'store' },
+      checkout: { x: 1100, y: 180, label: 'Checkout', colorKey: 'api' },
+      payments: { x: 1100, y: 320, label: 'Payments', colorKey: 'external' },
+      orders: { x: 860, y: 320, label: 'Orders', colorKey: 'store' },
+      access: { x: 620, y: 320, label: 'Access', colorKey: 'api' },
+      email: { x: 380, y: 320, label: 'Email', colorKey: 'external' },
+      automation: { x: 380, y: 460, label: 'Automation', colorKey: 'api' },
+      community: { x: 620, y: 460, label: 'Community', colorKey: 'api' },
+      messaging: { x: 860, y: 460, label: 'Messaging', colorKey: 'stream' },
+      notifications: { x: 140, y: 460, label: 'Notify', colorKey: 'external' },
+      affiliates: { x: 620, y: 600, label: 'Affiliates', colorKey: 'store' },
+      payouts: { x: 860, y: 600, label: 'Payouts', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'circle-so': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','communities','spaces','permissions','posts','feeds','messaging','events','integrations','automation','notifications','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      communities: { x: 620, y: 180, label: 'Community', colorKey: 'store' },
+      spaces: { x: 860, y: 180, label: 'Spaces', colorKey: 'store' },
+      permissions: { x: 1100, y: 180, label: 'Permissions', colorKey: 'api' },
+      posts: { x: 860, y: 320, label: 'Posts', colorKey: 'api' },
+      feeds: { x: 620, y: 320, label: 'Feeds', colorKey: 'api' },
+      messaging: { x: 380, y: 320, label: 'Messaging', colorKey: 'stream' },
+      events: { x: 1100, y: 320, label: 'Events', colorKey: 'api' },
+      integrations: { x: 620, y: 460, label: 'Integrations', colorKey: 'external' },
+      automation: { x: 860, y: 460, label: 'Automation', colorKey: 'api' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      subscriptions: { x: 140, y: 320, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 140, y: 460, label: 'Payments', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  }
+});
+
+Object.assign(ARCH_LAYOUTS, {
+  unfold: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Unfold',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','templates','editor','assets','fonts','render','export','sharing','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'App' },
+      templates: { x: 320, y: 160, label: 'Templates' },
+      editor: { x: 600, y: 160, label: 'Editor' },
+      assets: { x: 880, y: 160, label: 'Assets' },
+      fonts: { x: 1160, y: 160, label: 'Fonts' },
+      render: { x: 880, y: 300, label: 'Render' },
+      export: { x: 600, y: 300, label: 'Export' },
+      sharing: { x: 320, y: 300, label: 'Sharing' },
+      subscriptions: { x: 40, y: 300, label: 'Subscriptions' },
+      payments: { x: 40, y: 440, label: 'Payments' },
+      analytics: { x: 1160, y: 300, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','templates','tmpl'], ['templates','editor','edit']);
+      if(stepIdx===2) e.push(['editor','assets','asset'], ['assets','fonts','font'], ['fonts','render','render']);
+      if(stepIdx===3) e.push(['render','export','export'], ['export','sharing','share']);
+      if(stepIdx===4) e.push(['subscriptions','payments','bill']);
+      if(stepIdx===5) e.push(['export','analytics','analytics']);
+      return e;
+    }
+  },
+
+  linktree: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Linktree',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','pages','editor','links','publish','cdn','analytics','integrations','subscriptions','payments','notifications'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      pages: { x: 600, y: 160, label: 'Pages' },
+      editor: { x: 880, y: 160, label: 'Editor' },
+      links: { x: 1160, y: 160, label: 'Links' },
+      publish: { x: 880, y: 300, label: 'Publish' },
+      cdn: { x: 1160, y: 300, label: 'CDN' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' },
+      integrations: { x: 600, y: 300, label: 'Integrations' },
+      subscriptions: { x: 320, y: 300, label: 'Subscriptions' },
+      payments: { x: 320, y: 440, label: 'Payments' },
+      notifications: { x: 600, y: 440, label: 'Notify' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','pages','page'], ['pages','editor','edit']);
+      if(stepIdx===2) e.push(['editor','links','links'], ['pages','publish','pub'], ['publish','cdn','cdn']);
+      if(stepIdx===3) e.push(['links','analytics','analytics']);
+      if(stepIdx===4) e.push(['subscriptions','payments','bill'], ['payments','notifications','notify']);
+      if(stepIdx===5) e.push(['integrations','pages','int']);
+      return e;
+    }
+  },
+
+  beacons: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Beacons',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','pages','editor','links','forms','contacts','publish','cdn','analytics','store','subscriptions','payments'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      pages: { x: 600, y: 160, label: 'Pages' },
+      editor: { x: 880, y: 160, label: 'Editor' },
+      links: { x: 1160, y: 160, label: 'Links' },
+      forms: { x: 880, y: 300, label: 'Forms' },
+      contacts: { x: 1160, y: 300, label: 'Contacts' },
+      publish: { x: 600, y: 300, label: 'Publish' },
+      cdn: { x: 600, y: 440, label: 'CDN' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' },
+      store: { x: 880, y: 440, label: 'Store' },
+      subscriptions: { x: 320, y: 300, label: 'Subscriptions' },
+      payments: { x: 320, y: 440, label: 'Payments' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','pages','page'], ['pages','editor','edit'], ['editor','links','links']);
+      if(stepIdx===2) e.push(['editor','forms','form'], ['forms','contacts','lead']);
+      if(stepIdx===3) e.push(['pages','publish','pub'], ['publish','cdn','cdn'], ['links','analytics','analytics']);
+      if(stepIdx===4) e.push(['payments','store','pay'], ['subscriptions','payments','bill']);
+      return e;
+    }
+  },
+
+  'stan-store': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Stan Store',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','store','products','checkout','payments','orders','delivery','email','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      store: { x: 600, y: 160, label: 'Store' },
+      products: { x: 880, y: 160, label: 'Products' },
+      checkout: { x: 1160, y: 160, label: 'Checkout' },
+      payments: { x: 1160, y: 300, label: 'Payments' },
+      orders: { x: 880, y: 300, label: 'Orders' },
+      delivery: { x: 600, y: 300, label: 'Delivery' },
+      email: { x: 320, y: 300, label: 'Email' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','store','store'], ['store','products','prod']);
+      if(stepIdx===2) e.push(['products','checkout','checkout'], ['checkout','payments','pay'], ['payments','orders','order']);
+      if(stepIdx===3) e.push(['orders','delivery','deliver'], ['delivery','email','email'], ['email','notifications','notify']);
+      if(stepIdx===4) e.push(['orders','analytics','analytics']);
+      return e;
+    }
+  },
+
+  gumroad: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Gumroad',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','products','assets','checkout','payments','orders','delivery','email','notifications','payouts','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      products: { x: 600, y: 160, label: 'Products' },
+      assets: { x: 880, y: 160, label: 'Assets' },
+      checkout: { x: 1160, y: 160, label: 'Checkout' },
+      payments: { x: 1160, y: 300, label: 'Payments' },
+      orders: { x: 880, y: 300, label: 'Orders' },
+      delivery: { x: 600, y: 300, label: 'Delivery' },
+      email: { x: 320, y: 300, label: 'Email' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      payouts: { x: 600, y: 440, label: 'Payouts' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','products','prod'], ['products','assets','asset']);
+      if(stepIdx===2) e.push(['products','checkout','checkout'], ['checkout','payments','pay'], ['payments','orders','order']);
+      if(stepIdx===3) e.push(['orders','delivery','deliver'], ['delivery','email','email'], ['email','notifications','notify']);
+      if(stepIdx===4) e.push(['payments','payouts','payout']);
+      if(stepIdx===5) e.push(['orders','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'lemon-squeezy': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Lemon Squeezy',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','products','licenses','checkout','tax','payments','orders','delivery','email','subscriptions','billing','notifications','payouts','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      products: { x: 600, y: 160, label: 'Products' },
+      licenses: { x: 880, y: 160, label: 'Licenses' },
+      checkout: { x: 1160, y: 160, label: 'Checkout' },
+      tax: { x: 1160, y: 300, label: 'Tax' },
+      payments: { x: 880, y: 300, label: 'Payments' },
+      orders: { x: 600, y: 300, label: 'Orders' },
+      delivery: { x: 320, y: 300, label: 'Delivery' },
+      email: { x: 40, y: 300, label: 'Email' },
+      subscriptions: { x: 320, y: 160, label: 'Subscriptions' },
+      billing: { x: 320, y: 440, label: 'Billing' },
+      notifications: { x: 40, y: 440, label: 'Notify' },
+      payouts: { x: 600, y: 440, label: 'Payouts' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','products','prod'], ['products','licenses','lic']);
+      if(stepIdx===2) e.push(['products','checkout','checkout'], ['checkout','tax','tax'], ['checkout','payments','pay'], ['payments','orders','order']);
+      if(stepIdx===3) e.push(['orders','delivery','deliver'], ['delivery','email','email']);
+      if(stepIdx===4) e.push(['orders','subscriptions','sub'], ['subscriptions','billing','bill'], ['billing','notifications','notify']);
+      if(stepIdx===5) e.push(['payments','payouts','payout'], ['orders','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'ko-fi': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Ko-fi',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','pages','goals','checkout','payments','orders','subscriptions','posts','products','delivery','notifications','payouts','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      pages: { x: 600, y: 160, label: 'Pages' },
+      goals: { x: 880, y: 160, label: 'Goals' },
+      checkout: { x: 1160, y: 160, label: 'Checkout' },
+      payments: { x: 1160, y: 300, label: 'Payments' },
+      orders: { x: 880, y: 300, label: 'Orders' },
+      subscriptions: { x: 600, y: 300, label: 'Memberships' },
+      posts: { x: 320, y: 300, label: 'Posts' },
+      products: { x: 600, y: 440, label: 'Products' },
+      delivery: { x: 880, y: 440, label: 'Delivery' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      payouts: { x: 600, y: 580, label: 'Payouts' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','pages','page'], ['pages','checkout','support']);
+      if(stepIdx===2) e.push(['checkout','payments','pay'], ['payments','orders','order']);
+      if(stepIdx===3) e.push(['orders','subscriptions','sub'], ['subscriptions','posts','post'], ['posts','notifications','notify']);
+      if(stepIdx===4) e.push(['products','delivery','deliver'], ['delivery','notifications','notify']);
+      if(stepIdx===5) e.push(['payments','payouts','payout'], ['orders','analytics','analytics']);
+      return e;
+    }
+  },
+
+  patreon: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Patreon',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','creator','tiers','subscriptions','payments','billing','posts','access','community','messaging','notifications','payouts','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      creator: { x: 600, y: 160, label: 'Creator' },
+      tiers: { x: 880, y: 160, label: 'Tiers' },
+      subscriptions: { x: 1160, y: 160, label: 'Subscriptions' },
+      payments: { x: 1160, y: 300, label: 'Payments' },
+      billing: { x: 880, y: 300, label: 'Billing' },
+      posts: { x: 600, y: 300, label: 'Posts' },
+      access: { x: 320, y: 300, label: 'Access' },
+      community: { x: 600, y: 440, label: 'Community' },
+      messaging: { x: 880, y: 440, label: 'Messaging' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      payouts: { x: 600, y: 580, label: 'Payouts' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','creator','creator'], ['creator','tiers','tier']);
+      if(stepIdx===2) e.push(['tiers','subscriptions','sub'], ['subscriptions','payments','pay'], ['payments','billing','bill']);
+      if(stepIdx===3) e.push(['creator','posts','post'], ['posts','access','access'], ['access','notifications','notify']);
+      if(stepIdx===4) e.push(['posts','community','community'], ['community','messaging','msg']);
+      if(stepIdx===5) e.push(['payments','payouts','payout'], ['subscriptions','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'buy-me-a-coffee': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Buy Me a Coffee',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','pages','products','checkout','payments','orders','delivery','messaging','notifications','subscriptions','posts','payouts','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      pages: { x: 600, y: 160, label: 'Pages' },
+      products: { x: 880, y: 160, label: 'Products' },
+      checkout: { x: 1160, y: 160, label: 'Checkout' },
+      payments: { x: 1160, y: 300, label: 'Payments' },
+      orders: { x: 880, y: 300, label: 'Orders' },
+      delivery: { x: 600, y: 300, label: 'Delivery' },
+      messaging: { x: 320, y: 300, label: 'Messaging' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      subscriptions: { x: 600, y: 440, label: 'Memberships' },
+      posts: { x: 880, y: 440, label: 'Posts' },
+      payouts: { x: 600, y: 580, label: 'Payouts' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','pages','page'], ['pages','products','prod']);
+      if(stepIdx===2) e.push(['products','checkout','checkout'], ['checkout','payments','pay'], ['payments','orders','order']);
+      if(stepIdx===3) e.push(['orders','delivery','deliver'], ['delivery','messaging','msg'], ['messaging','notifications','notify']);
+      if(stepIdx===4) e.push(['orders','subscriptions','sub'], ['subscriptions','posts','post']);
+      if(stepIdx===5) e.push(['payments','payouts','payout'], ['orders','analytics','analytics']);
+      return e;
+    }
+  },
+
+  subbly: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Subbly',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','products','plans','checkout','subscriptions','billing','payments','invoices','orders','fulfillment','integrations','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Merchant' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      products: { x: 600, y: 160, label: 'Products' },
+      plans: { x: 880, y: 160, label: 'Plans' },
+      checkout: { x: 1160, y: 160, label: 'Checkout' },
+      subscriptions: { x: 1160, y: 300, label: 'Subscriptions' },
+      billing: { x: 880, y: 300, label: 'Billing' },
+      payments: { x: 600, y: 300, label: 'Payments' },
+      invoices: { x: 320, y: 300, label: 'Invoices' },
+      orders: { x: 600, y: 440, label: 'Orders' },
+      fulfillment: { x: 880, y: 440, label: 'Fulfillment' },
+      integrations: { x: 1160, y: 440, label: 'Integrations' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      analytics: { x: 1160, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','products','prod'], ['products','plans','plan']);
+      if(stepIdx===2) e.push(['products','checkout','checkout'], ['checkout','subscriptions','sub'], ['subscriptions','billing','bill']);
+      if(stepIdx===3) e.push(['billing','payments','pay'], ['payments','invoices','inv'], ['invoices','notifications','notify']);
+      if(stepIdx===4) e.push(['payments','orders','order'], ['orders','fulfillment','fulfill'], ['fulfillment','integrations','int']);
+      if(stepIdx===5) e.push(['subscriptions','analytics','analytics']);
+      return e;
+    }
+  },
+
+  teachable: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Teachable',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','creator','courses','content','checkout','payments','enrollments','access','video','cdn','progress','quizzes','certificates','payouts','analytics','email','notifications'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      creator: { x: 600, y: 160, label: 'Creator' },
+      courses: { x: 880, y: 160, label: 'Courses' },
+      content: { x: 1160, y: 160, label: 'Content' },
+      checkout: { x: 1160, y: 300, label: 'Checkout' },
+      payments: { x: 880, y: 300, label: 'Payments' },
+      enrollments: { x: 600, y: 300, label: 'Enrollments' },
+      access: { x: 320, y: 300, label: 'Access' },
+      video: { x: 880, y: 440, label: 'Video' },
+      cdn: { x: 1160, y: 440, label: 'CDN' },
+      progress: { x: 600, y: 440, label: 'Progress' },
+      quizzes: { x: 320, y: 440, label: 'Quizzes' },
+      certificates: { x: 320, y: 580, label: 'Certificates' },
+      payouts: { x: 600, y: 580, label: 'Payouts' },
+      analytics: { x: 1160, y: 580, label: 'Analytics' },
+      email: { x: 40, y: 440, label: 'Email' },
+      notifications: { x: 40, y: 580, label: 'Notify' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','creator','creator'], ['creator','courses','course'], ['courses','content','content']);
+      if(stepIdx===2) e.push(['courses','checkout','checkout'], ['checkout','payments','pay'], ['payments','enrollments','enroll'], ['enrollments','access','access']);
+      if(stepIdx===3) e.push(['content','video','video'], ['video','cdn','cdn']);
+      if(stepIdx===4) e.push(['access','progress','progress'], ['progress','quizzes','quiz'], ['quizzes','certificates','cert']);
+      if(stepIdx===5) e.push(['payments','payouts','payout'], ['enrollments','analytics','analytics'], ['email','notifications','notify']);
+      return e;
+    }
+  },
+
+  kajabi: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Kajabi',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','site','products','content','funnels','email','automation','checkout','payments','memberships','access','community','notifications','affiliates','payouts','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Creator' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      site: { x: 600, y: 160, label: 'Site' },
+      products: { x: 880, y: 160, label: 'Products' },
+      content: { x: 1160, y: 160, label: 'Content' },
+      funnels: { x: 600, y: 300, label: 'Funnels' },
+      email: { x: 320, y: 300, label: 'Email' },
+      automation: { x: 320, y: 440, label: 'Automation' },
+      checkout: { x: 1160, y: 300, label: 'Checkout' },
+      payments: { x: 880, y: 300, label: 'Payments' },
+      memberships: { x: 600, y: 440, label: 'Memberships' },
+      access: { x: 880, y: 440, label: 'Access' },
+      community: { x: 1160, y: 440, label: 'Community' },
+      notifications: { x: 40, y: 440, label: 'Notify' },
+      affiliates: { x: 600, y: 580, label: 'Affiliates' },
+      payouts: { x: 880, y: 580, label: 'Payouts' },
+      analytics: { x: 1160, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','site','site'], ['site','products','prod'], ['products','content','content']);
+      if(stepIdx===2) e.push(['site','funnels','funnel'], ['funnels','email','email'], ['email','automation','auto']);
+      if(stepIdx===3) e.push(['products','checkout','checkout'], ['checkout','payments','pay'], ['payments','memberships','member']);
+      if(stepIdx===4) e.push(['memberships','access','access'], ['access','community','community'], ['community','notifications','notify']);
+      if(stepIdx===5) e.push(['funnels','analytics','analytics'], ['affiliates','payouts','payout']);
+      return e;
+    }
+  },
+
+  podia: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Podia',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','products','content','checkout','payments','orders','access','email','automation','community','messaging','notifications','affiliates','payouts','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Creator' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      products: { x: 600, y: 160, label: 'Products' },
+      content: { x: 880, y: 160, label: 'Content' },
+      checkout: { x: 1160, y: 160, label: 'Checkout' },
+      payments: { x: 1160, y: 300, label: 'Payments' },
+      orders: { x: 880, y: 300, label: 'Orders' },
+      access: { x: 600, y: 300, label: 'Access' },
+      email: { x: 320, y: 300, label: 'Email' },
+      automation: { x: 320, y: 440, label: 'Automation' },
+      community: { x: 600, y: 440, label: 'Community' },
+      messaging: { x: 880, y: 440, label: 'Messaging' },
+      notifications: { x: 40, y: 440, label: 'Notify' },
+      affiliates: { x: 600, y: 580, label: 'Affiliates' },
+      payouts: { x: 880, y: 580, label: 'Payouts' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','products','prod'], ['products','content','content']);
+      if(stepIdx===2) e.push(['products','checkout','checkout'], ['checkout','payments','pay'], ['payments','orders','order'], ['orders','access','access']);
+      if(stepIdx===3) e.push(['products','email','email'], ['email','automation','auto'], ['email','analytics','analytics']);
+      if(stepIdx===4) e.push(['access','community','community'], ['community','messaging','msg'], ['messaging','notifications','notify']);
+      if(stepIdx===5) e.push(['payments','payouts','payout'], ['affiliates','payouts','aff']);
+      return e;
+    }
+  },
+
+  'circle-so': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Circle.so',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','communities','spaces','permissions','posts','feeds','messaging','events','integrations','automation','notifications','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      communities: { x: 600, y: 160, label: 'Community' },
+      spaces: { x: 880, y: 160, label: 'Spaces' },
+      permissions: { x: 1160, y: 160, label: 'Permissions' },
+      posts: { x: 880, y: 300, label: 'Posts' },
+      feeds: { x: 600, y: 300, label: 'Feeds' },
+      messaging: { x: 320, y: 300, label: 'Messaging' },
+      events: { x: 1160, y: 300, label: 'Events' },
+      integrations: { x: 600, y: 440, label: 'Integrations' },
+      automation: { x: 880, y: 440, label: 'Automation' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      subscriptions: { x: 40, y: 300, label: 'Subscriptions' },
+      payments: { x: 40, y: 440, label: 'Payments' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','communities','comm'], ['communities','spaces','space'], ['spaces','permissions','perm']);
+      if(stepIdx===2) e.push(['spaces','posts','post'], ['posts','feeds','feed'], ['feeds','notifications','notify']);
+      if(stepIdx===3) e.push(['communities','messaging','msg'], ['spaces','events','event']);
+      if(stepIdx===4) e.push(['integrations','communities','int'], ['automation','integrations','auto']);
+      if(stepIdx===5) e.push(['subscriptions','payments','bill'], ['communities','analytics','analytics']);
+      return e;
+    }
+  }
+});
+
 Object.assign(ARCH_LAYOUTS, {
   facetune: {
     viewBox: '0 0 1860 820',
