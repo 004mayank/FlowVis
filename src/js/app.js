@@ -16907,6 +16907,486 @@ Object.assign(SYSTEM_LAYOUTS, {
   }
 });
 
+// ----- Batch 69 (System + Architecture - dev infra + AI coding tools) -----
+
+Object.assign(SYSTEM_LAYOUTS, {
+  logrocket: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','sdk','ingest','sessions','replay','errors','perf','alerts','integrations','dashboards','analytics','billing'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      sdk: { x: 620, y: 180, label: 'SDK', colorKey: 'external' },
+      ingest: { x: 860, y: 180, label: 'Ingest', colorKey: 'api' },
+      sessions: { x: 1100, y: 180, label: 'Sessions', colorKey: 'store' },
+      replay: { x: 620, y: 320, label: 'Replay', colorKey: 'store' },
+      errors: { x: 860, y: 320, label: 'Errors', colorKey: 'store' },
+      perf: { x: 1100, y: 320, label: 'Perf', colorKey: 'store' },
+      alerts: { x: 380, y: 320, label: 'Alerts', colorKey: 'external' },
+      integrations: { x: 620, y: 460, label: 'Integrations', colorKey: 'external' },
+      dashboards: { x: 860, y: 460, label: 'Dashboards', colorKey: 'store' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' },
+      billing: { x: 380, y: 460, label: 'Billing', colorKey: 'external' }
+    }
+  },
+
+  supabase: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','projects','api','db','storage','realtime','edge','functions','admin','billing','analytics','logs','security'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      projects: { x: 620, y: 180, label: 'Projects', colorKey: 'store' },
+      api: { x: 860, y: 180, label: 'API', colorKey: 'api' },
+      db: { x: 1100, y: 180, label: 'DB', colorKey: 'store' },
+      storage: { x: 1100, y: 320, label: 'Storage', colorKey: 'store' },
+      realtime: { x: 860, y: 320, label: 'Realtime', colorKey: 'stream' },
+      edge: { x: 620, y: 320, label: 'Edge', colorKey: 'cdn' },
+      functions: { x: 620, y: 460, label: 'Functions', colorKey: 'api' },
+      admin: { x: 380, y: 320, label: 'Admin', colorKey: 'store' },
+      billing: { x: 380, y: 460, label: 'Billing', colorKey: 'external' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' },
+      logs: { x: 1100, y: 460, label: 'Logs', colorKey: 'store' },
+      security: { x: 860, y: 600, label: 'Security', colorKey: 'api' }
+    }
+  },
+
+  planetscale: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','orgs','db','branches','schema','migrations','backups','connectors','query','observability','security','billing'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      orgs: { x: 620, y: 180, label: 'Orgs', colorKey: 'store' },
+      db: { x: 860, y: 180, label: 'DB', colorKey: 'store' },
+      branches: { x: 1100, y: 180, label: 'Branches', colorKey: 'store' },
+      schema: { x: 620, y: 320, label: 'Schema', colorKey: 'store' },
+      migrations: { x: 860, y: 320, label: 'Migrations', colorKey: 'api' },
+      backups: { x: 1100, y: 320, label: 'Backups', colorKey: 'store' },
+      connectors: { x: 620, y: 460, label: 'Connectors', colorKey: 'external' },
+      query: { x: 860, y: 460, label: 'Query', colorKey: 'api' },
+      observability: { x: 1100, y: 460, label: 'Observability', colorKey: 'store' },
+      security: { x: 860, y: 600, label: 'Security', colorKey: 'api' },
+      billing: { x: 380, y: 320, label: 'Billing', colorKey: 'external' }
+    }
+  },
+
+  railway: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','projects','repos','builds','deploy','runtime','services','db','secrets','logs','metrics','billing','alerts'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      projects: { x: 620, y: 180, label: 'Projects', colorKey: 'store' },
+      repos: { x: 860, y: 180, label: 'Repos', colorKey: 'external' },
+      builds: { x: 1100, y: 180, label: 'Builds', colorKey: 'api' },
+      deploy: { x: 860, y: 320, label: 'Deploy', colorKey: 'api' },
+      runtime: { x: 1100, y: 320, label: 'Runtime', colorKey: 'external' },
+      services: { x: 620, y: 320, label: 'Services', colorKey: 'store' },
+      db: { x: 620, y: 460, label: 'DB', colorKey: 'store' },
+      secrets: { x: 380, y: 320, label: 'Secrets', colorKey: 'store' },
+      logs: { x: 860, y: 460, label: 'Logs', colorKey: 'store' },
+      metrics: { x: 1100, y: 460, label: 'Metrics', colorKey: 'store' },
+      billing: { x: 380, y: 180, label: 'Billing', colorKey: 'external' },
+      alerts: { x: 380, y: 460, label: 'Alerts', colorKey: 'external' }
+    }
+  },
+
+  'fly-io': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','apps','deploy','regions','edge','machines','network','volumes','secrets','logs','metrics','billing','alerts'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      apps: { x: 620, y: 180, label: 'Apps', colorKey: 'store' },
+      deploy: { x: 860, y: 180, label: 'Deploy', colorKey: 'api' },
+      regions: { x: 1100, y: 180, label: 'Regions', colorKey: 'store' },
+      edge: { x: 1100, y: 320, label: 'Edge', colorKey: 'cdn' },
+      machines: { x: 860, y: 320, label: 'Machines', colorKey: 'external' },
+      network: { x: 620, y: 320, label: 'Network', colorKey: 'api' },
+      volumes: { x: 620, y: 460, label: 'Volumes', colorKey: 'store' },
+      secrets: { x: 380, y: 320, label: 'Secrets', colorKey: 'store' },
+      logs: { x: 860, y: 460, label: 'Logs', colorKey: 'store' },
+      metrics: { x: 1100, y: 460, label: 'Metrics', colorKey: 'store' },
+      billing: { x: 380, y: 180, label: 'Billing', colorKey: 'external' },
+      alerts: { x: 380, y: 460, label: 'Alerts', colorKey: 'external' }
+    }
+  },
+
+  'v0-dev': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','projects','prompts','components','generation','preview','export','git','deploy','analytics','billing','safety'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      projects: { x: 620, y: 180, label: 'Projects', colorKey: 'store' },
+      prompts: { x: 860, y: 180, label: 'Prompts', colorKey: 'store' },
+      generation: { x: 1100, y: 180, label: 'Generation', colorKey: 'api' },
+      components: { x: 860, y: 320, label: 'Components', colorKey: 'store' },
+      preview: { x: 1100, y: 320, label: 'Preview', colorKey: 'client' },
+      export: { x: 620, y: 320, label: 'Export', colorKey: 'api' },
+      git: { x: 620, y: 460, label: 'Git', colorKey: 'external' },
+      deploy: { x: 860, y: 460, label: 'Deploy', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' },
+      billing: { x: 380, y: 320, label: 'Billing', colorKey: 'external' },
+      safety: { x: 380, y: 460, label: 'Safety', colorKey: 'api' }
+    }
+  },
+
+  'bolt-new': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','prompts','generation','editor','sandbox','preview','deploy','git','billing','analytics','safety'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      prompts: { x: 620, y: 180, label: 'Prompts', colorKey: 'store' },
+      generation: { x: 860, y: 180, label: 'Generation', colorKey: 'api' },
+      editor: { x: 1100, y: 180, label: 'Editor', colorKey: 'client' },
+      sandbox: { x: 860, y: 320, label: 'Sandbox', colorKey: 'external' },
+      preview: { x: 1100, y: 320, label: 'Preview', colorKey: 'client' },
+      deploy: { x: 860, y: 460, label: 'Deploy', colorKey: 'external' },
+      git: { x: 620, y: 320, label: 'Git', colorKey: 'external' },
+      billing: { x: 380, y: 320, label: 'Billing', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' },
+      safety: { x: 380, y: 460, label: 'Safety', colorKey: 'api' }
+    }
+  },
+
+  cursor: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','workspace','repo','indexing','chat','completion','context','tools','models','telemetry','billing','analytics','safety'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      workspace: { x: 620, y: 180, label: 'Workspace', colorKey: 'store' },
+      repo: { x: 860, y: 180, label: 'Repo', colorKey: 'external' },
+      indexing: { x: 1100, y: 180, label: 'Indexing', colorKey: 'api' },
+      chat: { x: 620, y: 320, label: 'Chat', colorKey: 'api' },
+      completion: { x: 860, y: 320, label: 'Completion', colorKey: 'api' },
+      context: { x: 1100, y: 320, label: 'Context', colorKey: 'store' },
+      tools: { x: 620, y: 460, label: 'Tools', colorKey: 'api' },
+      models: { x: 860, y: 460, label: 'Models', colorKey: 'external' },
+      telemetry: { x: 1100, y: 460, label: 'Telemetry', colorKey: 'store' },
+      billing: { x: 380, y: 320, label: 'Billing', colorKey: 'external' },
+      analytics: { x: 380, y: 460, label: 'Analytics', colorKey: 'store' },
+      safety: { x: 860, y: 600, label: 'Safety', colorKey: 'api' }
+    }
+  },
+
+  tabnine: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','ide','plugins','context','models','completion','policies','telemetry','admin','billing','analytics','security'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      ide: { x: 620, y: 180, label: 'IDE', colorKey: 'external' },
+      plugins: { x: 860, y: 180, label: 'Plugins', colorKey: 'external' },
+      context: { x: 1100, y: 180, label: 'Context', colorKey: 'store' },
+      models: { x: 860, y: 320, label: 'Models', colorKey: 'external' },
+      completion: { x: 1100, y: 320, label: 'Completion', colorKey: 'api' },
+      policies: { x: 620, y: 320, label: 'Policies', colorKey: 'api' },
+      telemetry: { x: 860, y: 460, label: 'Telemetry', colorKey: 'store' },
+      admin: { x: 620, y: 460, label: 'Admin', colorKey: 'store' },
+      billing: { x: 380, y: 320, label: 'Billing', colorKey: 'external' },
+      analytics: { x: 380, y: 460, label: 'Analytics', colorKey: 'store' },
+      security: { x: 1100, y: 460, label: 'Security', colorKey: 'api' }
+    }
+  }
+});
+
+Object.assign(ARCH_LAYOUTS, {
+  logrocket: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'LogRocket',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','sdk','ingest','sessions','replay','errors','perf','alerts','integrations','dashboards','analytics','billing'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      sdk: { x: 600, y: 160, label: 'SDK' },
+      ingest: { x: 880, y: 160, label: 'Ingest' },
+      sessions: { x: 1160, y: 160, label: 'Sessions' },
+      replay: { x: 600, y: 300, label: 'Replay' },
+      errors: { x: 880, y: 300, label: 'Errors' },
+      perf: { x: 1160, y: 300, label: 'Perf' },
+      alerts: { x: 320, y: 300, label: 'Alerts' },
+      integrations: { x: 600, y: 440, label: 'Integrations' },
+      dashboards: { x: 880, y: 440, label: 'Dashboards' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' },
+      billing: { x: 320, y: 440, label: 'Billing' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['sdk','ingest','ingest'], ['ingest','sessions','session']);
+      if(stepIdx===2) e.push(['sessions','replay','replay'], ['sessions','errors','error']);
+      if(stepIdx===3) e.push(['sessions','perf','perf']);
+      if(stepIdx===4) e.push(['errors','alerts','alert'], ['alerts','integrations','integrate']);
+      if(stepIdx===5) e.push(['replay','dashboards','dash'], ['dashboards','analytics','analytics']);
+      if(stepIdx===6) e.push(['billing','analytics','bill']);
+      return e;
+    }
+  },
+
+  supabase: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Supabase',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','projects','api','db','storage','realtime','edge','functions','admin','billing','analytics','logs','security'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      projects: { x: 600, y: 160, label: 'Projects' },
+      api: { x: 880, y: 160, label: 'API' },
+      db: { x: 1160, y: 160, label: 'DB' },
+      storage: { x: 1160, y: 300, label: 'Storage' },
+      realtime: { x: 880, y: 300, label: 'Realtime' },
+      edge: { x: 600, y: 300, label: 'Edge' },
+      functions: { x: 600, y: 440, label: 'Functions' },
+      admin: { x: 320, y: 300, label: 'Admin' },
+      billing: { x: 320, y: 440, label: 'Billing' },
+      analytics: { x: 880, y: 440, label: 'Analytics' },
+      logs: { x: 1160, y: 440, label: 'Logs' },
+      security: { x: 880, y: 580, label: 'Security' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','projects','proj'], ['projects','api','api']);
+      if(stepIdx===2) e.push(['api','db','db'], ['api','storage','storage']);
+      if(stepIdx===3) e.push(['db','realtime','rt'], ['edge','functions','fn']);
+      if(stepIdx===4) e.push(['functions','logs','logs'], ['logs','analytics','analytics']);
+      if(stepIdx===5) e.push(['security','api','sec']);
+      if(stepIdx===6) e.push(['billing','analytics','bill']);
+      return e;
+    }
+  },
+
+  planetscale: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'PlanetScale',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','orgs','db','branches','schema','migrations','backups','connectors','query','observability','security','billing'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      orgs: { x: 600, y: 160, label: 'Orgs' },
+      db: { x: 880, y: 160, label: 'DB' },
+      branches: { x: 1160, y: 160, label: 'Branches' },
+      schema: { x: 600, y: 300, label: 'Schema' },
+      migrations: { x: 880, y: 300, label: 'Migrations' },
+      backups: { x: 1160, y: 300, label: 'Backups' },
+      connectors: { x: 600, y: 440, label: 'Connectors' },
+      query: { x: 880, y: 440, label: 'Query' },
+      observability: { x: 1160, y: 440, label: 'Observability' },
+      security: { x: 880, y: 580, label: 'Security' },
+      billing: { x: 320, y: 300, label: 'Billing' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','orgs','org'], ['orgs','db','db']);
+      if(stepIdx===2) e.push(['db','branches','branch'], ['schema','migrations','mig']);
+      if(stepIdx===3) e.push(['migrations','db','apply'], ['db','backups','backup']);
+      if(stepIdx===4) e.push(['connectors','query','query'], ['query','observability','obs']);
+      if(stepIdx===5) e.push(['security','db','sec']);
+      if(stepIdx===6) e.push(['billing','observability','bill']);
+      return e;
+    }
+  },
+
+  railway: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Railway',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','projects','repos','builds','deploy','runtime','services','db','secrets','logs','metrics','billing','alerts'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      projects: { x: 600, y: 160, label: 'Projects' },
+      repos: { x: 880, y: 160, label: 'Repos' },
+      builds: { x: 1160, y: 160, label: 'Builds' },
+      deploy: { x: 880, y: 300, label: 'Deploy' },
+      runtime: { x: 1160, y: 300, label: 'Runtime' },
+      services: { x: 600, y: 300, label: 'Services' },
+      db: { x: 600, y: 440, label: 'DB' },
+      secrets: { x: 320, y: 300, label: 'Secrets' },
+      logs: { x: 880, y: 440, label: 'Logs' },
+      metrics: { x: 1160, y: 440, label: 'Metrics' },
+      billing: { x: 320, y: 160, label: 'Billing' },
+      alerts: { x: 320, y: 440, label: 'Alerts' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','projects','proj'], ['projects','repos','repo']);
+      if(stepIdx===2) e.push(['repos','builds','build'], ['builds','deploy','deploy']);
+      if(stepIdx===3) e.push(['deploy','runtime','run'], ['services','db','db']);
+      if(stepIdx===4) e.push(['secrets','runtime','secret']);
+      if(stepIdx===5) e.push(['runtime','logs','logs'], ['runtime','metrics','metrics']);
+      if(stepIdx===6) e.push(['alerts','client','alert'], ['billing','projects','bill']);
+      return e;
+    }
+  },
+
+  'fly-io': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Fly.io',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','apps','deploy','regions','edge','machines','network','volumes','secrets','logs','metrics','billing','alerts'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      apps: { x: 600, y: 160, label: 'Apps' },
+      deploy: { x: 880, y: 160, label: 'Deploy' },
+      regions: { x: 1160, y: 160, label: 'Regions' },
+      edge: { x: 1160, y: 300, label: 'Edge' },
+      machines: { x: 880, y: 300, label: 'Machines' },
+      network: { x: 600, y: 300, label: 'Network' },
+      volumes: { x: 600, y: 440, label: 'Volumes' },
+      secrets: { x: 320, y: 300, label: 'Secrets' },
+      logs: { x: 880, y: 440, label: 'Logs' },
+      metrics: { x: 1160, y: 440, label: 'Metrics' },
+      billing: { x: 320, y: 160, label: 'Billing' },
+      alerts: { x: 320, y: 440, label: 'Alerts' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','apps','app'], ['apps','deploy','deploy']);
+      if(stepIdx===2) e.push(['deploy','regions','region'], ['regions','machines','machine']);
+      if(stepIdx===3) e.push(['machines','network','net'], ['machines','volumes','vol']);
+      if(stepIdx===4) e.push(['secrets','machines','secret']);
+      if(stepIdx===5) e.push(['machines','edge','edge'], ['machines','logs','logs'], ['machines','metrics','metrics']);
+      if(stepIdx===6) e.push(['alerts','client','alert'], ['billing','apps','bill']);
+      return e;
+    }
+  },
+
+  'v0-dev': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'V0.dev',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','projects','prompts','components','generation','preview','export','git','deploy','analytics','billing','safety'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      projects: { x: 600, y: 160, label: 'Projects' },
+      prompts: { x: 880, y: 160, label: 'Prompts' },
+      generation: { x: 1160, y: 160, label: 'Generation' },
+      components: { x: 880, y: 300, label: 'Components' },
+      preview: { x: 1160, y: 300, label: 'Preview' },
+      export: { x: 600, y: 300, label: 'Export' },
+      git: { x: 600, y: 440, label: 'Git' },
+      deploy: { x: 880, y: 440, label: 'Deploy' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' },
+      billing: { x: 320, y: 300, label: 'Billing' },
+      safety: { x: 320, y: 440, label: 'Safety' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','projects','proj'], ['projects','prompts','prompt']);
+      if(stepIdx===2) e.push(['prompts','generation','gen'], ['generation','components','comp']);
+      if(stepIdx===3) e.push(['components','preview','preview'], ['components','export','export']);
+      if(stepIdx===4) e.push(['export','git','git'], ['git','deploy','deploy']);
+      if(stepIdx===5) e.push(['generation','safety','safety']);
+      if(stepIdx===6) e.push(['billing','analytics','bill']);
+      return e;
+    }
+  },
+
+  'bolt-new': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Bolt.new',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','prompts','generation','editor','sandbox','preview','deploy','git','billing','analytics','safety'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      prompts: { x: 600, y: 160, label: 'Prompts' },
+      generation: { x: 880, y: 160, label: 'Generation' },
+      editor: { x: 1160, y: 160, label: 'Editor' },
+      sandbox: { x: 880, y: 300, label: 'Sandbox' },
+      preview: { x: 1160, y: 300, label: 'Preview' },
+      deploy: { x: 880, y: 440, label: 'Deploy' },
+      git: { x: 600, y: 300, label: 'Git' },
+      billing: { x: 320, y: 300, label: 'Billing' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' },
+      safety: { x: 320, y: 440, label: 'Safety' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','prompts','prompt'], ['prompts','generation','gen']);
+      if(stepIdx===2) e.push(['generation','editor','edit'], ['generation','sandbox','sb']);
+      if(stepIdx===3) e.push(['sandbox','preview','preview'], ['sandbox','deploy','deploy']);
+      if(stepIdx===4) e.push(['git','deploy','git']);
+      if(stepIdx===5) e.push(['generation','safety','safety']);
+      if(stepIdx===6) e.push(['billing','analytics','bill']);
+      return e;
+    }
+  },
+
+  cursor: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Cursor',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','workspace','repo','indexing','chat','completion','context','tools','models','telemetry','billing','analytics','safety'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      workspace: { x: 600, y: 160, label: 'Workspace' },
+      repo: { x: 880, y: 160, label: 'Repo' },
+      indexing: { x: 1160, y: 160, label: 'Indexing' },
+      chat: { x: 600, y: 300, label: 'Chat' },
+      completion: { x: 880, y: 300, label: 'Completion' },
+      context: { x: 1160, y: 300, label: 'Context' },
+      tools: { x: 600, y: 440, label: 'Tools' },
+      models: { x: 880, y: 440, label: 'Models' },
+      telemetry: { x: 1160, y: 440, label: 'Telemetry' },
+      billing: { x: 320, y: 300, label: 'Billing' },
+      analytics: { x: 320, y: 440, label: 'Analytics' },
+      safety: { x: 880, y: 580, label: 'Safety' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','workspace','ws'], ['workspace','repo','repo']);
+      if(stepIdx===2) e.push(['repo','indexing','index'], ['indexing','context','ctx']);
+      if(stepIdx===3) e.push(['context','chat','chat'], ['context','completion','complete']);
+      if(stepIdx===4) e.push(['tools','chat','tool'], ['models','completion','model']);
+      if(stepIdx===5) e.push(['telemetry','analytics','analytics'], ['completion','safety','safety']);
+      if(stepIdx===6) e.push(['billing','analytics','bill']);
+      return e;
+    }
+  },
+
+  tabnine: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Tabnine',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','ide','plugins','context','models','completion','policies','telemetry','admin','billing','analytics','security'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      ide: { x: 600, y: 160, label: 'IDE' },
+      plugins: { x: 880, y: 160, label: 'Plugins' },
+      context: { x: 1160, y: 160, label: 'Context' },
+      models: { x: 880, y: 300, label: 'Models' },
+      completion: { x: 1160, y: 300, label: 'Completion' },
+      policies: { x: 600, y: 300, label: 'Policies' },
+      telemetry: { x: 880, y: 440, label: 'Telemetry' },
+      admin: { x: 600, y: 440, label: 'Admin' },
+      billing: { x: 320, y: 300, label: 'Billing' },
+      analytics: { x: 320, y: 440, label: 'Analytics' },
+      security: { x: 1160, y: 440, label: 'Security' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['ide','plugins','plugin'], ['plugins','context','ctx']);
+      if(stepIdx===2) e.push(['context','models','model'], ['models','completion','complete']);
+      if(stepIdx===3) e.push(['policies','completion','policy']);
+      if(stepIdx===4) e.push(['completion','telemetry','telemetry'], ['telemetry','analytics','analytics']);
+      if(stepIdx===5) e.push(['admin','security','sec']);
+      if(stepIdx===6) e.push(['billing','analytics','bill']);
+      return e;
+    }
+  }
+});
+
 Object.assign(ARCH_LAYOUTS, {
   'character-ai': {
     viewBox: '0 0 1860 820',

@@ -10655,6 +10655,252 @@ export const FLOWS = {
     ]
   },
 
+  logrocket: {
+    title: 'LogRocket',
+    steps: [
+      {
+        title: 'Capture session',
+        desc: 'SDK captures session replay, errors, and performance signals.',
+        active: ['client','auth','sdk','ingest','sessions'],
+        edges: [['client','auth'], ['sdk','ingest'], ['ingest','sessions']]
+      },
+      {
+        title: 'Replay + errors + perf',
+        desc: 'Sessions analyzed into replay, errors, and performance views.',
+        active: ['replay','errors','perf'],
+        edges: [['sessions','replay'], ['sessions','errors'], ['sessions','perf']]
+      },
+      {
+        title: 'Alerts + integrations',
+        desc: 'Alerts fire and route to integrations.',
+        active: ['alerts','integrations'],
+        edges: [['errors','alerts'], ['alerts','integrations']]
+      },
+      {
+        title: 'Dashboards + analytics + billing',
+        desc: 'Dashboards and analytics summarize; billing tracks usage.',
+        active: ['dashboards','analytics','billing'],
+        edges: [['replay','dashboards'], ['dashboards','analytics'], ['billing','analytics']]
+      }
+    ]
+  },
+
+  supabase: {
+    title: 'Supabase',
+    steps: [
+      {
+        title: 'Create project',
+        desc: 'User authenticates and creates a project.',
+        active: ['client','auth','projects','admin'],
+        edges: [['client','auth'], ['auth','projects'], ['projects','admin']]
+      },
+      {
+        title: 'Use API + database',
+        desc: 'API reads/writes database and storage.',
+        active: ['api','db','storage'],
+        edges: [['api','db'], ['api','storage']]
+      },
+      {
+        title: 'Realtime + edge functions',
+        desc: 'Realtime updates and edge/functions compute.',
+        active: ['realtime','edge','functions'],
+        edges: [['db','realtime'], ['edge','functions']]
+      },
+      {
+        title: 'Security + logs + billing',
+        desc: 'Security policies, logs/analytics, and billing for usage.',
+        active: ['security','logs','analytics','billing'],
+        edges: [['functions','logs'], ['logs','analytics'], ['billing','analytics']]
+      }
+    ]
+  },
+
+  planetscale: {
+    title: 'PlanetScale',
+    steps: [
+      {
+        title: 'Create DB + branches',
+        desc: 'Org creates DB and branches for safe schema changes.',
+        active: ['client','auth','orgs','db','branches'],
+        edges: [['client','auth'], ['auth','orgs'], ['orgs','db'], ['db','branches']]
+      },
+      {
+        title: 'Migrations + backups',
+        desc: 'Schema migrations applied; backups maintained.',
+        active: ['schema','migrations','backups'],
+        edges: [['schema','migrations'], ['db','backups'], ['migrations','db']]
+      },
+      {
+        title: 'Connect + query + observability',
+        desc: 'Connectors run queries and observability tracks performance.',
+        active: ['connectors','query','observability'],
+        edges: [['connectors','query'], ['query','observability']]
+      },
+      {
+        title: 'Security + billing',
+        desc: 'Security policies and billing for usage.',
+        active: ['security','billing'],
+        edges: [['security','db'], ['billing','observability']]
+      }
+    ]
+  },
+
+  railway: {
+    title: 'Railway',
+    steps: [
+      {
+        title: 'Connect repo + build',
+        desc: 'Repo connected; builds run and artifacts produced.',
+        active: ['client','auth','projects','repos','builds'],
+        edges: [['client','auth'], ['auth','projects'], ['projects','repos'], ['repos','builds']]
+      },
+      {
+        title: 'Deploy to runtime',
+        desc: 'Deploy publishes build to runtime services.',
+        active: ['deploy','runtime','services'],
+        edges: [['builds','deploy'], ['deploy','runtime'], ['deploy','services']]
+      },
+      {
+        title: 'DB + secrets',
+        desc: 'DB provisioned and secrets injected.',
+        active: ['db','secrets'],
+        edges: [['services','db'], ['secrets','runtime']]
+      },
+      {
+        title: 'Logs + metrics + alerts + billing',
+        desc: 'Observability and billing/alerts for deployments.',
+        active: ['logs','metrics','alerts','billing'],
+        edges: [['runtime','logs'], ['runtime','metrics'], ['alerts','client'], ['billing','projects']]
+      }
+    ]
+  },
+
+  'fly-io': {
+    title: 'Fly.io',
+    steps: [
+      {
+        title: 'Deploy app to regions',
+        desc: 'App deployed and placed in regions; machines started.',
+        active: ['client','auth','apps','deploy','regions','machines'],
+        edges: [['client','auth'], ['auth','apps'], ['apps','deploy'], ['deploy','regions'], ['regions','machines']]
+      },
+      {
+        title: 'Network + volumes + secrets',
+        desc: 'Network configured, volumes attached, secrets injected.',
+        active: ['network','volumes','secrets'],
+        edges: [['machines','network'], ['machines','volumes'], ['secrets','machines']]
+      },
+      {
+        title: 'Edge + observability',
+        desc: 'Edge routes traffic; logs/metrics collected; alerts fire.',
+        active: ['edge','logs','metrics','alerts'],
+        edges: [['machines','edge'], ['machines','logs'], ['machines','metrics'], ['alerts','client']]
+      },
+      {
+        title: 'Billing',
+        desc: 'Billing tracks resource consumption.',
+        active: ['billing'],
+        edges: [['billing','apps']]
+      }
+    ]
+  },
+
+  'v0-dev': {
+    title: 'V0.dev',
+    steps: [
+      {
+        title: 'Prompt + generate UI',
+        desc: 'User prompts; generation produces components and preview.',
+        active: ['client','auth','projects','prompts','generation','components','preview'],
+        edges: [['client','auth'], ['auth','projects'], ['projects','prompts'], ['prompts','generation'], ['generation','components'], ['components','preview']]
+      },
+      {
+        title: 'Export + git + deploy',
+        desc: 'Export code, commit to git, and deploy.',
+        active: ['export','git','deploy'],
+        edges: [['components','export'], ['export','git'], ['git','deploy']]
+      },
+      {
+        title: 'Safety + billing + analytics',
+        desc: 'Safety checks; billing and analytics track usage.',
+        active: ['safety','billing','analytics'],
+        edges: [['generation','safety'], ['billing','analytics']]
+      }
+    ]
+  },
+
+  'bolt-new': {
+    title: 'Bolt.new',
+    steps: [
+      {
+        title: 'Prompt + generate app',
+        desc: 'User prompts; generation creates code in editor.',
+        active: ['client','auth','prompts','generation','editor'],
+        edges: [['client','auth'], ['auth','prompts'], ['prompts','generation'], ['generation','editor']]
+      },
+      {
+        title: 'Sandbox + preview',
+        desc: 'Sandbox runs app; preview updates.',
+        active: ['sandbox','preview'],
+        edges: [['generation','sandbox'], ['sandbox','preview']]
+      },
+      {
+        title: 'Deploy + git + analytics',
+        desc: 'Deploy publishes; git sync optional; analytics and billing track usage.',
+        active: ['deploy','git','analytics','billing','safety'],
+        edges: [['sandbox','deploy'], ['git','deploy'], ['billing','analytics'], ['generation','safety']]
+      }
+    ]
+  },
+
+  cursor: {
+    title: 'Cursor',
+    steps: [
+      {
+        title: 'Index repo',
+        desc: 'Workspace connects repo and builds index/context.',
+        active: ['client','auth','workspace','repo','indexing','context'],
+        edges: [['client','auth'], ['auth','workspace'], ['workspace','repo'], ['repo','indexing'], ['indexing','context']]
+      },
+      {
+        title: 'Chat + completions',
+        desc: 'Chat and code completion use context and models.',
+        active: ['chat','completion','models','tools'],
+        edges: [['context','chat'], ['context','completion'], ['models','completion'], ['tools','chat']]
+      },
+      {
+        title: 'Telemetry + safety + billing',
+        desc: 'Telemetry collected; safety enforced; billing and analytics track usage.',
+        active: ['telemetry','safety','billing','analytics'],
+        edges: [['telemetry','analytics'], ['completion','safety'], ['billing','analytics']]
+      }
+    ]
+  },
+
+  tabnine: {
+    title: 'Tabnine',
+    steps: [
+      {
+        title: 'IDE plugin + context',
+        desc: 'IDE plugin collects context under policies.',
+        active: ['client','auth','ide','plugins','context','policies'],
+        edges: [['ide','plugins'], ['plugins','context'], ['policies','completion']]
+      },
+      {
+        title: 'Model completion',
+        desc: 'Models generate completions and return suggestions.',
+        active: ['models','completion'],
+        edges: [['context','models'], ['models','completion']]
+      },
+      {
+        title: 'Admin + security + telemetry',
+        desc: 'Admin manages org settings; security and telemetry/analytics.',
+        active: ['admin','security','telemetry','analytics','billing'],
+        edges: [['admin','security'], ['completion','telemetry'], ['telemetry','analytics'], ['billing','analytics']]
+      }
+    ]
+  },
+
   chime: {
     title: 'Chime',
     steps: [
