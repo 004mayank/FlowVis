@@ -10901,6 +10901,246 @@ export const FLOWS = {
     ]
   },
 
+  render: {
+    title: 'Render',
+    steps: [
+      {
+        title: 'Connect repo + configure service',
+        desc: 'User connects repo, configures service, and sets env/secrets.',
+        active: ['client','auth','projects','repos','services','secrets'],
+        edges: [['client','auth'], ['auth','projects'], ['projects','repos'], ['repos','services'], ['secrets','services']]
+      },
+      {
+        title: 'Build + deploy',
+        desc: 'Build runs and deploy publishes to runtime.',
+        active: ['builds','deploy','runtime'],
+        edges: [['repos','builds'], ['builds','deploy'], ['deploy','runtime']]
+      },
+      {
+        title: 'Logs + metrics + alerts + billing',
+        desc: 'Observability and billing/alerts for running services.',
+        active: ['logs','metrics','alerts','billing','analytics'],
+        edges: [['runtime','logs'], ['runtime','metrics'], ['alerts','services'], ['billing','analytics']]
+      }
+    ]
+  },
+
+  codeium: {
+    title: 'Codeium',
+    steps: [
+      {
+        title: 'IDE plugin + context',
+        desc: 'IDE plugin collects context under policies.',
+        active: ['client','auth','ide','plugins','context','policies'],
+        edges: [['client','auth'], ['ide','plugins'], ['plugins','context'], ['policies','completion']]
+      },
+      {
+        title: 'Completions + chat',
+        desc: 'Models generate completions and chat responses.',
+        active: ['models','completion','chat'],
+        edges: [['context','models'], ['models','completion'], ['context','chat']]
+      },
+      {
+        title: 'Telemetry + security + billing',
+        desc: 'Telemetry and analytics; security controls; billing for teams.',
+        active: ['telemetry','security','billing','analytics'],
+        edges: [['completion','telemetry'], ['telemetry','analytics'], ['billing','analytics']]
+      }
+    ]
+  },
+
+  'hugging-face': {
+    title: 'Hugging Face',
+    steps: [
+      {
+        title: 'Browse models + datasets',
+        desc: 'User authenticates and browses models/datasets/repos.',
+        active: ['client','auth','models','datasets','repos'],
+        edges: [['client','auth'], ['auth','models'], ['auth','datasets'], ['auth','repos']]
+      },
+      {
+        title: 'Inference + Spaces',
+        desc: 'Run inference and interact with Spaces apps.',
+        active: ['inference','spaces','cdn'],
+        edges: [['models','inference'], ['spaces','cdn']]
+      },
+      {
+        title: 'Training + community + billing',
+        desc: 'Training jobs run; community interactions; billing and analytics.',
+        active: ['training','community','billing','analytics','security'],
+        edges: [['datasets','training'], ['community','analytics'], ['billing','analytics'], ['security','repos']]
+      }
+    ]
+  },
+
+  replicate: {
+    title: 'Replicate',
+    steps: [
+      {
+        title: 'Pick model',
+        desc: 'User authenticates and selects model from registry.',
+        active: ['client','auth','models','registry'],
+        edges: [['client','auth'], ['auth','models'], ['models','registry']]
+      },
+      {
+        title: 'Inference job + queue',
+        desc: 'Inference enqueued and executed by GPU workers.',
+        active: ['inference','queue','workers','gpu'],
+        edges: [['registry','inference'], ['inference','queue'], ['queue','workers'], ['workers','gpu']]
+      },
+      {
+        title: 'Store outputs + safety + billing',
+        desc: 'Outputs stored; safety/rate limits enforced; billing and analytics track usage.',
+        active: ['storage','safety','rateLimits','billing','analytics'],
+        edges: [['workers','storage'], ['safety','inference'], ['rateLimits','inference'], ['billing','analytics']]
+      }
+    ]
+  },
+
+  'stability-ai': {
+    title: 'Stability AI',
+    steps: [
+      {
+        title: 'Call API + run inference',
+        desc: 'Client calls API and runs image inference.',
+        active: ['client','auth','api','models','inference'],
+        edges: [['client','auth'], ['auth','api'], ['models','inference'], ['api','inference']]
+      },
+      {
+        title: 'Queue + GPU execution',
+        desc: 'Jobs queued and executed on GPU.',
+        active: ['queue','gpu','storage'],
+        edges: [['inference','queue'], ['queue','gpu'], ['gpu','storage']]
+      },
+      {
+        title: 'Filter + rate limits + billing',
+        desc: 'Content filter and rate limits enforced; billing and analytics track usage.',
+        active: ['contentFilter','rateLimits','billing','analytics','support'],
+        edges: [['contentFilter','inference'], ['rateLimits','api'], ['billing','analytics'], ['support','client']]
+      }
+    ]
+  },
+
+  midjourney: {
+    title: 'Midjourney',
+    steps: [
+      {
+        title: 'Prompt via Discord',
+        desc: 'User prompts via Discord; prompt enters queue.',
+        active: ['client','auth','discord','prompts','queue'],
+        edges: [['client','auth'], ['discord','prompts'], ['prompts','queue']]
+      },
+      {
+        title: 'GPU generation + upscale',
+        desc: 'GPU renders images and upscale variants.',
+        active: ['gpu','models','gallery','upscale'],
+        edges: [['queue','gpu'], ['models','gpu'], ['gpu','gallery'], ['gallery','upscale']]
+      },
+      {
+        title: 'Moderation + subscriptions + analytics',
+        desc: 'Moderation applied; subscriptions billed; analytics tracks usage.',
+        active: ['moderation','subscriptions','billing','notifications','analytics'],
+        edges: [['prompts','moderation'], ['subscriptions','billing'], ['gallery','analytics'], ['moderation','notifications']]
+      }
+    ]
+  },
+
+  'leonardo-ai': {
+    title: 'Leonardo AI',
+    steps: [
+      {
+        title: 'Prompt + inference',
+        desc: 'User prompts and runs inference with selected models.',
+        active: ['client','auth','prompts','models','inference','queue'],
+        edges: [['client','auth'], ['auth','prompts'], ['prompts','inference'], ['models','inference'], ['inference','queue']]
+      },
+      {
+        title: 'GPU output + assets',
+        desc: 'GPU renders outputs stored as assets; editor used for tweaks.',
+        active: ['gpu','assets','editor'],
+        edges: [['queue','gpu'], ['gpu','assets'], ['assets','editor']]
+      },
+      {
+        title: 'Moderation + subscriptions + analytics',
+        desc: 'Moderation and notifications; subscriptions billed; analytics tracks usage.',
+        active: ['moderation','subscriptions','billing','notifications','analytics'],
+        edges: [['moderation','notifications'], ['subscriptions','billing'], ['assets','analytics']]
+      }
+    ]
+  },
+
+  runpod: {
+    title: 'RunPod',
+    steps: [
+      {
+        title: 'Provision pod',
+        desc: 'User provisions pod with GPU and image.',
+        active: ['client','auth','pods','gpu','images'],
+        edges: [['client','auth'], ['auth','pods'], ['pods','gpu'], ['images','deploy']]
+      },
+      {
+        title: 'Deploy + run jobs',
+        desc: 'Deploy environment and run jobs via queue.',
+        active: ['deploy','jobs','queue'],
+        edges: [['pods','deploy'], ['deploy','jobs'], ['jobs','queue']]
+      },
+      {
+        title: 'Storage + network + logs + billing',
+        desc: 'Storage and networking; logs and analytics; billing tracks usage.',
+        active: ['storage','network','logs','analytics','billing'],
+        edges: [['jobs','storage'], ['network','jobs'], ['jobs','logs'], ['logs','analytics'], ['billing','analytics']]
+      }
+    ]
+  },
+
+  paperspace: {
+    title: 'Paperspace',
+    steps: [
+      {
+        title: 'Create machine',
+        desc: 'User creates project and provisions GPU machine with image.',
+        active: ['client','auth','projects','machines','gpu','images'],
+        edges: [['client','auth'], ['auth','projects'], ['projects','machines'], ['machines','gpu'], ['images','machines']]
+      },
+      {
+        title: 'Notebooks + jobs',
+        desc: 'Notebooks used interactively; jobs run for training/inference.',
+        active: ['notebooks','jobs','storage'],
+        edges: [['machines','notebooks'], ['notebooks','jobs'], ['jobs','storage']]
+      },
+      {
+        title: 'Logs + network + billing',
+        desc: 'Logs collected; network configured; billing/analytics track usage.',
+        active: ['logs','network','billing','analytics'],
+        edges: [['jobs','logs'], ['network','machines'], ['logs','analytics'], ['billing','analytics']]
+      }
+    ]
+  },
+
+  kaggle: {
+    title: 'Kaggle',
+    steps: [
+      {
+        title: 'Use datasets + notebooks',
+        desc: 'User authenticates, uses datasets in notebooks/kernels with GPU.',
+        active: ['client','auth','datasets','notebooks','kernels','gpu'],
+        edges: [['client','auth'], ['auth','datasets'], ['datasets','notebooks'], ['notebooks','kernels'], ['kernels','gpu']]
+      },
+      {
+        title: 'Competitions + submissions',
+        desc: 'Compete, submit predictions, and track leaderboard.',
+        active: ['competitions','submissions','leaderboard'],
+        edges: [['competitions','submissions'], ['submissions','leaderboard']]
+      },
+      {
+        title: 'Models + community + analytics',
+        desc: 'Models stored; community collaboration; analytics for engagement.',
+        active: ['models','storage','community','analytics'],
+        edges: [['kernels','storage'], ['storage','models'], ['community','competitions'], ['competitions','analytics']]
+      }
+    ]
+  },
+
   chime: {
     title: 'Chime',
     steps: [

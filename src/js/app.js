@@ -17094,6 +17094,486 @@ Object.assign(SYSTEM_LAYOUTS, {
   }
 });
 
+// ----- Batch 70 (System + Architecture - model platforms + creative gen + GPU compute) -----
+
+Object.assign(SYSTEM_LAYOUTS, {
+  codeium: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','ide','plugins','context','models','completion','chat','policies','telemetry','admin','billing','analytics','security'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      ide: { x: 620, y: 180, label: 'IDE', colorKey: 'external' },
+      plugins: { x: 860, y: 180, label: 'Plugins', colorKey: 'external' },
+      context: { x: 1100, y: 180, label: 'Context', colorKey: 'store' },
+      models: { x: 860, y: 320, label: 'Models', colorKey: 'external' },
+      completion: { x: 1100, y: 320, label: 'Completion', colorKey: 'api' },
+      chat: { x: 620, y: 320, label: 'Chat', colorKey: 'api' },
+      policies: { x: 620, y: 460, label: 'Policies', colorKey: 'api' },
+      telemetry: { x: 860, y: 460, label: 'Telemetry', colorKey: 'store' },
+      admin: { x: 620, y: 600, label: 'Admin', colorKey: 'store' },
+      billing: { x: 380, y: 320, label: 'Billing', colorKey: 'external' },
+      analytics: { x: 380, y: 460, label: 'Analytics', colorKey: 'store' },
+      security: { x: 1100, y: 460, label: 'Security', colorKey: 'api' }
+    }
+  },
+
+  'hugging-face': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','models','datasets','spaces','inference','training','repos','cdn','community','billing','analytics','security'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      models: { x: 620, y: 180, label: 'Models', colorKey: 'store' },
+      datasets: { x: 860, y: 180, label: 'Datasets', colorKey: 'store' },
+      spaces: { x: 1100, y: 180, label: 'Spaces', colorKey: 'store' },
+      inference: { x: 620, y: 320, label: 'Inference', colorKey: 'api' },
+      training: { x: 860, y: 320, label: 'Training', colorKey: 'external' },
+      repos: { x: 1100, y: 320, label: 'Repos', colorKey: 'store' },
+      cdn: { x: 1100, y: 460, label: 'CDN', colorKey: 'cdn' },
+      community: { x: 620, y: 460, label: 'Community', colorKey: 'api' },
+      billing: { x: 380, y: 320, label: 'Billing', colorKey: 'external' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' },
+      security: { x: 860, y: 600, label: 'Security', colorKey: 'api' }
+    }
+  },
+
+  replicate: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','models','registry','inference','queue','workers','gpu','storage','billing','analytics','safety','rateLimits'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      models: { x: 620, y: 180, label: 'Models', colorKey: 'store' },
+      registry: { x: 860, y: 180, label: 'Registry', colorKey: 'store' },
+      inference: { x: 1100, y: 180, label: 'Inference', colorKey: 'api' },
+      queue: { x: 860, y: 320, label: 'Queue', colorKey: 'stream' },
+      workers: { x: 1100, y: 320, label: 'Workers', colorKey: 'external' },
+      gpu: { x: 1100, y: 460, label: 'GPU', colorKey: 'external' },
+      storage: { x: 620, y: 320, label: 'Storage', colorKey: 'store' },
+      billing: { x: 380, y: 320, label: 'Billing', colorKey: 'external' },
+      analytics: { x: 620, y: 460, label: 'Analytics', colorKey: 'store' },
+      safety: { x: 860, y: 460, label: 'Safety', colorKey: 'api' },
+      rateLimits: { x: 380, y: 460, label: 'Rate Limits', colorKey: 'api' }
+    }
+  },
+
+  'stability-ai': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','models','api','inference','queue','gpu','storage','contentFilter','billing','analytics','rateLimits','support'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      models: { x: 620, y: 180, label: 'Models', colorKey: 'store' },
+      api: { x: 860, y: 180, label: 'API', colorKey: 'api' },
+      inference: { x: 1100, y: 180, label: 'Inference', colorKey: 'api' },
+      queue: { x: 860, y: 320, label: 'Queue', colorKey: 'stream' },
+      gpu: { x: 1100, y: 320, label: 'GPU', colorKey: 'external' },
+      storage: { x: 620, y: 320, label: 'Storage', colorKey: 'store' },
+      contentFilter: { x: 620, y: 460, label: 'Filter', colorKey: 'api' },
+      billing: { x: 380, y: 320, label: 'Billing', colorKey: 'external' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' },
+      rateLimits: { x: 380, y: 460, label: 'Rate Limits', colorKey: 'api' },
+      support: { x: 1100, y: 460, label: 'Support', colorKey: 'external' }
+    }
+  },
+
+  midjourney: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','discord','prompts','queue','gpu','models','gallery','upscale','moderation','subscriptions','billing','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      discord: { x: 620, y: 180, label: 'Discord', colorKey: 'external' },
+      prompts: { x: 860, y: 180, label: 'Prompts', colorKey: 'store' },
+      queue: { x: 1100, y: 180, label: 'Queue', colorKey: 'stream' },
+      gpu: { x: 1100, y: 320, label: 'GPU', colorKey: 'external' },
+      models: { x: 860, y: 320, label: 'Models', colorKey: 'store' },
+      gallery: { x: 620, y: 320, label: 'Gallery', colorKey: 'store' },
+      upscale: { x: 860, y: 460, label: 'Upscale', colorKey: 'api' },
+      moderation: { x: 620, y: 460, label: 'Moderation', colorKey: 'api' },
+      subscriptions: { x: 380, y: 180, label: 'Subscriptions', colorKey: 'external' },
+      billing: { x: 380, y: 320, label: 'Billing', colorKey: 'external' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'leonardo-ai': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','prompts','models','inference','queue','gpu','assets','editor','moderation','subscriptions','billing','analytics','notifications'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      prompts: { x: 620, y: 180, label: 'Prompts', colorKey: 'store' },
+      models: { x: 860, y: 180, label: 'Models', colorKey: 'store' },
+      inference: { x: 1100, y: 180, label: 'Inference', colorKey: 'api' },
+      queue: { x: 860, y: 320, label: 'Queue', colorKey: 'stream' },
+      gpu: { x: 1100, y: 320, label: 'GPU', colorKey: 'external' },
+      assets: { x: 620, y: 320, label: 'Assets', colorKey: 'store' },
+      editor: { x: 620, y: 460, label: 'Editor', colorKey: 'client' },
+      moderation: { x: 860, y: 460, label: 'Moderation', colorKey: 'api' },
+      subscriptions: { x: 380, y: 180, label: 'Subscriptions', colorKey: 'external' },
+      billing: { x: 380, y: 320, label: 'Billing', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' }
+    }
+  },
+
+  runpod: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','pods','gpu','images','deploy','jobs','queue','storage','network','billing','analytics','logs'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      pods: { x: 620, y: 180, label: 'Pods', colorKey: 'store' },
+      gpu: { x: 860, y: 180, label: 'GPU', colorKey: 'external' },
+      images: { x: 1100, y: 180, label: 'Images', colorKey: 'store' },
+      deploy: { x: 620, y: 320, label: 'Deploy', colorKey: 'api' },
+      jobs: { x: 860, y: 320, label: 'Jobs', colorKey: 'api' },
+      queue: { x: 1100, y: 320, label: 'Queue', colorKey: 'stream' },
+      storage: { x: 620, y: 460, label: 'Storage', colorKey: 'store' },
+      network: { x: 860, y: 460, label: 'Network', colorKey: 'api' },
+      billing: { x: 380, y: 320, label: 'Billing', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' },
+      logs: { x: 860, y: 600, label: 'Logs', colorKey: 'store' }
+    }
+  },
+
+  paperspace: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','projects','machines','gpu','images','notebooks','jobs','storage','network','billing','analytics','logs'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      projects: { x: 620, y: 180, label: 'Projects', colorKey: 'store' },
+      machines: { x: 860, y: 180, label: 'Machines', colorKey: 'external' },
+      gpu: { x: 1100, y: 180, label: 'GPU', colorKey: 'external' },
+      images: { x: 620, y: 320, label: 'Images', colorKey: 'store' },
+      notebooks: { x: 860, y: 320, label: 'Notebooks', colorKey: 'client' },
+      jobs: { x: 1100, y: 320, label: 'Jobs', colorKey: 'api' },
+      storage: { x: 620, y: 460, label: 'Storage', colorKey: 'store' },
+      network: { x: 860, y: 460, label: 'Network', colorKey: 'api' },
+      billing: { x: 380, y: 320, label: 'Billing', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' },
+      logs: { x: 860, y: 600, label: 'Logs', colorKey: 'store' }
+    }
+  },
+
+  kaggle: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','datasets','notebooks','kernels','competitions','submissions','leaderboard','models','gpu','storage','community','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      datasets: { x: 620, y: 180, label: 'Datasets', colorKey: 'store' },
+      notebooks: { x: 860, y: 180, label: 'Notebooks', colorKey: 'client' },
+      kernels: { x: 1100, y: 180, label: 'Kernels', colorKey: 'api' },
+      competitions: { x: 620, y: 320, label: 'Competitions', colorKey: 'store' },
+      submissions: { x: 860, y: 320, label: 'Submissions', colorKey: 'api' },
+      leaderboard: { x: 1100, y: 320, label: 'Leaderboard', colorKey: 'store' },
+      models: { x: 620, y: 460, label: 'Models', colorKey: 'store' },
+      gpu: { x: 860, y: 460, label: 'GPU', colorKey: 'external' },
+      storage: { x: 1100, y: 460, label: 'Storage', colorKey: 'store' },
+      community: { x: 380, y: 320, label: 'Community', colorKey: 'api' },
+      analytics: { x: 1100, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  }
+});
+
+Object.assign(ARCH_LAYOUTS, {
+  codeium: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Codeium',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','ide','plugins','context','models','completion','chat','policies','telemetry','admin','billing','analytics','security'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      ide: { x: 600, y: 160, label: 'IDE' },
+      plugins: { x: 880, y: 160, label: 'Plugins' },
+      context: { x: 1160, y: 160, label: 'Context' },
+      models: { x: 880, y: 300, label: 'Models' },
+      completion: { x: 1160, y: 300, label: 'Completion' },
+      chat: { x: 600, y: 300, label: 'Chat' },
+      policies: { x: 600, y: 440, label: 'Policies' },
+      telemetry: { x: 880, y: 440, label: 'Telemetry' },
+      admin: { x: 600, y: 580, label: 'Admin' },
+      billing: { x: 320, y: 300, label: 'Billing' },
+      analytics: { x: 320, y: 440, label: 'Analytics' },
+      security: { x: 1160, y: 440, label: 'Security' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['ide','plugins','plugin'], ['plugins','context','ctx']);
+      if(stepIdx===2) e.push(['context','models','model'], ['models','completion','complete']);
+      if(stepIdx===3) e.push(['context','chat','chat'], ['chat','models','model']);
+      if(stepIdx===4) e.push(['policies','completion','policy'], ['security','policies','sec']);
+      if(stepIdx===5) e.push(['completion','telemetry','telemetry'], ['telemetry','analytics','analytics']);
+      if(stepIdx===6) e.push(['billing','analytics','bill']);
+      return e;
+    }
+  },
+
+  'hugging-face': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Hugging Face',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','models','datasets','spaces','inference','training','repos','cdn','community','billing','analytics','security'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      models: { x: 600, y: 160, label: 'Models' },
+      datasets: { x: 880, y: 160, label: 'Datasets' },
+      spaces: { x: 1160, y: 160, label: 'Spaces' },
+      inference: { x: 600, y: 300, label: 'Inference' },
+      training: { x: 880, y: 300, label: 'Training' },
+      repos: { x: 1160, y: 300, label: 'Repos' },
+      cdn: { x: 1160, y: 440, label: 'CDN' },
+      community: { x: 600, y: 440, label: 'Community' },
+      billing: { x: 320, y: 300, label: 'Billing' },
+      analytics: { x: 880, y: 440, label: 'Analytics' },
+      security: { x: 880, y: 580, label: 'Security' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','models','model'], ['auth','datasets','data']);
+      if(stepIdx===2) e.push(['models','inference','infer'], ['datasets','training','train']);
+      if(stepIdx===3) e.push(['repos','spaces','space'], ['spaces','cdn','cdn']);
+      if(stepIdx===4) e.push(['community','analytics','community']);
+      if(stepIdx===5) e.push(['security','repos','sec']);
+      if(stepIdx===6) e.push(['billing','analytics','bill']);
+      return e;
+    }
+  },
+
+  replicate: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Replicate',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','models','registry','inference','queue','workers','gpu','storage','billing','analytics','safety','rateLimits'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      models: { x: 600, y: 160, label: 'Models' },
+      registry: { x: 880, y: 160, label: 'Registry' },
+      inference: { x: 1160, y: 160, label: 'Inference' },
+      queue: { x: 880, y: 300, label: 'Queue' },
+      workers: { x: 1160, y: 300, label: 'Workers' },
+      gpu: { x: 1160, y: 440, label: 'GPU' },
+      storage: { x: 600, y: 300, label: 'Storage' },
+      billing: { x: 320, y: 300, label: 'Billing' },
+      analytics: { x: 600, y: 440, label: 'Analytics' },
+      safety: { x: 880, y: 440, label: 'Safety' },
+      rateLimits: { x: 320, y: 440, label: 'Rate Limits' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','models','model'], ['models','inference','infer']);
+      if(stepIdx===2) e.push(['inference','queue','queue'], ['queue','workers','work']);
+      if(stepIdx===3) e.push(['workers','gpu','gpu'], ['workers','storage','out']);
+      if(stepIdx===4) e.push(['safety','inference','safety'], ['rateLimits','inference','limit']);
+      if(stepIdx===5) e.push(['storage','analytics','analytics']);
+      if(stepIdx===6) e.push(['billing','analytics','bill']);
+      return e;
+    }
+  },
+
+  'stability-ai': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Stability AI',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','models','api','inference','queue','gpu','storage','contentFilter','billing','analytics','rateLimits','support'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      models: { x: 600, y: 160, label: 'Models' },
+      api: { x: 880, y: 160, label: 'API' },
+      inference: { x: 1160, y: 160, label: 'Inference' },
+      queue: { x: 880, y: 300, label: 'Queue' },
+      gpu: { x: 1160, y: 300, label: 'GPU' },
+      storage: { x: 600, y: 300, label: 'Storage' },
+      contentFilter: { x: 600, y: 440, label: 'Filter' },
+      billing: { x: 320, y: 300, label: 'Billing' },
+      analytics: { x: 880, y: 440, label: 'Analytics' },
+      rateLimits: { x: 320, y: 440, label: 'Rate Limits' },
+      support: { x: 1160, y: 440, label: 'Support' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','api','api'], ['api','inference','infer']);
+      if(stepIdx===2) e.push(['inference','queue','queue'], ['queue','gpu','gpu']);
+      if(stepIdx===3) e.push(['gpu','storage','out'], ['storage','analytics','analytics']);
+      if(stepIdx===4) e.push(['contentFilter','inference','filter'], ['rateLimits','api','limit']);
+      if(stepIdx===5) e.push(['support','client','support']);
+      if(stepIdx===6) e.push(['billing','analytics','bill']);
+      return e;
+    }
+  },
+
+  midjourney: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Midjourney',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','discord','prompts','queue','gpu','models','gallery','upscale','moderation','subscriptions','billing','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      discord: { x: 600, y: 160, label: 'Discord' },
+      prompts: { x: 880, y: 160, label: 'Prompts' },
+      queue: { x: 1160, y: 160, label: 'Queue' },
+      gpu: { x: 1160, y: 300, label: 'GPU' },
+      models: { x: 880, y: 300, label: 'Models' },
+      gallery: { x: 600, y: 300, label: 'Gallery' },
+      upscale: { x: 880, y: 440, label: 'Upscale' },
+      moderation: { x: 600, y: 440, label: 'Moderation' },
+      subscriptions: { x: 320, y: 160, label: 'Subscriptions' },
+      billing: { x: 320, y: 300, label: 'Billing' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['discord','prompts','prompt'], ['prompts','queue','queue']);
+      if(stepIdx===2) e.push(['queue','gpu','gpu'], ['models','gpu','model']);
+      if(stepIdx===3) e.push(['gpu','gallery','img'], ['gallery','upscale','up']);
+      if(stepIdx===4) e.push(['prompts','moderation','mod'], ['moderation','notifications','notify']);
+      if(stepIdx===5) e.push(['subscriptions','billing','bill']);
+      if(stepIdx===6) e.push(['gallery','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'leonardo-ai': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Leonardo AI',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','prompts','models','inference','queue','gpu','assets','editor','moderation','subscriptions','billing','analytics','notifications'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      prompts: { x: 600, y: 160, label: 'Prompts' },
+      models: { x: 880, y: 160, label: 'Models' },
+      inference: { x: 1160, y: 160, label: 'Inference' },
+      queue: { x: 880, y: 300, label: 'Queue' },
+      gpu: { x: 1160, y: 300, label: 'GPU' },
+      assets: { x: 600, y: 300, label: 'Assets' },
+      editor: { x: 600, y: 440, label: 'Editor' },
+      moderation: { x: 880, y: 440, label: 'Moderation' },
+      subscriptions: { x: 320, y: 160, label: 'Subscriptions' },
+      billing: { x: 320, y: 300, label: 'Billing' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' },
+      notifications: { x: 320, y: 440, label: 'Notify' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','prompts','prompt'], ['prompts','inference','infer']);
+      if(stepIdx===2) e.push(['inference','queue','queue'], ['queue','gpu','gpu']);
+      if(stepIdx===3) e.push(['gpu','assets','asset'], ['assets','editor','edit']);
+      if(stepIdx===4) e.push(['moderation','notifications','notify']);
+      if(stepIdx===5) e.push(['subscriptions','billing','bill']);
+      if(stepIdx===6) e.push(['assets','analytics','analytics']);
+      return e;
+    }
+  },
+
+  runpod: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'RunPod',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','pods','gpu','images','deploy','jobs','queue','storage','network','billing','analytics','logs'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      pods: { x: 600, y: 160, label: 'Pods' },
+      gpu: { x: 880, y: 160, label: 'GPU' },
+      images: { x: 1160, y: 160, label: 'Images' },
+      deploy: { x: 600, y: 300, label: 'Deploy' },
+      jobs: { x: 880, y: 300, label: 'Jobs' },
+      queue: { x: 1160, y: 300, label: 'Queue' },
+      storage: { x: 600, y: 440, label: 'Storage' },
+      network: { x: 880, y: 440, label: 'Network' },
+      billing: { x: 320, y: 300, label: 'Billing' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' },
+      logs: { x: 880, y: 580, label: 'Logs' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','pods','pod'], ['pods','gpu','gpu']);
+      if(stepIdx===2) e.push(['images','deploy','deploy'], ['deploy','jobs','job']);
+      if(stepIdx===3) e.push(['jobs','queue','queue'], ['queue','gpu','run']);
+      if(stepIdx===4) e.push(['jobs','storage','store'], ['network','jobs','net']);
+      if(stepIdx===5) e.push(['jobs','logs','logs'], ['logs','analytics','analytics']);
+      if(stepIdx===6) e.push(['billing','analytics','bill']);
+      return e;
+    }
+  },
+
+  paperspace: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Paperspace',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','projects','machines','gpu','images','notebooks','jobs','storage','network','billing','analytics','logs'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      projects: { x: 600, y: 160, label: 'Projects' },
+      machines: { x: 880, y: 160, label: 'Machines' },
+      gpu: { x: 1160, y: 160, label: 'GPU' },
+      images: { x: 600, y: 300, label: 'Images' },
+      notebooks: { x: 880, y: 300, label: 'Notebooks' },
+      jobs: { x: 1160, y: 300, label: 'Jobs' },
+      storage: { x: 600, y: 440, label: 'Storage' },
+      network: { x: 880, y: 440, label: 'Network' },
+      billing: { x: 320, y: 300, label: 'Billing' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' },
+      logs: { x: 880, y: 580, label: 'Logs' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','projects','proj'], ['projects','machines','vm']);
+      if(stepIdx===2) e.push(['machines','gpu','gpu'], ['images','machines','image']);
+      if(stepIdx===3) e.push(['notebooks','jobs','job'], ['jobs','storage','store']);
+      if(stepIdx===4) e.push(['jobs','logs','logs'], ['logs','analytics','analytics']);
+      if(stepIdx===5) e.push(['network','machines','net']);
+      if(stepIdx===6) e.push(['billing','analytics','bill']);
+      return e;
+    }
+  },
+
+  kaggle: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Kaggle',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','datasets','notebooks','kernels','competitions','submissions','leaderboard','models','gpu','storage','community','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      datasets: { x: 600, y: 160, label: 'Datasets' },
+      notebooks: { x: 880, y: 160, label: 'Notebooks' },
+      kernels: { x: 1160, y: 160, label: 'Kernels' },
+      competitions: { x: 600, y: 300, label: 'Competitions' },
+      submissions: { x: 880, y: 300, label: 'Submissions' },
+      leaderboard: { x: 1160, y: 300, label: 'Leaderboard' },
+      models: { x: 600, y: 440, label: 'Models' },
+      gpu: { x: 880, y: 440, label: 'GPU' },
+      storage: { x: 1160, y: 440, label: 'Storage' },
+      community: { x: 320, y: 300, label: 'Community' },
+      analytics: { x: 1160, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','datasets','data'], ['datasets','notebooks','nb']);
+      if(stepIdx===2) e.push(['notebooks','kernels','run'], ['kernels','gpu','gpu']);
+      if(stepIdx===3) e.push(['competitions','submissions','submit'], ['submissions','leaderboard','rank']);
+      if(stepIdx===4) e.push(['kernels','storage','store'], ['storage','models','model']);
+      if(stepIdx===5) e.push(['community','competitions','community']);
+      if(stepIdx===6) e.push(['competitions','analytics','analytics']);
+      return e;
+    }
+  }
+});
+
 Object.assign(ARCH_LAYOUTS, {
   logrocket: {
     viewBox: '0 0 1860 820',
