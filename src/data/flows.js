@@ -11441,6 +11441,360 @@ export const FLOWS = {
     ]
   },
 
+  'xbox-app': {
+    title: 'Xbox App',
+    steps: [
+      {
+        title: 'Sign in + open store',
+        desc: 'User signs in and opens the store catalog.',
+        active: ['client','auth','profile','store','catalog'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','store'], ['store','catalog']]
+      },
+      {
+        title: 'Purchase / claim entitlement',
+        desc: 'Payments and subscriptions handle purchases and entitlements.',
+        active: ['payments','subscriptions','library'],
+        edges: [['store','payments'], ['subscriptions','payments'], ['payments','library']]
+      },
+      {
+        title: 'Install + cloud',
+        desc: 'Library items download; cloud saves and cloud gaming integrate.',
+        active: ['downloads','cloud'],
+        edges: [['library','downloads'], ['downloads','cloud']]
+      },
+      {
+        title: 'Multiplayer + chat + notifications',
+        desc: 'Session services and chat support play and coordination.',
+        active: ['multiplayer','chat','notifications'],
+        edges: [['multiplayer','chat'], ['chat','notifications']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Telemetry tracks engagement and store funnel.',
+        active: ['analytics'],
+        edges: [['library','analytics']]
+      }
+    ]
+  },
+
+  'playstation-app': {
+    title: 'PlayStation App',
+    steps: [
+      {
+        title: 'Sign in + browse store',
+        desc: 'User signs in and browses store/catalog.',
+        active: ['client','auth','profile','store','catalog'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','store'], ['store','catalog']]
+      },
+      {
+        title: 'Purchase / subscription entitlement',
+        desc: 'Payments/subscriptions create entitlements in library.',
+        active: ['payments','subscriptions','library'],
+        edges: [['store','payments'], ['subscriptions','payments'], ['payments','library']]
+      },
+      {
+        title: 'Downloads + cloud',
+        desc: 'Downloads and cloud save integrate across console/app.',
+        active: ['downloads','cloud'],
+        edges: [['library','downloads'], ['downloads','cloud']]
+      },
+      {
+        title: 'Parties + chat',
+        desc: 'Parties and chat coordinate play; notifications update events.',
+        active: ['parties','chat','notifications'],
+        edges: [['parties','chat'], ['chat','notifications']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Engagement telemetry powers dashboards and recommendations.',
+        active: ['analytics'],
+        edges: [['library','analytics']]
+      }
+    ]
+  },
+
+  'discord-nitro': {
+    title: 'Discord Nitro',
+    steps: [
+      {
+        title: 'Join servers + chat',
+        desc: 'User signs in and uses server chat and voice.',
+        active: ['client','auth','servers','chat','voice'],
+        edges: [['client','auth'], ['auth','servers'], ['servers','chat'], ['servers','voice']]
+      },
+      {
+        title: 'Streaming + CDN',
+        desc: 'Streaming features rely on media delivery and CDN.',
+        active: ['streaming','cdn'],
+        edges: [['voice','streaming'], ['cdn','streaming']]
+      },
+      {
+        title: 'Subscribe to Nitro',
+        desc: 'Subscription creates billing state and unlocks perks.',
+        active: ['subscriptions','billing','payments','perks'],
+        edges: [['subscriptions','billing'], ['billing','payments'], ['payments','perks']]
+      },
+      {
+        title: 'Perks applied',
+        desc: 'Perks like emoji, boosts, and uploads apply to servers.',
+        active: ['emoji','servers'],
+        edges: [['perks','servers'], ['emoji','cdn']]
+      },
+      {
+        title: 'Support + analytics',
+        desc: 'Support handles issues; analytics tracks retention and ARPU.',
+        active: ['support','analytics'],
+        edges: [['chat','analytics'], ['support','client']]
+      }
+    ]
+  },
+
+  'battle-net': {
+    title: 'Battle.net',
+    steps: [
+      {
+        title: 'Browse catalog + cart',
+        desc: 'User signs in, browses store/catalog, and adds items to cart.',
+        active: ['client','auth','store','catalog','cart'],
+        edges: [['client','auth'], ['auth','store'], ['store','catalog'], ['catalog','cart']]
+      },
+      {
+        title: 'Checkout + order',
+        desc: 'Checkout processes payment and creates order/entitlement.',
+        active: ['checkout','payments','orders'],
+        edges: [['cart','checkout'], ['checkout','payments'], ['checkout','orders']]
+      },
+      {
+        title: 'Library + downloads + CDN',
+        desc: 'Order adds to library; downloads via CDN.',
+        active: ['library','downloads','cdn'],
+        edges: [['orders','library'], ['library','downloads'], ['downloads','cdn']]
+      },
+      {
+        title: 'Friends + chat',
+        desc: 'Social layer supports friends and chat.',
+        active: ['friends','chat','notifications'],
+        edges: [['friends','chat'], ['orders','notifications']]
+      },
+      {
+        title: 'Support + analytics',
+        desc: 'Support handles issues; analytics tracks funnel and engagement.',
+        active: ['support','analytics'],
+        edges: [['support','client'], ['orders','analytics']]
+      }
+    ]
+  },
+
+  'riot-client': {
+    title: 'Riot Client',
+    steps: [
+      {
+        title: 'Sign in + select game',
+        desc: 'User signs in and selects a game title.',
+        active: ['client','auth','account','games'],
+        edges: [['client','auth'], ['auth','account'], ['account','games']]
+      },
+      {
+        title: 'Patch + download via CDN',
+        desc: 'Client checks patches and downloads builds via CDN.',
+        active: ['patches','downloads','cdn'],
+        edges: [['games','patches'], ['patches','downloads'], ['downloads','cdn']]
+      },
+      {
+        title: 'Store purchases',
+        desc: 'Payments process in-client purchases for cosmetics.',
+        active: ['store','payments'],
+        edges: [['store','payments']]
+      },
+      {
+        title: 'Social + notifications',
+        desc: 'Friends/chat and notifications coordinate sessions.',
+        active: ['friends','chat','notifications'],
+        edges: [['friends','chat'], ['chat','notifications']]
+      },
+      {
+        title: 'Anti-cheat + analytics',
+        desc: 'Anti-cheat enforces integrity; analytics tracks performance.',
+        active: ['antiCheat','analytics'],
+        edges: [['antiCheat','games'], ['games','analytics']]
+      }
+    ]
+  },
+
+  gog: {
+    title: 'GOG',
+    steps: [
+      {
+        title: 'Browse + cart',
+        desc: 'User signs in and browses catalog then adds to cart.',
+        active: ['client','auth','store','catalog','cart'],
+        edges: [['client','auth'], ['auth','store'], ['store','catalog'], ['catalog','cart']]
+      },
+      {
+        title: 'Checkout + payment',
+        desc: 'Checkout processes payment and creates order.',
+        active: ['checkout','payments','orders'],
+        edges: [['cart','checkout'], ['checkout','payments'], ['checkout','orders']]
+      },
+      {
+        title: 'Library + downloads',
+        desc: 'Order adds titles to library; downloads use CDN.',
+        active: ['library','downloads','cdn'],
+        edges: [['orders','library'], ['library','downloads'], ['downloads','cdn']]
+      },
+      {
+        title: 'Community + notifications',
+        desc: 'Community activity triggers notifications.',
+        active: ['community','notifications'],
+        edges: [['community','notifications']]
+      },
+      {
+        title: 'Support + analytics',
+        desc: 'Support resolves issues; analytics tracks funnel and engagement.',
+        active: ['support','analytics'],
+        edges: [['support','client'], ['orders','analytics']]
+      }
+    ]
+  },
+
+  'itch-io': {
+    title: 'itch.io',
+    steps: [
+      {
+        title: 'Browse indie catalog',
+        desc: 'User signs in and browses the indie catalog/store.',
+        active: ['client','auth','store','catalog'],
+        edges: [['client','auth'], ['auth','store'], ['store','catalog']]
+      },
+      {
+        title: 'Creator uploads build',
+        desc: 'Creators upload builds; CDN serves downloads.',
+        active: ['creators','uploads','cdn'],
+        edges: [['creators','uploads'], ['uploads','cdn']]
+      },
+      {
+        title: 'Purchase + payout',
+        desc: 'Payments handle purchase; payouts distribute to creators.',
+        active: ['payments','payouts','library'],
+        edges: [['catalog','payments'], ['payments','library'], ['payments','payouts']]
+      },
+      {
+        title: 'Download + community',
+        desc: 'Library downloads and community features drive engagement.',
+        active: ['downloads','community','notifications'],
+        edges: [['library','downloads'], ['community','notifications']]
+      },
+      {
+        title: 'Analytics + support',
+        desc: 'Analytics tracks funnel; support resolves issues.',
+        active: ['analytics','support'],
+        edges: [['downloads','analytics'], ['support','client']]
+      }
+    ]
+  },
+
+  'game-jolt': {
+    title: 'Game Jolt',
+    steps: [
+      {
+        title: 'Sign in + discover games',
+        desc: 'User signs in and discovers games via catalog.',
+        active: ['client','auth','games','catalog'],
+        edges: [['client','auth'], ['auth','catalog'], ['catalog','games']]
+      },
+      {
+        title: 'Community uploads + CDN',
+        desc: 'Community uploads builds/media; CDN distributes.',
+        active: ['community','uploads','cdn'],
+        edges: [['community','uploads'], ['uploads','cdn']]
+      },
+      {
+        title: 'Downloads',
+        desc: 'Users download builds through CDN.',
+        active: ['downloads','cdn'],
+        edges: [['games','downloads'], ['downloads','cdn']]
+      },
+      {
+        title: 'Payments + payouts',
+        desc: 'Payments process purchases; payouts pay creators.',
+        active: ['payments','payouts'],
+        edges: [['payments','payouts']]
+      },
+      {
+        title: 'Moderation + analytics',
+        desc: 'Moderation keeps content safe; analytics tracks engagement.',
+        active: ['moderation','notifications','analytics'],
+        edges: [['moderation','notifications'], ['games','analytics']]
+      }
+    ]
+  },
+
+  miniclip: {
+    title: 'Miniclip',
+    steps: [
+      {
+        title: 'Start session',
+        desc: 'User signs in and starts a game session.',
+        active: ['client','auth','games','sessions'],
+        edges: [['client','auth'], ['auth','games'], ['games','sessions']]
+      },
+      {
+        title: 'Leaderboard updates',
+        desc: 'Scores update leaderboards and profiles.',
+        active: ['leaderboards','profiles'],
+        edges: [['sessions','leaderboards'], ['leaderboards','profiles']]
+      },
+      {
+        title: 'Ads + IAP',
+        desc: 'Ads monetize sessions; IAP uses payments.',
+        active: ['ads','iap','payments'],
+        edges: [['ads','games'], ['iap','payments']]
+      },
+      {
+        title: 'Friends + notifications',
+        desc: 'Friends and notifications drive re-engagement.',
+        active: ['friends','notifications'],
+        edges: [['friends','notifications']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics tracks retention and monetization.',
+        active: ['analytics'],
+        edges: [['sessions','analytics']]
+      }
+    ]
+  },
+
+  poki: {
+    title: 'Poki',
+    steps: [
+      {
+        title: 'Discover + launch game',
+        desc: 'User discovers games via catalog and launches via CDN.',
+        active: ['client','auth','catalog','games','cdn'],
+        edges: [['client','auth'], ['auth','catalog'], ['catalog','games'], ['games','cdn']]
+      },
+      {
+        title: 'Ads + measurement',
+        desc: 'Ad stack monetizes play; analytics measures performance.',
+        active: ['ads','analytics'],
+        edges: [['games','ads'], ['ads','analytics']]
+      },
+      {
+        title: 'Profiles + recommendations',
+        desc: 'Profiles feed recommendation engine for better discovery.',
+        active: ['profiles','recommendations'],
+        edges: [['profiles','recommendations']]
+      },
+      {
+        title: 'Moderation + support',
+        desc: 'Moderation and support handle safety and issues.',
+        active: ['moderation','support','notifications'],
+        edges: [['moderation','support'], ['support','notifications']]
+      }
+    ]
+  },
+
   chime: {
     title: 'Chime',
     steps: [

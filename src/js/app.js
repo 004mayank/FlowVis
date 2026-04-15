@@ -17487,6 +17487,552 @@ Object.assign(SYSTEM_LAYOUTS, {
   }
 });
 
+// ----- Batch 72 (System + Architecture - gaming clients + stores + subscriptions) -----
+
+Object.assign(SYSTEM_LAYOUTS, {
+  'xbox-app': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','store','catalog','library','downloads','cloud','multiplayer','chat','payments','subscriptions','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'App', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      store: { x: 860, y: 180, label: 'Store', colorKey: 'api' },
+      catalog: { x: 1100, y: 180, label: 'Catalog', colorKey: 'store' },
+      library: { x: 620, y: 320, label: 'Library', colorKey: 'store' },
+      downloads: { x: 860, y: 320, label: 'Downloads', colorKey: 'api' },
+      cloud: { x: 1100, y: 320, label: 'Cloud', colorKey: 'external' },
+      multiplayer: { x: 620, y: 460, label: 'Multiplayer', colorKey: 'stream' },
+      chat: { x: 860, y: 460, label: 'Chat', colorKey: 'stream' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      subscriptions: { x: 380, y: 180, label: 'Subscriptions', colorKey: 'external' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'playstation-app': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profile','store','catalog','library','downloads','cloud','parties','chat','payments','subscriptions','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'App', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profile: { x: 620, y: 180, label: 'Profile', colorKey: 'store' },
+      store: { x: 860, y: 180, label: 'Store', colorKey: 'api' },
+      catalog: { x: 1100, y: 180, label: 'Catalog', colorKey: 'store' },
+      library: { x: 620, y: 320, label: 'Library', colorKey: 'store' },
+      downloads: { x: 860, y: 320, label: 'Downloads', colorKey: 'api' },
+      cloud: { x: 1100, y: 320, label: 'Cloud', colorKey: 'external' },
+      parties: { x: 620, y: 460, label: 'Parties', colorKey: 'stream' },
+      chat: { x: 860, y: 460, label: 'Chat', colorKey: 'stream' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      subscriptions: { x: 380, y: 180, label: 'Subscriptions', colorKey: 'external' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'discord-nitro': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','servers','chat','voice','streaming','emoji','cdn','subscriptions','billing','payments','perks','support','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      servers: { x: 620, y: 180, label: 'Servers', colorKey: 'store' },
+      chat: { x: 860, y: 180, label: 'Chat', colorKey: 'stream' },
+      voice: { x: 1100, y: 180, label: 'Voice', colorKey: 'stream' },
+      streaming: { x: 1100, y: 320, label: 'Streaming', colorKey: 'cdn' },
+      emoji: { x: 860, y: 320, label: 'Emoji', colorKey: 'store' },
+      cdn: { x: 620, y: 320, label: 'CDN', colorKey: 'cdn' },
+      subscriptions: { x: 380, y: 180, label: 'Subscriptions', colorKey: 'external' },
+      billing: { x: 380, y: 320, label: 'Billing', colorKey: 'external' },
+      payments: { x: 380, y: 460, label: 'Payments', colorKey: 'external' },
+      perks: { x: 620, y: 460, label: 'Perks', colorKey: 'api' },
+      support: { x: 860, y: 460, label: 'Support', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'battle-net': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','store','catalog','cart','checkout','orders','library','downloads','cdn','friends','chat','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      store: { x: 620, y: 180, label: 'Store', colorKey: 'api' },
+      catalog: { x: 860, y: 180, label: 'Catalog', colorKey: 'store' },
+      cart: { x: 1100, y: 180, label: 'Cart', colorKey: 'store' },
+      checkout: { x: 860, y: 320, label: 'Checkout', colorKey: 'api' },
+      orders: { x: 1100, y: 320, label: 'Orders', colorKey: 'store' },
+      library: { x: 620, y: 320, label: 'Library', colorKey: 'store' },
+      downloads: { x: 860, y: 460, label: 'Downloads', colorKey: 'api' },
+      cdn: { x: 1100, y: 460, label: 'CDN', colorKey: 'cdn' },
+      friends: { x: 380, y: 320, label: 'Friends', colorKey: 'api' },
+      chat: { x: 380, y: 460, label: 'Chat', colorKey: 'stream' },
+      payments: { x: 380, y: 180, label: 'Payments', colorKey: 'external' },
+      support: { x: 620, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 620, y: 600, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'riot-client': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','games','patches','downloads','cdn','store','payments','account','friends','chat','antiCheat','support','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      games: { x: 620, y: 180, label: 'Games', colorKey: 'store' },
+      patches: { x: 860, y: 180, label: 'Patches', colorKey: 'store' },
+      downloads: { x: 1100, y: 180, label: 'Downloads', colorKey: 'api' },
+      cdn: { x: 1100, y: 320, label: 'CDN', colorKey: 'cdn' },
+      store: { x: 620, y: 320, label: 'Store', colorKey: 'api' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      account: { x: 380, y: 180, label: 'Account', colorKey: 'store' },
+      friends: { x: 620, y: 460, label: 'Friends', colorKey: 'api' },
+      chat: { x: 860, y: 460, label: 'Chat', colorKey: 'stream' },
+      antiCheat: { x: 1100, y: 460, label: 'Anti-cheat', colorKey: 'api' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 620, y: 600, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  gog: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','store','catalog','cart','checkout','orders','library','downloads','cdn','community','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      store: { x: 620, y: 180, label: 'Store', colorKey: 'api' },
+      catalog: { x: 860, y: 180, label: 'Catalog', colorKey: 'store' },
+      cart: { x: 1100, y: 180, label: 'Cart', colorKey: 'store' },
+      checkout: { x: 860, y: 320, label: 'Checkout', colorKey: 'api' },
+      orders: { x: 1100, y: 320, label: 'Orders', colorKey: 'store' },
+      library: { x: 620, y: 320, label: 'Library', colorKey: 'store' },
+      downloads: { x: 860, y: 460, label: 'Downloads', colorKey: 'api' },
+      cdn: { x: 1100, y: 460, label: 'CDN', colorKey: 'cdn' },
+      community: { x: 620, y: 460, label: 'Community', colorKey: 'api' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 620, y: 600, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'itch-io': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','store','catalog','creators','uploads','payments','payouts','library','downloads','cdn','community','support','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      store: { x: 620, y: 180, label: 'Store', colorKey: 'api' },
+      catalog: { x: 860, y: 180, label: 'Catalog', colorKey: 'store' },
+      creators: { x: 1100, y: 180, label: 'Creators', colorKey: 'store' },
+      uploads: { x: 1100, y: 320, label: 'Uploads', colorKey: 'store' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      payouts: { x: 380, y: 460, label: 'Payouts', colorKey: 'external' },
+      library: { x: 620, y: 320, label: 'Library', colorKey: 'store' },
+      downloads: { x: 860, y: 320, label: 'Downloads', colorKey: 'api' },
+      cdn: { x: 860, y: 460, label: 'CDN', colorKey: 'cdn' },
+      community: { x: 620, y: 460, label: 'Community', colorKey: 'api' },
+      support: { x: 620, y: 600, label: 'Support', colorKey: 'external' },
+      notifications: { x: 380, y: 600, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'game-jolt': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','games','catalog','community','uploads','downloads','cdn','payments','payouts','moderation','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      games: { x: 620, y: 180, label: 'Games', colorKey: 'store' },
+      catalog: { x: 860, y: 180, label: 'Catalog', colorKey: 'store' },
+      community: { x: 1100, y: 180, label: 'Community', colorKey: 'api' },
+      uploads: { x: 620, y: 320, label: 'Uploads', colorKey: 'store' },
+      downloads: { x: 860, y: 320, label: 'Downloads', colorKey: 'api' },
+      cdn: { x: 1100, y: 320, label: 'CDN', colorKey: 'cdn' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      payouts: { x: 380, y: 460, label: 'Payouts', colorKey: 'external' },
+      moderation: { x: 620, y: 460, label: 'Moderation', colorKey: 'api' },
+      notifications: { x: 860, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  miniclip: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','games','sessions','leaderboards','ads','iap','payments','profiles','friends','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      games: { x: 620, y: 180, label: 'Games', colorKey: 'store' },
+      sessions: { x: 860, y: 180, label: 'Sessions', colorKey: 'stream' },
+      leaderboards: { x: 1100, y: 180, label: 'Leaderboards', colorKey: 'store' },
+      ads: { x: 380, y: 320, label: 'Ads', colorKey: 'api' },
+      iap: { x: 620, y: 320, label: 'IAP', colorKey: 'external' },
+      payments: { x: 860, y: 320, label: 'Payments', colorKey: 'external' },
+      profiles: { x: 620, y: 460, label: 'Profiles', colorKey: 'store' },
+      friends: { x: 860, y: 460, label: 'Friends', colorKey: 'api' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  poki: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','catalog','games','cdn','ads','analytics','profiles','recommendations','moderation','support','notifications'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      catalog: { x: 620, y: 180, label: 'Catalog', colorKey: 'store' },
+      games: { x: 860, y: 180, label: 'Games', colorKey: 'store' },
+      cdn: { x: 1100, y: 180, label: 'CDN', colorKey: 'cdn' },
+      ads: { x: 380, y: 320, label: 'Ads', colorKey: 'api' },
+      analytics: { x: 1100, y: 320, label: 'Analytics', colorKey: 'store' },
+      profiles: { x: 620, y: 320, label: 'Profiles', colorKey: 'store' },
+      recommendations: { x: 860, y: 320, label: 'Recs', colorKey: 'api' },
+      moderation: { x: 620, y: 460, label: 'Moderation', colorKey: 'api' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 860, y: 460, label: 'Notify', colorKey: 'external' }
+    }
+  }
+});
+
+Object.assign(ARCH_LAYOUTS, {
+  'xbox-app': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Xbox App',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','store','catalog','library','downloads','cloud','multiplayer','chat','payments','subscriptions','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'App' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      store: { x: 880, y: 160, label: 'Store' },
+      catalog: { x: 1160, y: 160, label: 'Catalog' },
+      library: { x: 600, y: 300, label: 'Library' },
+      downloads: { x: 880, y: 300, label: 'Downloads' },
+      cloud: { x: 1160, y: 300, label: 'Cloud' },
+      multiplayer: { x: 600, y: 440, label: 'Multiplayer' },
+      chat: { x: 880, y: 440, label: 'Chat' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      subscriptions: { x: 320, y: 160, label: 'Subscriptions' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profile','profile'], ['profile','store','store']);
+      if(stepIdx===2) e.push(['store','catalog','browse'], ['catalog','library','own']);
+      if(stepIdx===3) e.push(['library','downloads','dl'], ['downloads','cloud','cloud']);
+      if(stepIdx===4) e.push(['multiplayer','chat','chat'], ['chat','notifications','notify']);
+      if(stepIdx===5) e.push(['subscriptions','payments','bill']);
+      if(stepIdx===6) e.push(['library','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'playstation-app': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'PlayStation App',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profile','store','catalog','library','downloads','cloud','parties','chat','payments','subscriptions','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'App' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profile: { x: 600, y: 160, label: 'Profile' },
+      store: { x: 880, y: 160, label: 'Store' },
+      catalog: { x: 1160, y: 160, label: 'Catalog' },
+      library: { x: 600, y: 300, label: 'Library' },
+      downloads: { x: 880, y: 300, label: 'Downloads' },
+      cloud: { x: 1160, y: 300, label: 'Cloud' },
+      parties: { x: 600, y: 440, label: 'Parties' },
+      chat: { x: 880, y: 440, label: 'Chat' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      subscriptions: { x: 320, y: 160, label: 'Subscriptions' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profile','profile'], ['profile','store','store']);
+      if(stepIdx===2) e.push(['store','catalog','browse'], ['catalog','library','own']);
+      if(stepIdx===3) e.push(['library','downloads','dl'], ['downloads','cloud','cloud']);
+      if(stepIdx===4) e.push(['parties','chat','chat'], ['chat','notifications','notify']);
+      if(stepIdx===5) e.push(['subscriptions','payments','bill']);
+      if(stepIdx===6) e.push(['library','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'discord-nitro': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Discord Nitro',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','servers','chat','voice','streaming','emoji','cdn','subscriptions','billing','payments','perks','support','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      servers: { x: 600, y: 160, label: 'Servers' },
+      chat: { x: 880, y: 160, label: 'Chat' },
+      voice: { x: 1160, y: 160, label: 'Voice' },
+      streaming: { x: 1160, y: 300, label: 'Streaming' },
+      emoji: { x: 880, y: 300, label: 'Emoji' },
+      cdn: { x: 600, y: 300, label: 'CDN' },
+      subscriptions: { x: 320, y: 160, label: 'Subscriptions' },
+      billing: { x: 320, y: 300, label: 'Billing' },
+      payments: { x: 320, y: 440, label: 'Payments' },
+      perks: { x: 600, y: 440, label: 'Perks' },
+      support: { x: 880, y: 440, label: 'Support' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','servers','server'], ['servers','chat','chat']);
+      if(stepIdx===2) e.push(['voice','streaming','stream'], ['cdn','streaming','cdn']);
+      if(stepIdx===3) e.push(['emoji','cdn','emoji']);
+      if(stepIdx===4) e.push(['subscriptions','billing','bill'], ['billing','payments','pay']);
+      if(stepIdx===5) e.push(['perks','servers','perk']);
+      if(stepIdx===6) e.push(['chat','analytics','analytics'], ['support','client','support']);
+      return e;
+    }
+  },
+
+  'battle-net': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Battle.net',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','store','catalog','cart','checkout','orders','library','downloads','cdn','friends','chat','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      store: { x: 600, y: 160, label: 'Store' },
+      catalog: { x: 880, y: 160, label: 'Catalog' },
+      cart: { x: 1160, y: 160, label: 'Cart' },
+      checkout: { x: 880, y: 300, label: 'Checkout' },
+      orders: { x: 1160, y: 300, label: 'Orders' },
+      library: { x: 600, y: 300, label: 'Library' },
+      downloads: { x: 880, y: 440, label: 'Downloads' },
+      cdn: { x: 1160, y: 440, label: 'CDN' },
+      friends: { x: 320, y: 300, label: 'Friends' },
+      chat: { x: 320, y: 440, label: 'Chat' },
+      payments: { x: 320, y: 160, label: 'Payments' },
+      support: { x: 600, y: 440, label: 'Support' },
+      notifications: { x: 600, y: 580, label: 'Notify' },
+      analytics: { x: 1160, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','store','store'], ['store','catalog','browse']);
+      if(stepIdx===2) e.push(['catalog','cart','cart'], ['cart','checkout','checkout']);
+      if(stepIdx===3) e.push(['checkout','payments','pay'], ['checkout','orders','order']);
+      if(stepIdx===4) e.push(['orders','library','lib'], ['library','downloads','dl'], ['downloads','cdn','cdn']);
+      if(stepIdx===5) e.push(['friends','chat','chat'], ['orders','notifications','notify']);
+      if(stepIdx===6) e.push(['orders','analytics','analytics'], ['support','client','support']);
+      return e;
+    }
+  },
+
+  'riot-client': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Riot Client',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','games','patches','downloads','cdn','store','payments','account','friends','chat','antiCheat','support','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      games: { x: 600, y: 160, label: 'Games' },
+      patches: { x: 880, y: 160, label: 'Patches' },
+      downloads: { x: 1160, y: 160, label: 'Downloads' },
+      cdn: { x: 1160, y: 300, label: 'CDN' },
+      store: { x: 600, y: 300, label: 'Store' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      account: { x: 320, y: 160, label: 'Account' },
+      friends: { x: 600, y: 440, label: 'Friends' },
+      chat: { x: 880, y: 440, label: 'Chat' },
+      antiCheat: { x: 1160, y: 440, label: 'Anti-cheat' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 600, y: 580, label: 'Notify' },
+      analytics: { x: 1160, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','games','games'], ['games','patches','patch']);
+      if(stepIdx===2) e.push(['patches','downloads','dl'], ['downloads','cdn','cdn']);
+      if(stepIdx===3) e.push(['store','payments','pay']);
+      if(stepIdx===4) e.push(['friends','chat','chat'], ['chat','notifications','notify']);
+      if(stepIdx===5) e.push(['antiCheat','games','ac']);
+      if(stepIdx===6) e.push(['games','analytics','analytics'], ['support','client','support']);
+      return e;
+    }
+  },
+
+  gog: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'GOG',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','store','catalog','cart','checkout','orders','library','downloads','cdn','community','payments','support','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      store: { x: 600, y: 160, label: 'Store' },
+      catalog: { x: 880, y: 160, label: 'Catalog' },
+      cart: { x: 1160, y: 160, label: 'Cart' },
+      checkout: { x: 880, y: 300, label: 'Checkout' },
+      orders: { x: 1160, y: 300, label: 'Orders' },
+      library: { x: 600, y: 300, label: 'Library' },
+      downloads: { x: 880, y: 440, label: 'Downloads' },
+      cdn: { x: 1160, y: 440, label: 'CDN' },
+      community: { x: 600, y: 440, label: 'Community' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 600, y: 580, label: 'Notify' },
+      analytics: { x: 1160, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','store','store'], ['store','catalog','browse']);
+      if(stepIdx===2) e.push(['catalog','cart','cart'], ['cart','checkout','checkout']);
+      if(stepIdx===3) e.push(['checkout','payments','pay'], ['checkout','orders','order']);
+      if(stepIdx===4) e.push(['orders','library','lib'], ['library','downloads','dl'], ['downloads','cdn','cdn']);
+      if(stepIdx===5) e.push(['community','notifications','notify']);
+      if(stepIdx===6) e.push(['orders','analytics','analytics'], ['support','client','support']);
+      return e;
+    }
+  },
+
+  'itch-io': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'itch.io',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','store','catalog','creators','uploads','payments','payouts','library','downloads','cdn','community','support','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      store: { x: 600, y: 160, label: 'Store' },
+      catalog: { x: 880, y: 160, label: 'Catalog' },
+      creators: { x: 1160, y: 160, label: 'Creators' },
+      uploads: { x: 1160, y: 300, label: 'Uploads' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      payouts: { x: 320, y: 440, label: 'Payouts' },
+      library: { x: 600, y: 300, label: 'Library' },
+      downloads: { x: 880, y: 300, label: 'Downloads' },
+      cdn: { x: 880, y: 440, label: 'CDN' },
+      community: { x: 600, y: 440, label: 'Community' },
+      support: { x: 600, y: 580, label: 'Support' },
+      notifications: { x: 320, y: 580, label: 'Notify' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','store','store'], ['store','catalog','browse']);
+      if(stepIdx===2) e.push(['creators','uploads','upload'], ['uploads','cdn','cdn']);
+      if(stepIdx===3) e.push(['catalog','payments','pay'], ['payments','payouts','payout']);
+      if(stepIdx===4) e.push(['payments','library','lib'], ['library','downloads','dl']);
+      if(stepIdx===5) e.push(['community','notifications','notify']);
+      if(stepIdx===6) e.push(['analytics','support','analytics']);
+      return e;
+    }
+  },
+
+  'game-jolt': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Game Jolt',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','games','catalog','community','uploads','downloads','cdn','payments','payouts','moderation','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      games: { x: 600, y: 160, label: 'Games' },
+      catalog: { x: 880, y: 160, label: 'Catalog' },
+      community: { x: 1160, y: 160, label: 'Community' },
+      uploads: { x: 600, y: 300, label: 'Uploads' },
+      downloads: { x: 880, y: 300, label: 'Downloads' },
+      cdn: { x: 1160, y: 300, label: 'CDN' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      payouts: { x: 320, y: 440, label: 'Payouts' },
+      moderation: { x: 600, y: 440, label: 'Moderation' },
+      notifications: { x: 880, y: 440, label: 'Notify' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','catalog','browse'], ['catalog','games','game']);
+      if(stepIdx===2) e.push(['community','uploads','upload'], ['uploads','cdn','cdn']);
+      if(stepIdx===3) e.push(['games','downloads','dl'], ['downloads','cdn','cdn']);
+      if(stepIdx===4) e.push(['payments','payouts','payout']);
+      if(stepIdx===5) e.push(['moderation','notifications','mod']);
+      if(stepIdx===6) e.push(['games','analytics','analytics']);
+      return e;
+    }
+  },
+
+  miniclip: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Miniclip',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','games','sessions','leaderboards','ads','iap','payments','profiles','friends','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      games: { x: 600, y: 160, label: 'Games' },
+      sessions: { x: 880, y: 160, label: 'Sessions' },
+      leaderboards: { x: 1160, y: 160, label: 'Leaderboards' },
+      ads: { x: 320, y: 300, label: 'Ads' },
+      iap: { x: 600, y: 300, label: 'IAP' },
+      payments: { x: 880, y: 300, label: 'Payments' },
+      profiles: { x: 600, y: 440, label: 'Profiles' },
+      friends: { x: 880, y: 440, label: 'Friends' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','games','game'], ['games','sessions','session']);
+      if(stepIdx===2) e.push(['sessions','leaderboards','score']);
+      if(stepIdx===3) e.push(['ads','games','ads']);
+      if(stepIdx===4) e.push(['iap','payments','pay']);
+      if(stepIdx===5) e.push(['friends','notifications','notify']);
+      if(stepIdx===6) e.push(['sessions','analytics','analytics']);
+      return e;
+    }
+  },
+
+  poki: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Poki',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','catalog','games','cdn','ads','analytics','profiles','recommendations','moderation','support','notifications'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      catalog: { x: 600, y: 160, label: 'Catalog' },
+      games: { x: 880, y: 160, label: 'Games' },
+      cdn: { x: 1160, y: 160, label: 'CDN' },
+      ads: { x: 320, y: 300, label: 'Ads' },
+      analytics: { x: 1160, y: 300, label: 'Analytics' },
+      profiles: { x: 600, y: 300, label: 'Profiles' },
+      recommendations: { x: 880, y: 300, label: 'Recs' },
+      moderation: { x: 600, y: 440, label: 'Moderation' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 880, y: 440, label: 'Notify' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','catalog','browse'], ['catalog','games','game']);
+      if(stepIdx===2) e.push(['games','cdn','cdn']);
+      if(stepIdx===3) e.push(['ads','analytics','ads'], ['games','ads','ads']);
+      if(stepIdx===4) e.push(['profiles','recommendations','rec']);
+      if(stepIdx===5) e.push(['moderation','support','mod'], ['support','notifications','notify']);
+      if(stepIdx===6) e.push(['analytics','recommendations','analytics']);
+      return e;
+    }
+  }
+});
+
 Object.assign(ARCH_LAYOUTS, {
   colab: {
     viewBox: '0 0 1860 820',
