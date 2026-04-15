@@ -12659,6 +12659,546 @@ Object.assign(SYSTEM_LAYOUTS, {
   }
 });
 
+// ----- Batch 49 (System + Architecture - discovery/tracking + docs/PKM) -----
+
+Object.assign(SYSTEM_LAYOUTS, {
+  newsbreak: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','sources','crawler','ingest','dedupe','local','rank','feed','search','index','notify','ads','analytics','moderation'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      sources: { x: 620, y: 180, label: 'Sources', colorKey: 'external' },
+      crawler: { x: 620, y: 320, label: 'Crawler', colorKey: 'api' },
+      ingest: { x: 860, y: 320, label: 'Ingest', colorKey: 'queue' },
+      dedupe: { x: 1100, y: 320, label: 'Dedupe', colorKey: 'api' },
+      local: { x: 380, y: 320, label: 'Localize', colorKey: 'api' },
+      rank: { x: 860, y: 180, label: 'Ranking', colorKey: 'api' },
+      feed: { x: 1100, y: 180, label: 'Feed', colorKey: 'api' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 460, label: 'Index', colorKey: 'store' },
+      notify: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      ads: { x: 1100, y: 460, label: 'Ads', colorKey: 'api' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' },
+      moderation: { x: 860, y: 600, label: 'Moderation', colorKey: 'api' }
+    }
+  },
+
+  'reddit-reader-apps': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','oauth','reddit','subreddits','feed','comments','media','cache','search','index','notifications','telemetry','analytics','moderation'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      oauth: { x: 380, y: 180, label: 'OAuth', colorKey: 'external' },
+      reddit: { x: 620, y: 180, label: 'Reddit API', colorKey: 'external' },
+      subreddits: { x: 620, y: 320, label: 'Subreddits', colorKey: 'api' },
+      feed: { x: 860, y: 320, label: 'Feed', colorKey: 'api' },
+      comments: { x: 1100, y: 320, label: 'Comments', colorKey: 'api' },
+      media: { x: 1100, y: 180, label: 'Media', colorKey: 'cdn' },
+      cache: { x: 860, y: 180, label: 'Cache', colorKey: 'store' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 460, label: 'Index', colorKey: 'store' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      telemetry: { x: 620, y: 600, label: 'Telemetry', colorKey: 'stream' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' },
+      moderation: { x: 1100, y: 600, label: 'Moderation', colorKey: 'api' }
+    }
+  },
+
+  letterboxd: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','profiles','films','log','ratings','reviews','lists','social','search','index','recos','notify','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      profiles: { x: 620, y: 180, label: 'Profiles', colorKey: 'store' },
+      films: { x: 860, y: 180, label: 'Films', colorKey: 'store' },
+      log: { x: 380, y: 320, label: 'Diary Log', colorKey: 'store' },
+      ratings: { x: 620, y: 320, label: 'Ratings', colorKey: 'store' },
+      reviews: { x: 860, y: 320, label: 'Reviews', colorKey: 'store' },
+      lists: { x: 1100, y: 320, label: 'Lists', colorKey: 'store' },
+      social: { x: 1100, y: 180, label: 'Social', colorKey: 'api' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 460, label: 'Index', colorKey: 'store' },
+      recos: { x: 1100, y: 460, label: 'Recos', colorKey: 'api' },
+      notify: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  imdb: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','titles','people','ratings','reviews','media','cdn','search','index','recommend','ads','analytics','moderation'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      titles: { x: 620, y: 180, label: 'Titles', colorKey: 'store' },
+      people: { x: 860, y: 180, label: 'People', colorKey: 'store' },
+      ratings: { x: 620, y: 320, label: 'Ratings', colorKey: 'store' },
+      reviews: { x: 860, y: 320, label: 'Reviews', colorKey: 'store' },
+      media: { x: 1100, y: 180, label: 'Media', colorKey: 'cdn' },
+      cdn: { x: 1100, y: 320, label: 'CDN', colorKey: 'cdn' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 460, label: 'Index', colorKey: 'store' },
+      recommend: { x: 1100, y: 460, label: 'Recommend', colorKey: 'api' },
+      ads: { x: 380, y: 460, label: 'Ads', colorKey: 'api' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' },
+      moderation: { x: 860, y: 600, label: 'Moderation', colorKey: 'api' }
+    }
+  },
+
+  'tv-time': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','shows','episodes','tracking','sync','social','notifications','search','index','recommend','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      shows: { x: 620, y: 180, label: 'Shows', colorKey: 'store' },
+      episodes: { x: 860, y: 180, label: 'Episodes', colorKey: 'store' },
+      tracking: { x: 620, y: 320, label: 'Tracking', colorKey: 'store' },
+      sync: { x: 860, y: 320, label: 'Sync', colorKey: 'api' },
+      social: { x: 1100, y: 320, label: 'Social', colorKey: 'api' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 460, label: 'Index', colorKey: 'store' },
+      recommend: { x: 1100, y: 460, label: 'Recos', colorKey: 'api' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  trakt: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','oauth','api','users','history','lists','sync','scrobble','webhooks','search','index','recommend','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      oauth: { x: 380, y: 180, label: 'OAuth', colorKey: 'external' },
+      api: { x: 620, y: 180, label: 'API', colorKey: 'api' },
+      users: { x: 860, y: 180, label: 'Users', colorKey: 'store' },
+      history: { x: 620, y: 320, label: 'History', colorKey: 'store' },
+      lists: { x: 860, y: 320, label: 'Lists', colorKey: 'store' },
+      sync: { x: 1100, y: 320, label: 'Sync', colorKey: 'api' },
+      scrobble: { x: 380, y: 320, label: 'Scrobble', colorKey: 'api' },
+      webhooks: { x: 1100, y: 180, label: 'Webhooks', colorKey: 'external' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 460, label: 'Index', colorKey: 'store' },
+      recommend: { x: 1100, y: 460, label: 'Recos', colorKey: 'api' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  justwatch: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','catalog','providers','availability','search','index','watchlist','alerts','rank','ads','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      catalog: { x: 620, y: 180, label: 'Catalog', colorKey: 'store' },
+      providers: { x: 860, y: 180, label: 'Providers', colorKey: 'external' },
+      availability: { x: 1100, y: 180, label: 'Availability', colorKey: 'api' },
+      search: { x: 620, y: 320, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 320, label: 'Index', colorKey: 'store' },
+      watchlist: { x: 620, y: 460, label: 'Watchlist', colorKey: 'store' },
+      alerts: { x: 380, y: 460, label: 'Alerts', colorKey: 'external' },
+      rank: { x: 1100, y: 320, label: 'Ranking', colorKey: 'api' },
+      ads: { x: 860, y: 460, label: 'Ads', colorKey: 'api' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  coda: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','docs','tables','formulas','packs','integrations','compute','realtime','permissions','search','index','export','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      docs: { x: 620, y: 180, label: 'Docs', colorKey: 'store' },
+      tables: { x: 860, y: 180, label: 'Tables', colorKey: 'store' },
+      formulas: { x: 1100, y: 180, label: 'Formulas', colorKey: 'api' },
+      packs: { x: 380, y: 320, label: 'Packs', colorKey: 'api' },
+      integrations: { x: 140, y: 320, label: 'Integrations', colorKey: 'external' },
+      compute: { x: 620, y: 320, label: 'Compute', colorKey: 'queue' },
+      realtime: { x: 860, y: 320, label: 'Realtime', colorKey: 'stream' },
+      permissions: { x: 1100, y: 320, label: 'Permissions', colorKey: 'api' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 460, label: 'Index', colorKey: 'store' },
+      export: { x: 1100, y: 460, label: 'Export', colorKey: 'api' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  obsidian: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','vault','markdown','links','graph','search','index','sync','cloud','publish','plugins','security','backups','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      vault: { x: 380, y: 240, label: 'Vault', colorKey: 'store' },
+      markdown: { x: 620, y: 180, label: 'Markdown', colorKey: 'api' },
+      links: { x: 860, y: 180, label: 'Links', colorKey: 'api' },
+      graph: { x: 1100, y: 180, label: 'Graph', colorKey: 'api' },
+      search: { x: 620, y: 320, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 320, label: 'Index', colorKey: 'store' },
+      sync: { x: 380, y: 400, label: 'Sync', colorKey: 'api' },
+      cloud: { x: 140, y: 460, label: 'Cloud', colorKey: 'external' },
+      publish: { x: 620, y: 460, label: 'Publish', colorKey: 'external' },
+      plugins: { x: 1100, y: 320, label: 'Plugins', colorKey: 'api' },
+      security: { x: 380, y: 540, label: 'Security', colorKey: 'api' },
+      backups: { x: 620, y: 600, label: 'Backups', colorKey: 'external' },
+      analytics: { x: 860, y: 600, label: 'Telemetry', colorKey: 'stream' }
+    }
+  },
+
+  'roam-research': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','graphs','blocks','references','query','index','sync','realtime','share','export','backups','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      graphs: { x: 620, y: 180, label: 'Graphs', colorKey: 'store' },
+      blocks: { x: 860, y: 180, label: 'Blocks', colorKey: 'store' },
+      references: { x: 1100, y: 180, label: 'Refs', colorKey: 'store' },
+      query: { x: 620, y: 320, label: 'Query', colorKey: 'api' },
+      index: { x: 860, y: 320, label: 'Index', colorKey: 'store' },
+      sync: { x: 380, y: 320, label: 'Sync', colorKey: 'api' },
+      realtime: { x: 380, y: 460, label: 'Realtime', colorKey: 'stream' },
+      share: { x: 1100, y: 320, label: 'Share', colorKey: 'external' },
+      export: { x: 860, y: 460, label: 'Export', colorKey: 'api' },
+      backups: { x: 620, y: 460, label: 'Backups', colorKey: 'external' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  }
+});
+
+Object.assign(ARCH_LAYOUTS, {
+  newsbreak: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'NewsBreak Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','sources','crawler','ingest','dedupe','local','rank','feed','search','index','notify','ads','analytics','moderation'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      sources: { x: 600, y: 160, label: 'Sources' },
+      crawler: { x: 600, y: 300, label: 'Crawler' },
+      ingest: { x: 880, y: 300, label: 'Ingest' },
+      dedupe: { x: 1160, y: 300, label: 'Dedupe' },
+      local: { x: 320, y: 300, label: 'Localize' },
+      rank: { x: 880, y: 160, label: 'Ranking' },
+      feed: { x: 1160, y: 160, label: 'Feed' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 880, y: 440, label: 'Index' },
+      notify: { x: 320, y: 440, label: 'Notify' },
+      ads: { x: 1160, y: 440, label: 'Ads' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      moderation: { x: 600, y: 580, label: 'Moderation' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['sources','crawler','crawl'], ['crawler','ingest','ingest'], ['ingest','dedupe','dedupe']);
+      if(stepIdx===2) e.push(['dedupe','local','local'], ['local','rank','rank'], ['rank','feed','feed']);
+      if(stepIdx===3) e.push(['client','feed','read'], ['feed','ads','ads']);
+      if(stepIdx===4) e.push(['client','search','search'], ['search','index','index'], ['index','feed','results']);
+      if(stepIdx===5) e.push(['feed','notify','notify']);
+      if(stepIdx===6) e.push(['feed','analytics','analytics'], ['feed','moderation','mod']);
+      return e;
+    }
+  },
+
+  'reddit-reader-apps': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Reddit Reader Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','oauth','reddit','subreddits','feed','comments','media','cache','search','index','notifications','telemetry','analytics','moderation'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      oauth: { x: 320, y: 160, label: 'OAuth' },
+      reddit: { x: 600, y: 160, label: 'Reddit API' },
+      subreddits: { x: 600, y: 300, label: 'Subreddits' },
+      feed: { x: 880, y: 300, label: 'Feed' },
+      comments: { x: 1160, y: 300, label: 'Comments' },
+      media: { x: 1160, y: 160, label: 'Media' },
+      cache: { x: 880, y: 160, label: 'Cache' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 880, y: 440, label: 'Index' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      telemetry: { x: 600, y: 580, label: 'Telemetry' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      moderation: { x: 1160, y: 580, label: 'Moderation' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','oauth','oauth'], ['oauth','reddit','token'], ['reddit','subreddits','subs']);
+      if(stepIdx===2) e.push(['subreddits','feed','feed'], ['feed','cache','cache']);
+      if(stepIdx===3) e.push(['feed','comments','comments'], ['comments','reddit','api']);
+      if(stepIdx===4) e.push(['feed','media','media']);
+      if(stepIdx===5) e.push(['client','search','search'], ['search','index','index'], ['index','feed','results']);
+      if(stepIdx===6) e.push(['feed','telemetry','telemetry'], ['telemetry','analytics','analytics']);
+      if(stepIdx===7) e.push(['comments','moderation','mod'], ['moderation','feed','enforce']);
+      return e;
+    }
+  },
+
+  letterboxd: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Letterboxd Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','profiles','films','log','ratings','reviews','lists','social','search','index','recos','notify','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      profiles: { x: 600, y: 160, label: 'Profiles' },
+      films: { x: 880, y: 160, label: 'Films' },
+      log: { x: 320, y: 300, label: 'Diary Log' },
+      ratings: { x: 600, y: 300, label: 'Ratings' },
+      reviews: { x: 880, y: 300, label: 'Reviews' },
+      lists: { x: 1160, y: 300, label: 'Lists' },
+      social: { x: 1160, y: 160, label: 'Social' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 880, y: 440, label: 'Index' },
+      recos: { x: 1160, y: 440, label: 'Recos' },
+      notify: { x: 320, y: 440, label: 'Notify' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','profiles','profile']);
+      if(stepIdx===2) e.push(['client','films','browse'], ['films','log','log'], ['log','ratings','rate']);
+      if(stepIdx===3) e.push(['ratings','reviews','review'], ['reviews','lists','list']);
+      if(stepIdx===4) e.push(['lists','social','follow'], ['social','notify','notify']);
+      if(stepIdx===5) e.push(['client','search','search'], ['search','index','index'], ['index','films','results']);
+      if(stepIdx===6) e.push(['films','recos','recos'], ['recos','analytics','analytics']);
+      return e;
+    }
+  },
+
+  imdb: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'IMDb Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','titles','people','ratings','reviews','media','cdn','search','index','recommend','ads','analytics','moderation'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      titles: { x: 600, y: 160, label: 'Titles' },
+      people: { x: 880, y: 160, label: 'People' },
+      ratings: { x: 600, y: 300, label: 'Ratings' },
+      reviews: { x: 880, y: 300, label: 'Reviews' },
+      media: { x: 1160, y: 160, label: 'Media' },
+      cdn: { x: 1160, y: 300, label: 'CDN' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 880, y: 440, label: 'Index' },
+      recommend: { x: 1160, y: 440, label: 'Recommend' },
+      ads: { x: 320, y: 440, label: 'Ads' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      moderation: { x: 600, y: 580, label: 'Moderation' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','titles','view'], ['titles','media','media'], ['media','cdn','cdn']);
+      if(stepIdx===2) e.push(['client','ratings','rate'], ['ratings','titles','agg']);
+      if(stepIdx===3) e.push(['client','reviews','review'], ['reviews','moderation','mod']);
+      if(stepIdx===4) e.push(['client','search','search'], ['search','index','index'], ['index','titles','results']);
+      if(stepIdx===5) e.push(['titles','recommend','recos']);
+      if(stepIdx===6) e.push(['titles','ads','ads'], ['titles','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'tv-time': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'TV Time Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','shows','episodes','tracking','sync','social','notifications','search','index','recommend','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      shows: { x: 600, y: 160, label: 'Shows' },
+      episodes: { x: 880, y: 160, label: 'Episodes' },
+      tracking: { x: 600, y: 300, label: 'Tracking' },
+      sync: { x: 880, y: 300, label: 'Sync' },
+      social: { x: 1160, y: 300, label: 'Social' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 880, y: 440, label: 'Index' },
+      recommend: { x: 1160, y: 440, label: 'Recos' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','shows','shows']);
+      if(stepIdx===2) e.push(['client','tracking','track'], ['tracking','sync','sync']);
+      if(stepIdx===3) e.push(['sync','notifications','notify']);
+      if(stepIdx===4) e.push(['client','social','social'], ['social','notifications','notify']);
+      if(stepIdx===5) e.push(['client','search','search'], ['search','index','index'], ['index','shows','results']);
+      if(stepIdx===6) e.push(['shows','recommend','recos'], ['recommend','analytics','analytics']);
+      return e;
+    }
+  },
+
+  trakt: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Trakt Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','oauth','api','users','history','lists','sync','scrobble','webhooks','search','index','recommend','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      oauth: { x: 320, y: 160, label: 'OAuth' },
+      api: { x: 600, y: 160, label: 'API' },
+      users: { x: 880, y: 160, label: 'Users' },
+      history: { x: 600, y: 300, label: 'History' },
+      lists: { x: 880, y: 300, label: 'Lists' },
+      sync: { x: 1160, y: 300, label: 'Sync' },
+      scrobble: { x: 320, y: 300, label: 'Scrobble' },
+      webhooks: { x: 1160, y: 160, label: 'Webhooks' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 880, y: 440, label: 'Index' },
+      recommend: { x: 1160, y: 440, label: 'Recos' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','oauth','oauth'], ['oauth','api','token'], ['api','users','user']);
+      if(stepIdx===2) e.push(['client','scrobble','scrobble'], ['scrobble','history','history'], ['history','sync','sync']);
+      if(stepIdx===3) e.push(['lists','sync','sync'], ['sync','webhooks','hooks']);
+      if(stepIdx===4) e.push(['client','search','search'], ['search','index','index'], ['index','api','results']);
+      if(stepIdx===5) e.push(['history','recommend','recos'], ['recommend','analytics','analytics']);
+      return e;
+    }
+  },
+
+  justwatch: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'JustWatch Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','catalog','providers','availability','search','index','watchlist','alerts','rank','ads','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      catalog: { x: 600, y: 160, label: 'Catalog' },
+      providers: { x: 880, y: 160, label: 'Providers' },
+      availability: { x: 1160, y: 160, label: 'Availability' },
+      search: { x: 600, y: 300, label: 'Search' },
+      index: { x: 880, y: 300, label: 'Index' },
+      watchlist: { x: 600, y: 440, label: 'Watchlist' },
+      alerts: { x: 320, y: 440, label: 'Alerts' },
+      rank: { x: 1160, y: 300, label: 'Ranking' },
+      ads: { x: 880, y: 440, label: 'Ads' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['providers','availability','avail'], ['availability','catalog','catalog']);
+      if(stepIdx===2) e.push(['client','search','search'], ['search','index','index'], ['index','catalog','results']);
+      if(stepIdx===3) e.push(['client','watchlist','watchlist'], ['watchlist','alerts','alerts']);
+      if(stepIdx===4) e.push(['catalog','rank','rank']);
+      if(stepIdx===5) e.push(['catalog','ads','ads'], ['catalog','analytics','analytics']);
+      return e;
+    }
+  },
+
+  coda: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Coda Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','docs','tables','formulas','compute','realtime','permissions','packs','integrations','search','index','export','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      docs: { x: 600, y: 160, label: 'Docs' },
+      tables: { x: 880, y: 160, label: 'Tables' },
+      formulas: { x: 1160, y: 160, label: 'Formulas' },
+      compute: { x: 600, y: 300, label: 'Compute' },
+      realtime: { x: 880, y: 300, label: 'Realtime' },
+      permissions: { x: 1160, y: 300, label: 'Permissions' },
+      packs: { x: 320, y: 300, label: 'Packs' },
+      integrations: { x: 320, y: 440, label: 'Integrations' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 880, y: 440, label: 'Index' },
+      export: { x: 1160, y: 440, label: 'Export' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','docs','doc'], ['docs','tables','tables']);
+      if(stepIdx===2) e.push(['tables','formulas','formula'], ['formulas','compute','compute']);
+      if(stepIdx===3) e.push(['compute','realtime','rt'], ['realtime','client','updates']);
+      if(stepIdx===4) e.push(['docs','permissions','perm']);
+      if(stepIdx===5) e.push(['packs','integrations','ext'], ['integrations','compute','call']);
+      if(stepIdx===6) e.push(['client','search','search'], ['search','index','index']);
+      if(stepIdx===7) e.push(['docs','export','export']);
+      if(stepIdx===8) e.push(['docs','analytics','analytics']);
+      return e;
+    }
+  },
+
+  obsidian: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Obsidian Ecosystem',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','vault','markdown','links','graph','search','index','sync','cloud','publish','plugins','security','backups','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      vault: { x: 320, y: 240, label: 'Vault' },
+      markdown: { x: 600, y: 160, label: 'Markdown' },
+      links: { x: 880, y: 160, label: 'Links' },
+      graph: { x: 1160, y: 160, label: 'Graph' },
+      search: { x: 600, y: 300, label: 'Search' },
+      index: { x: 880, y: 300, label: 'Index' },
+      sync: { x: 320, y: 380, label: 'Sync' },
+      cloud: { x: 40, y: 460, label: 'Cloud' },
+      publish: { x: 600, y: 460, label: 'Publish' },
+      plugins: { x: 1160, y: 300, label: 'Plugins' },
+      security: { x: 320, y: 540, label: 'Security' },
+      backups: { x: 880, y: 460, label: 'Backups' },
+      analytics: { x: 1160, y: 460, label: 'Telemetry' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','vault','open'], ['vault','markdown','parse']);
+      if(stepIdx===2) e.push(['markdown','links','links'], ['links','graph','graph']);
+      if(stepIdx===3) e.push(['client','search','search'], ['search','index','index'], ['index','vault','results']);
+      if(stepIdx===4) e.push(['vault','sync','sync'], ['sync','cloud','cloud']);
+      if(stepIdx===5) e.push(['vault','publish','publish']);
+      if(stepIdx===6) e.push(['client','plugins','plugins']);
+      if(stepIdx===7) e.push(['vault','security','security'], ['vault','backups','backup']);
+      if(stepIdx===8) e.push(['client','analytics','telemetry']);
+      return e;
+    }
+  },
+
+  'roam-research': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Roam Research Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','graphs','blocks','references','query','index','sync','realtime','share','export','backups','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      graphs: { x: 600, y: 160, label: 'Graphs' },
+      blocks: { x: 880, y: 160, label: 'Blocks' },
+      references: { x: 1160, y: 160, label: 'Refs' },
+      query: { x: 600, y: 300, label: 'Query' },
+      index: { x: 880, y: 300, label: 'Index' },
+      sync: { x: 320, y: 300, label: 'Sync' },
+      realtime: { x: 320, y: 440, label: 'Realtime' },
+      share: { x: 1160, y: 300, label: 'Share' },
+      export: { x: 880, y: 440, label: 'Export' },
+      backups: { x: 600, y: 440, label: 'Backups' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','graphs','graph'], ['graphs','blocks','blocks']);
+      if(stepIdx===2) e.push(['blocks','references','refs'], ['references','index','index']);
+      if(stepIdx===3) e.push(['client','query','query'], ['query','index','index'], ['index','blocks','results']);
+      if(stepIdx===4) e.push(['blocks','realtime','rt'], ['realtime','client','updates']);
+      if(stepIdx===5) e.push(['blocks','sync','sync']);
+      if(stepIdx===6) e.push(['blocks','share','share'], ['share','export','export']);
+      if(stepIdx===7) e.push(['blocks','backups','backup'], ['blocks','analytics','analytics']);
+      return e;
+    }
+  }
+});
+
 Object.assign(ARCH_LAYOUTS, {
   revue: {
     viewBox: '0 0 1860 820',

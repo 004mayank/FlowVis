@@ -3485,6 +3485,414 @@ export const FLOWS = {
     ]
   },
 
+  newsbreak: {
+    title: 'NewsBreak',
+    steps: [
+      {
+        title: 'Ingest + dedupe publishers',
+        desc: 'Crawler/ingest pipeline pulls from sources and dedupes/normalizes stories.',
+        active: ['sources','crawler','ingest','dedupe'],
+        edges: [['sources','crawler'], ['crawler','ingest'], ['ingest','dedupe']]
+      },
+      {
+        title: 'Local personalization',
+        desc: 'Localization builds neighborhood/local news mix and context for ranking.',
+        active: ['local','rank'],
+        edges: [['dedupe','local'], ['local','rank']]
+      },
+      {
+        title: 'Rank + serve feed',
+        desc: 'Ranking assembles the feed; client reads and scrolls cards.',
+        active: ['rank','feed','client'],
+        edges: [['rank','feed'], ['client','feed']]
+      },
+      {
+        title: 'Search',
+        desc: 'Search uses index to retrieve stories and topics.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','feed']]
+      },
+      {
+        title: 'Notifications + ads',
+        desc: 'Breaking news notifications and ad monetization around feed engagement.',
+        active: ['notify','ads'],
+        edges: [['feed','notify'], ['feed','ads']]
+      },
+      {
+        title: 'Moderation + analytics',
+        desc: 'Policy enforcement and analytics tune ranking and content coverage.',
+        active: ['moderation','analytics'],
+        edges: [['feed','moderation'], ['feed','analytics']]
+      }
+    ]
+  },
+
+  'reddit-reader-apps': {
+    title: 'Reddit Reader apps',
+    steps: [
+      {
+        title: 'OAuth + session',
+        desc: 'Client authenticates via OAuth and uses token to call Reddit API.',
+        active: ['client','oauth','reddit'],
+        edges: [['client','oauth'], ['oauth','reddit']]
+      },
+      {
+        title: 'Load subreddit feeds',
+        desc: 'Subreddit listings fetched; feed cached for fast scrolling.',
+        active: ['subreddits','feed','cache'],
+        edges: [['reddit','subreddits'], ['subreddits','feed'], ['feed','cache']]
+      },
+      {
+        title: 'Open thread + comments',
+        desc: 'Comments loaded; actions like upvote/reply go back through API.',
+        active: ['comments','reddit'],
+        edges: [['feed','comments'], ['comments','reddit']]
+      },
+      {
+        title: 'Media handling',
+        desc: 'Images/videos pulled from media/CDN sources and rendered in-app.',
+        active: ['media'],
+        edges: [['feed','media']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Search uses local index/cache to filter and jump between threads.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','feed']]
+      },
+      {
+        title: 'Telemetry + moderation',
+        desc: 'Telemetry and moderation tools manage UX and safety/policy constraints.',
+        active: ['telemetry','analytics','moderation'],
+        edges: [['feed','telemetry'], ['telemetry','analytics'], ['comments','moderation']]
+      }
+    ]
+  },
+
+  letterboxd: {
+    title: 'Letterboxd',
+    steps: [
+      {
+        title: 'Sign in + profile',
+        desc: 'User signs in and loads profile and diary context.',
+        active: ['client','auth','profiles'],
+        edges: [['client','auth'], ['auth','profiles']]
+      },
+      {
+        title: 'Log a film',
+        desc: 'User picks a film and logs watch date; diary entry saved.',
+        active: ['films','log'],
+        edges: [['client','films'], ['films','log']]
+      },
+      {
+        title: 'Rate + review',
+        desc: 'User rates and writes review; stored and shown on film pages.',
+        active: ['ratings','reviews'],
+        edges: [['log','ratings'], ['ratings','reviews']]
+      },
+      {
+        title: 'Lists + social',
+        desc: 'Users curate lists and follow others; notifications fired for activity.',
+        active: ['lists','social','notify'],
+        edges: [['reviews','lists'], ['lists','social'], ['social','notify']]
+      },
+      {
+        title: 'Search + recos',
+        desc: 'Search hits index; recommendations suggest films based on taste graph.',
+        active: ['search','index','recos'],
+        edges: [['client','search'], ['search','index'], ['films','recos']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Engagement analytics tune recommendations and community health.',
+        active: ['analytics'],
+        edges: [['social','analytics']]
+      }
+    ]
+  },
+
+  imdb: {
+    title: 'IMDb',
+    steps: [
+      {
+        title: 'Browse title page',
+        desc: 'User opens a title; metadata and media assets load via CDN.',
+        active: ['client','titles','media','cdn'],
+        edges: [['client','titles'], ['titles','media'], ['media','cdn']]
+      },
+      {
+        title: 'Rate title',
+        desc: 'User rating saved and aggregated into title score distribution.',
+        active: ['ratings','titles'],
+        edges: [['client','ratings'], ['ratings','titles']]
+      },
+      {
+        title: 'Write review + moderation',
+        desc: 'User review saved; moderation checks policy before publishing.',
+        active: ['reviews','moderation'],
+        edges: [['client','reviews'], ['reviews','moderation']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Search uses index over titles/people and returns results.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','titles']]
+      },
+      {
+        title: 'Recommendations + ads',
+        desc: 'Recommendations surface related titles; ads monetize page views.',
+        active: ['recommend','ads'],
+        edges: [['titles','recommend'], ['titles','ads']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics tracks engagement and improves ranking/recos.',
+        active: ['analytics'],
+        edges: [['titles','analytics']]
+      }
+    ]
+  },
+
+  'tv-time': {
+    title: 'TV Time',
+    steps: [
+      {
+        title: 'Browse show + episode list',
+        desc: 'User browses shows and episodes from catalog metadata.',
+        active: ['client','shows','episodes'],
+        edges: [['client','shows'], ['shows','episodes']]
+      },
+      {
+        title: 'Track watched episodes',
+        desc: 'User marks watched; tracking stored and synced across devices.',
+        active: ['tracking','sync'],
+        edges: [['client','tracking'], ['tracking','sync']]
+      },
+      {
+        title: 'Reminders + notifications',
+        desc: 'Notifications for new episodes, premieres, and watchlist events.',
+        active: ['notifications'],
+        edges: [['sync','notifications']]
+      },
+      {
+        title: 'Social reactions',
+        desc: 'Comments/reactions shared socially and may trigger notifications.',
+        active: ['social','notifications'],
+        edges: [['client','social'], ['social','notifications']]
+      },
+      {
+        title: 'Search + recommendations',
+        desc: 'Search hits index; recommendations suggest next shows to watch.',
+        active: ['search','index','recommend'],
+        edges: [['client','search'], ['search','index'], ['shows','recommend']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Engagement analytics tune recommendations and alerts.',
+        active: ['analytics'],
+        edges: [['tracking','analytics']]
+      }
+    ]
+  },
+
+  trakt: {
+    title: 'Trakt',
+    steps: [
+      {
+        title: 'OAuth + API session',
+        desc: 'Client authenticates via OAuth and calls Trakt API for profile/history.',
+        active: ['client','oauth','api','users'],
+        edges: [['client','oauth'], ['oauth','api'], ['api','users']]
+      },
+      {
+        title: 'Scrobble playback',
+        desc: 'Apps send scrobble events; watch history updated and synced.',
+        active: ['scrobble','history','sync'],
+        edges: [['client','scrobble'], ['scrobble','history'], ['history','sync']]
+      },
+      {
+        title: 'Lists + sync + webhooks',
+        desc: 'Lists/watchlists synced to clients; webhooks notify integrations.',
+        active: ['lists','sync','webhooks'],
+        edges: [['lists','sync'], ['sync','webhooks']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Search uses index; results returned through API and rendered in clients.',
+        active: ['search','index','api'],
+        edges: [['client','search'], ['search','index'], ['index','api']]
+      },
+      {
+        title: 'Recommendations + analytics',
+        desc: 'History drives recommendations; analytics measures engagement and accuracy.',
+        active: ['recommend','analytics'],
+        edges: [['history','recommend'], ['recommend','analytics']]
+      }
+    ]
+  },
+
+  justwatch: {
+    title: 'JustWatch',
+    steps: [
+      {
+        title: 'Ingest provider availability',
+        desc: 'Availability collected from streaming providers and merged into catalog.',
+        active: ['providers','availability','catalog'],
+        edges: [['providers','availability'], ['availability','catalog']]
+      },
+      {
+        title: 'Search + filter',
+        desc: 'Search hits index; filters by provider, price, quality, and region.',
+        active: ['search','index','catalog'],
+        edges: [['client','search'], ['search','index'], ['index','catalog']]
+      },
+      {
+        title: 'Watchlist + alerts',
+        desc: 'User saves watchlist; alerts fire when availability changes.',
+        active: ['watchlist','alerts'],
+        edges: [['client','watchlist'], ['watchlist','alerts']]
+      },
+      {
+        title: 'Ranking',
+        desc: 'Ranking orders results based on popularity and relevance.',
+        active: ['rank'],
+        edges: [['catalog','rank']]
+      },
+      {
+        title: 'Ads + analytics',
+        desc: 'Ads monetize traffic; analytics tune ranking and UX funnels.',
+        active: ['ads','analytics'],
+        edges: [['catalog','ads'], ['catalog','analytics']]
+      }
+    ]
+  },
+
+  coda: {
+    title: 'Coda',
+    steps: [
+      {
+        title: 'Sign in + open doc',
+        desc: 'User signs in and opens a doc with tables and views.',
+        active: ['client','auth','docs','tables'],
+        edges: [['client','auth'], ['auth','docs'], ['docs','tables']]
+      },
+      {
+        title: 'Edit tables + formulas',
+        desc: 'Edits trigger formula evaluation and compute jobs.',
+        active: ['tables','formulas','compute'],
+        edges: [['tables','formulas'], ['formulas','compute']]
+      },
+      {
+        title: 'Realtime collaboration',
+        desc: 'Realtime engine syncs changes to collaborators with permissions enforced.',
+        active: ['realtime','permissions'],
+        edges: [['compute','realtime'], ['docs','permissions'], ['realtime','client']]
+      },
+      {
+        title: 'Packs + integrations',
+        desc: 'Packs call external APIs and write data back into tables.',
+        active: ['packs','integrations','compute'],
+        edges: [['client','packs'], ['packs','integrations'], ['integrations','compute']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Search uses index across docs, tables, and content.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index']]
+      },
+      {
+        title: 'Export + analytics',
+        desc: 'Exports produce files; analytics track adoption and doc performance.',
+        active: ['export','analytics'],
+        edges: [['docs','export'], ['docs','analytics']]
+      }
+    ]
+  },
+
+  obsidian: {
+    title: 'Obsidian',
+    steps: [
+      {
+        title: 'Open vault + edit note',
+        desc: 'User opens local vault and edits Markdown notes.',
+        active: ['client','vault','markdown'],
+        edges: [['client','vault'], ['vault','markdown']]
+      },
+      {
+        title: 'Links + graph view',
+        desc: 'Backlinks and graph computed from links between notes.',
+        active: ['links','graph'],
+        edges: [['markdown','links'], ['links','graph']]
+      },
+      {
+        title: 'Search + indexing',
+        desc: 'Index built from vault content; search returns matches quickly.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','vault']]
+      },
+      {
+        title: 'Sync + cloud',
+        desc: 'Sync replicates vault changes to cloud and other devices.',
+        active: ['sync','cloud'],
+        edges: [['vault','sync'], ['sync','cloud']]
+      },
+      {
+        title: 'Publish site',
+        desc: 'Publish turns notes into a hosted site for sharing.',
+        active: ['publish'],
+        edges: [['vault','publish']]
+      },
+      {
+        title: 'Plugins + safety',
+        desc: 'Plugins extend workflows; security controls and backups protect data.',
+        active: ['plugins','security','backups'],
+        edges: [['client','plugins'], ['vault','security'], ['vault','backups']]
+      }
+    ]
+  },
+
+  'roam-research': {
+    title: 'Roam Research',
+    steps: [
+      {
+        title: 'Sign in + open graph',
+        desc: 'User opens a graph; blocks and references load.',
+        active: ['client','auth','graphs','blocks'],
+        edges: [['client','auth'], ['auth','graphs'], ['graphs','blocks']]
+      },
+      {
+        title: 'Block references + indexing',
+        desc: 'References/backlinks update; index supports fast queries.',
+        active: ['references','index'],
+        edges: [['blocks','references'], ['references','index']]
+      },
+      {
+        title: 'Query + filters',
+        desc: 'User runs queries; index returns matching blocks/attributes.',
+        active: ['query','index','blocks'],
+        edges: [['client','query'], ['query','index'], ['index','blocks']]
+      },
+      {
+        title: 'Realtime collaboration',
+        desc: 'Realtime sync pushes edits across collaborators and devices.',
+        active: ['realtime','sync'],
+        edges: [['blocks','realtime'], ['realtime','client'], ['blocks','sync']]
+      },
+      {
+        title: 'Share + export',
+        desc: 'Graph/pages shared; exports create backups and portable formats.',
+        active: ['share','export','backups'],
+        edges: [['blocks','share'], ['share','export'], ['blocks','backups']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics monitor usage patterns and collaboration health.',
+        active: ['analytics'],
+        edges: [['blocks','analytics']]
+      }
+    ]
+  },
+
   chime: {
     title: 'Chime',
     steps: [
