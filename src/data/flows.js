@@ -6,6 +6,323 @@
  */
 
 export const FLOWS = {
+  line: {
+    title: 'LINE',
+    steps: [
+      {
+        title: 'Sign in + session setup',
+        desc: 'Client establishes session; auth refresh and device registration completed.',
+        active: ['client','auth'],
+        edges: [['client','auth']]
+      },
+      {
+        title: 'Send message',
+        desc: 'Client posts message; server validates and persists message state.',
+        active: ['client','api','storage'],
+        edges: [['client','api'], ['api','storage']]
+      },
+      {
+        title: 'Fanout + realtime delivery',
+        desc: 'Fanout sends to online devices via realtime gateways; offline users via push.',
+        active: ['fanout','realtime','notify','push'],
+        edges: [['storage','fanout'], ['fanout','realtime'], ['realtime','client'], ['fanout','notify'], ['notify','push']]
+      },
+      {
+        title: 'Media sharing',
+        desc: 'Media uploads to object storage; CDN serves downloads.',
+        active: ['upload','obj','cdn'],
+        edges: [['client','upload'], ['upload','obj'], ['obj','cdn']]
+      },
+      {
+        title: 'Stickers and store',
+        desc: 'Sticker catalog and purchases integrate with payments and entitlement checks.',
+        active: ['catalog','payments','policy'],
+        edges: [['client','catalog'], ['catalog','policy'], ['policy','payments']]
+      },
+      {
+        title: 'Anti-spam and moderation',
+        desc: 'Spam controls and moderation workflows enforce safety.',
+        active: ['moderation','risk','storage'],
+        edges: [['storage','moderation'], ['moderation','risk']]
+      }
+    ]
+  },
+
+  kakaotalk: {
+    title: 'KakaoTalk',
+    steps: [
+      {
+        title: 'Login + contacts sync',
+        desc: 'Client authenticates and syncs contacts/friends graph.',
+        active: ['client','auth','contacts'],
+        edges: [['client','auth'], ['auth','contacts']]
+      },
+      {
+        title: 'Send message',
+        desc: 'Message is submitted; server persists state for multi-device sync.',
+        active: ['client','api','storage'],
+        edges: [['client','api'], ['api','storage']]
+      },
+      {
+        title: 'Realtime delivery + push',
+        desc: 'Realtime delivers to online devices; push wakes offline recipients.',
+        active: ['realtime','fanout','push','notify'],
+        edges: [['storage','fanout'], ['fanout','realtime'], ['realtime','client'], ['fanout','notify'], ['notify','push']]
+      },
+      {
+        title: 'Media and file sharing',
+        desc: 'Uploads stored in object store; CDN serves downloads.',
+        active: ['upload','obj','cdn'],
+        edges: [['client','upload'], ['upload','obj'], ['obj','cdn']]
+      },
+      {
+        title: 'Payments + commerce (where used)',
+        desc: 'In-chat purchases and payments run through risk and ledgering.',
+        active: ['payments','risk','ledger'],
+        edges: [['client','payments'], ['payments','risk'], ['risk','ledger']]
+      },
+      {
+        title: 'Moderation + anti-abuse',
+        desc: 'Spam controls, reporting, and moderation enforce policies.',
+        active: ['moderation','risk'],
+        edges: [['storage','moderation'], ['moderation','risk']]
+      }
+    ]
+  },
+
+  viber: {
+    title: 'Viber',
+    steps: [
+      {
+        title: 'Session + identity',
+        desc: 'Client authenticates; device keys and session state established.',
+        active: ['client','auth'],
+        edges: [['client','auth']]
+      },
+      {
+        title: 'Send message',
+        desc: 'Message submitted to backend; persisted and routed to recipient.',
+        active: ['client','api','router','storage'],
+        edges: [['client','api'], ['api','router'], ['router','storage']]
+      },
+      {
+        title: 'Delivery + push',
+        desc: 'Fanout/realtime delivers to devices; push notifications for offline.',
+        active: ['fanout','realtime','push','notify'],
+        edges: [['storage','fanout'], ['fanout','realtime'], ['fanout','notify'], ['notify','push']]
+      },
+      {
+        title: 'Media sharing',
+        desc: 'Media stored in object store; CDN serves media.',
+        active: ['upload','obj','cdn'],
+        edges: [['client','upload'], ['upload','obj'], ['obj','cdn']]
+      },
+      {
+        title: 'Communities and broadcast',
+        desc: 'Large groups require caching and fanout optimization.',
+        active: ['fanout','cache'],
+        edges: [['router','fanout'], ['fanout','cache']]
+      },
+      {
+        title: 'Spam controls',
+        desc: 'Anti-spam and moderation systems enforce safety.',
+        active: ['moderation','risk'],
+        edges: [['storage','moderation'], ['moderation','risk']]
+      }
+    ]
+  },
+
+  hike: {
+    title: 'Hike',
+    steps: [
+      {
+        title: 'Login + contact discovery',
+        desc: 'Client authenticates and discovers contacts/friends.',
+        active: ['client','auth','contacts'],
+        edges: [['client','auth'], ['auth','contacts']]
+      },
+      {
+        title: 'Send message',
+        desc: 'Message is submitted; persisted for delivery and sync.',
+        active: ['client','api','storage'],
+        edges: [['client','api'], ['api','storage']]
+      },
+      {
+        title: 'Realtime delivery + notifications',
+        desc: 'Fanout/realtime delivers; push notifications wake offline devices.',
+        active: ['fanout','realtime','notify','push'],
+        edges: [['storage','fanout'], ['fanout','realtime'], ['fanout','notify'], ['notify','push']]
+      },
+      {
+        title: 'Media and stickers',
+        desc: 'Media uploaded; stickers catalog served; CDN delivers assets.',
+        active: ['upload','obj','cdn','catalog'],
+        edges: [['client','upload'], ['upload','obj'], ['obj','cdn'], ['client','catalog']]
+      },
+      {
+        title: 'Groups',
+        desc: 'Group messaging uses fanout and caching.',
+        active: ['fanout','cache'],
+        edges: [['storage','fanout'], ['fanout','cache']]
+      },
+      {
+        title: 'Moderation + anti-abuse',
+        desc: 'Spam controls enforce safety policies.',
+        active: ['moderation','risk'],
+        edges: [['storage','moderation'], ['moderation','risk']]
+      }
+    ]
+  },
+
+  imo: {
+    title: 'IMO',
+    steps: [
+      {
+        title: 'Authenticate + presence',
+        desc: 'Client establishes session; presence state updated.',
+        active: ['client','auth','presence'],
+        edges: [['client','auth'], ['auth','presence']]
+      },
+      {
+        title: 'Start chat/call',
+        desc: 'Client initiates chat or call; signaling routes session setup.',
+        active: ['client','api','signaling'],
+        edges: [['client','api'], ['api','signaling']]
+      },
+      {
+        title: 'Realtime media path',
+        desc: 'Media flows through relay/SFU where needed; realtime updates flow to peers.',
+        active: ['realtime','media','sfu'],
+        edges: [['signaling','realtime'], ['realtime','media'], ['media','sfu']]
+      },
+      {
+        title: 'Messaging persistence',
+        desc: 'Messages persist for sync and delivery guarantees.',
+        active: ['storage','fanout'],
+        edges: [['api','storage'], ['storage','fanout']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Push notifications wake offline devices for messages/calls.',
+        active: ['notify','push','client'],
+        edges: [['fanout','notify'], ['notify','push'], ['push','client']]
+      },
+      {
+        title: 'Safety controls',
+        desc: 'Spam, abuse, and moderation enforce platform safety.',
+        active: ['moderation','risk'],
+        edges: [['storage','moderation'], ['moderation','risk']]
+      }
+    ]
+  },
+
+  'marco-polo': {
+    title: 'Marco Polo',
+    steps: [
+      {
+        title: 'Authenticate + threads',
+        desc: 'Client authenticates and loads contacts and threads.',
+        active: ['client','auth','profiles'],
+        edges: [['client','auth'], ['auth','profiles']]
+      },
+      {
+        title: 'Record + upload video message',
+        desc: 'User records async video; upload stores asset and metadata.',
+        active: ['client','upload','obj','transcode'],
+        edges: [['client','upload'], ['upload','obj'], ['obj','transcode']]
+      },
+      {
+        title: 'Process + publish to CDN',
+        desc: 'Transcode produces renditions; CDN serves playback to recipients.',
+        active: ['transcode','cdn'],
+        edges: [['transcode','cdn'], ['cdn','client']]
+      },
+      {
+        title: 'Delivery + notifications',
+        desc: 'Recipients notified; thread updates sync across devices.',
+        active: ['fanout','notify','push','sync'],
+        edges: [['obj','fanout'], ['fanout','notify'], ['notify','push'], ['sync','client']]
+      },
+      {
+        title: 'Playback + telemetry',
+        desc: 'Playback events feed analytics and quality signals.',
+        active: ['analytics','metrics'],
+        edges: [['client','metrics'], ['metrics','analytics']]
+      }
+    ]
+  },
+
+  houseparty: {
+    title: 'Houseparty',
+    steps: [
+      {
+        title: 'Login + presence',
+        desc: 'Client authenticates; presence updates show who is available.',
+        active: ['client','auth','presence'],
+        edges: [['client','auth'], ['auth','presence']]
+      },
+      {
+        title: 'Create/join room',
+        desc: 'Room created; realtime service tracks participants and state.',
+        active: ['realtime','signaling'],
+        edges: [['client','signaling'], ['signaling','realtime']]
+      },
+      {
+        title: 'Media session (SFU/relay)',
+        desc: 'Audio/video flows through SFU/relay; QoE monitored.',
+        active: ['media','sfu','metrics'],
+        edges: [['signaling','media'], ['media','sfu'], ['media','metrics']]
+      },
+      {
+        title: 'Chat + notifications',
+        desc: 'In-room chat persists; notifications invite friends.',
+        active: ['chat','notify','push'],
+        edges: [['client','chat'], ['chat','notify'], ['notify','push']]
+      },
+      {
+        title: 'Moderation + safety',
+        desc: 'Safety systems handle reporting and abuse prevention.',
+        active: ['moderation','risk'],
+        edges: [['chat','moderation'], ['moderation','risk']]
+      }
+    ]
+  },
+
+  yubo: {
+    title: 'Yubo',
+    steps: [
+      {
+        title: 'Onboard + profile verification',
+        desc: 'User onboards; age and safety verification run to prevent abuse.',
+        active: ['client','auth','profiles','risk'],
+        edges: [['client','auth'], ['auth','profiles'], ['profiles','risk']]
+      },
+      {
+        title: 'Discovery + matching',
+        desc: 'Discovery surfaces users and live rooms; matching uses preferences and safety filters.',
+        active: ['match','profiles','moderation'],
+        edges: [['profiles','match'], ['match','moderation']]
+      },
+      {
+        title: 'Chat + realtime + notifications',
+        desc: 'Messaging uses realtime delivery; notifications drive re-engagement.',
+        active: ['chat','realtime','notify','push'],
+        edges: [['client','chat'], ['chat','realtime'], ['realtime','notify'], ['notify','push']]
+      },
+      {
+        title: 'Live streaming rooms',
+        desc: 'Live rooms use signaling and media relay; moderation monitors streams.',
+        active: ['signaling','media','moderation'],
+        edges: [['client','signaling'], ['signaling','media'], ['media','moderation']]
+      },
+      {
+        title: 'Reporting + enforcement',
+        desc: 'Reports and blocks enforce safety policies and reduce abuse.',
+        active: ['report','block','risk'],
+        edges: [['client','report'], ['report','block'], ['report','risk']]
+      }
+    ]
+  },
   wechat: {
     title: 'WeChat',
     steps: [
@@ -2512,39 +2829,39 @@ export const FLOWS = {
     title: 'Prime Video',
     steps: [
       {
-        title: 'Browse home',
-        desc: 'Client loads personalized home rows and recommendations.',
-        active: ['client','home','recos'],
-        edges: [['client','home'], ['home','recos']]
+        title: 'Open app: home rows + personalization',
+        desc: 'Client loads home rows; personalization uses watch history and experiments.',
+        active: ['client','home','recos','history','ab'],
+        edges: [['client','home'], ['home','recos'], ['history','recos'], ['recos','ab']]
       },
       {
-        title: 'Select title',
-        desc: 'Client fetches metadata, availability, and playback policy.',
-        active: ['catalog','policy','drm'],
-        edges: [['home','catalog'], ['catalog','policy'], ['policy','drm']]
+        title: 'Select title: catalog + entitlements',
+        desc: 'Client fetches metadata; policy verifies entitlements, region rights, and device limits.',
+        active: ['catalog','policy','auth','drm'],
+        edges: [['home','catalog'], ['catalog','policy'], ['policy','auth'], ['policy','drm']]
       },
       {
-        title: 'DRM license',
-        desc: 'Client requests DRM license and verifies entitlements.',
+        title: 'DRM license + session setup',
+        desc: 'Client obtains DRM license and starts playback session.',
         active: ['client','drm','auth'],
         edges: [['client','drm'], ['drm','auth']]
       },
       {
-        title: 'Start playback',
-        desc: 'Segments stream from CDN with adaptive bitrate switching.',
-        active: ['cdn','client','player'],
-        edges: [['cdn','client'], ['client','player']]
+        title: 'Playback via CDN (ABR)',
+        desc: 'Player streams segments from CDN with ABR and QoE monitoring.',
+        active: ['cdn','client','player','metrics'],
+        edges: [['cdn','client'], ['client','player'], ['player','metrics']]
       },
       {
-        title: 'Ads and telemetry',
-        desc: 'For ad-supported tiers, ad decisioning runs and telemetry is collected.',
-        active: ['ads','metrics','analytics'],
-        edges: [['player','ads'], ['player','metrics'], ['metrics','analytics']]
+        title: 'Ads (where applicable) + telemetry',
+        desc: 'Ad decisioning runs for ad-supported content; telemetry collected for QoE and engagement.',
+        active: ['ads','auction','metrics','analytics'],
+        edges: [['player','ads'], ['ads','auction'], ['player','metrics'], ['metrics','analytics']]
       },
       {
-        title: 'Watch history and recos',
-        desc: 'Watch events update history, continue-watching, and recommendations.',
-        active: ['history','recos','home'],
+        title: 'History + continue-watching loop',
+        desc: 'Watch events update history/continue-watching; signals improve recos and surfacing.',
+        active: ['history','recos','home','analytics'],
         edges: [['analytics','history'], ['history','recos'], ['recos','home']]
       }
     ]
@@ -2554,38 +2871,38 @@ export const FLOWS = {
     title: 'Apple Music',
     steps: [
       {
-        title: 'Open app and load library',
-        desc: 'Client syncs library metadata and loads home recommendations.',
+        title: 'Open app: library sync + For You',
+        desc: 'Client syncs library metadata and loads personalized recommendations.',
         active: ['client','library','recos'],
         edges: [['client','library'], ['library','recos']]
       },
       {
-        title: 'Search catalog',
-        desc: 'Search hits indexing services to return tracks, artists, and playlists.',
-        active: ['client','search','index'],
-        edges: [['client','search'], ['search','index']]
+        title: 'Search + index',
+        desc: 'Search hits index; results filtered by region rights and subscription.',
+        active: ['client','search','index','policy'],
+        edges: [['client','search'], ['search','index'], ['index','policy']]
       },
       {
-        title: 'Select track and entitlement',
-        desc: 'Playback policy verifies subscription and region rights.',
-        active: ['policy','auth','drm'],
-        edges: [['client','policy'], ['policy','auth'], ['policy','drm']]
+        title: 'Entitlement + licensing',
+        desc: 'Policy verifies subscription/device limits and region rights; licenses issued when required.',
+        active: ['policy','auth','drm','risk'],
+        edges: [['client','policy'], ['policy','auth'], ['policy','drm'], ['auth','risk']]
       },
       {
-        title: 'Playback and CDN',
-        desc: 'Client requests stream URL and plays from CDN.',
+        title: 'Playback via CDN',
+        desc: 'Client requests stream URL/manifest and plays from CDN with caching.',
         active: ['client','playback','cdn'],
-        edges: [['client','playback'], ['playback','cdn']]
+        edges: [['client','playback'], ['playback','cdn'], ['cdn','client']]
       },
       {
-        title: 'Lyrics and metadata',
-        desc: 'Lyrics and metadata are fetched alongside playback for UX features.',
-        active: ['metadata','lyrics','client'],
-        edges: [['playback','metadata'], ['metadata','lyrics'], ['lyrics','client']]
+        title: 'Lyrics/metadata + sharing',
+        desc: 'Lyrics/metadata fetched; sharing updates engagement and discovery signals.',
+        active: ['metadata','lyrics','client','sharing'],
+        edges: [['playback','metadata'], ['metadata','lyrics'], ['lyrics','client'], ['client','sharing']]
       },
       {
-        title: 'Telemetry and personalization',
-        desc: 'Listening events feed personalization and recommendations.',
+        title: 'Telemetry + personalization loop',
+        desc: 'Listening events feed analytics and improve recommendations and mixes.',
         active: ['metrics','analytics','recos'],
         edges: [['playback','metrics'], ['metrics','analytics'], ['analytics','recos']]
       }
