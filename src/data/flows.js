@@ -12497,6 +12497,1482 @@ export const FLOWS = {
     ]
   },
 
+  moodle: {
+    title: 'Moodle',
+    steps: [
+      {
+        title: 'Login + open course',
+        desc: 'User authenticates and opens a course site.',
+        active: ['client','auth','courses','content'],
+        edges: [['client','auth'], ['auth','courses'], ['courses','content']]
+      },
+      {
+        title: 'Assignments + submissions',
+        desc: 'Assignments are created and student submissions stored.',
+        active: ['assignments','submissions'],
+        edges: [['courses','assignments'], ['assignments','submissions']]
+      },
+      {
+        title: 'Grading + gradebook',
+        desc: 'Grading updates gradebook and notifies students.',
+        active: ['grading','gradebook','notifications'],
+        edges: [['submissions','grading'], ['grading','gradebook'], ['gradebook','notifications']]
+      },
+      {
+        title: 'Forums + messaging',
+        desc: 'Forums and messaging drive engagement and announcements.',
+        active: ['forums','messaging','notifications'],
+        edges: [['courses','forums'], ['forums','messaging'], ['messaging','notifications']]
+      },
+      {
+        title: 'Plugins + analytics',
+        desc: 'Plugins/integrations extend LMS; analytics tracks usage.',
+        active: ['plugins','integrations','analytics'],
+        edges: [['plugins','integrations'], ['courses','analytics']]
+      }
+    ]
+  },
+
+  'canvas-lms': {
+    title: 'Canvas LMS',
+    steps: [
+      {
+        title: 'Authenticate + select course',
+        desc: 'User signs in via SSO and selects a course.',
+        active: ['client','auth','sso','courses'],
+        edges: [['client','auth'], ['auth','sso'], ['sso','courses']]
+      },
+      {
+        title: 'Content + modules',
+        desc: 'Course content and modules delivered to learners.',
+        active: ['content','modules'],
+        edges: [['courses','modules'], ['modules','content']]
+      },
+      {
+        title: 'Assignments + submissions',
+        desc: 'Students submit work; submissions stored and queued for grading.',
+        active: ['assignments','submissions','grading'],
+        edges: [['courses','assignments'], ['assignments','submissions'], ['submissions','grading']]
+      },
+      {
+        title: 'Gradebook + notifications',
+        desc: 'Grades update gradebook and notify students.',
+        active: ['gradebook','notifications'],
+        edges: [['grading','gradebook'], ['gradebook','notifications']]
+      },
+      {
+        title: 'Integrations + analytics',
+        desc: 'LTI/integrations connect tools; analytics reports outcomes.',
+        active: ['integrations','analytics','admin'],
+        edges: [['integrations','courses'], ['admin','integrations'], ['courses','analytics']]
+      }
+    ]
+  },
+
+  'google-classroom': {
+    title: 'Google Classroom',
+    steps: [
+      {
+        title: 'Sign in + join class',
+        desc: 'Teacher/student signs in and joins a class.',
+        active: ['client','auth','classes','roster'],
+        edges: [['client','auth'], ['auth','classes'], ['classes','roster']]
+      },
+      {
+        title: 'Post assignment',
+        desc: 'Teacher posts assignment with Drive attachments.',
+        active: ['assignments','drive','content'],
+        edges: [['classes','assignments'], ['assignments','drive'], ['drive','content']]
+      },
+      {
+        title: 'Submission + grading',
+        desc: 'Students submit via Drive; grading updates gradebook.',
+        active: ['submissions','grading','gradebook'],
+        edges: [['content','submissions'], ['submissions','grading'], ['grading','gradebook']]
+      },
+      {
+        title: 'Stream + notifications',
+        desc: 'Class stream and comments generate notifications.',
+        active: ['stream','notifications'],
+        edges: [['classes','stream'], ['stream','notifications']]
+      },
+      {
+        title: 'Admin + analytics',
+        desc: 'Admin policies and analytics across classes.',
+        active: ['admin','analytics'],
+        edges: [['admin','classes'], ['classes','analytics']]
+      }
+    ]
+  },
+
+  noteflight: {
+    title: 'Noteflight',
+    steps: [
+      {
+        title: 'Create score in editor',
+        desc: 'User signs in and creates a score in the notation editor.',
+        active: ['client','auth','editor','scores'],
+        edges: [['client','auth'], ['auth','editor'], ['editor','scores']]
+      },
+      {
+        title: 'Playback + instruments',
+        desc: 'Playback renders with instrument library and audio engine.',
+        active: ['playback','instruments','audio'],
+        edges: [['scores','playback'], ['playback','instruments'], ['instruments','audio']]
+      },
+      {
+        title: 'Share + collaborate',
+        desc: 'Sharing and collaboration features with comments.',
+        active: ['sharing','collaboration','comments'],
+        edges: [['scores','sharing'], ['sharing','collaboration'], ['collaboration','comments']]
+      },
+      {
+        title: 'Export + printing',
+        desc: 'Export to PDF/MIDI and printing pipeline.',
+        active: ['export','storage'],
+        edges: [['scores','export'], ['export','storage']]
+      },
+      {
+        title: 'Subscriptions + analytics',
+        desc: 'Billing/subscriptions for premium; analytics tracks usage.',
+        active: ['subscriptions','payments','analytics'],
+        edges: [['subscriptions','payments'], ['scores','analytics']]
+      }
+    ]
+  },
+
+  yousician: {
+    title: 'Yousician',
+    steps: [
+      {
+        title: 'Start lesson + calibration',
+        desc: 'User signs in and starts lesson; microphone calibration runs.',
+        active: ['client','auth','lessons','calibration'],
+        edges: [['client','auth'], ['auth','lessons'], ['lessons','calibration']]
+      },
+      {
+        title: 'Real-time note detection',
+        desc: 'Audio capture feeds pitch detection and scoring engine.',
+        active: ['audio','detection','scoring'],
+        edges: [['client','audio'], ['audio','detection'], ['detection','scoring']]
+      },
+      {
+        title: 'Feedback + progression',
+        desc: 'Feedback updates progression, streaks, and recommendations.',
+        active: ['feedback','progress','recommendations'],
+        edges: [['scoring','feedback'], ['feedback','progress'], ['progress','recommendations']]
+      },
+      {
+        title: 'Practice sessions + leaderboard',
+        desc: 'Sessions stored; leaderboards and achievements update.',
+        active: ['sessions','leaderboards','achievements'],
+        edges: [['lessons','sessions'], ['sessions','leaderboards'], ['sessions','achievements']]
+      },
+      {
+        title: 'Subscription billing + analytics',
+        desc: 'Premium access via subscriptions; analytics tracks retention.',
+        active: ['subscriptions','payments','analytics'],
+        edges: [['subscriptions','payments'], ['sessions','analytics']]
+      }
+    ]
+  },
+
+  'simply-piano': {
+    title: 'Simply Piano',
+    steps: [
+      {
+        title: 'Start lesson',
+        desc: 'User starts a piano lesson and sets up mic input.',
+        active: ['client','auth','lessons','audio'],
+        edges: [['client','auth'], ['auth','lessons'], ['client','audio']]
+      },
+      {
+        title: 'Listen + detect notes',
+        desc: 'Audio detection and scoring provide real-time feedback.',
+        active: ['detection','scoring','feedback'],
+        edges: [['audio','detection'], ['detection','scoring'], ['scoring','feedback']]
+      },
+      {
+        title: 'Progress tracking',
+        desc: 'Progress updates and recommendations plan next lessons.',
+        active: ['progress','recommendations'],
+        edges: [['feedback','progress'], ['progress','recommendations']]
+      },
+      {
+        title: 'Subscription + billing',
+        desc: 'Subscriptions unlock content; payments manage renewals.',
+        active: ['subscriptions','payments','notifications'],
+        edges: [['subscriptions','payments'], ['payments','notifications']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics tracks engagement and completion rates.',
+        active: ['analytics'],
+        edges: [['progress','analytics']]
+      }
+    ]
+  },
+
+  'fender-play': {
+    title: 'Fender Play',
+    steps: [
+      {
+        title: 'Browse courses + start lesson',
+        desc: 'User signs in, selects course, and starts a lesson.',
+        active: ['client','auth','catalog','courses','lessons'],
+        edges: [['client','auth'], ['auth','catalog'], ['catalog','courses'], ['courses','lessons']]
+      },
+      {
+        title: 'Video + exercises',
+        desc: 'Video delivered via CDN; exercises tracked in progress.',
+        active: ['video','cdn','exercises','progress'],
+        edges: [['lessons','video'], ['video','cdn'], ['lessons','exercises'], ['exercises','progress']]
+      },
+      {
+        title: 'Practice tracking',
+        desc: 'Practice sessions update streaks and recommendations.',
+        active: ['sessions','recommendations'],
+        edges: [['progress','sessions'], ['sessions','recommendations']]
+      },
+      {
+        title: 'Subscription billing',
+        desc: 'Subscriptions unlock full catalog; billing and notifications.',
+        active: ['subscriptions','payments','notifications'],
+        edges: [['subscriptions','payments'], ['payments','notifications']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics tracks lesson completion and retention.',
+        active: ['analytics'],
+        edges: [['sessions','analytics']]
+      }
+    ]
+  },
+
+  'ultimate-guitar': {
+    title: 'Ultimate Guitar',
+    steps: [
+      {
+        title: 'Search tabs',
+        desc: 'User searches tabs/chords and opens a tab page.',
+        active: ['client','auth','search','tabs'],
+        edges: [['client','search'], ['search','tabs'], ['client','auth']]
+      },
+      {
+        title: 'Playback + tools',
+        desc: 'Playback tools like metronome and transposer run.',
+        active: ['playback','tools'],
+        edges: [['tabs','playback'], ['playback','tools']]
+      },
+      {
+        title: 'Community contributions',
+        desc: 'Users upload/edit tabs; moderation ensures quality.',
+        active: ['uploads','moderation','profiles'],
+        edges: [['profiles','uploads'], ['uploads','moderation']]
+      },
+      {
+        title: 'Subscriptions + ads',
+        desc: 'Subscriptions/payments for premium; ads monetize free tier.',
+        active: ['subscriptions','payments','ads'],
+        edges: [['subscriptions','payments'], ['ads','analytics']]
+      },
+      {
+        title: 'Analytics + notifications',
+        desc: 'Analytics tracks engagement; notifications for favorites.',
+        active: ['analytics','notifications'],
+        edges: [['tabs','analytics'], ['notifications','client']]
+      }
+    ]
+  },
+
+  garageband: {
+    title: 'GarageBand',
+    steps: [
+      {
+        title: 'Create project',
+        desc: 'User creates a project and selects instruments/loops.',
+        active: ['client','projects','instruments','loops'],
+        edges: [['client','projects'], ['projects','instruments'], ['projects','loops']]
+      },
+      {
+        title: 'Record + edit tracks',
+        desc: 'Recording and editing produce track assets.',
+        active: ['recording','editing','tracks'],
+        edges: [['instruments','recording'], ['recording','tracks'], ['tracks','editing']]
+      },
+      {
+        title: 'Mix + effects',
+        desc: 'Mixer applies effects chain and automation.',
+        active: ['mixer','effects'],
+        edges: [['tracks','mixer'], ['mixer','effects']]
+      },
+      {
+        title: 'Export',
+        desc: 'Export bounces project to audio file and saves to storage.',
+        active: ['export','storage'],
+        edges: [['mixer','export'], ['export','storage']]
+      },
+      {
+        title: 'Share',
+        desc: 'Sharing to services / iCloud collaboration if enabled.',
+        active: ['sharing','cloud'],
+        edges: [['storage','sharing'], ['sharing','cloud']]
+      }
+    ]
+  },
+
+  'fl-studio-mobile': {
+    title: 'FL Studio Mobile',
+    steps: [
+      {
+        title: 'Create project + instruments',
+        desc: 'User creates a project and adds instruments/samples.',
+        active: ['client','projects','instruments','samples'],
+        edges: [['client','projects'], ['projects','instruments'], ['projects','samples']]
+      },
+      {
+        title: 'Sequence + record',
+        desc: 'Sequencer records patterns and clips.',
+        active: ['sequencer','recording','tracks'],
+        edges: [['instruments','sequencer'], ['sequencer','tracks'], ['tracks','recording']]
+      },
+      {
+        title: 'Mix + effects',
+        desc: 'Mixer and effects chain shape sound.',
+        active: ['mixer','effects'],
+        edges: [['tracks','mixer'], ['mixer','effects']]
+      },
+      {
+        title: 'Export + cloud',
+        desc: 'Export project and optionally sync to cloud.',
+        active: ['export','storage','cloud'],
+        edges: [['mixer','export'], ['export','storage'], ['storage','cloud']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Usage analytics and crash logs.',
+        active: ['analytics','logs'],
+        edges: [['client','analytics'], ['client','logs']]
+      }
+    ]
+  },
+
+  bandlab: {
+    title: 'BandLab',
+    steps: [
+      {
+        title: 'Create project in cloud studio',
+        desc: 'User signs in and creates project in web/mobile studio.',
+        active: ['client','auth','projects','studio'],
+        edges: [['client','auth'], ['auth','projects'], ['projects','studio']]
+      },
+      {
+        title: 'Record + collaborate',
+        desc: 'Recording stored in cloud; collaboration merges revisions.',
+        active: ['recording','storage','collaboration'],
+        edges: [['studio','recording'], ['recording','storage'], ['storage','collaboration']]
+      },
+      {
+        title: 'Mix + publish',
+        desc: 'Mixing pipeline and publishing to community feed.',
+        active: ['mixer','effects','publish','community'],
+        edges: [['storage','mixer'], ['mixer','effects'], ['effects','publish'], ['publish','community']]
+      },
+      {
+        title: 'Social + notifications',
+        desc: 'Likes/comments/follows generate notifications.',
+        active: ['social','notifications'],
+        edges: [['community','social'], ['social','notifications']]
+      },
+      {
+        title: 'Analytics + monetization',
+        desc: 'Analytics for creators; subscriptions/payments for features.',
+        active: ['analytics','subscriptions','payments'],
+        edges: [['publish','analytics'], ['subscriptions','payments']]
+      }
+    ]
+  },
+
+  soundtrap: {
+    title: 'Soundtrap',
+    steps: [
+      {
+        title: 'Create project',
+        desc: 'User signs in and creates project in browser studio.',
+        active: ['client','auth','projects','studio'],
+        edges: [['client','auth'], ['auth','projects'], ['projects','studio']]
+      },
+      {
+        title: 'Record + loops',
+        desc: 'Record audio/MIDI and add loops/samples.',
+        active: ['recording','loops','samples'],
+        edges: [['studio','recording'], ['studio','loops'], ['loops','samples']]
+      },
+      {
+        title: 'Collaboration',
+        desc: 'Real-time collaboration syncs changes and versions.',
+        active: ['collaboration','versions'],
+        edges: [['studio','collaboration'], ['collaboration','versions']]
+      },
+      {
+        title: 'Export + publishing',
+        desc: 'Export mixes and optionally publish/share.',
+        active: ['export','storage','sharing'],
+        edges: [['studio','export'], ['export','storage'], ['storage','sharing']]
+      },
+      {
+        title: 'Subscriptions + analytics',
+        desc: 'Subscriptions manage access; analytics track usage.',
+        active: ['subscriptions','payments','analytics'],
+        edges: [['subscriptions','payments'], ['projects','analytics']]
+      }
+    ]
+  },
+
+  splice: {
+    title: 'Splice',
+    steps: [
+      {
+        title: 'Browse sounds catalog',
+        desc: 'User signs in and browses sounds/packs.',
+        active: ['client','auth','catalog','sounds'],
+        edges: [['client','auth'], ['auth','catalog'], ['catalog','sounds']]
+      },
+      {
+        title: 'Download via CDN',
+        desc: 'Sounds are delivered via CDN to local workstation.',
+        active: ['cdn','downloads'],
+        edges: [['sounds','cdn'], ['cdn','downloads']]
+      },
+      {
+        title: 'Studio sync / backup',
+        desc: 'Project backup and versioning syncs with cloud.',
+        active: ['projects','sync','versions'],
+        edges: [['downloads','projects'], ['projects','sync'], ['sync','versions']]
+      },
+      {
+        title: 'Subscriptions + payments',
+        desc: 'Subscriptions manage credits and billing.',
+        active: ['subscriptions','payments','billing'],
+        edges: [['subscriptions','payments'], ['payments','billing']]
+      },
+      {
+        title: 'Recommendations + analytics',
+        desc: 'Recommendations for sounds; analytics for engagement.',
+        active: ['recommendations','analytics'],
+        edges: [['analytics','recommendations'], ['catalog','analytics']]
+      }
+    ]
+  },
+
+  'adobe-express': {
+    title: 'Adobe Express',
+    steps: [
+      {
+        title: 'Start design',
+        desc: 'User signs in and starts a template-based design.',
+        active: ['client','auth','templates','editor'],
+        edges: [['client','auth'], ['auth','templates'], ['templates','editor']]
+      },
+      {
+        title: 'Assets + fonts',
+        desc: 'Assets and fonts pulled from libraries/CDN.',
+        active: ['assets','fonts','cdn'],
+        edges: [['editor','assets'], ['assets','cdn'], ['fonts','cdn']]
+      },
+      {
+        title: 'Export + publish',
+        desc: 'Export renders media and publishes/share links.',
+        active: ['render','export','sharing'],
+        edges: [['editor','render'], ['render','export'], ['export','sharing']]
+      },
+      {
+        title: 'Team collaboration',
+        desc: 'Collaboration and comments support teams.',
+        active: ['collaboration','comments'],
+        edges: [['editor','collaboration'], ['collaboration','comments']]
+      },
+      {
+        title: 'Subscriptions + analytics',
+        desc: 'Creative Cloud subscriptions and analytics.',
+        active: ['subscriptions','payments','analytics'],
+        edges: [['subscriptions','payments'], ['export','analytics']]
+      }
+    ]
+  },
+
+  picsart: {
+    title: 'PicsArt',
+    steps: [
+      {
+        title: 'Edit photo/video',
+        desc: 'User opens editor and imports media assets.',
+        active: ['client','auth','editor','media'],
+        edges: [['client','auth'], ['auth','editor'], ['editor','media']]
+      },
+      {
+        title: 'Apply effects + AI tools',
+        desc: 'Effects and AI tools process media and update previews.',
+        active: ['effects','ai','render'],
+        edges: [['editor','effects'], ['effects','ai'], ['ai','render']]
+      },
+      {
+        title: 'Export + share',
+        desc: 'Export media and share/publish.',
+        active: ['export','sharing'],
+        edges: [['render','export'], ['export','sharing']]
+      },
+      {
+        title: 'Community + notifications',
+        desc: 'Community feed interactions generate notifications.',
+        active: ['community','notifications'],
+        edges: [['sharing','community'], ['community','notifications']]
+      },
+      {
+        title: 'Subscriptions + analytics',
+        desc: 'Premium subscription; analytics tracks engagement.',
+        active: ['subscriptions','payments','analytics'],
+        edges: [['subscriptions','payments'], ['export','analytics']]
+      }
+    ]
+  },
+
+  snapseed: {
+    title: 'Snapseed',
+    steps: [
+      {
+        title: 'Import photo',
+        desc: 'User imports photo into editor.',
+        active: ['client','editor','media'],
+        edges: [['client','editor'], ['editor','media']]
+      },
+      {
+        title: 'Apply edits',
+        desc: 'Filters and tools applied locally; render updates preview.',
+        active: ['effects','render'],
+        edges: [['media','effects'], ['effects','render']]
+      },
+      {
+        title: 'Export',
+        desc: 'Export writes edited image to device storage.',
+        active: ['export','storage'],
+        edges: [['render','export'], ['export','storage']]
+      },
+      {
+        title: 'Share',
+        desc: 'Share to external apps.',
+        active: ['sharing'],
+        edges: [['storage','sharing']]
+      }
+    ]
+  },
+
+  'lightroom-mobile': {
+    title: 'Lightroom Mobile',
+    steps: [
+      {
+        title: 'Sign in + import',
+        desc: 'User signs in and imports photos.',
+        active: ['client','auth','library','media'],
+        edges: [['client','auth'], ['auth','library'], ['client','media']]
+      },
+      {
+        title: 'Edit + presets',
+        desc: 'Edits and presets applied; previews rendered.',
+        active: ['editor','presets','render'],
+        edges: [['library','editor'], ['editor','presets'], ['presets','render']]
+      },
+      {
+        title: 'Cloud sync',
+        desc: 'Cloud sync stores originals/edits and enables cross-device.',
+        active: ['cloud','sync','storage'],
+        edges: [['library','sync'], ['sync','cloud'], ['cloud','storage']]
+      },
+      {
+        title: 'Export + share',
+        desc: 'Export images and share externally.',
+        active: ['export','sharing'],
+        edges: [['render','export'], ['export','sharing']]
+      },
+      {
+        title: 'Subscription billing + analytics',
+        desc: 'Subscriptions manage premium features; analytics tracks usage.',
+        active: ['subscriptions','payments','analytics'],
+        edges: [['subscriptions','payments'], ['export','analytics']]
+      }
+    ]
+  },
+
+  'vsco-editor': {
+    title: 'VSCO Editor',
+    steps: [
+      {
+        title: 'Import + edit',
+        desc: 'User imports photos and edits with presets.',
+        active: ['client','auth','library','editor','presets'],
+        edges: [['client','auth'], ['auth','library'], ['library','editor'], ['editor','presets']]
+      },
+      {
+        title: 'Render + export',
+        desc: 'Render previews and export edited images.',
+        active: ['render','export'],
+        edges: [['presets','render'], ['render','export']]
+      },
+      {
+        title: 'Publish to community',
+        desc: 'Publish to VSCO community; notifications for interactions.',
+        active: ['community','notifications'],
+        edges: [['export','community'], ['community','notifications']]
+      },
+      {
+        title: 'Subscription',
+        desc: 'Membership unlocks presets and tools.',
+        active: ['subscriptions','payments'],
+        edges: [['subscriptions','payments']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics tracks engagement and retention.',
+        active: ['analytics'],
+        edges: [['community','analytics']]
+      }
+    ]
+  },
+
+  facetune: {
+    title: 'Facetune',
+    steps: [
+      {
+        title: 'Import portrait',
+        desc: 'User imports portrait into editor.',
+        active: ['client','editor','media'],
+        edges: [['client','editor'], ['editor','media']]
+      },
+      {
+        title: 'AI retouch',
+        desc: 'AI retouch models apply edits and render results.',
+        active: ['ai','effects','render'],
+        edges: [['media','ai'], ['ai','effects'], ['effects','render']]
+      },
+      {
+        title: 'Export + share',
+        desc: 'Export edited image and share.',
+        active: ['export','sharing'],
+        edges: [['render','export'], ['export','sharing']]
+      },
+      {
+        title: 'Subscription',
+        desc: 'Premium tools unlocked via subscription billing.',
+        active: ['subscriptions','payments'],
+        edges: [['subscriptions','payments']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics tracks usage and conversion.',
+        active: ['analytics'],
+        edges: [['export','analytics']]
+      }
+    ]
+  },
+
+  remini: {
+    title: 'Remini',
+    steps: [
+      {
+        title: 'Upload photo',
+        desc: 'User uploads a photo to enhance.',
+        active: ['client','media','upload'],
+        edges: [['client','media'], ['media','upload']]
+      },
+      {
+        title: 'AI enhancement',
+        desc: 'Enhancement pipeline runs on AI backend and returns result.',
+        active: ['ai','render'],
+        edges: [['upload','ai'], ['ai','render']]
+      },
+      {
+        title: 'Export',
+        desc: 'User exports enhanced image to storage.',
+        active: ['export','storage'],
+        edges: [['render','export'], ['export','storage']]
+      },
+      {
+        title: 'Subscription + billing',
+        desc: 'Subscriptions manage credits and premium enhancements.',
+        active: ['subscriptions','payments','notifications'],
+        edges: [['subscriptions','payments'], ['payments','notifications']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics tracks throughput and retention.',
+        active: ['analytics'],
+        edges: [['render','analytics']]
+      }
+    ]
+  },
+
+  lensa: {
+    title: 'Lensa',
+    steps: [
+      {
+        title: 'Import selfies',
+        desc: 'User imports selfies into app for editing.',
+        active: ['client','media','editor'],
+        edges: [['client','media'], ['media','editor']]
+      },
+      {
+        title: 'AI filters / avatars',
+        desc: 'AI backend generates edits/avatars and returns renders.',
+        active: ['ai','render','effects'],
+        edges: [['editor','ai'], ['ai','render'], ['render','effects']]
+      },
+      {
+        title: 'Export + share',
+        desc: 'Export images and share externally.',
+        active: ['export','sharing'],
+        edges: [['effects','export'], ['export','sharing']]
+      },
+      {
+        title: 'Subscription billing',
+        desc: 'Subscriptions and payments manage premium features.',
+        active: ['subscriptions','payments'],
+        edges: [['subscriptions','payments']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics tracks conversion and usage.',
+        active: ['analytics'],
+        edges: [['export','analytics']]
+      }
+    ]
+  },
+
+  'capcut-editor': {
+    title: 'CapCut Editor',
+    steps: [
+      {
+        title: 'Import clips',
+        desc: 'User imports clips into timeline editor.',
+        active: ['client','editor','media','timeline'],
+        edges: [['client','editor'], ['editor','media'], ['media','timeline']]
+      },
+      {
+        title: 'Edit + effects',
+        desc: 'Effects, transitions, and templates applied to timeline.',
+        active: ['effects','templates','render'],
+        edges: [['timeline','effects'], ['effects','templates'], ['templates','render']]
+      },
+      {
+        title: 'AI tools',
+        desc: 'AI tools like captions/background removal run and update render.',
+        active: ['ai','render'],
+        edges: [['timeline','ai'], ['ai','render']]
+      },
+      {
+        title: 'Export + publish',
+        desc: 'Export video and publish/share.',
+        active: ['export','sharing'],
+        edges: [['render','export'], ['export','sharing']]
+      },
+      {
+        title: 'Analytics + monetization',
+        desc: 'Analytics for exports; subscription/billing for premium.',
+        active: ['analytics','subscriptions','payments'],
+        edges: [['export','analytics'], ['subscriptions','payments']]
+      }
+    ]
+  },
+
+  inshot: {
+    title: 'InShot',
+    steps: [
+      {
+        title: 'Import + edit',
+        desc: 'User imports media and edits in timeline.',
+        active: ['client','editor','media','timeline'],
+        edges: [['client','editor'], ['editor','media'], ['media','timeline']]
+      },
+      {
+        title: 'Effects + music',
+        desc: 'Effects and music library applied; render preview updates.',
+        active: ['effects','music','render'],
+        edges: [['timeline','effects'], ['effects','render'], ['music','timeline']]
+      },
+      {
+        title: 'Export + share',
+        desc: 'Export video to storage and share.',
+        active: ['export','storage','sharing'],
+        edges: [['render','export'], ['export','storage'], ['storage','sharing']]
+      },
+      {
+        title: 'Ads + subscriptions',
+        desc: 'Ads monetize free tier; subscriptions remove ads and unlock features.',
+        active: ['ads','subscriptions','payments'],
+        edges: [['ads','analytics'], ['subscriptions','payments']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics tracks usage and conversion.',
+        active: ['analytics'],
+        edges: [['export','analytics']]
+      }
+    ]
+  },
+
+  'vn-editor': {
+    title: 'VN Editor',
+    steps: [
+      {
+        title: 'Edit timeline',
+        desc: 'User imports clips and edits timeline.',
+        active: ['client','editor','media','timeline'],
+        edges: [['client','editor'], ['editor','media'], ['media','timeline']]
+      },
+      {
+        title: 'Transitions + effects',
+        desc: 'Effects applied and rendered into preview.',
+        active: ['effects','render'],
+        edges: [['timeline','effects'], ['effects','render']]
+      },
+      {
+        title: 'Export',
+        desc: 'Export final video to storage.',
+        active: ['export','storage'],
+        edges: [['render','export'], ['export','storage']]
+      },
+      {
+        title: 'Share',
+        desc: 'Share externally.',
+        active: ['sharing'],
+        edges: [['storage','sharing']]
+      }
+    ]
+  },
+
+  kinemaster: {
+    title: 'Kinemaster',
+    steps: [
+      {
+        title: 'Project + timeline',
+        desc: 'User creates project and edits timeline.',
+        active: ['client','auth','projects','timeline','editor'],
+        edges: [['client','auth'], ['auth','projects'], ['projects','timeline'], ['timeline','editor']]
+      },
+      {
+        title: 'Assets + effects',
+        desc: 'Asset store downloads effects and templates.',
+        active: ['assets','effects','store'],
+        edges: [['store','assets'], ['assets','effects']]
+      },
+      {
+        title: 'Render + export',
+        desc: 'Render pipeline exports final video.',
+        active: ['render','export','storage'],
+        edges: [['editor','render'], ['render','export'], ['export','storage']]
+      },
+      {
+        title: 'Subscription billing',
+        desc: 'Subscriptions/payments unlock premium assets.',
+        active: ['subscriptions','payments'],
+        edges: [['subscriptions','payments']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics tracks creation and export funnel.',
+        active: ['analytics'],
+        edges: [['export','analytics']]
+      }
+    ]
+  },
+
+  filmorago: {
+    title: 'FilmoraGo',
+    steps: [
+      {
+        title: 'Import + edit',
+        desc: 'User imports clips and edits timeline with templates.',
+        active: ['client','editor','media','timeline','templates'],
+        edges: [['client','editor'], ['editor','media'], ['media','timeline'], ['timeline','templates']]
+      },
+      {
+        title: 'Effects + music',
+        desc: 'Effects and music added; render preview updates.',
+        active: ['effects','music','render'],
+        edges: [['templates','effects'], ['effects','render'], ['music','timeline']]
+      },
+      {
+        title: 'Export + share',
+        desc: 'Export to storage and share.',
+        active: ['export','storage','sharing'],
+        edges: [['render','export'], ['export','storage'], ['storage','sharing']]
+      },
+      {
+        title: 'Subscriptions',
+        desc: 'Subscriptions manage premium assets and exports.',
+        active: ['subscriptions','payments'],
+        edges: [['subscriptions','payments']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics tracks engagement and conversion.',
+        active: ['analytics'],
+        edges: [['export','analytics']]
+      }
+    ]
+  },
+
+  'alight-motion': {
+    title: 'Alight Motion',
+    steps: [
+      {
+        title: 'Create motion project',
+        desc: 'User creates motion graphics project with layers.',
+        active: ['client','editor','projects','timeline'],
+        edges: [['client','editor'], ['editor','projects'], ['projects','timeline']]
+      },
+      {
+        title: 'Effects + keyframes',
+        desc: 'Effects and keyframes applied; render preview updates.',
+        active: ['effects','keyframes','render'],
+        edges: [['timeline','keyframes'], ['keyframes','effects'], ['effects','render']]
+      },
+      {
+        title: 'Asset packs',
+        desc: 'Asset packs downloaded and used in projects.',
+        active: ['assets','store'],
+        edges: [['store','assets'], ['assets','timeline']]
+      },
+      {
+        title: 'Export',
+        desc: 'Export render to storage and share.',
+        active: ['export','storage','sharing'],
+        edges: [['render','export'], ['export','storage'], ['storage','sharing']]
+      },
+      {
+        title: 'Subscriptions + analytics',
+        desc: 'Subscriptions unlock features; analytics tracks usage.',
+        active: ['subscriptions','payments','analytics'],
+        edges: [['subscriptions','payments'], ['export','analytics']]
+      }
+    ]
+  },
+
+  mojo: {
+    title: 'Mojo',
+    steps: [
+      {
+        title: 'Choose template',
+        desc: 'User chooses a story template in editor.',
+        active: ['client','templates','editor'],
+        edges: [['client','templates'], ['templates','editor']]
+      },
+      {
+        title: 'Edit + assets',
+        desc: 'Assets and typography applied; render updates.',
+        active: ['assets','fonts','render'],
+        edges: [['editor','assets'], ['assets','fonts'], ['fonts','render']]
+      },
+      {
+        title: 'Export + share',
+        desc: 'Export story and share.',
+        active: ['export','sharing'],
+        edges: [['render','export'], ['export','sharing']]
+      },
+      {
+        title: 'Subscriptions + analytics',
+        desc: 'Premium templates via subscriptions; analytics tracks usage.',
+        active: ['subscriptions','payments','analytics'],
+        edges: [['subscriptions','payments'], ['export','analytics']]
+      }
+    ]
+  },
+
+  unfold: {
+    title: 'Unfold',
+    steps: [
+      {
+        title: 'Select template',
+        desc: 'User selects template for story/content.',
+        active: ['client','templates','editor'],
+        edges: [['client','templates'], ['templates','editor']]
+      },
+      {
+        title: 'Design + assets',
+        desc: 'Editor uses assets and fonts; renders previews.',
+        active: ['assets','fonts','render'],
+        edges: [['editor','assets'], ['assets','fonts'], ['fonts','render']]
+      },
+      {
+        title: 'Export + share',
+        desc: 'Export to device and share.',
+        active: ['export','sharing'],
+        edges: [['render','export'], ['export','sharing']]
+      },
+      {
+        title: 'Subscription + analytics',
+        desc: 'Subscriptions unlock packs; analytics tracks engagement.',
+        active: ['subscriptions','payments','analytics'],
+        edges: [['subscriptions','payments'], ['export','analytics']]
+      }
+    ]
+  },
+
+  linktree: {
+    title: 'Linktree',
+    steps: [
+      {
+        title: 'Create page',
+        desc: 'Creator signs in and creates link page.',
+        active: ['client','auth','editor','pages'],
+        edges: [['client','auth'], ['auth','pages'], ['pages','editor']]
+      },
+      {
+        title: 'Add links + analytics',
+        desc: 'Links configured; analytics tracks clicks.',
+        active: ['links','analytics'],
+        edges: [['editor','links'], ['links','analytics']]
+      },
+      {
+        title: 'Publish + CDN',
+        desc: 'Page published and served via CDN.',
+        active: ['publish','cdn'],
+        edges: [['pages','publish'], ['publish','cdn']]
+      },
+      {
+        title: 'Monetization',
+        desc: 'Pro subscriptions unlock features and integrations.',
+        active: ['subscriptions','payments','integrations'],
+        edges: [['subscriptions','payments'], ['editor','integrations']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Notifications for milestones and creator updates.',
+        active: ['notifications'],
+        edges: [['notifications','client']]
+      }
+    ]
+  },
+
+  beacons: {
+    title: 'Beacons',
+    steps: [
+      {
+        title: 'Build creator page',
+        desc: 'Creator signs in and builds a landing page.',
+        active: ['client','auth','pages','editor'],
+        edges: [['client','auth'], ['auth','pages'], ['pages','editor']]
+      },
+      {
+        title: 'Add links + email capture',
+        desc: 'Links and lead capture configured; contacts stored.',
+        active: ['links','forms','contacts'],
+        edges: [['editor','links'], ['editor','forms'], ['forms','contacts']]
+      },
+      {
+        title: 'Publish + CDN',
+        desc: 'Published site served via CDN; analytics tracks clicks.',
+        active: ['publish','cdn','analytics'],
+        edges: [['pages','publish'], ['publish','cdn'], ['links','analytics']]
+      },
+      {
+        title: 'Monetization',
+        desc: 'Subscriptions/payments unlock features and storefronts.',
+        active: ['subscriptions','payments','store'],
+        edges: [['subscriptions','payments'], ['payments','store']]
+      }
+    ]
+  },
+
+  'stan-store': {
+    title: 'Stan Store',
+    steps: [
+      {
+        title: 'Create storefront',
+        desc: 'Creator signs in and configures storefront.',
+        active: ['client','auth','store','products'],
+        edges: [['client','auth'], ['auth','store'], ['store','products']]
+      },
+      {
+        title: 'Checkout + payment',
+        desc: 'Customer purchases; payments create order and access.',
+        active: ['checkout','payments','orders'],
+        edges: [['products','checkout'], ['checkout','payments'], ['payments','orders']]
+      },
+      {
+        title: 'Digital delivery',
+        desc: 'Digital goods delivered; email/notifications sent.',
+        active: ['delivery','email','notifications'],
+        edges: [['orders','delivery'], ['delivery','email'], ['email','notifications']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics tracks conversion and revenue.',
+        active: ['analytics'],
+        edges: [['orders','analytics']]
+      }
+    ]
+  },
+
+  gumroad: {
+    title: 'Gumroad',
+    steps: [
+      {
+        title: 'Publish product',
+        desc: 'Creator publishes digital product with assets.',
+        active: ['client','auth','products','assets'],
+        edges: [['client','auth'], ['auth','products'], ['products','assets']]
+      },
+      {
+        title: 'Checkout + payment',
+        desc: 'Customer purchases; payments create order.',
+        active: ['checkout','payments','orders'],
+        edges: [['products','checkout'], ['checkout','payments'], ['payments','orders']]
+      },
+      {
+        title: 'Delivery + emails',
+        desc: 'Digital delivery and email receipts/download links.',
+        active: ['delivery','email','notifications'],
+        edges: [['orders','delivery'], ['delivery','email'], ['email','notifications']]
+      },
+      {
+        title: 'Payouts',
+        desc: 'Payouts send creator earnings.',
+        active: ['payouts'],
+        edges: [['payments','payouts']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics tracks sales funnel and revenue.',
+        active: ['analytics'],
+        edges: [['orders','analytics']]
+      }
+    ]
+  },
+
+  'lemon-squeezy': {
+    title: 'Lemon Squeezy',
+    steps: [
+      {
+        title: 'Create product + license',
+        desc: 'Creator configures product, pricing, and licensing.',
+        active: ['client','auth','products','licenses'],
+        edges: [['client','auth'], ['auth','products'], ['products','licenses']]
+      },
+      {
+        title: 'Checkout + tax',
+        desc: 'Checkout processes tax/VAT and payment.',
+        active: ['checkout','tax','payments'],
+        edges: [['products','checkout'], ['checkout','tax'], ['checkout','payments']]
+      },
+      {
+        title: 'Order + delivery',
+        desc: 'Orders created; license keys and downloads delivered.',
+        active: ['orders','delivery','email'],
+        edges: [['payments','orders'], ['orders','delivery'], ['delivery','email']]
+      },
+      {
+        title: 'Subscriptions',
+        desc: 'Subscriptions manage renewals and invoicing.',
+        active: ['subscriptions','billing','notifications'],
+        edges: [['orders','subscriptions'], ['subscriptions','billing'], ['billing','notifications']]
+      },
+      {
+        title: 'Analytics + payouts',
+        desc: 'Analytics tracks revenue; payouts to creators.',
+        active: ['analytics','payouts'],
+        edges: [['orders','analytics'], ['payments','payouts']]
+      }
+    ]
+  },
+
+  'ko-fi': {
+    title: 'Ko-fi',
+    steps: [
+      {
+        title: 'Creator page setup',
+        desc: 'Creator signs in and sets up page and goals.',
+        active: ['client','auth','pages','goals'],
+        edges: [['client','auth'], ['auth','pages'], ['pages','goals']]
+      },
+      {
+        title: 'Supporter donation',
+        desc: 'Supporter makes a one-time donation via payments.',
+        active: ['checkout','payments','orders'],
+        edges: [['pages','checkout'], ['checkout','payments'], ['payments','orders']]
+      },
+      {
+        title: 'Memberships',
+        desc: 'Membership subscriptions unlock posts and perks.',
+        active: ['subscriptions','posts','notifications'],
+        edges: [['orders','subscriptions'], ['subscriptions','posts'], ['posts','notifications']]
+      },
+      {
+        title: 'Digital products',
+        desc: 'Creators sell digital products and deliver downloads.',
+        active: ['products','delivery','email'],
+        edges: [['products','checkout'], ['orders','delivery'], ['delivery','email']]
+      },
+      {
+        title: 'Analytics + payouts',
+        desc: 'Analytics tracks supporters; payouts transfer earnings.',
+        active: ['analytics','payouts'],
+        edges: [['orders','analytics'], ['payments','payouts']]
+      }
+    ]
+  },
+
+  patreon: {
+    title: 'Patreon',
+    steps: [
+      {
+        title: 'Creator sets tiers',
+        desc: 'Creator signs in and configures membership tiers and benefits.',
+        active: ['client','auth','creator','tiers'],
+        edges: [['client','auth'], ['auth','creator'], ['creator','tiers']]
+      },
+      {
+        title: 'Patron subscribes',
+        desc: 'Patron subscribes; payments create subscription state.',
+        active: ['subscriptions','payments','billing'],
+        edges: [['tiers','subscriptions'], ['subscriptions','payments'], ['payments','billing']]
+      },
+      {
+        title: 'Content posts',
+        desc: 'Creator posts content; patrons access gated content.',
+        active: ['posts','access','notifications'],
+        edges: [['creator','posts'], ['posts','access'], ['access','notifications']]
+      },
+      {
+        title: 'Community messaging',
+        desc: 'Messages and community comments drive engagement.',
+        active: ['community','messaging'],
+        edges: [['posts','community'], ['community','messaging']]
+      },
+      {
+        title: 'Payouts + analytics',
+        desc: 'Payouts distribute earnings; analytics tracks retention.',
+        active: ['payouts','analytics'],
+        edges: [['payments','payouts'], ['subscriptions','analytics']]
+      }
+    ]
+  },
+
+  'buy-me-a-coffee': {
+    title: 'Buy Me a Coffee',
+    steps: [
+      {
+        title: 'Creator page setup',
+        desc: 'Creator sets up profile, goals, and offerings.',
+        active: ['client','auth','pages','products'],
+        edges: [['client','auth'], ['auth','pages'], ['pages','products']]
+      },
+      {
+        title: 'Supporter purchase/donation',
+        desc: 'Supporter buys a coffee or product via checkout.',
+        active: ['checkout','payments','orders'],
+        edges: [['products','checkout'], ['checkout','payments'], ['payments','orders']]
+      },
+      {
+        title: 'Delivery + messages',
+        desc: 'Thank-you messages and delivery for digital products.',
+        active: ['delivery','messaging','notifications'],
+        edges: [['orders','delivery'], ['delivery','messaging'], ['messaging','notifications']]
+      },
+      {
+        title: 'Memberships',
+        desc: 'Membership subscriptions unlock posts and perks.',
+        active: ['subscriptions','posts'],
+        edges: [['orders','subscriptions'], ['subscriptions','posts']]
+      },
+      {
+        title: 'Analytics + payouts',
+        desc: 'Analytics tracks supporters; payouts transfer earnings.',
+        active: ['analytics','payouts'],
+        edges: [['orders','analytics'], ['payments','payouts']]
+      }
+    ]
+  },
+
+  subbly: {
+    title: 'Subbly',
+    steps: [
+      {
+        title: 'Create subscription products',
+        desc: 'Merchant sets up subscription products and plans.',
+        active: ['client','auth','products','plans'],
+        edges: [['client','auth'], ['auth','products'], ['products','plans']]
+      },
+      {
+        title: 'Checkout + subscriptions',
+        desc: 'Customer checks out; subscription created with billing schedule.',
+        active: ['checkout','subscriptions','billing'],
+        edges: [['products','checkout'], ['checkout','subscriptions'], ['subscriptions','billing']]
+      },
+      {
+        title: 'Payments + renewals',
+        desc: 'Payments process recurring renewals and invoices.',
+        active: ['payments','invoices','notifications'],
+        edges: [['billing','payments'], ['payments','invoices'], ['invoices','notifications']]
+      },
+      {
+        title: 'Fulfillment',
+        desc: 'Orders flow to fulfillment/shipping integrations.',
+        active: ['orders','fulfillment','integrations'],
+        edges: [['payments','orders'], ['orders','fulfillment'], ['fulfillment','integrations']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics tracks churn, LTV, and renewals.',
+        active: ['analytics'],
+        edges: [['subscriptions','analytics']]
+      }
+    ]
+  },
+
+  teachable: {
+    title: 'Teachable',
+    steps: [
+      {
+        title: 'Build course',
+        desc: 'Creator builds course curriculum and uploads content.',
+        active: ['client','auth','creator','courses','content'],
+        edges: [['client','auth'], ['auth','creator'], ['creator','courses'], ['courses','content']]
+      },
+      {
+        title: 'Checkout + enrollment',
+        desc: 'Student purchases; enrollment and access granted.',
+        active: ['checkout','payments','enrollments','access'],
+        edges: [['courses','checkout'], ['checkout','payments'], ['payments','enrollments'], ['enrollments','access']]
+      },
+      {
+        title: 'Consume lessons',
+        desc: 'Lessons delivered via CDN/video delivery.',
+        active: ['video','cdn'],
+        edges: [['content','video'], ['video','cdn']]
+      },
+      {
+        title: 'Progress + quizzes',
+        desc: 'Progress tracking and quizzes/assignments.',
+        active: ['progress','quizzes','certificates'],
+        edges: [['access','progress'], ['progress','quizzes'], ['quizzes','certificates']]
+      },
+      {
+        title: 'Payouts + analytics',
+        desc: 'Payouts to creators; analytics for conversion and retention.',
+        active: ['payouts','analytics','email'],
+        edges: [['payments','payouts'], ['enrollments','analytics'], ['email','notifications']]
+      }
+    ]
+  },
+
+  kajabi: {
+    title: 'Kajabi',
+    steps: [
+      {
+        title: 'Create product + site',
+        desc: 'Creator builds site, products, and content.',
+        active: ['client','auth','site','products','content'],
+        edges: [['client','auth'], ['auth','site'], ['site','products'], ['products','content']]
+      },
+      {
+        title: 'Marketing funnel',
+        desc: 'Email, landing pages, and automation nurture leads.',
+        active: ['funnels','email','automation'],
+        edges: [['site','funnels'], ['funnels','email'], ['email','automation']]
+      },
+      {
+        title: 'Checkout + payments',
+        desc: 'Checkout processes payments and creates memberships.',
+        active: ['checkout','payments','memberships'],
+        edges: [['products','checkout'], ['checkout','payments'], ['payments','memberships']]
+      },
+      {
+        title: 'Deliver content + community',
+        desc: 'Members access content; community and notifications engage.',
+        active: ['access','community','notifications'],
+        edges: [['memberships','access'], ['access','community'], ['community','notifications']]
+      },
+      {
+        title: 'Analytics + payouts',
+        desc: 'Analytics measures funnel and retention; payouts for affiliates.',
+        active: ['analytics','affiliates','payouts'],
+        edges: [['funnels','analytics'], ['affiliates','payouts']]
+      }
+    ]
+  },
+
+  podia: {
+    title: 'Podia',
+    steps: [
+      {
+        title: 'Create products',
+        desc: 'Creator creates courses, downloads, and memberships.',
+        active: ['client','auth','products','content'],
+        edges: [['client','auth'], ['auth','products'], ['products','content']]
+      },
+      {
+        title: 'Checkout + payment',
+        desc: 'Customers purchase; payments create orders and access.',
+        active: ['checkout','payments','orders','access'],
+        edges: [['products','checkout'], ['checkout','payments'], ['payments','orders'], ['orders','access']]
+      },
+      {
+        title: 'Email marketing',
+        desc: 'Email sequences and newsletters engage customers.',
+        active: ['email','automation','analytics'],
+        edges: [['products','email'], ['email','automation'], ['email','analytics']]
+      },
+      {
+        title: 'Community + messaging',
+        desc: 'Community and messaging support members.',
+        active: ['community','messaging','notifications'],
+        edges: [['access','community'], ['community','messaging'], ['messaging','notifications']]
+      },
+      {
+        title: 'Payouts',
+        desc: 'Payouts for creators and affiliates.',
+        active: ['payouts','affiliates'],
+        edges: [['payments','payouts'], ['affiliates','payouts']]
+      }
+    ]
+  },
+
+  'circle-so': {
+    title: 'Circle.so',
+    steps: [
+      {
+        title: 'Create community space',
+        desc: 'Admin creates community and spaces with access rules.',
+        active: ['client','auth','communities','spaces','permissions'],
+        edges: [['client','auth'], ['auth','communities'], ['communities','spaces'], ['spaces','permissions']]
+      },
+      {
+        title: 'Members join + post',
+        desc: 'Members join, post discussions, and interact.',
+        active: ['posts','feeds','notifications'],
+        edges: [['spaces','posts'], ['posts','feeds'], ['feeds','notifications']]
+      },
+      {
+        title: 'Messaging + events',
+        desc: 'Messaging and events drive engagement.',
+        active: ['messaging','events'],
+        edges: [['communities','messaging'], ['spaces','events']]
+      },
+      {
+        title: 'Integrations + automation',
+        desc: 'Integrations and automations connect tools and workflows.',
+        active: ['integrations','automation'],
+        edges: [['integrations','communities'], ['automation','integrations']]
+      },
+      {
+        title: 'Subscriptions + analytics',
+        desc: 'Subscriptions/billing for paid communities; analytics tracks engagement.',
+        active: ['subscriptions','payments','analytics'],
+        edges: [['subscriptions','payments'], ['communities','analytics']]
+      }
+    ]
+  },
+
   chime: {
     title: 'Chime',
     steps: [
