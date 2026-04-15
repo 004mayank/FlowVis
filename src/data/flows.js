@@ -12137,6 +12137,366 @@ export const FLOWS = {
     ]
   },
 
+  skillshare: {
+    title: 'Skillshare',
+    steps: [
+      {
+        title: 'Browse catalog + open class',
+        desc: 'User signs in, browses catalog, and opens a class.',
+        active: ['client','auth','catalog','classes'],
+        edges: [['client','auth'], ['auth','catalog'], ['catalog','classes']]
+      },
+      {
+        title: 'Stream video via CDN',
+        desc: 'Video playback served via CDN with analytics instrumentation.',
+        active: ['video','cdn','analytics'],
+        edges: [['classes','video'], ['video','cdn'], ['video','analytics']]
+      },
+      {
+        title: 'Project + community',
+        desc: 'Learners post projects; community interactions trigger notifications.',
+        active: ['projects','community','notifications'],
+        edges: [['classes','projects'], ['projects','community'], ['community','notifications']]
+      },
+      {
+        title: 'Creator publishing + monetization',
+        desc: 'Creator tools publish classes; subscriptions/payments handle monetization.',
+        active: ['creator','subscriptions','payments'],
+        edges: [['creator','classes'], ['subscriptions','payments']]
+      },
+      {
+        title: 'Recommendations',
+        desc: 'Recommendations use engagement analytics to suggest next classes.',
+        active: ['recommendations','analytics'],
+        edges: [['analytics','recommendations']]
+      }
+    ]
+  },
+
+  masterclass: {
+    title: 'MasterClass',
+    steps: [
+      {
+        title: 'Sign in + pick series',
+        desc: 'User signs in and selects a series from catalog.',
+        active: ['client','auth','catalog','series'],
+        edges: [['client','auth'], ['auth','catalog'], ['catalog','series']]
+      },
+      {
+        title: 'Stream lessons',
+        desc: 'Video streams via CDN; downloads support offline viewing.',
+        active: ['video','cdn','downloads'],
+        edges: [['series','video'], ['video','cdn'], ['video','downloads']]
+      },
+      {
+        title: 'Subscriptions + billing',
+        desc: 'Subscriptions/billing manage access and renewals.',
+        active: ['subscriptions','billing','notifications'],
+        edges: [['subscriptions','billing'], ['billing','notifications']]
+      },
+      {
+        title: 'Profiles + recommendations',
+        desc: 'Profiles and engagement power recommendations.',
+        active: ['profiles','recommendations','analytics'],
+        edges: [['profiles','recommendations'], ['series','analytics'], ['analytics','recommendations']]
+      },
+      {
+        title: 'Support',
+        desc: 'Support resolves account and playback issues.',
+        active: ['support'],
+        edges: [['support','client']]
+      }
+    ]
+  },
+
+  edx: {
+    title: 'edX',
+    steps: [
+      {
+        title: 'Enroll in course',
+        desc: 'User signs in, browses catalog, and enrolls.',
+        active: ['client','auth','catalog','courses','profiles'],
+        edges: [['client','auth'], ['auth','catalog'], ['catalog','courses'], ['auth','profiles']]
+      },
+      {
+        title: 'Consume content',
+        desc: 'Course content and videos served via CDN.',
+        active: ['content','video','cdn'],
+        edges: [['courses','content'], ['content','video'], ['video','cdn']]
+      },
+      {
+        title: 'Assessments + grading',
+        desc: 'Assessments submitted; grading updates progress and results.',
+        active: ['assessments','grading'],
+        edges: [['content','assessments'], ['assessments','grading']]
+      },
+      {
+        title: 'Certificates + payments',
+        desc: 'Payments unlock verified certificates and issuance.',
+        active: ['payments','certificates'],
+        edges: [['payments','certificates'], ['grading','certificates']]
+      },
+      {
+        title: 'Forums + notifications + analytics',
+        desc: 'Forums drive engagement; notifications and analytics track outcomes.',
+        active: ['forums','notifications','analytics'],
+        edges: [['forums','notifications'], ['courses','analytics']]
+      }
+    ]
+  },
+
+  brainly: {
+    title: 'Brainly',
+    steps: [
+      {
+        title: 'Ask question',
+        desc: 'User signs in and posts a question.',
+        active: ['client','auth','questions'],
+        edges: [['client','auth'], ['auth','questions']]
+      },
+      {
+        title: 'Search + answer',
+        desc: 'Search finds similar threads; answers are posted and ranked.',
+        active: ['search','answers','reputation'],
+        edges: [['questions','search'], ['search','answers'], ['answers','reputation']]
+      },
+      {
+        title: 'AI assist',
+        desc: 'AI assists in explaining solutions and summarizing.',
+        active: ['ai','answers'],
+        edges: [['answers','ai']]
+      },
+      {
+        title: 'Moderation + notifications',
+        desc: 'Moderation enforces policies; notifications keep users engaged.',
+        active: ['moderation','notifications'],
+        edges: [['moderation','answers'], ['answers','notifications']]
+      },
+      {
+        title: 'Subscriptions + analytics',
+        desc: 'Subscriptions/payments unlock features; analytics tracks funnel.',
+        active: ['subscriptions','payments','analytics'],
+        edges: [['subscriptions','payments'], ['answers','analytics']]
+      }
+    ]
+  },
+
+  photomath: {
+    title: 'Photomath',
+    steps: [
+      {
+        title: 'Scan problem',
+        desc: 'User scans a math problem using the camera.',
+        active: ['client','camera'],
+        edges: [['client','camera']]
+      },
+      {
+        title: 'OCR + solve',
+        desc: 'OCR extracts expression; solver computes solution.',
+        active: ['ocr','solver'],
+        edges: [['camera','ocr'], ['ocr','solver']]
+      },
+      {
+        title: 'Show step-by-step',
+        desc: 'Steps and explanations delivered from content store.',
+        active: ['steps','content'],
+        edges: [['solver','steps'], ['steps','content']]
+      },
+      {
+        title: 'Practice',
+        desc: 'Practice recommendations and exercises reinforce learning.',
+        active: ['practice','analytics'],
+        edges: [['content','practice'], ['solver','analytics']]
+      },
+      {
+        title: 'Subscriptions',
+        desc: 'Premium features managed via subscriptions/payments.',
+        active: ['subscriptions','payments','notifications'],
+        edges: [['subscriptions','payments'], ['payments','notifications']]
+      }
+    ]
+  },
+
+  socratic: {
+    title: 'Socratic',
+    steps: [
+      {
+        title: 'Capture question',
+        desc: 'User captures a question with the camera.',
+        active: ['client','camera'],
+        edges: [['client','camera']]
+      },
+      {
+        title: 'OCR + query',
+        desc: 'OCR extracts text; query is built for search.',
+        active: ['ocr','query','search'],
+        edges: [['camera','ocr'], ['ocr','query'], ['query','search']]
+      },
+      {
+        title: 'Answers + explanations',
+        desc: 'Search returns answers and explanation content.',
+        active: ['answers','content'],
+        edges: [['search','answers'], ['answers','content']]
+      },
+      {
+        title: 'Recommendations + feedback',
+        desc: 'Recommendations personalize; feedback improves quality.',
+        active: ['recommendations','feedback','analytics'],
+        edges: [['content','recommendations'], ['feedback','analytics'], ['recommendations','analytics']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Notifications drive follow-up learning.',
+        active: ['notifications'],
+        edges: [['notifications','client']]
+      }
+    ]
+  },
+
+  remind: {
+    title: 'Remind',
+    steps: [
+      {
+        title: 'Create class + roster',
+        desc: 'Teacher creates class and manages roster.',
+        active: ['client','auth','classes','roster'],
+        edges: [['client','auth'], ['auth','classes'], ['classes','roster']]
+      },
+      {
+        title: 'Send message',
+        desc: 'Messages go through messaging service and fan out notifications.',
+        active: ['messaging','notifications'],
+        edges: [['classes','messaging'], ['messaging','notifications']]
+      },
+      {
+        title: 'Attachments',
+        desc: 'Attachments stored and delivered to the class.',
+        active: ['attachments'],
+        edges: [['messaging','attachments'], ['attachments','classes']]
+      },
+      {
+        title: 'Admin + integrations',
+        desc: 'Admin and integrations support school-wide setup.',
+        active: ['admin','integrations'],
+        edges: [['admin','integrations']]
+      },
+      {
+        title: 'Moderation + analytics + billing',
+        desc: 'Moderation enforces policies; analytics and billing track usage.',
+        active: ['moderation','analytics','billing'],
+        edges: [['moderation','messaging'], ['messaging','analytics'], ['billing','analytics']]
+      }
+    ]
+  },
+
+  classdojo: {
+    title: 'ClassDojo',
+    steps: [
+      {
+        title: 'Set up classroom',
+        desc: 'Teacher creates classroom and student roster.',
+        active: ['client','auth','classrooms','students'],
+        edges: [['client','auth'], ['auth','classrooms'], ['classrooms','students']]
+      },
+      {
+        title: 'Points + feed updates',
+        desc: 'Behavior points update feed and parent views.',
+        active: ['points','feed','notifications'],
+        edges: [['students','points'], ['points','feed'], ['feed','notifications']]
+      },
+      {
+        title: 'Messaging',
+        desc: 'Messaging with parents and announcements drive engagement.',
+        active: ['messaging','notifications'],
+        edges: [['feed','messaging'], ['messaging','notifications']]
+      },
+      {
+        title: 'Portfolios',
+        desc: 'Student portfolios store artifacts and share updates.',
+        active: ['portfolios','notifications'],
+        edges: [['students','portfolios'], ['portfolios','notifications']]
+      },
+      {
+        title: 'Moderation + billing + analytics',
+        desc: 'Moderation ensures safety; billing and analytics track usage.',
+        active: ['moderation','billing','analytics'],
+        edges: [['moderation','feed'], ['billing','analytics'], ['feed','analytics']]
+      }
+    ]
+  },
+
+  seesaw: {
+    title: 'Seesaw',
+    steps: [
+      {
+        title: 'Assign work',
+        desc: 'Teacher creates assignment for a class.',
+        active: ['client','auth','classes','assignments'],
+        edges: [['client','auth'], ['auth','classes'], ['classes','assignments']]
+      },
+      {
+        title: 'Student submission',
+        desc: 'Students submit work; submissions stored in portfolio.',
+        active: ['submissions','portfolio'],
+        edges: [['assignments','submissions'], ['submissions','portfolio']]
+      },
+      {
+        title: 'Feedback + messaging',
+        desc: 'Teacher feedback and messaging notify parents/students.',
+        active: ['feedback','messaging','notifications'],
+        edges: [['portfolio','feedback'], ['feedback','notifications'], ['messaging','notifications']]
+      },
+      {
+        title: 'Moderation + integrations',
+        desc: 'Moderation for safety; integrations sync rosters/classes.',
+        active: ['moderation','integrations'],
+        edges: [['moderation','portfolio'], ['integrations','classes']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics tracks engagement and learning outcomes.',
+        active: ['analytics'],
+        edges: [['portfolio','analytics']]
+      }
+    ]
+  },
+
+  blackboard: {
+    title: 'Blackboard',
+    steps: [
+      {
+        title: 'Access course',
+        desc: 'User signs in and opens a course with content.',
+        active: ['client','auth','courses','content'],
+        edges: [['client','auth'], ['auth','courses'], ['courses','content']]
+      },
+      {
+        title: 'Assignments + submissions',
+        desc: 'Students submit assignments; submissions stored and queued for grading.',
+        active: ['assignments','submissions'],
+        edges: [['courses','assignments'], ['assignments','submissions']]
+      },
+      {
+        title: 'Grading + gradebook',
+        desc: 'Grading updates gradebook and triggers notifications.',
+        active: ['grading','gradebook','notifications'],
+        edges: [['submissions','grading'], ['grading','gradebook'], ['gradebook','notifications']]
+      },
+      {
+        title: 'Discussions',
+        desc: 'Discussion threads drive engagement and announcements.',
+        active: ['discussions','notifications'],
+        edges: [['courses','discussions'], ['discussions','notifications']]
+      },
+      {
+        title: 'Integrations + admin + analytics',
+        desc: 'Integrations and admin manage institution setup; analytics measures usage; billing for enterprise.',
+        active: ['integrations','admin','analytics','billing'],
+        edges: [['integrations','admin'], ['admin','analytics'], ['billing','analytics']]
+      }
+    ]
+  },
+
   chime: {
     title: 'Chime',
     steps: [

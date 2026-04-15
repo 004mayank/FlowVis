@@ -17907,6 +17907,526 @@ Object.assign(SYSTEM_LAYOUTS, {
   }
 });
 
+// ----- Batch 74 (System + Architecture - learning platforms + classroom tools) -----
+
+Object.assign(SYSTEM_LAYOUTS, {
+  skillshare: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','catalog','classes','video','cdn','projects','community','creator','payments','subscriptions','recommendations','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      catalog: { x: 620, y: 180, label: 'Catalog', colorKey: 'store' },
+      classes: { x: 860, y: 180, label: 'Classes', colorKey: 'api' },
+      video: { x: 1100, y: 180, label: 'Video', colorKey: 'cdn' },
+      cdn: { x: 1100, y: 320, label: 'CDN', colorKey: 'cdn' },
+      projects: { x: 860, y: 320, label: 'Projects', colorKey: 'store' },
+      community: { x: 620, y: 320, label: 'Community', colorKey: 'api' },
+      creator: { x: 620, y: 460, label: 'Creator tools', colorKey: 'api' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      subscriptions: { x: 380, y: 180, label: 'Subscriptions', colorKey: 'external' },
+      recommendations: { x: 860, y: 460, label: 'Recs', colorKey: 'api' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  masterclass: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','catalog','series','video','cdn','downloads','billing','subscriptions','profiles','recommendations','support','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      catalog: { x: 620, y: 180, label: 'Catalog', colorKey: 'store' },
+      series: { x: 860, y: 180, label: 'Series', colorKey: 'api' },
+      video: { x: 1100, y: 180, label: 'Video', colorKey: 'cdn' },
+      cdn: { x: 1100, y: 320, label: 'CDN', colorKey: 'cdn' },
+      downloads: { x: 860, y: 320, label: 'Downloads', colorKey: 'store' },
+      billing: { x: 380, y: 320, label: 'Billing', colorKey: 'external' },
+      subscriptions: { x: 380, y: 180, label: 'Subscriptions', colorKey: 'external' },
+      profiles: { x: 620, y: 320, label: 'Profiles', colorKey: 'store' },
+      recommendations: { x: 620, y: 460, label: 'Recs', colorKey: 'api' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 860, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  edx: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','catalog','courses','content','video','cdn','assessments','grading','certificates','payments','profiles','forums','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      catalog: { x: 620, y: 180, label: 'Catalog', colorKey: 'store' },
+      courses: { x: 860, y: 180, label: 'Courses', colorKey: 'api' },
+      content: { x: 1100, y: 180, label: 'Content', colorKey: 'store' },
+      video: { x: 1100, y: 320, label: 'Video', colorKey: 'cdn' },
+      cdn: { x: 860, y: 320, label: 'CDN', colorKey: 'cdn' },
+      assessments: { x: 620, y: 320, label: 'Assessments', colorKey: 'api' },
+      grading: { x: 620, y: 460, label: 'Grading', colorKey: 'api' },
+      certificates: { x: 860, y: 460, label: 'Certificates', colorKey: 'store' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      profiles: { x: 380, y: 460, label: 'Profiles', colorKey: 'store' },
+      forums: { x: 1100, y: 460, label: 'Forums', colorKey: 'api' },
+      notifications: { x: 140, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  brainly: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','questions','search','answers','moderation','reputation','ai','subscriptions','payments','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      questions: { x: 620, y: 180, label: 'Questions', colorKey: 'store' },
+      search: { x: 860, y: 180, label: 'Search', colorKey: 'api' },
+      answers: { x: 1100, y: 180, label: 'Answers', colorKey: 'store' },
+      moderation: { x: 620, y: 320, label: 'Moderation', colorKey: 'api' },
+      reputation: { x: 860, y: 320, label: 'Reputation', colorKey: 'store' },
+      ai: { x: 1100, y: 320, label: 'AI assist', colorKey: 'api' },
+      subscriptions: { x: 380, y: 180, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  photomath: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','camera','ocr','solver','steps','content','practice','subscriptions','payments','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'App', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      camera: { x: 620, y: 180, label: 'Camera', colorKey: 'client' },
+      ocr: { x: 860, y: 180, label: 'OCR', colorKey: 'api' },
+      solver: { x: 1100, y: 180, label: 'Solver', colorKey: 'api' },
+      steps: { x: 1100, y: 320, label: 'Steps', colorKey: 'store' },
+      content: { x: 860, y: 320, label: 'Content', colorKey: 'store' },
+      practice: { x: 620, y: 320, label: 'Practice', colorKey: 'api' },
+      subscriptions: { x: 380, y: 180, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      notifications: { x: 620, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  socratic: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','camera','ocr','query','search','answers','content','recommendations','feedback','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'App', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      camera: { x: 620, y: 180, label: 'Camera', colorKey: 'client' },
+      ocr: { x: 860, y: 180, label: 'OCR', colorKey: 'api' },
+      query: { x: 1100, y: 180, label: 'Query', colorKey: 'api' },
+      search: { x: 1100, y: 320, label: 'Search', colorKey: 'api' },
+      answers: { x: 860, y: 320, label: 'Answers', colorKey: 'store' },
+      content: { x: 620, y: 320, label: 'Content', colorKey: 'store' },
+      recommendations: { x: 620, y: 460, label: 'Recs', colorKey: 'api' },
+      feedback: { x: 380, y: 320, label: 'Feedback', colorKey: 'store' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  remind: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','classes','roster','messaging','notifications','attachments','moderation','admin','integrations','analytics','billing'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'App', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      classes: { x: 620, y: 180, label: 'Classes', colorKey: 'store' },
+      roster: { x: 860, y: 180, label: 'Roster', colorKey: 'store' },
+      messaging: { x: 1100, y: 180, label: 'Messaging', colorKey: 'stream' },
+      notifications: { x: 1100, y: 320, label: 'Notify', colorKey: 'external' },
+      attachments: { x: 860, y: 320, label: 'Attachments', colorKey: 'store' },
+      moderation: { x: 620, y: 320, label: 'Moderation', colorKey: 'api' },
+      admin: { x: 380, y: 320, label: 'Admin', colorKey: 'api' },
+      integrations: { x: 380, y: 460, label: 'Integrations', colorKey: 'external' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' },
+      billing: { x: 1100, y: 460, label: 'Billing', colorKey: 'external' }
+    }
+  },
+
+  classdojo: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','classrooms','students','points','feed','messaging','notifications','portfolios','moderation','admin','analytics','billing'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'App', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      classrooms: { x: 620, y: 180, label: 'Classrooms', colorKey: 'store' },
+      students: { x: 860, y: 180, label: 'Students', colorKey: 'store' },
+      points: { x: 1100, y: 180, label: 'Points', colorKey: 'api' },
+      feed: { x: 620, y: 320, label: 'Feed', colorKey: 'api' },
+      messaging: { x: 860, y: 320, label: 'Messaging', colorKey: 'stream' },
+      notifications: { x: 1100, y: 320, label: 'Notify', colorKey: 'external' },
+      portfolios: { x: 620, y: 460, label: 'Portfolios', colorKey: 'store' },
+      moderation: { x: 380, y: 320, label: 'Moderation', colorKey: 'api' },
+      admin: { x: 380, y: 460, label: 'Admin', colorKey: 'api' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' },
+      billing: { x: 1100, y: 460, label: 'Billing', colorKey: 'external' }
+    }
+  },
+
+  seesaw: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','classes','roster','assignments','submissions','portfolio','feedback','messaging','notifications','moderation','integrations','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'App', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      classes: { x: 620, y: 180, label: 'Classes', colorKey: 'store' },
+      roster: { x: 860, y: 180, label: 'Roster', colorKey: 'store' },
+      assignments: { x: 1100, y: 180, label: 'Assignments', colorKey: 'api' },
+      submissions: { x: 1100, y: 320, label: 'Submissions', colorKey: 'store' },
+      portfolio: { x: 860, y: 320, label: 'Portfolio', colorKey: 'store' },
+      feedback: { x: 620, y: 320, label: 'Feedback', colorKey: 'api' },
+      messaging: { x: 620, y: 460, label: 'Messaging', colorKey: 'stream' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      moderation: { x: 380, y: 320, label: 'Moderation', colorKey: 'api' },
+      integrations: { x: 860, y: 460, label: 'Integrations', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  blackboard: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','courses','content','assignments','submissions','grading','gradebook','discussions','notifications','integrations','admin','analytics','billing'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      courses: { x: 620, y: 180, label: 'Courses', colorKey: 'store' },
+      content: { x: 860, y: 180, label: 'Content', colorKey: 'store' },
+      assignments: { x: 1100, y: 180, label: 'Assignments', colorKey: 'api' },
+      submissions: { x: 1100, y: 320, label: 'Submissions', colorKey: 'store' },
+      grading: { x: 860, y: 320, label: 'Grading', colorKey: 'api' },
+      gradebook: { x: 620, y: 320, label: 'Gradebook', colorKey: 'store' },
+      discussions: { x: 620, y: 460, label: 'Discussions', colorKey: 'api' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      integrations: { x: 380, y: 320, label: 'Integrations', colorKey: 'external' },
+      admin: { x: 860, y: 460, label: 'Admin', colorKey: 'api' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' },
+      billing: { x: 380, y: 600, label: 'Billing', colorKey: 'external' }
+    }
+  }
+});
+
+Object.assign(ARCH_LAYOUTS, {
+  skillshare: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Skillshare',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','catalog','classes','video','cdn','projects','community','creator','payments','subscriptions','recommendations','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      catalog: { x: 600, y: 160, label: 'Catalog' },
+      classes: { x: 880, y: 160, label: 'Classes' },
+      video: { x: 1160, y: 160, label: 'Video' },
+      cdn: { x: 1160, y: 300, label: 'CDN' },
+      projects: { x: 880, y: 300, label: 'Projects' },
+      community: { x: 600, y: 300, label: 'Community' },
+      creator: { x: 600, y: 440, label: 'Creator tools' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      subscriptions: { x: 320, y: 160, label: 'Subscriptions' },
+      recommendations: { x: 880, y: 440, label: 'Recs' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','catalog','browse'], ['catalog','classes','class']);
+      if(stepIdx===2) e.push(['classes','video','play'], ['video','cdn','cdn']);
+      if(stepIdx===3) e.push(['projects','community','post'], ['community','notifications','notify']);
+      if(stepIdx===4) e.push(['subscriptions','payments','bill']);
+      if(stepIdx===5) e.push(['creator','classes','publish'], ['classes','analytics','analytics']);
+      return e;
+    }
+  },
+
+  masterclass: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'MasterClass',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','catalog','series','video','cdn','downloads','billing','subscriptions','profiles','recommendations','support','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      catalog: { x: 600, y: 160, label: 'Catalog' },
+      series: { x: 880, y: 160, label: 'Series' },
+      video: { x: 1160, y: 160, label: 'Video' },
+      cdn: { x: 1160, y: 300, label: 'CDN' },
+      downloads: { x: 880, y: 300, label: 'Downloads' },
+      billing: { x: 320, y: 300, label: 'Billing' },
+      subscriptions: { x: 320, y: 160, label: 'Subscriptions' },
+      profiles: { x: 600, y: 300, label: 'Profiles' },
+      recommendations: { x: 600, y: 440, label: 'Recs' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 880, y: 440, label: 'Notify' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','catalog','browse'], ['catalog','series','series']);
+      if(stepIdx===2) e.push(['series','video','play'], ['video','cdn','cdn']);
+      if(stepIdx===3) e.push(['downloads','cdn','offline']);
+      if(stepIdx===4) e.push(['subscriptions','billing','bill'], ['billing','notifications','notify']);
+      if(stepIdx===5) e.push(['profiles','recommendations','recs'], ['series','analytics','analytics']);
+      return e;
+    }
+  },
+
+  edx: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'edX',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','catalog','courses','content','video','cdn','assessments','grading','certificates','payments','profiles','forums','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      catalog: { x: 600, y: 160, label: 'Catalog' },
+      courses: { x: 880, y: 160, label: 'Courses' },
+      content: { x: 1160, y: 160, label: 'Content' },
+      video: { x: 1160, y: 300, label: 'Video' },
+      cdn: { x: 880, y: 300, label: 'CDN' },
+      assessments: { x: 600, y: 300, label: 'Assessments' },
+      grading: { x: 600, y: 440, label: 'Grading' },
+      certificates: { x: 880, y: 440, label: 'Certificates' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      profiles: { x: 320, y: 440, label: 'Profiles' },
+      forums: { x: 1160, y: 440, label: 'Forums' },
+      notifications: { x: 40, y: 440, label: 'Notify' },
+      analytics: { x: 1160, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','catalog','browse'], ['catalog','courses','enroll']);
+      if(stepIdx===2) e.push(['courses','content','read'], ['content','video','watch'], ['video','cdn','cdn']);
+      if(stepIdx===3) e.push(['assessments','grading','grade'], ['grading','certificates','cert']);
+      if(stepIdx===4) e.push(['payments','certificates','verify']);
+      if(stepIdx===5) e.push(['forums','notifications','notify']);
+      if(stepIdx===6) e.push(['courses','analytics','analytics']);
+      return e;
+    }
+  },
+
+  brainly: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Brainly',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','questions','search','answers','moderation','reputation','ai','subscriptions','payments','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      questions: { x: 600, y: 160, label: 'Questions' },
+      search: { x: 880, y: 160, label: 'Search' },
+      answers: { x: 1160, y: 160, label: 'Answers' },
+      moderation: { x: 600, y: 300, label: 'Moderation' },
+      reputation: { x: 880, y: 300, label: 'Reputation' },
+      ai: { x: 1160, y: 300, label: 'AI assist' },
+      subscriptions: { x: 320, y: 160, label: 'Subscriptions' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','questions','ask'], ['questions','search','search']);
+      if(stepIdx===2) e.push(['search','answers','answer'], ['answers','reputation','rep']);
+      if(stepIdx===3) e.push(['answers','ai','ai']);
+      if(stepIdx===4) e.push(['moderation','notifications','mod']);
+      if(stepIdx===5) e.push(['subscriptions','payments','bill'], ['answers','analytics','analytics']);
+      return e;
+    }
+  },
+
+  photomath: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Photomath',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','camera','ocr','solver','steps','content','practice','subscriptions','payments','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'App' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      camera: { x: 600, y: 160, label: 'Camera' },
+      ocr: { x: 880, y: 160, label: 'OCR' },
+      solver: { x: 1160, y: 160, label: 'Solver' },
+      steps: { x: 1160, y: 300, label: 'Steps' },
+      content: { x: 880, y: 300, label: 'Content' },
+      practice: { x: 600, y: 300, label: 'Practice' },
+      subscriptions: { x: 320, y: 160, label: 'Subscriptions' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      notifications: { x: 600, y: 440, label: 'Notify' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','camera','snap'], ['camera','ocr','ocr'], ['ocr','solver','solve']);
+      if(stepIdx===2) e.push(['solver','steps','steps'], ['steps','content','learn']);
+      if(stepIdx===3) e.push(['content','practice','practice']);
+      if(stepIdx===4) e.push(['subscriptions','payments','bill'], ['payments','notifications','notify']);
+      if(stepIdx===5) e.push(['solver','analytics','analytics']);
+      return e;
+    }
+  },
+
+  socratic: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Socratic',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','camera','ocr','query','search','answers','content','recommendations','feedback','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'App' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      camera: { x: 600, y: 160, label: 'Camera' },
+      ocr: { x: 880, y: 160, label: 'OCR' },
+      query: { x: 1160, y: 160, label: 'Query' },
+      search: { x: 1160, y: 300, label: 'Search' },
+      answers: { x: 880, y: 300, label: 'Answers' },
+      content: { x: 600, y: 300, label: 'Content' },
+      recommendations: { x: 600, y: 440, label: 'Recs' },
+      feedback: { x: 320, y: 300, label: 'Feedback' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','camera','snap'], ['camera','ocr','ocr'], ['ocr','query','query']);
+      if(stepIdx===2) e.push(['query','search','search'], ['search','answers','answer']);
+      if(stepIdx===3) e.push(['answers','content','explain'], ['content','recommendations','recs']);
+      if(stepIdx===4) e.push(['feedback','analytics','feedback'], ['recommendations','analytics','learn']);
+      if(stepIdx===5) e.push(['notifications','client','notify']);
+      return e;
+    }
+  },
+
+  remind: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Remind',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','classes','roster','messaging','notifications','attachments','moderation','admin','integrations','analytics','billing'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'App' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      classes: { x: 600, y: 160, label: 'Classes' },
+      roster: { x: 880, y: 160, label: 'Roster' },
+      messaging: { x: 1160, y: 160, label: 'Messaging' },
+      notifications: { x: 1160, y: 300, label: 'Notify' },
+      attachments: { x: 880, y: 300, label: 'Attachments' },
+      moderation: { x: 600, y: 300, label: 'Moderation' },
+      admin: { x: 320, y: 300, label: 'Admin' },
+      integrations: { x: 320, y: 440, label: 'Integrations' },
+      analytics: { x: 880, y: 440, label: 'Analytics' },
+      billing: { x: 1160, y: 440, label: 'Billing' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','classes','class'], ['classes','roster','roster']);
+      if(stepIdx===2) e.push(['classes','messaging','msg'], ['messaging','notifications','notify']);
+      if(stepIdx===3) e.push(['messaging','attachments','attach'], ['attachments','classes','deliver']);
+      if(stepIdx===4) e.push(['moderation','messaging','mod'], ['admin','integrations','admin']);
+      if(stepIdx===5) e.push(['messaging','analytics','analytics'], ['billing','analytics','bill']);
+      return e;
+    }
+  },
+
+  classdojo: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'ClassDojo',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','classrooms','students','points','feed','messaging','notifications','portfolios','moderation','admin','analytics','billing'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'App' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      classrooms: { x: 600, y: 160, label: 'Classrooms' },
+      students: { x: 880, y: 160, label: 'Students' },
+      points: { x: 1160, y: 160, label: 'Points' },
+      feed: { x: 600, y: 300, label: 'Feed' },
+      messaging: { x: 880, y: 300, label: 'Messaging' },
+      notifications: { x: 1160, y: 300, label: 'Notify' },
+      portfolios: { x: 600, y: 440, label: 'Portfolios' },
+      moderation: { x: 320, y: 300, label: 'Moderation' },
+      admin: { x: 320, y: 440, label: 'Admin' },
+      analytics: { x: 880, y: 440, label: 'Analytics' },
+      billing: { x: 1160, y: 440, label: 'Billing' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','classrooms','class'], ['classrooms','students','roster']);
+      if(stepIdx===2) e.push(['students','points','points'], ['points','feed','feed']);
+      if(stepIdx===3) e.push(['feed','messaging','msg'], ['messaging','notifications','notify']);
+      if(stepIdx===4) e.push(['portfolios','notifications','share']);
+      if(stepIdx===5) e.push(['moderation','feed','mod'], ['billing','analytics','bill']);
+      return e;
+    }
+  },
+
+  seesaw: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Seesaw',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','classes','roster','assignments','submissions','portfolio','feedback','messaging','notifications','moderation','integrations','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'App' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      classes: { x: 600, y: 160, label: 'Classes' },
+      roster: { x: 880, y: 160, label: 'Roster' },
+      assignments: { x: 1160, y: 160, label: 'Assignments' },
+      submissions: { x: 1160, y: 300, label: 'Submissions' },
+      portfolio: { x: 880, y: 300, label: 'Portfolio' },
+      feedback: { x: 600, y: 300, label: 'Feedback' },
+      messaging: { x: 600, y: 440, label: 'Messaging' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      moderation: { x: 320, y: 300, label: 'Moderation' },
+      integrations: { x: 880, y: 440, label: 'Integrations' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','classes','class'], ['classes','assignments','assign']);
+      if(stepIdx===2) e.push(['assignments','submissions','submit'], ['submissions','portfolio','portfolio']);
+      if(stepIdx===3) e.push(['portfolio','feedback','feedback'], ['feedback','notifications','notify']);
+      if(stepIdx===4) e.push(['messaging','notifications','msg'], ['integrations','classes','sync']);
+      if(stepIdx===5) e.push(['moderation','portfolio','mod'], ['portfolio','analytics','analytics']);
+      return e;
+    }
+  },
+
+  blackboard: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Blackboard',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','courses','content','assignments','submissions','grading','gradebook','discussions','notifications','integrations','admin','analytics','billing'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      courses: { x: 600, y: 160, label: 'Courses' },
+      content: { x: 880, y: 160, label: 'Content' },
+      assignments: { x: 1160, y: 160, label: 'Assignments' },
+      submissions: { x: 1160, y: 300, label: 'Submissions' },
+      grading: { x: 880, y: 300, label: 'Grading' },
+      gradebook: { x: 600, y: 300, label: 'Gradebook' },
+      discussions: { x: 600, y: 440, label: 'Discussions' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      integrations: { x: 320, y: 300, label: 'Integrations' },
+      admin: { x: 880, y: 440, label: 'Admin' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' },
+      billing: { x: 320, y: 580, label: 'Billing' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','courses','course'], ['courses','content','content']);
+      if(stepIdx===2) e.push(['courses','assignments','assign'], ['assignments','submissions','submit']);
+      if(stepIdx===3) e.push(['submissions','grading','grade'], ['grading','gradebook','record']);
+      if(stepIdx===4) e.push(['discussions','notifications','notify']);
+      if(stepIdx===5) e.push(['integrations','admin','sync'], ['admin','analytics','analytics']);
+      if(stepIdx===6) e.push(['billing','analytics','bill']);
+      return e;
+    }
+  }
+});
+
 Object.assign(ARCH_LAYOUTS, {
   crazygames: {
     viewBox: '0 0 1860 820',
