@@ -18112,6 +18112,969 @@ Object.assign(SYSTEM_LAYOUTS, {
   }
 });
 
+// ----- Batch 75b (System + Architecture - complete remaining layouts) -----
+
+Object.assign(SYSTEM_LAYOUTS, {
+  moodle: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','courses','content','assignments','submissions','grading','gradebook','forums','messaging','plugins','integrations','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      courses: { x: 620, y: 180, label: 'Courses', colorKey: 'store' },
+      content: { x: 860, y: 180, label: 'Content', colorKey: 'store' },
+      assignments: { x: 1100, y: 180, label: 'Assignments', colorKey: 'api' },
+      submissions: { x: 1100, y: 320, label: 'Submissions', colorKey: 'store' },
+      grading: { x: 860, y: 320, label: 'Grading', colorKey: 'api' },
+      gradebook: { x: 620, y: 320, label: 'Gradebook', colorKey: 'store' },
+      forums: { x: 620, y: 460, label: 'Forums', colorKey: 'api' },
+      messaging: { x: 860, y: 460, label: 'Messaging', colorKey: 'stream' },
+      plugins: { x: 380, y: 320, label: 'Plugins', colorKey: 'api' },
+      integrations: { x: 380, y: 460, label: 'Integrations', colorKey: 'external' },
+      notifications: { x: 140, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'canvas-lms': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','sso','courses','modules','content','assignments','submissions','grading','gradebook','integrations','admin','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      sso: { x: 620, y: 180, label: 'SSO', colorKey: 'external' },
+      courses: { x: 860, y: 180, label: 'Courses', colorKey: 'store' },
+      modules: { x: 1100, y: 180, label: 'Modules', colorKey: 'api' },
+      content: { x: 1100, y: 320, label: 'Content', colorKey: 'store' },
+      assignments: { x: 860, y: 320, label: 'Assignments', colorKey: 'api' },
+      submissions: { x: 1100, y: 460, label: 'Submissions', colorKey: 'store' },
+      grading: { x: 860, y: 460, label: 'Grading', colorKey: 'api' },
+      gradebook: { x: 620, y: 320, label: 'Gradebook', colorKey: 'store' },
+      integrations: { x: 380, y: 320, label: 'Integrations', colorKey: 'external' },
+      admin: { x: 380, y: 460, label: 'Admin', colorKey: 'api' },
+      notifications: { x: 140, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 620, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'google-classroom': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','classes','roster','assignments','drive','content','submissions','grading','gradebook','stream','admin','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      classes: { x: 620, y: 180, label: 'Classes', colorKey: 'store' },
+      roster: { x: 860, y: 180, label: 'Roster', colorKey: 'store' },
+      assignments: { x: 1100, y: 180, label: 'Assignments', colorKey: 'api' },
+      drive: { x: 620, y: 320, label: 'Drive', colorKey: 'external' },
+      content: { x: 860, y: 320, label: 'Content', colorKey: 'store' },
+      submissions: { x: 1100, y: 320, label: 'Submissions', colorKey: 'store' },
+      grading: { x: 1100, y: 460, label: 'Grading', colorKey: 'api' },
+      gradebook: { x: 860, y: 460, label: 'Gradebook', colorKey: 'store' },
+      stream: { x: 620, y: 460, label: 'Stream', colorKey: 'api' },
+      admin: { x: 380, y: 320, label: 'Admin', colorKey: 'api' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 140, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  noteflight: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','editor','scores','playback','instruments','audio','sharing','collaboration','comments','export','storage','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      editor: { x: 620, y: 180, label: 'Editor', colorKey: 'client' },
+      scores: { x: 860, y: 180, label: 'Scores', colorKey: 'store' },
+      playback: { x: 1100, y: 180, label: 'Playback', colorKey: 'api' },
+      instruments: { x: 1100, y: 320, label: 'Instruments', colorKey: 'store' },
+      audio: { x: 860, y: 320, label: 'Audio', colorKey: 'cdn' },
+      sharing: { x: 620, y: 320, label: 'Sharing', colorKey: 'api' },
+      collaboration: { x: 620, y: 460, label: 'Collab', colorKey: 'api' },
+      comments: { x: 860, y: 460, label: 'Comments', colorKey: 'store' },
+      export: { x: 1100, y: 460, label: 'Export', colorKey: 'api' },
+      storage: { x: 1100, y: 600, label: 'Storage', colorKey: 'store' },
+      subscriptions: { x: 380, y: 320, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 380, y: 460, label: 'Payments', colorKey: 'external' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  yousician: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','lessons','calibration','audio','detection','scoring','feedback','progress','recommendations','sessions','leaderboards','achievements','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'App', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      lessons: { x: 620, y: 180, label: 'Lessons', colorKey: 'store' },
+      calibration: { x: 860, y: 180, label: 'Calibration', colorKey: 'api' },
+      audio: { x: 1100, y: 180, label: 'Audio', colorKey: 'stream' },
+      detection: { x: 1100, y: 320, label: 'Detection', colorKey: 'api' },
+      scoring: { x: 860, y: 320, label: 'Scoring', colorKey: 'api' },
+      feedback: { x: 620, y: 320, label: 'Feedback', colorKey: 'api' },
+      progress: { x: 620, y: 460, label: 'Progress', colorKey: 'store' },
+      recommendations: { x: 860, y: 460, label: 'Recs', colorKey: 'api' },
+      sessions: { x: 1100, y: 460, label: 'Sessions', colorKey: 'store' },
+      leaderboards: { x: 1100, y: 600, label: 'Leaderboards', colorKey: 'store' },
+      achievements: { x: 860, y: 600, label: 'Achievements', colorKey: 'store' },
+      subscriptions: { x: 380, y: 600, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 140, y: 460, label: 'Payments', colorKey: 'external' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'simply-piano': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','lessons','audio','detection','scoring','feedback','progress','recommendations','subscriptions','payments','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'App', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      lessons: { x: 620, y: 180, label: 'Lessons', colorKey: 'store' },
+      audio: { x: 860, y: 180, label: 'Audio', colorKey: 'stream' },
+      detection: { x: 1100, y: 180, label: 'Detection', colorKey: 'api' },
+      scoring: { x: 1100, y: 320, label: 'Scoring', colorKey: 'api' },
+      feedback: { x: 860, y: 320, label: 'Feedback', colorKey: 'api' },
+      progress: { x: 620, y: 320, label: 'Progress', colorKey: 'store' },
+      recommendations: { x: 620, y: 460, label: 'Recs', colorKey: 'api' },
+      subscriptions: { x: 380, y: 320, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 380, y: 460, label: 'Payments', colorKey: 'external' },
+      notifications: { x: 860, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'fender-play': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','catalog','courses','lessons','video','cdn','exercises','progress','sessions','recommendations','subscriptions','payments','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      catalog: { x: 620, y: 180, label: 'Catalog', colorKey: 'store' },
+      courses: { x: 860, y: 180, label: 'Courses', colorKey: 'api' },
+      lessons: { x: 1100, y: 180, label: 'Lessons', colorKey: 'api' },
+      video: { x: 1100, y: 320, label: 'Video', colorKey: 'cdn' },
+      cdn: { x: 860, y: 320, label: 'CDN', colorKey: 'cdn' },
+      exercises: { x: 620, y: 320, label: 'Exercises', colorKey: 'api' },
+      progress: { x: 620, y: 460, label: 'Progress', colorKey: 'store' },
+      sessions: { x: 860, y: 460, label: 'Sessions', colorKey: 'store' },
+      recommendations: { x: 1100, y: 460, label: 'Recs', colorKey: 'api' },
+      subscriptions: { x: 380, y: 320, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 380, y: 180, label: 'Payments', colorKey: 'external' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'ultimate-guitar': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','search','tabs','playback','tools','uploads','moderation','profiles','subscriptions','payments','ads','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      search: { x: 620, y: 180, label: 'Search', colorKey: 'api' },
+      tabs: { x: 860, y: 180, label: 'Tabs', colorKey: 'store' },
+      playback: { x: 1100, y: 180, label: 'Playback', colorKey: 'api' },
+      tools: { x: 1100, y: 320, label: 'Tools', colorKey: 'api' },
+      uploads: { x: 620, y: 320, label: 'Uploads', colorKey: 'store' },
+      moderation: { x: 860, y: 320, label: 'Moderation', colorKey: 'api' },
+      profiles: { x: 380, y: 320, label: 'Profiles', colorKey: 'store' },
+      subscriptions: { x: 380, y: 180, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 380, y: 460, label: 'Payments', colorKey: 'external' },
+      ads: { x: 620, y: 460, label: 'Ads', colorKey: 'api' },
+      notifications: { x: 860, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  garageband: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','projects','instruments','loops','recording','tracks','editing','mixer','effects','export','storage','sharing','cloud'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'App', colorKey: 'client' },
+      projects: { x: 380, y: 180, label: 'Projects', colorKey: 'store' },
+      instruments: { x: 620, y: 180, label: 'Instruments', colorKey: 'store' },
+      loops: { x: 860, y: 180, label: 'Loops', colorKey: 'store' },
+      recording: { x: 1100, y: 180, label: 'Recording', colorKey: 'api' },
+      tracks: { x: 1100, y: 320, label: 'Tracks', colorKey: 'store' },
+      editing: { x: 860, y: 320, label: 'Editing', colorKey: 'client' },
+      mixer: { x: 620, y: 320, label: 'Mixer', colorKey: 'api' },
+      effects: { x: 380, y: 320, label: 'Effects', colorKey: 'api' },
+      export: { x: 620, y: 460, label: 'Export', colorKey: 'api' },
+      storage: { x: 860, y: 460, label: 'Storage', colorKey: 'store' },
+      sharing: { x: 1100, y: 460, label: 'Sharing', colorKey: 'external' },
+      cloud: { x: 380, y: 460, label: 'Cloud', colorKey: 'external' }
+    }
+  },
+
+  'fl-studio-mobile': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','projects','instruments','samples','sequencer','tracks','recording','mixer','effects','export','storage','cloud','analytics','logs'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'App', colorKey: 'client' },
+      projects: { x: 380, y: 180, label: 'Projects', colorKey: 'store' },
+      instruments: { x: 620, y: 180, label: 'Instruments', colorKey: 'store' },
+      samples: { x: 860, y: 180, label: 'Samples', colorKey: 'store' },
+      sequencer: { x: 1100, y: 180, label: 'Sequencer', colorKey: 'api' },
+      tracks: { x: 1100, y: 320, label: 'Tracks', colorKey: 'store' },
+      recording: { x: 860, y: 320, label: 'Recording', colorKey: 'api' },
+      mixer: { x: 620, y: 320, label: 'Mixer', colorKey: 'api' },
+      effects: { x: 380, y: 320, label: 'Effects', colorKey: 'api' },
+      export: { x: 620, y: 460, label: 'Export', colorKey: 'api' },
+      storage: { x: 860, y: 460, label: 'Storage', colorKey: 'store' },
+      cloud: { x: 1100, y: 460, label: 'Cloud', colorKey: 'external' },
+      analytics: { x: 380, y: 460, label: 'Analytics', colorKey: 'store' },
+      logs: { x: 140, y: 460, label: 'Logs', colorKey: 'store' }
+    }
+  }
+});
+
+// ----- Batch 75c (System + Architecture - creator+editing + creator-commerce set 1) -----
+
+Object.assign(SYSTEM_LAYOUTS, {
+  bandlab: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','projects','studio','recording','storage','collaboration','mixer','effects','publish','community','social','notifications','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      projects: { x: 620, y: 180, label: 'Projects', colorKey: 'store' },
+      studio: { x: 860, y: 180, label: 'Studio', colorKey: 'client' },
+      recording: { x: 1100, y: 180, label: 'Recording', colorKey: 'api' },
+      storage: { x: 1100, y: 320, label: 'Storage', colorKey: 'store' },
+      collaboration: { x: 860, y: 320, label: 'Collab', colorKey: 'api' },
+      mixer: { x: 620, y: 320, label: 'Mixer', colorKey: 'api' },
+      effects: { x: 380, y: 320, label: 'Effects', colorKey: 'api' },
+      publish: { x: 620, y: 460, label: 'Publish', colorKey: 'api' },
+      community: { x: 860, y: 460, label: 'Community', colorKey: 'api' },
+      social: { x: 1100, y: 460, label: 'Social', colorKey: 'api' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      subscriptions: { x: 140, y: 320, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 140, y: 460, label: 'Payments', colorKey: 'external' },
+      analytics: { x: 1100, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  soundtrap: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','projects','studio','recording','loops','samples','collaboration','versions','export','storage','sharing','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      projects: { x: 620, y: 180, label: 'Projects', colorKey: 'store' },
+      studio: { x: 860, y: 180, label: 'Studio', colorKey: 'client' },
+      recording: { x: 1100, y: 180, label: 'Recording', colorKey: 'api' },
+      loops: { x: 620, y: 320, label: 'Loops', colorKey: 'store' },
+      samples: { x: 860, y: 320, label: 'Samples', colorKey: 'store' },
+      collaboration: { x: 1100, y: 320, label: 'Collab', colorKey: 'api' },
+      versions: { x: 1100, y: 460, label: 'Versions', colorKey: 'store' },
+      export: { x: 860, y: 460, label: 'Export', colorKey: 'api' },
+      storage: { x: 620, y: 460, label: 'Storage', colorKey: 'store' },
+      sharing: { x: 380, y: 460, label: 'Sharing', colorKey: 'external' },
+      subscriptions: { x: 380, y: 320, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 140, y: 460, label: 'Payments', colorKey: 'external' },
+      analytics: { x: 1100, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  splice: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','catalog','sounds','cdn','downloads','projects','sync','versions','recommendations','subscriptions','payments','billing','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      catalog: { x: 620, y: 180, label: 'Catalog', colorKey: 'store' },
+      sounds: { x: 860, y: 180, label: 'Sounds', colorKey: 'store' },
+      cdn: { x: 1100, y: 180, label: 'CDN', colorKey: 'cdn' },
+      downloads: { x: 1100, y: 320, label: 'Downloads', colorKey: 'store' },
+      projects: { x: 860, y: 320, label: 'Projects', colorKey: 'store' },
+      sync: { x: 620, y: 320, label: 'Sync', colorKey: 'api' },
+      versions: { x: 620, y: 460, label: 'Versions', colorKey: 'store' },
+      recommendations: { x: 860, y: 460, label: 'Recs', colorKey: 'api' },
+      subscriptions: { x: 380, y: 320, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 380, y: 180, label: 'Payments', colorKey: 'external' },
+      billing: { x: 380, y: 460, label: 'Billing', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'adobe-express': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','templates','editor','assets','fonts','cdn','render','export','sharing','collaboration','comments','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      templates: { x: 620, y: 180, label: 'Templates', colorKey: 'store' },
+      editor: { x: 860, y: 180, label: 'Editor', colorKey: 'client' },
+      assets: { x: 1100, y: 180, label: 'Assets', colorKey: 'store' },
+      fonts: { x: 1100, y: 320, label: 'Fonts', colorKey: 'store' },
+      cdn: { x: 860, y: 320, label: 'CDN', colorKey: 'cdn' },
+      render: { x: 620, y: 320, label: 'Render', colorKey: 'api' },
+      export: { x: 620, y: 460, label: 'Export', colorKey: 'api' },
+      sharing: { x: 860, y: 460, label: 'Sharing', colorKey: 'external' },
+      collaboration: { x: 1100, y: 460, label: 'Collab', colorKey: 'api' },
+      comments: { x: 1100, y: 600, label: 'Comments', colorKey: 'store' },
+      subscriptions: { x: 380, y: 320, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 380, y: 180, label: 'Payments', colorKey: 'external' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  picsart: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','editor','media','effects','ai','render','export','sharing','community','notifications','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'App', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      editor: { x: 620, y: 180, label: 'Editor', colorKey: 'client' },
+      media: { x: 860, y: 180, label: 'Media', colorKey: 'store' },
+      effects: { x: 1100, y: 180, label: 'Effects', colorKey: 'api' },
+      ai: { x: 1100, y: 320, label: 'AI tools', colorKey: 'api' },
+      render: { x: 860, y: 320, label: 'Render', colorKey: 'api' },
+      export: { x: 620, y: 320, label: 'Export', colorKey: 'api' },
+      sharing: { x: 620, y: 460, label: 'Sharing', colorKey: 'external' },
+      community: { x: 860, y: 460, label: 'Community', colorKey: 'api' },
+      notifications: { x: 1100, y: 460, label: 'Notify', colorKey: 'external' },
+      subscriptions: { x: 380, y: 320, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 380, y: 180, label: 'Payments', colorKey: 'external' },
+      analytics: { x: 1100, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  snapseed: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','editor','media','effects','render','export','storage','sharing'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'App', colorKey: 'client' },
+      editor: { x: 380, y: 180, label: 'Editor', colorKey: 'client' },
+      media: { x: 620, y: 180, label: 'Media', colorKey: 'store' },
+      effects: { x: 860, y: 180, label: 'Effects', colorKey: 'api' },
+      render: { x: 1100, y: 180, label: 'Render', colorKey: 'api' },
+      export: { x: 860, y: 320, label: 'Export', colorKey: 'api' },
+      storage: { x: 620, y: 320, label: 'Storage', colorKey: 'store' },
+      sharing: { x: 380, y: 320, label: 'Sharing', colorKey: 'external' }
+    }
+  },
+
+  'lightroom-mobile': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','library','media','editor','presets','render','sync','cloud','storage','export','sharing','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'App', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      library: { x: 620, y: 180, label: 'Library', colorKey: 'store' },
+      media: { x: 860, y: 180, label: 'Media', colorKey: 'store' },
+      editor: { x: 1100, y: 180, label: 'Editor', colorKey: 'client' },
+      presets: { x: 1100, y: 320, label: 'Presets', colorKey: 'api' },
+      render: { x: 860, y: 320, label: 'Render', colorKey: 'api' },
+      sync: { x: 620, y: 320, label: 'Sync', colorKey: 'api' },
+      cloud: { x: 380, y: 320, label: 'Cloud', colorKey: 'external' },
+      storage: { x: 380, y: 460, label: 'Storage', colorKey: 'store' },
+      export: { x: 620, y: 460, label: 'Export', colorKey: 'api' },
+      sharing: { x: 860, y: 460, label: 'Sharing', colorKey: 'external' },
+      subscriptions: { x: 140, y: 320, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 140, y: 460, label: 'Payments', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'vsco-editor': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','library','editor','presets','render','export','community','notifications','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'App', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      library: { x: 620, y: 180, label: 'Library', colorKey: 'store' },
+      editor: { x: 860, y: 180, label: 'Editor', colorKey: 'client' },
+      presets: { x: 1100, y: 180, label: 'Presets', colorKey: 'api' },
+      render: { x: 1100, y: 320, label: 'Render', colorKey: 'api' },
+      export: { x: 860, y: 320, label: 'Export', colorKey: 'api' },
+      community: { x: 620, y: 320, label: 'Community', colorKey: 'api' },
+      notifications: { x: 380, y: 320, label: 'Notify', colorKey: 'external' },
+      subscriptions: { x: 380, y: 180, label: 'Subscriptions', colorKey: 'external' },
+      payments: { x: 380, y: 460, label: 'Payments', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  }
+});
+
+Object.assign(ARCH_LAYOUTS, {
+  'fender-play': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Fender Play',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','catalog','courses','lessons','video','cdn','exercises','progress','sessions','recommendations','subscriptions','payments','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      catalog: { x: 600, y: 160, label: 'Catalog' },
+      courses: { x: 880, y: 160, label: 'Courses' },
+      lessons: { x: 1160, y: 160, label: 'Lessons' },
+      video: { x: 1160, y: 300, label: 'Video' },
+      cdn: { x: 880, y: 300, label: 'CDN' },
+      exercises: { x: 600, y: 300, label: 'Exercises' },
+      progress: { x: 600, y: 440, label: 'Progress' },
+      sessions: { x: 880, y: 440, label: 'Sessions' },
+      recommendations: { x: 1160, y: 440, label: 'Recs' },
+      subscriptions: { x: 320, y: 300, label: 'Subscriptions' },
+      payments: { x: 320, y: 160, label: 'Payments' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      analytics: { x: 1160, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','catalog','browse'], ['catalog','courses','course'], ['courses','lessons','lesson']);
+      if(stepIdx===2) e.push(['lessons','video','play'], ['video','cdn','cdn'], ['lessons','exercises','ex']);
+      if(stepIdx===3) e.push(['exercises','progress','progress'], ['progress','sessions','session']);
+      if(stepIdx===4) e.push(['sessions','recommendations','recs']);
+      if(stepIdx===5) e.push(['subscriptions','payments','bill'], ['payments','notifications','notify'], ['sessions','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'ultimate-guitar': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Ultimate Guitar',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','search','tabs','playback','tools','uploads','moderation','profiles','subscriptions','payments','ads','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      search: { x: 600, y: 160, label: 'Search' },
+      tabs: { x: 880, y: 160, label: 'Tabs' },
+      playback: { x: 1160, y: 160, label: 'Playback' },
+      tools: { x: 1160, y: 300, label: 'Tools' },
+      uploads: { x: 600, y: 300, label: 'Uploads' },
+      moderation: { x: 880, y: 300, label: 'Moderation' },
+      profiles: { x: 320, y: 300, label: 'Profiles' },
+      subscriptions: { x: 320, y: 160, label: 'Subscriptions' },
+      payments: { x: 320, y: 440, label: 'Payments' },
+      ads: { x: 600, y: 440, label: 'Ads' },
+      notifications: { x: 880, y: 440, label: 'Notify' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','search','search'], ['search','tabs','tab'], ['client','auth','auth']);
+      if(stepIdx===2) e.push(['tabs','playback','play'], ['playback','tools','tools']);
+      if(stepIdx===3) e.push(['profiles','uploads','upload'], ['uploads','moderation','mod']);
+      if(stepIdx===4) e.push(['subscriptions','payments','bill'], ['tabs','ads','ads']);
+      if(stepIdx===5) e.push(['tabs','analytics','analytics'], ['notifications','client','notify']);
+      return e;
+    }
+  },
+
+  garageband: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'GarageBand',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','projects','instruments','loops','recording','tracks','editing','mixer','effects','export','storage','sharing','cloud'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'App' },
+      projects: { x: 320, y: 160, label: 'Projects' },
+      instruments: { x: 600, y: 160, label: 'Instruments' },
+      loops: { x: 880, y: 160, label: 'Loops' },
+      recording: { x: 1160, y: 160, label: 'Recording' },
+      tracks: { x: 1160, y: 300, label: 'Tracks' },
+      editing: { x: 880, y: 300, label: 'Editing' },
+      mixer: { x: 600, y: 300, label: 'Mixer' },
+      effects: { x: 320, y: 300, label: 'Effects' },
+      export: { x: 600, y: 440, label: 'Export' },
+      storage: { x: 880, y: 440, label: 'Storage' },
+      sharing: { x: 1160, y: 440, label: 'Sharing' },
+      cloud: { x: 320, y: 440, label: 'Cloud' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','projects','new'], ['projects','instruments','inst'], ['projects','loops','loop']);
+      if(stepIdx===2) e.push(['instruments','recording','rec'], ['recording','tracks','track'], ['tracks','editing','edit']);
+      if(stepIdx===3) e.push(['tracks','mixer','mix'], ['mixer','effects','fx']);
+      if(stepIdx===4) e.push(['mixer','export','export'], ['export','storage','store']);
+      if(stepIdx===5) e.push(['storage','sharing','share'], ['sharing','cloud','sync']);
+      return e;
+    }
+  },
+
+  bandlab: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'BandLab',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','projects','studio','recording','storage','collaboration','mixer','effects','publish','community','social','notifications','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      projects: { x: 600, y: 160, label: 'Projects' },
+      studio: { x: 880, y: 160, label: 'Studio' },
+      recording: { x: 1160, y: 160, label: 'Recording' },
+      storage: { x: 1160, y: 300, label: 'Storage' },
+      collaboration: { x: 880, y: 300, label: 'Collab' },
+      mixer: { x: 600, y: 300, label: 'Mixer' },
+      effects: { x: 320, y: 300, label: 'Effects' },
+      publish: { x: 600, y: 440, label: 'Publish' },
+      community: { x: 880, y: 440, label: 'Community' },
+      social: { x: 1160, y: 440, label: 'Social' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      subscriptions: { x: 40, y: 300, label: 'Subscriptions' },
+      payments: { x: 40, y: 440, label: 'Payments' },
+      analytics: { x: 1160, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','projects','proj'], ['projects','studio','studio']);
+      if(stepIdx===2) e.push(['studio','recording','rec'], ['recording','storage','store'], ['storage','collaboration','collab']);
+      if(stepIdx===3) e.push(['storage','mixer','mix'], ['mixer','effects','fx'], ['effects','publish','pub']);
+      if(stepIdx===4) e.push(['publish','community','community'], ['community','social','social'], ['social','notifications','notify']);
+      if(stepIdx===5) e.push(['subscriptions','payments','bill'], ['publish','analytics','analytics']);
+      return e;
+    }
+  },
+
+  soundtrap: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Soundtrap',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','projects','studio','recording','loops','samples','collaboration','versions','export','storage','sharing','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      projects: { x: 600, y: 160, label: 'Projects' },
+      studio: { x: 880, y: 160, label: 'Studio' },
+      recording: { x: 1160, y: 160, label: 'Recording' },
+      loops: { x: 600, y: 300, label: 'Loops' },
+      samples: { x: 880, y: 300, label: 'Samples' },
+      collaboration: { x: 1160, y: 300, label: 'Collab' },
+      versions: { x: 1160, y: 440, label: 'Versions' },
+      export: { x: 880, y: 440, label: 'Export' },
+      storage: { x: 600, y: 440, label: 'Storage' },
+      sharing: { x: 320, y: 440, label: 'Sharing' },
+      subscriptions: { x: 320, y: 300, label: 'Subscriptions' },
+      payments: { x: 40, y: 440, label: 'Payments' },
+      analytics: { x: 1160, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','projects','proj'], ['projects','studio','studio']);
+      if(stepIdx===2) e.push(['studio','recording','rec'], ['studio','loops','loop'], ['loops','samples','sample']);
+      if(stepIdx===3) e.push(['studio','collaboration','collab'], ['collaboration','versions','ver']);
+      if(stepIdx===4) e.push(['studio','export','export'], ['export','storage','store'], ['storage','sharing','share']);
+      if(stepIdx===5) e.push(['subscriptions','payments','bill'], ['projects','analytics','analytics']);
+      return e;
+    }
+  },
+
+  splice: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Splice',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','catalog','sounds','cdn','downloads','projects','sync','versions','recommendations','subscriptions','payments','billing','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      catalog: { x: 600, y: 160, label: 'Catalog' },
+      sounds: { x: 880, y: 160, label: 'Sounds' },
+      cdn: { x: 1160, y: 160, label: 'CDN' },
+      downloads: { x: 1160, y: 300, label: 'Downloads' },
+      projects: { x: 880, y: 300, label: 'Projects' },
+      sync: { x: 600, y: 300, label: 'Sync' },
+      versions: { x: 600, y: 440, label: 'Versions' },
+      recommendations: { x: 880, y: 440, label: 'Recs' },
+      subscriptions: { x: 320, y: 300, label: 'Subscriptions' },
+      payments: { x: 320, y: 160, label: 'Payments' },
+      billing: { x: 320, y: 440, label: 'Billing' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','catalog','browse'], ['catalog','sounds','sound']);
+      if(stepIdx===2) e.push(['sounds','cdn','cdn'], ['cdn','downloads','dl']);
+      if(stepIdx===3) e.push(['downloads','projects','proj'], ['projects','sync','sync'], ['sync','versions','ver']);
+      if(stepIdx===4) e.push(['subscriptions','payments','bill'], ['payments','billing','invoice']);
+      if(stepIdx===5) e.push(['analytics','recommendations','recs']);
+      return e;
+    }
+  },
+
+  'adobe-express': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Adobe Express',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','templates','editor','assets','fonts','cdn','render','export','sharing','collaboration','comments','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      templates: { x: 600, y: 160, label: 'Templates' },
+      editor: { x: 880, y: 160, label: 'Editor' },
+      assets: { x: 1160, y: 160, label: 'Assets' },
+      fonts: { x: 1160, y: 300, label: 'Fonts' },
+      cdn: { x: 880, y: 300, label: 'CDN' },
+      render: { x: 600, y: 300, label: 'Render' },
+      export: { x: 600, y: 440, label: 'Export' },
+      sharing: { x: 880, y: 440, label: 'Sharing' },
+      collaboration: { x: 1160, y: 440, label: 'Collab' },
+      comments: { x: 1160, y: 580, label: 'Comments' },
+      subscriptions: { x: 320, y: 300, label: 'Subscriptions' },
+      payments: { x: 320, y: 160, label: 'Payments' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','templates','tmpl'], ['templates','editor','edit']);
+      if(stepIdx===2) e.push(['editor','assets','asset'], ['assets','cdn','cdn'], ['fonts','cdn','font']);
+      if(stepIdx===3) e.push(['editor','render','render'], ['render','export','export'], ['export','sharing','share']);
+      if(stepIdx===4) e.push(['editor','collaboration','collab'], ['collaboration','comments','comment']);
+      if(stepIdx===5) e.push(['subscriptions','payments','bill'], ['export','analytics','analytics']);
+      return e;
+    }
+  },
+
+  picsart: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'PicsArt',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','editor','media','effects','ai','render','export','sharing','community','notifications','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'App' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      editor: { x: 600, y: 160, label: 'Editor' },
+      media: { x: 880, y: 160, label: 'Media' },
+      effects: { x: 1160, y: 160, label: 'Effects' },
+      ai: { x: 1160, y: 300, label: 'AI tools' },
+      render: { x: 880, y: 300, label: 'Render' },
+      export: { x: 600, y: 300, label: 'Export' },
+      sharing: { x: 600, y: 440, label: 'Sharing' },
+      community: { x: 880, y: 440, label: 'Community' },
+      notifications: { x: 1160, y: 440, label: 'Notify' },
+      subscriptions: { x: 320, y: 300, label: 'Subscriptions' },
+      payments: { x: 320, y: 160, label: 'Payments' },
+      analytics: { x: 1160, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','editor','edit'], ['editor','media','import']);
+      if(stepIdx===2) e.push(['media','effects','fx'], ['effects','ai','ai'], ['ai','render','render']);
+      if(stepIdx===3) e.push(['render','export','export'], ['export','sharing','share']);
+      if(stepIdx===4) e.push(['sharing','community','post'], ['community','notifications','notify']);
+      if(stepIdx===5) e.push(['subscriptions','payments','bill'], ['export','analytics','analytics']);
+      return e;
+    }
+  },
+
+  snapseed: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Snapseed',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','editor','media','effects','render','export','storage','sharing'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'App' },
+      editor: { x: 320, y: 160, label: 'Editor' },
+      media: { x: 600, y: 160, label: 'Media' },
+      effects: { x: 880, y: 160, label: 'Effects' },
+      render: { x: 1160, y: 160, label: 'Render' },
+      export: { x: 880, y: 300, label: 'Export' },
+      storage: { x: 600, y: 300, label: 'Storage' },
+      sharing: { x: 320, y: 300, label: 'Sharing' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','editor','open'], ['editor','media','import']);
+      if(stepIdx===2) e.push(['media','effects','fx'], ['effects','render','render']);
+      if(stepIdx===3) e.push(['render','export','export'], ['export','storage','save']);
+      if(stepIdx===4) e.push(['storage','sharing','share']);
+      return e;
+    }
+  },
+
+  'lightroom-mobile': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Lightroom Mobile',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','library','media','editor','presets','render','sync','cloud','storage','export','sharing','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'App' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      library: { x: 600, y: 160, label: 'Library' },
+      media: { x: 880, y: 160, label: 'Media' },
+      editor: { x: 1160, y: 160, label: 'Editor' },
+      presets: { x: 1160, y: 300, label: 'Presets' },
+      render: { x: 880, y: 300, label: 'Render' },
+      sync: { x: 600, y: 300, label: 'Sync' },
+      cloud: { x: 320, y: 300, label: 'Cloud' },
+      storage: { x: 320, y: 440, label: 'Storage' },
+      export: { x: 600, y: 440, label: 'Export' },
+      sharing: { x: 880, y: 440, label: 'Sharing' },
+      subscriptions: { x: 40, y: 300, label: 'Subscriptions' },
+      payments: { x: 40, y: 440, label: 'Payments' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','library','lib'], ['client','media','import']);
+      if(stepIdx===2) e.push(['library','editor','edit'], ['editor','presets','preset'], ['presets','render','render']);
+      if(stepIdx===3) e.push(['library','sync','sync'], ['sync','cloud','cloud'], ['cloud','storage','store']);
+      if(stepIdx===4) e.push(['render','export','export'], ['export','sharing','share']);
+      if(stepIdx===5) e.push(['subscriptions','payments','bill'], ['export','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'vsco-editor': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'VSCO Editor',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','library','editor','presets','render','export','community','notifications','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'App' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      library: { x: 600, y: 160, label: 'Library' },
+      editor: { x: 880, y: 160, label: 'Editor' },
+      presets: { x: 1160, y: 160, label: 'Presets' },
+      render: { x: 1160, y: 300, label: 'Render' },
+      export: { x: 880, y: 300, label: 'Export' },
+      community: { x: 600, y: 300, label: 'Community' },
+      notifications: { x: 320, y: 300, label: 'Notify' },
+      subscriptions: { x: 320, y: 160, label: 'Subscriptions' },
+      payments: { x: 320, y: 440, label: 'Payments' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','library','lib'], ['library','editor','edit'], ['editor','presets','preset']);
+      if(stepIdx===2) e.push(['presets','render','render'], ['render','export','export']);
+      if(stepIdx===3) e.push(['export','community','post'], ['community','notifications','notify']);
+      if(stepIdx===4) e.push(['subscriptions','payments','bill']);
+      if(stepIdx===5) e.push(['community','analytics','analytics']);
+      return e;
+    }
+  }
+});
+
+Object.assign(ARCH_LAYOUTS, {
+  moodle: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Moodle',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','courses','content','assignments','submissions','grading','gradebook','forums','messaging','plugins','integrations','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      courses: { x: 600, y: 160, label: 'Courses' },
+      content: { x: 880, y: 160, label: 'Content' },
+      assignments: { x: 1160, y: 160, label: 'Assignments' },
+      submissions: { x: 1160, y: 300, label: 'Submissions' },
+      grading: { x: 880, y: 300, label: 'Grading' },
+      gradebook: { x: 600, y: 300, label: 'Gradebook' },
+      forums: { x: 600, y: 440, label: 'Forums' },
+      messaging: { x: 880, y: 440, label: 'Messaging' },
+      plugins: { x: 320, y: 300, label: 'Plugins' },
+      integrations: { x: 320, y: 440, label: 'Integrations' },
+      notifications: { x: 40, y: 440, label: 'Notify' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','courses','course'], ['courses','content','content']);
+      if(stepIdx===2) e.push(['courses','assignments','assign'], ['assignments','submissions','submit']);
+      if(stepIdx===3) e.push(['submissions','grading','grade'], ['grading','gradebook','record']);
+      if(stepIdx===4) e.push(['forums','messaging','msg'], ['messaging','notifications','notify']);
+      if(stepIdx===5) e.push(['plugins','integrations','plug'], ['courses','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'canvas-lms': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Canvas LMS',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','sso','courses','modules','content','assignments','submissions','grading','gradebook','integrations','admin','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      sso: { x: 600, y: 160, label: 'SSO' },
+      courses: { x: 880, y: 160, label: 'Courses' },
+      modules: { x: 1160, y: 160, label: 'Modules' },
+      content: { x: 1160, y: 300, label: 'Content' },
+      assignments: { x: 880, y: 300, label: 'Assignments' },
+      submissions: { x: 1160, y: 440, label: 'Submissions' },
+      grading: { x: 880, y: 440, label: 'Grading' },
+      gradebook: { x: 600, y: 300, label: 'Gradebook' },
+      integrations: { x: 320, y: 300, label: 'Integrations' },
+      admin: { x: 320, y: 440, label: 'Admin' },
+      notifications: { x: 40, y: 440, label: 'Notify' },
+      analytics: { x: 600, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','sso','sso'], ['sso','courses','course']);
+      if(stepIdx===2) e.push(['courses','modules','module'], ['modules','content','content']);
+      if(stepIdx===3) e.push(['courses','assignments','assign'], ['assignments','submissions','submit']);
+      if(stepIdx===4) e.push(['submissions','grading','grade'], ['grading','gradebook','record']);
+      if(stepIdx===5) e.push(['integrations','admin','admin'], ['courses','analytics','analytics'], ['gradebook','notifications','notify']);
+      return e;
+    }
+  },
+
+  'google-classroom': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Google Classroom',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','classes','roster','assignments','drive','content','submissions','grading','gradebook','stream','admin','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      classes: { x: 600, y: 160, label: 'Classes' },
+      roster: { x: 880, y: 160, label: 'Roster' },
+      assignments: { x: 1160, y: 160, label: 'Assignments' },
+      drive: { x: 600, y: 300, label: 'Drive' },
+      content: { x: 880, y: 300, label: 'Content' },
+      submissions: { x: 1160, y: 300, label: 'Submissions' },
+      grading: { x: 1160, y: 440, label: 'Grading' },
+      gradebook: { x: 880, y: 440, label: 'Gradebook' },
+      stream: { x: 600, y: 440, label: 'Stream' },
+      admin: { x: 320, y: 300, label: 'Admin' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      analytics: { x: 40, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','classes','class'], ['classes','roster','roster']);
+      if(stepIdx===2) e.push(['classes','assignments','assign'], ['assignments','drive','attach'], ['drive','content','deliver']);
+      if(stepIdx===3) e.push(['content','submissions','submit'], ['submissions','grading','grade'], ['grading','gradebook','record']);
+      if(stepIdx===4) e.push(['classes','stream','post'], ['stream','notifications','notify']);
+      if(stepIdx===5) e.push(['admin','classes','admin'], ['classes','analytics','analytics']);
+      return e;
+    }
+  },
+
+  noteflight: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Noteflight',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','editor','scores','playback','instruments','audio','sharing','collaboration','comments','export','storage','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      editor: { x: 600, y: 160, label: 'Editor' },
+      scores: { x: 880, y: 160, label: 'Scores' },
+      playback: { x: 1160, y: 160, label: 'Playback' },
+      instruments: { x: 1160, y: 300, label: 'Instruments' },
+      audio: { x: 880, y: 300, label: 'Audio' },
+      sharing: { x: 600, y: 300, label: 'Sharing' },
+      collaboration: { x: 600, y: 440, label: 'Collab' },
+      comments: { x: 880, y: 440, label: 'Comments' },
+      export: { x: 1160, y: 440, label: 'Export' },
+      storage: { x: 1160, y: 580, label: 'Storage' },
+      subscriptions: { x: 320, y: 300, label: 'Subscriptions' },
+      payments: { x: 320, y: 440, label: 'Payments' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','editor','edit'], ['editor','scores','score']);
+      if(stepIdx===2) e.push(['scores','playback','play'], ['playback','instruments','inst'], ['instruments','audio','audio']);
+      if(stepIdx===3) e.push(['scores','sharing','share'], ['sharing','collaboration','collab'], ['collaboration','comments','comment']);
+      if(stepIdx===4) e.push(['scores','export','export'], ['export','storage','store']);
+      if(stepIdx===5) e.push(['subscriptions','payments','bill'], ['scores','analytics','analytics']);
+      return e;
+    }
+  },
+
+  yousician: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Yousician',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','lessons','calibration','audio','detection','scoring','feedback','progress','recommendations','sessions','leaderboards','achievements','subscriptions','payments','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'App' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      lessons: { x: 600, y: 160, label: 'Lessons' },
+      calibration: { x: 880, y: 160, label: 'Calibration' },
+      audio: { x: 1160, y: 160, label: 'Audio' },
+      detection: { x: 1160, y: 300, label: 'Detection' },
+      scoring: { x: 880, y: 300, label: 'Scoring' },
+      feedback: { x: 600, y: 300, label: 'Feedback' },
+      progress: { x: 600, y: 440, label: 'Progress' },
+      recommendations: { x: 880, y: 440, label: 'Recs' },
+      sessions: { x: 1160, y: 440, label: 'Sessions' },
+      leaderboards: { x: 1160, y: 580, label: 'Leaderboards' },
+      achievements: { x: 880, y: 580, label: 'Achievements' },
+      subscriptions: { x: 320, y: 300, label: 'Subscriptions' },
+      payments: { x: 320, y: 440, label: 'Payments' },
+      analytics: { x: 600, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','lessons','lesson'], ['lessons','calibration','cal']);
+      if(stepIdx===2) e.push(['audio','detection','detect'], ['detection','scoring','score'], ['scoring','feedback','fb']);
+      if(stepIdx===3) e.push(['feedback','progress','progress'], ['progress','recommendations','recs']);
+      if(stepIdx===4) e.push(['lessons','sessions','session'], ['sessions','leaderboards','rank'], ['sessions','achievements','ach']);
+      if(stepIdx===5) e.push(['subscriptions','payments','bill'], ['sessions','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'simply-piano': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Simply Piano',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','lessons','audio','detection','scoring','feedback','progress','recommendations','subscriptions','payments','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'App' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      lessons: { x: 600, y: 160, label: 'Lessons' },
+      audio: { x: 880, y: 160, label: 'Audio' },
+      detection: { x: 1160, y: 160, label: 'Detection' },
+      scoring: { x: 1160, y: 300, label: 'Scoring' },
+      feedback: { x: 880, y: 300, label: 'Feedback' },
+      progress: { x: 600, y: 300, label: 'Progress' },
+      recommendations: { x: 600, y: 440, label: 'Recs' },
+      subscriptions: { x: 320, y: 300, label: 'Subscriptions' },
+      payments: { x: 320, y: 440, label: 'Payments' },
+      notifications: { x: 880, y: 440, label: 'Notify' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','lessons','lesson'], ['client','audio','audio']);
+      if(stepIdx===2) e.push(['audio','detection','detect'], ['detection','scoring','score'], ['scoring','feedback','fb']);
+      if(stepIdx===3) e.push(['feedback','progress','progress'], ['progress','recommendations','recs']);
+      if(stepIdx===4) e.push(['subscriptions','payments','bill'], ['payments','notifications','notify']);
+      if(stepIdx===5) e.push(['progress','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'fl-studio-mobile': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'FL Studio Mobile',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','projects','instruments','samples','sequencer','tracks','recording','mixer','effects','export','storage','cloud','analytics','logs'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'App' },
+      projects: { x: 320, y: 160, label: 'Projects' },
+      instruments: { x: 600, y: 160, label: 'Instruments' },
+      samples: { x: 880, y: 160, label: 'Samples' },
+      sequencer: { x: 1160, y: 160, label: 'Sequencer' },
+      tracks: { x: 1160, y: 300, label: 'Tracks' },
+      recording: { x: 880, y: 300, label: 'Recording' },
+      mixer: { x: 600, y: 300, label: 'Mixer' },
+      effects: { x: 320, y: 300, label: 'Effects' },
+      export: { x: 600, y: 440, label: 'Export' },
+      storage: { x: 880, y: 440, label: 'Storage' },
+      cloud: { x: 1160, y: 440, label: 'Cloud' },
+      analytics: { x: 320, y: 440, label: 'Analytics' },
+      logs: { x: 40, y: 440, label: 'Logs' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','projects','new'], ['projects','instruments','inst'], ['projects','samples','sample']);
+      if(stepIdx===2) e.push(['instruments','sequencer','seq'], ['sequencer','tracks','track'], ['tracks','recording','rec']);
+      if(stepIdx===3) e.push(['tracks','mixer','mix'], ['mixer','effects','fx']);
+      if(stepIdx===4) e.push(['mixer','export','export'], ['export','storage','store'], ['storage','cloud','sync']);
+      if(stepIdx===5) e.push(['client','analytics','analytics'], ['client','logs','logs']);
+      return e;
+    }
+  }
+});
+
 Object.assign(ARCH_LAYOUTS, {
   skillshare: {
     viewBox: '0 0 1860 820',
