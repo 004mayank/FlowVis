@@ -13927,6 +13927,556 @@ Object.assign(SYSTEM_LAYOUTS, {
   }
 });
 
+// ----- Batch 55 (System + Architecture - accounting + billing + marketing automation) -----
+
+Object.assign(SYSTEM_LAYOUTS, {
+  xero: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','org','ledger','invoices','expenses','bankfeeds','reconcile','tax','reports','integrations','payments','audit','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      org: { x: 620, y: 180, label: 'Org', colorKey: 'store' },
+      ledger: { x: 860, y: 180, label: 'Ledger', colorKey: 'store' },
+      invoices: { x: 1100, y: 180, label: 'Invoices', colorKey: 'store' },
+      expenses: { x: 620, y: 320, label: 'Expenses', colorKey: 'store' },
+      bankfeeds: { x: 860, y: 320, label: 'Bank Feeds', colorKey: 'external' },
+      reconcile: { x: 1100, y: 320, label: 'Reconcile', colorKey: 'api' },
+      tax: { x: 380, y: 320, label: 'Tax', colorKey: 'api' },
+      reports: { x: 620, y: 460, label: 'Reports', colorKey: 'store' },
+      integrations: { x: 860, y: 460, label: 'Integrations', colorKey: 'external' },
+      payments: { x: 1100, y: 460, label: 'Payments', colorKey: 'external' },
+      audit: { x: 620, y: 600, label: 'Audit', colorKey: 'store' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  freshbooks: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','org','clients','projects','time','invoices','expenses','payments','reports','integrations','tax','audit','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      org: { x: 620, y: 180, label: 'Org', colorKey: 'store' },
+      clients: { x: 860, y: 180, label: 'Clients', colorKey: 'store' },
+      projects: { x: 1100, y: 180, label: 'Projects', colorKey: 'store' },
+      time: { x: 620, y: 320, label: 'Time', colorKey: 'store' },
+      invoices: { x: 860, y: 320, label: 'Invoices', colorKey: 'store' },
+      expenses: { x: 1100, y: 320, label: 'Expenses', colorKey: 'store' },
+      payments: { x: 1100, y: 460, label: 'Payments', colorKey: 'external' },
+      reports: { x: 620, y: 460, label: 'Reports', colorKey: 'store' },
+      integrations: { x: 860, y: 460, label: 'Integrations', colorKey: 'external' },
+      tax: { x: 380, y: 320, label: 'Tax', colorKey: 'api' },
+      audit: { x: 620, y: 600, label: 'Audit', colorKey: 'store' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  wave: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','org','ledger','invoices','expenses','banking','reconcile','payments','payroll','reports','tax','audit','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      org: { x: 620, y: 180, label: 'Org', colorKey: 'store' },
+      ledger: { x: 860, y: 180, label: 'Ledger', colorKey: 'store' },
+      invoices: { x: 1100, y: 180, label: 'Invoices', colorKey: 'store' },
+      expenses: { x: 620, y: 320, label: 'Expenses', colorKey: 'store' },
+      banking: { x: 860, y: 320, label: 'Banking', colorKey: 'external' },
+      reconcile: { x: 1100, y: 320, label: 'Reconcile', colorKey: 'api' },
+      payments: { x: 1100, y: 460, label: 'Payments', colorKey: 'external' },
+      payroll: { x: 380, y: 180, label: 'Payroll', colorKey: 'api' },
+      reports: { x: 620, y: 460, label: 'Reports', colorKey: 'store' },
+      tax: { x: 380, y: 320, label: 'Tax', colorKey: 'api' },
+      audit: { x: 620, y: 600, label: 'Audit', colorKey: 'store' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'stripe-atlas': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','incorporation','kyc','bank','payments','merchant','dashboard','docs','support','integrations','analytics','audit'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Founder', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      incorporation: { x: 620, y: 180, label: 'Incorporation', colorKey: 'external' },
+      kyc: { x: 860, y: 180, label: 'KYC', colorKey: 'external' },
+      bank: { x: 1100, y: 180, label: 'Banking', colorKey: 'external' },
+      payments: { x: 620, y: 320, label: 'Payments', colorKey: 'external' },
+      merchant: { x: 860, y: 320, label: 'Merchant', colorKey: 'store' },
+      dashboard: { x: 1100, y: 320, label: 'Dashboard', colorKey: 'api' },
+      docs: { x: 620, y: 460, label: 'Docs', colorKey: 'store' },
+      support: { x: 860, y: 460, label: 'Support', colorKey: 'external' },
+      integrations: { x: 1100, y: 460, label: 'Integrations', colorKey: 'external' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' },
+      audit: { x: 620, y: 600, label: 'Audit', colorKey: 'store' }
+    }
+  },
+
+  paddle: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','catalog','checkout','tax','payments','subscriptions','entitlements','webhooks','integrations','invoices','analytics','audit'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Merchant', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      catalog: { x: 620, y: 180, label: 'Catalog', colorKey: 'store' },
+      checkout: { x: 860, y: 180, label: 'Checkout', colorKey: 'api' },
+      tax: { x: 1100, y: 180, label: 'Tax', colorKey: 'api' },
+      payments: { x: 860, y: 320, label: 'Payments', colorKey: 'external' },
+      subscriptions: { x: 620, y: 320, label: 'Subscriptions', colorKey: 'store' },
+      entitlements: { x: 380, y: 320, label: 'Entitlements', colorKey: 'api' },
+      webhooks: { x: 1100, y: 320, label: 'Webhooks', colorKey: 'external' },
+      integrations: { x: 1100, y: 460, label: 'Integrations', colorKey: 'external' },
+      invoices: { x: 620, y: 460, label: 'Invoices', colorKey: 'store' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' },
+      audit: { x: 620, y: 600, label: 'Audit', colorKey: 'store' }
+    }
+  },
+
+  chargebee: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','catalog','plans','customers','subscriptions','billing','invoices','payments','tax','dunning','webhooks','integrations','analytics','audit'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Merchant', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      catalog: { x: 620, y: 180, label: 'Catalog', colorKey: 'store' },
+      plans: { x: 860, y: 180, label: 'Plans', colorKey: 'store' },
+      customers: { x: 1100, y: 180, label: 'Customers', colorKey: 'store' },
+      subscriptions: { x: 620, y: 320, label: 'Subscriptions', colorKey: 'store' },
+      billing: { x: 860, y: 320, label: 'Billing', colorKey: 'api' },
+      invoices: { x: 1100, y: 320, label: 'Invoices', colorKey: 'store' },
+      payments: { x: 1100, y: 460, label: 'Payments', colorKey: 'external' },
+      tax: { x: 860, y: 460, label: 'Tax', colorKey: 'api' },
+      dunning: { x: 620, y: 460, label: 'Dunning', colorKey: 'api' },
+      webhooks: { x: 380, y: 460, label: 'Webhooks', colorKey: 'external' },
+      integrations: { x: 380, y: 600, label: 'Integrations', colorKey: 'external' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' },
+      audit: { x: 1100, y: 600, label: 'Audit', colorKey: 'store' }
+    }
+  },
+
+  recurly: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','catalog','customers','subscriptions','billing','invoices','payments','tax','dunning','webhooks','integrations','analytics','audit'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Merchant', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      catalog: { x: 620, y: 180, label: 'Catalog', colorKey: 'store' },
+      customers: { x: 860, y: 180, label: 'Customers', colorKey: 'store' },
+      subscriptions: { x: 1100, y: 180, label: 'Subscriptions', colorKey: 'store' },
+      billing: { x: 620, y: 320, label: 'Billing', colorKey: 'api' },
+      invoices: { x: 860, y: 320, label: 'Invoices', colorKey: 'store' },
+      payments: { x: 1100, y: 320, label: 'Payments', colorKey: 'external' },
+      tax: { x: 620, y: 460, label: 'Tax', colorKey: 'api' },
+      dunning: { x: 860, y: 460, label: 'Dunning', colorKey: 'api' },
+      webhooks: { x: 1100, y: 460, label: 'Webhooks', colorKey: 'external' },
+      integrations: { x: 380, y: 460, label: 'Integrations', colorKey: 'external' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' },
+      audit: { x: 860, y: 600, label: 'Audit', colorKey: 'store' }
+    }
+  },
+
+  mailchimp: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','audience','segments','campaigns','editor','automation','send','deliverability','tracking','integrations','reports','analytics','compliance'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      audience: { x: 620, y: 180, label: 'Audience', colorKey: 'store' },
+      segments: { x: 860, y: 180, label: 'Segments', colorKey: 'api' },
+      campaigns: { x: 1100, y: 180, label: 'Campaigns', colorKey: 'store' },
+      editor: { x: 620, y: 320, label: 'Editor', colorKey: 'api' },
+      automation: { x: 860, y: 320, label: 'Automation', colorKey: 'queue' },
+      send: { x: 1100, y: 320, label: 'Send', colorKey: 'external' },
+      deliverability: { x: 1100, y: 460, label: 'Deliverability', colorKey: 'api' },
+      tracking: { x: 860, y: 460, label: 'Tracking', colorKey: 'api' },
+      integrations: { x: 620, y: 460, label: 'Integrations', colorKey: 'external' },
+      reports: { x: 380, y: 320, label: 'Reports', colorKey: 'store' },
+      analytics: { x: 380, y: 460, label: 'Analytics', colorKey: 'store' },
+      compliance: { x: 620, y: 600, label: 'Compliance', colorKey: 'api' }
+    }
+  },
+
+  convertkit: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','subscribers','forms','tags','segments','campaigns','automation','send','deliverability','commerce','payments','integrations','analytics','reports'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Creator', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      subscribers: { x: 620, y: 180, label: 'Subscribers', colorKey: 'store' },
+      forms: { x: 860, y: 180, label: 'Forms', colorKey: 'external' },
+      tags: { x: 1100, y: 180, label: 'Tags', colorKey: 'store' },
+      segments: { x: 620, y: 320, label: 'Segments', colorKey: 'api' },
+      campaigns: { x: 860, y: 320, label: 'Campaigns', colorKey: 'store' },
+      automation: { x: 1100, y: 320, label: 'Automation', colorKey: 'queue' },
+      send: { x: 1100, y: 460, label: 'Send', colorKey: 'external' },
+      deliverability: { x: 860, y: 460, label: 'Deliverability', colorKey: 'api' },
+      commerce: { x: 620, y: 460, label: 'Commerce', colorKey: 'store' },
+      payments: { x: 380, y: 460, label: 'Payments', colorKey: 'external' },
+      integrations: { x: 380, y: 320, label: 'Integrations', colorKey: 'external' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' },
+      reports: { x: 860, y: 600, label: 'Reports', colorKey: 'store' }
+    }
+  },
+
+  activecampaign: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','contacts','segments','campaigns','automation','crm','pipelines','send','deliverability','tracking','integrations','analytics','reports','compliance'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      contacts: { x: 620, y: 180, label: 'Contacts', colorKey: 'store' },
+      segments: { x: 860, y: 180, label: 'Segments', colorKey: 'api' },
+      campaigns: { x: 1100, y: 180, label: 'Campaigns', colorKey: 'store' },
+      automation: { x: 860, y: 320, label: 'Automation', colorKey: 'queue' },
+      crm: { x: 620, y: 320, label: 'CRM', colorKey: 'store' },
+      pipelines: { x: 1100, y: 320, label: 'Pipelines', colorKey: 'store' },
+      send: { x: 1100, y: 460, label: 'Send', colorKey: 'external' },
+      deliverability: { x: 860, y: 460, label: 'Deliverability', colorKey: 'api' },
+      tracking: { x: 620, y: 460, label: 'Tracking', colorKey: 'api' },
+      integrations: { x: 380, y: 320, label: 'Integrations', colorKey: 'external' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' },
+      reports: { x: 860, y: 600, label: 'Reports', colorKey: 'store' },
+      compliance: { x: 1100, y: 600, label: 'Compliance', colorKey: 'api' }
+    }
+  }
+});
+
+Object.assign(ARCH_LAYOUTS, {
+  xero: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Xero Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','org','ledger','invoices','expenses','bankfeeds','reconcile','tax','reports','integrations','payments','audit','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      org: { x: 600, y: 160, label: 'Org' },
+      ledger: { x: 880, y: 160, label: 'Ledger' },
+      invoices: { x: 1160, y: 160, label: 'Invoices' },
+      expenses: { x: 600, y: 300, label: 'Expenses' },
+      bankfeeds: { x: 880, y: 300, label: 'Bank Feeds' },
+      reconcile: { x: 1160, y: 300, label: 'Reconcile' },
+      tax: { x: 320, y: 300, label: 'Tax' },
+      reports: { x: 600, y: 440, label: 'Reports' },
+      integrations: { x: 880, y: 440, label: 'Integrations' },
+      payments: { x: 1160, y: 440, label: 'Payments' },
+      audit: { x: 600, y: 580, label: 'Audit' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','org','org'], ['org','ledger','ledger']);
+      if(stepIdx===2) e.push(['ledger','invoices','invoice'], ['invoices','payments','pay']);
+      if(stepIdx===3) e.push(['client','expenses','expense'], ['expenses','tax','tax']);
+      if(stepIdx===4) e.push(['bankfeeds','reconcile','reconcile'], ['reconcile','reports','reports']);
+      if(stepIdx===5) e.push(['org','integrations','integrate']);
+      if(stepIdx===6) e.push(['org','audit','audit'], ['reports','analytics','analytics']);
+      return e;
+    }
+  },
+
+  freshbooks: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'FreshBooks Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','org','clients','projects','time','invoices','expenses','payments','reports','integrations','tax','audit','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      org: { x: 600, y: 160, label: 'Org' },
+      clients: { x: 880, y: 160, label: 'Clients' },
+      projects: { x: 1160, y: 160, label: 'Projects' },
+      time: { x: 600, y: 300, label: 'Time' },
+      invoices: { x: 880, y: 300, label: 'Invoices' },
+      expenses: { x: 1160, y: 300, label: 'Expenses' },
+      payments: { x: 1160, y: 440, label: 'Payments' },
+      reports: { x: 600, y: 440, label: 'Reports' },
+      integrations: { x: 880, y: 440, label: 'Integrations' },
+      tax: { x: 320, y: 300, label: 'Tax' },
+      audit: { x: 600, y: 580, label: 'Audit' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','org','org'], ['org','clients','client']);
+      if(stepIdx===2) e.push(['projects','time','time'], ['time','invoices','invoice'], ['invoices','payments','pay']);
+      if(stepIdx===3) e.push(['client','expenses','expense'], ['expenses','tax','tax']);
+      if(stepIdx===4) e.push(['org','integrations','integrate']);
+      if(stepIdx===5) e.push(['org','reports','reports'], ['reports','analytics','analytics'], ['org','audit','audit']);
+      return e;
+    }
+  },
+
+  wave: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Wave Accounting',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','org','ledger','invoices','expenses','banking','reconcile','payments','payroll','reports','tax','audit','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      org: { x: 600, y: 160, label: 'Org' },
+      ledger: { x: 880, y: 160, label: 'Ledger' },
+      invoices: { x: 1160, y: 160, label: 'Invoices' },
+      expenses: { x: 600, y: 300, label: 'Expenses' },
+      banking: { x: 880, y: 300, label: 'Banking' },
+      reconcile: { x: 1160, y: 300, label: 'Reconcile' },
+      payments: { x: 1160, y: 440, label: 'Payments' },
+      payroll: { x: 320, y: 160, label: 'Payroll' },
+      reports: { x: 600, y: 440, label: 'Reports' },
+      tax: { x: 320, y: 300, label: 'Tax' },
+      audit: { x: 600, y: 580, label: 'Audit' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','org','org'], ['org','ledger','ledger']);
+      if(stepIdx===2) e.push(['ledger','invoices','invoice'], ['invoices','payments','pay']);
+      if(stepIdx===3) e.push(['client','expenses','expense'], ['expenses','tax','tax']);
+      if(stepIdx===4) e.push(['banking','reconcile','reconcile'], ['reconcile','reports','reports']);
+      if(stepIdx===5) e.push(['org','payroll','payroll']);
+      if(stepIdx===6) e.push(['org','audit','audit'], ['reports','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'stripe-atlas': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Stripe Atlas Journey',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','incorporation','kyc','bank','payments','merchant','dashboard','docs','support','integrations','analytics','audit'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Founder' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      incorporation: { x: 600, y: 160, label: 'Incorporation' },
+      kyc: { x: 880, y: 160, label: 'KYC' },
+      bank: { x: 1160, y: 160, label: 'Banking' },
+      payments: { x: 600, y: 300, label: 'Payments' },
+      merchant: { x: 880, y: 300, label: 'Merchant' },
+      dashboard: { x: 1160, y: 300, label: 'Dashboard' },
+      docs: { x: 600, y: 440, label: 'Docs' },
+      support: { x: 880, y: 440, label: 'Support' },
+      integrations: { x: 1160, y: 440, label: 'Integrations' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      audit: { x: 600, y: 580, label: 'Audit' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','incorporation','inc']);
+      if(stepIdx===2) e.push(['incorporation','kyc','kyc'], ['kyc','bank','bank']);
+      if(stepIdx===3) e.push(['bank','payments','pay'], ['payments','merchant','merchant'], ['merchant','dashboard','dash']);
+      if(stepIdx===4) e.push(['dashboard','integrations','integrate']);
+      if(stepIdx===5) e.push(['docs','support','support']);
+      if(stepIdx===6) e.push(['dashboard','analytics','analytics'], ['dashboard','audit','audit']);
+      return e;
+    }
+  },
+
+  paddle: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Paddle Billing Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','catalog','checkout','tax','payments','subscriptions','entitlements','webhooks','integrations','invoices','analytics','audit'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Merchant' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      catalog: { x: 600, y: 160, label: 'Catalog' },
+      checkout: { x: 880, y: 160, label: 'Checkout' },
+      tax: { x: 1160, y: 160, label: 'Tax' },
+      payments: { x: 880, y: 300, label: 'Payments' },
+      subscriptions: { x: 600, y: 300, label: 'Subscriptions' },
+      entitlements: { x: 320, y: 300, label: 'Entitlements' },
+      webhooks: { x: 1160, y: 300, label: 'Webhooks' },
+      integrations: { x: 1160, y: 440, label: 'Integrations' },
+      invoices: { x: 600, y: 440, label: 'Invoices' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      audit: { x: 600, y: 580, label: 'Audit' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','catalog','catalog'], ['catalog','checkout','checkout']);
+      if(stepIdx===2) e.push(['checkout','tax','tax'], ['checkout','payments','pay']);
+      if(stepIdx===3) e.push(['payments','subscriptions','sub'], ['subscriptions','entitlements','entitle']);
+      if(stepIdx===4) e.push(['subscriptions','invoices','invoice']);
+      if(stepIdx===5) e.push(['subscriptions','webhooks','hook'], ['webhooks','integrations','integrate']);
+      if(stepIdx===6) e.push(['subscriptions','analytics','analytics'], ['subscriptions','audit','audit']);
+      return e;
+    }
+  },
+
+  chargebee: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Chargebee Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','catalog','plans','customers','subscriptions','billing','invoices','payments','tax','dunning','webhooks','integrations','analytics','audit'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Merchant' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      catalog: { x: 600, y: 160, label: 'Catalog' },
+      plans: { x: 880, y: 160, label: 'Plans' },
+      customers: { x: 1160, y: 160, label: 'Customers' },
+      subscriptions: { x: 600, y: 300, label: 'Subscriptions' },
+      billing: { x: 880, y: 300, label: 'Billing' },
+      invoices: { x: 1160, y: 300, label: 'Invoices' },
+      payments: { x: 1160, y: 440, label: 'Payments' },
+      tax: { x: 880, y: 440, label: 'Tax' },
+      dunning: { x: 600, y: 440, label: 'Dunning' },
+      webhooks: { x: 320, y: 440, label: 'Webhooks' },
+      integrations: { x: 320, y: 580, label: 'Integrations' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      audit: { x: 1160, y: 580, label: 'Audit' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','catalog','catalog'], ['catalog','plans','plan']);
+      if(stepIdx===2) e.push(['customers','subscriptions','sub'], ['subscriptions','billing','bill']);
+      if(stepIdx===3) e.push(['billing','invoices','invoice'], ['invoices','payments','pay']);
+      if(stepIdx===4) e.push(['invoices','tax','tax']);
+      if(stepIdx===5) e.push(['payments','dunning','dun'], ['dunning','subscriptions','retry']);
+      if(stepIdx===6) e.push(['subscriptions','webhooks','hook'], ['webhooks','integrations','integrate']);
+      if(stepIdx===7) e.push(['subscriptions','analytics','analytics'], ['subscriptions','audit','audit']);
+      return e;
+    }
+  },
+
+  recurly: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Recurly Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','catalog','customers','subscriptions','billing','invoices','payments','tax','dunning','webhooks','integrations','analytics','audit'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Merchant' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      catalog: { x: 600, y: 160, label: 'Catalog' },
+      customers: { x: 880, y: 160, label: 'Customers' },
+      subscriptions: { x: 1160, y: 160, label: 'Subscriptions' },
+      billing: { x: 600, y: 300, label: 'Billing' },
+      invoices: { x: 880, y: 300, label: 'Invoices' },
+      payments: { x: 1160, y: 300, label: 'Payments' },
+      tax: { x: 600, y: 440, label: 'Tax' },
+      dunning: { x: 880, y: 440, label: 'Dunning' },
+      webhooks: { x: 1160, y: 440, label: 'Webhooks' },
+      integrations: { x: 320, y: 440, label: 'Integrations' },
+      analytics: { x: 600, y: 580, label: 'Analytics' },
+      audit: { x: 880, y: 580, label: 'Audit' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','catalog','catalog'], ['catalog','customers','cust']);
+      if(stepIdx===2) e.push(['customers','subscriptions','sub'], ['subscriptions','billing','bill']);
+      if(stepIdx===3) e.push(['billing','invoices','invoice'], ['invoices','payments','pay']);
+      if(stepIdx===4) e.push(['invoices','tax','tax']);
+      if(stepIdx===5) e.push(['payments','dunning','dun'], ['dunning','subscriptions','retry']);
+      if(stepIdx===6) e.push(['subscriptions','webhooks','hook'], ['webhooks','integrations','integrate']);
+      if(stepIdx===7) e.push(['subscriptions','analytics','analytics'], ['subscriptions','audit','audit']);
+      return e;
+    }
+  },
+
+  mailchimp: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Mailchimp Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','audience','segments','campaigns','editor','automation','send','deliverability','tracking','integrations','reports','analytics','compliance'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      audience: { x: 600, y: 160, label: 'Audience' },
+      segments: { x: 880, y: 160, label: 'Segments' },
+      campaigns: { x: 1160, y: 160, label: 'Campaigns' },
+      editor: { x: 600, y: 300, label: 'Editor' },
+      automation: { x: 880, y: 300, label: 'Automation' },
+      send: { x: 1160, y: 300, label: 'Send' },
+      deliverability: { x: 1160, y: 440, label: 'Deliverability' },
+      tracking: { x: 880, y: 440, label: 'Tracking' },
+      integrations: { x: 600, y: 440, label: 'Integrations' },
+      reports: { x: 320, y: 300, label: 'Reports' },
+      analytics: { x: 320, y: 440, label: 'Analytics' },
+      compliance: { x: 600, y: 580, label: 'Compliance' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','audience','aud'], ['audience','segments','seg']);
+      if(stepIdx===2) e.push(['segments','campaigns','camp'], ['campaigns','editor','edit'], ['editor','automation','auto']);
+      if(stepIdx===3) e.push(['automation','send','send'], ['send','deliverability','deliver']);
+      if(stepIdx===4) e.push(['send','tracking','track'], ['tracking','reports','report'], ['reports','analytics','analytics']);
+      if(stepIdx===5) e.push(['audience','integrations','integrate']);
+      if(stepIdx===6) e.push(['campaigns','compliance','compliance']);
+      return e;
+    }
+  },
+
+  convertkit: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'ConvertKit Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','subscribers','forms','tags','segments','campaigns','automation','send','deliverability','commerce','payments','integrations','analytics','reports'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Creator' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      subscribers: { x: 600, y: 160, label: 'Subscribers' },
+      forms: { x: 880, y: 160, label: 'Forms' },
+      tags: { x: 1160, y: 160, label: 'Tags' },
+      segments: { x: 600, y: 300, label: 'Segments' },
+      campaigns: { x: 880, y: 300, label: 'Campaigns' },
+      automation: { x: 1160, y: 300, label: 'Automation' },
+      send: { x: 1160, y: 440, label: 'Send' },
+      deliverability: { x: 880, y: 440, label: 'Deliverability' },
+      commerce: { x: 600, y: 440, label: 'Commerce' },
+      payments: { x: 320, y: 440, label: 'Payments' },
+      integrations: { x: 320, y: 300, label: 'Integrations' },
+      analytics: { x: 600, y: 580, label: 'Analytics' },
+      reports: { x: 880, y: 580, label: 'Reports' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['forms','subscribers','sub'], ['subscribers','tags','tag'], ['tags','segments','seg']);
+      if(stepIdx===2) e.push(['segments','campaigns','camp'], ['campaigns','automation','auto'], ['automation','send','send']);
+      if(stepIdx===3) e.push(['send','deliverability','deliver']);
+      if(stepIdx===4) e.push(['subscribers','commerce','commerce'], ['commerce','payments','pay']);
+      if(stepIdx===5) e.push(['subscribers','integrations','integrate']);
+      if(stepIdx===6) e.push(['send','analytics','analytics'], ['analytics','reports','reports']);
+      return e;
+    }
+  },
+
+  activecampaign: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'ActiveCampaign Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','contacts','segments','campaigns','automation','crm','pipelines','send','deliverability','tracking','integrations','analytics','reports','compliance'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      contacts: { x: 600, y: 160, label: 'Contacts' },
+      segments: { x: 880, y: 160, label: 'Segments' },
+      campaigns: { x: 1160, y: 160, label: 'Campaigns' },
+      automation: { x: 880, y: 300, label: 'Automation' },
+      crm: { x: 600, y: 300, label: 'CRM' },
+      pipelines: { x: 1160, y: 300, label: 'Pipelines' },
+      send: { x: 1160, y: 440, label: 'Send' },
+      deliverability: { x: 880, y: 440, label: 'Deliverability' },
+      tracking: { x: 600, y: 440, label: 'Tracking' },
+      integrations: { x: 320, y: 300, label: 'Integrations' },
+      analytics: { x: 600, y: 580, label: 'Analytics' },
+      reports: { x: 880, y: 580, label: 'Reports' },
+      compliance: { x: 1160, y: 580, label: 'Compliance' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','contacts','contact'], ['contacts','segments','seg']);
+      if(stepIdx===2) e.push(['segments','campaigns','camp'], ['campaigns','automation','auto'], ['automation','send','send']);
+      if(stepIdx===3) e.push(['send','deliverability','deliver'], ['send','tracking','track']);
+      if(stepIdx===4) e.push(['tracking','reports','report'], ['reports','analytics','analytics']);
+      if(stepIdx===5) e.push(['contacts','crm','crm'], ['crm','pipelines','pipe']);
+      if(stepIdx===6) e.push(['contacts','integrations','integrate']);
+      if(stepIdx===7) e.push(['campaigns','compliance','compliance']);
+      return e;
+    }
+  }
+});
+
 Object.assign(ARCH_LAYOUTS, {
   rescuetime: {
     viewBox: '0 0 1860 820',

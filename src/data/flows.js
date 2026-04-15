@@ -5909,6 +5909,408 @@ export const FLOWS = {
     ]
   },
 
+  xero: {
+    title: 'Xero',
+    steps: [
+      {
+        title: 'Set up org + ledger',
+        desc: 'User sets up org and chart of accounts; ledger becomes source of truth.',
+        active: ['client','auth','org','ledger'],
+        edges: [['client','auth'], ['auth','org'], ['org','ledger']]
+      },
+      {
+        title: 'Invoice + collect payments',
+        desc: 'Invoices created and sent; payments collected through provider.',
+        active: ['invoices','payments'],
+        edges: [['ledger','invoices'], ['invoices','payments']]
+      },
+      {
+        title: 'Expenses + tax',
+        desc: 'Expenses logged; tax rules applied for compliance and reporting.',
+        active: ['expenses','tax'],
+        edges: [['client','expenses'], ['expenses','tax']]
+      },
+      {
+        title: 'Bank feeds + reconciliation',
+        desc: 'Bank feeds imported and reconciled against ledger transactions.',
+        active: ['bankfeeds','reconcile'],
+        edges: [['bankfeeds','reconcile'], ['reconcile','ledger']]
+      },
+      {
+        title: 'Reports + analytics + audit',
+        desc: 'Reports summarize finances; analytics shows trends; audit logs changes.',
+        active: ['reports','analytics','audit'],
+        edges: [['ledger','reports'], ['reports','analytics'], ['ledger','audit']]
+      },
+      {
+        title: 'Integrations',
+        desc: 'Integrations sync accounting data with payroll, CRM, and e-commerce systems.',
+        active: ['integrations'],
+        edges: [['org','integrations']]
+      }
+    ]
+  },
+
+  freshbooks: {
+    title: 'FreshBooks',
+    steps: [
+      {
+        title: 'Set up clients + projects',
+        desc: 'Create clients and projects for time and invoicing workflows.',
+        active: ['client','auth','org','clients','projects'],
+        edges: [['client','auth'], ['auth','org'], ['org','clients'], ['clients','projects']]
+      },
+      {
+        title: 'Track time',
+        desc: 'Time tracked against projects and billable rates.',
+        active: ['time','projects'],
+        edges: [['client','time'], ['projects','time']]
+      },
+      {
+        title: 'Create invoices + payments',
+        desc: 'Invoices generated from time/expenses; payments collected via provider.',
+        active: ['invoices','payments'],
+        edges: [['time','invoices'], ['expenses','invoices'], ['invoices','payments']]
+      },
+      {
+        title: 'Log expenses + tax',
+        desc: 'Expenses categorized; tax rules applied for reports.',
+        active: ['expenses','tax'],
+        edges: [['client','expenses'], ['expenses','tax']]
+      },
+      {
+        title: 'Integrations',
+        desc: 'Integrations sync invoices, payments, and contacts to external systems.',
+        active: ['integrations'],
+        edges: [['org','integrations']]
+      },
+      {
+        title: 'Reports + analytics + audit',
+        desc: 'Reports summarize profitability; analytics shows trends; audit logs changes.',
+        active: ['reports','analytics','audit'],
+        edges: [['org','reports'], ['reports','analytics'], ['org','audit']]
+      }
+    ]
+  },
+
+  wave: {
+    title: 'Wave',
+    steps: [
+      {
+        title: 'Set up org + ledger',
+        desc: 'Org configured; ledger stores accounting transactions.',
+        active: ['client','auth','org','ledger'],
+        edges: [['client','auth'], ['auth','org'], ['org','ledger']]
+      },
+      {
+        title: 'Invoices + payments',
+        desc: 'Invoices created; payments collected and reconciled into ledger.',
+        active: ['invoices','payments'],
+        edges: [['ledger','invoices'], ['invoices','payments'], ['payments','ledger']]
+      },
+      {
+        title: 'Expenses + tax',
+        desc: 'Expenses logged and categorized; tax applied for compliance.',
+        active: ['expenses','tax'],
+        edges: [['client','expenses'], ['expenses','tax']]
+      },
+      {
+        title: 'Banking + reconciliation',
+        desc: 'Banking feeds imported; reconciliation matches transactions.',
+        active: ['banking','reconcile'],
+        edges: [['banking','reconcile'], ['reconcile','ledger']]
+      },
+      {
+        title: 'Payroll',
+        desc: 'Payroll postings update ledger and tax flows.',
+        active: ['payroll'],
+        edges: [['org','payroll'], ['payroll','ledger']]
+      },
+      {
+        title: 'Reports + analytics + audit',
+        desc: 'Reports summarize financials; analytics shows trends; audit logs changes.',
+        active: ['reports','analytics','audit'],
+        edges: [['ledger','reports'], ['reports','analytics'], ['ledger','audit']]
+      }
+    ]
+  },
+
+  'stripe-atlas': {
+    title: 'Stripe Atlas',
+    steps: [
+      {
+        title: 'Sign up + incorporate',
+        desc: 'Founder signs up and completes incorporation workflow.',
+        active: ['client','auth','incorporation'],
+        edges: [['client','auth'], ['auth','incorporation']]
+      },
+      {
+        title: 'KYC + banking setup',
+        desc: 'KYC verification and banking account setup completed.',
+        active: ['kyc','bank'],
+        edges: [['incorporation','kyc'], ['kyc','bank']]
+      },
+      {
+        title: 'Enable payments + merchant account',
+        desc: 'Payments enabled; merchant account provisioned and configured.',
+        active: ['payments','merchant','dashboard'],
+        edges: [['bank','payments'], ['payments','merchant'], ['merchant','dashboard']]
+      },
+      {
+        title: 'Docs + support',
+        desc: 'Docs and support help founders complete setup and compliance.',
+        active: ['docs','support'],
+        edges: [['dashboard','docs'], ['docs','support']]
+      },
+      {
+        title: 'Integrations + analytics + audit',
+        desc: 'Integrations connect services; analytics and audit track activity and compliance.',
+        active: ['integrations','analytics','audit'],
+        edges: [['dashboard','integrations'], ['dashboard','analytics'], ['dashboard','audit']]
+      }
+    ]
+  },
+
+  paddle: {
+    title: 'Paddle',
+    steps: [
+      {
+        title: 'Set up catalog + checkout',
+        desc: 'Merchant configures catalog and embeds checkout.',
+        active: ['client','auth','catalog','checkout'],
+        edges: [['client','auth'], ['auth','catalog'], ['catalog','checkout']]
+      },
+      {
+        title: 'Tax + payments',
+        desc: 'Tax calculated; payments processed.',
+        active: ['tax','payments'],
+        edges: [['checkout','tax'], ['checkout','payments']]
+      },
+      {
+        title: 'Subscriptions + entitlements',
+        desc: 'Subscriptions created; entitlements provision access for end users.',
+        active: ['subscriptions','entitlements'],
+        edges: [['payments','subscriptions'], ['subscriptions','entitlements']]
+      },
+      {
+        title: 'Invoices',
+        desc: 'Invoices issued for billing and compliance.',
+        active: ['invoices'],
+        edges: [['subscriptions','invoices']]
+      },
+      {
+        title: 'Webhooks + integrations',
+        desc: 'Webhooks send events to integrations and merchant systems.',
+        active: ['webhooks','integrations'],
+        edges: [['subscriptions','webhooks'], ['webhooks','integrations']]
+      },
+      {
+        title: 'Analytics + audit',
+        desc: 'Analytics and audit support monitoring, disputes, and compliance.',
+        active: ['analytics','audit'],
+        edges: [['subscriptions','analytics'], ['subscriptions','audit']]
+      }
+    ]
+  },
+
+  chargebee: {
+    title: 'Chargebee',
+    steps: [
+      {
+        title: 'Catalog + plans',
+        desc: 'Merchant configures catalog and pricing plans.',
+        active: ['client','auth','catalog','plans'],
+        edges: [['client','auth'], ['auth','catalog'], ['catalog','plans']]
+      },
+      {
+        title: 'Customers + subscriptions',
+        desc: 'Customers subscribe; subscription lifecycle tracked.',
+        active: ['customers','subscriptions'],
+        edges: [['plans','customers'], ['customers','subscriptions']]
+      },
+      {
+        title: 'Billing + invoices + payments',
+        desc: 'Billing generates invoices; payments collected via provider.',
+        active: ['billing','invoices','payments'],
+        edges: [['subscriptions','billing'], ['billing','invoices'], ['invoices','payments']]
+      },
+      {
+        title: 'Tax + dunning',
+        desc: 'Tax computed; dunning retries failed payments and updates subscription status.',
+        active: ['tax','dunning'],
+        edges: [['invoices','tax'], ['payments','dunning'], ['dunning','subscriptions']]
+      },
+      {
+        title: 'Webhooks + integrations',
+        desc: 'Webhooks push lifecycle events to integrations and internal systems.',
+        active: ['webhooks','integrations'],
+        edges: [['subscriptions','webhooks'], ['webhooks','integrations']]
+      },
+      {
+        title: 'Analytics + audit',
+        desc: 'Analytics measure MRR/churn; audit tracks changes and compliance.',
+        active: ['analytics','audit'],
+        edges: [['subscriptions','analytics'], ['subscriptions','audit']]
+      }
+    ]
+  },
+
+  recurly: {
+    title: 'Recurly',
+    steps: [
+      {
+        title: 'Catalog + customers',
+        desc: 'Merchant sets catalog; customers created for subscriptions.',
+        active: ['client','auth','catalog','customers'],
+        edges: [['client','auth'], ['auth','catalog'], ['catalog','customers']]
+      },
+      {
+        title: 'Subscriptions + billing',
+        desc: 'Subscriptions created; billing schedules invoices and renewals.',
+        active: ['subscriptions','billing'],
+        edges: [['customers','subscriptions'], ['subscriptions','billing']]
+      },
+      {
+        title: 'Invoices + payments',
+        desc: 'Invoices issued; payments collected and settled.',
+        active: ['invoices','payments'],
+        edges: [['billing','invoices'], ['invoices','payments']]
+      },
+      {
+        title: 'Tax + dunning',
+        desc: 'Tax computed; dunning retries failures and manages churn recovery.',
+        active: ['tax','dunning'],
+        edges: [['invoices','tax'], ['payments','dunning'], ['dunning','subscriptions']]
+      },
+      {
+        title: 'Webhooks + integrations',
+        desc: 'Webhooks deliver events to integrations and data pipelines.',
+        active: ['webhooks','integrations'],
+        edges: [['subscriptions','webhooks'], ['webhooks','integrations']]
+      },
+      {
+        title: 'Analytics + audit',
+        desc: 'Analytics track revenue and churn; audit logs changes.',
+        active: ['analytics','audit'],
+        edges: [['subscriptions','analytics'], ['subscriptions','audit']]
+      }
+    ]
+  },
+
+  mailchimp: {
+    title: 'Mailchimp',
+    steps: [
+      {
+        title: 'Import audience + segments',
+        desc: 'Audience imported and segmented for targeting.',
+        active: ['client','auth','audience','segments'],
+        edges: [['client','auth'], ['auth','audience'], ['audience','segments']]
+      },
+      {
+        title: 'Build campaign in editor',
+        desc: 'Campaign created and composed in editor.',
+        active: ['campaigns','editor'],
+        edges: [['segments','campaigns'], ['campaigns','editor']]
+      },
+      {
+        title: 'Automation + send',
+        desc: 'Automation triggers sends; deliverability monitored.',
+        active: ['automation','send','deliverability'],
+        edges: [['editor','automation'], ['automation','send'], ['send','deliverability']]
+      },
+      {
+        title: 'Tracking + reports',
+        desc: 'Opens/clicks tracked; reports and analytics summarize performance.',
+        active: ['tracking','reports','analytics'],
+        edges: [['send','tracking'], ['tracking','reports'], ['reports','analytics']]
+      },
+      {
+        title: 'Integrations + compliance',
+        desc: 'Integrations sync contacts and events; compliance handles opt-outs and policies.',
+        active: ['integrations','compliance'],
+        edges: [['audience','integrations'], ['campaigns','compliance']]
+      }
+    ]
+  },
+
+  convertkit: {
+    title: 'ConvertKit',
+    steps: [
+      {
+        title: 'Capture subscriber via form',
+        desc: 'Subscriber signs up via form; stored and tagged.',
+        active: ['forms','subscribers','tags'],
+        edges: [['forms','subscribers'], ['subscribers','tags']]
+      },
+      {
+        title: 'Segments + campaigns',
+        desc: 'Segments built from tags; campaigns authored for nurture sequences.',
+        active: ['segments','campaigns'],
+        edges: [['tags','segments'], ['segments','campaigns']]
+      },
+      {
+        title: 'Automation + send',
+        desc: 'Automation triggers sends; deliverability monitored.',
+        active: ['automation','send','deliverability'],
+        edges: [['campaigns','automation'], ['automation','send'], ['send','deliverability']]
+      },
+      {
+        title: 'Commerce + payments',
+        desc: 'Sell digital products; payments collected and reconciled.',
+        active: ['commerce','payments'],
+        edges: [['subscribers','commerce'], ['commerce','payments']]
+      },
+      {
+        title: 'Integrations + reporting',
+        desc: 'Integrations sync events; analytics and reports summarize growth.',
+        active: ['integrations','analytics','reports'],
+        edges: [['subscribers','integrations'], ['send','analytics'], ['analytics','reports']]
+      }
+    ]
+  },
+
+  activecampaign: {
+    title: 'ActiveCampaign',
+    steps: [
+      {
+        title: 'Import contacts + segment',
+        desc: 'Contacts imported and segmented for targeting.',
+        active: ['client','auth','contacts','segments'],
+        edges: [['client','auth'], ['auth','contacts'], ['contacts','segments']]
+      },
+      {
+        title: 'Create campaign + automation',
+        desc: 'Campaigns created; automation orchestrates multi-step journeys.',
+        active: ['campaigns','automation'],
+        edges: [['segments','campaigns'], ['campaigns','automation']]
+      },
+      {
+        title: 'Send + deliverability + tracking',
+        desc: 'Sends executed; deliverability monitored; tracking captures engagement.',
+        active: ['send','deliverability','tracking'],
+        edges: [['automation','send'], ['send','deliverability'], ['send','tracking']]
+      },
+      {
+        title: 'CRM pipelines',
+        desc: 'CRM and pipelines track leads through stages based on engagement.',
+        active: ['crm','pipelines'],
+        edges: [['contacts','crm'], ['crm','pipelines']]
+      },
+      {
+        title: 'Reports + analytics + compliance',
+        desc: 'Reports/analytics summarize performance; compliance manages consent.',
+        active: ['reports','analytics','compliance'],
+        edges: [['tracking','reports'], ['reports','analytics'], ['campaigns','compliance']]
+      },
+      {
+        title: 'Integrations',
+        desc: 'Integrations sync events and data with external systems.',
+        active: ['integrations'],
+        edges: [['contacts','integrations']]
+      }
+    ]
+  },
+
   chime: {
     title: 'Chime',
     steps: [
