@@ -425,6 +425,336 @@ export const FLOWS = {
     ]
   },
 
+  wink: {
+    title: 'Wink',
+    steps: [
+      {
+        title: 'Onboard + profile setup',
+        desc: 'User signs up, sets profile, and grants permissions; safety checks run.',
+        active: ['client','auth','profiles','risk'],
+        edges: [['client','auth'], ['auth','profiles'], ['profiles','risk']]
+      },
+      {
+        title: 'Discovery + matching',
+        desc: 'Discovery ranks nearby/compatible users; matching applies preferences and safety filters.',
+        active: ['match','profiles','moderation'],
+        edges: [['profiles','match'], ['match','moderation']]
+      },
+      {
+        title: 'Chat + realtime',
+        desc: 'Messaging uses realtime delivery; notifications drive re-engagement.',
+        active: ['chat','realtime','notify','push'],
+        edges: [['client','chat'], ['chat','realtime'], ['realtime','notify'], ['notify','push']]
+      },
+      {
+        title: 'Safety: blocks/reports',
+        desc: 'Reports, blocks, and enforcement reduce abuse and spam.',
+        active: ['report','block','risk'],
+        edges: [['client','report'], ['report','block'], ['report','risk']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Telemetry improves match quality and detects abuse patterns.',
+        active: ['analytics','risk'],
+        edges: [['client','analytics'], ['analytics','risk']]
+      }
+    ]
+  },
+
+  slowly: {
+    title: 'Slowly',
+    steps: [
+      {
+        title: 'Sign in + profile preferences',
+        desc: 'User signs in; profile and preferences used for matching and delivery rules.',
+        active: ['client','auth','profiles'],
+        edges: [['client','auth'], ['auth','profiles']]
+      },
+      {
+        title: 'Find pen pals (matching)',
+        desc: 'Matching proposes pen pals based on interests, language, and safety constraints.',
+        active: ['match','profiles','risk'],
+        edges: [['profiles','match'], ['match','risk']]
+      },
+      {
+        title: 'Write a letter',
+        desc: 'Letter is created and persisted; delivery time is computed.',
+        active: ['messaging','store'],
+        edges: [['client','messaging'], ['messaging','store']]
+      },
+      {
+        title: 'Delay queue + delivery',
+        desc: 'Delay queue schedules delivery; delivery service releases at computed time.',
+        active: ['queue','delivery','notify','push'],
+        edges: [['store','queue'], ['queue','delivery'], ['delivery','notify'], ['notify','push']]
+      },
+      {
+        title: 'Moderation + safety',
+        desc: 'Abuse/spam controls and moderation enforce policies on messages.',
+        active: ['moderation','risk'],
+        edges: [['store','moderation'], ['moderation','risk']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Engagement and delivery metrics improve matching and safety systems.',
+        active: ['analytics'],
+        edges: [['delivery','analytics']]
+      }
+    ]
+  },
+
+  'cult-fit': {
+    title: 'Cult.fit',
+    steps: [
+      {
+        title: 'Browse classes + centers',
+        desc: 'User browses class catalog, center availability, and schedules.',
+        active: ['client','catalog','schedule'],
+        edges: [['client','catalog'], ['catalog','schedule']]
+      },
+      {
+        title: 'Membership/entitlement check',
+        desc: 'Entitlements and credits validated; eligibility rules applied.',
+        active: ['auth','ledger','risk'],
+        edges: [['client','auth'], ['auth','ledger'], ['ledger','risk']]
+      },
+      {
+        title: 'Book a slot',
+        desc: 'Booking reserves a spot; waitlist logic applies if full.',
+        active: ['booking','schedule','notify'],
+        edges: [['client','booking'], ['booking','schedule'], ['booking','notify']]
+      },
+      {
+        title: 'Payments (if needed)',
+        desc: 'Payments or wallet deductions occur; ledger updated.',
+        active: ['payments','ledger'],
+        edges: [['booking','payments'], ['payments','ledger']]
+      },
+      {
+        title: 'Coach ops + attendance',
+        desc: 'Coach rosters and attendance updates sync to ops systems.',
+        active: ['coach','tracking','analytics'],
+        edges: [['booking','coach'], ['coach','tracking'], ['tracking','analytics']]
+      },
+      {
+        title: 'Notifications + reminders',
+        desc: 'Reminders for class time, changes, and cancellations delivered to user.',
+        active: ['notify','push','client'],
+        edges: [['notify','push'], ['push','client']]
+      }
+    ]
+  },
+
+  'domino-s': {
+    title: 'Domino’s',
+    steps: [
+      {
+        title: 'Browse menu + build cart',
+        desc: 'User browses menu; cart updated with customizations and pricing.',
+        active: ['client','catalog','cart'],
+        edges: [['client','catalog'], ['catalog','cart']]
+      },
+      {
+        title: 'Checkout: address + store selection',
+        desc: 'Checkout validates address, selects store, and computes delivery promise.',
+        active: ['checkout','orders','pos'],
+        edges: [['cart','checkout'], ['checkout','orders'], ['orders','pos']]
+      },
+      {
+        title: 'Payment authorization',
+        desc: 'Payment authorized (or COD); ledger updated.',
+        active: ['payments','ledger','risk'],
+        edges: [['checkout','payments'], ['payments','risk'], ['payments','ledger']]
+      },
+      {
+        title: 'Kitchen production',
+        desc: 'Order routed to kitchen; status updates (prepping/baking/ready).',
+        active: ['kitchen','orders','notify'],
+        edges: [['pos','kitchen'], ['kitchen','orders'], ['orders','notify']]
+      },
+      {
+        title: 'Dispatch + tracking',
+        desc: 'Delivery dispatched; driver tracking updates the customer timeline.',
+        active: ['dispatch','driver','tracking'],
+        edges: [['orders','dispatch'], ['dispatch','driver'], ['driver','tracking']]
+      },
+      {
+        title: 'Support, refunds, loyalty',
+        desc: 'Issues handled; refunds processed; loyalty and receipts updated.',
+        active: ['support','refunds','ledger'],
+        edges: [['tracking','support'], ['support','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  'mcdonald-s-app': {
+    title: 'McDonald’s App',
+    steps: [
+      {
+        title: 'Browse menu + offers',
+        desc: 'User browses menu; personalized offers and loyalty pricing applied.',
+        active: ['client','catalog','offers','loyalty'],
+        edges: [['client','catalog'], ['catalog','offers'], ['offers','loyalty']]
+      },
+      {
+        title: 'Build cart + select store',
+        desc: 'Cart built; store selection and pickup method (counter/drive-thru/curbside) chosen.',
+        active: ['cart','store','checkout'],
+        edges: [['client','cart'], ['cart','checkout'], ['checkout','store']]
+      },
+      {
+        title: 'Pay and place order',
+        desc: 'Payment authorized; order placed and sent to store POS/kitchen.',
+        active: ['payments','orders','store','kitchen'],
+        edges: [['checkout','payments'], ['payments','orders'], ['orders','store'], ['store','kitchen']]
+      },
+      {
+        title: 'Prepare order + status updates',
+        desc: 'Kitchen prepares; status updates to app; pickup readiness communicated.',
+        active: ['kitchen','notify','client'],
+        edges: [['kitchen','notify'], ['notify','client']]
+      },
+      {
+        title: 'Loyalty accrual + ledger',
+        desc: 'Points accrue; receipts and ledger updated for reconciliation.',
+        active: ['loyalty','ledger','analytics'],
+        edges: [['orders','loyalty'], ['payments','ledger'], ['ledger','analytics']]
+      },
+      {
+        title: 'Support + refunds',
+        desc: 'Refunds and support cases adjust ledger and order records.',
+        active: ['support','refunds','ledger'],
+        edges: [['client','support'], ['support','refunds'], ['refunds','ledger']]
+      }
+    ]
+  },
+
+  'jd-com': {
+    title: 'JD.com',
+    steps: [
+      {
+        title: 'Browse/search + ranking',
+        desc: 'Search hits index; ranking selects products by price, inventory, and relevance.',
+        active: ['client','search','index','rank','catalog'],
+        edges: [['client','search'], ['search','index'], ['search','rank'], ['rank','catalog']]
+      },
+      {
+        title: 'PDP: inventory + delivery promise',
+        desc: 'PDP composes inventory, pricing, and delivery promise using fulfillment network.',
+        active: ['catalog','inventory','checkout'],
+        edges: [['catalog','inventory'], ['inventory','checkout']]
+      },
+      {
+        title: 'Cart + checkout',
+        desc: 'Cart totals computed; checkout validates address and applies promos.',
+        active: ['cart','checkout','risk'],
+        edges: [['client','cart'], ['cart','checkout'], ['checkout','risk']]
+      },
+      {
+        title: 'Payments + risk',
+        desc: 'Payments authorized; risk checks gate order placement.',
+        active: ['payments','risk','ledger'],
+        edges: [['checkout','payments'], ['payments','risk'], ['payments','ledger']]
+      },
+      {
+        title: 'Fulfillment + carrier tracking',
+        desc: 'Fulfillment allocates inventory; carrier tracking updates customer timeline.',
+        active: ['fulfillment','carrier','tracking','notify'],
+        edges: [['checkout','fulfillment'], ['fulfillment','carrier'], ['carrier','tracking'], ['tracking','notify']]
+      },
+      {
+        title: 'Returns + refunds',
+        desc: 'Returns create reverse logistics; refunds update ledger and inventory.',
+        active: ['returns','refunds','ledger','inventory'],
+        edges: [['tracking','returns'], ['returns','refunds'], ['refunds','ledger'], ['returns','inventory']]
+      }
+    ]
+  },
+
+  roposo: {
+    title: 'Roposo',
+    steps: [
+      {
+        title: 'Open feed (ranking + recos)',
+        desc: 'Client loads feed; ranking selects videos using signals and safety filters.',
+        active: ['client','feed','rank','moderation'],
+        edges: [['client','feed'], ['feed','rank'], ['rank','moderation']]
+      },
+      {
+        title: 'Playback (CDN)',
+        desc: 'Videos stream from CDN; QoE metrics captured.',
+        active: ['cdn','client','metrics'],
+        edges: [['cdn','client'], ['client','metrics']]
+      },
+      {
+        title: 'Upload short video',
+        desc: 'Upload stored; transcode creates renditions; metadata written.',
+        active: ['upload','obj','transcode','write'],
+        edges: [['client','upload'], ['upload','obj'], ['obj','transcode'], ['upload','write']]
+      },
+      {
+        title: 'Fanout + notifications',
+        desc: 'Fanout updates followers; notifications for engagement.',
+        active: ['fanout','notify'],
+        edges: [['write','fanout'], ['fanout','notify']]
+      },
+      {
+        title: 'Comments + interactions',
+        desc: 'Comments/likes persist; signals update ranking features.',
+        active: ['comments','analytics','rank'],
+        edges: [['client','comments'], ['comments','analytics'], ['analytics','rank']]
+      },
+      {
+        title: 'Ads + measurement',
+        desc: 'Ads inserted; measurement and analytics recorded.',
+        active: ['ads','analytics'],
+        edges: [['client','ads'], ['ads','analytics']]
+      }
+    ]
+  },
+
+  likee: {
+    title: 'Likee',
+    steps: [
+      {
+        title: 'Open feed (rank + safety)',
+        desc: 'Client loads feed; ranking selects content and applies moderation filters.',
+        active: ['client','feed','rank','moderation'],
+        edges: [['client','feed'], ['feed','rank'], ['rank','moderation']]
+      },
+      {
+        title: 'Playback (CDN) + telemetry',
+        desc: 'Videos stream from CDN; telemetry captured for QoE and engagement.',
+        active: ['cdn','client','metrics','analytics'],
+        edges: [['cdn','client'], ['client','metrics'], ['metrics','analytics']]
+      },
+      {
+        title: 'Create + upload video',
+        desc: 'Upload stored; transcode creates renditions; metadata written.',
+        active: ['upload','obj','transcode','write'],
+        edges: [['client','upload'], ['upload','obj'], ['obj','transcode'], ['upload','write']]
+      },
+      {
+        title: 'Fanout + notifications',
+        desc: 'Fanout updates followers; notifications for likes/comments.',
+        active: ['fanout','notify'],
+        edges: [['write','fanout'], ['fanout','notify']]
+      },
+      {
+        title: 'Ads + monetization',
+        desc: 'Ads inserted; measurement and analytics recorded.',
+        active: ['ads','analytics'],
+        edges: [['client','ads'], ['ads','analytics']]
+      },
+      {
+        title: 'Moderation + anti-abuse',
+        desc: 'Moderation/risk systems enforce policy and reduce spam.',
+        active: ['moderation','risk'],
+        edges: [['write','moderation'], ['moderation','risk']]
+      }
+    ]
+  },
+
   peanut: {
     title: 'Peanut',
     steps: [
