@@ -8795,6 +8795,336 @@ export const FLOWS = {
     ]
   },
 
+  'zomato-business': {
+    title: 'Zomato Business',
+    steps: [
+      {
+        title: 'Sign in + view dashboard',
+        desc: 'Merchant logs in and views operational dashboard.',
+        active: ['merchant','auth','dashboard'],
+        edges: [['merchant','auth'], ['auth','dashboard']]
+      },
+      {
+        title: 'Update menus + inventory',
+        desc: 'Menus, inventory, and pricing maintained for ordering apps.',
+        active: ['menus','inventory','pricing'],
+        edges: [['dashboard','menus'], ['menus','inventory'], ['inventory','pricing']]
+      },
+      {
+        title: 'Manage orders + KDS',
+        desc: 'Orders monitored; KDS integration supports kitchen operations.',
+        active: ['orders','kds'],
+        edges: [['pricing','orders'], ['orders','kds']]
+      },
+      {
+        title: 'Settlements + ads',
+        desc: 'Settlements/reconciliation and ads/campaign tools.',
+        active: ['settlements','ads'],
+        edges: [['orders','settlements'], ['ads','analytics']]
+      },
+      {
+        title: 'Notifications + support + analytics',
+        desc: 'Notifications for spikes/issues; support workflows; analytics performance.',
+        active: ['notifications','support','analytics'],
+        edges: [['orders','notifications'], ['merchant','support'], ['orders','analytics']]
+      }
+    ]
+  },
+
+  'swiggy-instamart': {
+    title: 'Swiggy Instamart',
+    steps: [
+      {
+        title: 'Browse catalog + inventory',
+        desc: 'User browses quick-commerce catalog backed by inventory.',
+        active: ['client','auth','search','catalog','inventory'],
+        edges: [['client','auth'], ['auth','search'], ['search','catalog'], ['catalog','inventory']]
+      },
+      {
+        title: 'Cart + checkout + payment',
+        desc: 'Checkout creates order and processes payment.',
+        active: ['cart','checkout','payments','orders'],
+        edges: [['inventory','cart'], ['cart','checkout'], ['checkout','payments'], ['checkout','orders']]
+      },
+      {
+        title: 'Picking',
+        desc: 'Picking/packing in dark store prepares the order.',
+        active: ['picking'],
+        edges: [['orders','picking']]
+      },
+      {
+        title: 'Dispatch + courier tracking',
+        desc: 'Dispatch assigns courier; tracking and notifications update status.',
+        active: ['dispatch','couriers','tracking','notifications'],
+        edges: [['picking','dispatch'], ['dispatch','couriers'], ['couriers','tracking'], ['orders','notifications']]
+      },
+      {
+        title: 'Support + analytics',
+        desc: 'Support handles issues; analytics aggregates fulfillment KPIs.',
+        active: ['support','analytics'],
+        edges: [['client','support'], ['orders','analytics']]
+      }
+    ]
+  },
+
+  'uber-eats-driver': {
+    title: 'Uber Eats Driver',
+    steps: [
+      {
+        title: 'Go online + get offers',
+        desc: 'Driver authenticates, sets availability, and receives offers.',
+        active: ['driver','auth','availability','offers'],
+        edges: [['driver','auth'], ['auth','availability'], ['availability','offers']]
+      },
+      {
+        title: 'Accept + pickup',
+        desc: 'Accept offer and head to pickup location.',
+        active: ['accept','pickup','routing','navigation'],
+        edges: [['offers','accept'], ['accept','routing'], ['routing','navigation'], ['accept','pickup']]
+      },
+      {
+        title: 'Tracking + dropoff',
+        desc: 'Tracking updates; dropoff completes delivery.',
+        active: ['tracking','dropoff','notifications'],
+        edges: [['pickup','tracking'], ['tracking','dropoff'], ['tracking','notifications']]
+      },
+      {
+        title: 'Proof + payouts',
+        desc: 'Proof captured; payouts calculated and executed.',
+        active: ['proof','payouts'],
+        edges: [['dropoff','proof'], ['proof','payouts']]
+      },
+      {
+        title: 'Support + analytics',
+        desc: 'Support handles issues; analytics monitors performance.',
+        active: ['support','analytics'],
+        edges: [['driver','support'], ['tracking','analytics']]
+      }
+    ]
+  },
+
+  'domino-s-tracker': {
+    title: 'Domino\u2019s Tracker',
+    steps: [
+      {
+        title: 'Authenticate + load order',
+        desc: 'User authenticates and loads order details for tracking.',
+        active: ['client','auth','order'],
+        edges: [['client','auth'], ['auth','order']]
+      },
+      {
+        title: 'Store + kitchen updates',
+        desc: 'Store and kitchen systems update status events.',
+        active: ['store','kitchen','status'],
+        edges: [['order','store'], ['store','kitchen'], ['kitchen','status']]
+      },
+      {
+        title: 'Dispatch + driver tracking',
+        desc: 'Dispatch assigns driver; tracking updates location/status.',
+        active: ['dispatch','driver','tracking'],
+        edges: [['status','dispatch'], ['dispatch','driver'], ['driver','tracking']]
+      },
+      {
+        title: 'Notifications + support + analytics',
+        desc: 'Notifications update customer; support handles issues; analytics aggregates SLA.',
+        active: ['notifications','support','analytics'],
+        edges: [['tracking','notifications'], ['client','support'], ['order','analytics']]
+      }
+    ]
+  },
+
+  'starbucks-app': {
+    title: 'Starbucks App',
+    steps: [
+      {
+        title: 'Sign in + choose store',
+        desc: 'User signs in and selects a store for pickup.',
+        active: ['client','auth','profile','stores'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','stores']]
+      },
+      {
+        title: 'Build order + checkout',
+        desc: 'User builds cart from menu and checks out.',
+        active: ['menu','cart','checkout','payments','orders'],
+        edges: [['stores','menu'], ['menu','cart'], ['cart','checkout'], ['checkout','payments'], ['checkout','orders']]
+      },
+      {
+        title: 'Pickup + notifications',
+        desc: 'Pickup flow and notifications update order readiness.',
+        active: ['pickup','notifications'],
+        edges: [['orders','pickup'], ['orders','notifications']]
+      },
+      {
+        title: 'Loyalty + rewards',
+        desc: 'Loyalty accrues points and rewards for redemptions.',
+        active: ['loyalty','rewards'],
+        edges: [['orders','loyalty'], ['loyalty','rewards']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics tracks app engagement and order performance.',
+        active: ['analytics'],
+        edges: [['orders','analytics']]
+      }
+    ]
+  },
+
+  'kfc-app': {
+    title: 'KFC App',
+    steps: [
+      {
+        title: 'Browse menu + deals',
+        desc: 'User browses stores, menu, and deals.',
+        active: ['client','auth','stores','menu','deals'],
+        edges: [['client','auth'], ['auth','stores'], ['stores','menu'], ['menu','deals']]
+      },
+      {
+        title: 'Cart + checkout + payment',
+        desc: 'Checkout creates order and processes payment.',
+        active: ['cart','checkout','payments','orders'],
+        edges: [['deals','cart'], ['cart','checkout'], ['checkout','payments'], ['checkout','orders']]
+      },
+      {
+        title: 'Pickup/delivery + notifications',
+        desc: 'Pickup or delivery; notifications update status.',
+        active: ['pickup','delivery','notifications'],
+        edges: [['orders','pickup'], ['orders','delivery'], ['orders','notifications']]
+      },
+      {
+        title: 'Support + analytics',
+        desc: 'Support resolves issues; analytics aggregates order metrics.',
+        active: ['support','analytics'],
+        edges: [['client','support'], ['orders','analytics']]
+      }
+    ]
+  },
+
+  'burger-king-app': {
+    title: 'Burger King App',
+    steps: [
+      {
+        title: 'Store + menu + deals',
+        desc: 'User selects store, browses menu, and applies deals.',
+        active: ['client','auth','profile','stores','menu','deals'],
+        edges: [['client','auth'], ['auth','profile'], ['profile','stores'], ['stores','menu'], ['menu','deals']]
+      },
+      {
+        title: 'Checkout + payment',
+        desc: 'Checkout creates order and processes payment.',
+        active: ['cart','checkout','payments','orders'],
+        edges: [['deals','cart'], ['cart','checkout'], ['checkout','payments'], ['checkout','orders']]
+      },
+      {
+        title: 'Pickup/delivery + notifications',
+        desc: 'Pickup or delivery; notifications update status.',
+        active: ['pickup','delivery','notifications'],
+        edges: [['orders','pickup'], ['orders','delivery'], ['orders','notifications']]
+      },
+      {
+        title: 'Loyalty',
+        desc: 'Loyalty accrues points/rewards for purchases.',
+        active: ['loyalty'],
+        edges: [['orders','loyalty']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics aggregates behavior and order performance.',
+        active: ['analytics'],
+        edges: [['orders','analytics']]
+      }
+    ]
+  },
+
+  'taco-bell-app': {
+    title: 'Taco Bell App',
+    steps: [
+      {
+        title: 'Browse + customize',
+        desc: 'User browses menu and customizes items.',
+        active: ['client','auth','stores','menu','customize'],
+        edges: [['client','auth'], ['auth','stores'], ['stores','menu'], ['menu','customize']]
+      },
+      {
+        title: 'Cart + checkout + payment',
+        desc: 'Checkout creates order and processes payment.',
+        active: ['cart','checkout','payments','orders'],
+        edges: [['customize','cart'], ['cart','checkout'], ['checkout','payments'], ['checkout','orders']]
+      },
+      {
+        title: 'Pickup/delivery + loyalty',
+        desc: 'Pickup or delivery; loyalty accrues points; notifications update status.',
+        active: ['pickup','delivery','loyalty','notifications'],
+        edges: [['orders','pickup'], ['orders','delivery'], ['orders','loyalty'], ['orders','notifications']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics aggregates behavior and order performance.',
+        active: ['analytics'],
+        edges: [['orders','analytics']]
+      }
+    ]
+  },
+
+  'pizza-hut-app': {
+    title: 'Pizza Hut App',
+    steps: [
+      {
+        title: 'Browse + customize + deals',
+        desc: 'User browses menu, customizes pizzas, and applies deals.',
+        active: ['client','auth','stores','menu','customize','deals'],
+        edges: [['client','auth'], ['auth','stores'], ['stores','menu'], ['menu','customize'], ['customize','deals']]
+      },
+      {
+        title: 'Cart + checkout + payment',
+        desc: 'Checkout creates order and processes payment.',
+        active: ['cart','checkout','payments','orders'],
+        edges: [['deals','cart'], ['cart','checkout'], ['checkout','payments'], ['checkout','orders']]
+      },
+      {
+        title: 'Kitchen + delivery + notifications',
+        desc: 'Kitchen prepares order; delivery fulfills; notifications update status.',
+        active: ['kitchen','delivery','notifications'],
+        edges: [['orders','kitchen'], ['kitchen','delivery'], ['orders','notifications']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics aggregates behavior and order performance.',
+        active: ['analytics'],
+        edges: [['orders','analytics']]
+      }
+    ]
+  },
+
+  'baskin-robbins-app': {
+    title: 'Baskin Robbins App',
+    steps: [
+      {
+        title: 'Browse + customize',
+        desc: 'User browses menu and customizes ice cream/cakes.',
+        active: ['client','auth','stores','menu','customize'],
+        edges: [['client','auth'], ['auth','stores'], ['stores','menu'], ['menu','customize']]
+      },
+      {
+        title: 'Cart + checkout + payment',
+        desc: 'Checkout creates order and processes payment.',
+        active: ['cart','checkout','payments','orders'],
+        edges: [['customize','cart'], ['cart','checkout'], ['checkout','payments'], ['checkout','orders']]
+      },
+      {
+        title: 'Pickup/delivery + offers + loyalty',
+        desc: 'Fulfillment via pickup/delivery; offers and loyalty applied; notifications update status.',
+        active: ['pickup','delivery','offers','loyalty','notifications'],
+        edges: [['orders','pickup'], ['orders','delivery'], ['orders','offers'], ['offers','loyalty'], ['orders','notifications']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics aggregates behavior and order performance.',
+        active: ['analytics'],
+        edges: [['orders','analytics']]
+      }
+    ]
+  },
+
   chime: {
     title: 'Chime',
     steps: [
