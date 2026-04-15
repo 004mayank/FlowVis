@@ -13724,6 +13724,530 @@ Object.assign(SYSTEM_LAYOUTS, {
   }
 });
 
+// ----- Batch 54 (System + Architecture - productivity + calendar + accounting) -----
+
+Object.assign(SYSTEM_LAYOUTS, {
+  rescuetime: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','agent','collector','classify','rules','dashboards','goals','alerts','reports','integrations','api','analytics','storage'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      agent: { x: 380, y: 240, label: 'Agent', colorKey: 'api' },
+      collector: { x: 620, y: 180, label: 'Collector', colorKey: 'queue' },
+      classify: { x: 860, y: 180, label: 'Classify', colorKey: 'api' },
+      rules: { x: 1100, y: 180, label: 'Rules', colorKey: 'store' },
+      dashboards: { x: 620, y: 320, label: 'Dashboards', colorKey: 'api' },
+      goals: { x: 860, y: 320, label: 'Goals', colorKey: 'store' },
+      alerts: { x: 1100, y: 320, label: 'Alerts', colorKey: 'external' },
+      reports: { x: 620, y: 460, label: 'Reports', colorKey: 'store' },
+      integrations: { x: 860, y: 460, label: 'Integrations', colorKey: 'external' },
+      api: { x: 1100, y: 460, label: 'API', colorKey: 'api' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' },
+      storage: { x: 620, y: 600, label: 'Storage', colorKey: 'store' }
+    }
+  },
+
+  freedom: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','devices','profiles','blocklists','scheduler','policy','enforcer','dns','vpn','sync','analytics','support'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      devices: { x: 620, y: 180, label: 'Devices', colorKey: 'store' },
+      profiles: { x: 860, y: 180, label: 'Profiles', colorKey: 'store' },
+      blocklists: { x: 1100, y: 180, label: 'Blocklists', colorKey: 'store' },
+      scheduler: { x: 620, y: 320, label: 'Scheduler', colorKey: 'queue' },
+      policy: { x: 860, y: 320, label: 'Policy', colorKey: 'api' },
+      enforcer: { x: 1100, y: 320, label: 'Enforcer', colorKey: 'api' },
+      dns: { x: 620, y: 460, label: 'DNS', colorKey: 'external' },
+      vpn: { x: 860, y: 460, label: 'VPN', colorKey: 'external' },
+      sync: { x: 1100, y: 460, label: 'Sync', colorKey: 'api' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' },
+      support: { x: 860, y: 600, label: 'Support', colorKey: 'external' }
+    }
+  },
+
+  'cold-turkey': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','rules','blocklists','scheduler','enforcer','hosts','firewall','reports','analytics','backups','export'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      rules: { x: 380, y: 180, label: 'Rules', colorKey: 'store' },
+      blocklists: { x: 620, y: 180, label: 'Blocklists', colorKey: 'store' },
+      scheduler: { x: 860, y: 180, label: 'Scheduler', colorKey: 'queue' },
+      enforcer: { x: 1100, y: 180, label: 'Enforcer', colorKey: 'api' },
+      hosts: { x: 620, y: 320, label: 'Hosts File', colorKey: 'external' },
+      firewall: { x: 860, y: 320, label: 'Firewall', colorKey: 'external' },
+      reports: { x: 1100, y: 320, label: 'Reports', colorKey: 'store' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' },
+      backups: { x: 620, y: 460, label: 'Backups', colorKey: 'external' },
+      export: { x: 1100, y: 460, label: 'Export', colorKey: 'api' }
+    }
+  },
+
+  sunsama: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','calendar','tasks','planner','timebox','sync','integrations','notifications','analytics','reports','storage'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      calendar: { x: 620, y: 180, label: 'Calendar', colorKey: 'external' },
+      tasks: { x: 860, y: 180, label: 'Tasks', colorKey: 'store' },
+      planner: { x: 1100, y: 180, label: 'Planner', colorKey: 'api' },
+      timebox: { x: 620, y: 320, label: 'Timeboxing', colorKey: 'api' },
+      sync: { x: 860, y: 320, label: 'Sync', colorKey: 'api' },
+      integrations: { x: 1100, y: 320, label: 'Integrations', colorKey: 'external' },
+      notifications: { x: 380, y: 320, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 620, y: 460, label: 'Analytics', colorKey: 'store' },
+      reports: { x: 860, y: 460, label: 'Reports', colorKey: 'store' },
+      storage: { x: 1100, y: 460, label: 'Storage', colorKey: 'store' }
+    }
+  },
+
+  motion: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','calendar','tasks','optimizer','schedule','constraints','sync','integrations','notifications','analytics','reports'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      calendar: { x: 620, y: 180, label: 'Calendar', colorKey: 'external' },
+      tasks: { x: 860, y: 180, label: 'Tasks', colorKey: 'store' },
+      optimizer: { x: 1100, y: 180, label: 'Optimizer', colorKey: 'api' },
+      schedule: { x: 620, y: 320, label: 'Schedule', colorKey: 'api' },
+      constraints: { x: 860, y: 320, label: 'Constraints', colorKey: 'store' },
+      sync: { x: 1100, y: 320, label: 'Sync', colorKey: 'api' },
+      integrations: { x: 620, y: 460, label: 'Integrations', colorKey: 'external' },
+      notifications: { x: 380, y: 320, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' },
+      reports: { x: 1100, y: 460, label: 'Reports', colorKey: 'store' }
+    }
+  },
+
+  'reclaim-ai': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','calendar','tasks','habits','optimizer','schedule','sync','integrations','notifications','analytics','reports'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      calendar: { x: 620, y: 180, label: 'Calendar', colorKey: 'external' },
+      tasks: { x: 860, y: 180, label: 'Tasks', colorKey: 'store' },
+      habits: { x: 1100, y: 180, label: 'Habits', colorKey: 'store' },
+      optimizer: { x: 620, y: 320, label: 'Optimizer', colorKey: 'api' },
+      schedule: { x: 860, y: 320, label: 'Schedule', colorKey: 'api' },
+      sync: { x: 1100, y: 320, label: 'Sync', colorKey: 'api' },
+      integrations: { x: 620, y: 460, label: 'Integrations', colorKey: 'external' },
+      notifications: { x: 380, y: 320, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' },
+      reports: { x: 1100, y: 460, label: 'Reports', colorKey: 'store' }
+    }
+  },
+
+  fantastical: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','caldav','calendar','nlp','events','tasks','sync','notifications','integrations','search','index','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      caldav: { x: 620, y: 180, label: 'CalDAV', colorKey: 'external' },
+      calendar: { x: 860, y: 180, label: 'Calendar', colorKey: 'store' },
+      nlp: { x: 620, y: 320, label: 'NLP Parse', colorKey: 'api' },
+      events: { x: 860, y: 320, label: 'Events', colorKey: 'store' },
+      tasks: { x: 1100, y: 180, label: 'Tasks', colorKey: 'store' },
+      sync: { x: 1100, y: 320, label: 'Sync', colorKey: 'api' },
+      notifications: { x: 380, y: 320, label: 'Notify', colorKey: 'external' },
+      integrations: { x: 620, y: 460, label: 'Integrations', colorKey: 'external' },
+      search: { x: 860, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 1100, y: 460, label: 'Index', colorKey: 'store' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  outlook: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','exchange','mailbox','calendar','contacts','search','index','sync','antispam','policy','send','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      exchange: { x: 620, y: 180, label: 'Exchange', colorKey: 'external' },
+      mailbox: { x: 860, y: 180, label: 'Mailbox', colorKey: 'store' },
+      calendar: { x: 1100, y: 180, label: 'Calendar', colorKey: 'store' },
+      contacts: { x: 620, y: 320, label: 'Contacts', colorKey: 'store' },
+      search: { x: 860, y: 320, label: 'Search', colorKey: 'api' },
+      index: { x: 1100, y: 320, label: 'Index', colorKey: 'store' },
+      sync: { x: 620, y: 460, label: 'Sync', colorKey: 'api' },
+      antispam: { x: 380, y: 320, label: 'Spam', colorKey: 'api' },
+      policy: { x: 380, y: 460, label: 'Policy', colorKey: 'api' },
+      send: { x: 860, y: 460, label: 'Send', colorKey: 'external' },
+      notifications: { x: 1100, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'zoho-books': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','org','customers','invoices','expenses','banking','reconcile','tax','reports','integrations','payments','audit','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      org: { x: 620, y: 180, label: 'Org', colorKey: 'store' },
+      customers: { x: 860, y: 180, label: 'Customers', colorKey: 'store' },
+      invoices: { x: 1100, y: 180, label: 'Invoices', colorKey: 'store' },
+      expenses: { x: 620, y: 320, label: 'Expenses', colorKey: 'store' },
+      banking: { x: 860, y: 320, label: 'Banking', colorKey: 'external' },
+      reconcile: { x: 1100, y: 320, label: 'Reconcile', colorKey: 'api' },
+      tax: { x: 380, y: 320, label: 'Tax', colorKey: 'api' },
+      reports: { x: 620, y: 460, label: 'Reports', colorKey: 'store' },
+      integrations: { x: 860, y: 460, label: 'Integrations', colorKey: 'external' },
+      payments: { x: 1100, y: 460, label: 'Payments', colorKey: 'external' },
+      audit: { x: 620, y: 600, label: 'Audit', colorKey: 'store' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  quickbooks: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','company','customers','invoices','expenses','banking','reconcile','payroll','tax','reports','integrations','payments','audit','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      company: { x: 620, y: 180, label: 'Company', colorKey: 'store' },
+      customers: { x: 860, y: 180, label: 'Customers', colorKey: 'store' },
+      invoices: { x: 1100, y: 180, label: 'Invoices', colorKey: 'store' },
+      expenses: { x: 620, y: 320, label: 'Expenses', colorKey: 'store' },
+      banking: { x: 860, y: 320, label: 'Banking', colorKey: 'external' },
+      reconcile: { x: 1100, y: 320, label: 'Reconcile', colorKey: 'api' },
+      payroll: { x: 380, y: 180, label: 'Payroll', colorKey: 'api' },
+      tax: { x: 380, y: 320, label: 'Tax', colorKey: 'api' },
+      reports: { x: 620, y: 460, label: 'Reports', colorKey: 'store' },
+      integrations: { x: 860, y: 460, label: 'Integrations', colorKey: 'external' },
+      payments: { x: 1100, y: 460, label: 'Payments', colorKey: 'external' },
+      audit: { x: 620, y: 600, label: 'Audit', colorKey: 'store' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  }
+});
+
+Object.assign(ARCH_LAYOUTS, {
+  rescuetime: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'RescueTime Pipeline',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','agent','collector','classify','rules','dashboards','goals','alerts','reports','integrations','api','analytics','storage'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      agent: { x: 320, y: 240, label: 'Agent' },
+      collector: { x: 600, y: 160, label: 'Collector' },
+      classify: { x: 880, y: 160, label: 'Classify' },
+      rules: { x: 1160, y: 160, label: 'Rules' },
+      dashboards: { x: 600, y: 300, label: 'Dashboards' },
+      goals: { x: 880, y: 300, label: 'Goals' },
+      alerts: { x: 1160, y: 300, label: 'Alerts' },
+      reports: { x: 600, y: 440, label: 'Reports' },
+      integrations: { x: 880, y: 440, label: 'Integrations' },
+      api: { x: 1160, y: 440, label: 'API' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      storage: { x: 600, y: 580, label: 'Storage' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','agent','track'], ['agent','collector','upload'], ['collector','storage','store']);
+      if(stepIdx===2) e.push(['storage','classify','classify'], ['classify','rules','rules']);
+      if(stepIdx===3) e.push(['rules','dashboards','dash'], ['dashboards','goals','goals']);
+      if(stepIdx===4) e.push(['goals','alerts','alert']);
+      if(stepIdx===5) e.push(['storage','reports','reports'], ['reports','analytics','analytics']);
+      if(stepIdx===6) e.push(['api','integrations','integrate']);
+      return e;
+    }
+  },
+
+  freedom: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Freedom Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','devices','profiles','blocklists','scheduler','policy','enforcer','dns','vpn','sync','analytics','support'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      devices: { x: 600, y: 160, label: 'Devices' },
+      profiles: { x: 880, y: 160, label: 'Profiles' },
+      blocklists: { x: 1160, y: 160, label: 'Blocklists' },
+      scheduler: { x: 600, y: 300, label: 'Scheduler' },
+      policy: { x: 880, y: 300, label: 'Policy' },
+      enforcer: { x: 1160, y: 300, label: 'Enforcer' },
+      dns: { x: 600, y: 440, label: 'DNS' },
+      vpn: { x: 880, y: 440, label: 'VPN' },
+      sync: { x: 1160, y: 440, label: 'Sync' },
+      analytics: { x: 600, y: 580, label: 'Analytics' },
+      support: { x: 880, y: 580, label: 'Support' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','devices','device'], ['devices','profiles','profile']);
+      if(stepIdx===2) e.push(['profiles','blocklists','lists'], ['blocklists','policy','policy']);
+      if(stepIdx===3) e.push(['scheduler','policy','schedule'], ['policy','enforcer','enforce']);
+      if(stepIdx===4) e.push(['enforcer','dns','dns'], ['enforcer','vpn','vpn']);
+      if(stepIdx===5) e.push(['policy','sync','sync']);
+      if(stepIdx===6) e.push(['client','analytics','analytics'], ['support','client','support']);
+      return e;
+    }
+  },
+
+  'cold-turkey': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Cold Turkey Local Enforcement',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','rules','blocklists','scheduler','enforcer','hosts','firewall','reports','analytics','backups','export'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      rules: { x: 320, y: 160, label: 'Rules' },
+      blocklists: { x: 600, y: 160, label: 'Blocklists' },
+      scheduler: { x: 880, y: 160, label: 'Scheduler' },
+      enforcer: { x: 1160, y: 160, label: 'Enforcer' },
+      hosts: { x: 600, y: 300, label: 'Hosts File' },
+      firewall: { x: 880, y: 300, label: 'Firewall' },
+      reports: { x: 1160, y: 300, label: 'Reports' },
+      backups: { x: 600, y: 440, label: 'Backups' },
+      export: { x: 1160, y: 440, label: 'Export' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','rules','rules'], ['rules','blocklists','lists']);
+      if(stepIdx===2) e.push(['blocklists','scheduler','schedule'], ['scheduler','enforcer','enforce']);
+      if(stepIdx===3) e.push(['enforcer','hosts','hosts'], ['enforcer','firewall','fw']);
+      if(stepIdx===4) e.push(['enforcer','reports','report'], ['reports','analytics','analytics']);
+      if(stepIdx===5) e.push(['rules','export','export'], ['rules','backups','backup']);
+      return e;
+    }
+  },
+
+  sunsama: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Sunsama Planner',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','calendar','tasks','planner','timebox','sync','integrations','notifications','analytics','reports','storage'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      calendar: { x: 600, y: 160, label: 'Calendar' },
+      tasks: { x: 880, y: 160, label: 'Tasks' },
+      planner: { x: 1160, y: 160, label: 'Planner' },
+      timebox: { x: 600, y: 300, label: 'Timeboxing' },
+      sync: { x: 880, y: 300, label: 'Sync' },
+      integrations: { x: 1160, y: 300, label: 'Integrations' },
+      notifications: { x: 320, y: 300, label: 'Notify' },
+      analytics: { x: 600, y: 440, label: 'Analytics' },
+      reports: { x: 880, y: 440, label: 'Reports' },
+      storage: { x: 1160, y: 440, label: 'Storage' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','calendar','calendar'], ['calendar','planner','day']);
+      if(stepIdx===2) e.push(['tasks','planner','prioritize'], ['planner','timebox','timebox']);
+      if(stepIdx===3) e.push(['timebox','sync','sync'], ['sync','calendar','push']);
+      if(stepIdx===4) e.push(['tasks','integrations','integrate']);
+      if(stepIdx===5) e.push(['planner','notifications','notify']);
+      if(stepIdx===6) e.push(['planner','analytics','analytics'], ['analytics','reports','reports']);
+      return e;
+    }
+  },
+
+  motion: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Motion Scheduler',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','calendar','tasks','optimizer','schedule','constraints','sync','integrations','notifications','analytics','reports'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      calendar: { x: 600, y: 160, label: 'Calendar' },
+      tasks: { x: 880, y: 160, label: 'Tasks' },
+      optimizer: { x: 1160, y: 160, label: 'Optimizer' },
+      schedule: { x: 600, y: 300, label: 'Schedule' },
+      constraints: { x: 880, y: 300, label: 'Constraints' },
+      sync: { x: 1160, y: 300, label: 'Sync' },
+      integrations: { x: 600, y: 440, label: 'Integrations' },
+      notifications: { x: 320, y: 300, label: 'Notify' },
+      analytics: { x: 880, y: 440, label: 'Analytics' },
+      reports: { x: 1160, y: 440, label: 'Reports' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','calendar','calendar'], ['auth','tasks','tasks']);
+      if(stepIdx===2) e.push(['tasks','constraints','constraints'], ['constraints','optimizer','opt']);
+      if(stepIdx===3) e.push(['optimizer','schedule','schedule'], ['schedule','sync','sync']);
+      if(stepIdx===4) e.push(['sync','calendar','push'], ['sync','notifications','notify']);
+      if(stepIdx===5) e.push(['schedule','integrations','integrate']);
+      if(stepIdx===6) e.push(['schedule','analytics','analytics'], ['analytics','reports','reports']);
+      return e;
+    }
+  },
+
+  'reclaim-ai': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Reclaim AI Scheduler',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','calendar','tasks','habits','optimizer','schedule','sync','integrations','notifications','analytics','reports'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      calendar: { x: 600, y: 160, label: 'Calendar' },
+      tasks: { x: 880, y: 160, label: 'Tasks' },
+      habits: { x: 1160, y: 160, label: 'Habits' },
+      optimizer: { x: 600, y: 300, label: 'Optimizer' },
+      schedule: { x: 880, y: 300, label: 'Schedule' },
+      sync: { x: 1160, y: 300, label: 'Sync' },
+      integrations: { x: 600, y: 440, label: 'Integrations' },
+      notifications: { x: 320, y: 300, label: 'Notify' },
+      analytics: { x: 880, y: 440, label: 'Analytics' },
+      reports: { x: 1160, y: 440, label: 'Reports' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','calendar','calendar'], ['auth','tasks','tasks']);
+      if(stepIdx===2) e.push(['tasks','optimizer','opt'], ['habits','optimizer','habit']);
+      if(stepIdx===3) e.push(['optimizer','schedule','schedule'], ['schedule','sync','sync']);
+      if(stepIdx===4) e.push(['sync','calendar','push'], ['sync','notifications','notify']);
+      if(stepIdx===5) e.push(['schedule','integrations','integrate']);
+      if(stepIdx===6) e.push(['schedule','analytics','analytics'], ['analytics','reports','reports']);
+      return e;
+    }
+  },
+
+  fantastical: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Fantastical Calendar Client',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','caldav','calendar','nlp','events','tasks','sync','notifications','integrations','search','index','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      caldav: { x: 600, y: 160, label: 'CalDAV' },
+      calendar: { x: 880, y: 160, label: 'Calendar' },
+      nlp: { x: 600, y: 300, label: 'NLP Parse' },
+      events: { x: 880, y: 300, label: 'Events' },
+      tasks: { x: 1160, y: 160, label: 'Tasks' },
+      sync: { x: 1160, y: 300, label: 'Sync' },
+      notifications: { x: 320, y: 300, label: 'Notify' },
+      integrations: { x: 600, y: 440, label: 'Integrations' },
+      search: { x: 880, y: 440, label: 'Search' },
+      index: { x: 1160, y: 440, label: 'Index' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','caldav','caldav'], ['caldav','calendar','sync']);
+      if(stepIdx===2) e.push(['client','nlp','nlp'], ['nlp','events','event'], ['events','sync','sync']);
+      if(stepIdx===3) e.push(['sync','notifications','notify']);
+      if(stepIdx===4) e.push(['client','search','search'], ['search','index','index'], ['index','events','results']);
+      if(stepIdx===5) e.push(['events','integrations','integrate']);
+      if(stepIdx===6) e.push(['events','analytics','analytics']);
+      return e;
+    }
+  },
+
+  outlook: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Outlook + Exchange',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','exchange','mailbox','calendar','contacts','search','index','sync','antispam','policy','send','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      exchange: { x: 600, y: 160, label: 'Exchange' },
+      mailbox: { x: 880, y: 160, label: 'Mailbox' },
+      calendar: { x: 1160, y: 160, label: 'Calendar' },
+      contacts: { x: 600, y: 300, label: 'Contacts' },
+      search: { x: 880, y: 300, label: 'Search' },
+      index: { x: 1160, y: 300, label: 'Index' },
+      sync: { x: 600, y: 440, label: 'Sync' },
+      antispam: { x: 320, y: 300, label: 'Spam' },
+      policy: { x: 320, y: 440, label: 'Policy' },
+      send: { x: 880, y: 440, label: 'Send' },
+      notifications: { x: 1160, y: 440, label: 'Notify' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','exchange','exchange'], ['exchange','mailbox','mail']);
+      if(stepIdx===2) e.push(['mailbox','antispam','spam'], ['antispam','policy','policy']);
+      if(stepIdx===3) e.push(['client','search','search'], ['search','index','index'], ['index','mailbox','results']);
+      if(stepIdx===4) e.push(['client','send','send'], ['send','exchange','smtp'], ['send','notifications','notify']);
+      if(stepIdx===5) e.push(['exchange','calendar','calendar'], ['exchange','contacts','contacts']);
+      if(stepIdx===6) e.push(['mailbox','sync','sync'], ['mailbox','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'zoho-books': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Zoho Books Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','org','customers','invoices','expenses','banking','reconcile','tax','reports','integrations','payments','audit','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      org: { x: 600, y: 160, label: 'Org' },
+      customers: { x: 880, y: 160, label: 'Customers' },
+      invoices: { x: 1160, y: 160, label: 'Invoices' },
+      expenses: { x: 600, y: 300, label: 'Expenses' },
+      banking: { x: 880, y: 300, label: 'Banking' },
+      reconcile: { x: 1160, y: 300, label: 'Reconcile' },
+      tax: { x: 320, y: 300, label: 'Tax' },
+      reports: { x: 600, y: 440, label: 'Reports' },
+      integrations: { x: 880, y: 440, label: 'Integrations' },
+      payments: { x: 1160, y: 440, label: 'Payments' },
+      audit: { x: 600, y: 580, label: 'Audit' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','org','org'], ['org','customers','cust']);
+      if(stepIdx===2) e.push(['customers','invoices','invoice'], ['invoices','payments','pay']);
+      if(stepIdx===3) e.push(['client','expenses','expense'], ['expenses','tax','tax']);
+      if(stepIdx===4) e.push(['banking','reconcile','reconcile'], ['reconcile','reports','reports']);
+      if(stepIdx===5) e.push(['org','integrations','integrate']);
+      if(stepIdx===6) e.push(['org','audit','audit'], ['reports','analytics','analytics']);
+      return e;
+    }
+  },
+
+  quickbooks: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'QuickBooks Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','company','customers','invoices','expenses','banking','reconcile','payroll','tax','reports','integrations','payments','audit','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      company: { x: 600, y: 160, label: 'Company' },
+      customers: { x: 880, y: 160, label: 'Customers' },
+      invoices: { x: 1160, y: 160, label: 'Invoices' },
+      expenses: { x: 600, y: 300, label: 'Expenses' },
+      banking: { x: 880, y: 300, label: 'Banking' },
+      reconcile: { x: 1160, y: 300, label: 'Reconcile' },
+      payroll: { x: 320, y: 160, label: 'Payroll' },
+      tax: { x: 320, y: 300, label: 'Tax' },
+      reports: { x: 600, y: 440, label: 'Reports' },
+      integrations: { x: 880, y: 440, label: 'Integrations' },
+      payments: { x: 1160, y: 440, label: 'Payments' },
+      audit: { x: 600, y: 580, label: 'Audit' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','company','company'], ['company','customers','cust']);
+      if(stepIdx===2) e.push(['customers','invoices','invoice'], ['invoices','payments','pay']);
+      if(stepIdx===3) e.push(['client','expenses','expense'], ['expenses','tax','tax']);
+      if(stepIdx===4) e.push(['banking','reconcile','reconcile'], ['reconcile','reports','reports']);
+      if(stepIdx===5) e.push(['company','payroll','payroll']);
+      if(stepIdx===6) e.push(['company','integrations','integrate']);
+      if(stepIdx===7) e.push(['company','audit','audit'], ['reports','analytics','analytics']);
+      return e;
+    }
+  }
+});
+
 Object.assign(ARCH_LAYOUTS, {
   xmind: {
     viewBox: '0 0 1860 820',

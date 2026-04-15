@@ -5525,6 +5525,390 @@ export const FLOWS = {
     ]
   },
 
+  rescuetime: {
+    title: 'RescueTime',
+    steps: [
+      {
+        title: 'Track activity on device',
+        desc: 'Agent records app/website activity and sends to collector.',
+        active: ['client','agent','collector'],
+        edges: [['client','agent'], ['agent','collector']]
+      },
+      {
+        title: 'Classify + apply rules',
+        desc: 'Events classified into categories and tagged by user rules.',
+        active: ['classify','rules','storage'],
+        edges: [['collector','storage'], ['storage','classify'], ['classify','rules']]
+      },
+      {
+        title: 'Dashboards + goals',
+        desc: 'Dashboards visualize time; goals evaluate productivity targets.',
+        active: ['dashboards','goals'],
+        edges: [['rules','dashboards'], ['dashboards','goals']]
+      },
+      {
+        title: 'Alerts',
+        desc: 'Alerts fire when distraction thresholds or goals are breached.',
+        active: ['alerts'],
+        edges: [['goals','alerts']]
+      },
+      {
+        title: 'Reports + integrations',
+        desc: 'Reports exported or shared via API and integrations.',
+        active: ['reports','api','integrations'],
+        edges: [['storage','reports'], ['reports','api'], ['api','integrations']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics aggregates trends and supports product insights.',
+        active: ['analytics'],
+        edges: [['reports','analytics']]
+      }
+    ]
+  },
+
+  freedom: {
+    title: 'Freedom',
+    steps: [
+      {
+        title: 'Sign in + device setup',
+        desc: 'User signs in and registers devices to receive block sessions.',
+        active: ['client','auth','devices'],
+        edges: [['client','auth'], ['auth','devices']]
+      },
+      {
+        title: 'Create profiles + blocklists',
+        desc: 'Profiles define blocklists and app/site categories to block.',
+        active: ['profiles','blocklists','policy'],
+        edges: [['devices','profiles'], ['profiles','blocklists'], ['blocklists','policy']]
+      },
+      {
+        title: 'Schedule sessions',
+        desc: 'Scheduler creates blocking sessions and pushes policy to enforcers.',
+        active: ['scheduler','sync'],
+        edges: [['policy','scheduler'], ['scheduler','sync']]
+      },
+      {
+        title: 'Enforce via DNS/VPN',
+        desc: 'Enforcer blocks sites/apps using DNS/VPN techniques.',
+        active: ['enforcer','dns','vpn'],
+        edges: [['sync','enforcer'], ['enforcer','dns'], ['enforcer','vpn']]
+      },
+      {
+        title: 'Analytics + support',
+        desc: 'Analytics monitor sessions; support resolves device/policy issues.',
+        active: ['analytics','support'],
+        edges: [['enforcer','analytics'], ['client','support']]
+      }
+    ]
+  },
+
+  'cold-turkey': {
+    title: 'Cold Turkey',
+    steps: [
+      {
+        title: 'Configure rules + blocklists',
+        desc: 'User defines blocklists and schedules; rules stored locally.',
+        active: ['client','rules','blocklists'],
+        edges: [['client','rules'], ['rules','blocklists']]
+      },
+      {
+        title: 'Scheduler triggers enforcement',
+        desc: 'Scheduler activates enforcer at configured times.',
+        active: ['scheduler','enforcer'],
+        edges: [['blocklists','scheduler'], ['scheduler','enforcer']]
+      },
+      {
+        title: 'Block using hosts/firewall',
+        desc: 'Enforcer applies blocks through hosts file and firewall rules.',
+        active: ['hosts','firewall'],
+        edges: [['enforcer','hosts'], ['enforcer','firewall']]
+      },
+      {
+        title: 'Reports + analytics',
+        desc: 'Reports summarize blocks; analytics tracks usage and outcomes.',
+        active: ['reports','analytics'],
+        edges: [['enforcer','reports'], ['reports','analytics']]
+      },
+      {
+        title: 'Backups + export',
+        desc: 'Backups protect configuration; export shares settings across devices.',
+        active: ['backups','export'],
+        edges: [['rules','backups'], ['rules','export']]
+      }
+    ]
+  },
+
+  sunsama: {
+    title: 'Sunsama',
+    steps: [
+      {
+        title: 'Connect calendar + tasks',
+        desc: 'User connects calendar and task sources; planner loads the day.',
+        active: ['client','auth','calendar','tasks','planner'],
+        edges: [['client','auth'], ['auth','calendar'], ['auth','tasks'], ['calendar','planner']]
+      },
+      {
+        title: 'Plan day + prioritize',
+        desc: 'Planner prioritizes tasks and groups work for focused execution.',
+        active: ['planner','tasks'],
+        edges: [['tasks','planner']]
+      },
+      {
+        title: 'Timebox into calendar',
+        desc: 'Timeboxing creates calendar blocks and sync pushes updates.',
+        active: ['timebox','sync'],
+        edges: [['planner','timebox'], ['timebox','sync'], ['sync','calendar']]
+      },
+      {
+        title: 'Integrations + notifications',
+        desc: 'Integrations update external tools; notifications remind about blocks.',
+        active: ['integrations','notifications'],
+        edges: [['tasks','integrations'], ['planner','notifications']]
+      },
+      {
+        title: 'Reports + analytics',
+        desc: 'Reports summarize planned vs done; analytics tracks habits.',
+        active: ['reports','analytics'],
+        edges: [['planner','analytics'], ['analytics','reports']]
+      }
+    ]
+  },
+
+  motion: {
+    title: 'Motion',
+    steps: [
+      {
+        title: 'Connect calendar + tasks',
+        desc: 'User connects calendar and task list; Motion ingests availability.',
+        active: ['client','auth','calendar','tasks'],
+        edges: [['client','auth'], ['auth','calendar'], ['auth','tasks']]
+      },
+      {
+        title: 'Constraints + optimization',
+        desc: 'Constraints captured; optimizer computes schedule proposal.',
+        active: ['constraints','optimizer'],
+        edges: [['tasks','constraints'], ['constraints','optimizer']]
+      },
+      {
+        title: 'Schedule + sync',
+        desc: 'Schedule written; sync pushes events to calendar and updates tasks.',
+        active: ['schedule','sync'],
+        edges: [['optimizer','schedule'], ['schedule','sync'], ['sync','calendar']]
+      },
+      {
+        title: 'Notifications',
+        desc: 'Notifications alert for upcoming tasks and schedule changes.',
+        active: ['notifications'],
+        edges: [['sync','notifications']]
+      },
+      {
+        title: 'Integrations + analytics',
+        desc: 'Integrations sync with PM tools; analytics measures adherence.',
+        active: ['integrations','analytics','reports'],
+        edges: [['schedule','integrations'], ['schedule','analytics'], ['analytics','reports']]
+      }
+    ]
+  },
+
+  'reclaim-ai': {
+    title: 'Reclaim AI',
+    steps: [
+      {
+        title: 'Connect calendar + tasks',
+        desc: 'Calendar and tasks connected; habits and preferences loaded.',
+        active: ['client','auth','calendar','tasks','habits'],
+        edges: [['client','auth'], ['auth','calendar'], ['auth','tasks'], ['auth','habits']]
+      },
+      {
+        title: 'Optimize schedule',
+        desc: 'Optimizer balances tasks, habits, and meetings into schedule.',
+        active: ['optimizer','schedule'],
+        edges: [['tasks','optimizer'], ['habits','optimizer'], ['optimizer','schedule']]
+      },
+      {
+        title: 'Sync to calendar + notify',
+        desc: 'Sync writes events to calendar and notifies on changes.',
+        active: ['sync','notifications'],
+        edges: [['schedule','sync'], ['sync','calendar'], ['sync','notifications']]
+      },
+      {
+        title: 'Integrations',
+        desc: 'Integrations keep tasks and schedules in sync with external tools.',
+        active: ['integrations'],
+        edges: [['sync','integrations']]
+      },
+      {
+        title: 'Analytics + reports',
+        desc: 'Analytics track schedule health; reports summarize utilization.',
+        active: ['analytics','reports'],
+        edges: [['schedule','analytics'], ['analytics','reports']]
+      }
+    ]
+  },
+
+  fantastical: {
+    title: 'Fantastical',
+    steps: [
+      {
+        title: 'Connect calendars (CalDAV)',
+        desc: 'User connects CalDAV sources; calendars synced locally.',
+        active: ['client','auth','caldav','calendar'],
+        edges: [['client','auth'], ['auth','caldav'], ['caldav','calendar']]
+      },
+      {
+        title: 'Natural language entry',
+        desc: 'NLP parses text into event/task details and creates events.',
+        active: ['nlp','events','tasks'],
+        edges: [['client','nlp'], ['nlp','events'], ['nlp','tasks']]
+      },
+      {
+        title: 'Sync + notifications',
+        desc: 'Sync pushes updates to calendar sources; notifications remind.',
+        active: ['sync','notifications'],
+        edges: [['events','sync'], ['sync','notifications'], ['sync','caldav']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Index powers search across events and calendars.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','events']]
+      },
+      {
+        title: 'Integrations + analytics',
+        desc: 'Integrations connect services; analytics track usage patterns.',
+        active: ['integrations','analytics'],
+        edges: [['events','integrations'], ['events','analytics']]
+      }
+    ]
+  },
+
+  outlook: {
+    title: 'Outlook',
+    steps: [
+      {
+        title: 'Auth + sync Exchange',
+        desc: 'User signs in; Exchange sync loads mailbox and calendar state.',
+        active: ['client','auth','exchange','mailbox','calendar'],
+        edges: [['client','auth'], ['auth','exchange'], ['exchange','mailbox'], ['exchange','calendar']]
+      },
+      {
+        title: 'Spam + policy enforcement',
+        desc: 'Spam filtering and policy controls apply to inbound mail.',
+        active: ['antispam','policy'],
+        edges: [['mailbox','antispam'], ['antispam','policy']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Index powers fast search across mail, contacts, and calendar items.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','mailbox']]
+      },
+      {
+        title: 'Send mail + notifications',
+        desc: 'Send mail via Exchange; notifications alert for replies and calendar events.',
+        active: ['send','notifications'],
+        edges: [['client','send'], ['send','exchange'], ['exchange','notifications']]
+      },
+      {
+        title: 'Contacts + sync + analytics',
+        desc: 'Contacts sync; analytics track usage and reliability.',
+        active: ['contacts','sync','analytics'],
+        edges: [['exchange','contacts'], ['mailbox','sync'], ['mailbox','analytics']]
+      }
+    ]
+  },
+
+  'zoho-books': {
+    title: 'Zoho Books',
+    steps: [
+      {
+        title: 'Set up org + customers',
+        desc: 'Org set up; customers added for invoicing.',
+        active: ['client','auth','org','customers'],
+        edges: [['client','auth'], ['auth','org'], ['org','customers']]
+      },
+      {
+        title: 'Create invoice + collect payment',
+        desc: 'Invoices created and sent; payments collected via provider.',
+        active: ['invoices','payments'],
+        edges: [['customers','invoices'], ['invoices','payments']]
+      },
+      {
+        title: 'Log expenses + tax',
+        desc: 'Expenses categorized; tax rules applied for compliance.',
+        active: ['expenses','tax'],
+        edges: [['client','expenses'], ['expenses','tax']]
+      },
+      {
+        title: 'Bank feeds + reconciliation',
+        desc: 'Banking feeds imported; reconciliation matches transactions.',
+        active: ['banking','reconcile'],
+        edges: [['banking','reconcile']]
+      },
+      {
+        title: 'Reports + analytics + audit',
+        desc: 'Reports summarize finances; analytics/audit support compliance.',
+        active: ['reports','analytics','audit'],
+        edges: [['reconcile','reports'], ['reports','analytics'], ['org','audit']]
+      },
+      {
+        title: 'Integrations',
+        desc: 'Integrations sync accounting with CRM, e-commerce, and payroll tools.',
+        active: ['integrations'],
+        edges: [['org','integrations']]
+      }
+    ]
+  },
+
+  quickbooks: {
+    title: 'QuickBooks',
+    steps: [
+      {
+        title: 'Set up company',
+        desc: 'Company profile set up; chart of accounts and permissions configured.',
+        active: ['client','auth','company'],
+        edges: [['client','auth'], ['auth','company']]
+      },
+      {
+        title: 'Invoices + payments',
+        desc: 'Invoices sent to customers and paid via payment provider.',
+        active: ['customers','invoices','payments'],
+        edges: [['company','customers'], ['customers','invoices'], ['invoices','payments']]
+      },
+      {
+        title: 'Expenses + bank feeds',
+        desc: 'Expenses recorded and imported from banking feeds.',
+        active: ['expenses','banking'],
+        edges: [['client','expenses'], ['banking','reconcile']]
+      },
+      {
+        title: 'Reconciliation + tax',
+        desc: 'Reconcile transactions; tax calculations and filing workflows.',
+        active: ['reconcile','tax'],
+        edges: [['banking','reconcile'], ['reconcile','tax']]
+      },
+      {
+        title: 'Payroll',
+        desc: 'Payroll runs and postings update books and tax withholdings.',
+        active: ['payroll','tax'],
+        edges: [['company','payroll'], ['payroll','tax']]
+      },
+      {
+        title: 'Reports + audit + analytics',
+        desc: 'Reports summarize finances; audit logs changes; analytics track trends.',
+        active: ['reports','audit','analytics'],
+        edges: [['reconcile','reports'], ['company','audit'], ['reports','analytics']]
+      },
+      {
+        title: 'Integrations',
+        desc: 'Integrations connect banks, payroll, e-commerce, and tax services.',
+        active: ['integrations'],
+        edges: [['company','integrations']]
+      }
+    ]
+  },
+
   chime: {
     title: 'Chime',
     steps: [
