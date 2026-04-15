@@ -16505,6 +16505,523 @@ Object.assign(SYSTEM_LAYOUTS, {
   }
 });
 
+// ----- Batch 67 (System + Architecture - transit planning + parking + AI chat platforms) -----
+
+Object.assign(SYSTEM_LAYOUTS, {
+  citymapper: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','map','transit','routes','realtime','alerts','tickets','payments','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      map: { x: 620, y: 180, label: 'Map', colorKey: 'api' },
+      transit: { x: 860, y: 180, label: 'Transit Data', colorKey: 'external' },
+      routes: { x: 1100, y: 180, label: 'Routes', colorKey: 'api' },
+      realtime: { x: 860, y: 320, label: 'Realtime', colorKey: 'stream' },
+      alerts: { x: 1100, y: 320, label: 'Alerts', colorKey: 'stream' },
+      tickets: { x: 620, y: 320, label: 'Tickets', colorKey: 'store' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      notifications: { x: 620, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'transit-app': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','map','transit','routes','realtime','alerts','crowd','tickets','payments','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      map: { x: 620, y: 180, label: 'Map', colorKey: 'api' },
+      transit: { x: 860, y: 180, label: 'Transit Data', colorKey: 'external' },
+      routes: { x: 1100, y: 180, label: 'Routes', colorKey: 'api' },
+      realtime: { x: 860, y: 320, label: 'Realtime', colorKey: 'stream' },
+      alerts: { x: 1100, y: 320, label: 'Alerts', colorKey: 'stream' },
+      crowd: { x: 620, y: 320, label: 'Crowd', colorKey: 'stream' },
+      tickets: { x: 620, y: 460, label: 'Tickets', colorKey: 'store' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'google-trips-legacy': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','imports','gmail','calendar','itinerary','maps','recommendations','reservations','offline','notifications','analytics','privacy'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      imports: { x: 620, y: 180, label: 'Imports', colorKey: 'api' },
+      gmail: { x: 860, y: 180, label: 'Gmail', colorKey: 'external' },
+      calendar: { x: 1100, y: 180, label: 'Calendar', colorKey: 'external' },
+      itinerary: { x: 620, y: 320, label: 'Itinerary', colorKey: 'store' },
+      maps: { x: 860, y: 320, label: 'Maps', colorKey: 'external' },
+      recommendations: { x: 1100, y: 320, label: 'Recs', colorKey: 'api' },
+      reservations: { x: 620, y: 460, label: 'Reservations', colorKey: 'store' },
+      offline: { x: 860, y: 460, label: 'Offline', colorKey: 'store' },
+      notifications: { x: 380, y: 320, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' },
+      privacy: { x: 380, y: 460, label: 'Privacy', colorKey: 'api' }
+    }
+  },
+
+  roadtrippers: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','planner','maps','places','routes','bookings','partners','payments','shared','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      planner: { x: 620, y: 180, label: 'Planner', colorKey: 'store' },
+      maps: { x: 860, y: 180, label: 'Maps', colorKey: 'external' },
+      places: { x: 1100, y: 180, label: 'Places', colorKey: 'external' },
+      routes: { x: 620, y: 320, label: 'Routes', colorKey: 'api' },
+      bookings: { x: 860, y: 320, label: 'Bookings', colorKey: 'api' },
+      partners: { x: 1100, y: 320, label: 'Partners', colorKey: 'external' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      shared: { x: 620, y: 460, label: 'Sharing', colorKey: 'api' },
+      notifications: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  parkmobile: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','map','locations','sessions','meters','payments','receipts','enforcement','support','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Driver', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      map: { x: 620, y: 180, label: 'Map', colorKey: 'api' },
+      locations: { x: 860, y: 180, label: 'Locations', colorKey: 'store' },
+      sessions: { x: 1100, y: 180, label: 'Sessions', colorKey: 'store' },
+      meters: { x: 860, y: 320, label: 'Meters', colorKey: 'external' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      receipts: { x: 620, y: 320, label: 'Receipts', colorKey: 'store' },
+      enforcement: { x: 1100, y: 320, label: 'Enforcement', colorKey: 'external' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 620, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  spothero: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','search','inventory','garages','pricing','booking','payments','qr','access','support','notifications','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Driver', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      search: { x: 620, y: 180, label: 'Search', colorKey: 'api' },
+      inventory: { x: 860, y: 180, label: 'Inventory', colorKey: 'api' },
+      garages: { x: 1100, y: 180, label: 'Garages', colorKey: 'external' },
+      pricing: { x: 860, y: 320, label: 'Pricing', colorKey: 'api' },
+      booking: { x: 620, y: 320, label: 'Booking', colorKey: 'api' },
+      payments: { x: 380, y: 320, label: 'Payments', colorKey: 'external' },
+      qr: { x: 1100, y: 320, label: 'QR/Pass', colorKey: 'store' },
+      access: { x: 860, y: 460, label: 'Access', colorKey: 'external' },
+      support: { x: 380, y: 460, label: 'Support', colorKey: 'external' },
+      notifications: { x: 620, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  'openai-playground': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','projects','prompts','models','inference','tools','files','logging','billing','analytics','safety','rateLimits'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      projects: { x: 620, y: 180, label: 'Projects', colorKey: 'store' },
+      prompts: { x: 860, y: 180, label: 'Prompts', colorKey: 'store' },
+      models: { x: 1100, y: 180, label: 'Models', colorKey: 'api' },
+      inference: { x: 860, y: 320, label: 'Inference', colorKey: 'api' },
+      tools: { x: 1100, y: 320, label: 'Tools', colorKey: 'api' },
+      files: { x: 620, y: 320, label: 'Files', colorKey: 'store' },
+      logging: { x: 620, y: 460, label: 'Logging', colorKey: 'store' },
+      billing: { x: 380, y: 320, label: 'Billing', colorKey: 'external' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' },
+      safety: { x: 1100, y: 460, label: 'Safety', colorKey: 'api' },
+      rateLimits: { x: 380, y: 460, label: 'Rate Limits', colorKey: 'api' }
+    }
+  },
+
+  'anthropic-claude': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','workspaces','projects','prompts','models','inference','tools','files','logging','billing','analytics','safety','rateLimits'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      workspaces: { x: 620, y: 180, label: 'Workspaces', colorKey: 'store' },
+      projects: { x: 860, y: 180, label: 'Projects', colorKey: 'store' },
+      prompts: { x: 1100, y: 180, label: 'Prompts', colorKey: 'store' },
+      models: { x: 860, y: 320, label: 'Models', colorKey: 'api' },
+      inference: { x: 1100, y: 320, label: 'Inference', colorKey: 'api' },
+      tools: { x: 860, y: 460, label: 'Tools', colorKey: 'api' },
+      files: { x: 620, y: 320, label: 'Files', colorKey: 'store' },
+      logging: { x: 620, y: 460, label: 'Logging', colorKey: 'store' },
+      billing: { x: 380, y: 320, label: 'Billing', colorKey: 'external' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' },
+      safety: { x: 1100, y: 600, label: 'Safety', colorKey: 'api' },
+      rateLimits: { x: 380, y: 460, label: 'Rate Limits', colorKey: 'api' }
+    }
+  },
+
+  'perplexity-ai': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','query','retrieval','web','ranking','answer','citations','history','subscriptions','billing','analytics','safety'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      query: { x: 620, y: 180, label: 'Query', colorKey: 'api' },
+      retrieval: { x: 860, y: 180, label: 'Retrieval', colorKey: 'api' },
+      web: { x: 1100, y: 180, label: 'Web', colorKey: 'external' },
+      ranking: { x: 860, y: 320, label: 'Ranking', colorKey: 'api' },
+      answer: { x: 620, y: 320, label: 'Answer', colorKey: 'api' },
+      citations: { x: 1100, y: 320, label: 'Citations', colorKey: 'store' },
+      history: { x: 620, y: 460, label: 'History', colorKey: 'store' },
+      subscriptions: { x: 380, y: 180, label: 'Subscriptions', colorKey: 'external' },
+      billing: { x: 380, y: 320, label: 'Billing', colorKey: 'external' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' },
+      safety: { x: 1100, y: 460, label: 'Safety', colorKey: 'api' }
+    }
+  },
+
+  poe: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','bots','marketplace','chat','providers','routing','inference','billing','subscriptions','safety','analytics','notifications'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      bots: { x: 620, y: 180, label: 'Bots', colorKey: 'store' },
+      marketplace: { x: 860, y: 180, label: 'Marketplace', colorKey: 'store' },
+      chat: { x: 1100, y: 180, label: 'Chat', colorKey: 'stream' },
+      providers: { x: 860, y: 320, label: 'Providers', colorKey: 'external' },
+      routing: { x: 620, y: 320, label: 'Routing', colorKey: 'api' },
+      inference: { x: 1100, y: 320, label: 'Inference', colorKey: 'api' },
+      billing: { x: 380, y: 320, label: 'Billing', colorKey: 'external' },
+      subscriptions: { x: 380, y: 180, label: 'Subscriptions', colorKey: 'external' },
+      safety: { x: 620, y: 460, label: 'Safety', colorKey: 'api' },
+      analytics: { x: 860, y: 460, label: 'Analytics', colorKey: 'store' },
+      notifications: { x: 1100, y: 460, label: 'Notify', colorKey: 'external' }
+    }
+  }
+});
+
+Object.assign(ARCH_LAYOUTS, {
+  citymapper: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Citymapper',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','map','transit','routes','realtime','alerts','tickets','payments','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      map: { x: 600, y: 160, label: 'Map' },
+      transit: { x: 880, y: 160, label: 'Transit Data' },
+      routes: { x: 1160, y: 160, label: 'Routes' },
+      realtime: { x: 880, y: 300, label: 'Realtime' },
+      alerts: { x: 1160, y: 300, label: 'Alerts' },
+      tickets: { x: 600, y: 300, label: 'Tickets' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      notifications: { x: 600, y: 440, label: 'Notify' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','map','map'], ['map','transit','data']);
+      if(stepIdx===2) e.push(['transit','routes','route'], ['routes','realtime','rt']);
+      if(stepIdx===3) e.push(['realtime','alerts','alert'], ['alerts','notifications','notify']);
+      if(stepIdx===4) e.push(['tickets','payments','pay']);
+      if(stepIdx===5) e.push(['routes','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'transit-app': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Transit App',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','map','transit','routes','realtime','alerts','crowd','tickets','payments','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      map: { x: 600, y: 160, label: 'Map' },
+      transit: { x: 880, y: 160, label: 'Transit Data' },
+      routes: { x: 1160, y: 160, label: 'Routes' },
+      realtime: { x: 880, y: 300, label: 'Realtime' },
+      alerts: { x: 1160, y: 300, label: 'Alerts' },
+      crowd: { x: 600, y: 300, label: 'Crowd' },
+      tickets: { x: 600, y: 440, label: 'Tickets' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','map','map'], ['map','transit','data']);
+      if(stepIdx===2) e.push(['transit','routes','route'], ['routes','realtime','rt']);
+      if(stepIdx===3) e.push(['realtime','alerts','alert'], ['crowd','alerts','crowd']);
+      if(stepIdx===4) e.push(['tickets','payments','pay']);
+      if(stepIdx===5) e.push(['alerts','notifications','notify']);
+      if(stepIdx===6) e.push(['routes','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'google-trips-legacy': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Google Trips',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','imports','gmail','calendar','itinerary','maps','recommendations','reservations','offline','notifications','analytics','privacy'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      imports: { x: 600, y: 160, label: 'Imports' },
+      gmail: { x: 880, y: 160, label: 'Gmail' },
+      calendar: { x: 1160, y: 160, label: 'Calendar' },
+      itinerary: { x: 600, y: 300, label: 'Itinerary' },
+      maps: { x: 880, y: 300, label: 'Maps' },
+      recommendations: { x: 1160, y: 300, label: 'Recs' },
+      reservations: { x: 600, y: 440, label: 'Reservations' },
+      offline: { x: 880, y: 440, label: 'Offline' },
+      notifications: { x: 320, y: 300, label: 'Notify' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' },
+      privacy: { x: 320, y: 440, label: 'Privacy' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','imports','import']);
+      if(stepIdx===2) e.push(['imports','gmail','gmail'], ['imports','calendar','cal']);
+      if(stepIdx===3) e.push(['gmail','reservations','res'], ['calendar','itinerary','itin']);
+      if(stepIdx===4) e.push(['itinerary','maps','maps'], ['itinerary','recommendations','recs']);
+      if(stepIdx===5) e.push(['itinerary','offline','offline'], ['recommendations','notifications','notify']);
+      if(stepIdx===6) e.push(['privacy','itinerary','privacy'], ['itinerary','analytics','analytics']);
+      return e;
+    }
+  },
+
+  roadtrippers: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Roadtrippers',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','planner','maps','places','routes','bookings','partners','payments','shared','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      planner: { x: 600, y: 160, label: 'Planner' },
+      maps: { x: 880, y: 160, label: 'Maps' },
+      places: { x: 1160, y: 160, label: 'Places' },
+      routes: { x: 600, y: 300, label: 'Routes' },
+      bookings: { x: 880, y: 300, label: 'Bookings' },
+      partners: { x: 1160, y: 300, label: 'Partners' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      shared: { x: 600, y: 440, label: 'Sharing' },
+      notifications: { x: 320, y: 440, label: 'Notify' },
+      analytics: { x: 880, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','planner','plan']);
+      if(stepIdx===2) e.push(['planner','maps','maps'], ['maps','places','place']);
+      if(stepIdx===3) e.push(['places','routes','route'], ['routes','shared','share']);
+      if(stepIdx===4) e.push(['routes','bookings','book'], ['bookings','partners','partner']);
+      if(stepIdx===5) e.push(['bookings','payments','pay'], ['bookings','notifications','notify']);
+      if(stepIdx===6) e.push(['routes','analytics','analytics']);
+      return e;
+    }
+  },
+
+  parkmobile: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'ParkMobile',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','map','locations','sessions','meters','payments','receipts','enforcement','support','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Driver' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      map: { x: 600, y: 160, label: 'Map' },
+      locations: { x: 880, y: 160, label: 'Locations' },
+      sessions: { x: 1160, y: 160, label: 'Sessions' },
+      meters: { x: 880, y: 300, label: 'Meters' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      receipts: { x: 600, y: 300, label: 'Receipts' },
+      enforcement: { x: 1160, y: 300, label: 'Enforcement' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 600, y: 440, label: 'Notify' },
+      analytics: { x: 880, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','map','map'], ['map','locations','loc']);
+      if(stepIdx===2) e.push(['locations','sessions','start'], ['sessions','meters','meter']);
+      if(stepIdx===3) e.push(['sessions','payments','pay'], ['payments','receipts','receipt']);
+      if(stepIdx===4) e.push(['sessions','enforcement','enforce']);
+      if(stepIdx===5) e.push(['sessions','notifications','notify']);
+      if(stepIdx===6) e.push(['sessions','analytics','analytics'], ['support','client','support']);
+      return e;
+    }
+  },
+
+  spothero: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'SpotHero',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','search','inventory','garages','pricing','booking','payments','qr','access','support','notifications','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Driver' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      search: { x: 600, y: 160, label: 'Search' },
+      inventory: { x: 880, y: 160, label: 'Inventory' },
+      garages: { x: 1160, y: 160, label: 'Garages' },
+      pricing: { x: 880, y: 300, label: 'Pricing' },
+      booking: { x: 600, y: 300, label: 'Booking' },
+      payments: { x: 320, y: 300, label: 'Payments' },
+      qr: { x: 1160, y: 300, label: 'QR/Pass' },
+      access: { x: 880, y: 440, label: 'Access' },
+      support: { x: 320, y: 440, label: 'Support' },
+      notifications: { x: 600, y: 440, label: 'Notify' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','search','search'], ['search','inventory','inv']);
+      if(stepIdx===2) e.push(['inventory','garages','garage'], ['garages','pricing','price']);
+      if(stepIdx===3) e.push(['pricing','booking','book'], ['booking','payments','pay']);
+      if(stepIdx===4) e.push(['booking','qr','pass'], ['qr','access','access']);
+      if(stepIdx===5) e.push(['booking','notifications','notify']);
+      if(stepIdx===6) e.push(['support','client','support'], ['booking','analytics','analytics']);
+      return e;
+    }
+  },
+
+  'openai-playground': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'OpenAI Playground',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','projects','prompts','models','inference','tools','files','logging','billing','analytics','safety','rateLimits'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      projects: { x: 600, y: 160, label: 'Projects' },
+      prompts: { x: 880, y: 160, label: 'Prompts' },
+      models: { x: 1160, y: 160, label: 'Models' },
+      inference: { x: 880, y: 300, label: 'Inference' },
+      tools: { x: 1160, y: 300, label: 'Tools' },
+      files: { x: 600, y: 300, label: 'Files' },
+      logging: { x: 600, y: 440, label: 'Logging' },
+      billing: { x: 320, y: 300, label: 'Billing' },
+      analytics: { x: 880, y: 440, label: 'Analytics' },
+      safety: { x: 1160, y: 440, label: 'Safety' },
+      rateLimits: { x: 320, y: 440, label: 'Rate Limits' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','projects','proj'], ['projects','prompts','prompt']);
+      if(stepIdx===2) e.push(['prompts','models','model'], ['models','inference','infer']);
+      if(stepIdx===3) e.push(['tools','inference','tool'], ['files','inference','file']);
+      if(stepIdx===4) e.push(['inference','logging','log'], ['logging','analytics','analytics']);
+      if(stepIdx===5) e.push(['inference','safety','safety'], ['rateLimits','inference','limit']);
+      if(stepIdx===6) e.push(['billing','analytics','bill']);
+      return e;
+    }
+  },
+
+  'anthropic-claude': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Anthropic Claude',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','workspaces','projects','prompts','models','inference','tools','files','logging','billing','analytics','safety','rateLimits'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      workspaces: { x: 600, y: 160, label: 'Workspaces' },
+      projects: { x: 880, y: 160, label: 'Projects' },
+      prompts: { x: 1160, y: 160, label: 'Prompts' },
+      models: { x: 880, y: 300, label: 'Models' },
+      inference: { x: 1160, y: 300, label: 'Inference' },
+      tools: { x: 880, y: 440, label: 'Tools' },
+      files: { x: 600, y: 300, label: 'Files' },
+      logging: { x: 600, y: 440, label: 'Logging' },
+      billing: { x: 320, y: 300, label: 'Billing' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' },
+      safety: { x: 1160, y: 580, label: 'Safety' },
+      rateLimits: { x: 320, y: 440, label: 'Rate Limits' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','workspaces','ws'], ['workspaces','projects','proj']);
+      if(stepIdx===2) e.push(['projects','prompts','prompt'], ['prompts','models','model']);
+      if(stepIdx===3) e.push(['models','inference','infer'], ['tools','inference','tool'], ['files','inference','file']);
+      if(stepIdx===4) e.push(['inference','logging','log'], ['logging','analytics','analytics']);
+      if(stepIdx===5) e.push(['inference','safety','safety'], ['rateLimits','inference','limit']);
+      if(stepIdx===6) e.push(['billing','analytics','bill']);
+      return e;
+    }
+  },
+
+  'perplexity-ai': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Perplexity AI',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','query','retrieval','web','ranking','answer','citations','history','subscriptions','billing','analytics','safety'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      query: { x: 600, y: 160, label: 'Query' },
+      retrieval: { x: 880, y: 160, label: 'Retrieval' },
+      web: { x: 1160, y: 160, label: 'Web' },
+      ranking: { x: 880, y: 300, label: 'Ranking' },
+      answer: { x: 600, y: 300, label: 'Answer' },
+      citations: { x: 1160, y: 300, label: 'Citations' },
+      history: { x: 600, y: 440, label: 'History' },
+      subscriptions: { x: 320, y: 160, label: 'Subscriptions' },
+      billing: { x: 320, y: 300, label: 'Billing' },
+      analytics: { x: 880, y: 440, label: 'Analytics' },
+      safety: { x: 1160, y: 440, label: 'Safety' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','query','q']);
+      if(stepIdx===2) e.push(['query','retrieval','retrieve'], ['retrieval','web','web']);
+      if(stepIdx===3) e.push(['web','ranking','rank'], ['ranking','answer','answer']);
+      if(stepIdx===4) e.push(['answer','citations','cite'], ['answer','history','save']);
+      if(stepIdx===5) e.push(['subscriptions','billing','bill'], ['answer','analytics','analytics']);
+      if(stepIdx===6) e.push(['answer','safety','safety']);
+      return e;
+    }
+  },
+
+  poe: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Poe',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','bots','marketplace','chat','providers','routing','inference','billing','subscriptions','safety','analytics','notifications'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      bots: { x: 600, y: 160, label: 'Bots' },
+      marketplace: { x: 880, y: 160, label: 'Marketplace' },
+      chat: { x: 1160, y: 160, label: 'Chat' },
+      providers: { x: 880, y: 300, label: 'Providers' },
+      routing: { x: 600, y: 300, label: 'Routing' },
+      inference: { x: 1160, y: 300, label: 'Inference' },
+      billing: { x: 320, y: 300, label: 'Billing' },
+      subscriptions: { x: 320, y: 160, label: 'Subscriptions' },
+      safety: { x: 600, y: 440, label: 'Safety' },
+      analytics: { x: 880, y: 440, label: 'Analytics' },
+      notifications: { x: 1160, y: 440, label: 'Notify' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','bots','bot'], ['bots','marketplace','market']);
+      if(stepIdx===2) e.push(['marketplace','chat','chat'], ['chat','routing','route']);
+      if(stepIdx===3) e.push(['routing','providers','provider'], ['providers','inference','infer']);
+      if(stepIdx===4) e.push(['inference','safety','safety'], ['inference','analytics','analytics']);
+      if(stepIdx===5) e.push(['subscriptions','billing','bill']);
+      if(stepIdx===6) e.push(['inference','notifications','notify']);
+      return e;
+    }
+  }
+});
+
 Object.assign(ARCH_LAYOUTS, {
   zipcar: {
     viewBox: '0 0 1860 820',

@@ -10055,6 +10055,306 @@ export const FLOWS = {
     ]
   },
 
+  citymapper: {
+    title: 'Citymapper',
+    steps: [
+      {
+        title: 'Plan route',
+        desc: 'User plans a route using transit data and maps.',
+        active: ['client','auth','map','transit','routes'],
+        edges: [['client','auth'], ['auth','map'], ['map','transit'], ['transit','routes']]
+      },
+      {
+        title: 'Realtime + alerts',
+        desc: 'Realtime feeds and alerts update route decisions.',
+        active: ['realtime','alerts','notifications'],
+        edges: [['routes','realtime'], ['realtime','alerts'], ['alerts','notifications']]
+      },
+      {
+        title: 'Tickets + payments',
+        desc: 'Tickets purchased via payments provider.',
+        active: ['tickets','payments'],
+        edges: [['tickets','payments']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics aggregates route and engagement metrics.',
+        active: ['analytics'],
+        edges: [['routes','analytics']]
+      }
+    ]
+  },
+
+  'transit-app': {
+    title: 'Transit App',
+    steps: [
+      {
+        title: 'Plan trip + crowd signals',
+        desc: 'Trip planned with crowd-sourced signals and schedules.',
+        active: ['client','auth','map','transit','routes','crowd'],
+        edges: [['client','auth'], ['auth','map'], ['map','transit'], ['transit','routes'], ['crowd','alerts']]
+      },
+      {
+        title: 'Realtime + alerts',
+        desc: 'Realtime updates and alerts drive rerouting decisions.',
+        active: ['realtime','alerts','notifications'],
+        edges: [['routes','realtime'], ['realtime','alerts'], ['alerts','notifications']]
+      },
+      {
+        title: 'Tickets + payments',
+        desc: 'Tickets purchased via payments provider.',
+        active: ['tickets','payments'],
+        edges: [['tickets','payments']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics tracks engagement and trip outcomes.',
+        active: ['analytics'],
+        edges: [['routes','analytics']]
+      }
+    ]
+  },
+
+  'google-trips-legacy': {
+    title: 'Google Trips (legacy)',
+    steps: [
+      {
+        title: 'Import reservations',
+        desc: 'Imports pull reservations from Gmail and Calendar.',
+        active: ['client','auth','imports','gmail','calendar','privacy'],
+        edges: [['client','auth'], ['auth','imports'], ['imports','gmail'], ['imports','calendar'], ['privacy','imports']]
+      },
+      {
+        title: 'Build itinerary + offline',
+        desc: 'Itinerary assembled and cached offline.',
+        active: ['itinerary','reservations','offline'],
+        edges: [['gmail','reservations'], ['calendar','itinerary'], ['itinerary','offline']]
+      },
+      {
+        title: 'Maps + recommendations',
+        desc: 'Maps and recommendations enrich the itinerary.',
+        active: ['maps','recommendations'],
+        edges: [['itinerary','maps'], ['itinerary','recommendations']]
+      },
+      {
+        title: 'Notifications + analytics',
+        desc: 'Notifications for upcoming items; analytics tracks usage.',
+        active: ['notifications','analytics'],
+        edges: [['recommendations','notifications'], ['itinerary','analytics']]
+      }
+    ]
+  },
+
+  roadtrippers: {
+    title: 'Roadtrippers',
+    steps: [
+      {
+        title: 'Plan road trip',
+        desc: 'User plans trip in planner with maps/places.',
+        active: ['client','auth','planner','maps','places','routes'],
+        edges: [['client','auth'], ['auth','planner'], ['planner','maps'], ['maps','places'], ['places','routes']]
+      },
+      {
+        title: 'Share route',
+        desc: 'Sharing links route with friends or collaborators.',
+        active: ['shared'],
+        edges: [['routes','shared']]
+      },
+      {
+        title: 'Bookings + payments',
+        desc: 'Bookings routed to partners; payments processed.',
+        active: ['bookings','partners','payments'],
+        edges: [['routes','bookings'], ['bookings','partners'], ['bookings','payments']]
+      },
+      {
+        title: 'Notifications + analytics',
+        desc: 'Notifications for itinerary events; analytics tracks conversion.',
+        active: ['notifications','analytics'],
+        edges: [['bookings','notifications'], ['routes','analytics']]
+      }
+    ]
+  },
+
+  parkmobile: {
+    title: 'ParkMobile',
+    steps: [
+      {
+        title: 'Find parking location',
+        desc: 'User finds location/zone on map and starts session.',
+        active: ['client','auth','map','locations','sessions'],
+        edges: [['client','auth'], ['auth','map'], ['map','locations'], ['locations','sessions']]
+      },
+      {
+        title: 'Pay + receipt',
+        desc: 'Payment processed and receipt stored.',
+        active: ['payments','receipts'],
+        edges: [['sessions','payments'], ['payments','receipts']]
+      },
+      {
+        title: 'Meter + enforcement',
+        desc: 'Meter/enforcement systems validate session.',
+        active: ['meters','enforcement'],
+        edges: [['sessions','meters'], ['sessions','enforcement']]
+      },
+      {
+        title: 'Notifications + support + analytics',
+        desc: 'Notifications for expiry; support handles disputes; analytics tracks usage.',
+        active: ['notifications','support','analytics'],
+        edges: [['sessions','notifications'], ['client','support'], ['sessions','analytics']]
+      }
+    ]
+  },
+
+  spothero: {
+    title: 'SpotHero',
+    steps: [
+      {
+        title: 'Search inventory',
+        desc: 'User searches parking inventory from garages.',
+        active: ['client','auth','search','inventory','garages'],
+        edges: [['client','auth'], ['auth','search'], ['search','inventory'], ['inventory','garages']]
+      },
+      {
+        title: 'Pricing + booking + payment',
+        desc: 'Pricing computed; booking created; payment processed.',
+        active: ['pricing','booking','payments'],
+        edges: [['garages','pricing'], ['pricing','booking'], ['booking','payments']]
+      },
+      {
+        title: 'QR pass + access',
+        desc: 'QR pass issued and used for garage access.',
+        active: ['qr','access','notifications'],
+        edges: [['booking','qr'], ['qr','access'], ['booking','notifications']]
+      },
+      {
+        title: 'Support + analytics',
+        desc: 'Support resolves issues; analytics tracks conversion.',
+        active: ['support','analytics'],
+        edges: [['client','support'], ['booking','analytics']]
+      }
+    ]
+  },
+
+  'openai-playground': {
+    title: 'OpenAI Playground',
+    steps: [
+      {
+        title: 'Auth + select model',
+        desc: 'User authenticates, selects project and model, configures prompt.',
+        active: ['client','auth','projects','prompts','models'],
+        edges: [['client','auth'], ['auth','projects'], ['projects','prompts'], ['prompts','models']]
+      },
+      {
+        title: 'Run inference',
+        desc: 'Inference runs with optional tools and files.',
+        active: ['inference','tools','files'],
+        edges: [['models','inference'], ['tools','inference'], ['files','inference']]
+      },
+      {
+        title: 'Logging + analytics',
+        desc: 'Runs logged; analytics summarizes usage.',
+        active: ['logging','analytics'],
+        edges: [['inference','logging'], ['logging','analytics']]
+      },
+      {
+        title: 'Safety + rate limits + billing',
+        desc: 'Safety policies and rate limits enforced; billing tracks cost.',
+        active: ['safety','rateLimits','billing'],
+        edges: [['inference','safety'], ['rateLimits','inference'], ['billing','analytics']]
+      }
+    ]
+  },
+
+  'anthropic-claude': {
+    title: 'Anthropic Claude',
+    steps: [
+      {
+        title: 'Workspace + project setup',
+        desc: 'User authenticates, chooses workspace/project, and sets prompt.',
+        active: ['client','auth','workspaces','projects','prompts'],
+        edges: [['client','auth'], ['auth','workspaces'], ['workspaces','projects'], ['projects','prompts']]
+      },
+      {
+        title: 'Model inference + tools',
+        desc: 'Inference runs; tools and files augment context.',
+        active: ['models','inference','tools','files'],
+        edges: [['prompts','models'], ['models','inference'], ['tools','inference'], ['files','inference']]
+      },
+      {
+        title: 'Logging + analytics',
+        desc: 'Requests logged; analytics summarizes usage.',
+        active: ['logging','analytics'],
+        edges: [['inference','logging'], ['logging','analytics']]
+      },
+      {
+        title: 'Safety + rate limits + billing',
+        desc: 'Safety policies and rate limits enforced; billing tracks usage.',
+        active: ['safety','rateLimits','billing'],
+        edges: [['inference','safety'], ['rateLimits','inference'], ['billing','analytics']]
+      }
+    ]
+  },
+
+  'perplexity-ai': {
+    title: 'Perplexity AI',
+    steps: [
+      {
+        title: 'Ask question',
+        desc: 'User submits query; retrieval pulls web sources.',
+        active: ['client','auth','query','retrieval','web'],
+        edges: [['client','auth'], ['auth','query'], ['query','retrieval'], ['retrieval','web']]
+      },
+      {
+        title: 'Rank + answer + citations',
+        desc: 'Ranking selects sources; answer generated with citations.',
+        active: ['ranking','answer','citations'],
+        edges: [['web','ranking'], ['ranking','answer'], ['answer','citations']]
+      },
+      {
+        title: 'History + subscriptions',
+        desc: 'History saved; subscription tier gates features.',
+        active: ['history','subscriptions','billing'],
+        edges: [['answer','history'], ['subscriptions','billing']]
+      },
+      {
+        title: 'Safety + analytics',
+        desc: 'Safety checks and analytics monitor outcomes.',
+        active: ['safety','analytics'],
+        edges: [['answer','safety'], ['answer','analytics']]
+      }
+    ]
+  },
+
+  poe: {
+    title: 'Poe',
+    steps: [
+      {
+        title: 'Pick bot + start chat',
+        desc: 'User authenticates, picks a bot from marketplace, and starts chat.',
+        active: ['client','auth','bots','marketplace','chat'],
+        edges: [['client','auth'], ['auth','bots'], ['bots','marketplace'], ['marketplace','chat']]
+      },
+      {
+        title: 'Provider routing + inference',
+        desc: 'Routing selects provider; inference executes and returns responses.',
+        active: ['routing','providers','inference'],
+        edges: [['chat','routing'], ['routing','providers'], ['providers','inference']]
+      },
+      {
+        title: 'Safety + notifications',
+        desc: 'Safety moderation applied; notifications for updates and mentions.',
+        active: ['safety','notifications'],
+        edges: [['inference','safety'], ['inference','notifications']]
+      },
+      {
+        title: 'Subscriptions + billing + analytics',
+        desc: 'Subscription billed; analytics tracks usage and bot performance.',
+        active: ['subscriptions','billing','analytics'],
+        edges: [['subscriptions','billing'], ['inference','analytics']]
+      }
+    ]
+  },
+
   chime: {
     title: 'Chime',
     steps: [
