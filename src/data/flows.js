@@ -4301,6 +4301,396 @@ export const FLOWS = {
     ]
   },
 
+  hubspot: {
+    title: 'HubSpot',
+    steps: [
+      {
+        title: 'Capture lead + contact',
+        desc: 'Leads captured from forms/ads/integrations and stored as contacts.',
+        active: ['client','crm','contacts'],
+        edges: [['client','crm'], ['crm','contacts']]
+      },
+      {
+        title: 'Enrich company + pipeline',
+        desc: 'Contacts linked to companies; deals created and moved through pipeline.',
+        active: ['companies','deals','pipeline'],
+        edges: [['contacts','companies'], ['contacts','deals'], ['deals','pipeline']]
+      },
+      {
+        title: 'Automation + workflows',
+        desc: 'Automation triggers workflows for routing, scoring, and follow-ups.',
+        active: ['automation','workflows'],
+        edges: [['pipeline','automation'], ['automation','workflows']]
+      },
+      {
+        title: 'Email sequences + tracking',
+        desc: 'Email sequences send outreach; tracking records opens/clicks and updates CRM.',
+        active: ['email','tracking','analytics'],
+        edges: [['workflows','email'], ['email','tracking'], ['tracking','analytics']]
+      },
+      {
+        title: 'Ads + integrations',
+        desc: 'Ads and integrations sync audiences, events, and lifecycle stages.',
+        active: ['ads','integrations'],
+        edges: [['crm','integrations'], ['workflows','ads']]
+      },
+      {
+        title: 'Reports',
+        desc: 'Reports measure funnel conversion and team performance.',
+        active: ['reports','analytics'],
+        edges: [['crm','reports'], ['reports','analytics']]
+      }
+    ]
+  },
+
+  salesforce: {
+    title: 'Salesforce',
+    steps: [
+      {
+        title: 'Auth + org context',
+        desc: 'User authenticates and loads org metadata and object schema.',
+        active: ['client','auth','org','objects'],
+        edges: [['client','auth'], ['auth','org'], ['org','objects']]
+      },
+      {
+        title: 'Manage accounts + contacts',
+        desc: 'Users create/update accounts and contacts; relationships stored in objects.',
+        active: ['accounts','contacts'],
+        edges: [['objects','accounts'], ['objects','contacts']]
+      },
+      {
+        title: 'Opportunities + workflow',
+        desc: 'Opportunities flow through stages; workflow and Apex automate updates.',
+        active: ['opps','workflow','apex'],
+        edges: [['objects','opps'], ['opps','workflow'], ['workflow','apex']]
+      },
+      {
+        title: 'Integrations + events',
+        desc: 'Events stream changes to integrations and downstream systems.',
+        active: ['events','integrations'],
+        edges: [['apex','events'], ['events','integrations']]
+      },
+      {
+        title: 'Reporting + analytics',
+        desc: 'Reports and analytics dashboards summarize pipeline performance.',
+        active: ['reporting','analytics'],
+        edges: [['objects','reporting'], ['reporting','analytics']]
+      },
+      {
+        title: 'Audit',
+        desc: 'Audit trails support compliance and change tracking.',
+        active: ['audit'],
+        edges: [['objects','audit']]
+      }
+    ]
+  },
+
+  pipedrive: {
+    title: 'Pipedrive',
+    steps: [
+      {
+        title: 'Add lead + contact',
+        desc: 'Lead captured and converted into a contact/person record.',
+        active: ['leads','contacts'],
+        edges: [['client','leads'], ['leads','contacts']]
+      },
+      {
+        title: 'Create deal + pipeline stages',
+        desc: 'Deals created and moved across pipeline stages.',
+        active: ['deals','pipeline'],
+        edges: [['contacts','deals'], ['deals','pipeline']]
+      },
+      {
+        title: 'Activities + reminders',
+        desc: 'Activities scheduled (calls, follow-ups); reminders keep reps on track.',
+        active: ['activities'],
+        edges: [['pipeline','activities']]
+      },
+      {
+        title: 'Automation + email',
+        desc: 'Automation triggers email templates and follow-ups; syncs back to CRM.',
+        active: ['automation','email'],
+        edges: [['pipeline','automation'], ['automation','email']]
+      },
+      {
+        title: 'Integrations',
+        desc: 'Integrations sync contacts, calendars, and communication history.',
+        active: ['integrations'],
+        edges: [['crm','integrations']]
+      },
+      {
+        title: 'Reports + analytics',
+        desc: 'Reports and analytics summarize conversions and rep performance.',
+        active: ['reports','analytics'],
+        edges: [['pipeline','reports'], ['reports','analytics']]
+      }
+    ]
+  },
+
+  freshsales: {
+    title: 'Freshsales',
+    steps: [
+      {
+        title: 'Capture lead + scoring',
+        desc: 'Leads captured and scored to prioritize outreach.',
+        active: ['leads','scoring'],
+        edges: [['client','leads'], ['leads','scoring']]
+      },
+      {
+        title: 'Convert + manage accounts',
+        desc: 'Leads converted to contacts/accounts; linked to deals.',
+        active: ['contacts','accounts','deals'],
+        edges: [['leads','contacts'], ['contacts','accounts'], ['contacts','deals']]
+      },
+      {
+        title: 'Automation + workflows',
+        desc: 'Automations trigger workflows for follow-ups and routing.',
+        active: ['automation'],
+        edges: [['deals','automation']]
+      },
+      {
+        title: 'Email + phone outreach',
+        desc: 'Sequences and call workflows create activities and update deal status.',
+        active: ['email','phone'],
+        edges: [['automation','email'], ['automation','phone']]
+      },
+      {
+        title: 'Integrations',
+        desc: 'Integrations sync calendars, support tools, and data sources.',
+        active: ['integrations'],
+        edges: [['crm','integrations']]
+      },
+      {
+        title: 'Reports + analytics',
+        desc: 'Reports and analytics track pipeline health and conversion.',
+        active: ['reports','analytics'],
+        edges: [['deals','reports'], ['reports','analytics']]
+      }
+    ]
+  },
+
+  intercom: {
+    title: 'Intercom',
+    steps: [
+      {
+        title: 'Customer opens widget',
+        desc: 'Widget opens; bots can answer or route to human support.',
+        active: ['widget','bots','inbox'],
+        edges: [['client','widget'], ['widget','bots'], ['bots','inbox']]
+      },
+      {
+        title: 'Routing + assignment',
+        desc: 'Conversation routed and assigned to teammates; notifications fire.',
+        active: ['routing','assign','notify'],
+        edges: [['inbox','routing'], ['routing','assign'], ['assign','notify']]
+      },
+      {
+        title: 'KB + tickets',
+        desc: 'Support uses knowledge base; issues can become tickets for tracking.',
+        active: ['kb','tickets'],
+        edges: [['inbox','kb'], ['kb','tickets']]
+      },
+      {
+        title: 'CRM + event tracking',
+        desc: 'User profiles and events enrich CRM context and triggers.',
+        active: ['crm','events'],
+        edges: [['inbox','crm'], ['crm','events']]
+      },
+      {
+        title: 'Integrations',
+        desc: 'Integrations sync conversations and tickets with external systems.',
+        active: ['integrations'],
+        edges: [['events','integrations']]
+      },
+      {
+        title: 'Moderation + analytics',
+        desc: 'Moderation enforces policies; analytics tracks resolution performance.',
+        active: ['moderation','analytics'],
+        edges: [['inbox','moderation'], ['inbox','analytics']]
+      }
+    ]
+  },
+
+  drift: {
+    title: 'Drift',
+    steps: [
+      {
+        title: 'Open chat + bot qualification',
+        desc: 'Widget opens; bots run playbooks to qualify and capture info.',
+        active: ['widget','bots','playbooks'],
+        edges: [['client','widget'], ['widget','bots'], ['bots','playbooks']]
+      },
+      {
+        title: 'Route to team inbox',
+        desc: 'Qualified leads routed to inbox and assigned to reps.',
+        active: ['routing','inbox'],
+        edges: [['playbooks','routing'], ['routing','inbox']]
+      },
+      {
+        title: 'Book meetings',
+        desc: 'Meetings scheduled; confirmations sent via notifications.',
+        active: ['meetings','notify'],
+        edges: [['inbox','meetings'], ['meetings','notify']]
+      },
+      {
+        title: 'CRM sync + integrations',
+        desc: 'Conversation and lead context synced to CRM and other tools.',
+        active: ['crm','integrations'],
+        edges: [['inbox','crm'], ['crm','integrations']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics tracks response time, conversion, and playbook performance.',
+        active: ['analytics'],
+        edges: [['inbox','analytics']]
+      }
+    ]
+  },
+
+  crisp: {
+    title: 'Crisp',
+    steps: [
+      {
+        title: 'Chat via widget',
+        desc: 'Customer chats via widget; messages stream to inbox.',
+        active: ['widget','chat','inbox'],
+        edges: [['client','widget'], ['widget','chat'], ['chat','inbox']]
+      },
+      {
+        title: 'Routing + bots',
+        desc: 'Routing assigns conversations; bots and KB help deflect tickets.',
+        active: ['routing','bots','kb'],
+        edges: [['inbox','routing'], ['kb','bots']]
+      },
+      {
+        title: 'CRM context',
+        desc: 'CRM links visitors to profiles and conversation history.',
+        active: ['crm'],
+        edges: [['inbox','crm']]
+      },
+      {
+        title: 'Integrations + notifications',
+        desc: 'Integrations sync data; notifications alert teams on priority messages.',
+        active: ['integrations','notify'],
+        edges: [['crm','integrations'], ['inbox','notify']]
+      },
+      {
+        title: 'Moderation + analytics',
+        desc: 'Moderation enforces policies; analytics tracks support performance.',
+        active: ['moderation','analytics'],
+        edges: [['inbox','moderation'], ['inbox','analytics']]
+      }
+    ]
+  },
+
+  'help-scout': {
+    title: 'Help Scout',
+    steps: [
+      {
+        title: 'Ingest mailbox',
+        desc: 'Mailboxes ingested into helpdesk inbox and converted to conversations.',
+        active: ['mailboxes','ingest','inbox'],
+        edges: [['mailboxes','ingest'], ['ingest','inbox']]
+      },
+      {
+        title: 'Assign + notify',
+        desc: 'Threads assigned to agents; notifications and SLAs keep queues moving.',
+        active: ['assign','notify'],
+        edges: [['inbox','assign'], ['assign','notify']]
+      },
+      {
+        title: 'KB + tickets',
+        desc: 'Knowledge base articles support deflection; tickets track issues.',
+        active: ['kb','tickets'],
+        edges: [['inbox','kb'], ['kb','tickets']]
+      },
+      {
+        title: 'Automation + integrations',
+        desc: 'Automation tags/routes; integrations sync with CRM and engineering tools.',
+        active: ['automation','integrations'],
+        edges: [['automation','inbox'], ['inbox','integrations']]
+      },
+      {
+        title: 'Reports + analytics',
+        desc: 'Reports measure response time, backlog, and CSAT.',
+        active: ['reports','analytics'],
+        edges: [['inbox','reports'], ['reports','analytics']]
+      }
+    ]
+  },
+
+  zendesk: {
+    title: 'Zendesk',
+    steps: [
+      {
+        title: 'Ingest multi-channel tickets',
+        desc: 'Channels ingested and normalized into tickets.',
+        active: ['channels','ingest','tickets'],
+        edges: [['channels','ingest'], ['ingest','tickets']]
+      },
+      {
+        title: 'Route + assign',
+        desc: 'Routing assigns tickets; notifications alert owners and escalate.',
+        active: ['routing','assign','notify'],
+        edges: [['tickets','routing'], ['routing','assign'], ['assign','notify']]
+      },
+      {
+        title: 'Macros + automation',
+        desc: 'Macros accelerate replies; automation applies triggers and SLAs.',
+        active: ['macros','automation'],
+        edges: [['macros','tickets'], ['automation','tickets']]
+      },
+      {
+        title: 'KB + integrations',
+        desc: 'KB articles support deflection; integrations sync to apps and systems.',
+        active: ['kb','integrations','apps'],
+        edges: [['tickets','kb'], ['tickets','integrations'], ['apps','tickets']]
+      },
+      {
+        title: 'Analytics + audit',
+        desc: 'Analytics tracks support performance; audit logs changes for compliance.',
+        active: ['analytics','audit'],
+        edges: [['tickets','analytics'], ['tickets','audit']]
+      }
+    ]
+  },
+
+  gorgias: {
+    title: 'Gorgias',
+    steps: [
+      {
+        title: 'Ingest ecommerce channels',
+        desc: 'Email/chat/social channels ingested into tickets for support.',
+        active: ['channels','ingest','tickets'],
+        edges: [['channels','ingest'], ['ingest','tickets']]
+      },
+      {
+        title: 'Pull order context from Shopify',
+        desc: 'Shopify integration pulls order/customer context into ticket view.',
+        active: ['shopify','orders','tickets'],
+        edges: [['tickets','shopify'], ['shopify','orders'], ['orders','tickets']]
+      },
+      {
+        title: 'Macros + automation + routing',
+        desc: 'Macros and automation power quick replies and routing rules.',
+        active: ['macros','automation','routing'],
+        edges: [['macros','tickets'], ['automation','tickets'], ['tickets','routing']]
+      },
+      {
+        title: 'Integrations + notifications',
+        desc: 'Integrations sync with other tools; notifications alert on priority tickets.',
+        active: ['integrations','notify'],
+        edges: [['tickets','integrations'], ['tickets','notify']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics tracks resolution time, CSAT, and revenue impact.',
+        active: ['analytics'],
+        edges: [['tickets','analytics']]
+      }
+    ]
+  },
+
   chime: {
     title: 'Chime',
     steps: [

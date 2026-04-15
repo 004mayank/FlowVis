@@ -13083,6 +13083,542 @@ Object.assign(SYSTEM_LAYOUTS, {
   }
 });
 
+// ----- Batch 51 (System + Architecture - CRM + support + chat) -----
+
+Object.assign(SYSTEM_LAYOUTS, {
+  hubspot: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','crm','contacts','companies','deals','pipeline','automation','workflows','email','ads','tracking','integrations','reports','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      crm: { x: 620, y: 180, label: 'CRM Core', colorKey: 'api' },
+      contacts: { x: 860, y: 180, label: 'Contacts', colorKey: 'store' },
+      companies: { x: 1100, y: 180, label: 'Companies', colorKey: 'store' },
+      deals: { x: 620, y: 320, label: 'Deals', colorKey: 'store' },
+      pipeline: { x: 860, y: 320, label: 'Pipeline', colorKey: 'store' },
+      automation: { x: 1100, y: 320, label: 'Automation', colorKey: 'api' },
+      workflows: { x: 380, y: 320, label: 'Workflows', colorKey: 'queue' },
+      email: { x: 380, y: 460, label: 'Email', colorKey: 'external' },
+      ads: { x: 620, y: 460, label: 'Ads', colorKey: 'external' },
+      tracking: { x: 860, y: 460, label: 'Tracking', colorKey: 'api' },
+      integrations: { x: 1100, y: 460, label: 'Integrations', colorKey: 'external' },
+      reports: { x: 620, y: 600, label: 'Reports', colorKey: 'store' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  salesforce: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','org','objects','accounts','contacts','opps','workflow','apex','integrations','events','reporting','analytics','audit'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      org: { x: 620, y: 180, label: 'Org', colorKey: 'store' },
+      objects: { x: 860, y: 180, label: 'Objects', colorKey: 'store' },
+      accounts: { x: 1100, y: 180, label: 'Accounts', colorKey: 'store' },
+      contacts: { x: 860, y: 320, label: 'Contacts', colorKey: 'store' },
+      opps: { x: 1100, y: 320, label: 'Opportunities', colorKey: 'store' },
+      workflow: { x: 620, y: 320, label: 'Workflow', colorKey: 'queue' },
+      apex: { x: 380, y: 320, label: 'Apex', colorKey: 'api' },
+      integrations: { x: 380, y: 460, label: 'Integrations', colorKey: 'external' },
+      events: { x: 620, y: 460, label: 'Events', colorKey: 'stream' },
+      reporting: { x: 860, y: 460, label: 'Reporting', colorKey: 'store' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' },
+      audit: { x: 860, y: 600, label: 'Audit', colorKey: 'store' }
+    }
+  },
+
+  pipedrive: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','crm','leads','contacts','deals','pipeline','activities','automation','email','integrations','reports','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      crm: { x: 620, y: 180, label: 'CRM API', colorKey: 'api' },
+      leads: { x: 860, y: 180, label: 'Leads', colorKey: 'store' },
+      contacts: { x: 1100, y: 180, label: 'Contacts', colorKey: 'store' },
+      deals: { x: 860, y: 320, label: 'Deals', colorKey: 'store' },
+      pipeline: { x: 1100, y: 320, label: 'Pipeline', colorKey: 'store' },
+      activities: { x: 620, y: 320, label: 'Activities', colorKey: 'store' },
+      automation: { x: 380, y: 320, label: 'Automation', colorKey: 'queue' },
+      email: { x: 380, y: 460, label: 'Email', colorKey: 'external' },
+      integrations: { x: 620, y: 460, label: 'Integrations', colorKey: 'external' },
+      reports: { x: 860, y: 460, label: 'Reports', colorKey: 'store' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  freshsales: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','crm','leads','contacts','accounts','deals','scoring','automation','email','phone','integrations','reports','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      crm: { x: 620, y: 180, label: 'CRM Core', colorKey: 'api' },
+      leads: { x: 860, y: 180, label: 'Leads', colorKey: 'store' },
+      contacts: { x: 1100, y: 180, label: 'Contacts', colorKey: 'store' },
+      accounts: { x: 860, y: 320, label: 'Accounts', colorKey: 'store' },
+      deals: { x: 1100, y: 320, label: 'Deals', colorKey: 'store' },
+      scoring: { x: 620, y: 320, label: 'Scoring', colorKey: 'api' },
+      automation: { x: 380, y: 320, label: 'Automation', colorKey: 'queue' },
+      email: { x: 380, y: 460, label: 'Email', colorKey: 'external' },
+      phone: { x: 620, y: 460, label: 'Phone', colorKey: 'external' },
+      integrations: { x: 860, y: 460, label: 'Integrations', colorKey: 'external' },
+      reports: { x: 1100, y: 460, label: 'Reports', colorKey: 'store' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  intercom: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','widget','inbox','routing','assign','bots','kb','tickets','crm','events','integrations','notify','analytics','moderation'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      widget: { x: 380, y: 320, label: 'Widget', colorKey: 'external' },
+      inbox: { x: 620, y: 320, label: 'Inbox', colorKey: 'store' },
+      routing: { x: 860, y: 320, label: 'Routing', colorKey: 'api' },
+      assign: { x: 1100, y: 320, label: 'Assign', colorKey: 'api' },
+      bots: { x: 620, y: 180, label: 'Bots', colorKey: 'api' },
+      kb: { x: 860, y: 180, label: 'KB', colorKey: 'store' },
+      tickets: { x: 1100, y: 180, label: 'Tickets', colorKey: 'store' },
+      crm: { x: 620, y: 460, label: 'CRM', colorKey: 'store' },
+      events: { x: 860, y: 460, label: 'Events', colorKey: 'stream' },
+      integrations: { x: 1100, y: 460, label: 'Integrations', colorKey: 'external' },
+      notify: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' },
+      moderation: { x: 860, y: 600, label: 'Moderation', colorKey: 'api' }
+    }
+  },
+
+  drift: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','widget','inbox','routing','bots','playbooks','meetings','crm','integrations','notify','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      widget: { x: 380, y: 320, label: 'Widget', colorKey: 'external' },
+      inbox: { x: 620, y: 320, label: 'Inbox', colorKey: 'store' },
+      routing: { x: 860, y: 320, label: 'Routing', colorKey: 'api' },
+      bots: { x: 620, y: 180, label: 'Bots', colorKey: 'api' },
+      playbooks: { x: 860, y: 180, label: 'Playbooks', colorKey: 'api' },
+      meetings: { x: 1100, y: 180, label: 'Meetings', colorKey: 'external' },
+      crm: { x: 860, y: 460, label: 'CRM', colorKey: 'store' },
+      integrations: { x: 1100, y: 460, label: 'Integrations', colorKey: 'external' },
+      notify: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  crisp: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','widget','chat','inbox','routing','kb','crm','bots','integrations','notify','analytics','moderation'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      widget: { x: 380, y: 320, label: 'Widget', colorKey: 'external' },
+      chat: { x: 620, y: 320, label: 'Chat', colorKey: 'stream' },
+      inbox: { x: 860, y: 320, label: 'Inbox', colorKey: 'store' },
+      routing: { x: 1100, y: 320, label: 'Routing', colorKey: 'api' },
+      kb: { x: 620, y: 180, label: 'KB', colorKey: 'store' },
+      crm: { x: 860, y: 180, label: 'CRM', colorKey: 'store' },
+      bots: { x: 1100, y: 180, label: 'Bots', colorKey: 'api' },
+      integrations: { x: 860, y: 460, label: 'Integrations', colorKey: 'external' },
+      notify: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' },
+      moderation: { x: 860, y: 600, label: 'Moderation', colorKey: 'api' }
+    }
+  },
+
+  'help-scout': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','mailboxes','ingest','inbox','assign','kb','tickets','automation','integrations','notify','reports','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      mailboxes: { x: 620, y: 180, label: 'Mailboxes', colorKey: 'external' },
+      ingest: { x: 620, y: 320, label: 'Ingest', colorKey: 'queue' },
+      inbox: { x: 860, y: 320, label: 'Inbox', colorKey: 'store' },
+      assign: { x: 1100, y: 320, label: 'Assign', colorKey: 'api' },
+      kb: { x: 860, y: 180, label: 'KB', colorKey: 'store' },
+      tickets: { x: 1100, y: 180, label: 'Tickets', colorKey: 'store' },
+      automation: { x: 380, y: 320, label: 'Automation', colorKey: 'queue' },
+      integrations: { x: 620, y: 460, label: 'Integrations', colorKey: 'external' },
+      notify: { x: 380, y: 460, label: 'Notify', colorKey: 'external' },
+      reports: { x: 860, y: 460, label: 'Reports', colorKey: 'store' },
+      analytics: { x: 1100, y: 460, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  zendesk: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','channels','ingest','tickets','routing','assign','kb','macros','automation','apps','integrations','notify','analytics','audit'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      channels: { x: 620, y: 180, label: 'Channels', colorKey: 'external' },
+      ingest: { x: 620, y: 320, label: 'Ingest', colorKey: 'queue' },
+      tickets: { x: 860, y: 320, label: 'Tickets', colorKey: 'store' },
+      routing: { x: 1100, y: 320, label: 'Routing', colorKey: 'api' },
+      assign: { x: 1100, y: 180, label: 'Assign', colorKey: 'api' },
+      kb: { x: 860, y: 180, label: 'KB', colorKey: 'store' },
+      macros: { x: 380, y: 320, label: 'Macros', colorKey: 'store' },
+      automation: { x: 380, y: 460, label: 'Automation', colorKey: 'queue' },
+      apps: { x: 620, y: 460, label: 'Apps', colorKey: 'external' },
+      integrations: { x: 860, y: 460, label: 'Integrations', colorKey: 'external' },
+      notify: { x: 380, y: 600, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' },
+      audit: { x: 860, y: 600, label: 'Audit', colorKey: 'store' }
+    }
+  },
+
+  gorgias: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','channels','ingest','tickets','shopify','orders','macros','automation','routing','integrations','notify','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      channels: { x: 620, y: 180, label: 'Channels', colorKey: 'external' },
+      ingest: { x: 620, y: 320, label: 'Ingest', colorKey: 'queue' },
+      tickets: { x: 860, y: 320, label: 'Tickets', colorKey: 'store' },
+      shopify: { x: 1100, y: 180, label: 'Shopify', colorKey: 'external' },
+      orders: { x: 1100, y: 320, label: 'Orders', colorKey: 'store' },
+      macros: { x: 380, y: 320, label: 'Macros', colorKey: 'store' },
+      automation: { x: 380, y: 460, label: 'Automation', colorKey: 'queue' },
+      routing: { x: 1100, y: 460, label: 'Routing', colorKey: 'api' },
+      integrations: { x: 860, y: 460, label: 'Integrations', colorKey: 'external' },
+      notify: { x: 620, y: 600, label: 'Notify', colorKey: 'external' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  }
+});
+
+Object.assign(ARCH_LAYOUTS, {
+  hubspot: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'HubSpot Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','crm','contacts','companies','deals','pipeline','automation','workflows','email','ads','tracking','integrations','reports','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      crm: { x: 600, y: 160, label: 'CRM Core' },
+      contacts: { x: 880, y: 160, label: 'Contacts' },
+      companies: { x: 1160, y: 160, label: 'Companies' },
+      deals: { x: 600, y: 300, label: 'Deals' },
+      pipeline: { x: 880, y: 300, label: 'Pipeline' },
+      automation: { x: 1160, y: 300, label: 'Automation' },
+      workflows: { x: 320, y: 300, label: 'Workflows' },
+      email: { x: 320, y: 440, label: 'Email' },
+      ads: { x: 600, y: 440, label: 'Ads' },
+      tracking: { x: 880, y: 440, label: 'Tracking' },
+      integrations: { x: 1160, y: 440, label: 'Integrations' },
+      reports: { x: 600, y: 580, label: 'Reports' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','crm','crm'], ['crm','contacts','contacts']);
+      if(stepIdx===2) e.push(['contacts','companies','company'], ['contacts','deals','deal'], ['deals','pipeline','pipeline']);
+      if(stepIdx===3) e.push(['pipeline','automation','auto'], ['automation','workflows','wf']);
+      if(stepIdx===4) e.push(['workflows','email','email'], ['email','tracking','track'], ['tracking','analytics','analytics']);
+      if(stepIdx===5) e.push(['workflows','ads','ads']);
+      if(stepIdx===6) e.push(['crm','integrations','integrations']);
+      if(stepIdx===7) e.push(['crm','reports','reports'], ['reports','analytics','analytics']);
+      return e;
+    }
+  },
+
+  salesforce: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Salesforce Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','org','objects','accounts','contacts','opps','workflow','apex','integrations','events','reporting','analytics','audit'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      org: { x: 600, y: 160, label: 'Org' },
+      objects: { x: 880, y: 160, label: 'Objects' },
+      accounts: { x: 1160, y: 160, label: 'Accounts' },
+      contacts: { x: 880, y: 300, label: 'Contacts' },
+      opps: { x: 1160, y: 300, label: 'Opportunities' },
+      workflow: { x: 600, y: 300, label: 'Workflow' },
+      apex: { x: 320, y: 300, label: 'Apex' },
+      integrations: { x: 320, y: 440, label: 'Integrations' },
+      events: { x: 600, y: 440, label: 'Events' },
+      reporting: { x: 880, y: 440, label: 'Reporting' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' },
+      audit: { x: 880, y: 580, label: 'Audit' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','org','org'], ['org','objects','objects']);
+      if(stepIdx===2) e.push(['objects','accounts','acct'], ['objects','contacts','contact'], ['objects','opps','opp']);
+      if(stepIdx===3) e.push(['opps','workflow','wf'], ['workflow','apex','apex']);
+      if(stepIdx===4) e.push(['apex','events','events'], ['events','integrations','integrate']);
+      if(stepIdx===5) e.push(['objects','reporting','reports'], ['reporting','analytics','analytics']);
+      if(stepIdx===6) e.push(['objects','audit','audit']);
+      return e;
+    }
+  },
+
+  pipedrive: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Pipedrive Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','crm','leads','contacts','deals','pipeline','activities','automation','email','integrations','reports','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      crm: { x: 600, y: 160, label: 'CRM API' },
+      leads: { x: 880, y: 160, label: 'Leads' },
+      contacts: { x: 1160, y: 160, label: 'Contacts' },
+      deals: { x: 880, y: 300, label: 'Deals' },
+      pipeline: { x: 1160, y: 300, label: 'Pipeline' },
+      activities: { x: 600, y: 300, label: 'Activities' },
+      automation: { x: 320, y: 300, label: 'Automation' },
+      email: { x: 320, y: 440, label: 'Email' },
+      integrations: { x: 600, y: 440, label: 'Integrations' },
+      reports: { x: 880, y: 440, label: 'Reports' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','crm','crm'], ['crm','leads','lead']);
+      if(stepIdx===2) e.push(['leads','contacts','contact'], ['contacts','deals','deal'], ['deals','pipeline','pipeline']);
+      if(stepIdx===3) e.push(['pipeline','activities','activity']);
+      if(stepIdx===4) e.push(['pipeline','automation','auto'], ['automation','email','email']);
+      if(stepIdx===5) e.push(['crm','integrations','integrations']);
+      if(stepIdx===6) e.push(['pipeline','reports','reports'], ['reports','analytics','analytics']);
+      return e;
+    }
+  },
+
+  freshsales: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Freshsales Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','crm','leads','contacts','accounts','deals','scoring','automation','email','phone','integrations','reports','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      crm: { x: 600, y: 160, label: 'CRM Core' },
+      leads: { x: 880, y: 160, label: 'Leads' },
+      contacts: { x: 1160, y: 160, label: 'Contacts' },
+      accounts: { x: 880, y: 300, label: 'Accounts' },
+      deals: { x: 1160, y: 300, label: 'Deals' },
+      scoring: { x: 600, y: 300, label: 'Scoring' },
+      automation: { x: 320, y: 300, label: 'Automation' },
+      email: { x: 320, y: 440, label: 'Email' },
+      phone: { x: 600, y: 440, label: 'Phone' },
+      integrations: { x: 880, y: 440, label: 'Integrations' },
+      reports: { x: 1160, y: 440, label: 'Reports' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','crm','crm'], ['crm','leads','lead']);
+      if(stepIdx===2) e.push(['leads','scoring','score'], ['scoring','deals','deal']);
+      if(stepIdx===3) e.push(['deals','automation','auto'], ['automation','email','email'], ['automation','phone','phone']);
+      if(stepIdx===4) e.push(['crm','integrations','integrations']);
+      if(stepIdx===5) e.push(['deals','reports','reports'], ['reports','analytics','analytics']);
+      return e;
+    }
+  },
+
+  intercom: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Intercom Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','widget','bots','inbox','routing','assign','kb','tickets','crm','events','integrations','notify','analytics','moderation'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      widget: { x: 320, y: 300, label: 'Widget' },
+      bots: { x: 600, y: 160, label: 'Bots' },
+      inbox: { x: 600, y: 300, label: 'Inbox' },
+      routing: { x: 880, y: 300, label: 'Routing' },
+      assign: { x: 1160, y: 300, label: 'Assign' },
+      kb: { x: 880, y: 160, label: 'KB' },
+      tickets: { x: 1160, y: 160, label: 'Tickets' },
+      crm: { x: 600, y: 440, label: 'CRM' },
+      events: { x: 880, y: 440, label: 'Events' },
+      integrations: { x: 1160, y: 440, label: 'Integrations' },
+      notify: { x: 320, y: 440, label: 'Notify' },
+      analytics: { x: 600, y: 580, label: 'Analytics' },
+      moderation: { x: 880, y: 580, label: 'Moderation' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','widget','open'], ['widget','bots','bot'], ['bots','inbox','handoff']);
+      if(stepIdx===2) e.push(['inbox','routing','route'], ['routing','assign','assign'], ['assign','notify','notify']);
+      if(stepIdx===3) e.push(['inbox','kb','kb'], ['kb','tickets','ticket']);
+      if(stepIdx===4) e.push(['inbox','crm','crm'], ['crm','events','events']);
+      if(stepIdx===5) e.push(['events','integrations','integrate']);
+      if(stepIdx===6) e.push(['inbox','analytics','analytics'], ['inbox','moderation','mod']);
+      return e;
+    }
+  },
+
+  drift: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Drift Conversational Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','widget','bots','playbooks','inbox','routing','meetings','crm','integrations','notify','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      widget: { x: 320, y: 300, label: 'Widget' },
+      bots: { x: 600, y: 160, label: 'Bots' },
+      playbooks: { x: 880, y: 160, label: 'Playbooks' },
+      inbox: { x: 600, y: 300, label: 'Inbox' },
+      routing: { x: 880, y: 300, label: 'Routing' },
+      meetings: { x: 1160, y: 160, label: 'Meetings' },
+      crm: { x: 880, y: 440, label: 'CRM' },
+      integrations: { x: 1160, y: 440, label: 'Integrations' },
+      notify: { x: 320, y: 440, label: 'Notify' },
+      analytics: { x: 600, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','widget','open'], ['widget','bots','bot'], ['bots','playbooks','playbook']);
+      if(stepIdx===2) e.push(['playbooks','routing','route'], ['routing','inbox','handoff']);
+      if(stepIdx===3) e.push(['inbox','meetings','meeting'], ['meetings','notify','notify']);
+      if(stepIdx===4) e.push(['inbox','crm','crm'], ['crm','integrations','integrate']);
+      if(stepIdx===5) e.push(['inbox','analytics','analytics']);
+      return e;
+    }
+  },
+
+  crisp: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Crisp Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','widget','chat','inbox','routing','kb','crm','bots','integrations','notify','analytics','moderation'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      widget: { x: 320, y: 300, label: 'Widget' },
+      chat: { x: 600, y: 300, label: 'Chat' },
+      inbox: { x: 880, y: 300, label: 'Inbox' },
+      routing: { x: 1160, y: 300, label: 'Routing' },
+      kb: { x: 600, y: 160, label: 'KB' },
+      crm: { x: 880, y: 160, label: 'CRM' },
+      bots: { x: 1160, y: 160, label: 'Bots' },
+      integrations: { x: 880, y: 440, label: 'Integrations' },
+      notify: { x: 320, y: 440, label: 'Notify' },
+      analytics: { x: 600, y: 580, label: 'Analytics' },
+      moderation: { x: 880, y: 580, label: 'Moderation' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','widget','open'], ['widget','chat','chat'], ['chat','inbox','inbox']);
+      if(stepIdx===2) e.push(['inbox','routing','route']);
+      if(stepIdx===3) e.push(['inbox','kb','kb'], ['kb','bots','bot']);
+      if(stepIdx===4) e.push(['inbox','crm','crm'], ['crm','integrations','integrate']);
+      if(stepIdx===5) e.push(['inbox','notify','notify']);
+      if(stepIdx===6) e.push(['inbox','analytics','analytics'], ['inbox','moderation','mod']);
+      return e;
+    }
+  },
+
+  'help-scout': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Help Scout Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','mailboxes','ingest','inbox','assign','kb','tickets','automation','integrations','notify','reports','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      mailboxes: { x: 600, y: 160, label: 'Mailboxes' },
+      ingest: { x: 600, y: 300, label: 'Ingest' },
+      inbox: { x: 880, y: 300, label: 'Inbox' },
+      assign: { x: 1160, y: 300, label: 'Assign' },
+      kb: { x: 880, y: 160, label: 'KB' },
+      tickets: { x: 1160, y: 160, label: 'Tickets' },
+      automation: { x: 320, y: 300, label: 'Automation' },
+      integrations: { x: 600, y: 440, label: 'Integrations' },
+      notify: { x: 320, y: 440, label: 'Notify' },
+      reports: { x: 880, y: 440, label: 'Reports' },
+      analytics: { x: 1160, y: 440, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['mailboxes','ingest','ingest'], ['ingest','inbox','inbox']);
+      if(stepIdx===2) e.push(['inbox','assign','assign'], ['assign','notify','notify']);
+      if(stepIdx===3) e.push(['inbox','kb','kb'], ['kb','tickets','ticket']);
+      if(stepIdx===4) e.push(['automation','inbox','rules'], ['inbox','integrations','integrate']);
+      if(stepIdx===5) e.push(['inbox','reports','reports'], ['reports','analytics','analytics']);
+      return e;
+    }
+  },
+
+  zendesk: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Zendesk Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','channels','ingest','tickets','routing','assign','kb','macros','automation','apps','integrations','notify','analytics','audit'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      channels: { x: 600, y: 160, label: 'Channels' },
+      ingest: { x: 600, y: 300, label: 'Ingest' },
+      tickets: { x: 880, y: 300, label: 'Tickets' },
+      routing: { x: 1160, y: 300, label: 'Routing' },
+      assign: { x: 1160, y: 160, label: 'Assign' },
+      kb: { x: 880, y: 160, label: 'KB' },
+      macros: { x: 320, y: 300, label: 'Macros' },
+      automation: { x: 320, y: 440, label: 'Automation' },
+      apps: { x: 600, y: 440, label: 'Apps' },
+      integrations: { x: 880, y: 440, label: 'Integrations' },
+      notify: { x: 320, y: 580, label: 'Notify' },
+      analytics: { x: 600, y: 580, label: 'Analytics' },
+      audit: { x: 880, y: 580, label: 'Audit' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['channels','ingest','ingest'], ['ingest','tickets','ticket']);
+      if(stepIdx===2) e.push(['tickets','routing','route'], ['routing','assign','assign'], ['assign','notify','notify']);
+      if(stepIdx===3) e.push(['macros','tickets','macro'], ['automation','tickets','auto']);
+      if(stepIdx===4) e.push(['tickets','kb','kb'], ['tickets','integrations','integrate'], ['apps','tickets','apps']);
+      if(stepIdx===5) e.push(['tickets','analytics','analytics'], ['tickets','audit','audit']);
+      return e;
+    }
+  },
+
+  gorgias: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Gorgias Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','channels','ingest','tickets','shopify','orders','macros','automation','routing','integrations','notify','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      channels: { x: 600, y: 160, label: 'Channels' },
+      ingest: { x: 600, y: 300, label: 'Ingest' },
+      tickets: { x: 880, y: 300, label: 'Tickets' },
+      shopify: { x: 1160, y: 160, label: 'Shopify' },
+      orders: { x: 1160, y: 300, label: 'Orders' },
+      macros: { x: 320, y: 300, label: 'Macros' },
+      automation: { x: 320, y: 440, label: 'Automation' },
+      routing: { x: 1160, y: 440, label: 'Routing' },
+      integrations: { x: 880, y: 440, label: 'Integrations' },
+      notify: { x: 600, y: 580, label: 'Notify' },
+      analytics: { x: 880, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['channels','ingest','ingest'], ['ingest','tickets','ticket']);
+      if(stepIdx===2) e.push(['tickets','shopify','shopify'], ['shopify','orders','orders']);
+      if(stepIdx===3) e.push(['macros','tickets','macro'], ['automation','tickets','auto'], ['tickets','routing','route']);
+      if(stepIdx===4) e.push(['tickets','integrations','integrate']);
+      if(stepIdx===5) e.push(['tickets','notify','notify'], ['tickets','analytics','analytics']);
+      return e;
+    }
+  }
+});
+
 Object.assign(ARCH_LAYOUTS, {
   bear: {
     viewBox: '0 0 1860 820',
