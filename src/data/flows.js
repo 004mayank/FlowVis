@@ -5105,6 +5105,426 @@ export const FLOWS = {
     ]
   },
 
+  xmind: {
+    title: 'XMind',
+    steps: [
+      {
+        title: 'Open map library',
+        desc: 'User opens the library and selects a mind map.',
+        active: ['client','library','maps'],
+        edges: [['client','library'], ['library','maps']]
+      },
+      {
+        title: 'Edit nodes + themes',
+        desc: 'User edits nodes and applies themes/styles to structure ideas.',
+        active: ['nodes','themes','maps'],
+        edges: [['maps','nodes'], ['nodes','themes']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Index enables searching across maps and content.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','maps']]
+      },
+      {
+        title: 'Sync to cloud',
+        desc: 'Sync keeps maps consistent across devices via cloud.',
+        active: ['sync','cloud'],
+        edges: [['maps','sync'], ['sync','cloud']]
+      },
+      {
+        title: 'Share + export',
+        desc: 'Share links and export to images/PDF for collaboration.',
+        active: ['share','export'],
+        edges: [['maps','share'], ['maps','export']]
+      },
+      {
+        title: 'Plugins + analytics',
+        desc: 'Add-ons extend workflows; analytics monitor usage and reliability.',
+        active: ['plugins','analytics'],
+        edges: [['client','plugins'], ['maps','analytics']]
+      }
+    ]
+  },
+
+  mindnode: {
+    title: 'MindNode',
+    steps: [
+      {
+        title: 'Open map',
+        desc: 'User opens a mind map from library and loads nodes.',
+        active: ['client','library','maps','nodes'],
+        edges: [['client','library'], ['library','maps'], ['maps','nodes']]
+      },
+      {
+        title: 'Styles + templates',
+        desc: 'User applies styles and templates to organize the map.',
+        active: ['styles','templates'],
+        edges: [['nodes','styles'], ['templates','maps']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Index enables quick search across map content.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','maps']]
+      },
+      {
+        title: 'Sync',
+        desc: 'Sync replicates maps to cloud for multi-device access.',
+        active: ['sync','cloud'],
+        edges: [['maps','sync'], ['sync','cloud']]
+      },
+      {
+        title: 'Export + share',
+        desc: 'Exports produce files; sharing sends links to collaborators.',
+        active: ['export','share'],
+        edges: [['maps','export'], ['maps','share']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics track feature usage and performance.',
+        active: ['analytics'],
+        edges: [['maps','analytics']]
+      }
+    ]
+  },
+
+  miro: {
+    title: 'Miro',
+    steps: [
+      {
+        title: 'Sign in + open board',
+        desc: 'User signs in, selects org/team, and opens a board.',
+        active: ['client','auth','org','boards'],
+        edges: [['client','auth'], ['auth','org'], ['org','boards']]
+      },
+      {
+        title: 'Edit objects + realtime',
+        desc: 'Objects created/edited; realtime layer syncs cursors and updates.',
+        active: ['objects','realtime'],
+        edges: [['boards','objects'], ['objects','realtime'], ['realtime','client']]
+      },
+      {
+        title: 'Comments + permissions',
+        desc: 'Comments added; permissions enforce access and sharing rules.',
+        active: ['comments','permissions'],
+        edges: [['boards','comments'], ['permissions','boards']]
+      },
+      {
+        title: 'Templates',
+        desc: 'Templates bootstrap common workflows (workshops, sprints, diagrams).',
+        active: ['templates'],
+        edges: [['templates','boards']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Search uses index across boards and objects.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','boards']]
+      },
+      {
+        title: 'Integrations + export + audit',
+        desc: 'Integrations connect tools; export produces files; audit tracks changes.',
+        active: ['integrations','export','audit','analytics'],
+        edges: [['boards','integrations'], ['boards','export'], ['boards','audit'], ['boards','analytics']]
+      }
+    ]
+  },
+
+  figjam: {
+    title: 'FigJam',
+    steps: [
+      {
+        title: 'Sign in + open file',
+        desc: 'User signs in, selects team, and opens a FigJam board/file.',
+        active: ['client','auth','teams','boards'],
+        edges: [['client','auth'], ['auth','teams'], ['teams','boards']]
+      },
+      {
+        title: 'Realtime collaboration',
+        desc: 'Realtime engine syncs edits, cursors, and presence.',
+        active: ['realtime'],
+        edges: [['boards','realtime'], ['realtime','client']]
+      },
+      {
+        title: 'Comments + permissions',
+        desc: 'Comments for async feedback; permissions enforce access.',
+        active: ['comments','permissions'],
+        edges: [['boards','comments'], ['permissions','boards']]
+      },
+      {
+        title: 'Templates + integrations',
+        desc: 'Templates speed setup; integrations connect to external tools.',
+        active: ['templates','integrations'],
+        edges: [['templates','boards'], ['boards','integrations']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Search uses index across files and objects.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','boards']]
+      },
+      {
+        title: 'Export + analytics',
+        desc: 'Exports produce files; analytics track collaboration engagement.',
+        active: ['export','analytics'],
+        edges: [['boards','export'], ['boards','analytics']]
+      }
+    ]
+  },
+
+  whimsical: {
+    title: 'Whimsical',
+    steps: [
+      {
+        title: 'Open workspace + board',
+        desc: 'User signs in and opens boards/diagrams/docs in a workspace.',
+        active: ['client','auth','workspace','boards'],
+        edges: [['client','auth'], ['auth','workspace'], ['workspace','boards']]
+      },
+      {
+        title: 'Create diagrams + docs',
+        desc: 'Diagrams and docs created/edited with realtime collaboration.',
+        active: ['diagrams','docs','realtime'],
+        edges: [['boards','diagrams'], ['boards','docs'], ['boards','realtime'], ['realtime','client']]
+      },
+      {
+        title: 'Comments + permissions',
+        desc: 'Comments provide feedback; permissions enforce sharing rules.',
+        active: ['comments','permissions'],
+        edges: [['boards','comments'], ['permissions','boards']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Search uses index across boards/diagrams/docs.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','boards']]
+      },
+      {
+        title: 'Templates + export',
+        desc: 'Templates speed setup; exports create files for sharing.',
+        active: ['templates','export'],
+        edges: [['templates','boards'], ['boards','export']]
+      },
+      {
+        title: 'Analytics',
+        desc: 'Analytics track usage and collaboration patterns.',
+        active: ['analytics'],
+        edges: [['boards','analytics']]
+      }
+    ]
+  },
+
+  lucidchart: {
+    title: 'Lucidchart',
+    steps: [
+      {
+        title: 'Open doc',
+        desc: 'User signs in and opens a diagram doc in a workspace.',
+        active: ['client','auth','workspace','docs'],
+        edges: [['client','auth'], ['auth','workspace'], ['workspace','docs']]
+      },
+      {
+        title: 'Edit shapes + render',
+        desc: 'Shapes edited; renderer produces layout/visual output and updates doc.',
+        active: ['shapes','render','docs'],
+        edges: [['docs','shapes'], ['shapes','render'], ['render','docs']]
+      },
+      {
+        title: 'Realtime + comments',
+        desc: 'Realtime collaboration and comments support teamwork.',
+        active: ['realtime','comments'],
+        edges: [['docs','realtime'], ['docs','comments'], ['realtime','client']]
+      },
+      {
+        title: 'Permissions',
+        desc: 'Permissions enforce access and sharing controls.',
+        active: ['permissions'],
+        edges: [['permissions','docs']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Search uses index across docs and shape metadata.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','docs']]
+      },
+      {
+        title: 'Integrations + export + audit',
+        desc: 'Integrations connect tools; exports create files; audit tracks changes.',
+        active: ['integrations','export','audit','analytics'],
+        edges: [['docs','integrations'], ['docs','export'], ['docs','audit'], ['docs','analytics']]
+      }
+    ]
+  },
+
+  'draw-io': {
+    title: 'Draw.io',
+    steps: [
+      {
+        title: 'Open diagram file',
+        desc: 'User opens a diagram file from local or cloud storage.',
+        active: ['client','files','storage'],
+        edges: [['client','files'], ['files','storage']]
+      },
+      {
+        title: 'Edit shapes + render',
+        desc: 'Editor updates shapes and renderer produces diagram output.',
+        active: ['editor','shapes','render'],
+        edges: [['files','editor'], ['editor','shapes'], ['shapes','render']]
+      },
+      {
+        title: 'Search + index',
+        desc: 'Index enables search across diagram names and metadata.',
+        active: ['search','index'],
+        edges: [['client','search'], ['search','index'], ['index','files']]
+      },
+      {
+        title: 'Sync to cloud',
+        desc: 'Files stored and synced via cloud provider.',
+        active: ['storage','cloud'],
+        edges: [['storage','cloud']]
+      },
+      {
+        title: 'Share + export',
+        desc: 'Share links and export to image/PDF for distribution.',
+        active: ['share','export'],
+        edges: [['files','share'], ['files','export']]
+      },
+      {
+        title: 'Integrations + analytics',
+        desc: 'Integrations connect to external systems; analytics monitor usage.',
+        active: ['integrations','analytics'],
+        edges: [['files','integrations'], ['files','analytics']]
+      }
+    ]
+  },
+
+  toggl: {
+    title: 'Toggl',
+    steps: [
+      {
+        title: 'Open workspace + project',
+        desc: 'User selects workspace and project for tracking time.',
+        active: ['client','auth','workspace','projects'],
+        edges: [['client','auth'], ['auth','workspace'], ['workspace','projects']]
+      },
+      {
+        title: 'Start timer + create entry',
+        desc: 'Timer starts and creates time entries that sync to backend.',
+        active: ['timer','entries','sync'],
+        edges: [['client','timer'], ['timer','entries'], ['entries','sync']]
+      },
+      {
+        title: 'Reports + billing',
+        desc: 'Reports summarize time; billing links rates and invoicing context.',
+        active: ['reports','billing'],
+        edges: [['entries','reports'], ['reports','billing']]
+      },
+      {
+        title: 'Integrations',
+        desc: 'Integrations sync time entries to PM and invoicing tools.',
+        active: ['integrations'],
+        edges: [['sync','integrations']]
+      },
+      {
+        title: 'Export',
+        desc: 'Exports create CSV/PDF for payroll or invoicing workflows.',
+        active: ['export'],
+        edges: [['entries','export']]
+      },
+      {
+        title: 'Analytics + audit',
+        desc: 'Analytics monitor adoption; audit tracks entry changes.',
+        active: ['analytics','audit'],
+        edges: [['entries','analytics'], ['entries','audit']]
+      }
+    ]
+  },
+
+  clockify: {
+    title: 'Clockify',
+    steps: [
+      {
+        title: 'Track time',
+        desc: 'Timer creates entries for projects in a workspace.',
+        active: ['client','auth','timer','entries'],
+        edges: [['client','auth'], ['client','timer'], ['timer','entries']]
+      },
+      {
+        title: 'Approval workflow',
+        desc: 'Entries reviewed/approved before reporting and billing.',
+        active: ['approval','reports'],
+        edges: [['entries','approval'], ['approval','reports']]
+      },
+      {
+        title: 'Reports + billing',
+        desc: 'Reports summarize time; billing applies rates and budgets.',
+        active: ['reports','billing'],
+        edges: [['reports','billing']]
+      },
+      {
+        title: 'Sync + integrations',
+        desc: 'Sync and integrations push time data to external systems.',
+        active: ['sync','integrations'],
+        edges: [['entries','sync'], ['sync','integrations']]
+      },
+      {
+        title: 'Export',
+        desc: 'Exports create files for payroll, clients, or accounting.',
+        active: ['export'],
+        edges: [['entries','export']]
+      },
+      {
+        title: 'Analytics + audit',
+        desc: 'Analytics track usage; audit logs entry changes.',
+        active: ['analytics','audit'],
+        edges: [['entries','analytics'], ['entries','audit']]
+      }
+    ]
+  },
+
+  harvest: {
+    title: 'Harvest',
+    steps: [
+      {
+        title: 'Track time entries',
+        desc: 'Timer creates time entries against projects in a workspace.',
+        active: ['client','auth','timer','entries'],
+        edges: [['client','auth'], ['client','timer'], ['timer','entries']]
+      },
+      {
+        title: 'Generate invoices',
+        desc: 'Entries roll up into invoices and billing totals.',
+        active: ['invoices','billing'],
+        edges: [['entries','invoices'], ['invoices','billing']]
+      },
+      {
+        title: 'Collect payments',
+        desc: 'Payments collected through provider; invoice status updated.',
+        active: ['payments'],
+        edges: [['billing','payments']]
+      },
+      {
+        title: 'Reports',
+        desc: 'Reports summarize utilization and profitability.',
+        active: ['reports'],
+        edges: [['entries','reports']]
+      },
+      {
+        title: 'Integrations + export',
+        desc: 'Integrations sync to accounting; exports create CSV/PDF.',
+        active: ['integrations','export'],
+        edges: [['projects','integrations'], ['entries','export']]
+      },
+      {
+        title: 'Analytics + audit',
+        desc: 'Analytics track trends; audit logs entry and invoice changes.',
+        active: ['analytics','audit'],
+        edges: [['entries','analytics'], ['entries','audit']]
+      }
+    ]
+  },
+
   chime: {
     title: 'Chime',
     steps: [

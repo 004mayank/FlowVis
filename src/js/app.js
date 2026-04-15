@@ -13512,6 +13512,553 @@ Object.assign(SYSTEM_LAYOUTS, {
   }
 });
 
+// ----- Batch 53 (System + Architecture - whiteboards + time tracking) -----
+
+Object.assign(SYSTEM_LAYOUTS, {
+  xmind: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','library','maps','nodes','themes','export','sync','cloud','share','search','index','plugins','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      library: { x: 380, y: 240, label: 'Library', colorKey: 'store' },
+      maps: { x: 620, y: 180, label: 'Maps', colorKey: 'store' },
+      nodes: { x: 860, y: 180, label: 'Nodes', colorKey: 'api' },
+      themes: { x: 1100, y: 180, label: 'Themes', colorKey: 'store' },
+      export: { x: 620, y: 320, label: 'Export', colorKey: 'api' },
+      sync: { x: 380, y: 420, label: 'Sync', colorKey: 'api' },
+      cloud: { x: 140, y: 460, label: 'Cloud', colorKey: 'external' },
+      share: { x: 1100, y: 320, label: 'Share', colorKey: 'external' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 460, label: 'Index', colorKey: 'store' },
+      plugins: { x: 1100, y: 460, label: 'Add-ons', colorKey: 'api' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  mindnode: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','library','maps','nodes','styles','export','sync','cloud','share','search','index','templates','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      library: { x: 380, y: 240, label: 'Library', colorKey: 'store' },
+      maps: { x: 620, y: 180, label: 'Maps', colorKey: 'store' },
+      nodes: { x: 860, y: 180, label: 'Nodes', colorKey: 'api' },
+      styles: { x: 1100, y: 180, label: 'Styles', colorKey: 'store' },
+      export: { x: 620, y: 320, label: 'Export', colorKey: 'api' },
+      sync: { x: 380, y: 420, label: 'Sync', colorKey: 'api' },
+      cloud: { x: 140, y: 460, label: 'Cloud', colorKey: 'external' },
+      share: { x: 1100, y: 320, label: 'Share', colorKey: 'external' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 460, label: 'Index', colorKey: 'store' },
+      templates: { x: 1100, y: 460, label: 'Templates', colorKey: 'store' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  miro: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','org','boards','objects','realtime','comments','permissions','templates','export','integrations','search','index','analytics','audit'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      org: { x: 620, y: 180, label: 'Org', colorKey: 'store' },
+      boards: { x: 860, y: 180, label: 'Boards', colorKey: 'store' },
+      objects: { x: 1100, y: 180, label: 'Objects', colorKey: 'store' },
+      realtime: { x: 620, y: 320, label: 'Realtime', colorKey: 'stream' },
+      comments: { x: 860, y: 320, label: 'Comments', colorKey: 'store' },
+      permissions: { x: 380, y: 320, label: 'Permissions', colorKey: 'api' },
+      templates: { x: 1100, y: 320, label: 'Templates', colorKey: 'store' },
+      export: { x: 620, y: 460, label: 'Export', colorKey: 'api' },
+      integrations: { x: 380, y: 460, label: 'Integrations', colorKey: 'external' },
+      search: { x: 860, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 1100, y: 460, label: 'Index', colorKey: 'store' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' },
+      audit: { x: 860, y: 600, label: 'Audit', colorKey: 'store' }
+    }
+  },
+
+  figjam: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','teams','files','boards','realtime','comments','permissions','templates','export','integrations','search','index','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      teams: { x: 620, y: 180, label: 'Teams', colorKey: 'store' },
+      files: { x: 860, y: 180, label: 'Files', colorKey: 'store' },
+      boards: { x: 1100, y: 180, label: 'Boards', colorKey: 'store' },
+      realtime: { x: 620, y: 320, label: 'Realtime', colorKey: 'stream' },
+      comments: { x: 860, y: 320, label: 'Comments', colorKey: 'store' },
+      permissions: { x: 380, y: 320, label: 'Permissions', colorKey: 'api' },
+      templates: { x: 1100, y: 320, label: 'Templates', colorKey: 'store' },
+      export: { x: 620, y: 460, label: 'Export', colorKey: 'api' },
+      integrations: { x: 380, y: 460, label: 'Integrations', colorKey: 'external' },
+      search: { x: 860, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 1100, y: 460, label: 'Index', colorKey: 'store' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  whimsical: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','workspace','boards','diagrams','docs','realtime','comments','permissions','export','templates','search','index','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      workspace: { x: 620, y: 180, label: 'Workspace', colorKey: 'store' },
+      boards: { x: 860, y: 180, label: 'Boards', colorKey: 'store' },
+      diagrams: { x: 1100, y: 180, label: 'Diagrams', colorKey: 'store' },
+      docs: { x: 620, y: 320, label: 'Docs', colorKey: 'store' },
+      realtime: { x: 860, y: 320, label: 'Realtime', colorKey: 'stream' },
+      comments: { x: 1100, y: 320, label: 'Comments', colorKey: 'store' },
+      permissions: { x: 380, y: 320, label: 'Permissions', colorKey: 'api' },
+      export: { x: 620, y: 460, label: 'Export', colorKey: 'api' },
+      templates: { x: 1100, y: 460, label: 'Templates', colorKey: 'store' },
+      search: { x: 860, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 600, label: 'Index', colorKey: 'store' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  lucidchart: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','workspace','docs','shapes','render','realtime','comments','permissions','export','integrations','search','index','analytics','audit'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      workspace: { x: 620, y: 180, label: 'Workspace', colorKey: 'store' },
+      docs: { x: 860, y: 180, label: 'Docs', colorKey: 'store' },
+      shapes: { x: 1100, y: 180, label: 'Shapes', colorKey: 'store' },
+      render: { x: 1100, y: 320, label: 'Render', colorKey: 'api' },
+      realtime: { x: 620, y: 320, label: 'Realtime', colorKey: 'stream' },
+      comments: { x: 860, y: 320, label: 'Comments', colorKey: 'store' },
+      permissions: { x: 380, y: 320, label: 'Permissions', colorKey: 'api' },
+      export: { x: 620, y: 460, label: 'Export', colorKey: 'api' },
+      integrations: { x: 380, y: 460, label: 'Integrations', colorKey: 'external' },
+      search: { x: 860, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 1100, y: 460, label: 'Index', colorKey: 'store' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' },
+      audit: { x: 860, y: 600, label: 'Audit', colorKey: 'store' }
+    }
+  },
+
+  'draw-io': {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','files','editor','shapes','render','export','storage','cloud','share','search','index','integrations','analytics'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      files: { x: 380, y: 240, label: 'Files', colorKey: 'store' },
+      editor: { x: 620, y: 180, label: 'Editor', colorKey: 'api' },
+      shapes: { x: 860, y: 180, label: 'Shapes', colorKey: 'store' },
+      render: { x: 1100, y: 180, label: 'Render', colorKey: 'api' },
+      export: { x: 620, y: 320, label: 'Export', colorKey: 'api' },
+      storage: { x: 380, y: 420, label: 'Storage', colorKey: 'external' },
+      cloud: { x: 140, y: 460, label: 'Cloud', colorKey: 'external' },
+      share: { x: 1100, y: 320, label: 'Share', colorKey: 'external' },
+      search: { x: 620, y: 460, label: 'Search', colorKey: 'api' },
+      index: { x: 860, y: 460, label: 'Index', colorKey: 'store' },
+      integrations: { x: 1100, y: 460, label: 'Integrations', colorKey: 'external' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' }
+    }
+  },
+
+  toggl: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','workspace','projects','timer','entries','sync','reports','billing','integrations','export','analytics','audit'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      workspace: { x: 620, y: 180, label: 'Workspace', colorKey: 'store' },
+      projects: { x: 860, y: 180, label: 'Projects', colorKey: 'store' },
+      timer: { x: 380, y: 320, label: 'Timer', colorKey: 'api' },
+      entries: { x: 620, y: 320, label: 'Entries', colorKey: 'store' },
+      sync: { x: 860, y: 320, label: 'Sync', colorKey: 'api' },
+      reports: { x: 1100, y: 320, label: 'Reports', colorKey: 'store' },
+      billing: { x: 1100, y: 180, label: 'Billing', colorKey: 'api' },
+      integrations: { x: 380, y: 460, label: 'Integrations', colorKey: 'external' },
+      export: { x: 620, y: 460, label: 'Export', colorKey: 'api' },
+      analytics: { x: 860, y: 600, label: 'Analytics', colorKey: 'store' },
+      audit: { x: 620, y: 600, label: 'Audit', colorKey: 'store' }
+    }
+  },
+
+  clockify: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','workspace','projects','timer','entries','approval','sync','reports','billing','integrations','export','analytics','audit'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      workspace: { x: 620, y: 180, label: 'Workspace', colorKey: 'store' },
+      projects: { x: 860, y: 180, label: 'Projects', colorKey: 'store' },
+      timer: { x: 380, y: 320, label: 'Timer', colorKey: 'api' },
+      entries: { x: 620, y: 320, label: 'Entries', colorKey: 'store' },
+      approval: { x: 860, y: 320, label: 'Approvals', colorKey: 'api' },
+      sync: { x: 1100, y: 320, label: 'Sync', colorKey: 'api' },
+      reports: { x: 1100, y: 180, label: 'Reports', colorKey: 'store' },
+      billing: { x: 860, y: 460, label: 'Billing', colorKey: 'api' },
+      integrations: { x: 380, y: 460, label: 'Integrations', colorKey: 'external' },
+      export: { x: 620, y: 460, label: 'Export', colorKey: 'api' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' },
+      audit: { x: 860, y: 600, label: 'Audit', colorKey: 'store' }
+    }
+  },
+
+  harvest: {
+    viewBox: '0 0 1200 960',
+    primaryPath: ['client','auth','workspace','projects','timer','entries','invoices','billing','payments','reports','integrations','export','analytics','audit'],
+    nodes: {
+      client: { x: 140, y: 240, label: 'Client', colorKey: 'client' },
+      auth: { x: 380, y: 180, label: 'Auth', colorKey: 'api' },
+      workspace: { x: 620, y: 180, label: 'Workspace', colorKey: 'store' },
+      projects: { x: 860, y: 180, label: 'Projects', colorKey: 'store' },
+      timer: { x: 380, y: 320, label: 'Timer', colorKey: 'api' },
+      entries: { x: 620, y: 320, label: 'Entries', colorKey: 'store' },
+      invoices: { x: 860, y: 320, label: 'Invoices', colorKey: 'store' },
+      billing: { x: 1100, y: 320, label: 'Billing', colorKey: 'api' },
+      payments: { x: 1100, y: 180, label: 'Payments', colorKey: 'external' },
+      reports: { x: 860, y: 460, label: 'Reports', colorKey: 'store' },
+      integrations: { x: 380, y: 460, label: 'Integrations', colorKey: 'external' },
+      export: { x: 620, y: 460, label: 'Export', colorKey: 'api' },
+      analytics: { x: 620, y: 600, label: 'Analytics', colorKey: 'store' },
+      audit: { x: 860, y: 600, label: 'Audit', colorKey: 'store' }
+    }
+  }
+});
+
+Object.assign(ARCH_LAYOUTS, {
+  xmind: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'XMind Storage + Sync',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','library','maps','nodes','themes','export','sync','cloud','share','search','index','plugins','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      library: { x: 320, y: 240, label: 'Library' },
+      maps: { x: 600, y: 160, label: 'Maps' },
+      nodes: { x: 880, y: 160, label: 'Nodes' },
+      themes: { x: 1160, y: 160, label: 'Themes' },
+      export: { x: 600, y: 300, label: 'Export' },
+      sync: { x: 320, y: 380, label: 'Sync' },
+      cloud: { x: 40, y: 460, label: 'Cloud' },
+      share: { x: 1160, y: 300, label: 'Share' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 880, y: 440, label: 'Index' },
+      plugins: { x: 1160, y: 440, label: 'Add-ons' },
+      analytics: { x: 600, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','library','open'], ['library','maps','map'], ['maps','nodes','node']);
+      if(stepIdx===2) e.push(['nodes','themes','theme']);
+      if(stepIdx===3) e.push(['client','search','search'], ['search','index','index'], ['index','maps','results']);
+      if(stepIdx===4) e.push(['maps','sync','sync'], ['sync','cloud','cloud']);
+      if(stepIdx===5) e.push(['maps','share','share'], ['maps','export','export']);
+      if(stepIdx===6) e.push(['client','plugins','plugins']);
+      if(stepIdx===7) e.push(['maps','analytics','analytics']);
+      return e;
+    }
+  },
+
+  mindnode: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'MindNode Storage + Sync',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','library','maps','nodes','styles','export','sync','cloud','share','search','index','templates','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      library: { x: 320, y: 240, label: 'Library' },
+      maps: { x: 600, y: 160, label: 'Maps' },
+      nodes: { x: 880, y: 160, label: 'Nodes' },
+      styles: { x: 1160, y: 160, label: 'Styles' },
+      export: { x: 600, y: 300, label: 'Export' },
+      sync: { x: 320, y: 380, label: 'Sync' },
+      cloud: { x: 40, y: 460, label: 'Cloud' },
+      share: { x: 1160, y: 300, label: 'Share' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 880, y: 440, label: 'Index' },
+      templates: { x: 1160, y: 440, label: 'Templates' },
+      analytics: { x: 600, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','library','open'], ['library','maps','map'], ['maps','nodes','node']);
+      if(stepIdx===2) e.push(['nodes','styles','style'], ['templates','maps','template']);
+      if(stepIdx===3) e.push(['client','search','search'], ['search','index','index'], ['index','maps','results']);
+      if(stepIdx===4) e.push(['maps','sync','sync'], ['sync','cloud','cloud']);
+      if(stepIdx===5) e.push(['maps','share','share'], ['maps','export','export']);
+      if(stepIdx===6) e.push(['maps','analytics','analytics']);
+      return e;
+    }
+  },
+
+  miro: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Miro Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','org','boards','objects','realtime','comments','permissions','templates','export','integrations','search','index','analytics','audit'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      org: { x: 600, y: 160, label: 'Org' },
+      boards: { x: 880, y: 160, label: 'Boards' },
+      objects: { x: 1160, y: 160, label: 'Objects' },
+      realtime: { x: 600, y: 300, label: 'Realtime' },
+      comments: { x: 880, y: 300, label: 'Comments' },
+      permissions: { x: 320, y: 300, label: 'Permissions' },
+      templates: { x: 1160, y: 300, label: 'Templates' },
+      export: { x: 600, y: 440, label: 'Export' },
+      integrations: { x: 320, y: 440, label: 'Integrations' },
+      search: { x: 880, y: 440, label: 'Search' },
+      index: { x: 1160, y: 440, label: 'Index' },
+      analytics: { x: 600, y: 580, label: 'Analytics' },
+      audit: { x: 880, y: 580, label: 'Audit' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','org','org'], ['org','boards','board']);
+      if(stepIdx===2) e.push(['boards','objects','object'], ['objects','realtime','rt'], ['realtime','client','updates']);
+      if(stepIdx===3) e.push(['boards','comments','comment']);
+      if(stepIdx===4) e.push(['permissions','boards','perm'], ['templates','boards','template']);
+      if(stepIdx===5) e.push(['client','search','search'], ['search','index','index'], ['index','boards','results']);
+      if(stepIdx===6) e.push(['boards','integrations','integrate']);
+      if(stepIdx===7) e.push(['boards','export','export'], ['boards','analytics','analytics'], ['boards','audit','audit']);
+      return e;
+    }
+  },
+
+  figjam: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'FigJam Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','teams','files','boards','realtime','comments','permissions','templates','export','integrations','search','index','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      teams: { x: 600, y: 160, label: 'Teams' },
+      files: { x: 880, y: 160, label: 'Files' },
+      boards: { x: 1160, y: 160, label: 'Boards' },
+      realtime: { x: 600, y: 300, label: 'Realtime' },
+      comments: { x: 880, y: 300, label: 'Comments' },
+      permissions: { x: 320, y: 300, label: 'Permissions' },
+      templates: { x: 1160, y: 300, label: 'Templates' },
+      export: { x: 600, y: 440, label: 'Export' },
+      integrations: { x: 320, y: 440, label: 'Integrations' },
+      search: { x: 880, y: 440, label: 'Search' },
+      index: { x: 1160, y: 440, label: 'Index' },
+      analytics: { x: 600, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','teams','team'], ['teams','boards','board']);
+      if(stepIdx===2) e.push(['boards','realtime','rt'], ['realtime','client','updates'], ['boards','comments','comment']);
+      if(stepIdx===3) e.push(['permissions','boards','perm'], ['templates','boards','template']);
+      if(stepIdx===4) e.push(['client','search','search'], ['search','index','index'], ['index','boards','results']);
+      if(stepIdx===5) e.push(['boards','integrations','integrate']);
+      if(stepIdx===6) e.push(['boards','export','export'], ['boards','analytics','analytics']);
+      return e;
+    }
+  },
+
+  whimsical: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Whimsical Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','workspace','boards','diagrams','docs','realtime','comments','permissions','export','templates','search','index','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      workspace: { x: 600, y: 160, label: 'Workspace' },
+      boards: { x: 880, y: 160, label: 'Boards' },
+      diagrams: { x: 1160, y: 160, label: 'Diagrams' },
+      docs: { x: 600, y: 300, label: 'Docs' },
+      realtime: { x: 880, y: 300, label: 'Realtime' },
+      comments: { x: 1160, y: 300, label: 'Comments' },
+      permissions: { x: 320, y: 300, label: 'Permissions' },
+      export: { x: 600, y: 440, label: 'Export' },
+      templates: { x: 1160, y: 440, label: 'Templates' },
+      search: { x: 880, y: 440, label: 'Search' },
+      index: { x: 880, y: 580, label: 'Index' },
+      analytics: { x: 600, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','workspace','ws'], ['workspace','boards','board']);
+      if(stepIdx===2) e.push(['boards','diagrams','diagram'], ['boards','docs','doc']);
+      if(stepIdx===3) e.push(['boards','realtime','rt'], ['realtime','client','updates'], ['boards','comments','comment']);
+      if(stepIdx===4) e.push(['permissions','boards','perm'], ['templates','boards','template']);
+      if(stepIdx===5) e.push(['client','search','search'], ['search','index','index'], ['index','boards','results']);
+      if(stepIdx===6) e.push(['boards','export','export'], ['boards','analytics','analytics']);
+      return e;
+    }
+  },
+
+  lucidchart: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Lucidchart Platform',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','workspace','docs','shapes','render','realtime','comments','permissions','export','integrations','search','index','analytics','audit'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      workspace: { x: 600, y: 160, label: 'Workspace' },
+      docs: { x: 880, y: 160, label: 'Docs' },
+      shapes: { x: 1160, y: 160, label: 'Shapes' },
+      render: { x: 1160, y: 300, label: 'Render' },
+      realtime: { x: 600, y: 300, label: 'Realtime' },
+      comments: { x: 880, y: 300, label: 'Comments' },
+      permissions: { x: 320, y: 300, label: 'Permissions' },
+      export: { x: 600, y: 440, label: 'Export' },
+      integrations: { x: 320, y: 440, label: 'Integrations' },
+      search: { x: 880, y: 440, label: 'Search' },
+      index: { x: 1160, y: 440, label: 'Index' },
+      analytics: { x: 600, y: 580, label: 'Analytics' },
+      audit: { x: 880, y: 580, label: 'Audit' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','workspace','ws'], ['workspace','docs','doc']);
+      if(stepIdx===2) e.push(['docs','shapes','shape'], ['shapes','render','render'], ['render','realtime','rt']);
+      if(stepIdx===3) e.push(['docs','comments','comment'], ['permissions','docs','perm']);
+      if(stepIdx===4) e.push(['client','search','search'], ['search','index','index'], ['index','docs','results']);
+      if(stepIdx===5) e.push(['docs','integrations','integrate']);
+      if(stepIdx===6) e.push(['docs','export','export'], ['docs','analytics','analytics'], ['docs','audit','audit']);
+      return e;
+    }
+  },
+
+  'draw-io': {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Draw.io File + Storage',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','files','editor','shapes','render','export','storage','cloud','share','search','index','integrations','analytics'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      files: { x: 320, y: 240, label: 'Files' },
+      editor: { x: 600, y: 160, label: 'Editor' },
+      shapes: { x: 880, y: 160, label: 'Shapes' },
+      render: { x: 1160, y: 160, label: 'Render' },
+      export: { x: 600, y: 300, label: 'Export' },
+      storage: { x: 320, y: 380, label: 'Storage' },
+      cloud: { x: 40, y: 460, label: 'Cloud' },
+      share: { x: 1160, y: 300, label: 'Share' },
+      search: { x: 600, y: 440, label: 'Search' },
+      index: { x: 880, y: 440, label: 'Index' },
+      integrations: { x: 1160, y: 440, label: 'Integrations' },
+      analytics: { x: 600, y: 580, label: 'Analytics' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','files','open'], ['files','editor','edit'], ['editor','shapes','shape']);
+      if(stepIdx===2) e.push(['shapes','render','render']);
+      if(stepIdx===3) e.push(['client','search','search'], ['search','index','index'], ['index','files','results']);
+      if(stepIdx===4) e.push(['files','storage','store'], ['storage','cloud','cloud']);
+      if(stepIdx===5) e.push(['files','share','share'], ['files','export','export']);
+      if(stepIdx===6) e.push(['files','integrations','integrate']);
+      if(stepIdx===7) e.push(['files','analytics','analytics']);
+      return e;
+    }
+  },
+
+  toggl: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Toggl Track',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','workspace','projects','timer','entries','sync','reports','billing','integrations','export','analytics','audit'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      workspace: { x: 600, y: 160, label: 'Workspace' },
+      projects: { x: 880, y: 160, label: 'Projects' },
+      timer: { x: 320, y: 300, label: 'Timer' },
+      entries: { x: 600, y: 300, label: 'Entries' },
+      sync: { x: 880, y: 300, label: 'Sync' },
+      reports: { x: 1160, y: 300, label: 'Reports' },
+      billing: { x: 1160, y: 160, label: 'Billing' },
+      integrations: { x: 320, y: 440, label: 'Integrations' },
+      export: { x: 600, y: 440, label: 'Export' },
+      analytics: { x: 880, y: 580, label: 'Analytics' },
+      audit: { x: 600, y: 580, label: 'Audit' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','workspace','ws'], ['workspace','projects','proj']);
+      if(stepIdx===2) e.push(['client','timer','start'], ['timer','entries','entry'], ['entries','sync','sync']);
+      if(stepIdx===3) e.push(['entries','reports','report'], ['reports','billing','bill']);
+      if(stepIdx===4) e.push(['sync','integrations','integrate']);
+      if(stepIdx===5) e.push(['entries','export','export']);
+      if(stepIdx===6) e.push(['entries','analytics','analytics'], ['entries','audit','audit']);
+      return e;
+    }
+  },
+
+  clockify: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Clockify Backend',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','workspace','projects','timer','entries','approval','sync','reports','billing','integrations','export','analytics','audit'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      workspace: { x: 600, y: 160, label: 'Workspace' },
+      projects: { x: 880, y: 160, label: 'Projects' },
+      timer: { x: 320, y: 300, label: 'Timer' },
+      entries: { x: 600, y: 300, label: 'Entries' },
+      approval: { x: 880, y: 300, label: 'Approvals' },
+      sync: { x: 1160, y: 300, label: 'Sync' },
+      reports: { x: 1160, y: 160, label: 'Reports' },
+      billing: { x: 880, y: 440, label: 'Billing' },
+      integrations: { x: 320, y: 440, label: 'Integrations' },
+      export: { x: 600, y: 440, label: 'Export' },
+      analytics: { x: 600, y: 580, label: 'Analytics' },
+      audit: { x: 880, y: 580, label: 'Audit' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','workspace','ws'], ['workspace','projects','proj']);
+      if(stepIdx===2) e.push(['client','timer','start'], ['timer','entries','entry']);
+      if(stepIdx===3) e.push(['entries','approval','approve'], ['approval','reports','report']);
+      if(stepIdx===4) e.push(['reports','billing','bill'], ['entries','sync','sync']);
+      if(stepIdx===5) e.push(['sync','integrations','integrate']);
+      if(stepIdx===6) e.push(['entries','export','export']);
+      if(stepIdx===7) e.push(['entries','analytics','analytics'], ['entries','audit','audit']);
+      return e;
+    }
+  },
+
+  harvest: {
+    viewBox: '0 0 1860 820',
+    backendLabel: 'Harvest Time + Invoicing',
+    backend: { x: 300, y: 80, w: 1360, h: 660 },
+    primaryPath: ['client','auth','workspace','projects','timer','entries','invoices','billing','payments','reports','integrations','export','analytics','audit'],
+    nodes: {
+      client: { x: 40, y: 240, label: 'Client' },
+      auth: { x: 320, y: 160, label: 'Auth' },
+      workspace: { x: 600, y: 160, label: 'Workspace' },
+      projects: { x: 880, y: 160, label: 'Projects' },
+      timer: { x: 320, y: 300, label: 'Timer' },
+      entries: { x: 600, y: 300, label: 'Entries' },
+      invoices: { x: 880, y: 300, label: 'Invoices' },
+      billing: { x: 1160, y: 300, label: 'Billing' },
+      payments: { x: 1160, y: 160, label: 'Payments' },
+      reports: { x: 880, y: 440, label: 'Reports' },
+      integrations: { x: 320, y: 440, label: 'Integrations' },
+      export: { x: 600, y: 440, label: 'Export' },
+      analytics: { x: 600, y: 580, label: 'Analytics' },
+      audit: { x: 880, y: 580, label: 'Audit' }
+    },
+    stepEdges: (stepIdx) => {
+      const e=[];
+      if(stepIdx===1) e.push(['client','auth','auth'], ['auth','workspace','ws'], ['workspace','projects','proj']);
+      if(stepIdx===2) e.push(['client','timer','start'], ['timer','entries','entry']);
+      if(stepIdx===3) e.push(['entries','invoices','invoice'], ['invoices','billing','bill'], ['billing','payments','pay']);
+      if(stepIdx===4) e.push(['entries','reports','report']);
+      if(stepIdx===5) e.push(['projects','integrations','integrate']);
+      if(stepIdx===6) e.push(['entries','export','export']);
+      if(stepIdx===7) e.push(['entries','analytics','analytics'], ['entries','audit','audit']);
+      return e;
+    }
+  }
+});
+
 Object.assign(ARCH_LAYOUTS, {
   linear: {
     viewBox: '0 0 1860 820',
