@@ -20810,10 +20810,17 @@ function initNavBindings() {
   });
 }
 
-window.addEventListener('load', () => {
+document.addEventListener('DOMContentLoaded', () => {
   mountShell();
   renderHome();
   initNavBindings();
+
+  // Dismiss the loading screen
+  const loader = document.getElementById('fv-loader');
+  if (loader) {
+    loader.classList.add('hidden');
+    setTimeout(() => { if (loader.parentNode) loader.parentNode.removeChild(loader); }, 350);
+  }
 
   // Respect initial routing set by index.html (/?page=preview)
   const initial = window.__FLOWVIS_INITIAL_PAGE__;
