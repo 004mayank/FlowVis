@@ -9,6 +9,7 @@ FlowVis uses animations and flow diagrams like the example below to explain the 
 ```bash
 npm install
 npm run dev
+npx serve . -l 3000 -s
 ```
 
 Then open: http://localhost:3000
