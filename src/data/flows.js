@@ -23700,6 +23700,128 @@ export const FLOWS = {
       { title: 'Safety', desc: 'Reports and moderation actions stored.', active: ['reports','safety','store'], edges: [['client','reports'], ['reports','safety'], ['safety','store']] }
     ]
   }
+
+  ,
+
+  roposo: {
+    title: 'Roposo',
+    steps: [
+      { title: 'Video feed', desc: 'Client loads feed; ranking selects videos.', active: ['client','feed','rank'], edges: [['client','feed'], ['feed','rank']] },
+      { title: 'Upload', desc: 'Upload to object store; transcode pipeline prepares playback.', active: ['upload','obj','transcode'], edges: [['client','upload'], ['upload','obj'], ['obj','transcode']] },
+      { title: 'Playback', desc: 'CDN delivers video segments.', active: ['cdn','obj','client'], edges: [['obj','cdn'], ['cdn','client']] },
+      { title: 'Engagement', desc: 'Likes/comments stored; notifications sent.', active: ['comments','fanout','notify'], edges: [['client','comments'], ['comments','fanout'], ['fanout','notify']] },
+      { title: 'Creator analytics', desc: 'Analytics and earnings tracked.', active: ['analytics','ledger','store'], edges: [['store','analytics'], ['analytics','ledger'], ['ledger','store']] },
+      { title: 'Safety', desc: 'Reports and moderation actions stored.', active: ['reports','safety','store'], edges: [['client','reports'], ['reports','safety'], ['safety','store']] }
+    ]
+  },
+
+  likee: {
+    title: 'Likee',
+    steps: [
+      { title: 'Video feed', desc: 'Client loads feed; ranking selects videos.', active: ['client','feed','rank'], edges: [['client','feed'], ['feed','rank']] },
+      { title: 'Upload', desc: 'Upload to object store; transcode pipeline prepares playback.', active: ['upload','obj','transcode'], edges: [['client','upload'], ['upload','obj'], ['obj','transcode']] },
+      { title: 'Playback', desc: 'CDN delivers video segments.', active: ['cdn','obj','client'], edges: [['obj','cdn'], ['cdn','client']] },
+      { title: 'Engagement', desc: 'Likes/comments stored; notifications sent.', active: ['comments','fanout','notify'], edges: [['client','comments'], ['comments','fanout'], ['fanout','notify']] },
+      { title: 'Search', desc: 'Index powers search and discovery.', active: ['search','index','store'], edges: [['client','search'], ['search','index'], ['index','store']] },
+      { title: 'Safety', desc: 'Reports and moderation actions stored.', active: ['reports','safety','store'], edges: [['client','reports'], ['reports','safety'], ['safety','store']] }
+    ]
+  },
+
+  wechat: {
+    title: 'WeChat',
+    steps: [
+      { title: 'Login and sync', desc: 'Client authenticates and syncs conversations.', active: ['client','auth','store'], edges: [['client','auth'], ['auth','store']] },
+      { title: 'Send message', desc: 'Message written; fanout to recipients; notifications.', active: ['write','fanout','notify'], edges: [['client','write'], ['write','fanout'], ['fanout','notify']] },
+      { title: 'Realtime delivery', desc: 'Realtime stream updates online clients.', active: ['stream','realtime','client'], edges: [['write','stream'], ['stream','realtime'], ['realtime','client']] },
+      { title: 'Media sharing', desc: 'Uploads stored and served via CDN.', active: ['upload','obj','cdn'], edges: [['client','upload'], ['upload','obj'], ['obj','cdn']] },
+      { title: 'Payments', desc: 'Payments processed; ledger updated.', active: ['payments','risk','ledger'], edges: [['client','payments'], ['payments','risk'], ['payments','ledger']] },
+      { title: 'Safety', desc: 'Abuse checks and reports processed.', active: ['reports','safety','store'], edges: [['client','reports'], ['reports','safety'], ['safety','store']] }
+    ]
+  },
+
+  qq: {
+    title: 'QQ',
+    steps: [
+      { title: 'Login and presence', desc: 'Client authenticates and updates presence.', active: ['client','auth','presence'], edges: [['client','auth'], ['auth','presence']] },
+      { title: 'Messaging', desc: 'Messages written; fanout and notifications.', active: ['write','fanout','notify'], edges: [['client','write'], ['write','fanout'], ['fanout','notify']] },
+      { title: 'Realtime', desc: 'Realtime stream delivers updates.', active: ['stream','realtime','client'], edges: [['write','stream'], ['stream','realtime'], ['realtime','client']] },
+      { title: 'Groups', desc: 'Group membership and roles enforced.', active: ['groups','authz','store'], edges: [['client','groups'], ['groups','authz'], ['authz','store']] },
+      { title: 'Media', desc: 'Uploads stored and served via CDN.', active: ['upload','obj','cdn'], edges: [['client','upload'], ['upload','obj'], ['obj','cdn']] },
+      { title: 'Safety', desc: 'Reports and abuse checks handled.', active: ['reports','safety','store'], edges: [['client','reports'], ['reports','safety'], ['safety','store']] }
+    ]
+  },
+
+  line: {
+    title: 'LINE',
+    steps: [
+      { title: 'Chat sync', desc: 'Client syncs chats and contacts.', active: ['client','store','cache'], edges: [['client','store'], ['store','cache']] },
+      { title: 'Send message', desc: 'Message written; fanout and notifications.', active: ['write','fanout','notify'], edges: [['client','write'], ['write','fanout'], ['fanout','notify']] },
+      { title: 'Realtime delivery', desc: 'Realtime stream updates online clients.', active: ['stream','realtime','client'], edges: [['write','stream'], ['stream','realtime'], ['realtime','client']] },
+      { title: 'Stickers', desc: 'Sticker store and media delivery via CDN.', active: ['catalog','cdn','client'], edges: [['client','catalog'], ['catalog','cdn'], ['cdn','client']] },
+      { title: 'Payments', desc: 'Payments and ledger updates.', active: ['payments','risk','ledger'], edges: [['client','payments'], ['payments','risk'], ['payments','ledger']] },
+      { title: 'Safety', desc: 'Reports and abuse checks handled.', active: ['reports','safety','store'], edges: [['client','reports'], ['reports','safety'], ['safety','store']] }
+    ]
+  },
+
+  kakaotalk: {
+    title: 'KakaoTalk',
+    steps: [
+      { title: 'Chat sync', desc: 'Client syncs chats and contacts.', active: ['client','store','cache'], edges: [['client','store'], ['store','cache']] },
+      { title: 'Send message', desc: 'Message written; fanout and notifications.', active: ['write','fanout','notify'], edges: [['client','write'], ['write','fanout'], ['fanout','notify']] },
+      { title: 'Realtime delivery', desc: 'Realtime stream updates online clients.', active: ['stream','realtime','client'], edges: [['write','stream'], ['stream','realtime'], ['realtime','client']] },
+      { title: 'Media sharing', desc: 'Uploads stored and served via CDN.', active: ['upload','obj','cdn'], edges: [['client','upload'], ['upload','obj'], ['obj','cdn']] },
+      { title: 'Payments', desc: 'Payments and ledger updates.', active: ['payments','risk','ledger'], edges: [['client','payments'], ['payments','risk'], ['payments','ledger']] },
+      { title: 'Safety', desc: 'Reports and abuse checks handled.', active: ['reports','safety','store'], edges: [['client','reports'], ['reports','safety'], ['safety','store']] }
+    ]
+  },
+
+  viber: {
+    title: 'Viber',
+    steps: [
+      { title: 'Chat sync', desc: 'Client syncs chats and contacts.', active: ['client','store','cache'], edges: [['client','store'], ['store','cache']] },
+      { title: 'Send message', desc: 'Message written; fanout and notifications.', active: ['write','fanout','notify'], edges: [['client','write'], ['write','fanout'], ['fanout','notify']] },
+      { title: 'Realtime delivery', desc: 'Realtime stream updates online clients.', active: ['stream','realtime','client'], edges: [['write','stream'], ['stream','realtime'], ['realtime','client']] },
+      { title: 'Calls', desc: 'Media service handles call signaling and relay.', active: ['media','realtime','network'], edges: [['client','media'], ['media','network'], ['network','realtime']] },
+      { title: 'Business messages', desc: 'Catalog and notifications for business chats.', active: ['catalog','notify','store'], edges: [['client','catalog'], ['catalog','store'], ['store','notify']] },
+      { title: 'Safety', desc: 'Reports and abuse checks handled.', active: ['reports','safety','store'], edges: [['client','reports'], ['reports','safety'], ['safety','store']] }
+    ]
+  },
+
+  hike: {
+    title: 'Hike',
+    steps: [
+      { title: 'Chat sync', desc: 'Client syncs chats and contacts.', active: ['client','store','cache'], edges: [['client','store'], ['store','cache']] },
+      { title: 'Send message', desc: 'Message written; fanout and notifications.', active: ['write','fanout','notify'], edges: [['client','write'], ['write','fanout'], ['fanout','notify']] },
+      { title: 'Realtime delivery', desc: 'Realtime stream updates online clients.', active: ['stream','realtime','client'], edges: [['write','stream'], ['stream','realtime'], ['realtime','client']] },
+      { title: 'Stickers', desc: 'Sticker catalog served; CDN delivery.', active: ['catalog','cdn','client'], edges: [['client','catalog'], ['catalog','cdn'], ['cdn','client']] },
+      { title: 'Stories', desc: 'Uploads stored; feed updates.', active: ['upload','obj','feed'], edges: [['client','upload'], ['upload','obj'], ['obj','feed']] },
+      { title: 'Safety', desc: 'Reports and abuse checks handled.', active: ['reports','safety','store'], edges: [['client','reports'], ['reports','safety'], ['safety','store']] }
+    ]
+  },
+
+  imo: {
+    title: 'IMO',
+    steps: [
+      { title: 'Chat sync', desc: 'Client syncs chats and contacts.', active: ['client','store','cache'], edges: [['client','store'], ['store','cache']] },
+      { title: 'Send message', desc: 'Message written; fanout and notifications.', active: ['write','fanout','notify'], edges: [['client','write'], ['write','fanout'], ['fanout','notify']] },
+      { title: 'Realtime delivery', desc: 'Realtime stream updates online clients.', active: ['stream','realtime','client'], edges: [['write','stream'], ['stream','realtime'], ['realtime','client']] },
+      { title: 'Calls', desc: 'Media service handles call relay.', active: ['media','network','realtime'], edges: [['client','media'], ['media','network'], ['network','realtime']] },
+      { title: 'Media sharing', desc: 'Uploads stored and served via CDN.', active: ['upload','obj','cdn'], edges: [['client','upload'], ['upload','obj'], ['obj','cdn']] },
+      { title: 'Safety', desc: 'Reports and abuse checks handled.', active: ['reports','safety','store'], edges: [['client','reports'], ['reports','safety'], ['safety','store']] }
+    ]
+  },
+
+  'marco-polo': {
+    title: 'Marco Polo',
+    steps: [
+      { title: 'Threads sync', desc: 'Client syncs threads and contacts.', active: ['client','store','cache'], edges: [['client','store'], ['store','cache']] },
+      { title: 'Record video message', desc: 'Client records and uploads video message.', active: ['client','upload','obj'], edges: [['client','upload'], ['upload','obj']] },
+      { title: 'Publish message', desc: 'Metadata written; notifications fan out.', active: ['write','fanout','notify'], edges: [['upload','write'], ['write','fanout'], ['fanout','notify']] },
+      { title: 'Playback', desc: 'CDN delivers video messages.', active: ['cdn','obj','client'], edges: [['obj','cdn'], ['cdn','client']] },
+      { title: 'Reactions', desc: 'Reactions stored; notifications sent.', active: ['comments','fanout','notify'], edges: [['client','comments'], ['comments','fanout'], ['fanout','notify']] },
+      { title: 'Safety', desc: 'Reports and abuse checks handled.', active: ['reports','safety','store'], edges: [['client','reports'], ['reports','safety'], ['safety','store']] }
+    ]
+  }
 };
 
 export function flowForSystem(sys) {
