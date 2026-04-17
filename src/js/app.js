@@ -19954,8 +19954,8 @@ function renderSystemDiagram(sys, step) {
       `;
     }
     return `
-      <circle cx="${cx}" cy="${cy}" r="${r}" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.09)" stroke-width="1.5" opacity="0.4"/>
-      <text x="${cx}" y="${cy + 5}" text-anchor="middle" fill="rgba(240,240,248,0.30)" font-size="13" font-family="Inter, Arial" font-weight="600">${escapeXml(label)}</text>
+      <circle cx="${cx}" cy="${cy}" r="${r}" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
+      <text x="${cx}" y="${cy + 5}" text-anchor="middle" fill="rgba(240,240,248,0.72)" font-size="13" font-family="Inter, Arial" font-weight="600">${escapeXml(label)}</text>
     `;
   };
 
@@ -20099,8 +20099,8 @@ function renderArchitectureDiagram(sys, step) {
       `;
     }
     return `
-      <rect x="${x}" y="${y}" width="240" height="60" rx="16" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" opacity="0.45"/>
-      <text x="${x + 14}" y="${y + 38}" fill="rgba(240,240,248,0.30)" font-size="14" font-family="Inter, Arial" font-weight="700" opacity="0.45">${escapeXml(label)}</text>
+      <rect x="${x}" y="${y}" width="240" height="60" rx="16" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+      <text x="${x + 14}" y="${y + 38}" fill="rgba(240,240,248,0.70)" font-size="14" font-family="Inter, Arial" font-weight="700">${escapeXml(label)}</text>
     `;
   };
 
