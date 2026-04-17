@@ -681,27 +681,53 @@ function mountShell() {
   overlay.className = 'playground';
   overlay.innerHTML = `
     <div class="pg-top">
-      <button class="pg-back" id="pg-close">← Back</button>
-      <div class="pg-title" id="pg-title"></div>
-      <div class="pg-tabs">
-        <button class="pg-tab active" data-tab="system">System Flow</button>
-        <button class="pg-tab" data-tab="arch">Architecture Flow</button>
+      <button class="pg-back" id="pg-close">← Back to Explore</button>
+      <div class="pg-header-center">
+        <div class="pg-title" id="pg-title"></div>
+        <div class="pg-subtitle" id="pg-subtitle"></div>
+      </div>
+      <div class="pg-header-right">
+        <div class="pg-tabs">
+          <button class="pg-tab active" data-tab="system">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" style="flex-shrink:0"><path d="M2 8h12M8 2l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            System Flow
+          </button>
+          <button class="pg-tab" data-tab="arch">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" style="flex-shrink:0"><rect x="2" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="9" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="2" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="9" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.6"/></svg>
+            Architecture Flow
+          </button>
+        </div>
+        <span class="pg-step-counter" id="pg-step-counter">Step 1 of 1</span>
       </div>
     </div>
 
     <div class="pg-body">
       <aside class="pg-left">
-        <div class="pg-desc" id="pg-desc"></div>
-        <div class="pg-steps" id="pg-steps"></div>
-        <div class="pg-controls">
-          <button class="pg-btn" id="pg-prev">Prev</button>
-          <button class="pg-btn primary" id="pg-play">Play</button>
-          <button class="pg-btn" id="pg-next">Next</button>
+        <div class="pg-playback-section">
+          <div class="pg-playback-label">PLAYBACK</div>
+          <div class="pg-speed" id="pg-speed">
+            <button class="sp" data-speed="0.5">0.5x</button>
+            <button class="sp active" data-speed="1">1x</button>
+            <button class="sp" data-speed="2">2x</button>
+          </div>
+          <div class="pg-controls">
+            <button class="pg-btn pg-skip-btn" id="pg-prev" title="Previous step">⏮</button>
+            <button class="pg-btn primary pg-play-btn" id="pg-play">▶ Play</button>
+            <button class="pg-btn pg-skip-btn" id="pg-next" title="Next step">⏭</button>
+          </div>
+          <div class="pg-progress-wrap">
+            <div class="pg-progress-fill" id="pg-progress-fill"></div>
+          </div>
         </div>
-        <div class="pg-speed" id="pg-speed">
-          <button class="sp" data-speed="0.5">0.5x</button>
-          <button class="sp active" data-speed="1">1x</button>
-          <button class="sp" data-speed="2">2x</button>
+        <div class="pg-steps-section">
+          <div class="pg-steps" id="pg-steps"></div>
+        </div>
+        <div class="pg-step-detail" id="pg-step-detail">
+          <div class="pg-step-detail-label">
+            <span class="pg-detail-dot"></span>
+            <span id="pg-step-detail-title">Step 1 Detail</span>
+          </div>
+          <div class="pg-step-detail-text" id="pg-step-detail-text"></div>
         </div>
       </aside>
 
@@ -713,7 +739,13 @@ function mountShell() {
           <div class="pg-zoom">
             <button class="z" id="z-in">+</button>
             <button class="z" id="z-out">−</button>
-            <button class="z" id="z-reset">Reset</button>
+            <button class="z" id="z-reset" title="Reset zoom">⊡</button>
+          </div>
+          <div class="pg-canvas-hint">Click any node to inspect</div>
+          <div class="pg-legend">
+            <div class="pg-legend-row"><span class="pg-leg-solid"></span><span class="pg-leg-txt">data flow</span></div>
+            <div class="pg-legend-row"><span class="pg-leg-dashed"></span><span class="pg-leg-txt">async / optional</span></div>
+            <div class="pg-legend-row"><span class="pg-leg-dot-icon"></span><span class="pg-leg-txt">active node</span></div>
           </div>
         </div>
         <div class="pg-panel pg-system hidden" id="pg-arch">
@@ -723,7 +755,13 @@ function mountShell() {
           <div class="pg-zoom">
             <button class="z" id="za-in">+</button>
             <button class="z" id="za-out">−</button>
-            <button class="z" id="za-reset">Reset</button>
+            <button class="z" id="za-reset" title="Reset zoom">⊡</button>
+          </div>
+          <div class="pg-canvas-hint">Click any node to inspect</div>
+          <div class="pg-legend">
+            <div class="pg-legend-row"><span class="pg-leg-solid"></span><span class="pg-leg-txt">data flow</span></div>
+            <div class="pg-legend-row"><span class="pg-leg-dashed"></span><span class="pg-leg-txt">async / optional</span></div>
+            <div class="pg-legend-row"><span class="pg-leg-dot-icon"></span><span class="pg-leg-txt">active node</span></div>
           </div>
         </div>
       </main>
@@ -1010,12 +1048,15 @@ function openPlayground(sys) {
   document.body.dataset.prevOverflow = document.body.style.overflow || '';
   document.body.style.overflow = 'hidden';
 
-  // Title: logo + product name (no "Playground")
+  // Title: logo + product name + category tag + difficulty tag
   const titleEl = document.getElementById('pg-title');
   const logo = logoForSystemId(sys.id);
-  titleEl.innerHTML = `${logo ? `<span class="pg-logo">${logo}</span>` : ''}<span>${sys.title}</span>`;
-  // Step description is shown above step list (like reference)
-  document.getElementById('pg-desc').textContent = '';
+  const steps = getProductSteps(sys);
+  const difficulty = steps.length <= 4 ? 'Beginner' : steps.length <= 6 ? 'Intermediate' : 'Advanced';
+  titleEl.innerHTML = `${logo ? `<span class="pg-logo">${logo}</span>` : ''}<span class="pg-title-name">${sys.title}</span>${sys.tag ? `<span class="pg-tag">${sys.tag}</span>` : ''}<span class="pg-tag pg-tag-level">${difficulty}</span>`;
+  // Subtitle
+  const subtitleEl = document.getElementById('pg-subtitle');
+  if (subtitleEl) subtitleEl.textContent = `How ${sys.title} works · ${steps.length} steps · System Flow`;
 
   // Tabs
   overlay.querySelectorAll('.pg-tab').forEach(b => {
@@ -1024,9 +1065,11 @@ function openPlayground(sys) {
   document.getElementById('pg-system').classList.remove('hidden');
 
   // Steps
-  const steps = getProductSteps(sys);
   const host = document.getElementById('pg-steps');
-  host.innerHTML = steps.map((s,i)=>`<button class="pg-step ${i===0?'active':''}" data-step="${i}"><span class="n">${i+1}</span><span class="t">${s.title}</span></button>`).join('');
+  host.innerHTML = steps.map((s,i)=>{
+    const sd = s.desc ? (s.desc.length > 80 ? s.desc.slice(0,80)+'\u2026' : s.desc) : '';
+    return `<button class="pg-step ${i===0?'active':''}" data-step="${i}"><span class="n">${i+1}</span><span class="pg-step-body"><span class="t">${s.title}</span>${sd?`<span class="pg-step-desc">${sd}</span>`:''}</span><span class="pg-step-chevron">›</span></button>`;
+  }).join('');
   host.querySelectorAll('[data-step]').forEach(btn => btn.addEventListener('click', () => {
     PLAYGROUND.step = Number(btn.dataset.step);
     renderPlayground();
@@ -1167,7 +1210,7 @@ function closePlayground() {
 
 function startPlayground() {
   const steps = getProductSteps(PLAYGROUND.sys);
-  document.getElementById('pg-play').textContent = 'Pause';
+  document.getElementById('pg-play').textContent = '⏸ Pause';
   const ms = Math.round(1800 / (PLAYGROUND.speed || 1));
   PLAYGROUND.timer = setInterval(() => {
     PLAYGROUND.step = (PLAYGROUND.step + 1) % steps.length;
@@ -1179,7 +1222,7 @@ function stopPlayground() {
   if (PLAYGROUND.timer) clearInterval(PLAYGROUND.timer);
   PLAYGROUND.timer = null;
   const btn = document.getElementById('pg-play');
-  if (btn) btn.textContent = 'Play';
+  if (btn) btn.textContent = '▶ Play';
 }
 
 function getProductSteps(sys) {
@@ -1200,8 +1243,20 @@ function renderPlayground() {
   });
 
   const s = steps[PLAYGROUND.step];
-  const d = document.getElementById('pg-desc');
-  if (d) d.textContent = s?.desc || '';
+
+  // Progress bar
+  const progressFill = document.getElementById('pg-progress-fill');
+  if (progressFill) progressFill.style.width = `${((PLAYGROUND.step + 1) / steps.length) * 100}%`;
+
+  // Step counter in header
+  const stepCounter = document.getElementById('pg-step-counter');
+  if (stepCounter) stepCounter.textContent = `Step ${PLAYGROUND.step + 1} of ${steps.length}`;
+
+  // Step detail panel
+  const detailTitle = document.getElementById('pg-step-detail-title');
+  const detailText = document.getElementById('pg-step-detail-text');
+  if (detailTitle) detailTitle.textContent = `Step ${PLAYGROUND.step + 1} Detail`;
+  if (detailText) detailText.textContent = s?.desc || '';
 
   // Render per-product diagrams (system + architecture)
   if (PLAYGROUND.tab === 'system') renderSystemDiagram(PLAYGROUND.sys, steps[PLAYGROUND.step]);
@@ -19858,145 +19913,150 @@ function renderSystemDiagram(sys, step) {
   };
 
   const baselineEdges = (() => {
-    // Prefer explicit baseline edges; else use primary path; else union-of-edges across steps.
     if (layout.baselineEdges?.length) return uniqPairs(layout.baselineEdges);
-    if (layout.primaryPath?.length) {
-      const p = layout.primaryPath;
-      const edges = [];
-      for (let i = 0; i < p.length - 1; i++) edges.push([p[i], p[i+1]]);
-      if (layout.primaryBranches?.length) {
-        for (const br of layout.primaryBranches) edges.push([br.from, br.to]);
-      }
-      return uniqPairs(edges);
-    }
+    // Always collect ALL edges from every step so every node is connected in the skeleton
     const flow = flowForSystem(sys);
     const all = [];
-    for (const s of (flow?.steps || [])) for (const e of (s.edges || [])) all.push(e);
+    for (const s of (flow?.steps || [])) for (const e of (s.edges || [])) all.push([e[0], e[1]]);
+    // Also include primaryPath spine
+    if (layout.primaryPath?.length) {
+      const p = layout.primaryPath;
+      for (let i = 0; i < p.length - 1; i++) all.push([p[i], p[i+1]]);
+      if (layout.primaryBranches?.length) for (const br of layout.primaryBranches) all.push([br.from, br.to]);
+    }
     return uniqPairs(all);
   })();
 
   const NODE_R = 44;
-  // Expand product layouts on the y-axis to avoid vertical overlap with bigger nodes.
+  // Products with an explicit viewBox already have precise coordinates — don't rescale.
   const scaleLayout = (layout.viewBox ? 1 : 1.35);
-  const scaleY = 1.35;
-  const node = (id, cx, cy, label, color) => {
+  const scaleY = scaleLayout; // same factor; keep nodes inside the declared viewBox
+
+  // Unified teal/cyan neon for active elements (Screenshot B style)
+  const ACTIVE_COL = 'rgba(45,212,191,1)';
+
+  const node = (id, cx, cy, label) => {
     const on = active.has(id);
-    const stroke = on ? color : 'rgba(255,255,255,0.16)';
-    const fill = on ? 'rgba(0,0,0,0.20)' : 'rgba(0,0,0,0.10)';
     const r = NODE_R;
-    const ring1 = on ? `<circle cx="${cx}" cy="${cy}" r="${r + 26}" fill="none" stroke="${color}" stroke-width="2" opacity="0.25"/>` : '';
-    const ring2 = on ? `<circle cx="${cx}" cy="${cy}" r="${r + 12}" fill="none" stroke="${color}" stroke-width="2" opacity="0.55"/>` : '';
-    const glow = on
-      ? `<filter id="glow-${id}"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>`
-      : '';
+    if (on) {
+      return `
+        <filter id="glow-${id}" x="-100%" y="-100%" width="300%" height="300%">
+          <feGaussianBlur stdDeviation="20" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <g filter="url(#glow-${id})">
+          <circle cx="${cx}" cy="${cy}" r="${r + 50}" fill="none" stroke="${ACTIVE_COL}" stroke-width="1" opacity="0.08"/>
+          <circle cx="${cx}" cy="${cy}" r="${r + 28}" fill="none" stroke="${ACTIVE_COL}" stroke-width="1.5" opacity="0.20"/>
+          <circle cx="${cx}" cy="${cy}" r="${r + 12}" fill="none" stroke="${ACTIVE_COL}" stroke-width="2" opacity="0.45"/>
+          <circle cx="${cx}" cy="${cy}" r="${r}" fill="rgba(20,184,166,0.14)" stroke="${ACTIVE_COL}" stroke-width="2.5"/>
+          <text x="${cx}" y="${cy + 5}" text-anchor="middle" fill="rgba(230,255,252,0.96)" font-size="13" font-family="Inter, Arial" font-weight="900">${escapeXml(label)}</text>
+        </g>
+      `;
+    }
     return `
-      ${glow}
-      <g ${on ? `filter="url(#glow-${id})"` : ''}>
-        ${ring1}
-        ${ring2}
-        <circle cx="${cx}" cy="${cy}" r="${r}" fill="${fill}" stroke="${stroke}" stroke-width="3" opacity="${on ? 1 : 0.55}"/>
-        <text x="${cx}" y="${cy + 5}" text-anchor="middle" fill="rgba(240,240,248,0.92)" font-size="13" font-family="Inter, Arial" font-weight="900" opacity="${on ? 1 : 0.65}">${escapeXml(label)}</text>
-      </g>
+      <circle cx="${cx}" cy="${cy}" r="${r}" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.09)" stroke-width="1.5" opacity="0.4"/>
+      <text x="${cx}" y="${cy + 5}" text-anchor="middle" fill="rgba(240,240,248,0.30)" font-size="13" font-family="Inter, Arial" font-weight="600">${escapeXml(label)}</text>
     `;
   };
 
   const arrow = (x1, y1, x2, y2, on) => {
     const mid = Math.abs(x1 * 13 + x2 * 7 + y1 * 11 + y2 * 5).toFixed(0);
     const markerId = `sys-arrow-${mid}`;
-    const stroke = on ? 'rgba(123,125,248,0.9)' : 'rgba(255,255,255,0.12)';
-    const w = on ? 4 : 3;
-    // faint dotted baseline always visible + solid overlay when active
-    const base = `
-      <path d="M${x1} ${y1} L ${x2} ${y2}" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 7" opacity="1"/>
-    `;
+    const base = `<path d="M${x1} ${y1} L ${x2} ${y2}" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="3 9"/>`;
     const activePath = on ? `
       <defs>
         <marker id="${markerId}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-          <path d="M 0 0 L 10 5 L 0 10 z" fill="${stroke}"/>
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="${ACTIVE_COL}"/>
         </marker>
       </defs>
-      <path d="M${x1} ${y1} L ${x2} ${y2}" fill="none" stroke="${stroke}" stroke-width="${w}" stroke-linecap="round" opacity="${on ? 0.95 : 0.55}" marker-end="url(#${markerId})"/>
+      <path d="M${x1} ${y1} L ${x2} ${y2}" fill="none" stroke="${ACTIVE_COL}" stroke-width="2.5" stroke-linecap="round" opacity="0.85" marker-end="url(#${markerId})"/>
     ` : '';
     return `${base}${activePath}`;
   };
 
   const dot = (x, y, on) => {
-    // small connector dot at endpoints; glows when on
-    const r = 4;
-    const stroke = on ? 'rgba(123,125,248,0.95)' : 'rgba(255,255,255,0.14)';
-    const fill = on ? 'rgba(123,125,248,0.22)' : 'rgba(255,255,255,0.06)';
-    const glow = on
-      ? `<filter id="dot-glow-${x}-${y}"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>`
-      : '';
+    if (!on) return `<circle cx="${x}" cy="${y}" r="3" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>`;
     return `
-      ${glow}
-      <circle cx="${x}" cy="${y}" r="${r}" fill="${fill}" stroke="${stroke}" stroke-width="2" opacity="${on ? 0.95 : 0.65}" ${on ? `filter="url(#dot-glow-${x}-${y})"` : ''}/>
+      <filter id="dg-${x.toFixed(0)}-${y.toFixed(0)}" x="-300%" y="-300%" width="700%" height="700%">
+        <feGaussianBlur stdDeviation="6" result="b"/>
+        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <circle cx="${x}" cy="${y}" r="4.5" fill="${ACTIVE_COL}" stroke="${ACTIVE_COL}" stroke-width="1" opacity="0.9" filter="url(#dg-${x.toFixed(0)}-${y.toFixed(0)})"/>
     `;
   };
 
   const edgeLabel = (x1, y1, x2, y2, text, on) => {
     if (!text) return '';
-    const mx = (x1 + x2) / 2;
-    const my = (y1 + y2) / 2;
-    // small offset so label sits above the line
-    const dx = x2 - x1;
-    const dy = y2 - y1;
+    const mx = (x1 + x2) / 2; const my = (y1 + y2) / 2;
+    const dx = x2 - x1; const dy = y2 - y1;
     const len = Math.max(1, Math.hypot(dx, dy));
-    const ox = (-dy / len) * 12;
-    const oy = (dx / len) * 12;
-    const a = on ? 0.9 : 0.45;
-    return `
-      <text x="${mx + ox}" y="${my + oy}" text-anchor="middle" fill="rgba(123,125,248,${a})" font-size="12" font-family="Inter, Arial" font-weight="900">${escapeXml(text)}</text>
-    `;
+    const ox = (-dy / len) * 14; const oy = (dx / len) * 14;
+    return `<text x="${mx + ox}" y="${my + oy}" text-anchor="middle" fill="${on ? ACTIVE_COL : 'rgba(255,255,255,0.25)'}" font-size="11" font-family="Inter, Arial" font-weight="700" opacity="${on ? 0.9 : 0.45}">${escapeXml(text)}</text>`;
   };
 
   const mkNode = (n0) => ({ ...n0, x: n0.x * scaleLayout, y: n0.y * scaleLayout * scaleY });
+
+  // Trim a line so it starts/ends at the node circle boundary, not the center
+  const trimEdge = (x1, y1, x2, y2, r) => {
+    const dx = x2 - x1, dy = y2 - y1;
+    const len = Math.hypot(dx, dy);
+    if (len < r * 2 + 10) return null; // nodes too close / overlapping
+    const nx = dx / len, ny = dy / len;
+    return [x1 + nx * r, y1 + ny * r, x2 - nx * r, y2 - ny * r];
+  };
 
   let edgesSvg = '';
   let dotsSvg = '';
   let labelsSvg = '';
 
-  // 1) Baseline: show connected dotted lines + dots for the default graph
+  // 1) Baseline: faint dotted skeleton connecting every node that appears in any step
   for (const [a, b] of baselineEdges) {
+    const na = layout.nodes[a] ? mkNode(layout.nodes[a]) : null;
+    const nb = layout.nodes[b] ? mkNode(layout.nodes[b]) : null;
+    if (!na || !nb) continue;
+    const pts = trimEdge(na.x, na.y, nb.x, nb.y, NODE_R + 4);
+    if (!pts) continue;
+    const [sx, sy, ex, ey] = pts;
+    edgesSvg += arrow(sx, sy, ex, ey, false);
+    dotsSvg += dot(sx, sy, false);
+    dotsSvg += dot(ex, ey, false);
+  }
+
+  // 2) Active overlay: solid teal edges trimmed to circle boundary
+  for (const [a, b] of stepEdges) {
     const na0 = layout.nodes[a];
     const nb0 = layout.nodes[b];
     const na = na0 ? mkNode(na0) : null;
     const nb = nb0 ? mkNode(nb0) : null;
     if (!na || !nb) continue;
-    // not active here; arrow() already draws dotted baseline regardless of `on`
-    edgesSvg += arrow(na.x, na.y, nb.x, nb.y, false);
-    dotsSvg += dot(na.x, na.y, false);
-    dotsSvg += dot(nb.x, nb.y, false);
-  }
-
-  // 2) Active overlay: re-draw step edges as glowing solid + glowing dots
-  for (const [a, b] of stepEdges) {
-    const na0 = layout.nodes[a];
-    const nb0 = layout.nodes[b];
-    const na = na0 ? { ...na0, x: na0.x * scaleLayout, y: na0.y * scaleLayout * scaleY } : null;
-    const nb = nb0 ? { ...nb0, x: nb0.x * scaleLayout, y: nb0.y * scaleLayout * scaleY } : null;
-    if (!na || !nb) continue;
+    const pts = trimEdge(na.x, na.y, nb.x, nb.y, NODE_R + 4);
+    if (!pts) continue;
+    const [sx, sy, ex, ey] = pts;
     const on = eActive(a, b);
-    edgesSvg += arrow(na.x, na.y, nb.x, nb.y, on);
-    // Endpoint dots for visual continuity
-    dotsSvg += dot(na.x, na.y, on);
-    dotsSvg += dot(nb.x, nb.y, on);
-
-    // Only show edge label when active (keeps canvas clean)
+    edgesSvg += arrow(sx, sy, ex, ey, on);
+    dotsSvg += dot(sx, sy, on);
+    dotsSvg += dot(ex, ey, on);
+    // Edge label at midpoint of trimmed line
     const lbl = step?.edgeLabels?.[`${a}->${b}`];
-    if (on && lbl) labelsSvg += edgeLabel(na.x, na.y, nb.x, nb.y, lbl, on);
+    if (on && lbl) labelsSvg += edgeLabel(sx, sy, ex, ey, lbl, on);
   }
 
   let nodesSvg = '';
   for (const [id, n0] of Object.entries(layout.nodes)) {
     const n = { ...n0, x: n0.x * scaleLayout, y: n0.y * scaleLayout * scaleY };
-    const cKey = n.colorKey || 'api';
-    const color = SYSTEM_NODE_COLORS[cKey] || 'rgba(236,72,153,0.95)';
-    nodesSvg += node(id, n.x, n.y, n.label, color);
+    nodesSvg += node(id, n.x, n.y, n.label);
   }
 
+  const vb = (svg.getAttribute('viewBox') || '0 0 1000 640').split(' ');
+  const vw = vb[2] || 1000; const vh = vb[3] || 640;
+
   svg.innerHTML = `
-    <rect x="0" y="0" width="100%" height="100%" fill="rgba(0,0,0,0)"/>
+    <defs>
+      <pattern id="grid-pat" width="60" height="60" patternUnits="userSpaceOnUse">
+        <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(45,212,191,0.04)" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect x="0" y="0" width="${vw}" height="${vh}" fill="url(#grid-pat)"/>
     ${edgesSvg}
     ${dotsSvg}
     ${labelsSvg}
@@ -20022,13 +20082,25 @@ function renderArchitectureDiagram(sys, step) {
     <text x="${x + 18}" y="${y + 28}" fill="rgba(240,240,248,0.75)" font-size="14" font-family="Inter, Arial" font-weight="900">${escapeXml(label)}</text>
   `;
 
+  const ARCH_ACTIVE = 'rgba(45,212,191,1)';
+
   const n = (id, x, y, label) => {
     const on = active.has(id);
-    const stroke = on ? 'rgba(236,72,153,0.95)' : 'rgba(255,255,255,0.12)';
-    const fill = on ? 'rgba(236,72,153,0.12)' : 'rgba(255,255,255,0.03)';
+    if (on) {
+      return `
+        <filter id="arch-ng-${id}" x="-60%" y="-60%" width="220%" height="220%">
+          <feGaussianBlur stdDeviation="10" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <g filter="url(#arch-ng-${id})">
+          <rect x="${x}" y="${y}" width="240" height="60" rx="16" fill="rgba(20,184,166,0.10)" stroke="${ARCH_ACTIVE}" stroke-width="2"/>
+          <text x="${x + 14}" y="${y + 38}" fill="rgba(230,255,252,0.95)" font-size="14" font-family="Inter, Arial" font-weight="900">${escapeXml(label)}</text>
+        </g>
+      `;
+    }
     return `
-      <rect x="${x}" y="${y}" width="240" height="60" rx="16" fill="${fill}" stroke="${stroke}" stroke-width="2" opacity="${on ? 1 : 0.65}"/>
-      <text x="${x + 14}" y="${y + 38}" fill="rgba(240,240,248,0.90)" font-size="14" font-family="Inter, Arial" font-weight="900" opacity="${on ? 1 : 0.65}">${escapeXml(label)}</text>
+      <rect x="${x}" y="${y}" width="240" height="60" rx="16" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" opacity="0.45"/>
+      <text x="${x + 14}" y="${y + 38}" fill="rgba(240,240,248,0.30)" font-size="14" font-family="Inter, Arial" font-weight="700" opacity="0.45">${escapeXml(label)}</text>
     `;
   };
 
@@ -20036,33 +20108,20 @@ function renderArchitectureDiagram(sys, step) {
     const mid = Math.abs(x1 * 13 + x2 * 7 + y1 * 11 + y2 * 5).toFixed(0);
     const markerId = `arch-arrow-${mid}`;
     const mx = Math.round((x1 + x2) / 2);
-    // Add clearance so edges don't go through boxes
     const clearance = 22;
-    const dir = (y2 >= y1) ? 1 : -1;
-    const y1c = y1 + dir * clearance;
-    const y2c = y2 - dir * clearance;
-    // Route primarily left->right: move out horizontally from source, then vertical, then into target.
-    // This avoids weird up/down arrowheads near boxes.
-    const x1c = x1 + clearance;
-    const x2c = x2 - clearance;
+    const x1c = x1 + clearance; const x2c = x2 - clearance;
     const d = `M${x1} ${y1} L ${x1c} ${y1} L ${x1c} ${y2} L ${x2c} ${y2} L ${x2} ${y2}`;
-
-    const glow = on
-      ? `<filter id="arch-glow-${mid}"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>`
-      : '';
-
-    const strokeOn = 'rgba(123,125,248,0.9)';
-    const strokeOff = 'rgba(123,125,248,0.40)';
+    const glowFilter = on ? `<filter id="arch-glow-${mid}" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>` : '';
     return `
-      ${glow}
+      ${glowFilter}
       <defs>
         <marker id="${markerId}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-          <path d="M 0 0 L 10 5 L 0 10 z" fill="${on ? strokeOn : strokeOff}"/>
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="${on ? ARCH_ACTIVE : 'rgba(255,255,255,0.12)'}"/>
         </marker>
       </defs>
-      <path d="${d}" fill="none" stroke="rgba(255,255,255,0.30)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 7" opacity="1"/>
-      <path d="${d}" fill="none" stroke="${on ? strokeOn : strokeOff}" stroke-width="${on ? 4 : 3}" stroke-linecap="round" stroke-linejoin="round" opacity="${on ? 0.92 : 0.55}" marker-end="url(#${markerId})" ${on ? `filter="url(#arch-glow-${mid})"` : ''}/>
-      ${label ? `<text x="${mx}" y="${Math.min(y1, y2) - 10}" text-anchor="middle" fill="rgba(123,125,248,0.65)" font-size="12" font-family="Inter, Arial" font-weight="800">${escapeXml(label)}</text>` : ''}
+      <path d="${d}" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3 8"/>
+      <path d="${d}" fill="none" stroke="${on ? ARCH_ACTIVE : 'rgba(255,255,255,0.10)'}" stroke-width="${on ? 2.5 : 1.5}" stroke-linecap="round" stroke-linejoin="round" opacity="${on ? 0.85 : 0.4}" marker-end="url(#${markerId})" ${on ? `filter="url(#arch-glow-${mid})"` : ''}/>
+      ${label ? `<text x="${mx}" y="${Math.min(y1, y2) - 10}" text-anchor="middle" fill="${on ? ARCH_ACTIVE : 'rgba(255,255,255,0.25)'}" font-size="11" font-family="Inter, Arial" font-weight="700" opacity="${on ? 0.9 : 0.4}">${escapeXml(label)}</text>` : ''}
     `;
   };
 
