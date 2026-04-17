@@ -656,6 +656,31 @@ const PLAYGROUND = {
   speed: 1,
 };
 
+// ---------- AI Generate state ----------
+const AI_EXAMPLES = [
+  'How does WhatsApp deliver a message',
+  'How does Stripe process a payment',
+  'How does Netflix stream a video',
+  'How does Uber match a driver',
+  'How does Google Search rank results',
+  'How does Spotify recommend songs',
+  'How does GitHub handle a pull request',
+  'How does Amazon process an order',
+  'How does Instagram serve your feed',
+  'How does Slack deliver a message in real time',
+  'How does Zoom start a video call',
+  'How does Airbnb book a stay',
+  'How does YouTube recommend a video',
+  'How does Twitter show your timeline',
+  'How does DoorDash route a delivery',
+];
+
+const AI_STATE = {
+  history: [],
+  exampleIdx: 0,
+  exampleTimer: null,
+};
+
 function mountShell() {
   const body = document.body;
 
@@ -20519,20 +20544,193 @@ function findSystem(q) {
   return SYSTEMS.find(x => x.title.toLowerCase().includes(qq));
 }
 
-// ---------- AI Generate (placeholder) ----------
+// ---------- AI Generate ----------
+
+function aiFindBestMatch(prompt) {
+  var q = prompt.trim().toLowerCase();
+  var qWords = q.split(/\s+/).filter(function(w) { return w.length > 2; });
+  var best = null;
+  var bestScore = 0;
+
+  for (var i = 0; i < SYSTEMS.length; i++) {
+    var sys = SYSTEMS[i];
+    var title = sys.title.toLowerCase();
+    var titleWords = title.split(/\s+/).filter(function(w) { return w.length > 1; });
+    var score = 0;
+
+    // Tier 1: full product name is a substring of the query (e.g. "how stripe works")
+    if (q.includes(title)) {
+      score = 200;
+    } else {
+      var titleWordsFoundInQuery = titleWords.filter(function(tw) {
+        return tw.length > 2 && q.includes(tw);
+      });
+      var allTitleWordsMatch = titleWordsFoundInQuery.length === titleWords.length;
+
+      if (allTitleWordsMatch && titleWords.length >= 2) {
+        // Tier 2: every word of a multi-word title appears in the query
+        // e.g. "google maps" -> both "google" and "maps" in query
+        score = 160 + titleWords.length * 10;
+      } else if (allTitleWordsMatch && titleWords.length === 1) {
+        // Tier 3: single-word product name found in query (e.g. "stripe", "netflix")
+        var queryHitsInTitle = qWords.filter(function(w) { return title.includes(w) && w.length > 3; }).length;
+        score = 100 + queryHitsInTitle * 15;
+      } else {
+        // Tier 4: partial match — only some title words found; penalise heavily
+        // This prevents "Google Drive" winning on a query about "Google Search"
+        score = titleWordsFoundInQuery.length * 15;
+      }
+    }
+
+    if (score > bestScore) { bestScore = score; best = sys; }
+  }
+
+  // Threshold: 80 ensures tier-3+ matches win; tier-4 partial matches (< 80) are rejected
+  return bestScore >= 80 ? best : null;
+}
+
+function aiSuggestAlternatives(prompt) {
+  var q = prompt.trim().toLowerCase();
+  var qWords = q.split(/\s+/).filter(function(w) { return w.length > 2; });
+  var scored = SYSTEMS.map(function(sys) {
+    var title = sys.title.toLowerCase();
+    var hits = qWords.filter(function(w) { return title.includes(w) && w.length > 2; }).length;
+    return { sys: sys, hits: hits };
+  }).filter(function(x) { return x.hits > 0; });
+  scored.sort(function(a, b) { return b.hits - a.hits; });
+  return scored.slice(0, 3).map(function(x) { return x.sys.title; });
+}
+
+function aiHistoryCardHtml(entry) {
+  var logo = logoForSystemId(entry.sys.id);
+  var iconHtml = logo
+    ? '<div class="ai-hist-logo">' + logo + '</div>'
+    : '<div class="ai-hist-icon">' + abbr(entry.sys.title) + '</div>';
+  var steps = getProductSteps(entry.sys);
+  var tagLabel = entry.sys.tag || catLabel(entry.sys.cat);
+  return '<div class="ai-hist-card" data-entry-id="' + entry.id + '">'
+    + '<div class="ai-hist-top">'
+    + iconHtml
+    + '<div class="ai-hist-meta">'
+    + '<div class="ai-hist-name">' + entry.sys.title + '</div>'
+    + '<div class="ai-hist-tag">' + tagLabel + '</div>'
+    + '</div>'
+    + '<span class="ai-hist-arrow">&rarr;</span>'
+    + '</div>'
+    + '<div class="ai-hist-prompt">&ldquo;' + entry.prompt + '&rdquo;</div>'
+    + '<div class="ai-hist-foot">'
+    + '<span class="ai-hist-steps">' + steps.length + ' steps</span>'
+    + '<span class="ai-hist-open">Open flow &#x2197;</span>'
+    + '</div>'
+    + '</div>';
+}
+
+function aiHistoryHtml() {
+  if (AI_STATE.history.length === 0) return '';
+  var cards = AI_STATE.history.map(function(e) { return aiHistoryCardHtml(e); }).join('');
+  return '<div class="ai-history-header">'
+    + '<span class="ai-history-title">Recent Generations</span>'
+    + '<span class="ai-history-count">' + AI_STATE.history.length + '</span>'
+    + '</div>'
+    + '<div class="ai-history-grid">' + cards + '</div>';
+}
+
+function aiExampleChipsHtml() {
+  return AI_EXAMPLES.slice(0, 5).map(function(ex) {
+    return '<button class="ai-example-chip" data-ex="' + ex + '">' + ex + '</button>';
+  }).join('');
+}
+
+function aiGenerate(prompt) {
+  if (!prompt.trim()) return;
+  var root = document.getElementById('ai-page');
+  var inputEl = root.querySelector('#ai-prompt');
+  var btn = root.querySelector('#ai-gen-btn');
+  var statusEl = root.querySelector('#ai-status');
+  if (btn) btn.disabled = true;
+  if (statusEl) { statusEl.textContent = 'Analysing prompt...'; statusEl.classList.add('visible'); }
+  setTimeout(function() {
+    var sys = aiFindBestMatch(prompt);
+    if (!sys) {
+      var suggestions = aiSuggestAlternatives(prompt);
+      var msg = suggestions.length
+        ? 'No exact match. Closest systems: ' + suggestions.join(', ')
+        : 'No match found. Try a known product like "Stripe", "Netflix", or "Uber".';
+      if (statusEl) { statusEl.textContent = msg; statusEl.classList.add('error'); }
+      if (btn) btn.disabled = false;
+      return;
+    }
+    if (statusEl) { statusEl.textContent = 'Matched "' + sys.title + '" - building flow...'; statusEl.classList.remove('error'); }
+    setTimeout(function() {
+      AI_STATE.history.unshift({ id: 'ai-' + Date.now(), prompt: prompt.trim(), sys: sys, createdAt: new Date() });
+      if (inputEl) inputEl.value = '';
+      if (btn) btn.disabled = false;
+      if (statusEl) { statusEl.textContent = ''; statusEl.classList.remove('visible', 'error'); }
+      renderAI();
+    }, 480);
+  }, 600);
+}
+
+function aiStartExampleRotation() {
+  if (AI_STATE.exampleTimer) clearInterval(AI_STATE.exampleTimer);
+  var root = document.getElementById('ai-page');
+  AI_STATE.exampleTimer = setInterval(function() {
+    AI_STATE.exampleIdx = (AI_STATE.exampleIdx + 1) % AI_EXAMPLES.length;
+    var inp = root && root.querySelector('#ai-prompt');
+    if (inp && inp !== document.activeElement && !inp.value) {
+      inp.placeholder = AI_EXAMPLES[AI_STATE.exampleIdx];
+    }
+  }, 2800);
+}
+
 function renderAI() {
-  const root = document.getElementById('ai-page');
-  root.innerHTML = `
-    <div class="container">
-      <div class="section-title" style="margin-top:10px">
-        <h2>AI Generate</h2>
-        <p>Generate a new system flow from a prompt. (Placeholder for now.)</p>
-      </div>
-      <div class="product-box">
-        <div class="muted">We’ll wire this once the main browsing flow is locked.</div>
-      </div>
-    </div>
-  `;
+  var root = document.getElementById('ai-page');
+  var placeholder = AI_EXAMPLES[AI_STATE.exampleIdx];
+  root.innerHTML = '<div class="container">'
+    + '<div class="ai-hero">'
+    + '<div class="ai-hero-label">AI GENERATE</div>'
+    + '<h2 class="ai-hero-title">Understand any system, instantly.</h2>'
+    + '<p class="ai-hero-sub">Describe a product or flow in plain English - map the full system: steps, data flows, and architecture.</p>'
+    + '</div>'
+    + '<div class="ai-input-wrap">'
+    + '<div class="ai-input-box">'
+    + '<svg class="ai-input-icon" width="18" height="18" viewBox="0 0 20 20" fill="none">'
+    + '<circle cx="10" cy="10" r="7" stroke="rgba(123,125,248,0.7)" stroke-width="1.5"/>'
+    + '<path d="M10 7v6M7 10h6" stroke="rgba(123,125,248,0.9)" stroke-width="1.5" stroke-linecap="round"/>'
+    + '</svg>'
+    + '<input id="ai-prompt" type="text" placeholder="' + placeholder + '" autocomplete="off" spellcheck="false"/>'
+    + '<button id="ai-gen-btn" class="ai-gen-btn">'
+    + '<svg width="13" height="13" viewBox="0 0 16 16" fill="none" style="flex-shrink:0">'
+    + '<path d="M3 8l4 4 6-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'
+    + '</svg>'
+    + 'Generate'
+    + '</button>'
+    + '</div>'
+    + '<div id="ai-status" class="ai-status"></div>'
+    + '<div class="ai-examples-row">'
+    + '<span class="ai-examples-label">Try:</span>'
+    + aiExampleChipsHtml()
+    + '</div>'
+    + '</div>'
+    + '<div class="ai-history-wrap" id="ai-history-wrap">'
+    + aiHistoryHtml()
+    + '</div>'
+    + '</div>';
+
+  var btn = root.querySelector('#ai-gen-btn');
+  var inp = root.querySelector('#ai-prompt');
+  btn.addEventListener('click', function() { aiGenerate(inp.value); });
+  inp.addEventListener('keydown', function(e) { if (e.key === 'Enter') aiGenerate(inp.value); });
+  root.querySelectorAll('.ai-example-chip').forEach(function(chip) {
+    chip.addEventListener('click', function() { inp.value = chip.dataset.ex; inp.focus(); });
+  });
+  root.querySelectorAll('.ai-hist-card').forEach(function(card) {
+    card.addEventListener('click', function() {
+      var entry = AI_STATE.history.find(function(e) { return e.id === card.dataset.entryId; });
+      if (entry) openProduct(entry.sys);
+    });
+  });
+  aiStartExampleRotation();
 }
 
 // ---------- Preview hub ----------
