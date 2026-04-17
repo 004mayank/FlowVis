@@ -20076,70 +20076,168 @@ function renderArchitectureDiagram(sys, step) {
 
   svg.setAttribute('viewBox', layout.viewBox || '0 0 1420 760');
   const active = new Set(step?.active || []);
-
-  const box = (x, y, w, h, label) => `
-    <rect x="${x}" y="${y}" width="${w}" height="${h}" rx="20" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.10)" />
-    <text x="${x + 18}" y="${y + 28}" fill="rgba(240,240,248,0.75)" font-size="14" font-family="Inter, Arial" font-weight="900">${escapeXml(label)}</text>
-  `;
-
   const ARCH_ACTIVE = 'rgba(45,212,191,1)';
 
-  const n = (id, x, y, label) => {
+  // ── Shape inference ──────────────────────────────────────────────────────
+  const inferShape = (lbl, typeHint) => {
+    if (typeHint) return typeHint;
+    const l = (lbl || '').toLowerCase();
+    if (/(store|storage|kv|cache|metadata|object store|index|ledger|blob|warehouse|database|db\b|thread|user assist|assist kv|queue store|event store)/.test(l)) return 'db';
+    if (/(queue|bus|stream|fanout|topic|kafka|pubsub)/.test(l)) return 'queue';
+    return 'service';
+  };
+
+  // Box dimensions per shape
+  const SVC_W = 210, SVC_H = 54;
+  const DB_W  = 170, DB_RY = 13, DB_BODY = 44; // cylinder: ry = cap radius, total h = DB_BODY + DB_RY*2
+  const Q_W   = 210, Q_H   = 54;
+
+  const shapeDim = (nd) => {
+    const s = inferShape(nd.label, nd.type);
+    if (s === 'db')    return { w: DB_W, h: DB_BODY + DB_RY * 2, shape: s };
+    if (s === 'queue') return { w: Q_W,  h: Q_H, shape: s };
+    return { w: SVC_W, h: SVC_H, shape: 'service' };
+  };
+
+  // ── Node renderers ────────────────────────────────────────────────────────
+  const renderService = (id, x, y, label, on) => {
+    const glowDef = on ? `<filter id="an-${id}" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="9" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>` : '';
+    const gAttr = on ? `filter="url(#an-${id})"` : '';
+    return `${glowDef}<g ${gAttr}>
+      <rect x="${x}" y="${y}" width="${SVC_W}" height="${SVC_H}" rx="10"
+        fill="${on ? 'rgba(20,184,166,0.12)' : 'rgba(255,255,255,0.04)'}"
+        stroke="${on ? ARCH_ACTIVE : 'rgba(255,255,255,0.22)'}" stroke-width="${on ? 2 : 1.5}"/>
+      <text x="${x + 12}" y="${y + 33}" fill="${on ? 'rgba(230,255,252,0.96)' : 'rgba(240,240,248,0.68)'}"
+        font-size="13" font-family="Inter, Arial" font-weight="${on ? 800 : 600}">${escapeXml(label)}</text>
+    </g>`;
+  };
+
+  const renderDB = (id, x, y, label, on) => {
+    const ry = DB_RY, bh = DB_BODY, w = DB_W;
+    const cx = x + w / 2;
+    const stroke = on ? ARCH_ACTIVE : 'rgba(255,255,255,0.22)';
+    const bodyFill = on ? 'rgba(20,184,166,0.10)' : 'rgba(255,255,255,0.04)';
+    const capFill  = on ? 'rgba(20,184,166,0.18)' : 'rgba(255,255,255,0.06)';
+    const sw = on ? 2 : 1.5;
+    const glowDef = on ? `<filter id="adb-${id}" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="9" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>` : '';
+    const gAttr = on ? `filter="url(#adb-${id})"` : '';
+    return `${glowDef}<g ${gAttr}>
+      <rect x="${x}" y="${y + ry}" width="${w}" height="${bh}"
+        fill="${bodyFill}" stroke="${stroke}" stroke-width="${sw}" stroke-left="none" stroke-right="none"/>
+      <ellipse cx="${cx}" cy="${y + ry}" rx="${w / 2}" ry="${ry}"
+        fill="${capFill}" stroke="${stroke}" stroke-width="${sw}"/>
+      <ellipse cx="${cx}" cy="${y + ry + bh}" rx="${w / 2}" ry="${ry}"
+        fill="${on ? 'rgba(20,184,166,0.14)' : 'rgba(0,0,0,0.12)'}" stroke="${stroke}" stroke-width="${sw}"/>
+      <text x="${cx}" y="${y + ry + bh / 2 + 5}" text-anchor="middle"
+        fill="${on ? 'rgba(230,255,252,0.96)' : 'rgba(240,240,248,0.68)'}"
+        font-size="12" font-family="Inter, Arial" font-weight="${on ? 800 : 600}">${escapeXml(label)}</text>
+    </g>`;
+  };
+
+  const renderQueue = (id, x, y, label, on) => {
+    const stroke = on ? ARCH_ACTIVE : 'rgba(255,255,255,0.22)';
+    const glowDef = on ? `<filter id="aq-${id}" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="9" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>` : '';
+    const gAttr = on ? `filter="url(#aq-${id})"` : '';
+    return `${glowDef}<g ${gAttr}>
+      <rect x="${x}" y="${y}" width="${Q_W}" height="${Q_H}" rx="8"
+        fill="${on ? 'rgba(20,184,166,0.12)' : 'rgba(255,255,255,0.04)'}"
+        stroke="${stroke}" stroke-width="${on ? 2 : 1.5}"/>
+      <line x1="${x+15}" y1="${y+12}" x2="${x+15}" y2="${y+Q_H-12}" stroke="${stroke}" stroke-width="1.5" opacity="0.45"/>
+      <line x1="${x+21}" y1="${y+12}" x2="${x+21}" y2="${y+Q_H-12}" stroke="${stroke}" stroke-width="1.5" opacity="0.45"/>
+      <text x="${x+32}" y="${y+33}" fill="${on ? 'rgba(230,255,252,0.96)' : 'rgba(240,240,248,0.68)'}"
+        font-size="13" font-family="Inter, Arial" font-weight="${on ? 800 : 600}">${escapeXml(label)}</text>
+    </g>`;
+  };
+
+  const renderNode = (id, nd) => {
+    const { shape } = shapeDim(nd);
     const on = active.has(id);
-    if (on) {
-      return `
-        <filter id="arch-ng-${id}" x="-60%" y="-60%" width="220%" height="220%">
-          <feGaussianBlur stdDeviation="10" result="b"/>
-          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-        <g filter="url(#arch-ng-${id})">
-          <rect x="${x}" y="${y}" width="240" height="60" rx="16" fill="rgba(20,184,166,0.10)" stroke="${ARCH_ACTIVE}" stroke-width="2"/>
-          <text x="${x + 14}" y="${y + 38}" fill="rgba(230,255,252,0.95)" font-size="14" font-family="Inter, Arial" font-weight="900">${escapeXml(label)}</text>
-        </g>
-      `;
+    if (shape === 'db')    return renderDB(id, nd.x, nd.y, nd.label, on);
+    if (shape === 'queue') return renderQueue(id, nd.x, nd.y, nd.label, on);
+    return renderService(id, nd.x, nd.y, nd.label, on);
+  };
+
+  // Backend outline
+  const backendOutline = (x, y, w, h, label) => `
+    <rect x="${x}" y="${y}" width="${w}" height="${h}" rx="18"
+      fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.13)" stroke-width="1.5" stroke-dasharray="6 5"/>
+    <text x="${x + 16}" y="${y + 24}" fill="rgba(240,240,248,0.45)"
+      font-size="12" font-family="Inter, Arial" font-weight="700" letter-spacing="0.08em">${escapeXml(label.toUpperCase())}</text>
+  `;
+
+  // ── Smart arrow routing ───────────────────────────────────────────────────
+  // Compute edge attachment points based on relative node positions.
+  const edgePoints = (na, nb) => {
+    const da = shapeDim(na), db_ = shapeDim(nb);
+    const ax = na.x + da.w / 2, ay = na.y + da.h / 2;
+    const bx = nb.x + db_.w / 2, by = nb.y + db_.h / 2;
+    const dx = bx - ax, dy = by - ay;
+
+    let x1, y1, x2, y2;
+    if (Math.abs(dx) >= Math.abs(dy)) {
+      // Horizontal primary
+      if (dx > 0) { x1 = na.x + da.w + 4; x2 = nb.x - 4; }
+      else        { x1 = na.x - 4;         x2 = nb.x + db_.w + 4; }
+      y1 = ay; y2 = by;
+    } else {
+      // Vertical primary
+      if (dy > 0) { y1 = na.y + da.h + 4; y2 = nb.y - 4; }
+      else        { y1 = na.y - 4;         y2 = nb.y + db_.h + 4; }
+      x1 = ax; x2 = bx;
     }
+    return { x1, y1, x2, y2 };
+  };
+
+  const drawConn = (x1, y1, x2, y2, label, on) => {
+    const uid = `${Math.round(x1)}-${Math.round(y1)}-${Math.round(x2)}-${Math.round(y2)}`.replace(/\./g,'');
+    const mid = `aa${uid}`;
+    const markerCol = on ? ARCH_ACTIVE : 'rgba(255,255,255,0.20)';
+
+    // Path shape
+    const adx = Math.abs(x2 - x1), ady = Math.abs(y2 - y1);
+    let d;
+    if (adx < 6 || ady < 6) {
+      d = `M${x1} ${y1} L ${x2} ${y2}`;
+    } else {
+      const mx = (x1 + x2) / 2;
+      d = `M${x1} ${y1} L ${mx} ${y1} L ${mx} ${y2} L ${x2} ${y2}`;
+    }
+
+    const glowF = on ? `<filter id="cg-${uid}" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>` : '';
+    const mx = (x1 + x2) / 2;
+    const labelSvg = label ? `<text x="${mx}" y="${Math.min(y1,y2) - 7}" text-anchor="middle"
+      fill="${on ? ARCH_ACTIVE : 'rgba(255,255,255,0.32)'}" font-size="10" font-family="Inter, Arial"
+      font-weight="700" opacity="${on ? 0.92 : 0.55}">${escapeXml(label)}</text>` : '';
+
     return `
-      <rect x="${x}" y="${y}" width="240" height="60" rx="16" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
-      <text x="${x + 14}" y="${y + 38}" fill="rgba(240,240,248,0.70)" font-size="14" font-family="Inter, Arial" font-weight="700">${escapeXml(label)}</text>
+      ${glowF}
+      <defs><marker id="${mid}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="${markerCol}"/>
+      </marker></defs>
+      <path d="${d}" fill="none" stroke="rgba(255,255,255,0.11)" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 7"/>
+      <path d="${d}" fill="none"
+        stroke="${on ? ARCH_ACTIVE : 'rgba(255,255,255,0.18)'}"
+        stroke-width="${on ? 2.5 : 1.5}" stroke-linecap="round" stroke-linejoin="round"
+        opacity="${on ? 0.88 : 0.5}" marker-end="url(#${mid})"
+        ${on ? `filter="url(#cg-${uid})"` : ''}/>
+      ${labelSvg}
     `;
   };
 
-  const arrowOrtho = (x1, y1, x2, y2, label = '', on = false) => {
-    const mid = Math.abs(x1 * 13 + x2 * 7 + y1 * 11 + y2 * 5).toFixed(0);
-    const markerId = `arch-arrow-${mid}`;
-    const mx = Math.round((x1 + x2) / 2);
-    const clearance = 22;
-    const x1c = x1 + clearance; const x2c = x2 - clearance;
-    const d = `M${x1} ${y1} L ${x1c} ${y1} L ${x1c} ${y2} L ${x2c} ${y2} L ${x2} ${y2}`;
-    const glowFilter = on ? `<filter id="arch-glow-${mid}" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>` : '';
-    return `
-      ${glowFilter}
-      <defs>
-        <marker id="${markerId}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-          <path d="M 0 0 L 10 5 L 0 10 z" fill="${on ? ARCH_ACTIVE : 'rgba(255,255,255,0.12)'}"/>
-        </marker>
-      </defs>
-      <path d="${d}" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3 8"/>
-      <path d="${d}" fill="none" stroke="${on ? ARCH_ACTIVE : 'rgba(255,255,255,0.10)'}" stroke-width="${on ? 2.5 : 1.5}" stroke-linecap="round" stroke-linejoin="round" opacity="${on ? 0.85 : 0.4}" marker-end="url(#${markerId})" ${on ? `filter="url(#arch-glow-${mid})"` : ''}/>
-      ${label ? `<text x="${mx}" y="${Math.min(y1, y2) - 10}" text-anchor="middle" fill="${on ? ARCH_ACTIVE : 'rgba(255,255,255,0.25)'}" font-size="11" font-family="Inter, Arial" font-weight="700" opacity="${on ? 0.9 : 0.4}">${escapeXml(label)}</text>` : ''}
-    `;
-  };
-
+  // ── Edge collections ──────────────────────────────────────────────────────
   const uniqPairs = (pairs) => {
-    const seen = new Set();
-    const out = [];
-    for (const [a,b] of pairs) {
+    const seen = new Set(), out = [];
+    for (const [a, b, ...rest] of pairs) {
       const k = `${a}->${b}`;
       if (seen.has(k)) continue;
       seen.add(k);
-      out.push([a,b]);
+      out.push([a, b, ...rest]);
     }
     return out;
   };
 
   const baselineEdges = (() => {
-    // Prefer explicit baseline edges; else use ONLY the primary path (spine).
-    // Branches are intentionally NOT part of baseline to keep the default view readable.
     if (layout.baselineEdges?.length) return uniqPairs(layout.baselineEdges);
     if (layout.primaryPath?.length) {
       const p = layout.primaryPath;
@@ -20148,52 +20246,41 @@ function renderArchitectureDiagram(sys, step) {
       return uniqPairs(edges);
     }
     const all = [];
-    // fallback: union all step edges for this product
     const steps = (flowForSystem(sys)?.steps || []);
     for (const s of steps) {
       const idx = steps.indexOf(s) + 1;
-      const edges = (layout.stepEdges ? layout.stepEdges(idx, sys) : []);
-      for (const [a,b] of edges) all.push([a,b]);
+      for (const [a, b] of (layout.stepEdges ? layout.stepEdges(idx, sys) : [])) all.push([a, b]);
     }
     return uniqPairs(all);
   })();
 
   const stepIdx = (PLAYGROUND.step ?? 0) + 1;
 
-  // 1) Baseline (faint dotted + non-glowing arrow overlay) for connected architecture graph
-  const baseline = baselineEdges
-    .map(([a, b]) => {
-      const na = layout.nodes[a];
-      const nb = layout.nodes[b];
-      if (!na || !nb) return '';
-      // Connect from right edge of source to left edge of target with padding
-      return arrowOrtho(na.x + 252, na.y + 30, nb.x - 12, nb.y + 30, '', false);
-    })
-    .join('');
+  const baselineSvg = baselineEdges.map(([a, b]) => {
+    const na = layout.nodes[a], nb = layout.nodes[b];
+    if (!na || !nb) return '';
+    const { x1, y1, x2, y2 } = edgePoints(na, nb);
+    return drawConn(x1, y1, x2, y2, '', false);
+  }).join('');
 
-  // 2) Active edges (solid/glow label already handled in arrowOrtho main stroke)
-  const activeEdges = (layout.stepEdges ? layout.stepEdges(stepIdx, sys) : [])
-    .map(([a, b, label]) => {
-      const na = layout.nodes[a];
-      const nb = layout.nodes[b];
-      if (!na || !nb) return '';
-      return arrowOrtho(na.x + 252, na.y + 30, nb.x - 12, nb.y + 30, label || '', true);
-    })
-    .join('');
+  const activeEdgeSvg = (layout.stepEdges ? layout.stepEdges(stepIdx, sys) : []).map(([a, b, lbl]) => {
+    const na = layout.nodes[a], nb = layout.nodes[b];
+    if (!na || !nb) return '';
+    const { x1, y1, x2, y2 } = edgePoints(na, nb);
+    return drawConn(x1, y1, x2, y2, lbl || '', true);
+  }).join('');
 
   const backend = layout.backend;
-  const backendBox = backend
-    ? box(backend.x, backend.y, backend.w, backend.h, layout.backendLabel || `${sys?.title || 'Product'} Backend`)
+  const backendSvg = backend
+    ? backendOutline(backend.x, backend.y, backend.w, backend.h, layout.backendLabel || `${sys?.title || 'Product'} Backend`)
     : '';
 
   svg.innerHTML = `
     <rect x="0" y="0" width="100%" height="100%" fill="rgba(0,0,0,0)"/>
-    ${backendBox}
-    ${Object.entries(layout.nodes)
-      .map(([id, nd]) => n(id, nd.x, nd.y, nd.label))
-      .join('')}
-    ${baseline}
-    ${activeEdges}
+    ${backendSvg}
+    ${baselineSvg}
+    ${activeEdgeSvg}
+    ${Object.entries(layout.nodes).map(([id, nd]) => renderNode(id, nd)).join('')}
   `;
 }
 
