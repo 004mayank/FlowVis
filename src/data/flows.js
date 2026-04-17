@@ -1109,38 +1109,38 @@ export const FLOWS = {
       {
         title: 'Merchant creates PaymentIntent',
         desc: 'Backend creates a PaymentIntent to represent the payment and required actions.',
-        active: ['client','api','payments'],
-        edges: [['client','api'], ['api','payments']]
+        active: ['merchant','api','pi'],
+        edges: [['merchant','api'], ['api','pi']]
       },
       {
         title: 'Collect payment method',
-        desc: 'Client collects card / wallet details and tokenizes securely.',
-        active: ['client','payments'],
-        edges: [['client','payments']]
+        desc: 'Client collects card / wallet details and tokenizes securely via Stripe.js.',
+        active: ['client','checkout','pi'],
+        edges: [['client','checkout'], ['checkout','pi']]
       },
       {
         title: 'Authenticate (3DS) if needed',
         desc: 'Risk checks may require customer authentication via 3DS flows.',
-        active: ['risk','auth'],
-        edges: [['payments','risk'], ['risk','auth']]
+        active: ['pi','sca','client'],
+        edges: [['pi','sca'], ['sca','client']]
       },
       {
         title: 'Authorize with network / issuer',
         desc: 'Stripe routes authorization to card networks and issuers.',
-        active: ['payments','external','ledger'],
-        edges: [['payments','external'], ['external','ledger']]
+        active: ['pi','acq','network','ledger'],
+        edges: [['pi','acq'], ['acq','network'], ['acq','ledger']]
       },
       {
         title: 'Confirm + webhooks',
-        desc: 'Stripe confirms status and notifies merchant via webhooks.',
-        active: ['api','notify'],
-        edges: [['ledger','api'], ['api','notify']]
+        desc: 'Stripe confirms status and notifies merchant via webhooks and events.',
+        active: ['api','events','webhook','merchant'],
+        edges: [['ledger','api'], ['api','events'], ['events','webhook'], ['webhook','merchant']]
       },
       {
         title: 'Capture / settlement',
         desc: 'Funds are captured and later settled; ledger records reconciled.',
-        active: ['ledger','analytics'],
-        edges: [['payments','ledger'], ['ledger','analytics']]
+        active: ['settle','ledger','reports'],
+        edges: [['pi','settle'], ['settle','ledger'], ['ledger','reports']]
       }
     ]
   },
@@ -1629,7 +1629,7 @@ export const FLOWS = {
         edges: [['monitor','compliance'], ['compliance','reports']]
       }
     ]
-  }
+  },
 
   paypal: {
     title: 'PayPal',
@@ -14013,7 +14013,7 @@ export const FLOWS = {
         edges: [['ledger','disputes'], ['disputes','support'], ['support','refunds'], ['refunds','recon']]
       }
     ]
-  }
+  },
 
   shopify: {
     title: 'Shopify',
@@ -14499,7 +14499,7 @@ export const FLOWS = {
         edges: [['tracking','returns'], ['returns','schedule'], ['returns','qc'], ['qc','refunds'], ['returns','support']]
       }
     ]
-  }
+  },
 
   ola: {
     title: 'Ola',
@@ -14973,7 +14973,7 @@ export const FLOWS = {
         edges: [['itinerary','support'], ['support','changes'], ['changes','refunds']]
       }
     ]
-  }
+  },
 
   spotify: {
     title: 'Spotify',
@@ -15401,7 +15401,7 @@ export const FLOWS = {
         edges: [['fanout','apps'], ['apps','webhooks'], ['webhooks','api'], ['apps','workflow']]
       }
     ]
-  }
+  },
 
   dropbox: {
     title: 'Dropbox',
@@ -15821,7 +15821,7 @@ export const FLOWS = {
         edges: [['client','metrics'], ['metrics','analytics'], ['analytics','support']]
       }
     ]
-  }
+  },
 
   discord: {
     title: 'Discord',
@@ -16241,7 +16241,7 @@ export const FLOWS = {
         edges: [['events','apps'], ['apps','webhooks'], ['webhooks','api']]
       }
     ]
-  }
+  },
 
   duolingo: {
     title: 'Duolingo',
@@ -16661,7 +16661,7 @@ export const FLOWS = {
         edges: [['orders','support'], ['support','refunds'], ['refunds','ledger']]
       }
     ]
-  }
+  },
 
   figma: {
     title: 'Figma',
@@ -17039,7 +17039,7 @@ export const FLOWS = {
         edges: [['api','ads'], ['ads','auction'], ['auction','analytics']]
       }
     ]
-  }
+  },
 
   'apple-photos': {
     title: 'Apple Photos',
@@ -17459,7 +17459,7 @@ export const FLOWS = {
         edges: [['payments','risk'], ['risk','fraud'], ['fraud','ledger']]
       }
     ]
-  }
+  },
 
   tinder: {
     title: 'Tinder',
@@ -17879,7 +17879,7 @@ export const FLOWS = {
         edges: [['sharing','notify'], ['notify','push'], ['push','client']]
       }
     ]
-  }
+  },
 
   klarna: {
     title: 'Klarna',
@@ -18299,7 +18299,7 @@ export const FLOWS = {
         edges: [['player','metrics'], ['metrics','analytics'], ['analytics','warehouse']]
       }
     ]
-  }
+  },
 
   headspace: {
     title: 'Headspace',
@@ -19139,7 +19139,7 @@ export const FLOWS = {
         edges: [['events','analytics'], ['analytics','warehouse'], ['warehouse','reports']]
       }
     ]
-  }
+  },
 
   postman: {
     title: 'Postman',
@@ -19559,7 +19559,7 @@ export const FLOWS = {
         edges: [['status','notify'], ['ledger','reports'], ['reports','exports']]
       }
     ]
-  }
+  },
 
   square: {
     title: 'Square',
@@ -19979,7 +19979,7 @@ export const FLOWS = {
         edges: [['client','disputes'], ['disputes','chargebacks'], ['chargebacks','ledger']]
       }
     ]
-  }
+  },
 
   'samsung-pay': {
     title: 'Samsung Pay',
@@ -20399,7 +20399,7 @@ export const FLOWS = {
         edges: [['status','notify'], ['notify','push'], ['notify','sms']]
       }
     ]
-  }
+  },
 
   niyo: {
     title: 'Niyo',
@@ -20819,7 +20819,7 @@ export const FLOWS = {
         edges: [['status','notify'], ['notify','push'], ['notify','email']]
       }
     ]
-  }
+  },
 
   aspiration: {
     title: 'Aspiration',
@@ -21239,7 +21239,7 @@ export const FLOWS = {
         edges: [['ledger','analytics'], ['analytics','warehouse'], ['analytics','notify']]
       }
     ]
-  }
+  },
 
   kraken: {
     title: 'Kraken',
@@ -21659,7 +21659,7 @@ export const FLOWS = {
         edges: [['client','returns'], ['returns','refunds'], ['refunds','ledger']]
       }
     ]
-  }
+  },
 
   noon: {
     title: 'Noon',
@@ -22079,7 +22079,7 @@ export const FLOWS = {
         edges: [['client','returns'], ['returns','refunds'], ['refunds','ledger']]
       }
     ]
-  }
+  },
 
   banggood: {
     title: 'Banggood',
@@ -22499,7 +22499,7 @@ export const FLOWS = {
         edges: [['client','returns'], ['returns','refunds'], ['refunds','ledger']]
       }
     ]
-  }
+  },
 
   'urban-ladder': {
     title: 'Urban Ladder',
@@ -22919,7 +22919,7 @@ export const FLOWS = {
         edges: [['client','returns'], ['returns','refunds'], ['refunds','ledger']]
       }
     ]
-  }
+  },
 
   'best-buy-app': {
     title: 'Best Buy App',
@@ -23339,7 +23339,7 @@ export const FLOWS = {
         edges: [['client','returns'], ['returns','refunds'], ['refunds','ledger']]
       }
     ]
-  }
+  },
 
   'net-a-porter': {
     title: 'Net-a-Porter',
@@ -23459,7 +23459,7 @@ export const FLOWS = {
       { title: 'Fulfillment and tracking', desc: 'Fulfillment ships; tracking updates; notifications sent.', active: ['fulfillment','tracking','notify'], edges: [['orders','fulfillment'], ['fulfillment','tracking'], ['tracking','notify']] },
       { title: 'Returns and refunds', desc: 'Returns handled; refunds adjust ledger.', active: ['returns','refunds','ledger'], edges: [['client','returns'], ['returns','refunds'], ['refunds','ledger']] }
     ]
-  }
+  },
 
   woocommerce: {
     title: 'WooCommerce',
@@ -23579,7 +23579,7 @@ export const FLOWS = {
       { title: 'Likes & comments', desc: 'Interactions stored; notifications sent.', active: ['comments','fanout','notify'], edges: [['client','comments'], ['comments','fanout'], ['fanout','notify']] },
       { title: 'Moderation', desc: 'Safety and reporting workflows applied.', active: ['reports','safety','store'], edges: [['client','reports'], ['reports','safety'], ['safety','store']] }
     ]
-  }
+  },
 
   flickr: {
     title: 'Flickr',
