@@ -1177,8 +1177,9 @@ function openPlayground(sys) {
   // - pinch/ctrl+wheel zooms
   wireWheelPanZoom(overlay);
 
-  // Deep dive widget + export
-  setupDeepDiveWidget(sys);
+  // Deep dive widget + export. Guarded so a failure here (e.g. a missing
+  // dd-* element) can never prevent the main flow from rendering.
+  try { setupDeepDiveWidget(sys); } catch (e) { console.error('[FlowVis] deep-dive init failed', e); }
   const exportBtn = document.getElementById('pg-export');
   if (exportBtn) exportBtn.onclick = () => exportPlaygroundPDF();
 
@@ -1186,8 +1187,8 @@ function openPlayground(sys) {
   const ddHost = document.getElementById('pg-deep-dives');
   if (ddHost) ddHost.innerHTML = '';
 
-  // Initial render
-  renderPlayground();
+  // Initial render. Guarded so one bad layout can't leave the canvas blank.
+  try { renderPlayground(); } catch (e) { console.error('[FlowVis] renderPlayground threw', e); }
 
   // Autoplay by default
   startPlayground();
