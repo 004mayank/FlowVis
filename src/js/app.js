@@ -20641,35 +20641,330 @@ function aiExampleChipsHtml() {
   }).join('');
 }
 
-function aiGenerate(prompt) {
-  if (!prompt.trim()) return;
-  var root = document.getElementById('ai-page');
-  var inputEl = root.querySelector('#ai-prompt');
-  var btn = root.querySelector('#ai-gen-btn');
-  var statusEl = root.querySelector('#ai-status');
-  if (btn) btn.disabled = true;
-  if (statusEl) { statusEl.textContent = 'Analysing prompt...'; statusEl.classList.add('visible'); }
-  setTimeout(function() {
-    var sys = aiFindBestMatch(prompt);
-    if (!sys) {
-      var suggestions = aiSuggestAlternatives(prompt);
-      var msg = suggestions.length
-        ? 'No exact match. Closest systems: ' + suggestions.join(', ')
-        : 'No match found. Try a known product like "Stripe", "Netflix", or "Uber".';
-      if (statusEl) { statusEl.textContent = msg; statusEl.classList.add('error'); }
-      if (btn) btn.disabled = false;
-      return;
+// === LLM-backed custom flow generation ===
+
+var AI_KEY_STATE = { provider: "anthropic", key: "" };
+
+function aiLoadKey() {
+  try {
+    var raw = localStorage.getItem("flowvis_llm_key");
+    if (!raw) return;
+    var obj = JSON.parse(raw);
+    if (obj && obj.key) {
+      AI_KEY_STATE.provider = obj.provider || "anthropic";
+      AI_KEY_STATE.key = obj.key;
     }
-    if (statusEl) { statusEl.textContent = 'Matched "' + sys.title + '" - building flow...'; statusEl.classList.remove('error'); }
-    setTimeout(function() {
-      AI_STATE.history.unshift({ id: 'ai-' + Date.now(), prompt: prompt.trim(), sys: sys, createdAt: new Date() });
-      if (inputEl) inputEl.value = '';
-      if (btn) btn.disabled = false;
-      if (statusEl) { statusEl.textContent = ''; statusEl.classList.remove('visible', 'error'); }
-      renderAI();
-    }, 480);
-  }, 600);
+  } catch (e) {}
 }
+
+function aiSaveKey(provider, key) {
+  AI_KEY_STATE.provider = provider;
+  AI_KEY_STATE.key = key;
+  try { localStorage.setItem("flowvis_llm_key", JSON.stringify({ provider: provider, key: key })); } catch (e) {}
+}
+
+function aiHasKey() {
+  return !!(AI_KEY_STATE.key && AI_KEY_STATE.key.length > 10);
+}
+
+function aiProviderLabel() {
+  return AI_KEY_STATE.provider === "openai" ? "OpenAI" : "Anthropic";
+}
+
+function aiOpenKeyModal() {
+  var existing = document.getElementById("ai-key-overlay");
+  if (existing) existing.remove();
+  var ov = document.createElement("div");
+  ov.id = "ai-key-overlay";
+  ov.className = "ai-key-overlay";
+  ov.innerHTML = ""
+    + "<div class=\"ai-key-card\">"
+    +   "<div class=\"ai-key-head\">"
+    +     "<div class=\"ai-key-title\">Connect your LLM</div>"
+    +     "<button class=\"ai-key-close\" id=\"ai-key-close\" aria-label=\"Close\">&times;</button>"
+    +   "</div>"
+    +   "<p class=\"ai-key-sub\">FlowVis calls the LLM directly from your browser using your key. The key is stored only in this browser (localStorage) and is never sent to FlowVis servers.</p>"
+    +   "<div class=\"ai-key-tabs\">"
+    +     "<button class=\"ai-key-tab\" data-p=\"anthropic\">Anthropic Claude</button>"
+    +     "<button class=\"ai-key-tab\" data-p=\"openai\">OpenAI GPT</button>"
+    +   "</div>"
+    +   "<input type=\"password\" id=\"ai-key-input\" class=\"ai-key-input\" placeholder=\"sk-ant-... or sk-...\" autocomplete=\"off\" spellcheck=\"false\"/>"
+    +   "<div class=\"ai-key-hint\" id=\"ai-key-hint\"></div>"
+    +   "<div class=\"ai-key-actions\">"
+    +     "<button class=\"ai-key-btn-secondary\" id=\"ai-key-cancel\">Cancel</button>"
+    +     "<button class=\"ai-key-btn-primary\" id=\"ai-key-save\">Save key</button>"
+    +   "</div>"
+    + "</div>";
+  document.body.appendChild(ov);
+
+  var provider = AI_KEY_STATE.provider || "anthropic";
+  var tabs = ov.querySelectorAll(".ai-key-tab");
+  var hint = ov.querySelector("#ai-key-hint");
+  var input = ov.querySelector("#ai-key-input");
+  if (AI_KEY_STATE.key) input.value = AI_KEY_STATE.key;
+  setTimeout(function() { input.focus(); }, 50);
+
+  function applyProvider() {
+    tabs.forEach(function(t) { t.classList.toggle("active", t.dataset.p === provider); });
+    hint.textContent = provider === "anthropic"
+      ? "Claude keys start with sk-ant-. Get one at console.anthropic.com."
+      : "OpenAI keys start with sk-. Get one at platform.openai.com.";
+  }
+  applyProvider();
+  tabs.forEach(function(t) {
+    t.addEventListener("click", function() { provider = t.dataset.p; applyProvider(); });
+  });
+
+  function close() { ov.remove(); }
+  ov.querySelector("#ai-key-close").addEventListener("click", close);
+  ov.querySelector("#ai-key-cancel").addEventListener("click", close);
+  ov.addEventListener("click", function(e) { if (e.target === ov) close(); });
+
+  ov.querySelector("#ai-key-save").addEventListener("click", function() {
+    var k = input.value.trim();
+    if (!k) { hint.textContent = "Paste an API key first."; return; }
+    aiSaveKey(provider, k);
+    close();
+    renderAI();
+  });
+
+  input.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") ov.querySelector("#ai-key-save").click();
+  });
+}
+
+function aiBuildPrompt(query) {
+  var system = "You are a distributed-systems expert. The user asks a specific question about how a system works. Build a CUSTOM flow that answers exactly that question — not a generic overview. Output one raw JSON object (no markdown, no prose) with this exact schema:\n\n"
+    + "{\n"
+    + "  \"title\": \"<concise flow title under 60 chars, phrased as the user question>\",\n"
+    + "  \"description\": \"<one-sentence overview>\",\n"
+    + "  \"category\": \"<payments|finance|crypto|ecommerce|travel|streaming|social|productivity|devtools|health|food|news|creator|education|gaming>\",\n"
+    + "  \"nodes\": [ {\"id\":\"<kebab-case id>\",\"label\":\"<<=18 chars>\",\"type\":\"<client|api|store|queue|cdn|external>\"} ],\n"
+    + "  \"steps\": [ {\"title\":\"<short>\",\"desc\":\"<1-2 sentences>\",\"active\":[\"id\",...],\"edges\":[[\"from\",\"to\",\"<short label>\"]]} ]\n"
+    + "}\n\n"
+    + "Constraints: 5-8 nodes, 4-7 steps. Every id used in active[] or edges[][0..1] MUST exist in nodes[]. Keep the flow scoped to the exact question. Return JSON ONLY.";
+  return { system: system, user: "Question: " + query };
+}
+
+async function aiCallLLM(prompts) {
+  var provider = AI_KEY_STATE.provider;
+  var key = AI_KEY_STATE.key;
+  if (provider === "openai") {
+    var res = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Authorization": "Bearer " + key },
+      body: JSON.stringify({
+        model: "gpt-4o-mini",
+        response_format: { type: "json_object" },
+        messages: [
+          { role: "system", content: prompts.system },
+          { role: "user", content: prompts.user }
+        ]
+      })
+    });
+    if (!res.ok) throw new Error("OpenAI " + res.status + ": " + (await res.text()).slice(0, 200));
+    var j = await res.json();
+    return j.choices[0].message.content;
+  }
+  var res2 = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-api-key": key,
+      "anthropic-version": "2023-06-01",
+      "anthropic-dangerous-direct-browser-access": "true"
+    },
+    body: JSON.stringify({
+      model: "claude-3-5-sonnet-latest",
+      max_tokens: 2048,
+      system: prompts.system,
+      messages: [{ role: "user", content: prompts.user }]
+    })
+  });
+  if (!res2.ok) throw new Error("Anthropic " + res2.status + ": " + (await res2.text()).slice(0, 200));
+  var j2 = await res2.json();
+  return j2.content[0].text;
+}
+
+function aiParseResponse(text) {
+  var t = (text || "").trim();
+  if (t.startsWith("```")) t = t.replace(/^```(?:json)?/i, "").replace(/```$/, "").trim();
+  var first = t.indexOf("{");
+  var last = t.lastIndexOf("}");
+  if (first >= 0 && last > first) t = t.slice(first, last + 1);
+  var data = JSON.parse(t);
+  if (!data || !data.title || !Array.isArray(data.nodes) || !Array.isArray(data.steps)) {
+    throw new Error("Invalid response shape from model");
+  }
+  var ids = new Set(data.nodes.map(function(n) { return n.id; }));
+  data.steps = data.steps.map(function(s) {
+    return {
+      title: s.title || "Step",
+      desc: s.desc || "",
+      active: (s.active || []).filter(function(x) { return ids.has(x); }),
+      edges: (s.edges || []).filter(function(e) { return e && ids.has(e[0]) && ids.has(e[1]); })
+    };
+  });
+  return data;
+}
+
+function aiAutoLayout(nodes, steps, viewW, viewH, padX, padY) {
+  var ids = nodes.map(function(n) { return n.id; });
+  var idSet = new Set(ids);
+  var adj = {}; var indeg = {};
+  ids.forEach(function(id) { adj[id] = []; indeg[id] = 0; });
+  steps.forEach(function(s) {
+    (s.edges || []).forEach(function(e) {
+      if (!idSet.has(e[0]) || !idSet.has(e[1]) || e[0] === e[1]) return;
+      if (adj[e[0]].indexOf(e[1]) === -1) { adj[e[0]].push(e[1]); indeg[e[1]]++; }
+    });
+  });
+  var layer = {};
+  var queue = [];
+  nodes.forEach(function(n) {
+    if (n.type === "client" || indeg[n.id] === 0) { layer[n.id] = 0; queue.push(n.id); }
+  });
+  if (queue.length === 0 && ids.length) { layer[ids[0]] = 0; queue.push(ids[0]); }
+  while (queue.length) {
+    var cur = queue.shift();
+    adj[cur].forEach(function(nx) {
+      var cand = (layer[cur] || 0) + 1;
+      if (layer[nx] === undefined || cand > layer[nx]) { layer[nx] = cand; queue.push(nx); }
+    });
+  }
+  ids.forEach(function(id) { if (layer[id] === undefined) layer[id] = 0; });
+  var maxLayer = 0;
+  Object.keys(layer).forEach(function(k) { if (layer[k] > maxLayer) maxLayer = layer[k]; });
+  var cols = {};
+  ids.forEach(function(id) { var L = layer[id]; (cols[L] = cols[L] || []).push(id); });
+  var pos = {};
+  var colCount = maxLayer + 1;
+  var usableW = viewW - padX * 2;
+  var usableH = viewH - padY * 2;
+  var dx = usableW / Math.max(1, colCount - 1 || 1);
+  Object.keys(cols).forEach(function(L) {
+    var arr = cols[L];
+    var gap = usableH / (arr.length + 1);
+    arr.forEach(function(id, i) {
+      var x = colCount === 1 ? viewW / 2 : padX + dx * Number(L);
+      var y = padY + gap * (i + 1);
+      pos[id] = { x: Math.round(x), y: Math.round(y) };
+    });
+  });
+  return pos;
+}
+
+function aiInjectFlow(data) {
+  var base = slugify("ai " + data.title).slice(0, 60) || ("ai-" + Date.now());
+  var id = base;
+  var n = 2;
+  while (FLOWS[id] || SYSTEM_LAYOUTS[id]) { id = base + "-" + n; n++; }
+
+  var viewW = 1000, viewH = 640;
+  var pos = aiAutoLayout(data.nodes, data.steps, viewW, viewH, 120, 90);
+  var layoutNodes = {};
+  data.nodes.forEach(function(nd) {
+    var p = pos[nd.id] || { x: viewW / 2, y: viewH / 2 };
+    var t = nd.type || "api";
+    if (!SYSTEM_NODE_COLORS[t]) t = "api";
+    layoutNodes[nd.id] = { x: p.x, y: p.y, label: nd.label, colorKey: t };
+  });
+  SYSTEM_LAYOUTS[id] = { viewBox: "0 0 " + viewW + " " + viewH, nodes: layoutNodes };
+
+  var archW = 1420, archH = 760;
+  var posA = aiAutoLayout(data.nodes, data.steps, archW - 320, archH - 220, 0, 0);
+  var archNodes = {};
+  data.nodes.forEach(function(nd) {
+    var p = posA[nd.id] || { x: (archW - 320) / 2, y: (archH - 220) / 2 };
+    var isClient = (nd.type === "client");
+    var x = isClient ? 40 : 320 + p.x;
+    var y = 110 + p.y;
+    archNodes[nd.id] = { x: x, y: y, label: nd.label };
+  });
+  ARCH_LAYOUTS[id] = {
+    viewBox: "0 0 " + archW + " " + archH,
+    backendLabel: (data.title || "Custom") + " Backend",
+    backend: { x: 300, y: 70, w: archW - 380, h: archH - 140 },
+    nodes: archNodes,
+    stepEdges: function(stepIdx) {
+      var s = (data.steps || [])[stepIdx];
+      if (!s) return [];
+      return (s.edges || []).map(function(e) { return [e[0], e[1], e[2] || ""]; });
+    }
+  };
+
+  FLOWS[id] = {
+    title: data.title,
+    steps: (data.steps || []).map(function(s) {
+      var edgeLabels = {};
+      (s.edges || []).forEach(function(e) { if (e[2]) edgeLabels[e[0] + "->" + e[1]] = e[2]; });
+      return {
+        title: s.title || "Step",
+        desc: s.desc || "",
+        active: s.active || [],
+        edges: (s.edges || []).map(function(e) { return [e[0], e[1]]; }),
+        edgeLabels: edgeLabels
+      };
+    })
+  };
+
+  return {
+    id: id,
+    title: data.title,
+    cat: data.category || "productivity",
+    tag: "AI Generated",
+    desc: data.description || ("Custom flow: " + data.title),
+    aiGenerated: true
+  };
+}
+
+async function aiGenerate(prompt) {
+  prompt = (prompt || "").trim();
+  if (!prompt) return;
+  var root = document.getElementById("ai-page");
+  if (!root) return;
+  var inputEl = root.querySelector("#ai-prompt");
+  var btn = root.querySelector("#ai-gen-btn");
+  var statusEl = root.querySelector("#ai-status");
+
+  if (!aiHasKey()) {
+    if (statusEl) {
+      statusEl.textContent = "Connect your LLM API key to generate custom flows.";
+      statusEl.classList.add("visible", "error");
+    }
+    aiOpenKeyModal();
+    return;
+  }
+
+  if (btn) btn.disabled = true;
+  if (statusEl) {
+    statusEl.classList.remove("error");
+    statusEl.classList.add("visible");
+    statusEl.textContent = "Asking " + aiProviderLabel() + "...";
+  }
+
+  try {
+    var prompts = aiBuildPrompt(prompt);
+    var raw = await aiCallLLM(prompts);
+    if (statusEl) statusEl.textContent = "Parsing response...";
+    var data = aiParseResponse(raw);
+    if (statusEl) statusEl.textContent = "Building flow...";
+    var sys = aiInjectFlow(data);
+    AI_STATE.history.unshift({ id: "ai-" + Date.now(), prompt: prompt, sys: sys, createdAt: new Date() });
+    if (inputEl) inputEl.value = "";
+    if (btn) btn.disabled = false;
+    if (statusEl) { statusEl.textContent = ""; statusEl.classList.remove("visible", "error"); }
+    renderAI();
+    openProduct(sys);
+  } catch (err) {
+    if (btn) btn.disabled = false;
+    if (statusEl) {
+      statusEl.textContent = "Error: " + (err && err.message ? err.message : String(err));
+      statusEl.classList.add("visible", "error");
+    }
+  }
+}
+
 
 function aiStartExampleRotation() {
   if (AI_STATE.exampleTimer) clearInterval(AI_STATE.exampleTimer);
@@ -20691,6 +20986,13 @@ function renderAI() {
     + '<div class="ai-hero-label">AI GENERATE</div>'
     + '<h2 class="ai-hero-title">Understand any system, instantly.</h2>'
     + '<p class="ai-hero-sub">Describe a product or flow in plain English - map the full system: steps, data flows, and architecture.</p>'
+    + '<div class="ai-key-status">'
+    +   (aiHasKey()
+        ? ('<span class="ai-key-dot on"></span>Connected to <b>' + aiProviderLabel() + '</b>'
+           + '<button class="ai-key-link" id="ai-key-change">Change key</button>')
+        : ('<span class="ai-key-dot"></span>No LLM key connected'
+           + '<button class="ai-key-link" id="ai-key-connect">Connect API key</button>'))
+    + '</div>'
     + '</div>'
     + '<div class="ai-input-wrap">'
     + '<div class="ai-input-box">'
@@ -20730,6 +21032,10 @@ function renderAI() {
       if (entry) openProduct(entry.sys);
     });
   });
+  var kConnect = root.querySelector('#ai-key-connect');
+  if (kConnect) kConnect.addEventListener('click', function() { aiOpenKeyModal(); });
+  var kChange = root.querySelector('#ai-key-change');
+  if (kChange) kChange.addEventListener('click', function() { aiOpenKeyModal(); });
   aiStartExampleRotation();
 }
 
@@ -20812,6 +21118,7 @@ function initNavBindings() {
 
 document.addEventListener('DOMContentLoaded', () => {
   mountShell();
+  aiLoadKey();
   renderHome();
   initNavBindings();
 
