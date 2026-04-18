@@ -20820,48 +20820,51 @@ function aiParseResponse(text) {
   return data;
 }
 
-function aiAutoLayout(nodes, steps, viewW, viewH, padX, padY) {
-  var ids = nodes.map(function(n) { return n.id; });
-  var idSet = new Set(ids);
-  var adj = {}; var indeg = {};
-  ids.forEach(function(id) { adj[id] = []; indeg[id] = 0; });
-  steps.forEach(function(s) {
+// Order nodes by their first appearance across steps (active[] then edges[]),
+// falling back to declared order. Produces a stable primary spine.
+function aiOrderNodes(nodes, steps) {
+  var firstSeen = {};
+  var counter = 0;
+  (steps || []).forEach(function(s) {
+    (s.active || []).forEach(function(id) { if (firstSeen[id] === undefined) firstSeen[id] = counter++; });
     (s.edges || []).forEach(function(e) {
-      if (!idSet.has(e[0]) || !idSet.has(e[1]) || e[0] === e[1]) return;
-      if (adj[e[0]].indexOf(e[1]) === -1) { adj[e[0]].push(e[1]); indeg[e[1]]++; }
+      if (e && e[0] !== undefined && firstSeen[e[0]] === undefined) firstSeen[e[0]] = counter++;
+      if (e && e[1] !== undefined && firstSeen[e[1]] === undefined) firstSeen[e[1]] = counter++;
     });
   });
-  var layer = {};
-  var queue = [];
-  nodes.forEach(function(n) {
-    if (n.type === "client" || indeg[n.id] === 0) { layer[n.id] = 0; queue.push(n.id); }
-  });
-  if (queue.length === 0 && ids.length) { layer[ids[0]] = 0; queue.push(ids[0]); }
-  while (queue.length) {
-    var cur = queue.shift();
-    adj[cur].forEach(function(nx) {
-      var cand = (layer[cur] || 0) + 1;
-      if (layer[nx] === undefined || cand > layer[nx]) { layer[nx] = cand; queue.push(nx); }
-    });
-  }
-  ids.forEach(function(id) { if (layer[id] === undefined) layer[id] = 0; });
-  var maxLayer = 0;
-  Object.keys(layer).forEach(function(k) { if (layer[k] > maxLayer) maxLayer = layer[k]; });
-  var cols = {};
-  ids.forEach(function(id) { var L = layer[id]; (cols[L] = cols[L] || []).push(id); });
+  (nodes || []).forEach(function(n) { if (firstSeen[n.id] === undefined) firstSeen[n.id] = counter++; });
+  return nodes.slice().sort(function(a, b) { return firstSeen[a.id] - firstSeen[b.id]; });
+}
+
+// 2D grid layout: spread nodes across columns (left-to-right in order),
+// stack into 2-3 rows if there are many nodes. Mirrors the feel of the
+// hand-crafted product layouts (varied x + y, room for dotted skeleton).
+function aiAutoLayout(nodes, steps, viewW, viewH, padX, padY) {
+  var ordered = aiOrderNodes(nodes, steps);
+  var n = ordered.length;
   var pos = {};
-  var colCount = maxLayer + 1;
+  if (n === 0) return pos;
+
+  var rows = n <= 5 ? 1 : (n <= 10 ? 2 : 3);
+  var cols = Math.ceil(n / rows);
   var usableW = viewW - padX * 2;
   var usableH = viewH - padY * 2;
-  var dx = usableW / Math.max(1, colCount - 1 || 1);
-  Object.keys(cols).forEach(function(L) {
-    var arr = cols[L];
-    var gap = usableH / (arr.length + 1);
-    arr.forEach(function(id, i) {
-      var x = colCount === 1 ? viewW / 2 : padX + dx * Number(L);
-      var y = padY + gap * (i + 1);
-      pos[id] = { x: Math.round(x), y: Math.round(y) };
-    });
+  var dx = cols > 1 ? usableW / (cols - 1) : 0;
+
+  // Row Y centers: single row → middle; two rows → 1/3 and 2/3; three rows → quarters.
+  var rowYs;
+  if (rows === 1) rowYs = [viewH / 2];
+  else if (rows === 2) rowYs = [padY + usableH * 0.32, padY + usableH * 0.68];
+  else rowYs = [padY + usableH * 0.22, padY + usableH * 0.50, padY + usableH * 0.78];
+
+  // Fill row-by-row so column order equals declared order (left-to-right spine).
+  var perRow = Math.ceil(n / rows);
+  ordered.forEach(function(node, i) {
+    var row = Math.floor(i / perRow);
+    var col = i % perRow;
+    var x = cols > 1 ? padX + dx * col : viewW / 2;
+    var y = rowYs[row] || rowYs[rowYs.length - 1];
+    pos[node.id] = { x: Math.round(x), y: Math.round(y) };
   });
   return pos;
 }
@@ -20869,11 +20872,29 @@ function aiAutoLayout(nodes, steps, viewW, viewH, padX, padY) {
 function aiInjectFlow(data) {
   var base = slugify("ai " + data.title).slice(0, 60) || ("ai-" + Date.now());
   var id = base;
-  var n = 2;
-  while (FLOWS[id] || SYSTEM_LAYOUTS[id]) { id = base + "-" + n; n++; }
+  var nn = 2;
+  while (FLOWS[id] || SYSTEM_LAYOUTS[id]) { id = base + "-" + nn; nn++; }
 
-  var viewW = 1000, viewH = 640;
-  var pos = aiAutoLayout(data.nodes, data.steps, viewW, viewH, 120, 90);
+  // Normalise steps: if a step has no edges, synthesise a chain from active[]
+  // so the diagram always shows movement between the lit-up nodes.
+  var steps = (data.steps || []).map(function(s) {
+    var active = (s.active || []).slice();
+    var edges = (s.edges || []).slice();
+    if (edges.length === 0 && active.length >= 2) {
+      for (var i = 0; i < active.length - 1; i++) edges.push([active[i], active[i + 1], ""]);
+    }
+    return { title: s.title || "Step", desc: s.desc || "", active: active, edges: edges };
+  });
+
+  // Primary spine: declared-order sequence, used for dotted baseline and arch primaryPath.
+  var ordered = aiOrderNodes(data.nodes, steps);
+  var primaryPath = ordered.map(function(n) { return n.id; });
+  var baselineEdges = [];
+  for (var k = 0; k < primaryPath.length - 1; k++) baselineEdges.push([primaryPath[k], primaryPath[k + 1]]);
+
+  // ── System diagram ──
+  var viewW = 1200, viewH = 700;
+  var pos = aiAutoLayout(data.nodes, steps, viewW, viewH, 140, 110);
   var layoutNodes = {};
   data.nodes.forEach(function(nd) {
     var p = pos[nd.id] || { x: viewW / 2, y: viewH / 2 };
@@ -20881,40 +20902,46 @@ function aiInjectFlow(data) {
     if (!SYSTEM_NODE_COLORS[t]) t = "api";
     layoutNodes[nd.id] = { x: p.x, y: p.y, label: nd.label, colorKey: t };
   });
-  SYSTEM_LAYOUTS[id] = { viewBox: "0 0 " + viewW + " " + viewH, nodes: layoutNodes };
+  SYSTEM_LAYOUTS[id] = {
+    viewBox: "0 0 " + viewW + " " + viewH,
+    nodes: layoutNodes,
+    baselineEdges: baselineEdges.slice()
+  };
 
+  // ── Architecture diagram ──
   var archW = 1420, archH = 760;
-  var posA = aiAutoLayout(data.nodes, data.steps, archW - 320, archH - 220, 0, 0);
+  var archPadX = 80, archPadY = 140;
+  var posA = aiAutoLayout(data.nodes, steps, archW, archH, archPadX, archPadY);
   var archNodes = {};
   data.nodes.forEach(function(nd) {
-    var p = posA[nd.id] || { x: (archW - 320) / 2, y: (archH - 220) / 2 };
-    var isClient = (nd.type === "client");
-    var x = isClient ? 40 : 320 + p.x;
-    var y = 110 + p.y;
-    archNodes[nd.id] = { x: x, y: y, label: nd.label };
+    var p = posA[nd.id] || { x: archW / 2, y: archH / 2 };
+    // Arch renderer uses top-left coords for boxes (w≈210, h≈54), so offset.
+    archNodes[nd.id] = { x: Math.round(p.x - 105), y: Math.round(p.y - 27), label: nd.label };
   });
   ARCH_LAYOUTS[id] = {
     viewBox: "0 0 " + archW + " " + archH,
     backendLabel: (data.title || "Custom") + " Backend",
-    backend: { x: 300, y: 70, w: archW - 380, h: archH - 140 },
+    backend: { x: 40, y: 70, w: archW - 80, h: archH - 140 },
     nodes: archNodes,
+    primaryPath: primaryPath.slice(),
     stepEdges: function(stepIdx) {
-      var s = (data.steps || [])[stepIdx];
+      var s = steps[stepIdx];
       if (!s) return [];
       return (s.edges || []).map(function(e) { return [e[0], e[1], e[2] || ""]; });
     }
   };
 
+  // ── FLOWS entry ──
   FLOWS[id] = {
     title: data.title,
-    steps: (data.steps || []).map(function(s) {
+    steps: steps.map(function(s) {
       var edgeLabels = {};
       (s.edges || []).forEach(function(e) { if (e[2]) edgeLabels[e[0] + "->" + e[1]] = e[2]; });
       return {
-        title: s.title || "Step",
-        desc: s.desc || "",
-        active: s.active || [],
-        edges: (s.edges || []).map(function(e) { return [e[0], e[1]]; }),
+        title: s.title,
+        desc: s.desc,
+        active: s.active,
+        edges: s.edges.map(function(e) { return [e[0], e[1]]; }),
         edgeLabels: edgeLabels
       };
     })
