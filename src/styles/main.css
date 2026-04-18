@@ -404,3 +404,11 @@ body{width:100%;}
 .ai-key-btn-secondary:hover{background:rgba(255,255,255,0.10);color:var(--text);}
 .ai-key-btn-primary{background:linear-gradient(135deg,#5b5df5,#9333ea);color:#fff;}
 .ai-key-btn-primary:hover{filter:brightness(1.1);}
+
+/* Animated trailing dots for AI status */
+.ai-dots{display:inline-block;margin-left:2px;}
+.ai-dots span{opacity:0;animation:ai-dot-blink 1.2s infinite;}
+.ai-dots span:nth-child(1){animation-delay:0s;}
+.ai-dots span:nth-child(2){animation-delay:0.2s;}
+.ai-dots span:nth-child(3){animation-delay:0.4s;}
+@keyframes ai-dot-blink{0%,20%{opacity:0;}50%{opacity:1;}100%{opacity:0;}}

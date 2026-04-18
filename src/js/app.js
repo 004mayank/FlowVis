@@ -20979,15 +20979,13 @@ async function aiGenerate(prompt) {
   if (statusEl) {
     statusEl.classList.remove("error");
     statusEl.classList.add("visible");
-    statusEl.textContent = "Asking " + aiProviderLabel() + "...";
+    statusEl.innerHTML = 'Generating flows<span class="ai-dots"><span>.</span><span>.</span><span>.</span></span>';
   }
 
   try {
     var prompts = aiBuildPrompt(prompt);
     var raw = await aiCallLLM(prompts);
-    if (statusEl) statusEl.textContent = "Parsing response...";
     var data = aiParseResponse(raw);
-    if (statusEl) statusEl.textContent = "Building flow...";
     var sys = aiInjectFlow(data);
     AI_STATE.history.unshift({ id: "ai-" + Date.now(), prompt: prompt, sys: sys, createdAt: new Date() });
     if (inputEl) inputEl.value = "";
@@ -21032,7 +21030,7 @@ function renderAI() {
         : ('<span class="ai-key-dot"></span>No LLM key connected'
            + '<button class="ai-key-link" id="ai-key-connect">Connect API key</button>'))
     + '</div>'
-    + '<div class="ai-key-privacy">Your API key is saved locally in this browser only. FlowVis has no backend and never has access to your credentials.</div>'
+    + '<div class="ai-key-privacy">Your API key is saved locally in this browser only. FlowVis never has access to your credentials.</div>'
     + '</div>'
     + '<div class="ai-input-wrap">'
     + '<div class="ai-input-box">'
