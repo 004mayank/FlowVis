@@ -724,6 +724,10 @@ function mountShell() {
             Architecture Flow
           </button>
         </div>
+        <button class="pg-export" id="pg-export" title="Export all flows to PDF">
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 13h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Export PDF
+        </button>
         <span class="pg-step-counter" id="pg-step-counter">Step 1 of 1</span>
       </div>
     </div>
@@ -792,6 +796,26 @@ function mountShell() {
           </div>
         </div>
       </main>
+    </div>
+
+    <div id="pg-deep-dives"></div>
+
+    <button class="dd-fab" id="dd-fab" style="display:none;" title="Ask a deep-dive question">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2 3h12v8H6l-3 3v-3H2V3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      Deep dive
+    </button>
+
+    <div class="dd-panel" id="dd-panel" style="display:none;">
+      <div class="dd-header">
+        <div class="dd-header-title" id="dd-header-title">Deep dive</div>
+        <button class="dd-close" id="dd-close" aria-label="Close">&times;</button>
+      </div>
+      <div class="dd-messages" id="dd-messages"></div>
+      <div class="dd-chips" id="dd-chips"></div>
+      <div class="dd-input">
+        <textarea id="dd-textarea" rows="1" placeholder="Ask about a specific flow..."></textarea>
+        <button class="dd-send" id="dd-send">Send</button>
+      </div>
     </div>
   `;
   body.appendChild(overlay);
@@ -1066,6 +1090,7 @@ function openPlayground(sys) {
   PLAYGROUND.sys = sys;
   PLAYGROUND.step = 0;
   PLAYGROUND.tab = 'system';
+  PLAYGROUND.deepDives = [];
   stopPlayground();
 
   const overlay = document.getElementById('playground');
@@ -1144,6 +1169,15 @@ function openPlayground(sys) {
   // - two-finger scroll pans the diagram
   // - pinch/ctrl+wheel zooms
   wireWheelPanZoom(overlay);
+
+  // Deep dive widget + export
+  setupDeepDiveWidget(sys);
+  const exportBtn = document.getElementById('pg-export');
+  if (exportBtn) exportBtn.onclick = () => exportPlaygroundPDF();
+
+  // Clear deep-dive host
+  const ddHost = document.getElementById('pg-deep-dives');
+  if (ddHost) ddHost.innerHTML = '';
 
   // Initial render
   renderPlayground();
@@ -1228,7 +1262,14 @@ function closePlayground() {
   stopPlayground();
   PLAYGROUND.open = false;
   PLAYGROUND.sys = null;
+  PLAYGROUND.deepDives = [];
   document.getElementById('playground').classList.remove('open');
+  const fab = document.getElementById('dd-fab');
+  const panel = document.getElementById('dd-panel');
+  if (fab) fab.style.display = 'none';
+  if (panel) panel.style.display = 'none';
+  const ddHost = document.getElementById('pg-deep-dives');
+  if (ddHost) ddHost.innerHTML = '';
 
   // Restore background scrolling
   const prev = document.body.dataset.prevOverflow;
@@ -2561,6 +2602,579 @@ function renderPreview() {
   list.querySelectorAll('.mini').forEach(b => b.addEventListener('click', () => openProductById(b.dataset.id)));
 }
 
+// ---------- Deep Dive (product-scoped chat + stacked flows) ----------
+
+// Sample prompts per product; fallback generic ones work for everything else.
+const DD_SAMPLES = {
+  stripe: ['How does Stripe handle refunds?', 'How does idempotency work in Stripe?', 'How does Stripe handle 3DS challenges?'],
+  whatsapp: ['How does WhatsApp handle group message fanout?', 'How does WhatsApp sync across devices?', 'How does WhatsApp handle media upload?'],
+  netflix: ['How does Netflix handle a play-start event?', 'How does ABR bitrate switching work?', 'How does Netflix recommend the next title?'],
+  uber: ['How does Uber handle surge pricing?', 'How does Uber match a driver?', 'How does Uber handle trip payment?'],
+  spotify: ['How does Spotify cache audio?', 'How does Discover Weekly build?', 'How does offline playback sync?'],
+};
+function ddSamplesFor(sys) {
+  const id = (sys?.id || '').toLowerCase();
+  if (DD_SAMPLES[id]) return DD_SAMPLES[id];
+  const t = sys?.title || 'this product';
+  return [
+    `How does ${t} handle retries?`,
+    `How does ${t} store data?`,
+    `How does ${t} handle failure modes?`,
+  ];
+}
+
+function setupDeepDiveWidget(sys) {
+  const fab = document.getElementById('dd-fab');
+  const panel = document.getElementById('dd-panel');
+  const title = document.getElementById('dd-header-title');
+  const messages = document.getElementById('dd-messages');
+  const chipsHost = document.getElementById('dd-chips');
+  const ta = document.getElementById('dd-textarea');
+  const send = document.getElementById('dd-send');
+  const closeBtn = document.getElementById('dd-close');
+  if (!fab || !panel) return;
+
+  // Reset state
+  fab.style.display = 'flex';
+  panel.style.display = 'none';
+  title.textContent = `Deep dive: ${sys.title}`;
+  messages.innerHTML = `<div class="dd-message assistant">Ask me about a specific ${escapeXml(sys.title)} flow. I'll generate a full system + architecture diagram for it below.</div>`;
+  chipsHost.innerHTML = ddSamplesFor(sys)
+    .map(s => `<button class="dd-chip" data-q="${escapeXml(s)}">${escapeXml(s)}</button>`).join('');
+  ta.value = '';
+  send.disabled = false;
+
+  fab.onclick = () => {
+    fab.style.display = 'none';
+    panel.style.display = 'flex';
+    setTimeout(() => ta.focus(), 20);
+  };
+  closeBtn.onclick = () => {
+    panel.style.display = 'none';
+    fab.style.display = 'flex';
+  };
+  chipsHost.querySelectorAll('.dd-chip').forEach(ch => {
+    ch.onclick = () => { ta.value = ch.dataset.q; ta.focus(); };
+  });
+  const doSend = () => {
+    const q = (ta.value || '').trim();
+    if (!q) return;
+    ta.value = '';
+    handleDeepDiveQuery(sys, q);
+  };
+  send.onclick = doSend;
+  ta.onkeydown = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); doSend(); }
+  };
+}
+
+function ddAppendMessage(role, text, opts) {
+  const messages = document.getElementById('dd-messages');
+  if (!messages) return null;
+  const div = document.createElement('div');
+  div.className = `dd-message ${role}${opts && opts.error ? ' error' : ''}`;
+  if (opts && opts.html) div.innerHTML = text;
+  else div.textContent = text;
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+  return div;
+}
+
+async function handleDeepDiveQuery(sys, q) {
+  ddAppendMessage('user', q);
+
+  if (!aiHasKey()) {
+    aiOpenKeyModal();
+    // Poll for key save, then continue automatically.
+    const startedAt = Date.now();
+    const interval = setInterval(() => {
+      if (aiHasKey()) {
+        clearInterval(interval);
+        runDeepDive(sys, q);
+      } else if (Date.now() - startedAt > 5 * 60 * 1000) {
+        clearInterval(interval);
+      }
+    }, 400);
+    return;
+  }
+  runDeepDive(sys, q);
+}
+
+async function runDeepDive(sys, q) {
+  const send = document.getElementById('dd-send');
+  if (send) send.disabled = true;
+
+  const loading = ddAppendMessage('assistant', 'Generating deep dive<span class="ai-dots"><span>.</span><span>.</span><span>.</span></span>', { html: true });
+
+  try {
+    const prompts = aiBuildDeepDivePrompt(sys, q);
+    const raw = await aiCallLLM(prompts);
+
+    // Try to detect explicit out-of-scope payload first.
+    let oos = null;
+    try {
+      const t = (raw || '').trim().replace(/^```(?:json)?/i, '').replace(/```$/, '').trim();
+      const first = t.indexOf('{'), last = t.lastIndexOf('}');
+      if (first >= 0 && last > first) {
+        const candidate = JSON.parse(t.slice(first, last + 1));
+        if (candidate && candidate.error === 'out-of-scope') oos = candidate;
+      }
+    } catch (_) { /* ignore */ }
+
+    if (oos) {
+      if (loading) loading.remove();
+      const hint = ddSamplesFor(sys).slice(0, 2).join(' | ');
+      ddAppendMessage('assistant', `That question doesn't seem related to ${sys.title}. Try something like: ${hint}`, { error: true });
+      return;
+    }
+
+    const data = aiParseResponse(raw);
+    const dd = buildDeepDive(sys, q, data);
+    PLAYGROUND.deepDives.push(dd);
+    renderDeepDiveSection(dd);
+    if (loading) loading.remove();
+    ddAppendMessage('assistant', `Generated flow: ${dd.title}`);
+  } catch (err) {
+    if (loading) loading.remove();
+    const msg = (err && /network|fetch/i.test(String(err.message || ''))) ? 'Network error. Please retry.'
+      : (err && /JSON|parse|shape/i.test(String(err.message || ''))) ? "I couldn't parse that response. Try rephrasing your question."
+      : `Error: ${err && err.message ? err.message : 'unknown'}`;
+    ddAppendMessage('assistant', msg, { error: true });
+  } finally {
+    if (send) send.disabled = false;
+  }
+}
+
+function aiBuildDeepDivePrompt(sys, userQuestion) {
+  const existing = (FLOWS[sys.id]?.steps || []).map(s => s.title).join(' | ') || '(none available)';
+  const system = "You are a senior distributed-systems architect explaining an internal subsystem of " + sys.title + ". "
+    + "The user asked: " + userQuestion + ". Produce a production-grade deep-dive flow showing ONLY how " + sys.title + " handles this specific scenario. "
+    + "Every node MUST be a real service/component in a " + sys.title + "-like architecture. Every step label and description must reference " + sys.title + " concretely. "
+    + "Do NOT produce a generic flow that could apply to any company.\n\n"
+    + "If the question is unrelated to " + sys.title + ", respond with a raw JSON object of shape {\"error\":\"out-of-scope\",\"reason\":\"...\"} and nothing else.\n\n"
+    + "Otherwise output ONE raw JSON object (no markdown fences) with this exact schema:\n"
+    + "{\n"
+    + "  \"title\": \"<concise flow title under 60 chars, phrased as the user question>\",\n"
+    + "  \"description\": \"<one-sentence overview>\",\n"
+    + "  \"nodes\": [ {\"id\":\"<kebab-case id>\",\"label\":\"<<=18 chars>\",\"type\":\"<client|api|store|queue|cdn|external>\"} ],\n"
+    + "  \"steps\": [ {\"title\":\"<short step title, <=50 chars>\",\"desc\":\"<3-5 sentences of real technical substance>\",\"active\":[\"id\",...],\"edges\":[[\"from\",\"to\",\"<short verb label>\"]]} ]\n"
+    + "}\n\n"
+    + "DEPTH REQUIREMENTS (apply ALL):\n"
+    + "- Minimum 8 steps, ideally 8-12. Break phases into granular sub-steps.\n"
+    + "- Minimum 7 nodes, ideally 8-14. Include caches, queues, metadata stores, CDNs, external services, observability.\n"
+    + "- Cover the happy path AND at least one retry/backpressure/failure handling step.\n"
+    + "- Each step's desc must be 3-5 sentences with protocols, data formats, invariants, consistency, retry, failure modes. No filler.\n"
+    + "- Each step should light up 2-5 nodes in active[] and have 1-4 edges.\n"
+    + "- Edge labels must be concrete verbs or payloads (e.g. \"POST /v1/charges\", \"enqueue\", \"ack\").\n\n"
+    + "CONTEXT — the product's top-level flow already covers these steps, so do NOT duplicate them; focus on the specific subsystem the user asked about:\n"
+    + existing + "\n\n"
+    + "VALIDITY: every id used in active[] or edges MUST exist in nodes[]. No duplicates. kebab-case ids only. Return JSON ONLY.";
+  return { system: system, user: "Question: " + userQuestion };
+}
+
+// Build a self-contained deep-dive object with its own precomputed layouts.
+function buildDeepDive(sys, question, data) {
+  const id = 'dd-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
+
+  // Normalise steps — if no edges, chain active[] like aiInjectFlow does.
+  const steps = (data.steps || []).map(s => {
+    const active = (s.active || []).slice();
+    let edges = (s.edges || []).slice();
+    if (edges.length === 0 && active.length >= 2) {
+      for (let i = 0; i < active.length - 1; i++) edges.push([active[i], active[i + 1], '']);
+    }
+    return { title: s.title || 'Step', desc: s.desc || '', active, edges };
+  });
+
+  const ordered = aiOrderNodes(data.nodes, steps);
+  const primaryPath = ordered.map(n => n.id);
+  const baselineEdges = [];
+  for (let k = 0; k < primaryPath.length - 1; k++) baselineEdges.push([primaryPath[k], primaryPath[k + 1]]);
+
+  // System layout
+  const sysW = 1200, sysH = 700;
+  const posS = aiAutoLayout(data.nodes, steps, sysW, sysH, 140, 110);
+  const sysNodes = {};
+  data.nodes.forEach(nd => {
+    const p = posS[nd.id] || { x: sysW / 2, y: sysH / 2 };
+    sysNodes[nd.id] = { x: p.x, y: p.y, label: nd.label };
+  });
+  const systemLayout = {
+    viewBox: `0 0 ${sysW} ${sysH}`,
+    nodes: sysNodes,
+    baselineEdges: baselineEdges.slice(),
+    primaryPath: primaryPath.slice(),
+  };
+
+  // Arch layout
+  const archW = 1420, archH = 760;
+  const posA = aiAutoLayout(data.nodes, steps, archW, archH, 120, 160);
+  const archNodes = {};
+  data.nodes.forEach(nd => {
+    const p = posA[nd.id] || { x: archW / 2, y: archH / 2 };
+    archNodes[nd.id] = { x: Math.round(p.x - 105), y: Math.round(p.y - 27), label: nd.label };
+  });
+  const archLayout = {
+    viewBox: `0 0 ${archW} ${archH}`,
+    backendLabel: `${sys.title} - ${data.title || 'Deep Dive'}`,
+    backend: { x: 40, y: 70, w: archW - 80, h: archH - 140 },
+    nodes: archNodes,
+    primaryPath: primaryPath.slice(),
+    stepEdges: (stepIdx) => {
+      const s = steps[stepIdx];
+      if (!s) return [];
+      return (s.edges || []).map(e => [e[0], e[1], e[2] || '']);
+    },
+  };
+
+  return {
+    id,
+    question,
+    title: data.title || question,
+    nodes: data.nodes,
+    steps,
+    stepIdx: 0,
+    tab: 'system',
+    collapsed: false,
+    systemLayout,
+    archLayout,
+  };
+}
+
+function renderDeepDiveSection(dd) {
+  const host = document.getElementById('pg-deep-dives');
+  if (!host) return;
+  const idx = PLAYGROUND.deepDives.indexOf(dd) + 1;
+  const sec = document.createElement('section');
+  sec.className = 'dd-section';
+  sec.dataset.id = dd.id;
+  sec.innerHTML = `
+    <div class="dd-section-header">
+      <span class="dd-chev">▼</span>
+      <span class="dd-section-title">Deep dive ${idx}: ${escapeXml(dd.question)}</span>
+      <div class="dd-section-tabs">
+        <button class="dd-section-tab active" data-tab="system">System</button>
+        <button class="dd-section-tab" data-tab="arch">Architecture</button>
+      </div>
+    </div>
+    <div class="dd-section-body">
+      <div class="dd-section-steps"></div>
+      <div class="dd-section-diagram">
+        <svg class="dd-svg" xmlns="http://www.w3.org/2000/svg"></svg>
+      </div>
+    </div>
+  `;
+  host.appendChild(sec);
+
+  const header = sec.querySelector('.dd-section-header');
+  const tabsEl = sec.querySelectorAll('.dd-section-tab');
+
+  // Toggle collapse when clicking on header text / chevron (but not tab buttons).
+  header.addEventListener('click', (e) => {
+    if (e.target.closest('.dd-section-tab')) return;
+    dd.collapsed = !dd.collapsed;
+    sec.classList.toggle('collapsed', dd.collapsed);
+  });
+
+  tabsEl.forEach(b => {
+    b.onclick = (e) => {
+      e.stopPropagation();
+      dd.tab = b.dataset.tab;
+      tabsEl.forEach(x => x.classList.toggle('active', x.dataset.tab === dd.tab));
+      renderDeepDiveDiagram(dd, sec);
+    };
+  });
+
+  renderDeepDiveStepList(dd, sec);
+  renderDeepDiveDiagram(dd, sec);
+
+  // Scroll into view
+  setTimeout(() => sec.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+}
+
+function renderDeepDiveStepList(dd, sec) {
+  const host = sec.querySelector('.dd-section-steps');
+  host.innerHTML = dd.steps.map((s, i) => (
+    `<button class="dd-step ${i === dd.stepIdx ? 'active' : ''}" data-i="${i}">
+      <span class="n">${i + 1}</span><span class="t">${escapeXml(s.title)}</span>
+    </button>`
+  )).join('');
+  host.querySelectorAll('[data-i]').forEach(b => {
+    b.onclick = (e) => {
+      e.stopPropagation();
+      dd.stepIdx = Number(b.dataset.i);
+      host.querySelectorAll('.dd-step').forEach(x => x.classList.toggle('active', Number(x.dataset.i) === dd.stepIdx));
+      renderDeepDiveDiagram(dd, sec);
+    };
+  });
+}
+
+function renderDeepDiveDiagram(dd, sec) {
+  const svg = sec.querySelector('.dd-svg');
+  if (!svg) return;
+  const step = dd.steps[dd.stepIdx];
+  if (dd.tab === 'system') renderDDSystem(svg, dd.systemLayout, step);
+  else renderDDArch(svg, dd.archLayout, step);
+}
+
+// Simplified system-style renderer against a provided SVG element.
+function renderDDSystem(svg, layout, step) {
+  svg.setAttribute('viewBox', layout.viewBox || '0 0 1200 700');
+  const active = new Set(step?.active || []);
+  const stepEdges = step?.edges || [];
+  const eActive = (a, b) => stepEdges.some(e => e[0] === a && e[1] === b);
+  const ACTIVE_COL = 'rgba(45,212,191,1)';
+  const NODE_R = 42;
+
+  const trimEdge = (x1, y1, x2, y2, r) => {
+    const dx = x2 - x1, dy = y2 - y1;
+    const len = Math.hypot(dx, dy);
+    if (len < r * 2 + 10) return null;
+    const nx = dx / len, ny = dy / len;
+    return [x1 + nx * r, y1 + ny * r, x2 - nx * r, y2 - ny * r];
+  };
+
+  const arrow = (x1, y1, x2, y2, on) => {
+    const base = `<path d="M${x1} ${y1} L ${x2} ${y2}" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="3 9"/>`;
+    if (!on) return base;
+    const mid = `ddm-${Math.abs((x1*13+y1*7+x2*11+y2*5)|0)}`;
+    return base + `<defs><marker id="${mid}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="${ACTIVE_COL}"/></marker></defs>
+      <path d="M${x1} ${y1} L ${x2} ${y2}" fill="none" stroke="${ACTIVE_COL}" stroke-width="2.5" stroke-linecap="round" opacity="0.88" marker-end="url(#${mid})"/>`;
+  };
+
+  const node = (id, cx, cy, label) => {
+    const on = active.has(id);
+    if (on) {
+      return `<circle cx="${cx}" cy="${cy}" r="${NODE_R + 10}" fill="none" stroke="${ACTIVE_COL}" stroke-width="1.5" opacity="0.35"/>
+        <circle cx="${cx}" cy="${cy}" r="${NODE_R}" fill="rgba(20,184,166,0.14)" stroke="${ACTIVE_COL}" stroke-width="2.5"/>
+        <text x="${cx}" y="${cy + 5}" text-anchor="middle" fill="rgba(230,255,252,0.96)" font-size="12" font-family="Inter, Arial" font-weight="800">${escapeXml(label)}</text>`;
+    }
+    return `<circle cx="${cx}" cy="${cy}" r="${NODE_R}" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
+      <text x="${cx}" y="${cy + 5}" text-anchor="middle" fill="rgba(240,240,248,0.72)" font-size="12" font-family="Inter, Arial" font-weight="600">${escapeXml(label)}</text>`;
+  };
+
+  let edgesSvg = '';
+  for (const [a, b] of layout.baselineEdges) {
+    const na = layout.nodes[a], nb = layout.nodes[b];
+    if (!na || !nb) continue;
+    const pts = trimEdge(na.x, na.y, nb.x, nb.y, NODE_R + 4);
+    if (!pts) continue;
+    edgesSvg += arrow(pts[0], pts[1], pts[2], pts[3], false);
+  }
+  for (const [a, b] of stepEdges) {
+    const na = layout.nodes[a], nb = layout.nodes[b];
+    if (!na || !nb) continue;
+    const pts = trimEdge(na.x, na.y, nb.x, nb.y, NODE_R + 4);
+    if (!pts) continue;
+    edgesSvg += arrow(pts[0], pts[1], pts[2], pts[3], eActive(a, b));
+  }
+
+  let nodesSvg = '';
+  for (const [id, nd] of Object.entries(layout.nodes)) {
+    nodesSvg += node(id, nd.x, nd.y, nd.label);
+  }
+
+  svg.innerHTML = `
+    <rect x="0" y="0" width="100%" height="100%" fill="rgba(0,0,0,0)"/>
+    ${edgesSvg}
+    ${nodesSvg}
+  `;
+}
+
+function renderDDArch(svg, layout, step) {
+  svg.setAttribute('viewBox', layout.viewBox || '0 0 1420 760');
+  const active = new Set(step?.active || []);
+  const ACTIVE_COL = 'rgba(45,212,191,1)';
+  const SVC_W = 210, SVC_H = 54;
+
+  const renderBox = (id, nd) => {
+    const on = active.has(id);
+    return `<rect x="${nd.x}" y="${nd.y}" width="${SVC_W}" height="${SVC_H}" rx="10"
+      fill="${on ? 'rgba(20,184,166,0.14)' : 'rgba(255,255,255,0.04)'}"
+      stroke="${on ? ACTIVE_COL : 'rgba(255,255,255,0.22)'}" stroke-width="${on ? 2 : 1.5}"/>
+      <text x="${nd.x + 12}" y="${nd.y + 33}" fill="${on ? 'rgba(230,255,252,0.96)' : 'rgba(240,240,248,0.72)'}"
+        font-size="13" font-family="Inter, Arial" font-weight="${on ? 800 : 600}">${escapeXml(nd.label)}</text>`;
+  };
+
+  const edgePoints = (na, nb) => {
+    const ax = na.x + SVC_W / 2, ay = na.y + SVC_H / 2;
+    const bx = nb.x + SVC_W / 2, by = nb.y + SVC_H / 2;
+    const dx = bx - ax, dy = by - ay;
+    let x1, y1, x2, y2;
+    if (Math.abs(dx) >= Math.abs(dy)) {
+      if (dx > 0) { x1 = na.x + SVC_W; x2 = nb.x; } else { x1 = na.x; x2 = nb.x + SVC_W; }
+      y1 = ay; y2 = by;
+    } else {
+      if (dy > 0) { y1 = na.y + SVC_H; y2 = nb.y; } else { y1 = na.y; y2 = nb.y + SVC_H; }
+      x1 = ax; x2 = bx;
+    }
+    return [x1, y1, x2, y2];
+  };
+
+  const drawConn = (x1, y1, x2, y2, label, on) => {
+    const uid = `ddc${Math.abs((x1*13+y1*7+x2*11+y2*5)|0)}`;
+    const adx = Math.abs(x2 - x1), ady = Math.abs(y2 - y1);
+    let d;
+    if (adx < 6 || ady < 6) d = `M${x1} ${y1} L ${x2} ${y2}`;
+    else { const mx = (x1 + x2) / 2; d = `M${x1} ${y1} L ${mx} ${y1} L ${mx} ${y2} L ${x2} ${y2}`; }
+    const labelSvg = label ? `<text x="${(x1+x2)/2}" y="${Math.min(y1,y2)-6}" text-anchor="middle" fill="${on ? ACTIVE_COL : 'rgba(255,255,255,0.35)'}" font-size="10" font-weight="700">${escapeXml(label)}</text>` : '';
+    return `<defs><marker id="${uid}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="${on ? ACTIVE_COL : 'rgba(255,255,255,0.25)'}"/></marker></defs>
+      <path d="${d}" fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="1.5" stroke-dasharray="4 7"/>
+      <path d="${d}" fill="none" stroke="${on ? ACTIVE_COL : 'rgba(255,255,255,0.20)'}" stroke-width="${on ? 2.5 : 1.5}" opacity="${on ? 0.9 : 0.55}" marker-end="url(#${uid})"/>
+      ${labelSvg}`;
+  };
+
+  const bk = layout.backend;
+  const backendSvg = bk
+    ? `<rect x="${bk.x}" y="${bk.y}" width="${bk.w}" height="${bk.h}" rx="18" fill="rgba(255,255,255,0.015)" stroke="rgba(255,255,255,0.13)" stroke-width="1.5" stroke-dasharray="6 5"/>
+       <text x="${bk.x + 16}" y="${bk.y + 24}" fill="rgba(240,240,248,0.45)" font-size="12" font-weight="700" letter-spacing="0.08em">${escapeXml((layout.backendLabel || '').toUpperCase())}</text>`
+    : '';
+
+  // Baseline from primaryPath
+  let baselineSvg = '';
+  const path = layout.primaryPath || [];
+  for (let i = 0; i < path.length - 1; i++) {
+    const na = layout.nodes[path[i]], nb = layout.nodes[path[i + 1]];
+    if (!na || !nb) continue;
+    const [x1, y1, x2, y2] = edgePoints(na, nb);
+    baselineSvg += drawConn(x1, y1, x2, y2, '', false);
+  }
+
+  const stepIdx = PLAYGROUND.deepDives.findIndex(dd => dd.archLayout === layout);
+  // The function signature takes our step object, so use active edges from step directly:
+  const activeEdges = (step?.edges || []);
+  let activeSvg = '';
+  for (const e of activeEdges) {
+    const na = layout.nodes[e[0]], nb = layout.nodes[e[1]];
+    if (!na || !nb) continue;
+    const [x1, y1, x2, y2] = edgePoints(na, nb);
+    activeSvg += drawConn(x1, y1, x2, y2, e[2] || '', true);
+  }
+
+  const nodesSvg = Object.entries(layout.nodes).map(([id, nd]) => renderBox(id, nd)).join('');
+
+  svg.innerHTML = `${backendSvg}${baselineSvg}${activeSvg}${nodesSvg}`;
+}
+
+// ---------- PDF export ----------
+async function exportPlaygroundPDF() {
+  if (typeof html2pdf === 'undefined') {
+    alert('PDF library failed to load. Please refresh and try again.');
+    return;
+  }
+  const sys = PLAYGROUND.sys;
+  if (!sys) return;
+
+  const host = document.createElement('div');
+  host.className = 'pdf-print-host';
+  document.body.appendChild(host);
+
+  const mainSteps = getProductSteps(sys) || [];
+  const sysLayout = systemLayoutFor(sys);
+  const archLayout = archLayoutFor(sys);
+
+  const stepsListHtml = (steps) => (
+    '<div class="pdf-step-list">' +
+    steps.map((s, i) => `<div class="pdf-step"><b>Step ${i + 1}</b> · ${escapeXml(s.title || '')}${s.desc ? ` — ${escapeXml(s.desc)}` : ''}</div>`).join('') +
+    '</div>'
+  );
+
+  // Build cover + main
+  const cover = document.createElement('div');
+  cover.className = 'pdf-page';
+  cover.innerHTML = `
+    <div class="pdf-brand">FlowVis</div>
+    <div class="pdf-title">${escapeXml(sys.title)}</div>
+    <div class="pdf-meta">How ${escapeXml(sys.title)} works · ${mainSteps.length} steps · generated ${new Date().toLocaleDateString()}</div>
+    <div class="pdf-section-title">Overview</div>
+    ${stepsListHtml(mainSteps)}
+  `;
+  host.appendChild(cover);
+
+  // Main system + arch pages — render via temporary svg
+  const renderToPdfSvg = (html, title, subtitle) => {
+    const page = document.createElement('div');
+    page.className = 'pdf-page';
+    page.innerHTML = `
+      <div class="pdf-brand">FlowVis</div>
+      <div class="pdf-section-title">${escapeXml(title)}</div>
+      ${subtitle ? `<div class="pdf-meta">${escapeXml(subtitle)}</div>` : ''}
+      <div class="pdf-diagram">${html}</div>
+    `;
+    return page;
+  };
+
+  // Helper: capture current main SVG state at a representative step (middle step)
+  const midIdx = Math.max(0, Math.floor(mainSteps.length / 2));
+  const savedStep = PLAYGROUND.step, savedTab = PLAYGROUND.tab;
+
+  // Render system diagram at mid step
+  PLAYGROUND.step = midIdx;
+  PLAYGROUND.tab = 'system';
+  if (sysLayout) renderSystemDiagram(sys, mainSteps[midIdx]);
+  const sysSvg = document.getElementById('wa-diagram');
+  if (sysSvg) {
+    const cloned = sysSvg.cloneNode(true);
+    cloned.removeAttribute('id');
+    host.appendChild(renderToPdfSvg(cloned.outerHTML, `${sys.title} — System Flow`, `Step ${midIdx + 1}: ${mainSteps[midIdx]?.title || ''}`));
+  }
+
+  // Render architecture diagram at mid step
+  PLAYGROUND.tab = 'arch';
+  if (archLayout) renderArchitectureDiagram(sys, mainSteps[midIdx]);
+  const archSvg = document.getElementById('wa-arch');
+  if (archSvg) {
+    const cloned = archSvg.cloneNode(true);
+    cloned.removeAttribute('id');
+    host.appendChild(renderToPdfSvg(cloned.outerHTML, `${sys.title} — Architecture Flow`, `Step ${midIdx + 1}: ${mainSteps[midIdx]?.title || ''}`));
+  }
+
+  // Restore main state
+  PLAYGROUND.step = savedStep;
+  PLAYGROUND.tab = savedTab;
+  renderPlayground();
+
+  // Deep dives
+  (PLAYGROUND.deepDives || []).forEach((dd, i) => {
+    const midDD = Math.max(0, Math.floor(dd.steps.length / 2));
+    const sysSvgEl = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    sysSvgEl.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    renderDDSystem(sysSvgEl, dd.systemLayout, dd.steps[midDD]);
+    const archSvgEl = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    archSvgEl.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    renderDDArch(archSvgEl, dd.archLayout, dd.steps[midDD]);
+
+    const page = document.createElement('div');
+    page.className = 'pdf-page';
+    page.innerHTML = `
+      <div class="pdf-brand">FlowVis</div>
+      <div class="pdf-section-title">Deep dive ${i + 1}</div>
+      <div class="pdf-question">${escapeXml(dd.question)}</div>
+      ${stepsListHtml(dd.steps)}
+      <div class="pdf-section-title">System Flow</div>
+      <div class="pdf-diagram">${sysSvgEl.outerHTML}</div>
+      <div class="pdf-section-title">Architecture Flow</div>
+      <div class="pdf-diagram">${archSvgEl.outerHTML}</div>
+    `;
+    host.appendChild(page);
+  });
+
+  try {
+    await html2pdf().set({
+      margin: [10, 10, 10, 10],
+      filename: `flowvis-${sys.id}-deepdive.pdf`,
+      image: { type: 'jpeg', quality: 0.92 },
+      html2canvas: { scale: 2, backgroundColor: '#0d0d12', useCORS: true },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+      pagebreak: { mode: ['css', 'legacy'] },
+    }).from(host).save();
+  } catch (e) {
+    alert('PDF export failed: ' + (e && e.message ? e.message : 'unknown error'));
+  } finally {
+    host.remove();
+  }
+}
+
 // ---------- Utils ----------
 function abbr(title) {
   const parts = title.replace(/\(.*?\)/g, '').trim().split(/\s+/).filter(Boolean);
@@ -2618,4 +3232,18 @@ document.addEventListener('DOMContentLoaded', () => {
   // Respect initial routing set by index.html (/?page=preview)
   const initial = window.__FLOWVIS_INITIAL_PAGE__;
   if (initial) showPage(initial);
+
+  // Hash-based routing for deep links like #/play/stripe
+  const handleHash = () => {
+    const h = window.location.hash || '';
+    const m = h.match(/^#\/play\/([\w-]+)/);
+    if (m) {
+      const id = m[1];
+      const sys = SYSTEMS.find(s => s.id === id)
+        || SYSTEMS.find(s => s.id === normId(id));
+      if (sys) openProduct(sys);
+    }
+  };
+  window.addEventListener('hashchange', handleHash);
+  handleHash();
 });
