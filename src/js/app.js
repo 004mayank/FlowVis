@@ -2630,7 +2630,14 @@ function ddSamplesFor(sys, lastQuery) {
   const flow = (typeof FLOWS !== 'undefined' && FLOWS[sys?.id]) || null;
   const layout = systemLayoutFor(sys);
   const stepTitles = (flow?.steps || []).map(s => s.title).filter(Boolean);
-  const nodeLabels = ((layout?.nodes) || [])
+  // layout.nodes is an object keyed by id, not an array
+  const rawNodes = layout?.nodes;
+  const nodeList = Array.isArray(rawNodes)
+    ? rawNodes
+    : (rawNodes && typeof rawNodes === 'object')
+      ? Object.entries(rawNodes).map(([id, n]) => ({ id, ...(n || {}) }))
+      : [];
+  const nodeLabels = nodeList
     .map(n => (n.label || n.id || '').toString().trim())
     .filter(l => l && l.length <= 32);
 
