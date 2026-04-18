@@ -724,11 +724,11 @@ function mountShell() {
             Architecture Flow
           </button>
         </div>
+        <span class="pg-step-counter" id="pg-step-counter">Step 1 of 1</span>
         <button class="pg-export" id="pg-export" title="Export all flows to PDF">
           <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 13h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
           Export PDF
         </button>
-        <span class="pg-step-counter" id="pg-step-counter">Step 1 of 1</span>
       </div>
     </div>
 
@@ -2783,7 +2783,9 @@ function buildDeepDive(sys, question, data) {
     if (edges.length === 0 && active.length >= 2) {
       for (let i = 0; i < active.length - 1; i++) edges.push([active[i], active[i + 1], '']);
     }
-    return { title: s.title || 'Step', desc: s.desc || '', active, edges };
+    // Accept both `desc` (our schema) and `description` (fallback from alt shapes)
+    const desc = s.desc || s.description || '';
+    return { title: s.title || 'Step', desc, active, edges };
   });
 
   const ordered = aiOrderNodes(data.nodes, steps);
@@ -2858,7 +2860,16 @@ function renderDeepDiveSection(dd) {
       </div>
     </div>
     <div class="dd-section-body">
-      <div class="dd-section-steps"></div>
+      <div class="dd-section-left">
+        <div class="dd-section-steps"></div>
+        <div class="dd-section-step-detail">
+          <div class="dd-section-detail-label">
+            <span class="dd-detail-dot"></span>
+            <span class="dd-detail-title">Step 1 Detail</span>
+          </div>
+          <div class="dd-detail-text"></div>
+        </div>
+      </div>
       <div class="dd-section-diagram">
         <svg class="dd-svg" xmlns="http://www.w3.org/2000/svg"></svg>
       </div>
@@ -2894,11 +2905,17 @@ function renderDeepDiveSection(dd) {
 
 function renderDeepDiveStepList(dd, sec) {
   const host = sec.querySelector('.dd-section-steps');
-  host.innerHTML = dd.steps.map((s, i) => (
-    `<button class="dd-step ${i === dd.stepIdx ? 'active' : ''}" data-i="${i}">
-      <span class="n">${i + 1}</span><span class="t">${escapeXml(s.title)}</span>
-    </button>`
-  )).join('');
+  host.innerHTML = dd.steps.map((s, i) => {
+    const sd = s.desc || '';
+    return `<button class="dd-step pg-step ${i === dd.stepIdx ? 'active' : ''}" data-i="${i}">
+      <span class="n">${i + 1}</span>
+      <span class="pg-step-body">
+        <span class="t">${escapeXml(s.title)}</span>
+        ${sd ? `<span class="pg-step-desc">${escapeXml(sd)}</span>` : ''}
+      </span>
+      <span class="pg-step-chevron">\u203A</span>
+    </button>`;
+  }).join('');
   host.querySelectorAll('[data-i]').forEach(b => {
     b.onclick = (e) => {
       e.stopPropagation();
@@ -2915,6 +2932,12 @@ function renderDeepDiveDiagram(dd, sec) {
   const step = dd.steps[dd.stepIdx];
   if (dd.tab === 'system') renderDDSystem(svg, dd.systemLayout, step);
   else renderDDArch(svg, dd.archLayout, step);
+
+  // Update step detail panel (mirrors main #pg-step-detail)
+  const detailTitle = sec.querySelector('.dd-detail-title');
+  const detailText = sec.querySelector('.dd-detail-text');
+  if (detailTitle) detailTitle.textContent = `Step ${dd.stepIdx + 1} Detail`;
+  if (detailText) detailText.textContent = step?.desc || '';
 }
 
 // Simplified system-style renderer against a provided SVG element.
@@ -3065,106 +3088,103 @@ async function exportPlaygroundPDF() {
   const sys = PLAYGROUND.sys;
   if (!sys) return;
 
+  const btn = document.getElementById('pg-export');
+  if (btn) { btn.disabled = true; btn.textContent = 'Generating PDF…'; }
+
+  // Host is briefly visible on-screen so html2canvas can reliably measure.
   const host = document.createElement('div');
   host.className = 'pdf-print-host';
+  host.style.cssText = 'position:fixed;left:0;top:0;width:820px;max-width:820px;z-index:99999;background:#0d0d12;color:#f0f0f8;padding:28px;font-family:Inter,sans-serif;overflow:hidden;opacity:0;pointer-events:none;';
   document.body.appendChild(host);
 
   const mainSteps = getProductSteps(sys) || [];
-  const sysLayout = systemLayoutFor(sys);
-  const archLayout = archLayoutFor(sys);
+  const mainSysLayout = normalizeSysLayoutForPdf(systemLayoutFor(sys));
+  const mainArchLayout = normalizeArchLayoutForPdf(archLayoutFor(sys), sys);
 
-  const stepsListHtml = (steps) => (
-    '<div class="pdf-step-list">' +
-    steps.map((s, i) => `<div class="pdf-step"><b>Step ${i + 1}</b> · ${escapeXml(s.title || '')}${s.desc ? ` — ${escapeXml(s.desc)}` : ''}</div>`).join('') +
-    '</div>'
-  );
+  // Build a single SVG for a flow step and return its outerHTML. Uses renderDD* so it's
+  // self-contained, independent of live DOM state, and matches the on-screen visuals.
+  const buildSysSvg = (layout, step) => {
+    if (!layout) return '';
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    svg.setAttribute('width', '760');
+    svg.setAttribute('height', '420');
+    renderDDSystem(svg, layout, step);
+    return svg.outerHTML;
+  };
+  const buildArchSvg = (layout, step) => {
+    if (!layout) return '';
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    svg.setAttribute('width', '760');
+    svg.setAttribute('height', '420');
+    renderDDArch(svg, layout, step);
+    return svg.outerHTML;
+  };
 
-  // Build cover + main
+  // Cover
   const cover = document.createElement('div');
   cover.className = 'pdf-page';
   cover.innerHTML = `
     <div class="pdf-brand">FlowVis</div>
     <div class="pdf-title">${escapeXml(sys.title)}</div>
     <div class="pdf-meta">How ${escapeXml(sys.title)} works · ${mainSteps.length} steps · generated ${new Date().toLocaleDateString()}</div>
-    <div class="pdf-section-title">Overview</div>
-    ${stepsListHtml(mainSteps)}
   `;
   host.appendChild(cover);
 
-  // Main system + arch pages — render via temporary svg
-  const renderToPdfSvg = (html, title, subtitle) => {
+  // Main flow — one page per step with System + Architecture
+  mainSteps.forEach((step, i) => {
     const page = document.createElement('div');
     page.className = 'pdf-page';
     page.innerHTML = `
       <div class="pdf-brand">FlowVis</div>
-      <div class="pdf-section-title">${escapeXml(title)}</div>
-      ${subtitle ? `<div class="pdf-meta">${escapeXml(subtitle)}</div>` : ''}
-      <div class="pdf-diagram">${html}</div>
-    `;
-    return page;
-  };
-
-  // Helper: capture current main SVG state at a representative step (middle step)
-  const midIdx = Math.max(0, Math.floor(mainSteps.length / 2));
-  const savedStep = PLAYGROUND.step, savedTab = PLAYGROUND.tab;
-
-  // Render system diagram at mid step
-  PLAYGROUND.step = midIdx;
-  PLAYGROUND.tab = 'system';
-  if (sysLayout) renderSystemDiagram(sys, mainSteps[midIdx]);
-  const sysSvg = document.getElementById('wa-diagram');
-  if (sysSvg) {
-    const cloned = sysSvg.cloneNode(true);
-    cloned.removeAttribute('id');
-    host.appendChild(renderToPdfSvg(cloned.outerHTML, `${sys.title} — System Flow`, `Step ${midIdx + 1}: ${mainSteps[midIdx]?.title || ''}`));
-  }
-
-  // Render architecture diagram at mid step
-  PLAYGROUND.tab = 'arch';
-  if (archLayout) renderArchitectureDiagram(sys, mainSteps[midIdx]);
-  const archSvg = document.getElementById('wa-arch');
-  if (archSvg) {
-    const cloned = archSvg.cloneNode(true);
-    cloned.removeAttribute('id');
-    host.appendChild(renderToPdfSvg(cloned.outerHTML, `${sys.title} — Architecture Flow`, `Step ${midIdx + 1}: ${mainSteps[midIdx]?.title || ''}`));
-  }
-
-  // Restore main state
-  PLAYGROUND.step = savedStep;
-  PLAYGROUND.tab = savedTab;
-  renderPlayground();
-
-  // Deep dives
-  (PLAYGROUND.deepDives || []).forEach((dd, i) => {
-    const midDD = Math.max(0, Math.floor(dd.steps.length / 2));
-    const sysSvgEl = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    sysSvgEl.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-    renderDDSystem(sysSvgEl, dd.systemLayout, dd.steps[midDD]);
-    const archSvgEl = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    archSvgEl.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-    renderDDArch(archSvgEl, dd.archLayout, dd.steps[midDD]);
-
-    const page = document.createElement('div');
-    page.className = 'pdf-page';
-    page.innerHTML = `
-      <div class="pdf-brand">FlowVis</div>
-      <div class="pdf-section-title">Deep dive ${i + 1}</div>
-      <div class="pdf-question">${escapeXml(dd.question)}</div>
-      ${stepsListHtml(dd.steps)}
-      <div class="pdf-section-title">System Flow</div>
-      <div class="pdf-diagram">${sysSvgEl.outerHTML}</div>
-      <div class="pdf-section-title">Architecture Flow</div>
-      <div class="pdf-diagram">${archSvgEl.outerHTML}</div>
+      <div class="pdf-section-title">${escapeXml(sys.title)} — Step ${i + 1} of ${mainSteps.length}</div>
+      <div class="pdf-step-title">${escapeXml(step.title || '')}</div>
+      ${step.desc ? `<div class="pdf-step-desc">${escapeXml(step.desc)}</div>` : ''}
+      ${mainSysLayout ? `<div class="pdf-sub">System Flow</div><div class="pdf-diagram">${buildSysSvg(mainSysLayout, step)}</div>` : ''}
+      ${mainArchLayout ? `<div class="pdf-sub">Architecture Flow</div><div class="pdf-diagram">${buildArchSvg(mainArchLayout, step)}</div>` : ''}
     `;
     host.appendChild(page);
   });
+
+  // Deep dives — cover page + one page per step
+  (PLAYGROUND.deepDives || []).forEach((dd, ddIdx) => {
+    const ddCover = document.createElement('div');
+    ddCover.className = 'pdf-page';
+    ddCover.innerHTML = `
+      <div class="pdf-brand">FlowVis</div>
+      <div class="pdf-section-title">Deep dive ${ddIdx + 1}</div>
+      <div class="pdf-question">${escapeXml(dd.question)}</div>
+      <div class="pdf-meta">${dd.steps.length} steps</div>
+    `;
+    host.appendChild(ddCover);
+
+    dd.steps.forEach((step, i) => {
+      const page = document.createElement('div');
+      page.className = 'pdf-page';
+      page.innerHTML = `
+        <div class="pdf-brand">FlowVis</div>
+        <div class="pdf-section-title">Deep dive ${ddIdx + 1} — Step ${i + 1} of ${dd.steps.length}</div>
+        <div class="pdf-step-title">${escapeXml(step.title || '')}</div>
+        ${step.desc ? `<div class="pdf-step-desc">${escapeXml(step.desc)}</div>` : ''}
+        <div class="pdf-sub">System Flow</div>
+        <div class="pdf-diagram">${buildSysSvg(dd.systemLayout, step)}</div>
+        <div class="pdf-sub">Architecture Flow</div>
+        <div class="pdf-diagram">${buildArchSvg(dd.archLayout, step)}</div>
+      `;
+      host.appendChild(page);
+    });
+  });
+
+  // Let layout settle
+  await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
 
   try {
     await html2pdf().set({
       margin: [10, 10, 10, 10],
       filename: `flowvis-${sys.id}-deepdive.pdf`,
       image: { type: 'jpeg', quality: 0.92 },
-      html2canvas: { scale: 2, backgroundColor: '#0d0d12', useCORS: true },
+      html2canvas: { scale: 2, backgroundColor: '#0d0d12', useCORS: true, logging: false, windowWidth: 820 },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
       pagebreak: { mode: ['css', 'legacy'] },
     }).from(host).save();
@@ -3172,7 +3192,34 @@ async function exportPlaygroundPDF() {
     alert('PDF export failed: ' + (e && e.message ? e.message : 'unknown error'));
   } finally {
     host.remove();
+    if (btn) { btn.disabled = false; btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 13h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Export PDF'; }
   }
+}
+
+// Ensure a main-flow system layout has the fields renderDDSystem expects.
+function normalizeSysLayoutForPdf(layout) {
+  if (!layout) return null;
+  const nodes = {};
+  for (const [id, n] of Object.entries(layout.nodes || {})) nodes[id] = { x: n.x, y: n.y, label: n.label };
+  let baselineEdges = (layout.baselineEdges || []).map(e => [e[0], e[1]]);
+  if (!baselineEdges.length && Array.isArray(layout.primaryPath)) {
+    for (let i = 0; i < layout.primaryPath.length - 1; i++) baselineEdges.push([layout.primaryPath[i], layout.primaryPath[i + 1]]);
+  }
+  return { viewBox: layout.viewBox || '0 0 1200 700', nodes, baselineEdges, primaryPath: (layout.primaryPath || []).slice() };
+}
+
+// Ensure a main-flow arch layout has the fields renderDDArch expects; bake stepEdges onto each step.
+function normalizeArchLayoutForPdf(layout, sys) {
+  if (!layout) return null;
+  const nodes = {};
+  for (const [id, n] of Object.entries(layout.nodes || {})) nodes[id] = { x: n.x, y: n.y, label: n.label };
+  return {
+    viewBox: layout.viewBox || '0 0 1420 760',
+    backend: layout.backend,
+    backendLabel: layout.backendLabel || `${sys?.title || ''} Backend`,
+    nodes,
+    primaryPath: (layout.primaryPath || []).slice(),
+  };
 }
 
 // ---------- Utils ----------
