@@ -8,7 +8,7 @@
 
 import { SYSTEMS, addSystem, CATEGORIES, slugify } from '../data/systems.js';
 import { logoForSystemId } from '../data/logos.js';
-import { flowForSystem } from '../data/flows.js';
+import { flowForSystem, FLOWS } from '../data/flows.js';
 
 // ---------- Product seed (from user paste) ----------
 const PRODUCT_LINES = `Stripe
@@ -20683,7 +20683,7 @@ function aiOpenKeyModal() {
     +     "<div class=\"ai-key-title\">Connect your LLM</div>"
     +     "<button class=\"ai-key-close\" id=\"ai-key-close\" aria-label=\"Close\">&times;</button>"
     +   "</div>"
-    +   "<p class=\"ai-key-sub\">FlowVis calls the LLM directly from your browser using your key. The key is stored only in this browser (localStorage) and is never sent to FlowVis servers.</p>"
+    +   "<p class=\"ai-key-sub\"><b>Your key stays on your device.</b> It is saved only in this browser (localStorage) and sent directly from your browser to the LLM provider. FlowVis has no backend and never sees, stores, or has access to your key or any other credentials.</p>"
     +   "<div class=\"ai-key-tabs\">"
     +     "<button class=\"ai-key-tab\" data-p=\"anthropic\">Anthropic Claude</button>"
     +     "<button class=\"ai-key-tab\" data-p=\"openai\">OpenAI GPT</button>"
@@ -20993,6 +20993,7 @@ function renderAI() {
         : ('<span class="ai-key-dot"></span>No LLM key connected'
            + '<button class="ai-key-link" id="ai-key-connect">Connect API key</button>'))
     + '</div>'
+    + '<div class="ai-key-privacy">Your API key is saved locally in this browser only. FlowVis has no backend and never has access to your credentials.</div>'
     + '</div>'
     + '<div class="ai-input-wrap">'
     + '<div class="ai-input-box">'

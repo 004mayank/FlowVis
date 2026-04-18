@@ -32,7 +32,12 @@ body{scrollbar-width:none;}
   overflow:hidden;padding:64px 0;margin-top:0;}
 .hero-inner{max-width:1280px;margin:0 auto;padding:0 32px;}
 @media (max-width: 640px){.hero-inner{padding:0 12px;}}
-.hero-bg{position:absolute;inset:0;pointer-events:none;}
+.hero-bg{position:absolute;inset:0;pointer-events:none;z-index:0;}
+.hero::before{content:'';position:absolute;left:0;right:0;top:0;height:520px;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 60% 70% at 55% 10%, rgba(34,197,94,0.42), transparent 65%),
+    radial-gradient(ellipse 50% 60% at 15% 0%, rgba(91,93,245,0.38), transparent 65%),
+    radial-gradient(ellipse 55% 60% at 92% 5%, rgba(147,51,234,0.42), transparent 65%);}
 .hero::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:42px;pointer-events:none;
   background:linear-gradient(to bottom, rgba(13,13,18,0) 0%, rgba(13,13,18,1) 100%);
   z-index:1;}
@@ -55,10 +60,10 @@ body{scrollbar-width:none;}
 /* (removed) chip row */
 
 /* Particles (simple) */
-.particle{position:absolute;border-radius:999px;filter:blur(0.2px);opacity:0.5;mix-blend-mode:screen;}
-.p1{width:180px;height:180px;left:-40px;top:-40px;background:radial-gradient(circle at 30% 30%, rgba(91,93,245,0.9), rgba(91,93,245,0));}
-.p2{width:220px;height:220px;right:-60px;top:40px;background:radial-gradient(circle at 30% 30%, rgba(147,51,234,0.85), rgba(147,51,234,0));}
-.p3{width:260px;height:260px;left:40%;top:-90px;background:radial-gradient(circle at 30% 30%, rgba(34,197,94,0.55), rgba(34,197,94,0));}
+.particle{position:absolute;border-radius:999px;filter:blur(40px);opacity:0.6;mix-blend-mode:screen;pointer-events:none;}
+.p1{width:260px;height:260px;left:-60px;top:40px;background:radial-gradient(circle at 30% 30%, rgba(91,93,245,0.9), rgba(91,93,245,0));}
+.p2{width:280px;height:280px;right:-80px;top:120px;background:radial-gradient(circle at 30% 30%, rgba(147,51,234,0.85), rgba(147,51,234,0));}
+.p3{width:420px;height:420px;left:38%;top:20px;background:radial-gradient(circle at 30% 30%, rgba(34,197,94,0.65), rgba(34,197,94,0));}
 .p4{width:220px;height:220px;left:20%;bottom:-120px;background:radial-gradient(circle at 30% 30%, rgba(20,184,166,0.55), rgba(20,184,166,0));}
 .p5{width:200px;height:200px;right:14%;bottom:-120px;background:radial-gradient(circle at 30% 30%, rgba(236,72,153,0.45), rgba(236,72,153,0));}
 
