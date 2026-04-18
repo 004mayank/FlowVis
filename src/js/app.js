@@ -3164,36 +3164,78 @@ async function exportPlaygroundPDF() {
   const btn = document.getElementById('pg-export');
   if (btn) { btn.disabled = true; btn.textContent = 'Generating PDF…'; }
 
-  // Host is briefly visible on-screen so html2canvas can reliably measure.
+  // Host is positioned far off-screen (not hidden via opacity/visibility, which
+  // html2canvas tends to capture as blank) and kept fully opaque so rasterizing
+  // produces real pixels.
   const host = document.createElement('div');
   host.className = 'pdf-print-host';
-  host.style.cssText = 'position:fixed;left:0;top:0;width:820px;max-width:820px;z-index:99999;background:#0d0d12;color:#f0f0f8;padding:28px;font-family:Inter,sans-serif;overflow:hidden;opacity:0;pointer-events:none;';
+  // html2canvas renders elements at their actual position; fully off-screen
+  // hosts often come back blank. Put the host on-screen (covering the playground
+  // briefly) so capture is reliable, then remove it when done.
+  host.style.cssText = 'position:fixed;left:0;top:0;width:820px;max-width:820px;min-height:100vh;background:#0d0d12;color:#f0f0f8;padding:28px;font-family:Inter,sans-serif;opacity:1;z-index:999999;overflow:hidden;';
   document.body.appendChild(host);
 
   const mainSteps = getProductSteps(sys) || [];
   const mainSysLayout = normalizeSysLayoutForPdf(systemLayoutFor(sys));
   const mainArchLayout = normalizeArchLayoutForPdf(archLayoutFor(sys), sys);
 
-  // Build a single SVG for a flow step and return its outerHTML. Uses renderDD* so it's
-  // self-contained, independent of live DOM state, and matches the on-screen visuals.
-  const buildSysSvg = (layout, step) => {
+  // Build a combined-flow step that lights up every active node / edge across
+  // the full flow at once, so the diagram in the PDF shows the whole picture
+  // rather than a single frame.
+  const mergeStepsForDiagram = (steps) => {
+    const active = new Set();
+    const edges = [];
+    const seen = new Set();
+    for (const s of (steps || [])) {
+      for (const a of (s.active || [])) active.add(a);
+      for (const e of (s.edges || [])) {
+        const k = `${e[0]}->${e[1]}`;
+        if (seen.has(k)) continue;
+        seen.add(k);
+        edges.push(e);
+      }
+    }
+    return { title: 'All steps', active: [...active], edges };
+  };
+
+  const buildSvg = (layout, step, renderer, height = 420) => {
     if (!layout) return '';
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
     svg.setAttribute('width', '760');
-    svg.setAttribute('height', '420');
-    renderDDSystem(svg, layout, step);
+    svg.setAttribute('height', String(height));
+    svg.style.display = 'block';
+    renderer(svg, layout, step);
     return svg.outerHTML;
   };
-  const buildArchSvg = (layout, step) => {
-    if (!layout) return '';
-    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-    svg.setAttribute('width', '760');
-    svg.setAttribute('height', '420');
-    renderDDArch(svg, layout, step);
-    return svg.outerHTML;
-  };
+
+  const stepListHtml = (steps) => (steps || []).map((s, i) => `
+    <div class="pdf-step"><b>${i + 1}. ${escapeXml(s.title || '')}</b>${s.desc ? `<br/>${escapeXml(s.desc)}` : ''}</div>
+  `).join('');
+
+  // One section per flow (main + each deep-dive). Each section contains: title,
+  // full step list, the combined System diagram, and the combined Architecture
+  // diagram. CSS pages break between sections.
+  const sections = [];
+
+  sections.push({
+    title: `${sys.title} — How it works`,
+    meta: `${mainSteps.length} steps · generated ${new Date().toLocaleDateString()}`,
+    steps: mainSteps,
+    sysLayout: mainSysLayout,
+    archLayout: mainArchLayout,
+  });
+
+  (PLAYGROUND.deepDives || []).forEach((dd, ddIdx) => {
+    sections.push({
+      title: `Deep dive ${ddIdx + 1}`,
+      question: dd.question,
+      meta: `${(dd.steps || []).length} steps`,
+      steps: dd.steps || [],
+      sysLayout: dd.systemLayout,
+      archLayout: dd.archLayout,
+    });
+  });
 
   // Cover
   const cover = document.createElement('div');
@@ -3201,56 +3243,30 @@ async function exportPlaygroundPDF() {
   cover.innerHTML = `
     <div class="pdf-brand">FlowVis</div>
     <div class="pdf-title">${escapeXml(sys.title)}</div>
-    <div class="pdf-meta">How ${escapeXml(sys.title)} works · ${mainSteps.length} steps · generated ${new Date().toLocaleDateString()}</div>
+    <div class="pdf-meta">${escapeXml(sys.title)} · ${mainSteps.length} steps · ${(PLAYGROUND.deepDives || []).length} deep dive${(PLAYGROUND.deepDives || []).length === 1 ? '' : 's'} · ${new Date().toLocaleDateString()}</div>
   `;
   host.appendChild(cover);
 
-  // Main flow — one page per step with System + Architecture
-  mainSteps.forEach((step, i) => {
+  sections.forEach((sec) => {
+    const combined = mergeStepsForDiagram(sec.steps);
     const page = document.createElement('div');
     page.className = 'pdf-page';
     page.innerHTML = `
       <div class="pdf-brand">FlowVis</div>
-      <div class="pdf-section-title">${escapeXml(sys.title)} — Step ${i + 1} of ${mainSteps.length}</div>
-      <div class="pdf-step-title">${escapeXml(step.title || '')}</div>
-      ${step.desc ? `<div class="pdf-step-desc">${escapeXml(step.desc)}</div>` : ''}
-      ${mainSysLayout ? `<div class="pdf-sub">System Flow</div><div class="pdf-diagram">${buildSysSvg(mainSysLayout, step)}</div>` : ''}
-      ${mainArchLayout ? `<div class="pdf-sub">Architecture Flow</div><div class="pdf-diagram">${buildArchSvg(mainArchLayout, step)}</div>` : ''}
+      <div class="pdf-section-title">${escapeXml(sec.title)}</div>
+      ${sec.question ? `<div class="pdf-question">${escapeXml(sec.question)}</div>` : ''}
+      ${sec.meta ? `<div class="pdf-meta">${escapeXml(sec.meta)}</div>` : ''}
+      <div class="pdf-sub">Steps</div>
+      <div class="pdf-step-list">${stepListHtml(sec.steps)}</div>
+      ${sec.sysLayout ? `<div class="pdf-sub">System Flow</div><div class="pdf-diagram">${buildSvg(sec.sysLayout, combined, renderDDSystem, 420)}</div>` : ''}
+      ${sec.archLayout ? `<div class="pdf-sub">Architecture Flow</div><div class="pdf-diagram">${buildSvg(sec.archLayout, combined, renderDDArch, 460)}</div>` : ''}
     `;
     host.appendChild(page);
   });
 
-  // Deep dives — cover page + one page per step
-  (PLAYGROUND.deepDives || []).forEach((dd, ddIdx) => {
-    const ddCover = document.createElement('div');
-    ddCover.className = 'pdf-page';
-    ddCover.innerHTML = `
-      <div class="pdf-brand">FlowVis</div>
-      <div class="pdf-section-title">Deep dive ${ddIdx + 1}</div>
-      <div class="pdf-question">${escapeXml(dd.question)}</div>
-      <div class="pdf-meta">${dd.steps.length} steps</div>
-    `;
-    host.appendChild(ddCover);
-
-    dd.steps.forEach((step, i) => {
-      const page = document.createElement('div');
-      page.className = 'pdf-page';
-      page.innerHTML = `
-        <div class="pdf-brand">FlowVis</div>
-        <div class="pdf-section-title">Deep dive ${ddIdx + 1} — Step ${i + 1} of ${dd.steps.length}</div>
-        <div class="pdf-step-title">${escapeXml(step.title || '')}</div>
-        ${step.desc ? `<div class="pdf-step-desc">${escapeXml(step.desc)}</div>` : ''}
-        <div class="pdf-sub">System Flow</div>
-        <div class="pdf-diagram">${buildSysSvg(dd.systemLayout, step)}</div>
-        <div class="pdf-sub">Architecture Flow</div>
-        <div class="pdf-diagram">${buildArchSvg(dd.archLayout, step)}</div>
-      `;
-      host.appendChild(page);
-    });
-  });
-
-  // Let layout settle
+  // Let layout/fonts/SVGs settle before rasterization.
   await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+  await new Promise(r => setTimeout(r, 60));
 
   try {
     await html2pdf().set({
@@ -3259,7 +3275,7 @@ async function exportPlaygroundPDF() {
       image: { type: 'jpeg', quality: 0.92 },
       html2canvas: { scale: 2, backgroundColor: '#0d0d12', useCORS: true, logging: false, windowWidth: 820 },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-      pagebreak: { mode: ['css', 'legacy'] },
+      pagebreak: { mode: ['css', 'legacy'], before: '.pdf-page' },
     }).from(host).save();
   } catch (e) {
     alert('PDF export failed: ' + (e && e.message ? e.message : 'unknown error'));
