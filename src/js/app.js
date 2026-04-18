@@ -20734,15 +20734,27 @@ function aiOpenKeyModal() {
 }
 
 function aiBuildPrompt(query) {
-  var system = "You are a distributed-systems expert. The user asks a specific question about how a system works. Build a CUSTOM flow that answers exactly that question — not a generic overview. Output one raw JSON object (no markdown, no prose) with this exact schema:\n\n"
+  var system = "You are a senior distributed-systems architect. The user asks a specific question about how a system works. Build a DETAILED, PRODUCTION-GRADE custom flow that answers exactly that question — not a generic overview, not a marketing pitch. Teach the reader from first principles.\n\n"
+    + "Output ONE raw JSON object (no markdown fences, no prose outside the JSON) with this exact schema:\n\n"
     + "{\n"
     + "  \"title\": \"<concise flow title under 60 chars, phrased as the user question>\",\n"
     + "  \"description\": \"<one-sentence overview>\",\n"
     + "  \"category\": \"<payments|finance|crypto|ecommerce|travel|streaming|social|productivity|devtools|health|food|news|creator|education|gaming>\",\n"
     + "  \"nodes\": [ {\"id\":\"<kebab-case id>\",\"label\":\"<<=18 chars>\",\"type\":\"<client|api|store|queue|cdn|external>\"} ],\n"
-    + "  \"steps\": [ {\"title\":\"<short>\",\"desc\":\"<1-2 sentences>\",\"active\":[\"id\",...],\"edges\":[[\"from\",\"to\",\"<short label>\"]]} ]\n"
+    + "  \"steps\": [ {\"title\":\"<short step title, <=50 chars>\",\"desc\":\"<3-5 sentences explaining WHY this step exists, WHAT data moves, which invariants hold, and common failure modes>\",\"active\":[\"id\",...],\"edges\":[[\"from\",\"to\",\"<short verb label>\"]]} ]\n"
     + "}\n\n"
-    + "Constraints: 5-8 nodes, 4-7 steps. Every id used in active[] or edges[][0..1] MUST exist in nodes[]. Keep the flow scoped to the exact question. Return JSON ONLY.";
+    + "DEPTH REQUIREMENTS — follow all of these:\n"
+    + "- Minimum 8 steps, ideally 8–12. Prefer MORE granular steps over fewer coarse ones. Break common phases into sub-steps (e.g. auth handshake, token mint, token exchange; or client upload → chunking → parallel PUT → assembly).\n"
+    + "- Minimum 7 nodes, ideally 8–14. Include caches, queues, metadata stores, CDNs, external services, observability — not just client/api/db.\n"
+    + "- Start from the very first user action (tap, keystroke, etc.) and end past the visible result (acks, analytics, cache warm, webhook fan-out).\n"
+    + "- Cover the happy path AND at least one retry/backpressure/failure handling step where it naturally fits.\n"
+    + "- Each step's desc must be 3–5 sentences of real technical substance — protocols, data formats, trade-offs, ordering guarantees, consistency model, cache TTLs, idempotency keys, etc. No vague filler like \"the system processes the request\".\n"
+    + "- Each step should light up 2–5 nodes in active[] and have 1–4 edges so the diagram shows real data movement, not a single arrow.\n"
+    + "- Edge labels should be concrete verbs or payloads (\"POST /v1/messages\", \"enqueue\", \"ack\", \"CDN hit\") — not \"data\".\n\n"
+    + "VALIDITY:\n"
+    + "- Every id used in active[] or edges[][0..1] MUST exist in nodes[].\n"
+    + "- No duplicate node ids. kebab-case only.\n"
+    + "- Return JSON ONLY.";
   return { system: system, user: "Question: " + query };
 }
 
@@ -20776,7 +20788,7 @@ async function aiCallLLM(prompts) {
     },
     body: JSON.stringify({
       model: "claude-3-5-sonnet-latest",
-      max_tokens: 2048,
+      max_tokens: 6000,
       system: prompts.system,
       messages: [{ role: "user", content: prompts.user }]
     })
