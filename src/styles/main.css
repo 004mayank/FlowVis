@@ -234,7 +234,7 @@ body{scrollbar-width:none;}
   font-size:11px;color:rgba(240,240,248,0.28);font-weight:600;pointer-events:none;white-space:nowrap;}
 
 /* Legend */
-.pg-legend{position:absolute;bottom:14px;right:14px;display:flex;flex-direction:column;gap:6px;
+.pg-legend{position:absolute;top:14px;right:14px;display:flex;flex-direction:column;gap:6px;
   background:rgba(13,13,18,0.6);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:8px 10px;z-index:4;}
 .pg-legend-row{display:flex;align-items:center;gap:7px;}
 .pg-leg-txt{font-size:10px;color:rgba(240,240,248,0.45);font-weight:600;}

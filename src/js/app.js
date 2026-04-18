@@ -799,12 +799,19 @@ function mountShell() {
     </div>
 
     <div id="pg-deep-dives"></div>
+  `;
+  body.appendChild(overlay);
 
+  // Deep-dive FAB + panel live on <body> (not inside .playground) so that
+  // .playground's backdrop-filter doesn't establish a containing block for
+  // position:fixed — otherwise the widget would scroll with the overlay.
+  const ddHost = document.createElement('div');
+  ddHost.id = 'dd-host';
+  ddHost.innerHTML = `
     <button class="dd-fab" id="dd-fab" style="display:none;" title="Ask a deep-dive question">
       <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2 3h12v8H6l-3 3v-3H2V3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
       Deep dive
     </button>
-
     <div class="dd-panel" id="dd-panel" style="display:none;">
       <div class="dd-header">
         <div class="dd-header-title" id="dd-header-title">Deep dive</div>
@@ -818,7 +825,7 @@ function mountShell() {
       </div>
     </div>
   `;
-  body.appendChild(overlay);
+  body.appendChild(ddHost);
 }
 
 // ---------- UI helpers ----------
@@ -2612,15 +2619,58 @@ const DD_SAMPLES = {
   uber: ['How does Uber handle surge pricing?', 'How does Uber match a driver?', 'How does Uber handle trip payment?'],
   spotify: ['How does Spotify cache audio?', 'How does Discover Weekly build?', 'How does offline playback sync?'],
 };
-function ddSamplesFor(sys) {
-  const id = (sys?.id || '').toLowerCase();
-  if (DD_SAMPLES[id]) return DD_SAMPLES[id];
+
+// Build dynamic, product-aware suggestions from the system's own step titles
+// and node labels. `lastQuery` lets us generate follow-ups after a question
+// has already been asked, so chips never stay stale.
+function ddSamplesFor(sys, lastQuery) {
   const t = sys?.title || 'this product';
-  return [
-    `How does ${t} handle retries?`,
-    `How does ${t} store data?`,
-    `How does ${t} handle failure modes?`,
-  ];
+  const id = (sys?.id || '').toLowerCase();
+  const flow = (typeof FLOWS !== 'undefined' && FLOWS[sys?.id]) || null;
+  const layout = systemLayoutFor(sys);
+  const stepTitles = (flow?.steps || []).map(s => s.title).filter(Boolean);
+  const nodeLabels = ((layout?.nodes) || [])
+    .map(n => (n.label || n.id || '').toString().trim())
+    .filter(l => l && l.length <= 32);
+
+  const clean = s => s.replace(/\s+/g, ' ').trim();
+  const out = [];
+  const push = q => {
+    const c = clean(q);
+    if (c && !out.some(x => x.toLowerCase() === c.toLowerCase())) out.push(c);
+  };
+
+  // Follow-up mode: riff off the last question
+  if (lastQuery) {
+    push(`How does ${t} scale ${lastQuery.replace(/^how does\s+\S+\s+/i, '').replace(/\?$/, '')}?`);
+  }
+
+  // Step-driven questions (walk the real flow)
+  for (const title of stepTitles) {
+    push(`How does ${t} handle ${title.toLowerCase()}?`);
+    if (out.length >= 6) break;
+  }
+
+  // Node-driven questions (pick interesting-looking components)
+  for (const label of nodeLabels) {
+    push(`What role does ${label} play in ${t}?`);
+    if (out.length >= 8) break;
+  }
+
+  // Curated fallbacks for well-known products
+  if (DD_SAMPLES[id]) {
+    for (const q of DD_SAMPLES[id]) push(q);
+  }
+
+  // Generic last-resort questions
+  push(`How does ${t} handle failures and retries?`);
+  push(`How does ${t} store and replicate data?`);
+  push(`How does ${t} scale under peak load?`);
+
+  // Rotate so suggestions feel fresh between renders
+  const seed = (lastQuery || sys?.id || t).length;
+  const rotated = out.slice(seed % out.length).concat(out.slice(0, seed % out.length));
+  return rotated.slice(0, 3);
 }
 
 function setupDeepDiveWidget(sys) {
@@ -2653,9 +2703,7 @@ function setupDeepDiveWidget(sys) {
     panel.style.display = 'none';
     fab.style.display = 'flex';
   };
-  chipsHost.querySelectorAll('.dd-chip').forEach(ch => {
-    ch.onclick = () => { ta.value = ch.dataset.q; ta.focus(); };
-  });
+  wireDeepDiveChips(chipsHost, ta);
   const doSend = () => {
     const q = (ta.value || '').trim();
     if (!q) return;
@@ -2666,6 +2714,21 @@ function setupDeepDiveWidget(sys) {
   ta.onkeydown = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); doSend(); }
   };
+}
+
+function wireDeepDiveChips(chipsHost, ta) {
+  chipsHost.querySelectorAll('.dd-chip').forEach(ch => {
+    ch.onclick = () => { ta.value = ch.dataset.q; ta.focus(); };
+  });
+}
+
+function refreshDeepDiveChips(sys, lastQuery) {
+  const chipsHost = document.getElementById('dd-chips');
+  const ta = document.getElementById('dd-textarea');
+  if (!chipsHost || !ta) return;
+  chipsHost.innerHTML = ddSamplesFor(sys, lastQuery)
+    .map(s => `<button class="dd-chip" data-q="${escapeXml(s)}">${escapeXml(s)}</button>`).join('');
+  wireDeepDiveChips(chipsHost, ta);
 }
 
 function ddAppendMessage(role, text, opts) {
@@ -2734,6 +2797,8 @@ async function runDeepDive(sys, q) {
     renderDeepDiveSection(dd);
     if (loading) loading.remove();
     ddAppendMessage('assistant', `Generated flow: ${dd.title}`);
+    // Refresh chips with follow-up questions seeded by what the user just asked
+    refreshDeepDiveChips(sys, q);
   } catch (err) {
     if (loading) loading.remove();
     const msg = (err && /network|fetch/i.test(String(err.message || ''))) ? 'Network error. Please retry.'
