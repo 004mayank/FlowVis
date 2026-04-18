@@ -6,7 +6,7 @@ Everything runs as a static single-page app. No backend, no build step.
 
 ## What you can do
 
-1. **Browse the catalog.** The home and Explore pages list 100+ products (WhatsApp, Stripe, Netflix, Uber, UPI, Shopify, and so on) grouped by category. Click any card to open the playground.
+1. **Browse the catalog.** The home and Explore pages list 500+ products (WhatsApp, Stripe, Netflix, Uber, UPI, Shopify, and so on) grouped by category. Click any card to open the playground.
 2. **Step through a flow.** Each product has an ordered set of steps. The playground lights up the active nodes and edges for the current step, shows a description panel, and lets you play, pause, zoom, and switch between the System Flow and Architecture Flow tabs.
 3. **Generate a custom flow with AI.** On the AI Generate page, connect your own Anthropic or OpenAI key once (stored only in your browser's localStorage), then ask a scoped question like "how does WhatsApp send images to others" or "how does Google Search rank results". The LLM returns a structured flow (nodes, steps, edges, active sets, edge labels) that is laid out and rendered exactly like a hand-authored product, with dotted baseline skeleton and teal active overlay. The generated flow is kept in your session's Recent Generations and can be reopened in the playground.
 
