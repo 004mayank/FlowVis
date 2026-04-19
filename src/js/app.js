@@ -3154,7 +3154,9 @@ function renderDDArch(svg, layout, step) {
 
 // ---------- PDF export ----------
 async function exportPlaygroundPDF() {
-  if (typeof html2pdf === 'undefined') {
+  const h2c = window.html2canvas;
+  const jsPDFCtor = window.jspdf && window.jspdf.jsPDF;
+  if (typeof h2c !== 'function' || typeof jsPDFCtor !== 'function') {
     alert('PDF library failed to load. Please refresh and try again.');
     return;
   }
@@ -3164,15 +3166,11 @@ async function exportPlaygroundPDF() {
   const btn = document.getElementById('pg-export');
   if (btn) { btn.disabled = true; btn.textContent = 'Generating PDF…'; }
 
-  // Host is positioned far off-screen (not hidden via opacity/visibility, which
-  // html2canvas tends to capture as blank) and kept fully opaque so rasterizing
-  // produces real pixels.
+  // Off-screen host — fully opaque so html2canvas rasterizes real pixels,
+  // but positioned far left so the user never sees it flash on-screen.
   const host = document.createElement('div');
   host.className = 'pdf-print-host';
-  // html2canvas renders elements at their actual position; fully off-screen
-  // hosts often come back blank. Put the host on-screen (covering the playground
-  // briefly) so capture is reliable, then remove it when done.
-  host.style.cssText = 'position:fixed;left:0;top:0;width:820px;max-width:820px;min-height:100vh;background:#0d0d12;color:#f0f0f8;padding:28px;font-family:Inter,sans-serif;opacity:1;z-index:999999;overflow:hidden;';
+  host.style.cssText = 'position:absolute;left:-20000px;top:0;width:820px;max-width:820px;background:#0d0d12;color:#f0f0f8;padding:28px;font-family:Inter,sans-serif;opacity:1;z-index:-1;';
   document.body.appendChild(host);
 
   const mainSteps = getProductSteps(sys) || [];
@@ -3264,20 +3262,44 @@ async function exportPlaygroundPDF() {
     host.appendChild(page);
   });
 
-  // Let layout/fonts/SVGs settle before rasterization.
-  await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
-  await new Promise(r => setTimeout(r, 60));
+  // Let layout/fonts/SVGs settle before rasterization. Use setTimeout rather
+  // than requestAnimationFrame because rAF is paused on hidden/background tabs.
+  await new Promise(r => setTimeout(r, 80));
 
   try {
-    await html2pdf().set({
-      margin: [10, 10, 10, 10],
-      filename: `flowvis-${sys.id}-deepdive.pdf`,
-      image: { type: 'jpeg', quality: 0.92 },
-      html2canvas: { scale: 2, backgroundColor: '#0d0d12', useCORS: true, logging: false, windowWidth: 820 },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-      pagebreak: { mode: ['css', 'legacy'], before: '.pdf-page' },
-    }).from(host).save();
+    // A4 portrait at 72dpi => 595 × 842pt. We render each .pdf-page to its own
+    // canvas, then fit it into an A4 page preserving aspect ratio.
+    const pdf = new jsPDFCtor({ unit: 'pt', format: 'a4', orientation: 'portrait' });
+    const pageW = pdf.internal.pageSize.getWidth();
+    const pageH = pdf.internal.pageSize.getHeight();
+    const margin = 24;
+    const maxW = pageW - margin * 2;
+    const maxH = pageH - margin * 2;
+
+    const pages = Array.from(host.querySelectorAll('.pdf-page'));
+    for (let i = 0; i < pages.length; i++) {
+      const el = pages[i];
+      const canvas = await h2c(el, {
+        backgroundColor: '#0d0d12',
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        windowWidth: 820,
+      });
+      const imgData = canvas.toDataURL('image/jpeg', 0.92);
+      const ratio = canvas.width / canvas.height;
+      let w = maxW;
+      let h = w / ratio;
+      if (h > maxH) { h = maxH; w = h * ratio; }
+      const x = (pageW - w) / 2;
+      const y = margin;
+      if (i > 0) pdf.addPage();
+      pdf.addImage(imgData, 'JPEG', x, y, w, h, undefined, 'FAST');
+    }
+
+    pdf.save(`flowvis-${sys.id}-deepdive.pdf`);
   } catch (e) {
+    console.error('[FlowVis] PDF export failed', e);
     alert('PDF export failed: ' + (e && e.message ? e.message : 'unknown error'));
   } finally {
     host.remove();
