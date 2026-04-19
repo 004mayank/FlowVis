@@ -691,7 +691,7 @@ function mountShell() {
   app.id = 'app';
   app.style.position = 'relative';
   app.style.zIndex = '1';
-  app.style.paddingTop = '86px';
+  app.style.paddingTop = '60px';
   body.appendChild(app);
 
   app.innerHTML = `
