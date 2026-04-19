@@ -507,6 +507,11 @@ body{width:100%;}
 .pdf-page .pdf-sub{font-size:11px;font-weight:800;color:rgba(240,240,248,0.55);
   letter-spacing:0.08em;text-transform:uppercase;margin:14px 0 6px;}
 .pdf-page:last-child{page-break-after:auto;}
+/* Each atomic block is rasterized on its own; give it the dark app bg so
+   stacking them with no gaps produces a seamless page. */
+.pdf-section{background:#0d0d12;}
+.pdf-block{background:#0d0d12;}
+.pdf-block + .pdf-block{margin-top:6px;}
 .pdf-brand{font:800 24px 'Syne',system-ui;color:#34d399;margin-bottom:16px;}
 .pdf-title{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;margin-bottom:6px;}
 .pdf-meta{color:#8888a8;font-size:12px;margin-bottom:20px;}

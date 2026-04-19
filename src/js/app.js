@@ -3326,22 +3326,48 @@ async function exportPlaygroundPDF() {
   // full native resolution for the 820px-wide host minus its 28px padding.
   const DIAGRAM_PX = 820 - 18 * 2 - 16; // host padding + diagram inner padding
 
-  // No cover page — the first section starts on page 1.
+  // Build DOM as a tree of sections -> blocks. Each .pdf-block is an atomic
+  // unit that must not be split across pages. The page-packer below rasterizes
+  // them individually and pushes each one to the next page if it doesn't fit
+  // on the remaining space, so flows and step cards never get sliced in half.
+  const mkBlock = (html) => {
+    const b = document.createElement('div');
+    b.className = 'pdf-block';
+    b.innerHTML = html;
+    return b;
+  };
   sections.forEach((sec) => {
     const combined = mergeStepsForDiagram(sec.steps);
-    const page = document.createElement('div');
-    page.className = 'pdf-page';
-    page.innerHTML = `
+    const section = document.createElement('div');
+    section.className = 'pdf-section';
+    // Header (brand + title + question + meta) — one atomic block
+    section.appendChild(mkBlock(`
       <div class="pdf-brand">FlowVis</div>
       <div class="pdf-section-title">${pdfText(sec.title)}</div>
       ${sec.question ? `<div class="pdf-question">${pdfText(sec.question)}</div>` : ''}
       ${sec.meta ? `<div class="pdf-meta">${pdfText(sec.meta)}</div>` : ''}
-      <div class="pdf-sub">Steps</div>
-      <div class="pdf-step-list">${stepListHtml(sec.steps)}</div>
-      ${sec.sysLayout ? `<div class="pdf-sub">System Flow</div><div class="pdf-diagram">${buildSvg(sec.sysLayout, combined, renderDDSystem, DIAGRAM_PX)}</div>` : ''}
-      ${sec.archLayout ? `<div class="pdf-sub">Architecture Flow</div><div class="pdf-diagram">${buildSvg(sec.archLayout, combined, renderDDArch, DIAGRAM_PX)}</div>` : ''}
-    `;
-    host.appendChild(page);
+    `));
+    // Steps label as its own block so it can stick with the first step below
+    // if space allows, but won't orphan a label at the bottom of a page.
+    if ((sec.steps || []).length) {
+      section.appendChild(mkBlock(`<div class="pdf-sub">Steps</div>`));
+      (sec.steps || []).forEach((s, i) => {
+        section.appendChild(mkBlock(
+          `<div class="pdf-step"><b>${i + 1}. ${pdfText(s.title || '')}</b>${s.desc ? `<br/>${pdfText(s.desc)}` : ''}</div>`
+        ));
+      });
+    }
+    if (sec.sysLayout) {
+      section.appendChild(mkBlock(
+        `<div class="pdf-sub">System Flow</div><div class="pdf-diagram">${buildSvg(sec.sysLayout, combined, renderDDSystem, DIAGRAM_PX)}</div>`
+      ));
+    }
+    if (sec.archLayout) {
+      section.appendChild(mkBlock(
+        `<div class="pdf-sub">Architecture Flow</div><div class="pdf-diagram">${buildSvg(sec.archLayout, combined, renderDDArch, DIAGRAM_PX)}</div>`
+      ));
+    }
+    host.appendChild(section);
   });
 
   // Let layout/fonts/SVGs settle before rasterization. Use setTimeout rather
@@ -3368,41 +3394,72 @@ async function exportPlaygroundPDF() {
     };
     paintBg();
 
-    const pages = Array.from(host.querySelectorAll('.pdf-page'));
-    let first = true;
-    for (let i = 0; i < pages.length; i++) {
-      const el = pages[i];
-      const canvas = await h2c(el, {
-        backgroundColor: '#0d0d12',
-        scale: 2,
-        useCORS: true,
-        logging: false,
-        windowWidth: 820,
-      });
+    // Page packer: walk each section's atomic blocks, place each one on the
+    // current page if it fits, otherwise start a fresh page. A new section
+    // always starts on a new page. A block taller than one page falls back
+    // to vertical slicing as a last resort — but since we build blocks per
+    // step / per diagram, this only fires for pathological content.
+    const sectionEls = Array.from(host.querySelectorAll('.pdf-section'));
+    let cursorY = marginY;
+    let anyDrawn = false;
+    for (let si = 0; si < sectionEls.length; si++) {
+      const section = sectionEls[si];
+      if (si > 0) {
+        // Every deep dive / section starts on its own A4 page.
+        pdf.addPage(); paintBg(); cursorY = marginY;
+      }
+      const blocks = Array.from(section.querySelectorAll('.pdf-block'));
+      for (const block of blocks) {
+        const canvas = await h2c(block, {
+          backgroundColor: '#0d0d12',
+          scale: 2,
+          useCORS: true,
+          logging: false,
+          windowWidth: 820,
+        });
+        const drawH = (canvas.height / canvas.width) * pageW;
 
-      // Image is drawn full width; compute its total height in pt, then the
-      // matching source-pixel height per A4 page's available content area.
-      const imgFullH = (canvas.height / canvas.width) * pageW;
-      const srcPxPerPage = Math.floor((availH / imgFullH) * canvas.height);
-
-      let sliceY = 0;
-      while (sliceY < canvas.height) {
-        const sliceH = Math.min(srcPxPerPage, canvas.height - sliceY);
-        const slice = document.createElement('canvas');
-        slice.width = canvas.width;
-        slice.height = sliceH;
-        const ctx = slice.getContext('2d');
-        ctx.fillStyle = '#0d0d12';
-        ctx.fillRect(0, 0, slice.width, slice.height);
-        ctx.drawImage(canvas, 0, sliceY, canvas.width, sliceH, 0, 0, canvas.width, sliceH);
-        const imgData = slice.toDataURL('image/jpeg', 0.92);
-        const drawH = (sliceH / canvas.width) * pageW;
-        if (!first) { pdf.addPage(); paintBg(); }
-        first = false;
-        pdf.addImage(imgData, 'JPEG', 0, marginY, pageW, drawH, undefined, 'FAST');
-        sliceY += sliceH;
+        if (drawH <= availH) {
+          // Normal path: block fits on a single page. Push it to the next
+          // page if it would overflow the current one.
+          if (cursorY + drawH > pageH - marginY && cursorY > marginY) {
+            pdf.addPage(); paintBg(); cursorY = marginY;
+          }
+          const imgData = canvas.toDataURL('image/jpeg', 0.92);
+          pdf.addImage(imgData, 'JPEG', 0, cursorY, pageW, drawH, undefined, 'FAST');
+          cursorY += drawH;
+          anyDrawn = true;
+        } else {
+          // Oversized block (taller than a full A4 page). Move to a clean
+          // page first, then slice vertically so we at least don't waste the
+          // tail of the previous page.
+          if (cursorY > marginY) { pdf.addPage(); paintBg(); cursorY = marginY; }
+          const srcPxPerPage = Math.floor((availH / drawH) * canvas.height);
+          let sliceY = 0;
+          while (sliceY < canvas.height) {
+            const sliceH = Math.min(srcPxPerPage, canvas.height - sliceY);
+            const slice = document.createElement('canvas');
+            slice.width = canvas.width;
+            slice.height = sliceH;
+            const ctx = slice.getContext('2d');
+            ctx.fillStyle = '#0d0d12';
+            ctx.fillRect(0, 0, slice.width, slice.height);
+            ctx.drawImage(canvas, 0, sliceY, canvas.width, sliceH, 0, 0, canvas.width, sliceH);
+            const imgData = slice.toDataURL('image/jpeg', 0.92);
+            const h = (sliceH / canvas.width) * pageW;
+            pdf.addImage(imgData, 'JPEG', 0, cursorY, pageW, h, undefined, 'FAST');
+            sliceY += sliceH;
+            if (sliceY < canvas.height) {
+              pdf.addPage(); paintBg(); cursorY = marginY;
+            } else {
+              cursorY += h;
+            }
+          }
+          anyDrawn = true;
+        }
       }
     }
+    void anyDrawn;
 
     pdf.save(`flowvis-${sys.id}-deepdive.pdf`);
   } catch (e) {
