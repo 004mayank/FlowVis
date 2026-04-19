@@ -65,6 +65,3 @@ Two further in-app constants in `src/js/app.js`:
 
 Vanilla JavaScript, ES modules, inline SVG for diagrams, CSS variables for theming. No framework, no bundler, no backend. The AI feature makes direct browser-to-provider HTTPS calls using a user-supplied key.
 
-## Credits
-
-Logos: https://github.com/gilbarbara/logos
