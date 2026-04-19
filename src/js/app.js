@@ -1239,10 +1239,13 @@ function wireWheelPanZoom(overlay) {
     const svgId = (PLAYGROUND.tab === 'arch') ? 'wa-arch' : 'wa-diagram';
     if (!ZOOM[svgId]) ZOOM[svgId] = { k: 1, x: 0, y: 0 };
 
-    // Zoom gesture (trackpad pinch often shows as ctrlKey wheel)
+    // Zoom gesture (trackpad pinch often shows as ctrlKey wheel).
+    // Use exponential scaling on deltaY so small pinches nudge gently and
+    // large ones don't overshoot. Clamped deltaY caps the per-event step.
     if (e.ctrlKey) {
-      const dir = (e.deltaY < 0) ? 1 : -1;
-      ZOOM[svgId].k = Math.min(2.4, Math.max(0.55, ZOOM[svgId].k + dir * 0.10));
+      const dy = Math.max(-40, Math.min(40, e.deltaY));
+      const factor = Math.exp(-dy * 0.005);
+      ZOOM[svgId].k = Math.min(2.4, Math.max(0.55, ZOOM[svgId].k * factor));
       applyZoom(svgId);
       return;
     }
@@ -3019,8 +3022,9 @@ function wireDDWheelPanZoom(sec) {
     // deep-dive diagram, whether or not we end up zooming vs panning.
     e.preventDefault();
     if (e.ctrlKey) {
-      const dir = (e.deltaY < 0) ? 1 : -1;
-      ZOOM[svgId].k = Math.min(2.4, Math.max(0.55, ZOOM[svgId].k + dir * 0.10));
+      const dy = Math.max(-40, Math.min(40, e.deltaY));
+      const factor = Math.exp(-dy * 0.005);
+      ZOOM[svgId].k = Math.min(2.4, Math.max(0.55, ZOOM[svgId].k * factor));
       applyZoom(svgId);
       return;
     }
