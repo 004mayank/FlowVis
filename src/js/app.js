@@ -3170,7 +3170,7 @@ async function exportPlaygroundPDF() {
   // but positioned far left so the user never sees it flash on-screen.
   const host = document.createElement('div');
   host.className = 'pdf-print-host';
-  host.style.cssText = 'position:absolute;left:-20000px;top:0;width:820px;max-width:820px;background:#0d0d12;color:#f0f0f8;padding:28px;font-family:Inter,sans-serif;opacity:1;z-index:-1;';
+  host.style.cssText = 'position:absolute;left:-20000px;top:0;width:820px;max-width:820px;background:#0d0d12;color:#f0f0f8;padding:18px;font-family:Inter,sans-serif;opacity:1;z-index:-1;';
   document.body.appendChild(host);
 
   const mainSteps = getProductSteps(sys) || [];
@@ -3196,14 +3196,41 @@ async function exportPlaygroundPDF() {
     return { title: 'All steps', active: [...active], edges };
   };
 
-  const buildSvg = (layout, step, renderer, height = 420) => {
+  // Compute a tight viewBox around the nodes (plus padding) so the diagram
+  // fills the PDF frame edge-to-edge instead of floating at the top-left of
+  // the original oversize canvas.
+  const tightViewBox = (layout) => {
+    const ns = layout && layout.nodes;
+    if (!ns) return null;
+    const entries = Array.isArray(ns) ? ns : Object.values(ns);
+    const xs = entries.map(n => n.x).filter(v => Number.isFinite(v));
+    const ys = entries.map(n => n.y).filter(v => Number.isFinite(v));
+    if (!xs.length || !ys.length) return null;
+    const padX = 90, padY = 90;
+    const minX = Math.min(...xs) - padX;
+    const minY = Math.min(...ys) - padY;
+    const w = Math.max(...xs) - Math.min(...xs) + padX * 2;
+    const h = Math.max(...ys) - Math.min(...ys) + padY * 2;
+    return `${minX} ${minY} ${w} ${h}`;
+  };
+
+  const buildSvg = (layout, step, renderer, widthPx) => {
     if (!layout) return '';
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-    svg.setAttribute('width', '760');
-    svg.setAttribute('height', String(height));
-    svg.style.display = 'block';
     renderer(svg, layout, step);
+    // Override viewBox after the renderer to a tight one so the diagram
+    // fills the available PDF width (the renderer's default viewBox comes
+    // from the underlying oversized canvas).
+    const tight = tightViewBox(layout);
+    if (tight) svg.setAttribute('viewBox', tight);
+    svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    // Let CSS scale it; derive the SVG's aspect from the (possibly tight) viewBox.
+    const vb = (svg.getAttribute('viewBox') || '0 0 1200 700').split(' ').map(Number);
+    const ratio = vb[3] > 0 ? vb[2] / vb[3] : 1.7;
+    svg.setAttribute('width', String(widthPx));
+    svg.setAttribute('height', String(Math.round(widthPx / ratio)));
+    svg.style.display = 'block';
     return svg.outerHTML;
   };
 
@@ -3235,16 +3262,11 @@ async function exportPlaygroundPDF() {
     });
   });
 
-  // Cover
-  const cover = document.createElement('div');
-  cover.className = 'pdf-page';
-  cover.innerHTML = `
-    <div class="pdf-brand">FlowVis</div>
-    <div class="pdf-title">${escapeXml(sys.title)}</div>
-    <div class="pdf-meta">${escapeXml(sys.title)} · ${mainSteps.length} steps · ${(PLAYGROUND.deepDives || []).length} deep dive${(PLAYGROUND.deepDives || []).length === 1 ? '' : 's'} · ${new Date().toLocaleDateString()}</div>
-  `;
-  host.appendChild(cover);
+  // Source width matches the off-screen host so diagrams rasterize at
+  // full native resolution for the 820px-wide host minus its 28px padding.
+  const DIAGRAM_PX = 820 - 18 * 2 - 16; // host padding + diagram inner padding
 
+  // No cover page — the first section starts on page 1.
   sections.forEach((sec) => {
     const combined = mergeStepsForDiagram(sec.steps);
     const page = document.createElement('div');
@@ -3256,8 +3278,8 @@ async function exportPlaygroundPDF() {
       ${sec.meta ? `<div class="pdf-meta">${escapeXml(sec.meta)}</div>` : ''}
       <div class="pdf-sub">Steps</div>
       <div class="pdf-step-list">${stepListHtml(sec.steps)}</div>
-      ${sec.sysLayout ? `<div class="pdf-sub">System Flow</div><div class="pdf-diagram">${buildSvg(sec.sysLayout, combined, renderDDSystem, 420)}</div>` : ''}
-      ${sec.archLayout ? `<div class="pdf-sub">Architecture Flow</div><div class="pdf-diagram">${buildSvg(sec.archLayout, combined, renderDDArch, 460)}</div>` : ''}
+      ${sec.sysLayout ? `<div class="pdf-sub">System Flow</div><div class="pdf-diagram">${buildSvg(sec.sysLayout, combined, renderDDSystem, DIAGRAM_PX)}</div>` : ''}
+      ${sec.archLayout ? `<div class="pdf-sub">Architecture Flow</div><div class="pdf-diagram">${buildSvg(sec.archLayout, combined, renderDDArch, DIAGRAM_PX)}</div>` : ''}
     `;
     host.appendChild(page);
   });
@@ -3267,16 +3289,16 @@ async function exportPlaygroundPDF() {
   await new Promise(r => setTimeout(r, 80));
 
   try {
-    // A4 portrait at 72dpi => 595 × 842pt. We render each .pdf-page to its own
-    // canvas, then fit it into an A4 page preserving aspect ratio.
+    // Edge-to-edge A4. We rasterize each section, then lay it out across as
+    // many A4 pages as needed so the image fills the full page width with no
+    // side margins. If a section is taller than one A4 page at that width,
+    // we slice the canvas vertically into successive pages.
     const pdf = new jsPDFCtor({ unit: 'pt', format: 'a4', orientation: 'portrait' });
     const pageW = pdf.internal.pageSize.getWidth();
     const pageH = pdf.internal.pageSize.getHeight();
-    const margin = 24;
-    const maxW = pageW - margin * 2;
-    const maxH = pageH - margin * 2;
 
     const pages = Array.from(host.querySelectorAll('.pdf-page'));
+    let first = true;
     for (let i = 0; i < pages.length; i++) {
       const el = pages[i];
       const canvas = await h2c(el, {
@@ -3286,15 +3308,29 @@ async function exportPlaygroundPDF() {
         logging: false,
         windowWidth: 820,
       });
-      const imgData = canvas.toDataURL('image/jpeg', 0.92);
-      const ratio = canvas.width / canvas.height;
-      let w = maxW;
-      let h = w / ratio;
-      if (h > maxH) { h = maxH; w = h * ratio; }
-      const x = (pageW - w) / 2;
-      const y = margin;
-      if (i > 0) pdf.addPage();
-      pdf.addImage(imgData, 'JPEG', x, y, w, h, undefined, 'FAST');
+
+      // Image is drawn full width; compute its total height in pt, then the
+      // matching source-pixel height per A4 page.
+      const imgFullH = (canvas.height / canvas.width) * pageW;
+      const srcPxPerPage = Math.floor((pageH / imgFullH) * canvas.height);
+
+      let sliceY = 0;
+      while (sliceY < canvas.height) {
+        const sliceH = Math.min(srcPxPerPage, canvas.height - sliceY);
+        const slice = document.createElement('canvas');
+        slice.width = canvas.width;
+        slice.height = sliceH;
+        const ctx = slice.getContext('2d');
+        ctx.fillStyle = '#0d0d12';
+        ctx.fillRect(0, 0, slice.width, slice.height);
+        ctx.drawImage(canvas, 0, sliceY, canvas.width, sliceH, 0, 0, canvas.width, sliceH);
+        const imgData = slice.toDataURL('image/jpeg', 0.92);
+        const drawH = (sliceH / canvas.width) * pageW;
+        if (!first) pdf.addPage();
+        first = false;
+        pdf.addImage(imgData, 'JPEG', 0, 0, pageW, drawH, undefined, 'FAST');
+        sliceY += sliceH;
+      }
     }
 
     pdf.save(`flowvis-${sys.id}-deepdive.pdf`);
