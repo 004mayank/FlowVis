@@ -466,7 +466,9 @@ body{width:100%;}
 .dd-send:disabled{opacity:0.45;cursor:default;}
 
 /* Stacked deep dive sections under the main playground */
-#pg-deep-dives{padding:0 16px 80px;display:flex;flex-direction:column;gap:14px;}
+/* padding-x = 15 so dd-section's 1px left border + 0 horizontal padding on
+   dd-section-body lines up the inner grid with pg-body's 16px padding. */
+#pg-deep-dives{padding:0 15px 80px;display:flex;flex-direction:column;gap:14px;}
 .dd-section{border:1px solid var(--border);background:rgba(255,255,255,0.02);
   border-radius:16px;overflow:hidden;}
 .dd-section-header{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;
@@ -481,7 +483,10 @@ body{width:100%;}
   padding:5px 10px;border-radius:7px;cursor:pointer;font-weight:700;font-size:12px;
   font-family:inherit;}
 .dd-section-tab.active{background:rgba(123,125,248,0.20);color:#fff;}
-.dd-section-body{display:grid;grid-template-columns:320px 1fr;gap:12px;padding:12px;}
+/* No horizontal padding here — the container (#pg-deep-dives + dd-section
+   border) already supplies the 16px inset. This keeps the step column
+   exactly aligned with pg-body's step column above. */
+.dd-section-body{display:grid;grid-template-columns:360px 1fr;gap:16px;padding:16px 0;}
 .dd-section.collapsed .dd-section-body{display:none;}
 .dd-section-steps{display:flex;flex-direction:column;gap:8px;max-height:520px;overflow-y:auto;padding-right:4px;}
 .dd-section-steps::-webkit-scrollbar{width:4px;}
