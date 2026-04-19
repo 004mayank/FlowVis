@@ -631,7 +631,8 @@ const state = {
   activeHomeCat: 'all',
   activeExploreCat: 'all',
   homeRenderCount: 48,
-  homeChunk: 48
+  homeChunk: 48,
+  homeQuery: ''
 };
 
 window.showPage = function showPage(page) {
@@ -918,19 +919,25 @@ function renderHome() {
 
   // search
   const heroInput = document.getElementById('hero-search');
+  heroInput.value = state.homeQuery || '';
+  const liveFilter = () => {
+    state.homeQuery = heroInput.value.trim();
+    state.homeRenderCount = state.homeChunk;
+    renderHomeGrid();
+  };
   const go = () => {
     const q = heroInput.value.trim();
     if (!q) return;
-    const found = findSystem(q);
-    if (found) openProduct(found);
-    else {
-      // fallback to explore filtered view
-      state.q = q;
-      showPage('explore');
-      const expInput = document.getElementById('explore-search');
-      if (expInput) expInput.value = q;
-    }
+    // If the live-filtered grid has matches, jump to the top one.
+    const matches = filterHomeSystems();
+    if (matches.length) { openProduct(matches[0]); return; }
+    // Nothing matches at all — fall back to explore page.
+    state.q = q;
+    showPage('explore');
+    const expInput = document.getElementById('explore-search');
+    if (expInput) expInput.value = q;
   };
+  heroInput.addEventListener('input', liveFilter);
   document.getElementById('hero-search-btn').addEventListener('click', go);
   heroInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') go();
@@ -955,13 +962,33 @@ function renderHomeFilters() {
   }));
 }
 
+// Build the current home list, respecting both category and live search.
+// When there's a query we rank matches first (title-prefix, then title-substring,
+// then description-substring) and push everything else afterwards, so the user
+// still sees the full catalog below the hits.
+function filterHomeSystems() {
+  const base = (state.activeHomeCat === 'all')
+    ? SYSTEMS
+    : SYSTEMS.filter(s => s.cat === state.activeHomeCat);
+  const q = (state.homeQuery || '').trim().toLowerCase();
+  if (!q) return base;
+  const prefix = [], contains = [], descHit = [], rest = [];
+  for (const s of base) {
+    const t = (s.title || '').toLowerCase();
+    const d = (s.desc || '').toLowerCase();
+    if (t.startsWith(q)) prefix.push(s);
+    else if (t.includes(q)) contains.push(s);
+    else if (d.includes(q)) descHit.push(s);
+    else rest.push(s);
+  }
+  return [...prefix, ...contains, ...descHit, ...rest];
+}
+
 function renderHomeGrid() {
   const grid = document.getElementById('home-grid');
   if (!grid) return;
 
-  const list = (state.activeHomeCat === 'all')
-    ? SYSTEMS
-    : SYSTEMS.filter(s => s.cat === state.activeHomeCat);
+  const list = filterHomeSystems();
 
   // Infinite scroll: render only the first N; the rest loads as you scroll
   const slice = list.slice(0, state.homeRenderCount);
@@ -1001,9 +1028,7 @@ function initHomeInfiniteScroll() {
     if (!ent.isIntersecting) return;
 
     // Increase render count and re-render
-    const list = (state.activeHomeCat === 'all')
-      ? SYSTEMS
-      : SYSTEMS.filter(s => s.cat === state.activeHomeCat);
+    const list = filterHomeSystems();
 
     if (state.homeRenderCount >= list.length) return;
     state.homeRenderCount = Math.min(state.homeRenderCount + state.homeChunk, list.length);
