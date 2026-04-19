@@ -3199,19 +3199,49 @@ async function exportPlaygroundPDF() {
   // Compute a tight viewBox around the nodes (plus padding) so the diagram
   // fills the PDF frame edge-to-edge instead of floating at the top-left of
   // the original oversize canvas.
-  const tightViewBox = (layout) => {
+  // Tight viewBox around everything drawn by the renderer. For the system
+  // renderer, node coords are circle centers (radius ~52 including outer
+  // ring). For the arch renderer, node coords are top-left of 210x54 boxes,
+  // and there may be a `backend` container rect that extends further. We
+  // build the bbox from whichever shapes actually render.
+  const tightViewBox = (layout, isArch) => {
     const ns = layout && layout.nodes;
     if (!ns) return null;
     const entries = Array.isArray(ns) ? ns : Object.values(ns);
-    const xs = entries.map(n => n.x).filter(v => Number.isFinite(v));
-    const ys = entries.map(n => n.y).filter(v => Number.isFinite(v));
-    if (!xs.length || !ys.length) return null;
-    const padX = 90, padY = 90;
-    const minX = Math.min(...xs) - padX;
-    const minY = Math.min(...ys) - padY;
-    const w = Math.max(...xs) - Math.min(...xs) + padX * 2;
-    const h = Math.max(...ys) - Math.min(...ys) + padY * 2;
-    return `${minX} ${minY} ${w} ${h}`;
+    if (!entries.length) return null;
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    const SVC_W = 210, SVC_H = 54, NODE_R_OUT = 56;
+    for (const n of entries) {
+      if (!Number.isFinite(n.x) || !Number.isFinite(n.y)) continue;
+      if (isArch) {
+        if (n.x < minX) minX = n.x;
+        if (n.y < minY) minY = n.y;
+        if (n.x + SVC_W > maxX) maxX = n.x + SVC_W;
+        if (n.y + SVC_H > maxY) maxY = n.y + SVC_H;
+      } else {
+        if (n.x - NODE_R_OUT < minX) minX = n.x - NODE_R_OUT;
+        if (n.y - NODE_R_OUT < minY) minY = n.y - NODE_R_OUT;
+        if (n.x + NODE_R_OUT > maxX) maxX = n.x + NODE_R_OUT;
+        if (n.y + NODE_R_OUT > maxY) maxY = n.y + NODE_R_OUT;
+      }
+    }
+    // Include the arch "backend" container rect if present, since it is
+    // drawn outside the node bounding box and would otherwise clip.
+    if (isArch && layout.backend) {
+      const bk = layout.backend;
+      if (bk.x < minX) minX = bk.x;
+      if (bk.y < minY) minY = bk.y;
+      if (bk.x + bk.w > maxX) maxX = bk.x + bk.w;
+      if (bk.y + bk.h > maxY) maxY = bk.y + bk.h;
+    }
+    if (!Number.isFinite(minX) || !Number.isFinite(maxX)) return null;
+    const padX = isArch ? 40 : 30;
+    const padY = isArch ? 40 : 30;
+    const x = minX - padX;
+    const y = minY - padY;
+    const w = (maxX - minX) + padX * 2;
+    const h = (maxY - minY) + padY * 2;
+    return `${x} ${y} ${w} ${h}`;
   };
 
   const buildSvg = (layout, step, renderer, widthPx) => {
@@ -3222,7 +3252,8 @@ async function exportPlaygroundPDF() {
     // Override viewBox after the renderer to a tight one so the diagram
     // fills the available PDF width (the renderer's default viewBox comes
     // from the underlying oversized canvas).
-    const tight = tightViewBox(layout);
+    const isArch = renderer === renderDDArch;
+    const tight = tightViewBox(layout, isArch);
     if (tight) svg.setAttribute('viewBox', tight);
     svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
     // Let CSS scale it; derive the SVG's aspect from the (possibly tight) viewBox.
@@ -3234,8 +3265,12 @@ async function exportPlaygroundPDF() {
     return svg.outerHTML;
   };
 
+  // Replace em/en dashes with a regular hyphen in all PDF text.
+  const stripDashes = (s) => (s == null ? '' : String(s).replace(/[—–]/g, '-'));
+  const pdfText = (s) => escapeXml(stripDashes(s));
+
   const stepListHtml = (steps) => (steps || []).map((s, i) => `
-    <div class="pdf-step"><b>${i + 1}. ${escapeXml(s.title || '')}</b>${s.desc ? `<br/>${escapeXml(s.desc)}` : ''}</div>
+    <div class="pdf-step"><b>${i + 1}. ${pdfText(s.title || '')}</b>${s.desc ? `<br/>${pdfText(s.desc)}` : ''}</div>
   `).join('');
 
   // One section per flow (main + each deep-dive). Each section contains: title,
@@ -3244,8 +3279,8 @@ async function exportPlaygroundPDF() {
   const sections = [];
 
   sections.push({
-    title: `${sys.title} — How it works`,
-    meta: `${mainSteps.length} steps · generated ${new Date().toLocaleDateString()}`,
+    title: `${sys.title}: How it works`,
+    meta: `${mainSteps.length} steps | generated ${new Date().toLocaleDateString()}`,
     steps: mainSteps,
     sysLayout: mainSysLayout,
     archLayout: mainArchLayout,
@@ -3273,9 +3308,9 @@ async function exportPlaygroundPDF() {
     page.className = 'pdf-page';
     page.innerHTML = `
       <div class="pdf-brand">FlowVis</div>
-      <div class="pdf-section-title">${escapeXml(sec.title)}</div>
-      ${sec.question ? `<div class="pdf-question">${escapeXml(sec.question)}</div>` : ''}
-      ${sec.meta ? `<div class="pdf-meta">${escapeXml(sec.meta)}</div>` : ''}
+      <div class="pdf-section-title">${pdfText(sec.title)}</div>
+      ${sec.question ? `<div class="pdf-question">${pdfText(sec.question)}</div>` : ''}
+      ${sec.meta ? `<div class="pdf-meta">${pdfText(sec.meta)}</div>` : ''}
       <div class="pdf-sub">Steps</div>
       <div class="pdf-step-list">${stepListHtml(sec.steps)}</div>
       ${sec.sysLayout ? `<div class="pdf-sub">System Flow</div><div class="pdf-diagram">${buildSvg(sec.sysLayout, combined, renderDDSystem, DIAGRAM_PX)}</div>` : ''}
@@ -3296,6 +3331,17 @@ async function exportPlaygroundPDF() {
     const pdf = new jsPDFCtor({ unit: 'pt', format: 'a4', orientation: 'portrait' });
     const pageW = pdf.internal.pageSize.getWidth();
     const pageH = pdf.internal.pageSize.getHeight();
+    // Symmetric top/bottom breathing room on every A4 page so the top of page N
+    // lines up with the bottom of page N-1.
+    const marginY = 24;
+    const availH = pageH - marginY * 2;
+    // Paint every A4 page with the app background so any area outside the
+    // image slice matches #0d0d12 instead of jsPDF's default white.
+    const paintBg = () => {
+      pdf.setFillColor(13, 13, 18);
+      pdf.rect(0, 0, pageW, pageH, 'F');
+    };
+    paintBg();
 
     const pages = Array.from(host.querySelectorAll('.pdf-page'));
     let first = true;
@@ -3310,9 +3356,9 @@ async function exportPlaygroundPDF() {
       });
 
       // Image is drawn full width; compute its total height in pt, then the
-      // matching source-pixel height per A4 page.
+      // matching source-pixel height per A4 page's available content area.
       const imgFullH = (canvas.height / canvas.width) * pageW;
-      const srcPxPerPage = Math.floor((pageH / imgFullH) * canvas.height);
+      const srcPxPerPage = Math.floor((availH / imgFullH) * canvas.height);
 
       let sliceY = 0;
       while (sliceY < canvas.height) {
@@ -3326,9 +3372,9 @@ async function exportPlaygroundPDF() {
         ctx.drawImage(canvas, 0, sliceY, canvas.width, sliceH, 0, 0, canvas.width, sliceH);
         const imgData = slice.toDataURL('image/jpeg', 0.92);
         const drawH = (sliceH / canvas.width) * pageW;
-        if (!first) pdf.addPage();
+        if (!first) { pdf.addPage(); paintBg(); }
         first = false;
-        pdf.addImage(imgData, 'JPEG', 0, 0, pageW, drawH, undefined, 'FAST');
+        pdf.addImage(imgData, 'JPEG', 0, marginY, pageW, drawH, undefined, 'FAST');
         sliceY += sliceH;
       }
     }
