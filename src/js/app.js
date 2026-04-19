@@ -2969,7 +2969,7 @@ function renderDeepDiveSection(dd) {
         </div>
       </div>
       <div class="dd-section-diagram">
-        <svg class="dd-svg" xmlns="http://www.w3.org/2000/svg"></svg>
+        <svg class="dd-svg" id="dd-svg-${escapeXml(dd.id)}" xmlns="http://www.w3.org/2000/svg"></svg>
       </div>
     </div>
   `;
@@ -2997,8 +2997,39 @@ function renderDeepDiveSection(dd) {
   renderDeepDiveStepList(dd, sec);
   renderDeepDiveDiagram(dd, sec);
 
+  // Wire trackpad/mouse wheel pan + pinch zoom on the diagram container,
+  // scoped to this deep-dive section. preventDefault stops the wheel event
+  // from bubbling up and scrolling the background page.
+  try { wireDDWheelPanZoom(sec); } catch (e) { console.error('[FlowVis] dd zoom wire failed', e); }
+
   // Scroll into view
   setTimeout(() => sec.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+}
+
+function wireDDWheelPanZoom(sec) {
+  const container = sec.querySelector('.dd-section-diagram');
+  const svg = sec.querySelector('.dd-svg');
+  if (!container || !svg || !svg.id) return;
+  if (container.dataset.wheelBound === '1') return;
+  container.dataset.wheelBound = '1';
+  const svgId = svg.id;
+  if (!ZOOM[svgId]) ZOOM[svgId] = { k: 1, x: 0, y: 0 };
+  container.addEventListener('wheel', (e) => {
+    // Always prevent the page from scrolling while the cursor is over a
+    // deep-dive diagram, whether or not we end up zooming vs panning.
+    e.preventDefault();
+    if (e.ctrlKey) {
+      const dir = (e.deltaY < 0) ? 1 : -1;
+      ZOOM[svgId].k = Math.min(2.4, Math.max(0.55, ZOOM[svgId].k + dir * 0.10));
+      applyZoom(svgId);
+      return;
+    }
+    const k = ZOOM[svgId].k || 1;
+    const speed = 1.0 / k;
+    ZOOM[svgId].x -= e.deltaX * speed;
+    ZOOM[svgId].y -= e.deltaY * speed;
+    applyZoom(svgId);
+  }, { passive: false });
 }
 
 function renderDeepDiveStepList(dd, sec) {
@@ -3030,6 +3061,10 @@ function renderDeepDiveDiagram(dd, sec) {
   const step = dd.steps[dd.stepIdx];
   if (dd.tab === 'system') renderDDSystem(svg, dd.systemLayout, step);
   else renderDDArch(svg, dd.archLayout, step);
+
+  // Re-apply any user pan/zoom after render — renderDDSystem/Arch both call
+  // svg.innerHTML = ... which wipes the zoom <g> wrapper.
+  if (svg.id) applyZoom(svg.id);
 
   // Update step detail panel (mirrors main #pg-step-detail)
   const detailTitle = sec.querySelector('.dd-detail-title');
